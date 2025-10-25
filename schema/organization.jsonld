@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "株式会社創和経営コンサルティング",
+  "url": "https://furumachi-smec.lognowa.com/public/lp",
+  "logo": "https://furumachi-smec.lognowa.com/public/lp/assets/logo.png",
+  "description": "福岡・九州の年商5000万円～10億円企業に向けたAI×管理会計×資金繰りの伴走型経営顧問サービス",
+  "founder": "古町 聖文",
+  "foundingDate": "2018-04-01",
+  "email": "k.furumachi@lognowa.com",
+  "telephone": "+81-92-231-2920",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "水谷3-14-17",
+    "addressLocality": "福岡市東区",
+    "addressRegion": "福岡県",
+    "postalCode": "839-0041",
+    "addressCountry": "JP"
+  },
+  "sameAs": [
+    "https://www.facebook.com/",
+    "https://line.me/"
+  ]
+}

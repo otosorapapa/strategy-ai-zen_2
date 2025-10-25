@@ -1,0 +1,72 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build
+        run: |
+          npm ci
+          npm run build -- --base=/public/lp/
+
+      - name: Guard dist
+        run: |
+          test -f dist/index.html || (echo "dist/index.html not found" && exit 1)
+
+      - name: Install sshpass
+        run: sudo apt-get update -y && sudo apt-get install -y sshpass
+
+      - name: Prepare remote directory
+        env:
+          WP_HOST: ${{ secrets.WP_HOST }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_SSH_PASS: ${{ secrets.WP_SSH_PASS }}
+          WP_REMOTE_PATH: ${{ secrets.WP_REMOTE_PATH }}
+        run: |
+          PASS_CLEAN=$(printf '%s' "$WP_SSH_PASS" | tr -d '\r\n')
+          PARENT_PATH=$(dirname "$WP_REMOTE_PATH")
+          sshpass -p "$PASS_CLEAN" ssh -p 2222 -o StrictHostKeyChecking=no "$WP_USER@$WP_HOST" "
+            mkdir -p $WP_REMOTE_PATH &&
+            echo 'RewriteEngine Off' > $PARENT_PATH/.htaccess &&
+            echo 'RewriteEngine Off' > $WP_REMOTE_PATH/.htaccess &&
+            chmod 644 $PARENT_PATH/.htaccess $WP_REMOTE_PATH/.htaccess
+          "
+
+      - name: Rsync Deploy
+        env:
+          WP_HOST: ${{ secrets.WP_HOST }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_SSH_PASS: ${{ secrets.WP_SSH_PASS }}
+          WP_REMOTE_PATH: ${{ secrets.WP_REMOTE_PATH }}
+        run: |
+          PASS_CLEAN=$(printf '%s' "$WP_SSH_PASS" | tr -d '\r\n')
+          sshpass -p "$PASS_CLEAN" rsync -avz --delete \
+            -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
+            dist/ "$WP_USER@$WP_HOST:$WP_REMOTE_PATH/"
+
+      - name: Show remote listing
+        env:
+          WP_HOST: ${{ secrets.WP_HOST }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_SSH_PASS: ${{ secrets.WP_SSH_PASS }}
+          WP_REMOTE_PATH: ${{ secrets.WP_REMOTE_PATH }}
+        run: |
+          PASS_CLEAN=$(printf '%s' "$WP_SSH_PASS" | tr -d '\r\n')
+          sshpass -p "$PASS_CLEAN" ssh -p 2222 -o StrictHostKeyChecking=no "$WP_USER@$WP_HOST" "
+            ls -la $WP_REMOTE_PATH &&
+            echo '== assets ==' &&
+            ls -la $WP_REMOTE_PATH/assets || true
+          "

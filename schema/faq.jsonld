@@ -1,0 +1,46 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "対象となる企業規模と業種は？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "年商5000万円～10億円・従業員10〜80名の中小企業を中心に、製造・建設・設備工事・卸売・サービス業などで支援実績があります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "契約期間と成果が出るまでの目安は？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "初回3ヶ月で可視化と打ち手運用を定着させ、4〜6ヶ月で粗利・資金繰りを改善します。四半期ごとに継続可否を見直します。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "社内に専任担当がいなくても進められますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "週次タスクボードと議事メモを提供し、必要に応じて当社がPMOを代行します。小人数体制でも推進できます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "AIに詳しくなくても問題ありませんか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "操作マニュアルとトレーニング動画を提供し、初月にワークショップを実施するため、専門知識は不要です。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "費用対効果はどのように測定しますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "粗利率・在庫回転率・手元資金カバレッジなどのKPIを週次・月次でレポートし、ROIを算出します。"
+      }
+    }
+  ]
+}

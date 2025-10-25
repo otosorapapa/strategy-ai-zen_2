@@ -1,0 +1,111 @@
+{
+  "exportFormatVersion": 2,
+  "exportTime": "2025-10-20T00:00:00Z",
+  "containerVersion": {
+    "container": {
+      "publicId": "GTM-XXXX",
+      "name": "Sowa LP",
+      "usageContext": ["web"]
+    },
+    "tag": [
+      {
+        "name": "GA4 - Page View",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "measurementId", "value": "G-XXXXXXXX" },
+          { "type": "BOOLEAN", "key": "sendPageView", "value": "true" }
+        ]
+      },
+      {
+        "name": "GA4 - view_form",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "measurementId", "value": "G-XXXXXXXX" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "view_form" }
+        ],
+        "trigger": [ { "type": "TRIGGER_ID", "value": "2147483647" } ]
+      },
+      {
+        "name": "GA4 - start_form",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "measurementId", "value": "G-XXXXXXXX" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "start_form" }
+        ],
+        "trigger": [ { "type": "TRIGGER_ID", "value": "2147483646" } ]
+      },
+      {
+        "name": "GA4 - submit_form",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "measurementId", "value": "G-XXXXXXXX" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "submit_form" }
+        ],
+        "trigger": [ { "type": "TRIGGER_ID", "value": "2147483645" } ]
+      },
+      {
+        "name": "GA4 - book_meeting",
+        "type": "gaawe",
+        "parameter": [
+          { "type": "TEMPLATE", "key": "measurementId", "value": "G-XXXXXXXX" },
+          { "type": "TEMPLATE", "key": "eventName", "value": "book_meeting" }
+        ],
+        "trigger": [ { "type": "TRIGGER_ID", "value": "2147483644" } ]
+      }
+    ],
+    "trigger": [
+      { "name": "All Pages", "type": "PAGEVIEW" },
+      {
+        "triggerId": "2147483647",
+        "name": "view_form",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          { "type": "MATCH_REGEX", "parameter": [
+            { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+            { "type": "TEMPLATE", "key": "arg1", "value": "view_form" }
+          ] }
+        ]
+      },
+      {
+        "triggerId": "2147483646",
+        "name": "start_form",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          { "type": "MATCH_REGEX", "parameter": [
+            { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+            { "type": "TEMPLATE", "key": "arg1", "value": "start_form" }
+          ] }
+        ]
+      },
+      {
+        "triggerId": "2147483645",
+        "name": "submit_form",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          { "type": "MATCH_REGEX", "parameter": [
+            { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+            { "type": "TEMPLATE", "key": "arg1", "value": "submit_form" }
+          ] }
+        ]
+      },
+      {
+        "triggerId": "2147483644",
+        "name": "book_meeting",
+        "type": "CUSTOM_EVENT",
+        "customEventFilter": [
+          { "type": "MATCH_REGEX", "parameter": [
+            { "type": "TEMPLATE", "key": "arg0", "value": "{{_event}}" },
+            { "type": "TEMPLATE", "key": "arg1", "value": "book_meeting" }
+          ] }
+        ]
+      }
+    ],
+    "variable": [
+      {
+        "name": "Page Path",
+        "type": "j",
+        "parameter": [ { "type": "BOOLEAN", "key": "stripQuery", "value": "true" } ]
+      }
+    ]
+  }
+}

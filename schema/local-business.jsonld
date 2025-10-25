@@ -1,0 +1,27 @@
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "株式会社創和経営コンサルティング 福岡オフィス",
+  "image": "https://furumachi-smec.lognowa.com/public/lp/assets/office.jpg",
+  "priceRange": "\u00a5180,000-\u00a5280,000/月",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "水谷3-14-17",
+    "addressLocality": "福岡市東区",
+    "addressRegion": "福岡県",
+    "postalCode": "839-0041",
+    "addressCountry": "JP"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 33.5902,
+    "longitude": 130.4017
+  },
+  "areaServed": ["福岡県", "佐賀県", "熊本県", "大分県", "長崎県", "宮崎県", "鹿児島県"],
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "18:00" }
+  ],
+  "url": "https://furumachi-smec.lognowa.com/public/lp",
+  "telephone": "+81-92-231-2920",
+  "email": "k.furumachi@lognowa.com"
+}

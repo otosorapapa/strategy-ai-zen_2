@@ -1,0 +1,175 @@
+:root {
+  --navy: #1f3a5f;
+  --blue: #2f6ca3;
+  --gray: #6b7785;
+  --light: #f5f7fa;
+  --accent: #0f8c5a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Noto Sans JP", sans-serif;
+  background: var(--light);
+  color: var(--navy);
+  line-height: 1.8;
+}
+
+.hero {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 80px 16px 40px;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(31, 58, 95, 0.1);
+  color: var(--navy);
+  font-size: 12px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-size: 30px;
+  margin: 24px 0;
+}
+
+.hero-sub {
+  font-size: 18px;
+  color: var(--gray);
+}
+
+.cta-group {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-outline {
+  min-width: 200px;
+  padding: 14px 24px;
+  font-size: 16px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--navy), var(--accent));
+  color: #fff;
+}
+
+.btn-outline {
+  border: 2px solid var(--blue);
+  background: transparent;
+  color: var(--blue);
+}
+
+.microcopy {
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+main {
+  padding: 0 16px 80px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+section {
+  margin-top: 64px;
+  background: #fff;
+  padding: 32px;
+  border-radius: 24px;
+  box-shadow: 0 16px 40px rgba(31, 58, 95, 0.1);
+}
+
+section h2 {
+  margin-top: 0;
+  font-size: 26px;
+}
+
+.pain-section ul {
+  padding-left: 20px;
+}
+
+.results article {
+  border: 1px solid rgba(31, 58, 95, 0.15);
+  border-radius: 16px;
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.plans {
+  display: grid;
+  gap: 24px;
+}
+
+.plan-card {
+  border: 1px solid rgba(31, 58, 95, 0.15);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+.plan-card.popular {
+  border-color: var(--accent);
+  box-shadow: 0 12px 30px rgba(15, 140, 90, 0.2);
+}
+
+.plan-card .price {
+  font-size: 22px;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.plan-card ul {
+  padding-left: 20px;
+}
+
+.form form {
+  display: grid;
+  gap: 16px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-weight: 600;
+}
+
+input,
+textarea {
+  padding: 12px;
+  border: 1px solid rgba(31, 58, 95, 0.2);
+  border-radius: 12px;
+  font-size: 16px;
+}
+
+textarea {
+  min-height: 120px;
+}
+
+.footer {
+  background: var(--navy);
+  color: #fff;
+  text-align: center;
+  padding: 32px 16px;
+}
+
+.footer .small {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}

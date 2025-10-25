@@ -1,0 +1,29 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "伴走型AI経営顧問サービス",
+  "description": "AI×管理会計×資金繰りで年商5000万円～10億円企業を支援する月額顧問プラン",
+  "brand": {
+    "@type": "Brand",
+    "name": "株式会社創和経営コンサルティング"
+  },
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "JPY",
+    "price": "180000",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "price": "180000",
+      "priceCurrency": "JPY",
+      "minPrice": "180000",
+      "maxPrice": "280000"
+    },
+    "availability": "https://schema.org/InStock",
+    "url": "https://furumachi-smec.lognowa.com/public/lp#plans"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "26"
+  }
+}
