@@ -47,6 +47,14 @@ type HeroMetric = {
   decimals?: number;
 };
 
+type EvidenceItem = {
+  title: string;
+  stat: string;
+  description: string;
+  source: string;
+  chartLabel: string;
+};
+
 const easeOutCubic = (progress: number) => 1 - Math.pow(1 - progress, 3);
 
 const DEFAULT_FORM_DATA: SimulationFormData = {
@@ -183,29 +191,29 @@ const capabilityTabs: CapabilityTab[] = [
 
 const heroMetrics: HeroMetric[] = [
   {
-    label: "計画書作成期間",
-    note: "準備期間を短縮",
-    prefix: "-",
-    suffix: "%",
-    target: 60,
-  },
-  {
-    label: "資金調達成功率",
-    note: "導入企業平均",
-    suffix: "×",
-    target: 2,
-    decimals: 1,
-  },
-  {
-    label: "経営会議準備時間",
-    note: "意思決定に充てられる時間",
+    label: "年間削減工数",
+    note: "中小企業向け調査（ひなたコンサルティング）",
     prefix: "-",
     suffix: "h",
-    target: 40,
+    target: 1750,
+  },
+  {
+    label: "年間コスト削減",
+    note: "同調査の平均削減額",
+    prefix: "-",
+    suffix: "万円",
+    target: 1000,
+  },
+  {
+    label: "意思決定精度",
+    note: "米国企業のAI分析導入効果",
+    prefix: "+",
+    suffix: "%",
+    target: 44,
   },
 ];
 
-const TIME_SAVED_TARGET = 15420;
+const TIME_SAVED_TARGET = 1750;
 
 const journeySteps: JourneyStep[] = [
   {
@@ -245,15 +253,50 @@ const journeySteps: JourneyStep[] = [
 const heroBenefits = [
   {
     title: "AIが右腕として分析",
-    description: "市場・政策・競合データを毎朝キャッチし、判断に使うべき要点だけを整理します。",
+    description: "市場・政策・競合データを毎朝キャッチし、導入率35.1%の先進企業が実践するスピードで意思決定材料を整備します。",
   },
   {
     title: "経営者が最終判断",
-    description: "財務シミュレーションやドラフトはAIが提示。意思決定は経営者が責任を持って選択できます。",
+    description: "日本中小企業診断士協会連合会が推奨する通り、AIの提案を専門家が検証し、最終判断は経営者が責任を持って選択できます。",
   },
   {
     title: "専門家が裏付けと伴走",
-    description: "中小企業診断士・財務のプロがレビューし、説得力と実行確度を高めます。",
+    description: "Furumachi SME Consultingの推奨に沿ったガバナンス体制で、中小企業診断士・財務のプロがレビューし、説得力と実行確度を高めます。",
+  },
+];
+
+const evidenceItems: EvidenceItem[] = [
+  {
+    title: "導入率が生む競争格差",
+    stat: "情報通信業35.1% / 卸売・小売10%台",
+    description:
+      "日本経済調査協議会の2025年報告書では、生成AI導入企業と未導入企業で業務効率と成長スピードに差が生まれていると指摘されています。",
+    source: "出典：日本経済調査協議会『2025年の成長と生成AI』（2024年11月調査）",
+    chartLabel: "導入企業と未導入企業の割合",
+  },
+  {
+    title: "年間で削減できる業務時間",
+    stat: "-1,750時間",
+    description:
+      "ひなたコンサルティングの調査によると、中小企業が生成AIを活用すると年間1,750時間の業務が削減でき、意思決定に使える時間が創出されます。",
+    source: "出典：ひなたコンサルティング調査（2024年）",
+    chartLabel: "生成AI導入前後の工数",
+  },
+  {
+    title: "年間コストインパクト",
+    stat: "-1,000万円",
+    description:
+      "同調査では年間1,000万円のコスト削減も確認されており、AIに業務を任せるほど投資対効果が大きくなります。",
+    source: "出典：ひなたコンサルティング調査（2024年）",
+    chartLabel: "削減できるコスト",
+  },
+  {
+    title: "意思決定の精度とスピード",
+    stat: "+44% 精度",
+    description:
+      "米国企業のレポートでは、AIによるデータ分析で意思決定の精度が44%向上し、会計ツールの自動化で年間34.1万時間の削減、チャットボットで問い合わせの80%を自動対応できると報告されています。",
+    source: "出典：DATAGOL.AI（2024年）",
+    chartLabel: "AI分析導入による成果",
   },
 ];
 
@@ -717,6 +760,7 @@ const Index = () => {
         <div className="container header-inner">
           <div className="brand" aria-label="AI経営計画書ラボ">AI経営計画書ラボ</div>
           <nav className="header-nav" aria-label="主要ナビゲーション">
+            <a href="#evidence">エビデンス</a>
             <a href="#pain">経営者の課題</a>
             <a href="#capabilities">機能と特徴</a>
             <a href="#simulator">シミュレーター</a>
@@ -726,7 +770,7 @@ const Index = () => {
           </nav>
           <div className="header-actions">
             <a className="btn btn-outline" href="#demo">
-              デモを見る
+              デモ予約
             </a>
             <a className="btn btn-accent" href="#consultation">
               無料相談
@@ -745,7 +789,7 @@ const Index = () => {
                 生成AIが外部環境を常時モニタリングし、市場インサイト・財務シミュレーション・資料ドラフトを整備。最終判断は経営者が行い、私たちは判断材料をそろえます。
               </p>
               <p className="subtitle">
-                日本中小企業診断士協会の報告書が示す通り、生成AIは経営者の判断を補完するツールです。情報の正確性を専門家がチェックし、東京商工会議所のガイドラインに沿って「AIに依存し過ぎない」運用を徹底しています。
+                日本中小企業診断士協会連合会の報告書が示す通り、生成AIは経営者の判断を補完するパートナーです。AIの提案は専門家が正確性を検証し、最終判断は経営者が行うという運用ポリシーを徹底しています。
               </p>
               <div className="hero-benefits">
                 {heroBenefits.map((benefit) => (
@@ -757,16 +801,16 @@ const Index = () => {
               </div>
               <div className="hero-actions">
                 <a className="btn btn-accent" href="#consultation">
-                  無料トライアルを予約
+                  無料トライアル
                 </a>
-                <a className="btn btn-ghost" href="#simulator">
-                  予測シミュレーションを見る
+                <a className="btn btn-ghost" href="#demo">
+                  デモ予約
                 </a>
               </div>
               <div className="hero-time-counter" ref={timeCounterRef} aria-live="polite">
-                <span className="hero-time-counter__label">累計で創出した意思決定時間</span>
+                <span className="hero-time-counter__label">年間で創出できる意思決定時間の目安</span>
                 <strong className="hero-time-counter__value">{formatNumber(timeSavedValue)} 時間</strong>
-                <span className="hero-time-counter__note">AIが分析・提案 / 経営者が最終判断することで生まれた時間</span>
+                <span className="hero-time-counter__note">ひなたコンサルティング調査に基づく平均値</span>
               </div>
               <dl className="hero-metrics" aria-label="サービス導入後の成果" ref={heroMetricsRef}>
                 {heroMetrics.map((metric, index) => (
@@ -814,42 +858,28 @@ const Index = () => {
           </div>
         </section>
 
-        <section className="journey reveal-on-scroll" id="journey">
+        <section className="evidence reveal-on-scroll" id="evidence">
           <div className="container">
             <div className="section-heading">
-              <h2 className="section-title">AIが分析・提案 → 経営者が意思決定するまでのタイムライン</h2>
+              <h2 className="section-title">生成AI活用の必要性を示すエビデンス</h2>
               <p className="section-lead">
-                ステップごとにAIと経営者の役割を併記し、「AIが行うこと」「経営者が行うこと」を明確化。判断すべき論点に集中するための伴走設計です。
+                外部の報告書や専門記事から、生成AIを導入した企業がどのように競争力・効率・意思決定の質を高めているかを整理しました。導入を先送りにすると競争優位を失うリスクが高まります。
               </p>
             </div>
-            <div className="journey-steps">
-              {journeySteps.map((step, index) => (
-                <article className="journey-step" key={step.title}>
-                  <span className="journey-index">STEP {index + 1}</span>
-                  <h3>{step.title}</h3>
-                  <p className="journey-duration">{step.duration}</p>
-                  <p className="journey-timesaved">{step.timeSaved}</p>
-                  <p>{step.description}</p>
-                  <div className="journey-roles">
-                    <div className="journey-role journey-role--ai">
-                      <h4>AIが行うこと</h4>
-                      <p>{step.aiRole}</p>
-                    </div>
-                    <div className="journey-role journey-role--executive">
-                      <h4>経営者が行うこと</h4>
-                      <p>{step.executiveRole}</p>
-                    </div>
+            <div className="evidence-grid">
+              {evidenceItems.map((item) => (
+                <article className="evidence-card" key={item.title}>
+                  <header className="evidence-card__header">
+                    <h3>{item.title}</h3>
+                    <strong>{item.stat}</strong>
+                  </header>
+                  <p>{item.description}</p>
+                  <div className="evidence-placeholder" role="presentation" aria-hidden="true">
+                    <span>{item.chartLabel}</span>
                   </div>
+                  <p className="evidence-card__source">{item.source}</p>
                 </article>
               ))}
-            </div>
-            <div className="section-cta">
-              <a className="btn btn-accent" href="#demo">
-                タイムラインの詳細資料を請求
-              </a>
-              <a className="btn btn-outline" href="#consultation">
-                無料相談で導入スケジュールを確認
-              </a>
             </div>
           </div>
         </section>
@@ -859,7 +889,7 @@ const Index = () => {
             <div className="section-heading">
               <h2 className="section-title">経営者が共感する3つの課題と、AI×専門家の解決策</h2>
               <p className="section-lead">
-                外部環境の変化に追われるほど意思決定の時間が不足します。AIが情報を集め・整理し、経営者は判断に集中することで、日本中小企業診断士協会が推奨する「AIは判断を補完する右腕」というスタンスを実現します。
+                外部環境の変化に追われるほど意思決定の時間が不足します。日本経済調査協議会の調査でも、生成AIを導入しない企業は競争力で遅れを取ると警鐘が鳴らされています。AIが情報を集め・整理し、経営者は判断に集中することで、日本中小企業診断士協会連合会が推奨する「AIは判断を補完する右腕」というスタンスを実現します。
               </p>
             </div>
             <div className="pain-grid">
@@ -902,10 +932,10 @@ const Index = () => {
             </div>
             <div className="section-cta">
               <a className="btn btn-accent" href="#consultation">
-                あなたの課題に合わせた活用方法を相談
+                無料相談
               </a>
-              <a className="btn btn-outline" href="#simulator">
-                まずはAIシミュレーターを試す
+              <a className="btn btn-outline" href="#consultation">
+                無料トライアル
               </a>
             </div>
           </div>
@@ -1045,12 +1075,52 @@ const Index = () => {
           </div>
         </section>
 
+        <section className="journey reveal-on-scroll" id="journey">
+          <div className="container">
+            <div className="section-heading">
+              <h2 className="section-title">AIが分析・提案 → 経営者が意思決定するまでのタイムライン</h2>
+              <p className="section-lead">
+                ステップごとにAIと経営者の役割を併記し、「AIが行うこと」「経営者が行うこと」を明確化。判断すべき論点に集中するための伴走設計です。
+              </p>
+            </div>
+            <div className="journey-steps">
+              {journeySteps.map((step, index) => (
+                <article className="journey-step" key={step.title}>
+                  <span className="journey-index">STEP {index + 1}</span>
+                  <h3>{step.title}</h3>
+                  <p className="journey-duration">{step.duration}</p>
+                  <p className="journey-timesaved">{step.timeSaved}</p>
+                  <p>{step.description}</p>
+                  <div className="journey-roles">
+                    <div className="journey-role journey-role--ai">
+                      <h4>AIが行うこと</h4>
+                      <p>{step.aiRole}</p>
+                    </div>
+                    <div className="journey-role journey-role--executive">
+                      <h4>経営者が行うこと</h4>
+                      <p>{step.executiveRole}</p>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="section-cta">
+              <a className="btn btn-accent" href="#demo">
+                デモ予約
+              </a>
+              <a className="btn btn-outline" href="#consultation">
+                無料相談
+              </a>
+            </div>
+          </div>
+        </section>
+
         <section className="partnership reveal-on-scroll" id="partnership">
           <div className="container">
             <div className="section-heading">
               <h2 className="section-title">専門家とAIの協働で、最終判断は経営者が握る</h2>
               <p className="section-lead">
-                東京商工会議所のガイドラインが指摘するように、生成AIは経営判断を支援するツールです。AIが提示したアウトプットを専門家がレビューし、経営者が自信を持って意思決定できる状態をつくります。
+                日本中小企業診断士協会連合会の報告書が強調するように、生成AIは経営判断を支援するツールです。AIが提示したアウトプットを専門家がレビューし、経営者が自信を持って意思決定できる状態をつくります。
               </p>
             </div>
             <div className="partnership-grid">
@@ -1069,7 +1139,7 @@ const Index = () => {
                   <li>複数シナリオのリスク／リターンと判断期限。</li>
                   <li>実行に向けた社内アクションと責任者の割り当て。</li>
                 </ul>
-                <p className="partnership-note">※ 最終判断は経営者が行い、AIは「新しい視点や解決策を提示するパートナー」（日本中小企業診断士協会報告書より）として活用します。</p>
+                <p className="partnership-note">※ 最終判断は経営者が行い、AIは「新しい視点や解決策を提示するパートナー」（日本中小企業診断士協会連合会の報告書より）として活用します。</p>
               </article>
             </div>
             <div className="expert-profiles">
@@ -1083,10 +1153,10 @@ const Index = () => {
             </div>
             <div className="section-cta">
               <a className="btn btn-accent" href="#consultation">
-                専門家レビューの具体例を相談
+                無料相談
               </a>
               <a className="btn btn-outline" href="#demo">
-                AIと専門家の連携デモを見る
+                デモ予約
               </a>
             </div>
           </div>
@@ -1268,10 +1338,10 @@ const Index = () => {
             </div>
             <div className="section-cta">
               <a className="btn btn-accent" href="#consultation">
-                伴走プロセスの詳細を無料相談で確認
+                無料相談
               </a>
               <a className="btn btn-outline" href="#demo">
-                ワークフローのデモ動画を見る
+                デモ予約
               </a>
             </div>
           </div>
@@ -1387,7 +1457,7 @@ const Index = () => {
             </div>
             <div className="plan-footer">
               <a className="btn btn-accent" href="#consultation">
-                無料トライアル・資料請求はこちら
+                無料トライアル
               </a>
             </div>
           </div>
@@ -1398,7 +1468,7 @@ const Index = () => {
             <div className="section-heading">
               <h2 className="section-title">セキュリティとガバナンス</h2>
               <p className="section-lead">
-                機密性の高い経営情報を扱うからこそ、安心して任せていただける環境を整えています。
+                機密性の高い経営情報を扱うからこそ、Furumachi SME Consultingのガイドラインにならい、暗号化や監査・削除ポリシーを明文化しています。
               </p>
             </div>
             <div className="security-grid">
@@ -1468,7 +1538,7 @@ const Index = () => {
               </p>
             </div>
             <a className="btn btn-accent" href="#consultation">
-              30分のデモを予約する
+              デモ予約
             </a>
           </div>
         </section>
@@ -1542,6 +1612,7 @@ const Index = () => {
           </div>
           <nav className="footer-nav" aria-label="フッターナビゲーション">
             <a href="#hero">トップ</a>
+            <a href="#evidence">エビデンス</a>
             <a href="#capabilities">機能</a>
             <a href="#cases">成功事例</a>
             <a href="#plans">料金プラン</a>
