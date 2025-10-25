@@ -19,6 +19,23 @@ type FaqItem = {
   answer: string;
 };
 
+type CapabilityTab = {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  points: string[];
+  highlights: { label: string; value: string; detail: string }[];
+  chart: { label: string; value: number; unit: string }[];
+};
+
+type JourneyStep = {
+  title: string;
+  duration: string;
+  timeSaved: string;
+  description: string;
+};
+
 const DEFAULT_FORM_DATA: SimulationFormData = {
   goalRevenue: 9600,
   initialInvestment: 1200,
@@ -59,6 +76,139 @@ const radarScenarios: Record<
     competitor: [3.0, 3.1, 3.6, 3.8, 2.9, 3.3],
   },
 };
+
+const capabilityTabs: CapabilityTab[] = [
+  {
+    id: "insight",
+    title: "外部環境を毎朝キャッチ",
+    subtitle: "市場の変化をAIが先に知らせる",
+    description:
+      "政策ニュースや競合の動きをAIが集めて整理。経営者が見るべき数字だけをダッシュボードに要約します。",
+    points: [
+      "72種類の市場・政策データを自動で更新",
+      "影響度が高いトピックはアラートで通知",
+      "会議で使える1枚サマリーを即座に生成",
+    ],
+    highlights: [
+      { label: "情報収集の時間", value: "-18時間/月", detail: "リサーチを自動集約" },
+      { label: "先読みできる指標", value: "12項目", detail: "重要度順に可視化" },
+      { label: "更新頻度", value: "毎朝5分", detail: "ダッシュボードを確認" },
+    ],
+    chart: [
+      { label: "モニタリングするデータ", value: 72, unit: "件" },
+      { label: "通知される市場変動", value: 12, unit: "件/月" },
+      { label: "削減できる調査工数", value: 18, unit: "時間/月" },
+    ],
+  },
+  {
+    id: "finance",
+    title: "財務シナリオを一括生成",
+    subtitle: "キャッシュの見通しが一目でわかる",
+    description:
+      "売上目標とコストの想定を入力すると、AIが複数の収支シナリオを作成。資金繰りに影響するイベントも自動で反映します。",
+    points: [
+      "6か月と5年のキャッシュフローを同時作成",
+      "金利や為替などの外部指数を自動連動",
+      "意思決定ごとにROIをシミュレーション",
+    ],
+    highlights: [
+      { label: "財務表の作成時間", value: "6時間→45分", detail: "テンプレート整形も自動" },
+      { label: "試算できるケース", value: "最大9パターン", detail: "ボタン1つで比較" },
+      { label: "判断前に確保", value: "+20時間", detail: "経営者の思考時間" },
+    ],
+    chart: [
+      { label: "生成するシナリオ", value: 9, unit: "パターン" },
+      { label: "感度分析の指標", value: 5, unit: "軸" },
+      { label: "改善できる利益率", value: 8, unit: "pt向上" },
+    ],
+  },
+  {
+    id: "document",
+    title: "読みやすい計画書ドラフト",
+    subtitle: "伝わる文章と図表を一緒に生成",
+    description:
+      "経営ストーリー、KPI、投資計画を章立てで提案。金融機関や補助金のフォーマットにも合わせて出力します。",
+    points: [
+      "意思決定に必要な問いをAIが下書き",
+      "章ごとに図解・グラフを自動レイアウト",
+      "フィードバックは共同編集画面で共有",
+    ],
+    highlights: [
+      { label: "ドラフト整合率", value: "95%", detail: "用語の揺れを自動補正" },
+      { label: "資料作成の時短", value: "-28時間/月", detail: "スライド整形なし" },
+      { label: "対応フォーマット", value: "補助金/銀行/社内", detail: "ワンクリック出力" },
+    ],
+    chart: [
+      { label: "自動生成するスライド", value: 35, unit: "枚" },
+      { label: "想定問答の提案", value: 15, unit: "項目" },
+      { label: "レビュー時間の短縮", value: 12, unit: "時間/月" },
+    ],
+  },
+  {
+    id: "advisor",
+    title: "専門家が伴走サポート",
+    subtitle: "AIの提案を現実的な戦略に磨き上げ",
+    description:
+      "元コンサルタント・金融機関出身のチームが、AIドラフトにチェックを入れて信頼性を保証。意思決定までの動線も整えます。",
+    points: [
+      "提出物は専門家が最終レビュー",
+      "金融機関との想定問答を準備",
+      "導入後の定例ミーティングで改善提案",
+    ],
+    highlights: [
+      { label: "平均応答時間", value: "24時間以内", detail: "質問に即レス" },
+      { label: "伴走ミーティング", value: "月2回", detail: "意思決定の壁を整理" },
+      { label: "顧客満足度", value: "CSAT 4.8/5", detail: "経営陣の評価" },
+    ],
+    chart: [
+      { label: "専門家のレビュー回数", value: 4, unit: "往復" },
+      { label: "会議準備の短縮", value: 40, unit: "時間/月" },
+      { label: "意思決定スピード", value: 2, unit: "倍" },
+    ],
+  },
+];
+
+const journeySteps: JourneyStep[] = [
+  {
+    title: "課題ヒアリング",
+    duration: "オンライン30分",
+    timeSaved: "資料準備0時間",
+    description: "事前アンケートと既存資料を共有いただくだけ。会議までに考えるべき論点をAIが整理します。",
+  },
+  {
+    title: "AIドラフト生成",
+    duration: "最短1日",
+    timeSaved: "分析時間-20時間",
+    description: "市場データの取り込みから財務シミュレーション、文章ドラフトまで自動生成します。",
+  },
+  {
+    title: "専門家レビュー",
+    duration: "2〜3営業日",
+    timeSaved: "修正作業-12時間",
+    description: "金融機関視点で裏付けをチェックし、リスクと対応策を補強。想定質問と答えも準備します。",
+  },
+  {
+    title: "経営会議・提出",
+    duration: "会議前に共有",
+    timeSaved: "判断時間+15時間",
+    description: "会議用サマリーと複数シナリオを提示。外部環境が変わってもその場で差し替え可能です。",
+  },
+];
+
+const heroBenefits = [
+  {
+    title: "意思決定の時間を確保",
+    description: "AIが資料づくりを担うので、経営者は考える時間に集中できます。",
+  },
+  {
+    title: "外部環境を先に把握",
+    description: "政策や競合の変化を自動通知。会議前にシナリオを差し替えられます。",
+  },
+  {
+    title: "信頼できる裏付け",
+    description: "専門家がレビューし、金融機関や投資家にも説明しやすい根拠を整理します。",
+  },
+];
 
 const faqItems: FaqItem[] = [
   {
@@ -109,32 +259,41 @@ const processSteps = [
 const successStories = [
   {
     industry: "製造業（年商22億円）",
-    challenge: "調達環境の変化で取引銀行から次年度計画の即時提出を求められていた。",
-    before: "計画書作成に3週間、部門ヒアリングに30時間超。",
-    after: "ドラフト作成を4日→1.5日に短縮し、交渉までの準備時間を60%削減。",
-    result: "事業性評価ローンで2.5億円の調達に成功。外部環境シナリオを即日で差し替え対応。",
+    challenge: "銀行から翌期計画の即時提出を求められ、資料づくりが経営のボトルネックに。",
+    result: "AIドラフトで交渉準備を60%短縮し、2.5億円の資金調達に成功。",
+    metrics: [
+      { label: "計画書ドラフト", before: 4, after: 1.5, unit: "日" },
+      { label: "部門ヒアリング", before: 30, after: 12, unit: "時間" },
+      { label: "差し替え対応", before: 48, after: 4, unit: "時間" },
+    ],
     quote:
-      "『生成AIで作成した複数シナリオが、役員会での意思決定を速めてくれました。銀行担当者の質問にも即答できました。』",
+      "『AIが用意した最新データと複数シナリオで、役員会も銀行との面談も迷いなく進められました。』",
     person: "代表取締役 A社長",
   },
   {
     industry: "ITサービス（年商6.5億円）",
-    challenge: "海外展開を見据えたシリーズB資金調達で、説得力ある財務シナリオが不足。",
-    before: "担当者2名での資料更新に毎月80時間。",
-    after: "AIがARR予測と市場サイズ根拠を自動更新し、更新工数を1/3に削減。",
-    result: "海外投資家向けDDで追加質問ゼロ、調達成功率が2.1倍に向上。",
+    challenge: "海外投資家向けに説得力のある財務シナリオと市場根拠を短期間で求められていた。",
+    result: "ARR予測と外部データを自動更新し、月80時間かかっていた資料更新を3分の1に削減。",
+    metrics: [
+      { label: "資料更新工数", before: 80, after: 26, unit: "時間/月" },
+      { label: "想定問答の準備", before: 15, after: 5, unit: "時間" },
+      { label: "投資家からの追加質問", before: 12, after: 0, unit: "件" },
+    ],
     quote:
-      "『外部環境の指数データが毎週反映され、経営会議の議題が“次の一手”に変わりました。』",
+      "『市場指数が週次で反映されるので、会議の議題が“次の一手”に変わりました。』",
     person: "CFO B氏",
   },
   {
     industry: "多店舗飲食（年商9億円）",
-    challenge: "新店出店の意思決定に必要な市場データが散在し、数字の裏付けが弱かった。",
-    before: "市場調査と損益シミュレーションに約14日。",
-    after: "AIが地区別データを統合し、計画書完成まで5日に短縮。",
-    result: "出店判断までのリードタイムが70%短縮し、月次での見直しが定着。",
+    challenge: "出店判断に必要な市場データがバラバラで、意思決定が後ろ倒しになっていた。",
+    result: "地域別データを自動統合し、出店判断までのリードタイムを70%短縮。",
+    metrics: [
+      { label: "市場調査", before: 14, after: 5, unit: "日" },
+      { label: "会議準備", before: 20, after: 6, unit: "時間" },
+      { label: "月次の見直し", before: 8, after: 2, unit: "時間" },
+    ],
     quote:
-      "『AIが用意したビフォー／アフター図で現場との会話が揃い、意思決定が早くなりました。』",
+      "『AIが見せてくれたビフォー／アフターのグラフで、現場との会話が揃いました。』",
     person: "COO C氏",
   },
 ];
@@ -151,6 +310,7 @@ const planData = [
     ],
     roi: "作成工数を平均35時間削減",
     trial: "14日間の無料トライアル付き",
+    badge: "まず試したい方に",
   },
   {
     name: "プロプラン",
@@ -164,6 +324,8 @@ const planData = [
     ],
     roi: "資金調達成功率 平均2.0倍／作成リードタイム60%削減",
     trial: "専任コンサルとの導入ワークショップ付き",
+    badge: "人気 No.1",
+    featured: true,
   },
   {
     name: "エンタープライズ",
@@ -177,10 +339,13 @@ const planData = [
     ],
     roi: "経営会議資料の更新リードタイムを最大80%短縮",
     trial: "PoCプログラム（4週間）を提案",
+    badge: "大型案件向け",
   },
 ];
 
 const formatNumber = (value: number) => Math.round(value).toLocaleString("ja-JP");
+
+const formatDecimal = (value: number) => (Number.isInteger(value) ? value.toString() : value.toFixed(1));
 
 const clampValue = (value: number, min: number, max?: number) => {
   const clampedMin = Math.max(value, min);
@@ -193,6 +358,7 @@ const clampValue = (value: number, min: number, max?: number) => {
 const Index = () => {
   const [formData, setFormData] = useState<SimulationFormData>(DEFAULT_FORM_DATA);
   const [selectedScenario, setSelectedScenario] = useState<RadarScenarioKey>("baseline");
+  const [activeCapabilityId, setActiveCapabilityId] = useState<string>(capabilityTabs[0].id);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   const {
@@ -253,6 +419,18 @@ const Index = () => {
   }, [formData]);
 
   const selectedRadar = radarScenarios[selectedScenario];
+
+  const activeCapability = useMemo(
+    () => capabilityTabs.find((capability) => capability.id === activeCapabilityId) ?? capabilityTabs[0],
+    [activeCapabilityId]
+  );
+
+  const capabilityChartMax = useMemo(() => {
+    return capabilityTabs.reduce((max, capability) => {
+      const capabilityMax = capability.chart.reduce((innerMax, item) => Math.max(innerMax, item.value), 0);
+      return Math.max(max, capabilityMax);
+    }, 0);
+  }, []);
 
   const radarPolygons = useMemo(() => {
     const center = { x: 140, y: 140 };
@@ -370,20 +548,22 @@ const Index = () => {
         <section className="hero reveal-on-scroll" id="hero">
           <div className="container hero-inner">
             <div className="hero-copy">
-              <p className="badge">先読みする経営計画 × 生成AI</p>
-              <h1>
-                生成AIで外部環境を先読み。
-                <span className="hero-highlight">最短1日で意思決定に使える経営計画書</span>
-                を。
-              </h1>
-              <p className="subtitle">
-                市場データ・財務予測・文章ドラフトを自動生成し、専門家が戦略目線で磨き上げます。変化が激しい今だからこそ、経営者が本質的な意思決定に集中できる時間を生み出します。
+              <p className="badge">中小企業のためのAI経営計画</p>
+              <h1>迷わず決断する時間を、AIがつくる。</h1>
+              <p className="hero-subtitle">
+                外部環境の変化をAIが読み取り、最短1日で意思決定に使える経営計画書をお届けします。
               </p>
-              <ul className="hero-painpoints">
-                <li>市場環境が毎月変わり、会議のたびに計画書を作り直している</li>
-                <li>資料づくりに追われ、意思決定のための思考時間が足りない</li>
-                <li>金融機関や投資家に刺さる裏付けデータを短期間で揃えたい</li>
-              </ul>
+              <p className="subtitle">
+                市場データ、資金繰りの予測、計画書の文章までをAIが下書き。専門家が裏付けを整えて、金融機関や投資家にも伝わる形で仕上げます。
+              </p>
+              <div className="hero-benefits">
+                {heroBenefits.map((benefit) => (
+                  <div className="benefit-card" key={benefit.title}>
+                    <strong>{benefit.title}</strong>
+                    <p>{benefit.description}</p>
+                  </div>
+                ))}
+              </div>
               <div className="hero-actions">
                 <a className="btn btn-accent" href="#consultation">
                   無料トライアルを予約
@@ -397,7 +577,7 @@ const Index = () => {
                   <dt>計画書作成期間</dt>
                   <dd>
                     <span className="metric-value">-60%</span>
-                    <span className="metric-note">平均短縮</span>
+                    <span className="metric-note">準備期間を短縮</span>
                   </dd>
                 </div>
                 <div>
@@ -411,7 +591,7 @@ const Index = () => {
                   <dt>経営会議準備時間</dt>
                   <dd>
                     <span className="metric-value">-40h</span>
-                    <span className="metric-note">／月の削減</span>
+                    <span className="metric-note">意思決定に充てられる時間</span>
                   </dd>
                 </div>
               </dl>
@@ -442,6 +622,28 @@ const Index = () => {
           </div>
         </section>
 
+        <section className="journey reveal-on-scroll" id="journey">
+          <div className="container">
+            <div className="section-heading">
+              <h2 className="section-title">AIと専門家が経営者の時間を取り戻す流れ</h2>
+              <p className="section-lead">
+                最初のヒアリングから意思決定の瞬間まで。生成AIが外部環境を先に捉え、専門家が確度を高めることで、考える時間と行動のスピードを両立します。
+              </p>
+            </div>
+            <div className="journey-steps">
+              {journeySteps.map((step, index) => (
+                <article className="journey-step" key={step.title}>
+                  <span className="journey-index">STEP {index + 1}</span>
+                  <h3>{step.title}</h3>
+                  <p className="journey-duration">{step.duration}</p>
+                  <p className="journey-timesaved">{step.timeSaved}</p>
+                  <p>{step.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="pain reveal-on-scroll" id="pain">
           <div className="container">
             <div className="section-heading">
@@ -454,21 +656,21 @@ const Index = () => {
               <article className="pain-card">
                 <h3>01. 情報過多で判断が追いつかない</h3>
                 <p>
-                  マクロ環境・競合動向・政策支援情報を追い続けるのは現場にとって負荷が大きい。情報をまとめるだけで会議が始まってしまう。
+                  毎日のニュースや競合の動きが多すぎて、整理だけで会議の時間が来てしまう。
                 </p>
-                <p className="pain-solution">→ 生成AIが一次情報を自動収集・要約し、意思決定に必要な指標だけを可視化。</p>
+                <p className="pain-solution">→ 生成AIが一次情報を自動収集・要約し、見るべき指標だけを可視化。</p>
               </article>
               <article className="pain-card">
                 <h3>02. 数字の裏付けと文章づくりに時間を奪われる</h3>
                 <p>
-                  エクセルとスライドを行き来しながら整合性をとる作業が続き、経営者の思考時間が失われている。
+                  エクセルとスライドを行き来して整合性をとるうちに、肝心な判断の時間がなくなる。
                 </p>
                 <p className="pain-solution">→ AIが財務シミュレーションから文章ドラフトまで一気通貫で生成。</p>
               </article>
               <article className="pain-card">
                 <h3>03. 最新の外部環境を反映した更新ができない</h3>
                 <p>
-                  金融機関・投資家からの追加質問に即時対応できず、判断のタイミングを逃してしまう。
+                  金融機関や投資家からの質問にすぐ答えられず、判断のタイミングを逃してしまう。
                 </p>
                 <p className="pain-solution">→ ダッシュボードでシナリオを切り替え、専門家が24時間以内にレビューを返答。</p>
               </article>
@@ -479,52 +681,68 @@ const Index = () => {
         <section className="capabilities reveal-on-scroll" id="capabilities">
           <div className="container">
             <div className="section-heading">
-              <h2 className="section-title">生成AIと専門家の4つの柱で、先見的な計画書を</h2>
+              <h2 className="section-title">4つの連携で、変化に強い経営計画を最短で</h2>
               <p className="section-lead">
-                具体的な成果とインタラクティブな分析で、経営判断のスピードと質を同時に引き上げます。
+                タブを切り替えると、AIと専門家がどのように役割分担し、判断に必要な数字とストーリーを整えていくかが確認できます。
               </p>
             </div>
-            <div className="pillars-grid">
-              <article className="pillar-card">
-                <h3>市場・競合分析の自動化</h3>
-                <p>
-                  72件の外部データソースをクロールし、業界構造・トレンド・競合差分をレポート化。AIが影響度の高い指標を優先表示します。
-                </p>
-                <footer>
-                  <span className="pillar-metric">分析更新時間 90%短縮</span>
-                  <small>政策・需給データを毎朝反映</small>
-                </footer>
-              </article>
-              <article className="pillar-card">
-                <h3>売上・収支予測</h3>
-                <p>
-                  ユーザー入力のKPIから5年間の収支を自動算出。外部指数を掛け合わせて、市場変動を織り込んだ複数シナリオを提示します。
-                </p>
-                <footer>
-                  <span className="pillar-metric">財務モデル作成 6時間 → 45分</span>
-                  <small>感度分析とキャッシュフロー表を同時生成</small>
-                </footer>
-              </article>
-              <article className="pillar-card">
-                <h3>文章生成とレポート作成</h3>
-                <p>
-                  事業ストーリー、戦略、リスク、KPIを章立てしたドラフトを自動作成。金融機関・補助金フォーマットにも対応します。
-                </p>
-                <footer>
-                  <span className="pillar-metric">ドラフト整合率 95%以上</span>
-                  <small>社内資料との用語統一も自動</small>
-                </footer>
-              </article>
-              <article className="pillar-card">
-                <h3>専門家レビューと伴走</h3>
-                <p>
-                  元金融機関・戦略コンサル出身の専門家がレビュー。実行計画と想定問答までセットで提供し、意思決定を後押しします。
-                </p>
-                <footer>
-                  <span className="pillar-metric">レビュー満足度 4.8 / 5.0</span>
-                  <small>最短24時間でフィードバック</small>
-                </footer>
-              </article>
+            <div className="capabilities-layout">
+              <div className="capabilities-tabs" role="tablist" aria-label="生成AIと専門家の役割">
+                {capabilityTabs.map((capability) => {
+                  const isActive = activeCapabilityId === capability.id;
+                  return (
+                    <button
+                      key={capability.id}
+                      className={isActive ? "capability-tab is-active" : "capability-tab"}
+                      role="tab"
+                      aria-selected={isActive}
+                      type="button"
+                      onClick={() => setActiveCapabilityId(capability.id)}
+                    >
+                      <span className="capability-tab__title">{capability.title}</span>
+                      <span className="capability-tab__subtitle">{capability.subtitle}</span>
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="capability-panel" role="tabpanel" aria-live="polite">
+                <header className="capability-panel__header">
+                  <h3>{activeCapability.title}</h3>
+                  <p className="capability-panel__subtitle">{activeCapability.subtitle}</p>
+                </header>
+                <p className="capability-description">{activeCapability.description}</p>
+                <ul className="capability-points">
+                  {activeCapability.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
+                <div className="capability-highlights">
+                  {activeCapability.highlights.map((highlight) => (
+                    <div className="capability-highlight" key={highlight.label}>
+                      <span className="capability-highlight__label">{highlight.label}</span>
+                      <strong>{highlight.value}</strong>
+                      <span className="capability-highlight__detail">{highlight.detail}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="capability-chart" aria-label={`${activeCapability.title}の効果指標`}>
+                  {activeCapability.chart.map((item) => {
+                    const widthPercent = capabilityChartMax > 0 ? Math.max((item.value / capabilityChartMax) * 100, 8) : 8;
+                    const clampedWidth = Math.min(widthPercent, 100);
+                    return (
+                      <div className="capability-chart__row" key={item.label}>
+                        <div className="capability-chart__info">
+                          <span className="capability-chart__label">{item.label}</span>
+                          <span className="capability-chart__value">{formatDecimal(item.value)} {item.unit}</span>
+                        </div>
+                        <div className="capability-chart__bar">
+                          <span className="capability-chart__fill" style={{ width: `${clampedWidth}%` }} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
 
             <div className="insight-lab">
@@ -786,20 +1004,27 @@ const Index = () => {
                     <h3>{story.industry}</h3>
                     <p className="case-challenge">課題：{story.challenge}</p>
                   </header>
-                  <dl className="case-metrics">
-                    <div>
-                      <dt>Before</dt>
-                      <dd>{story.before}</dd>
-                    </div>
-                    <div>
-                      <dt>After</dt>
-                      <dd>{story.after}</dd>
-                    </div>
-                    <div>
-                      <dt>成果</dt>
-                      <dd>{story.result}</dd>
-                    </div>
-                  </dl>
+                  <p className="case-result">{story.result}</p>
+                  <div className="case-compare">
+                    {story.metrics.map((metric) => {
+                      const maxValue = Math.max(metric.before, metric.after, 1);
+                      const beforeWidth = Math.min(Math.max((metric.before / maxValue) * 100, 8), 100);
+                      const afterWidth = Math.min(Math.max((metric.after / maxValue) * 100, 8), 100);
+                      return (
+                        <div className="case-compare__item" key={metric.label}>
+                          <div className="case-compare__header">{metric.label}</div>
+                          <div className="case-compare__bars">
+                            <div className="case-bar case-bar--before" style={{ width: `${beforeWidth}%` }}>
+                              <span className="case-bar__label">導入前 {formatDecimal(metric.before)}{metric.unit}</span>
+                            </div>
+                            <div className="case-bar case-bar--after" style={{ width: `${afterWidth}%` }}>
+                              <span className="case-bar__label">導入後 {formatDecimal(metric.after)}{metric.unit}</span>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                   <blockquote>
                     <p>{story.quote}</p>
                     <cite>{story.person}</cite>
@@ -828,9 +1053,14 @@ const Index = () => {
                 <div role="columnheader">トライアル</div>
               </div>
               {planData.map((plan) => (
-                <div className="plan-table__row" role="row" key={plan.name}>
+                <div
+                  className={plan.featured ? "plan-table__row is-featured" : "plan-table__row"}
+                  role="row"
+                  key={plan.name}
+                >
                   <div role="cell" className="plan-name">
                     <strong>{plan.name}</strong>
+                    {plan.badge ? <span className="plan-badge">{plan.badge}</span> : null}
                   </div>
                   <div role="cell">{plan.price}</div>
                   <div role="cell">{plan.target}</div>
@@ -982,6 +1212,14 @@ const Index = () => {
                 無料相談を申し込む
               </button>
               <p className="form-note">送信後はサンクスページで次のステップをご案内します。</p>
+              <div className="form-security">
+                <h3>セキュリティも安心</h3>
+                <ul>
+                  <li>AES-256による通信・保存の暗号化</li>
+                  <li>多要素認証とIP制限でアクセスを管理</li>
+                  <li>ISO/IEC 27001・27701取得、年次の外部監査を実施</li>
+                </ul>
+              </div>
             </form>
           </div>
         </section>
