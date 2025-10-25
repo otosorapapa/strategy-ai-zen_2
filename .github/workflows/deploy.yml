@@ -41,8 +41,25 @@ jobs:
           USER_CLEAN=$(printf '%s' "$WP_USER" | tr -d '\r\n')
           REMOTE_PATH_CLEAN=$(printf '%s' "$WP_REMOTE_PATH" | tr -d '\r\n')
           SSH_OPTIONS="-p 2222 -o StrictHostKeyChecking=no -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"
-          PARENT_PATH=$(dirname "$REMOTE_PATH_CLEAN")
-          REMOTE_PATH_ESCAPED=$(printf '%q' "$REMOTE_PATH_CLEAN")
+          REMOTE_HOME=$(sshpass -p "$PASS_CLEAN" ssh $SSH_OPTIONS "$USER_CLEAN@$HOST_CLEAN" 'printf %s "$HOME"')
+          REMOTE_HOME=$(printf '%s' "$REMOTE_HOME" | tr -d '\r\n')
+          if [ -n "$REMOTE_HOME" ]; then
+            case "$REMOTE_PATH_CLEAN" in
+              "~")
+                REMOTE_PATH_EFFECTIVE="$REMOTE_HOME"
+                ;;
+              ~/*)
+                REMOTE_PATH_EFFECTIVE="$REMOTE_HOME/${REMOTE_PATH_CLEAN#~/}"
+                ;;
+              *)
+                REMOTE_PATH_EFFECTIVE="$REMOTE_PATH_CLEAN"
+                ;;
+            esac
+          else
+            REMOTE_PATH_EFFECTIVE="$REMOTE_PATH_CLEAN"
+          fi
+          PARENT_PATH=$(dirname "$REMOTE_PATH_EFFECTIVE")
+          REMOTE_PATH_ESCAPED=$(printf '%q' "$REMOTE_PATH_EFFECTIVE")
           PARENT_PATH_ESCAPED=$(printf '%q' "$PARENT_PATH")
           sshpass -p "$PASS_CLEAN" ssh $SSH_OPTIONS "$USER_CLEAN@$HOST_CLEAN" "
             mkdir -p $REMOTE_PATH_ESCAPED &&
@@ -63,10 +80,27 @@ jobs:
           USER_CLEAN=$(printf '%s' "$WP_USER" | tr -d '\r\n')
           REMOTE_PATH_CLEAN=$(printf '%s' "$WP_REMOTE_PATH" | tr -d '\r\n')
           SSH_OPTIONS="-p 2222 -o StrictHostKeyChecking=no -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"
-          REMOTE_PATH_ESCAPED=$(printf '%q' "$REMOTE_PATH_CLEAN")
+          REMOTE_HOME=$(sshpass -p "$PASS_CLEAN" ssh $SSH_OPTIONS "$USER_CLEAN@$HOST_CLEAN" 'printf %s "$HOME"')
+          REMOTE_HOME=$(printf '%s' "$REMOTE_HOME" | tr -d '\r\n')
+          if [ -n "$REMOTE_HOME" ]; then
+            case "$REMOTE_PATH_CLEAN" in
+              "~")
+                REMOTE_PATH_EFFECTIVE="$REMOTE_HOME"
+                ;;
+              ~/*)
+                REMOTE_PATH_EFFECTIVE="$REMOTE_HOME/${REMOTE_PATH_CLEAN#~/}"
+                ;;
+              *)
+                REMOTE_PATH_EFFECTIVE="$REMOTE_PATH_CLEAN"
+                ;;
+            esac
+          else
+            REMOTE_PATH_EFFECTIVE="$REMOTE_PATH_CLEAN"
+          fi
+          REMOTE_TARGET_ESCAPED=$(printf '%q' "$REMOTE_PATH_EFFECTIVE/")
           sshpass -p "$PASS_CLEAN" rsync -avz --delete \
             -e "ssh $SSH_OPTIONS" \
-            dist/ "$USER_CLEAN@$HOST_CLEAN:$REMOTE_PATH_ESCAPED/"
+            dist/ "$USER_CLEAN@$HOST_CLEAN:$REMOTE_TARGET_ESCAPED"
 
       - name: Show remote listing
         env:
@@ -80,7 +114,24 @@ jobs:
           USER_CLEAN=$(printf '%s' "$WP_USER" | tr -d '\r\n')
           REMOTE_PATH_CLEAN=$(printf '%s' "$WP_REMOTE_PATH" | tr -d '\r\n')
           SSH_OPTIONS="-p 2222 -o StrictHostKeyChecking=no -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"
-          REMOTE_PATH_ESCAPED=$(printf '%q' "$REMOTE_PATH_CLEAN")
+          REMOTE_HOME=$(sshpass -p "$PASS_CLEAN" ssh $SSH_OPTIONS "$USER_CLEAN@$HOST_CLEAN" 'printf %s "$HOME"')
+          REMOTE_HOME=$(printf '%s' "$REMOTE_HOME" | tr -d '\r\n')
+          if [ -n "$REMOTE_HOME" ]; then
+            case "$REMOTE_PATH_CLEAN" in
+              "~")
+                REMOTE_PATH_EFFECTIVE="$REMOTE_HOME"
+                ;;
+              ~/*)
+                REMOTE_PATH_EFFECTIVE="$REMOTE_HOME/${REMOTE_PATH_CLEAN#~/}"
+                ;;
+              *)
+                REMOTE_PATH_EFFECTIVE="$REMOTE_PATH_CLEAN"
+                ;;
+            esac
+          else
+            REMOTE_PATH_EFFECTIVE="$REMOTE_PATH_CLEAN"
+          fi
+          REMOTE_PATH_ESCAPED=$(printf '%q' "$REMOTE_PATH_EFFECTIVE")
           sshpass -p "$PASS_CLEAN" ssh $SSH_OPTIONS "$USER_CLEAN@$HOST_CLEAN" "
             ls -la $REMOTE_PATH_ESCAPED &&
             echo '== assets ==' &&
