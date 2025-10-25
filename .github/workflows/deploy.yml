@@ -20,7 +20,7 @@ jobs:
       - name: Build
         run: |
           npm ci
-          npm run build -- --base=/public/lp/
+          npm run build -- --base=/public/lp_1/
 
       - name: Guard dist
         run: |
