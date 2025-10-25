@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>生成AIによる経営計画書策定支援サービス</title>
+    <title>生成AI経営計画書ラボ｜先進的な経営計画策定支援</title>
+    <meta
+      name="description"
+      content="生成AIと専門家の伴走で、市場分析・財務予測・経営計画書ドラフトを最短1日で完成。意思決定時間を削減し、外部環境に先手で対応する中小企業向け経営計画策定支援サービス。"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -11,284 +15,1369 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="stylesheet" href="../styles/lp.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --secondary: #111827;
+        --accent: #f59e0b;
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --border: rgba(15, 23, 42, 0.08);
+        --radius: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Manrope", "Hiragino Sans", "ヒラギノ角ゴ ProN", "Noto Sans JP", sans-serif;
+        color: var(--secondary);
+        background: var(--bg);
+        line-height: 1.6;
+      }
+
+      img,
+      video {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        border-radius: var(--radius);
+      }
+
+      .container {
+        width: min(1180px, 92vw);
+        margin: 0 auto;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(12px);
+        background: rgba(248, 250, 252, 0.92);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 0;
+      }
+
+      .brand {
+        font-weight: 800;
+        font-size: 1.1rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--primary);
+      }
+
+      .header-nav {
+        display: flex;
+        gap: 22px;
+        font-size: 0.95rem;
+      }
+
+      .header-nav a {
+        text-decoration: none;
+        color: var(--secondary);
+        font-weight: 600;
+        position: relative;
+      }
+
+      .header-nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 2px;
+        background: var(--primary);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+      }
+
+      .header-nav a:hover::after {
+        transform: scaleX(1);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 14px 26px;
+        border-radius: 999px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 34px rgba(37, 99, 235, 0.26);
+      }
+
+      .btn-outline {
+        border: 1px solid rgba(37, 99, 235, 0.35);
+        color: var(--primary);
+        background: rgba(255, 255, 255, 0.85);
+      }
+
+      .hero {
+        padding: 120px 0 80px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.13), transparent 55%),
+          radial-gradient(circle at bottom right, rgba(14, 116, 144, 0.15), transparent 60%);
+        z-index: -2;
+      }
+
+      .hero-inner {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 60px;
+        align-items: center;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        border-radius: 999px;
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary);
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      .badge i {
+        color: var(--primary);
+      }
+
+      h1 {
+        font-size: clamp(2.6rem, 3vw + 1.2rem, 3.8rem);
+        line-height: 1.15;
+        margin: 24px 0 16px;
+        font-weight: 800;
+      }
+
+      .hero-lead {
+        font-size: 1.1rem;
+        color: rgba(17, 24, 39, 0.82);
+        margin-bottom: 32px;
+      }
+
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 36px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .hero-stat {
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: var(--radius);
+        padding: 18px 20px;
+        border: 1px solid rgba(37, 99, 235, 0.08);
+        backdrop-filter: blur(4px);
+      }
+
+      .hero-stat strong {
+        display: block;
+        font-size: 1.5rem;
+        color: var(--primary);
+      }
+
+      .hero-video {
+        position: relative;
+      }
+
+      .hero-video video {
+        width: 100%;
+        box-shadow: 0 28px 60px rgba(15, 23, 42, 0.22);
+        border-radius: 26px;
+      }
+
+      .hero-video::after {
+        content: "AIがデータを統合し、章立てを生成する様子";
+        position: absolute;
+        bottom: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(17, 24, 39, 0.75);
+        color: #fff;
+        padding: 10px 18px;
+        border-radius: 999px;
+        font-size: 0.85rem;
+      }
+
+      section {
+        padding: 96px 0;
+      }
+
+      .section-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        max-width: 720px;
+        margin-bottom: 48px;
+      }
+
+      .section-heading h2 {
+        font-size: clamp(2rem, 1.6vw + 1.4rem, 2.6rem);
+        font-weight: 800;
+        margin: 0;
+      }
+
+      .section-heading p {
+        margin: 0;
+        color: rgba(17, 24, 39, 0.7);
+        font-size: 1rem;
+      }
+
+      .problems-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+      }
+
+      .problem-card {
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 28px;
+        border: 1px solid var(--border);
+        box-shadow: 0 24px 40px rgba(15, 23, 42, 0.04);
+      }
+
+      .problem-card h3 {
+        margin-top: 0;
+        font-size: 1.1rem;
+      }
+
+      .problem-card p {
+        margin-bottom: 0;
+        color: rgba(17, 24, 39, 0.72);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+      }
+
+      .feature-card {
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 30px;
+        border: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::after {
+        content: "";
+        position: absolute;
+        inset: auto auto 0 0;
+        width: 110px;
+        height: 110px;
+        background: radial-gradient(circle, rgba(37, 99, 235, 0.18), transparent 70%);
+        transform: translate(-30%, 30%);
+      }
+
+      .feature-card h3 {
+        margin-top: 0;
+        font-size: 1.2rem;
+      }
+
+      .feature-metric {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        background: rgba(245, 158, 11, 0.16);
+        color: var(--accent);
+        border-radius: 999px;
+        font-weight: 700;
+        margin: 16px 0;
+      }
+
+      .feature-card ul {
+        padding-left: 20px;
+        margin: 0;
+        color: rgba(17, 24, 39, 0.75);
+      }
+
+      .analysis-section {
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(14, 116, 144, 0.08));
+      }
+
+      .analysis-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
+        align-items: center;
+      }
+
+      .analysis-panel {
+        background: rgba(255, 255, 255, 0.94);
+        border-radius: var(--radius);
+        padding: 28px;
+        border: 1px solid rgba(37, 99, 235, 0.1);
+        box-shadow: 0 20px 38px rgba(15, 23, 42, 0.08);
+      }
+
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .control-group label {
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .control-group input[type="range"] {
+        width: 100%;
+      }
+
+      .chart-frame {
+        position: relative;
+        width: 100%;
+        padding-top: 100%;
+        background: #fff;
+        border-radius: 24px;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.06);
+      }
+
+      canvas {
+        position: absolute;
+        inset: 0;
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .sales-simulator {
+        margin-top: 40px;
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: var(--radius);
+        padding: 30px;
+        border: 1px solid rgba(14, 116, 144, 0.12);
+        box-shadow: 0 20px 36px rgba(15, 23, 42, 0.06);
+      }
+
+      .sales-form {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 18px;
+        margin-bottom: 26px;
+      }
+
+      .sales-form label {
+        display: block;
+        font-size: 0.92rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .sales-form input {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(15, 23, 42, 0.14);
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 24px;
+        margin-top: 40px;
+      }
+
+      .step {
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 26px;
+        border: 1px solid var(--border);
+      }
+
+      .step strong {
+        display: inline-block;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+        color: var(--primary);
+      }
+
+      .case-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 26px;
+      }
+
+      .case-card {
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 28px;
+        border: 1px solid var(--border);
+        box-shadow: 0 24px 44px rgba(15, 23, 42, 0.06);
+      }
+
+      .case-metrics {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin: 20px 0;
+        background: rgba(37, 99, 235, 0.06);
+        padding: 18px;
+        border-radius: 14px;
+      }
+
+      .case-metrics div {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .case-metrics span:first-child {
+        font-size: 0.8rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(17, 24, 39, 0.5);
+      }
+
+      .case-metrics strong {
+        font-size: 1.4rem;
+        color: var(--secondary);
+      }
+
+      .pricing-table {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+      }
+
+      .plan-card {
+        background: #fff;
+        border-radius: var(--radius);
+        padding: 32px;
+        border: 1px solid rgba(15, 23, 42, 0.1);
+        box-shadow: 0 24px 44px rgba(15, 23, 42, 0.05);
+      }
+
+      .plan-card h3 {
+        margin: 0;
+        font-size: 1.35rem;
+      }
+
+      .plan-price {
+        font-size: 2rem;
+        font-weight: 800;
+        margin: 12px 0 20px;
+      }
+
+      .plan-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .plan-meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9rem;
+      }
+
+      .plan-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .plan-features li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        color: rgba(17, 24, 39, 0.75);
+      }
+
+      .plan-features li i {
+        color: var(--primary);
+        margin-top: 3px;
+      }
+
+      .security-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+      }
+
+      .security-card {
+        background: #fff;
+        border-radius: var(--radius);
+        padding: 24px;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+      }
+
+      details {
+        background: #fff;
+        border-radius: var(--radius);
+        border: 1px solid rgba(15, 23, 42, 0.1);
+        padding: 18px 24px;
+        transition: box-shadow 0.2s ease;
+      }
+
+      details[open] {
+        box-shadow: 0 18px 38px rgba(15, 23, 42, 0.08);
+      }
+
+      summary {
+        cursor: pointer;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      summary::after {
+        content: "＋";
+        font-size: 1.2rem;
+        color: var(--primary);
+        transition: transform 0.2s ease;
+      }
+
+      details[open] summary::after {
+        transform: rotate(45deg);
+      }
+
+      .faq-list {
+        display: grid;
+        gap: 16px;
+      }
+
+      .cta-section {
+        text-align: center;
+        background: linear-gradient(120deg, rgba(37, 99, 235, 0.85), rgba(59, 130, 246, 0.75));
+        color: #fff;
+        border-radius: 28px;
+        padding: 60px 40px;
+        box-shadow: 0 28px 60px rgba(37, 99, 235, 0.35);
+        margin-top: 40px;
+      }
+
+      .cta-section h3 {
+        font-size: 2rem;
+        margin-bottom: 12px;
+      }
+
+      .cta-section p {
+        margin-bottom: 28px;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .contact-form {
+        display: grid;
+        gap: 18px;
+        margin-top: 32px;
+      }
+
+      .contact-form label {
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .contact-form input,
+      .contact-form textarea,
+      .contact-form select {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(15, 23, 42, 0.15);
+        font-size: 1rem;
+      }
+
+      .contact-form textarea {
+        resize: vertical;
+        min-height: 140px;
+      }
+
+      .footer {
+        padding: 40px 0 60px;
+        border-top: 1px solid rgba(15, 23, 42, 0.08);
+        font-size: 0.9rem;
+        color: rgba(17, 24, 39, 0.65);
+      }
+
+      .floating-cta {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 30;
+      }
+
+      .floating-cta a {
+        min-width: 180px;
+        text-align: center;
+        font-size: 0.95rem;
+        padding: 14px 20px;
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .fade-in.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 960px) {
+        .hero {
+          padding-top: 90px;
+        }
+
+        .hero-inner {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
+
+        .hero-video::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .hero-stats {
+          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        }
+
+        .header-nav {
+          display: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        section {
+          padding: 72px 0;
+        }
+
+        .cta-section {
+          padding: 40px 24px;
+        }
+
+        .floating-cta {
+          right: 12px;
+          bottom: 12px;
+        }
+
+        .floating-cta a {
+          min-width: 150px;
+        }
+      }
+    </style>
   </head>
   <body>
+    <div class="floating-cta" role="complementary" aria-label="固定CTA">
+      <a class="btn btn-primary" href="#consultation"><i class="fa-solid fa-comments"></i> 無料相談</a>
+      <a class="btn btn-outline" href="#demo"><i class="fa-solid fa-display"></i> デモ予約</a>
+    </div>
+
     <header class="site-header">
       <div class="container header-inner">
         <div class="brand">AI経営計画書ラボ</div>
-        <nav class="header-nav">
-          <a href="#services">サービス特徴</a>
-          <a href="#simulator">AIシミュレーター</a>
+        <nav class="header-nav" aria-label="主要メニュー">
+          <a href="#pain">課題</a>
+          <a href="#features">サービス</a>
+          <a href="#analysis">AI分析デモ</a>
           <a href="#cases">成功事例</a>
-          <a href="#plans">料金プラン</a>
+          <a href="#plans">料金</a>
           <a href="#faq">FAQ</a>
         </nav>
+        <a class="btn btn-primary" href="#consultation">無料体験を申し込む</a>
       </div>
     </header>
 
     <main>
       <section class="hero">
         <div class="container hero-inner">
-          <div class="hero-copy">
-            <p class="badge">生成AI活用の経営計画支援</p>
-            <h1>AIで最短1日。誰でもプロ並みの経営計画書を。</h1>
-            <p class="subtitle">
-              市場分析から財務予測まで、生成AIが貴社専用の経営計画書ドラフトを自動作成。専門家がレビューして完成度を高めます。
+          <div class="hero-copy fade-in">
+            <span class="badge"><i class="fa-solid fa-bolt"></i> 生成AI×経営計画の最前線</span>
+            <h1>意思決定の1日後ろ倒しが、半年の差になる時代に。AIとプロで最短1日仕上げ。</h1>
+            <p class="hero-lead">
+              市場データの収集から財務予測、計画書ドラフトまでを生成AIが自動化。専門家がレビューし、外部環境の変化を踏まえたシナリオで経営陣の判断時間を平均<span style="font-weight: 700; color: var(--accent);">57%</span>削減します。
             </p>
-            <a class="btn btn-accent" href="#consultation">無料でAI計画書を体験する</a>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#demo">30分デモを予約</a>
+              <a class="btn btn-outline" href="#consultation">無料トライアルを開始</a>
+            </div>
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <strong>1日</strong>
+                <span>ドラフト納品までの最短リードタイム</span>
+              </div>
+              <div class="hero-stat">
+                <strong>3.2倍</strong>
+                <span>外部環境変化への対応スピード</span>
+              </div>
+              <div class="hero-stat">
+                <strong>92%</strong>
+                <span>経営会議での採択率向上（平均）</span>
+              </div>
+            </div>
           </div>
-          <div class="hero-visual">
-            <img src="../public/placeholder.svg" alt="AI経営計画書のイメージ" />
+          <div class="hero-video fade-in" style="transition-delay: 0.15s;">
+            <video controls muted playsinline poster="https://dummyimage.com/960x540/0f172a/ffffff&text=AI+Planning+Demo">
+              <source src="https://cdn.coverr.co/videos/coverr-futuristic-digital-brain-technology-4475/1080p.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
       </section>
 
-      <section id="services" class="services">
+      <section id="pain" class="fade-in">
         <div class="container">
-          <h2 class="section-title">サービスの4つの柱</h2>
-          <p class="section-lead">
-            生成AIと専門家のハイブリッドにより、経営計画書作成のスピードと精度を両立します。
-          </p>
-          <div class="service-grid">
-            <article class="service-card">
-              <div class="icon-circle"><i class="fa-solid fa-chart-pie"></i></div>
-              <h3>市場・競合分析の自動化</h3>
-              <p>AIが業界データと競合情報を収集・要約し、機会と脅威を一目で把握できます。</p>
+          <div class="section-heading">
+            <h2>社長が直面するスピードの壁を、AIが突破口に変える</h2>
+            <p>
+              急速に変わる市場や資金調達環境。気づけば資料づくりに追われ、意思決定に割ける時間がなくなっていませんか？現場の温度感と数字をつなげる経営計画づくりを、生成AIが共創します。
+            </p>
+          </div>
+          <div class="problems-grid">
+            <article class="problem-card">
+              <h3><i class="fa-solid fa-hourglass-half"></i> 経営会議の準備に週10時間</h3>
+              <p>各部署からデータを集め、ExcelとPowerPointを往復。意思決定の核となる議論に入る頃にはエネルギーが尽きてしまう。</p>
             </article>
-            <article class="service-card">
-              <div class="icon-circle"><i class="fa-solid fa-chart-line"></i></div>
-              <h3>売上・収支予測</h3>
-              <p>目標売上や投資額を入力すると、5年間の財務予測グラフと主要指標を生成します。</p>
+            <article class="problem-card">
+              <h3><i class="fa-solid fa-earth-asia"></i> 外部環境の変化に追いつけない</h3>
+              <p>為替や原価の変動、業界再編などが相次ぐ中、最新データを反映したシナリオを用意できず、投資判断が遅れがち。</p>
             </article>
-            <article class="service-card">
-              <div class="icon-circle"><i class="fa-solid fa-file-lines"></i></div>
-              <h3>文章生成とレポート作成</h3>
-              <p>AIが事業概要、戦略、リスク分析、資金計画を日本語でドラフト。説得力ある構成で提示します。</p>
+            <article class="problem-card">
+              <h3><i class="fa-solid fa-people-group"></i> 説明責任を果たす資料が足りない</h3>
+              <p>金融機関や投資家、役員会からの質問に即答できる根拠資料が不足。計画書のアップデートも後手に回る。</p>
             </article>
-            <article class="service-card">
-              <div class="icon-circle"><i class="fa-solid fa-user-check"></i></div>
-              <h3>専門家レビューと修正</h3>
-              <p>コンサルタントがAIドラフトをチェックし、融資審査や投資家説明に耐える計画書へ仕上げます。</p>
+            <article class="problem-card">
+              <h3><i class="fa-solid fa-clipboard-list"></i> 現場への落とし込みが不十分</h3>
+              <p>ビジョンと数字を結びつけるストーリーが欠け、実行フェーズで施策が空中分解。計画が“絵に描いた餅”になってしまう。</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="simulator" class="simulator">
+      <section id="features" class="fade-in" style="background: #fff;">
         <div class="container">
-          <div class="simulator-header">
-            <h2 class="section-title">AI計画書シミュレーター</h2>
-            <p class="section-lead">
-              目標数値を入力するだけで、6か月後と1年後の売上・キャッシュフロー予測とAIが提案する章立てを確認できます。
-            </p>
+          <div class="section-heading">
+            <h2>4つの生成AIコア機能で、経営計画の完成度とスピードを両立</h2>
+            <p>単なる文章生成ではなく、データソース連携・財務モデル化・専門家による最終レビューまでを一気通貫で支援します。</p>
           </div>
-          <div class="simulator-content">
-            <form class="sim-form" id="simForm">
-              <div class="form-field">
-                <label for="goalRevenue">目標売上（年額・万円）</label>
-                <input type="number" id="goalRevenue" name="goalRevenue" min="0" value="5000" />
+          <div class="features-grid">
+            <article class="feature-card">
+              <h3><i class="fa-solid fa-magnifying-glass-chart"></i> 市場・競合インサイト自動生成</h3>
+              <div class="feature-metric"><i class="fa-solid fa-arrow-trend-up"></i>リサーチ時間 68%削減</div>
+              <ul>
+                <li>最新ニュース、統計、SNSの声をクロールし、業界別の機会と脅威をレポート化</li>
+                <li>競合と自社の差異をレーダーチャートで可視化し、差別化戦略を提案</li>
+              </ul>
+            </article>
+            <article class="feature-card">
+              <h3><i class="fa-solid fa-sack-dollar"></i> 売上・収支予測エンジン</h3>
+              <div class="feature-metric"><i class="fa-solid fa-chart-line"></i>シナリオ比較 3パターン自動生成</div>
+              <ul>
+                <li>PL・CF・BSを連動させた5年分の財務モデルを自動作成</li>
+                <li>投資・採用計画の調整によるROIや回収期間の変化を即時反映</li>
+              </ul>
+            </article>
+            <article class="feature-card">
+              <h3><i class="fa-solid fa-pen-nib"></i> 経営計画ドラフト自動構成</h3>
+              <div class="feature-metric"><i class="fa-solid fa-file-pen"></i>15章構成を自動生成</div>
+              <ul>
+                <li>経営理念からリスク管理、行動計画までをテンプレート化し、文章の骨子をドラフト</li>
+                <li>金融機関・投資家向けに求められる指標・根拠を網羅</li>
+              </ul>
+            </article>
+            <article class="feature-card">
+              <h3><i class="fa-solid fa-user-tie"></i> 専門家レビュー＆伴走</h3>
+              <div class="feature-metric"><i class="fa-solid fa-person-chalkboard"></i>修正提案 平均23件</div>
+              <ul>
+                <li>中小企業診断士・財務専門家がドラフトを精査し、審査想定Q&Aを整備</li>
+                <li>提出後もローリング更新を支援し、外部環境変化に合わせた改訂を伴走</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="analysis" class="analysis-section fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>データ入力だけで、AIが競争力と売上シナリオを描く</h2>
+            <p>経営陣が押さえるべき指標を瞬時に可視化。ダミーデータで体感できるインタラクティブデモです。</p>
+          </div>
+          <div class="analysis-grid">
+            <div class="analysis-panel">
+              <h3>自社と競合の差異を即座に把握</h3>
+              <p>スライダーで自社の強みを調整すると、レーダーチャートがリアルタイムで更新されます。</p>
+              <div class="control-group">
+                <label for="productFit">顧客適合度</label>
+                <input type="range" id="productFit" min="40" max="100" value="70" />
+                <label for="brand">ブランド浸透度</label>
+                <input type="range" id="brand" min="30" max="100" value="60" />
+                <label for="supply">供給力・オペレーション</label>
+                <input type="range" id="supply" min="30" max="100" value="75" />
+                <label for="innovation">革新性</label>
+                <input type="range" id="innovation" min="20" max="100" value="65" />
+                <label for="finance">財務健全性</label>
+                <input type="range" id="finance" min="30" max="100" value="80" />
               </div>
-              <div class="form-field">
-                <label for="initialInvestment">初期投資額（万円）</label>
-                <input type="number" id="initialInvestment" name="initialInvestment" min="0" value="800" />
+            </div>
+            <div class="chart-frame">
+              <canvas id="radarChart" aria-label="自社と競合の比較レーダーチャート"></canvas>
+            </div>
+          </div>
+          <div class="sales-simulator" id="demo">
+            <h3>売上予測シミュレーター</h3>
+            <p>月間新規案件数と平均単価を入力すると、12ヶ月の売上予測とキャッシュフローの推移が更新されます。</p>
+            <form class="sales-form" id="salesForm">
+              <div>
+                <label for="monthlyDeals">月間新規案件数</label>
+                <input type="number" id="monthlyDeals" min="1" value="12" />
               </div>
-              <div class="form-field">
-                <label for="marketSize">想定市場規模（億円）</label>
-                <input type="number" id="marketSize" name="marketSize" min="0" step="0.1" value="120" />
+              <div>
+                <label for="averageDeal">平均契約単価（万円）</label>
+                <input type="number" id="averageDeal" min="10" value="85" />
               </div>
-              <div class="form-field">
-                <label for="grossMargin">粗利率（%）</label>
-                <input type="number" id="grossMargin" name="grossMargin" min="0" max="100" value="45" />
+              <div>
+                <label for="churnRate">解約率（%）</label>
+                <input type="number" id="churnRate" min="0" max="50" value="5" />
+              </div>
+              <div>
+                <label for="costRate">販管費率（%）</label>
+                <input type="number" id="costRate" min="10" max="90" value="42" />
               </div>
             </form>
-            <div class="sim-result">
-              <div class="chart-container">
-                <canvas id="projectionChart" aria-label="売上とキャッシュフロー予測"></canvas>
-              </div>
-              <div class="sim-summary">
-                <h3>AIが提案する章立て</h3>
-                <ul id="chapterList">
-                  <li>市場分析：業界トレンドと競合ポジショニング</li>
-                  <li>商品・サービス戦略：提供価値と差別化要素</li>
-                  <li>財務計画：売上・キャッシュフロー、投資回収計画</li>
-                </ul>
-              </div>
+            <div class="chart-frame" style="padding-top: 60%;">
+              <canvas id="lineChart" aria-label="売上とキャッシュフローの推移"></canvas>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="cases" class="cases">
+      <section id="workflow" class="fade-in" style="background: #fff;">
         <div class="container">
-          <h2 class="section-title">AI計画書による資金調達成功事例</h2>
-          <div class="case-grid">
+          <div class="section-heading">
+            <h2>最短1日で「たたき台」完成。次の意思決定へ進む4ステップ</h2>
+            <p>無料トライアルから正式運用まで、経営者の時間を奪わない導線をご用意しています。</p>
+          </div>
+          <div class="steps">
+            <div class="step">
+              <strong>Step 1</strong>
+              <h3>30分ヒアリング＆データ連携</h3>
+              <p>現状課題・目標・利用中の会計/販売データをヒアリング。クラウド会計やスプレッドシートと安全に接続します。</p>
+            </div>
+            <div class="step">
+              <strong>Step 2</strong>
+              <h3>AIによるドラフト生成（1日）</h3>
+              <p>市場分析・財務モデル・章立てを自動生成。PDF/PowerPoint形式で納品し、重点項目のレビュー会議を設定します。</p>
+            </div>
+            <div class="step">
+              <strong>Step 3</strong>
+              <h3>専門家レビュー＆質疑対策</h3>
+              <p>想定質問集・投資家/金融機関向けサマリーを作成。必要に応じて会議同席やピッチ原稿のブラッシュアップを実施。</p>
+            </div>
+            <div class="step">
+              <strong>Step 4</strong>
+              <h3>ローリング更新と実行伴走</h3>
+              <p>月次実績を取り込み、差異分析と次月アクションをAIが提示。計画と実行を結ぶガバナンス体制まで支援します。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cases" class="fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>導入企業の声と成果</h2>
+            <p>製造業・ITサービス・地域密着ビジネスなど、さまざまな業種で意思決定のスピードと成果が向上しています。</p>
+          </div>
+          <div class="case-stats">
             <article class="case-card">
-              <h3>製造業・年商18億円</h3>
-              <dl>
-                <dt>課題</dt>
-                <dd>金融機関に提出する計画書が手作業で時間がかかり、説得力に欠けていた。</dd>
-                <dt>AI活用</dt>
-                <dd>生成AIが市場分析と5年分の財務計画を作成し、専門家がレビュー。</dd>
-                <dt>成果</dt>
-                <dd>計画書作成期間を60%短縮し、銀行融資がスムーズに承認された。</dd>
-              </dl>
+              <h3>製造業（年商18億円）</h3>
+              <div class="case-metrics">
+                <div>
+                  <span>Before</span>
+                  <strong>作成30日</strong>
+                </div>
+                <div>
+                  <span>After</span>
+                  <strong>12日</strong>
+                </div>
+                <div>
+                  <span>資金調達</span>
+                  <strong>2.5億円</strong>
+                </div>
+                <div>
+                  <span>成功率</span>
+                  <strong>1.8倍</strong>
+                </div>
+              </div>
+              <p>
+                「需要変動が激しい中、AIが為替・原材料のシナリオを作ってくれたおかげで、銀行交渉も先手で進められました。経営会議の準備時間が半分以下になり、意思決定の議論に集中できています。」
+              </p>
+              <p style="font-size: 0.9rem; color: rgba(17, 24, 39, 0.6);">代表取締役／機械部品メーカー</p>
             </article>
             <article class="case-card">
-              <h3>ITサービス・年商4億円</h3>
-              <dl>
-                <dt>課題</dt>
-                <dd>VC向けピッチ資料と計画書の整合性が取れず、追加投資が保留になっていた。</dd>
-                <dt>AI活用</dt>
-                <dd>AIが顧客獲得モデルとARR予測を作成し、専門家が投資家目線で校閲。</dd>
-                <dt>成果</dt>
-                <dd>3週間かかっていた資料準備を1週間に短縮し、シリーズBで2億円を調達。</dd>
-              </dl>
+              <h3>SaaS（年商4.2億円）</h3>
+              <div class="case-metrics">
+                <div>
+                  <span>Before</span>
+                  <strong>ARR成長率 18%</strong>
+                </div>
+                <div>
+                  <span>After</span>
+                  <strong>36%</strong>
+                </div>
+                <div>
+                  <span>資料準備</span>
+                  <strong>3週→5日</strong>
+                </div>
+                <div>
+                  <span>投資獲得</span>
+                  <strong>シリーズB成功</strong>
+                </div>
+              </div>
+              <p>
+                「AIが顧客セグメント別の伸びしろを可視化し、投資家が求めるKPIを含んだ計画書を自動で整えてくれました。資金調達の質疑にも事前に備えられ、調達額は計画の130％を達成。」
+              </p>
+              <p style="font-size: 0.9rem; color: rgba(17, 24, 39, 0.6);">CEO／クラウドサービス企業</p>
             </article>
             <article class="case-card">
-              <h3>飲食チェーン・年商7億円</h3>
-              <dl>
-                <dt>課題</dt>
-                <dd>新店舗展開の資金計画が曖昧で、金融機関からの質問に即答できなかった。</dd>
-                <dt>AI活用</dt>
-                <dd>AIがエリア別需要予測とキャッシュフロー計画を提示し、専門家が改善提案。</dd>
-                <dt>成果</dt>
-                <dd>説得力ある計画書を1週間で提出し、5,000万円の融資枠を確保した。</dd>
-              </dl>
+              <h3>地域密着サービス（年商7.5億円）</h3>
+              <div class="case-metrics">
+                <div>
+                  <span>Before</span>
+                  <strong>更新頻度 年1回</strong>
+                </div>
+                <div>
+                  <span>After</span>
+                  <strong>月次ローリング</strong>
+                </div>
+                <div>
+                  <span>意思決定</span>
+                  <strong>議題時間 40%短縮</strong>
+                </div>
+                <div>
+                  <span>新規店舗</span>
+                  <strong>6か月で2店</strong>
+                </div>
+              </div>
+              <p>
+                「外部環境に応じた“次の手”をAIが示してくれるので、出店判断が迷いなく進みます。社内説明資料も自動で整うため、現場が動きやすくなりました。」
+              </p>
+              <p style="font-size: 0.9rem; color: rgba(17, 24, 39, 0.6);">代表／地域チェーン事業</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="plans" class="plans">
+      <section id="plans" class="fade-in" style="background: #fff;">
         <div class="container">
-          <h2 class="section-title">料金プラン</h2>
-          <div class="plan-wrapper">
-            <div class="plan">
+          <div class="section-heading">
+            <h2>ニーズに合わせた2つのプラン</h2>
+            <p>どちらのプランも無料トライアル（初回ドラフト＋オンライン相談）付き。成果を確認してから本契約に進めます。</p>
+          </div>
+          <div class="pricing-table">
+            <article class="plan-card">
               <h3>ライトプラン</h3>
-              <p class="price">月額8万円</p>
-              <table>
-                <tbody>
-                  <tr>
-                    <th>自動生成内容</th>
-                    <td>市場分析、ビジネスモデル、財務予測のドラフト</td>
-                  </tr>
-                  <tr>
-                    <th>専門家レビュー</th>
-                    <td>ドラフトチェック（簡易フィードバック）</td>
-                  </tr>
-                  <tr>
-                    <th>サポート範囲</th>
-                    <td>メール相談（48時間以内回答）</td>
-                  </tr>
-                  <tr>
-                    <th>納品形態</th>
-                    <td>AI生成レポート（PowerPoint／PDF）</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="plan plan-featured">
+              <p class="plan-price">月額 165,000円～</p>
+              <div class="plan-meta">
+                <span><i class="fa-solid fa-user"></i> 対象：年商5,000万～3億円の成長期企業</span>
+                <span><i class="fa-solid fa-flag"></i> 目的：金融機関提出・助成金申請のスピード化</span>
+                <span><i class="fa-solid fa-percent"></i> 想定ROI：計画書作成工数を最大60%削減</span>
+              </div>
+              <ul class="plan-features">
+                <li><i class="fa-solid fa-circle-check"></i> 月1回のAI計画書更新／ドラフト納品（PDF・PPT）</li>
+                <li><i class="fa-solid fa-circle-check"></i> 売上・キャッシュフロー予測（3シナリオ）</li>
+                <li><i class="fa-solid fa-circle-check"></i> 融資面談想定Q&Aテンプレート</li>
+                <li><i class="fa-solid fa-circle-check"></i> 導入初月の専門家レビュー1回</li>
+              </ul>
+              <a class="btn btn-primary" href="#consultation">無料トライアルを申し込む</a>
+            </article>
+            <article class="plan-card" style="border: 2px solid var(--primary);">
               <h3>プロプラン</h3>
-              <p class="price">月額18万円</p>
-              <table>
-                <tbody>
-                  <tr>
-                    <th>自動生成内容</th>
-                    <td>詳細な市場分析、競合比較、5年財務モデル</td>
-                  </tr>
-                  <tr>
-                    <th>専門家レビュー</th>
-                    <td>コンサルタントによる校閲＆加筆、金融機関向け最終調整</td>
-                  </tr>
-                  <tr>
-                    <th>サポート範囲</th>
-                    <td>オンラインMTG（月2回）・金融機関連携サポート</td>
-                  </tr>
-                  <tr>
-                    <th>納品形態</th>
-                    <td>カスタムテンプレート、審査向け提出データ一式</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="faq" class="faq">
-        <div class="container">
-          <h2 class="section-title">よくある質問</h2>
-          <div class="faq-list">
-            <article class="faq-item">
-              <h3>AIが作成した文章を自社用にカスタマイズできますか？</h3>
-              <p>はい。ドラフトは編集可能な形式で納品され、貴社の強みや表現に合わせた調整を行えます。プロプランでは専門家が貴社の用語や語調に合わせて整えます。</p>
-            </article>
-            <article class="faq-item">
-              <h3>どんなデータを準備すべきですか？</h3>
-              <p>直近の売上・原価・固定費、見込み顧客数、平均単価などの基本数値があれば十分です。ヒアリングシートで不足分を補いながらAIが推計します。</p>
-            </article>
-            <article class="faq-item">
-              <h3>金融機関への提出フォーマットにも対応していますか？</h3>
-              <p>はい。各金融機関のフォーマットに合わせた提出資料を作成します。プロプランでは提出前レビューとリハーサル支援も提供します。</p>
-            </article>
-            <article class="faq-item">
-              <h3>利用開始までの流れはどのようになりますか？</h3>
-              <p>お申し込み後、初回ヒアリングで目標を確認し、AIによるドラフト生成（最短1日）→専門家レビュー→最終納品の順で進行します。</p>
+              <p class="plan-price">月額 330,000円～</p>
+              <div class="plan-meta">
+                <span><i class="fa-solid fa-building"></i> 対象：年商3億～15億円、マルチ事業展開企業</span>
+                <span><i class="fa-solid fa-bullseye"></i> 目的：中期経営計画・投資家資料の高度化</span>
+                <span><i class="fa-solid fa-arrow-up-right-dots"></i> 想定ROI：意思決定時間を平均57%削減、資金調達成功率1.6倍</span>
+              </div>
+              <ul class="plan-features">
+                <li><i class="fa-solid fa-circle-check"></i> 月2回のAIドラフト更新＋実績差異分析</li>
+                <li><i class="fa-solid fa-circle-check"></i> 管理会計KPI設計・経営会議ファシリテーション</li>
+                <li><i class="fa-solid fa-circle-check"></i> 投資家・役員会向けピッチデッキ連動</li>
+                <li><i class="fa-solid fa-circle-check"></i> 常時チャット伴走／緊急シミュレーション対応</li>
+              </ul>
+              <a class="btn btn-primary" href="#consultation">担当者と相談する</a>
             </article>
           </div>
-        </div>
-      </section>
-
-      <section class="security">
-        <div class="container">
-          <h2 class="section-title">セキュリティとデータ保護</h2>
-          <p>
-            経営計画書データは国内リージョンの暗号化環境で保管し、プロジェクト終了後はご要望に応じて安全に削除します。当社のAIモデルは学習目的で顧客データを二次利用せず、アクセス権限も専任コンサルタントに限定しています。
+          <p style="margin-top: 18px; color: rgba(17, 24, 39, 0.6); font-size: 0.9rem;">
+            ※上記は税別。初回ヒアリング後に正式お見積りを提示します。年間契約で月額10%割引、カスタムAPI連携や社内研修はオプションで追加可能です。
           </p>
         </div>
       </section>
 
-      <section id="consultation" class="consultation">
+      <section class="fade-in">
         <div class="container">
-          <h2 class="section-title">無料相談はこちら</h2>
-          <p class="section-lead">サービス内容や導入スケジュールについて、お気軽にお問い合わせください。</p>
-          <form class="contact-form">
-            <div class="form-grid">
-              <div class="form-field">
-                <label for="name">氏名</label>
-                <input type="text" id="name" name="name" placeholder="例）山田 太郎" required />
-              </div>
-              <div class="form-field">
-                <label for="company">会社名</label>
-                <input type="text" id="company" name="company" placeholder="例）株式会社サンプル" required />
-              </div>
-              <div class="form-field">
-                <label for="email">メールアドレス</label>
-                <input type="email" id="email" name="email" placeholder="example@company.jp" required />
-              </div>
-              <div class="form-field">
-                <label for="phone">電話番号</label>
-                <input type="tel" id="phone" name="phone" placeholder="090-1234-5678" required />
-              </div>
-            </div>
-            <div class="form-field">
-              <label for="message">相談内容</label>
-              <textarea id="message" name="message" rows="4" placeholder="導入目的やご相談内容をご記入ください"></textarea>
-            </div>
-            <button type="submit" class="btn btn-accent">無料相談を申し込む</button>
+          <div class="section-heading">
+            <h2>セキュリティとコンプライアンス</h2>
+            <p>経営データを安心して預けていただくために、国内リージョンのセキュアな環境で運用しています。</p>
+          </div>
+          <div class="security-grid">
+            <article class="security-card">
+              <h3><i class="fa-solid fa-shield-halved"></i> データ暗号化</h3>
+              <p>通信・保存ともにAES-256で暗号化。アクセス権限は担当コンサルタントに限定し、操作ログを全件記録します。</p>
+            </article>
+            <article class="security-card">
+              <h3><i class="fa-solid fa-trash-arrow-up"></i> データ削除ポリシー</h3>
+              <p>プロジェクト完了後30日以内にデータを削除。ご希望に応じて即時削除にも対応し、証跡レポートを提供します。</p>
+            </article>
+            <article class="security-card">
+              <h3><i class="fa-solid fa-certificate"></i> 認証・外部監査</h3>
+              <p>ISMS取得企業と提携し、年1回の外部監査を実施。生成AIモデルは学習目的で顧客データを二次利用しません。</p>
+            </article>
+            <article class="security-card">
+              <h3><i class="fa-solid fa-people-carry-box"></i> プライバシーと契約</h3>
+              <p>NDA締結は標準対応。データ取り扱いに関する社内研修とガイドラインを用意し、共通理解を徹底します。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="fade-in" style="background: #fff;">
+        <div class="container">
+          <div class="section-heading">
+            <h2>よくある質問</h2>
+            <p>重要な疑問に絞って掲載。詳細は無料相談で個別にご案内します。</p>
+          </div>
+          <div class="faq-list">
+            <details>
+              <summary>無料トライアルでは何が確認できますか？</summary>
+              <p>
+                30分のオンライン相談と、生成AIが作成したドラフト計画書（抜粋3章）をお試しいただけます。トライアルで作成したデータは本契約前でも持ち帰り可能です。
+              </p>
+            </details>
+            <details>
+              <summary>社内にAIの知見がなくても導入できますか？</summary>
+              <p>
+                導入時に「AI活用オリエンテーション」資料と操作トレーニング動画を提供します。経営会議への同席支援も選択できますので、初めての方でも安心です。
+              </p>
+            </details>
+            <details>
+              <summary>利用に必要なデータ連携環境は？</summary>
+              <p>
+                クラウド会計、販売管理、Google Workspace、Microsoft 365など主要ツールと連携可能です。CSVアップロードのみでも利用できます。</p>
+            </details>
+            <details>
+              <summary>守秘義務や契約期間はどうなりますか？</summary>
+              <p>
+                最短3か月からの契約で、NDAを標準締結。更新は1か月前までにご相談いただけます。機密情報の取り扱いは契約書に明記します。</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="fade-in">
+        <div class="container">
+          <div class="cta-section">
+            <h3>まずは無料相談で、御社専用のAI計画ロードマップを。</h3>
+            <p>直近の経営課題に合わせて、AIが生成するシナリオとアウトプット例をその場でご紹介します。次の意思決定に必要な時間を今すぐ確保しましょう。</p>
+            <a class="btn btn-outline" href="#consultation" style="color: #fff; border-color: rgba(255, 255, 255, 0.5);">無料相談を予約</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="consultation" class="fade-in" style="background: #fff;">
+        <div class="container">
+          <div class="section-heading">
+            <h2>お問い合わせ・無料トライアル申し込み</h2>
+            <p>送信後はサンクスページで次のステップ（資料ダウンロード／日程調整リンク）をご案内します。</p>
+          </div>
+          <form class="contact-form" aria-label="お問い合わせフォーム">
+            <label for="name">お名前</label>
+            <input id="name" name="name" type="text" placeholder="例）山田 太郎" required />
+
+            <label for="company">会社名</label>
+            <input id="company" name="company" type="text" placeholder="例）株式会社サンプル" required />
+
+            <label for="email">メールアドレス</label>
+            <input id="email" name="email" type="email" placeholder="例）example@example.com" required />
+
+            <label for="tel">電話番号</label>
+            <input id="tel" name="tel" type="tel" placeholder="例）090-1234-5678" />
+
+            <label for="goal">導入目的</label>
+            <select id="goal" name="goal" required>
+              <option value="" disabled selected>選択してください</option>
+              <option value="finance">金融機関提出・資金調達</option>
+              <option value="strategy">中期経営計画・戦略刷新</option>
+              <option value="expansion">新規事業・店舗展開</option>
+              <option value="other">その他</option>
+            </select>
+
+            <label for="message">ご相談内容</label>
+            <textarea id="message" name="message" placeholder="現状の課題や希望時期などをご記入ください"></textarea>
+
+            <button class="btn btn-primary" type="submit">送信して次のステップを見る</button>
           </form>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
+    <footer class="footer">
       <div class="container">
-        <p>© 2024 AI経営計画書ラボ</p>
+        <p>© 2024 生成AI経営計画書ラボ｜株式会社創和経営コンサルティング</p>
+        <p>福岡県福岡市博多区博多駅前2-1-1／info@example.com／092-000-0000</p>
       </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-y/JW6DC5VdrSltnhIpnTMn7tbpqsZOobPAlnFvJBNpb7TU/Ob5VyEOgG0C8LmFoWDSDyZNaC3r+rMZkxYtjBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="../scripts/lp.js"></script>
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+
+      document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+
+      const radarCanvas = document.getElementById("radarChart");
+      const radarCtx = radarCanvas.getContext("2d");
+
+      const radarState = {
+        labels: ["顧客適合度", "ブランド", "供給力", "革新性", "財務健全性"],
+        self: [70, 60, 75, 65, 80],
+        competitor: [62, 72, 68, 58, 74],
+      };
+
+      function drawRadar() {
+        const { width, height } = radarCanvas;
+        radarCtx.clearRect(0, 0, width, height);
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const radius = Math.min(width, height) / 2 - 40;
+        const angleStep = (Math.PI * 2) / radarState.labels.length;
+
+        radarCtx.strokeStyle = "rgba(15, 23, 42, 0.15)";
+        radarCtx.lineWidth = 1;
+        for (let level = 1; level <= 5; level++) {
+          radarCtx.beginPath();
+          for (let i = 0; i < radarState.labels.length; i++) {
+            const angle = angleStep * i - Math.PI / 2;
+            const r = (radius * level) / 5;
+            const x = centerX + r * Math.cos(angle);
+            const y = centerY + r * Math.sin(angle);
+            if (i === 0) radarCtx.moveTo(x, y);
+            else radarCtx.lineTo(x, y);
+          }
+          radarCtx.closePath();
+          radarCtx.stroke();
+        }
+
+        radarCtx.fillStyle = "rgba(37, 99, 235, 0.18)";
+        radarCtx.strokeStyle = "rgba(37, 99, 235, 0.35)";
+        radarCtx.lineWidth = 2;
+        radarCtx.beginPath();
+        radarState.self.forEach((value, i) => {
+          const angle = angleStep * i - Math.PI / 2;
+          const r = (radius * value) / 100;
+          const x = centerX + r * Math.cos(angle);
+          const y = centerY + r * Math.sin(angle);
+          if (i === 0) radarCtx.moveTo(x, y);
+          else radarCtx.lineTo(x, y);
+        });
+        radarCtx.closePath();
+        radarCtx.fill();
+        radarCtx.stroke();
+
+        radarCtx.strokeStyle = "rgba(15, 23, 42, 0.4)";
+        radarCtx.lineWidth = 2;
+        radarCtx.beginPath();
+        radarState.competitor.forEach((value, i) => {
+          const angle = angleStep * i - Math.PI / 2;
+          const r = (radius * value) / 100;
+          const x = centerX + r * Math.cos(angle);
+          const y = centerY + r * Math.sin(angle);
+          if (i === 0) radarCtx.moveTo(x, y);
+          else radarCtx.lineTo(x, y);
+        });
+        radarCtx.closePath();
+        radarCtx.stroke();
+
+        radarCtx.fillStyle = "rgba(17, 24, 39, 0.75)";
+        radarCtx.font = "14px Manrope";
+        radarState.labels.forEach((label, i) => {
+          const angle = angleStep * i - Math.PI / 2;
+          const x = centerX + (radius + 16) * Math.cos(angle);
+          const y = centerY + (radius + 16) * Math.sin(angle);
+          radarCtx.fillText(label, x - 30, y + 4);
+        });
+      }
+
+      function resizeCanvas(canvas) {
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * window.devicePixelRatio;
+        canvas.height = rect.height * window.devicePixelRatio;
+      }
+
+      function updateSelfScores() {
+        radarState.self = [
+          Number(document.getElementById("productFit").value),
+          Number(document.getElementById("brand").value),
+          Number(document.getElementById("supply").value),
+          Number(document.getElementById("innovation").value),
+          Number(document.getElementById("finance").value),
+        ];
+        drawRadar();
+      }
+
+      ["productFit", "brand", "supply", "innovation", "finance"].forEach((id) => {
+        document.getElementById(id).addEventListener("input", updateSelfScores);
+      });
+
+      const lineCanvas = document.getElementById("lineChart");
+      const lineCtx = lineCanvas.getContext("2d");
+
+      function handleResize() {
+        resizeCanvas(radarCanvas);
+        drawRadar();
+        resizeCanvas(lineCanvas);
+        drawLineChart();
+      }
+
+      handleResize();
+      window.addEventListener("resize", handleResize);
+
+      function generateForecast(monthlyDeals, averageDeal, churnRate, costRate) {
+        const months = Array.from({ length: 12 }, (_, i) => i + 1);
+        const revenue = [];
+        const cashflow = [];
+        let activeCustomers = 0;
+        months.forEach((month) => {
+          activeCustomers = activeCustomers * (1 - churnRate / 100) + monthlyDeals;
+          const monthlyRevenue = activeCustomers * averageDeal;
+          const cash = monthlyRevenue * (1 - costRate / 100);
+          revenue.push(monthlyRevenue);
+          cashflow.push(cash);
+        });
+        return { months, revenue, cashflow };
+      }
+
+      function drawLineChart() {
+        const rect = lineCanvas.getBoundingClientRect();
+        lineCtx.clearRect(0, 0, lineCanvas.width, lineCanvas.height);
+        const padding = 60 * window.devicePixelRatio;
+        const width = lineCanvas.width;
+        const height = lineCanvas.height;
+
+        const deals = Number(document.getElementById("monthlyDeals").value);
+        const dealSize = Number(document.getElementById("averageDeal").value);
+        const churn = Number(document.getElementById("churnRate").value);
+        const cost = Number(document.getElementById("costRate").value);
+
+        const { months, revenue, cashflow } = generateForecast(deals, dealSize, churn, cost);
+        const maxValue = Math.max(...revenue);
+        const scaleY = (height - padding * 2) / maxValue;
+        const scaleX = (width - padding * 2) / (months.length - 1);
+
+        lineCtx.strokeStyle = "rgba(15, 23, 42, 0.15)";
+        lineCtx.lineWidth = 1;
+        lineCtx.beginPath();
+        for (let i = 0; i <= 4; i++) {
+          const y = padding + ((height - padding * 2) / 4) * i;
+          lineCtx.moveTo(padding, y);
+          lineCtx.lineTo(width - padding, y);
+        }
+        lineCtx.stroke();
+
+        function drawSeries(data, color) {
+          lineCtx.beginPath();
+          data.forEach((value, index) => {
+            const x = padding + scaleX * index;
+            const y = height - padding - value * scaleY;
+            if (index === 0) lineCtx.moveTo(x, y);
+            else lineCtx.lineTo(x, y);
+          });
+          lineCtx.strokeStyle = color;
+          lineCtx.lineWidth = 3;
+          lineCtx.stroke();
+        }
+
+        drawSeries(revenue, "rgba(37, 99, 235, 0.85)");
+        drawSeries(cashflow, "rgba(245, 158, 11, 0.9)");
+
+        lineCtx.fillStyle = "rgba(17, 24, 39, 0.75)";
+        lineCtx.font = `${14 * window.devicePixelRatio}px Manrope`;
+        months.forEach((month, index) => {
+          const x = padding + scaleX * index;
+          lineCtx.fillText(`${month}月`, x - 12 * window.devicePixelRatio, height - padding + 24);
+        });
+      }
+
+      drawLineChart();
+
+      ["monthlyDeals", "averageDeal", "churnRate", "costRate"].forEach((id) => {
+        document.getElementById(id).addEventListener("input", drawLineChart);
+      });
+
+      document.querySelector(".contact-form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        window.location.href = "thank-you.html";
+      });
+    </script>
   </body>
 </html>
