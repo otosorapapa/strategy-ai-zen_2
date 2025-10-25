@@ -37,8 +37,9 @@ jobs:
           WP_REMOTE_PATH: ${{ secrets.WP_REMOTE_PATH }}
         run: |
           PASS_CLEAN=$(printf '%s' "$WP_SSH_PASS" | tr -d '\r\n')
+          SSH_OPTIONS="-p 2222 -o StrictHostKeyChecking=no -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"
           PARENT_PATH=$(dirname "$WP_REMOTE_PATH")
-          sshpass -p "$PASS_CLEAN" ssh -p 2222 -o StrictHostKeyChecking=no "$WP_USER@$WP_HOST" "
+          sshpass -p "$PASS_CLEAN" ssh $SSH_OPTIONS "$WP_USER@$WP_HOST" "
             mkdir -p $WP_REMOTE_PATH &&
             echo 'RewriteEngine Off' > $PARENT_PATH/.htaccess &&
             echo 'RewriteEngine Off' > $WP_REMOTE_PATH/.htaccess &&
@@ -53,8 +54,9 @@ jobs:
           WP_REMOTE_PATH: ${{ secrets.WP_REMOTE_PATH }}
         run: |
           PASS_CLEAN=$(printf '%s' "$WP_SSH_PASS" | tr -d '\r\n')
+          SSH_OPTIONS="-p 2222 -o StrictHostKeyChecking=no -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"
           sshpass -p "$PASS_CLEAN" rsync -avz --delete \
-            -e "ssh -p 2222 -o StrictHostKeyChecking=no" \
+            -e "ssh $SSH_OPTIONS" \
             dist/ "$WP_USER@$WP_HOST:$WP_REMOTE_PATH/"
 
       - name: Show remote listing
@@ -65,7 +67,8 @@ jobs:
           WP_REMOTE_PATH: ${{ secrets.WP_REMOTE_PATH }}
         run: |
           PASS_CLEAN=$(printf '%s' "$WP_SSH_PASS" | tr -d '\r\n')
-          sshpass -p "$PASS_CLEAN" ssh -p 2222 -o StrictHostKeyChecking=no "$WP_USER@$WP_HOST" "
+          SSH_OPTIONS="-p 2222 -o StrictHostKeyChecking=no -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"
+          sshpass -p "$PASS_CLEAN" ssh $SSH_OPTIONS "$WP_USER@$WP_HOST" "
             ls -la $WP_REMOTE_PATH &&
             echo '== assets ==' &&
             ls -la $WP_REMOTE_PATH/assets || true
