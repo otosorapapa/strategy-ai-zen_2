@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "株式会社創和経営コンサルティング 福岡オフィス",
-  "image": "https://furumachi-smec.lognowa.com/public/lp/assets/office.jpg",
+  "image": "https://furumachi-smec.lognowa.com/public/lp_1/assets/office.jpg",
   "priceRange": "\u00a5180,000-\u00a5280,000/月",
   "address": {
     "@type": "PostalAddress",
@@ -21,7 +21,7 @@
   "openingHoursSpecification": [
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "09:00", "closes": "18:00" }
   ],
-  "url": "https://furumachi-smec.lognowa.com/public/lp",
+  "url": "https://furumachi-smec.lognowa.com/public/lp_1",
   "telephone": "+81-92-231-2920",
   "email": "k.furumachi@lognowa.com"
 }

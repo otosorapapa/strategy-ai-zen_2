@@ -19,7 +19,7 @@
       "maxPrice": "280000"
     },
     "availability": "https://schema.org/InStock",
-    "url": "https://furumachi-smec.lognowa.com/public/lp#plans"
+    "url": "https://furumachi-smec.lognowa.com/public/lp_1#plans"
   },
   "aggregateRating": {
     "@type": "AggregateRating",

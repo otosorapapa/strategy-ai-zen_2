@@ -20,7 +20,7 @@ jobs:
       - name: Build
         run: |
           npm ci
-          npm run build -- --base=/public/lp/
+          npm run build -- --base=/public/lp_1/
 
       - name: Guard dist
         run: |
@@ -28,6 +28,15 @@ jobs:
 
       - name: Install sshpass
         run: sudo apt-get update -y && sudo apt-get install -y sshpass
+
+      - name: Validate remote path
+        env:
+          WP_REMOTE_PATH: ${{ secrets.WP_REMOTE_PATH }}
+        run: |
+          case "$WP_REMOTE_PATH" in
+            */lp_1) ;;
+            *) echo "WP_REMOTE_PATH must point to the lp_1 directory" && exit 1 ;;
+          esac
 
       - name: Prepare remote directory
         env:
