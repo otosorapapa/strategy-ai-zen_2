@@ -1,7 +1,7 @@
 # Lighthouse（Before）
 
 ## 実行状況
-- 対象URL: https://furumachi-smec.lognowa.com/public/lp
+- 対象URL: https://furumachi-smec.lognowa.com/public/lp_1
 - 実行結果: 403 Forbidden（社内プロキシ経由での取得失敗）
 
 ## 推定課題
