@@ -21,6 +21,12 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <script
+      src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"
+      integrity="sha384-1KvDp0fNsBdT4pdyLT22UEhZhoynCnK1bf9FePQlqJTmm3j9Gp+7vK62nyGNSW7O"
+      crossorigin="anonymous"
+      defer
+    ></script>
     <style>
       :root {
         --primary: #2563eb;
@@ -31,6 +37,7 @@
         --surface: #ffffff;
         --border: rgba(15, 23, 42, 0.08);
         --radius: 18px;
+        --shadow-lg: 0 28px 60px rgba(15, 23, 42, 0.12);
       }
 
       * {
@@ -45,6 +52,20 @@
         color: var(--secondary);
         background: var(--bg);
         line-height: 1.6;
+        scroll-behavior: smooth;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      a:focus-visible,
+      button:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: 3px solid rgba(37, 99, 235, 0.4);
+        outline-offset: 2px;
       }
 
       img,
@@ -63,8 +84,8 @@
       .site-header {
         position: sticky;
         top: 0;
-        z-index: 20;
-        backdrop-filter: blur(12px);
+        z-index: 40;
+        backdrop-filter: blur(14px);
         background: rgba(248, 250, 252, 0.92);
         border-bottom: 1px solid var(--border);
       }
@@ -79,7 +100,7 @@
       .brand {
         font-weight: 800;
         font-size: 1.1rem;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
         color: var(--primary);
       }
@@ -110,7 +131,8 @@
         transition: transform 0.25s ease;
       }
 
-      .header-nav a:hover::after {
+      .header-nav a:hover::after,
+      .header-nav a:focus-visible::after {
         transform: scaleX(1);
       }
 
@@ -123,8 +145,9 @@
         border-radius: 999px;
         font-weight: 700;
         text-decoration: none;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         cursor: pointer;
+        border: none;
       }
 
       .btn-primary {
@@ -133,37 +156,96 @@
         box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
       }
 
-      .btn-primary:hover {
+      .btn-primary:hover,
+      .btn-primary:focus-visible {
         transform: translateY(-2px);
-        box-shadow: 0 18px 34px rgba(37, 99, 235, 0.26);
+        box-shadow: 0 18px 34px rgba(37, 99, 235, 0.28);
+        background: var(--primary-dark);
       }
 
       .btn-outline {
-        border: 1px solid rgba(37, 99, 235, 0.35);
+        border: 1px solid rgba(37, 99, 235, 0.4);
         color: var(--primary);
         background: rgba(255, 255, 255, 0.85);
       }
 
-      .hero {
-        padding: 120px 0 80px;
-        position: relative;
-        overflow: hidden;
+      .btn-outline:hover,
+      .btn-outline:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 34px rgba(37, 99, 235, 0.15);
+        background: rgba(37, 99, 235, 0.08);
       }
 
-      .hero::before {
-        content: "";
+      .floating-cta {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 60;
+      }
+
+      .floating-cta a {
+        min-width: 200px;
+        text-align: center;
+        font-size: 0.95rem;
+        padding: 14px 20px;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 88vh;
+        display: flex;
+        align-items: center;
+        padding: 140px 0 120px;
+        overflow: hidden;
+        color: #fff;
+      }
+
+      .hero-background {
         position: absolute;
         inset: 0;
-        background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.13), transparent 55%),
-          radial-gradient(circle at bottom right, rgba(14, 116, 144, 0.15), transparent 60%);
         z-index: -2;
       }
 
+      .hero-background::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, rgba(15, 23, 42, 0.85), rgba(37, 99, 235, 0.78));
+        z-index: 1;
+      }
+
+      .hero-background video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 0;
+      }
+
       .hero-inner {
+        position: relative;
+        z-index: 2;
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 60px;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         align-items: center;
+      }
+
+      .hero-copy {
+        animation: heroFade 1s ease both;
+      }
+
+      @keyframes heroFade {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .badge {
@@ -172,77 +254,76 @@
         gap: 8px;
         padding: 6px 16px;
         border-radius: 999px;
-        background: rgba(37, 99, 235, 0.1);
-        color: var(--primary);
+        background: rgba(255, 255, 255, 0.18);
+        color: #fff;
         font-size: 0.85rem;
         font-weight: 700;
       }
 
-      .badge i {
-        color: var(--primary);
-      }
-
       h1 {
-        font-size: clamp(2.6rem, 3vw + 1.2rem, 3.8rem);
-        line-height: 1.15;
-        margin: 24px 0 16px;
+        font-size: clamp(2.7rem, 3vw + 1.3rem, 4rem);
+        line-height: 1.12;
+        margin: 26px 0 18px;
         font-weight: 800;
       }
 
       .hero-lead {
-        font-size: 1.1rem;
-        color: rgba(17, 24, 39, 0.82);
+        font-size: 1.15rem;
+        color: rgba(255, 255, 255, 0.84);
         margin-bottom: 32px;
       }
 
-      .hero-stats {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 18px;
-        margin-top: 36px;
+      .hero-lead strong {
+        color: #fff;
       }
 
       .hero-actions {
         display: flex;
         flex-wrap: wrap;
         gap: 16px;
+        margin-bottom: 32px;
       }
 
-      .hero-stat {
-        background: rgba(255, 255, 255, 0.85);
+      .hero-metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 18px;
+      }
+
+      .hero-metric {
+        background: rgba(255, 255, 255, 0.14);
         border-radius: var(--radius);
         padding: 18px 20px;
-        border: 1px solid rgba(37, 99, 235, 0.08);
-        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        backdrop-filter: blur(8px);
       }
 
-      .hero-stat strong {
+      .hero-metric strong {
         display: block;
         font-size: 1.5rem;
-        color: var(--primary);
       }
 
-      .hero-video {
+      .hero-metric span {
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 0.95rem;
+      }
+
+      .hero-visual {
         position: relative;
       }
 
-      .hero-video video {
-        width: 100%;
-        box-shadow: 0 28px 60px rgba(15, 23, 42, 0.22);
-        border-radius: 26px;
-      }
-
-      .hero-video::after {
-        content: "AIがデータを統合し、章立てを生成する様子";
+      .hero-visual::after {
+        content: "意思決定に集中するためのAIダッシュボード";
         position: absolute;
-        bottom: 18px;
+        bottom: 16px;
         left: 50%;
         transform: translateX(-50%);
-        background: rgba(17, 24, 39, 0.75);
+        background: rgba(15, 23, 42, 0.72);
         color: #fff;
         padding: 10px 18px;
         border-radius: 999px;
         font-size: 0.85rem;
+        backdrop-filter: blur(6px);
       }
 
       section {
@@ -258,7 +339,7 @@
       }
 
       .section-heading h2 {
-        font-size: clamp(2rem, 1.6vw + 1.4rem, 2.6rem);
+        font-size: clamp(2rem, 1.6vw + 1.4rem, 2.7rem);
         font-weight: 800;
         margin: 0;
       }
@@ -267,6 +348,113 @@
         margin: 0;
         color: rgba(17, 24, 39, 0.7);
         font-size: 1rem;
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .fade-in.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      #ai-evidence {
+        background: #fff;
+      }
+
+      .evidence-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
+      }
+
+      .chart-card {
+        background: rgba(248, 250, 252, 0.9);
+        border-radius: var(--radius);
+        padding: 24px;
+        border: 1px solid rgba(37, 99, 235, 0.12);
+        box-shadow: 0 18px 32px rgba(15, 23, 42, 0.05);
+      }
+
+      .chart-card h3 {
+        margin: 0 0 16px;
+        font-size: 1.2rem;
+      }
+
+      .chart-card canvas {
+        width: 100% !important;
+        height: 260px !important;
+      }
+
+      .stat-highlight {
+        margin-top: 36px;
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .stat-card {
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 24px;
+        border: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .stat-card strong {
+        font-size: 1.6rem;
+        color: var(--primary);
+      }
+
+      .timeline {
+        margin-top: 48px;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(59, 130, 246, 0.08));
+        border-radius: 24px;
+        padding: 32px;
+        border: 1px solid rgba(37, 99, 235, 0.12);
+      }
+
+      .timeline p {
+        color: rgba(17, 24, 39, 0.75);
+        margin-top: 0;
+      }
+
+      .timeline-quarters {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .quarter {
+        background: #fff;
+        border-radius: 18px;
+        padding: 18px;
+        border: 1px solid rgba(37, 99, 235, 0.18);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .quarter::before {
+        content: "";
+        position: absolute;
+        inset: auto auto 0 0;
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(circle, rgba(37, 99, 235, 0.18), transparent 70%);
+        transform: translate(-40%, 40%);
+      }
+
+      .quarter strong {
+        display: block;
+        font-size: 1.2rem;
+        margin-bottom: 6px;
+        color: var(--primary);
       }
 
       .problems-grid {
@@ -345,6 +533,35 @@
         background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(14, 116, 144, 0.08));
       }
 
+      .impact-counters {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        margin-bottom: 36px;
+      }
+
+      .counter-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: var(--radius);
+        padding: 24px;
+        border: 1px solid rgba(37, 99, 235, 0.12);
+        box-shadow: 0 20px 34px rgba(15, 23, 42, 0.08);
+        text-align: center;
+      }
+
+      .counter-card span {
+        display: block;
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: var(--primary);
+      }
+
+      .counter-card small {
+        display: block;
+        font-size: 0.9rem;
+        color: rgba(17, 24, 39, 0.68);
+      }
+
       .analysis-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -376,77 +593,202 @@
       }
 
       .chart-frame {
-        position: relative;
-        width: 100%;
-        padding-top: 100%;
         background: #fff;
         border-radius: 24px;
         border: 1px solid rgba(15, 23, 42, 0.08);
         box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.06);
+        padding: 24px;
       }
 
-      canvas {
-        position: absolute;
-        inset: 0;
+      .chart-frame canvas {
         width: 100% !important;
-        height: 100% !important;
+        height: 360px !important;
       }
 
       .sales-simulator {
-        margin-top: 40px;
-        background: rgba(255, 255, 255, 0.92);
+        margin-top: 48px;
+        background: rgba(255, 255, 255, 0.95);
         border-radius: var(--radius);
-        padding: 30px;
+        padding: 32px;
         border: 1px solid rgba(14, 116, 144, 0.12);
         box-shadow: 0 20px 36px rgba(15, 23, 42, 0.06);
       }
 
-      .sales-form {
+      .simulator-form {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 18px;
         margin-bottom: 26px;
       }
 
-      .sales-form label {
+      .simulator-form label {
         display: block;
         font-size: 0.92rem;
         font-weight: 600;
         margin-bottom: 6px;
       }
 
-      .sales-form input {
+      .simulator-form input {
         width: 100%;
         padding: 10px 12px;
         border-radius: 10px;
         border: 1px solid rgba(15, 23, 42, 0.14);
+        font-size: 1rem;
       }
 
-      .steps {
+      #performanceChart {
+        width: 100% !important;
+        height: 380px !important;
+      }
+
+      #experts {
+        background: #fff;
+      }
+
+      .expert-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 24px;
-        margin-top: 40px;
       }
 
-      .step {
+      .expert-card {
         background: var(--surface);
         border-radius: var(--radius);
         padding: 26px;
         border: 1px solid var(--border);
+        box-shadow: 0 22px 34px rgba(15, 23, 42, 0.06);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
       }
 
-      .step strong {
-        display: inline-block;
+      .expert-card.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .expert-card img {
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .expert-meta {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .expert-meta div {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .expert-meta strong {
         font-size: 1.1rem;
-        margin-bottom: 8px;
-        color: var(--primary);
+      }
+
+      .expert-meta span {
+        font-size: 0.9rem;
+        color: rgba(17, 24, 39, 0.65);
+      }
+
+      .expert-card p {
+        margin: 0;
+        color: rgba(17, 24, 39, 0.75);
+      }
+
+      .annotation {
+        margin-top: 32px;
+        font-size: 0.9rem;
+        color: rgba(17, 24, 39, 0.65);
+        padding-left: 16px;
+        border-left: 3px solid rgba(37, 99, 235, 0.4);
+      }
+
+      .journey {
+        background: linear-gradient(120deg, rgba(37, 99, 235, 0.08), rgba(99, 102, 241, 0.08));
+      }
+
+      .journey-steps {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+      }
+
+      .journey-step {
+        flex: 1 1 140px;
+        min-width: 140px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        border: 1px solid rgba(37, 99, 235, 0.2);
+        background: rgba(255, 255, 255, 0.85);
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.2s ease, border 0.2s ease;
+      }
+
+      .journey-step.is-active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+
+      .journey-panels {
+        position: relative;
+      }
+
+      .journey-panel {
+        background: #fff;
+        border-radius: var(--radius);
+        padding: 30px;
+        border: 1px solid rgba(37, 99, 235, 0.14);
+        box-shadow: 0 24px 36px rgba(15, 23, 42, 0.06);
+        display: none;
+      }
+
+      .journey-panel.is-active {
+        display: block;
+      }
+
+      .journey-panel h3 {
+        margin-top: 0;
+      }
+
+      .journey-lists {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 24px;
+        margin-top: 18px;
+      }
+
+      .journey-lists ul {
+        padding-left: 20px;
+        margin: 0;
+        color: rgba(17, 24, 39, 0.75);
+      }
+
+      .journey-nav {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .journey-nav button {
+        flex: 1;
       }
 
       .case-stats {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 26px;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 24px;
       }
 
       .case-card {
@@ -454,67 +796,45 @@
         border-radius: var(--radius);
         padding: 28px;
         border: 1px solid var(--border);
-        box-shadow: 0 24px 44px rgba(15, 23, 42, 0.06);
+        box-shadow: 0 22px 34px rgba(15, 23, 42, 0.06);
+      }
+
+      .case-card h3 {
+        margin-top: 0;
       }
 
       .case-metrics {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
+        gap: 16px;
         margin: 20px 0;
-        background: rgba(37, 99, 235, 0.06);
-        padding: 18px;
-        border-radius: 14px;
-      }
-
-      .case-metrics div {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-      }
-
-      .case-metrics span:first-child {
-        font-size: 0.8rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: rgba(17, 24, 39, 0.5);
-      }
-
-      .case-metrics strong {
-        font-size: 1.4rem;
-        color: var(--secondary);
       }
 
       .pricing-table {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 24px;
       }
 
       .plan-card {
-        background: #fff;
+        background: var(--surface);
         border-radius: var(--radius);
-        padding: 32px;
-        border: 1px solid rgba(15, 23, 42, 0.1);
-        box-shadow: 0 24px 44px rgba(15, 23, 42, 0.05);
+        padding: 30px;
+        border: 1px solid var(--border);
+        box-shadow: 0 20px 30px rgba(15, 23, 42, 0.05);
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
       }
 
-      .plan-card h3 {
-        margin: 0;
-        font-size: 1.35rem;
+      .plan-card .btn {
+        align-self: flex-start;
       }
 
       .plan-price {
-        font-size: 2rem;
-        font-weight: 800;
-        margin: 12px 0 20px;
-      }
-
-      .plan-meta {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        margin-bottom: 18px;
+        font-size: 1.4rem;
+        margin: 0;
+        color: var(--primary);
       }
 
       .plan-meta span {
@@ -611,7 +931,7 @@
 
       .cta-section p {
         margin-bottom: 28px;
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba(255, 255, 255, 0.85);
       }
 
       .contact-form {
@@ -633,11 +953,22 @@
         border-radius: 12px;
         border: 1px solid rgba(15, 23, 42, 0.15);
         font-size: 1rem;
+        transition: border 0.2s ease, box-shadow 0.2s ease;
       }
 
       .contact-form textarea {
         resize: vertical;
         min-height: 140px;
+      }
+
+      .contact-form .is-invalid {
+        border-color: #dc2626;
+        box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15);
+      }
+
+      .form-error {
+        color: #dc2626;
+        font-size: 0.85rem;
       }
 
       .footer {
@@ -647,51 +978,58 @@
         color: rgba(17, 24, 39, 0.65);
       }
 
-      .floating-cta {
+      .modal {
         position: fixed;
-        right: 24px;
-        bottom: 24px;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.55);
         display: flex;
-        flex-direction: column;
-        gap: 12px;
-        z-index: 30;
-      }
-
-      .floating-cta a {
-        min-width: 180px;
-        text-align: center;
-        font-size: 0.95rem;
-        padding: 14px 20px;
-      }
-
-      .fade-in {
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
         opacity: 0;
-        transform: translateY(24px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 80;
       }
 
-      .fade-in.is-visible {
+      .modal.is-open {
         opacity: 1;
-        transform: translateY(0);
+        pointer-events: all;
+      }
+
+      .modal-dialog {
+        max-width: 520px;
+        width: 100%;
+        background: #fff;
+        border-radius: 24px;
+        padding: 32px;
+        position: relative;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: none;
+        border: none;
+        font-size: 1.4rem;
+        cursor: pointer;
       }
 
       @media (max-width: 960px) {
         .hero {
-          padding-top: 90px;
+          min-height: auto;
+          padding-top: 120px;
         }
 
         .hero-inner {
-          grid-template-columns: 1fr;
           text-align: center;
         }
 
-        .hero-video::after {
+        .hero-visual::after {
           left: 50%;
           transform: translateX(-50%);
-        }
-
-        .hero-stats {
-          grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
         }
 
         .header-nav {
@@ -714,64 +1052,152 @@
         }
 
         .floating-cta a {
-          min-width: 150px;
+          min-width: 160px;
         }
       }
     </style>
   </head>
   <body>
     <div class="floating-cta" role="complementary" aria-label="固定CTA">
-      <a class="btn btn-primary" href="#consultation"><i class="fa-solid fa-comments"></i> 無料相談</a>
-      <a class="btn btn-outline" href="#demo"><i class="fa-solid fa-display"></i> デモ予約</a>
+      <a class="btn btn-primary" href="#demo"><i class="fa-solid fa-display"></i> 無料デモを予約</a>
+      <a class="btn btn-outline" data-open-modal="#contactModal" href="#consultation"><i class="fa-solid fa-comments"></i> 無料相談を申し込む</a>
     </div>
 
     <header class="site-header">
       <div class="container header-inner">
         <div class="brand">AI経営計画書ラボ</div>
         <nav class="header-nav" aria-label="主要メニュー">
+          <a href="#ai-evidence">導入状況</a>
           <a href="#pain">課題</a>
           <a href="#features">サービス</a>
           <a href="#analysis">AI分析デモ</a>
-          <a href="#cases">成功事例</a>
+          <a href="#experts">専門家</a>
+          <a href="#journey">進め方</a>
           <a href="#plans">料金</a>
-          <a href="#faq">FAQ</a>
         </nav>
-        <a class="btn btn-primary" href="#consultation">無料体験を申し込む</a>
+        <button class="btn btn-primary" type="button" data-open-modal="#contactModal">
+          <i class="fa-solid fa-phone-volume"></i> 無料相談
+        </button>
       </div>
     </header>
 
     <main>
-      <section class="hero">
+      <section class="hero" id="top">
+        <div class="hero-background" aria-hidden="true">
+          <video
+            data-hero-video
+            data-src="https://cdn.coverr.co/videos/coverr-futuristic-digital-brain-technology-4475/1080p.mp4"
+            poster="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=70"
+            muted
+            loop
+            playsinline
+            preload="none"
+          ></video>
+        </div>
         <div class="container hero-inner">
-          <div class="hero-copy fade-in">
-            <span class="badge"><i class="fa-solid fa-bolt"></i> 生成AI×経営計画の最前線</span>
-            <h1>意思決定の1日後ろ倒しが、半年の差になる時代に。AIとプロで最短1日仕上げ。</h1>
+          <div class="hero-copy">
+            <span class="badge"><i class="fa-solid fa-bolt"></i> 激動の時代に備える経営計画DX</span>
+            <h1>
+              激動の時代に経営者の右腕となる生成AI<br />
+              <span style="font-size: clamp(2.2rem, 2vw + 1rem, 3.4rem);">意思決定時間を創出するAIパートナー</span>
+            </h1>
             <p class="hero-lead">
-              市場データの収集から財務予測、計画書ドラフトまでを生成AIが自動化。専門家がレビューし、外部環境の変化を踏まえたシナリオで経営陣の判断時間を平均<span style="font-weight: 700; color: var(--accent);">57%</span>削減します。
+              外部環境の分析から経営計画書のドラフトまでを生成AIが伴走。<strong>最終判断は経営者が行う</strong>前提で、専門家が現場感とガバナンスを踏まえた提案に磨き上げます。年商5,000万円〜15億円の中小企業が、変化の速い市場でも自信をもって次の一手を決められる状態をつくります。
             </p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#demo">30分デモを予約</a>
-              <a class="btn btn-outline" href="#consultation">無料トライアルを開始</a>
+              <a class="btn btn-primary" href="#demo"><i class="fa-solid fa-rocket"></i> 無料デモを予約</a>
+              <button class="btn btn-outline" type="button" data-open-modal="#contactModal">
+                <i class="fa-solid fa-handshake"></i> 無料相談を申し込む
+              </button>
             </div>
-            <div class="hero-stats">
-              <div class="hero-stat">
-                <strong>1日</strong>
-                <span>ドラフト納品までの最短リードタイム</span>
+            <div class="hero-metrics" role="list">
+              <div class="hero-metric" role="listitem">
+                <strong>最短1日</strong>
+                <span>経営計画ドラフト納品</span>
               </div>
-              <div class="hero-stat">
-                <strong>3.2倍</strong>
-                <span>外部環境変化への対応スピード</span>
+              <div class="hero-metric" role="listitem">
+                <strong>57%削減</strong>
+                <span>経営陣の資料準備時間</span>
               </div>
-              <div class="hero-stat">
-                <strong>92%</strong>
-                <span>経営会議での採択率向上（平均）</span>
+              <div class="hero-metric" role="listitem">
+                <strong>44%向上</strong>
+                <span>意思決定の的中率（平均）</span>
               </div>
             </div>
           </div>
-          <div class="hero-video fade-in" style="transition-delay: 0.15s;">
-            <video controls muted playsinline poster="https://dummyimage.com/960x540/0f172a/ffffff&text=AI+Planning+Demo">
-              <source src="https://cdn.coverr.co/videos/coverr-futuristic-digital-brain-technology-4475/1080p.mp4" type="video/mp4" />
-            </video>
+          <div class="hero-visual" aria-hidden="true">
+            <video
+              data-hero-video
+              data-src="https://cdn.coverr.co/videos/coverr-digital-business-visualization-6871/1080p.mp4"
+              poster="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=70"
+              muted
+              loop
+              playsinline
+              preload="none"
+            ></video>
+          </div>
+        </div>
+      </section>
+
+      <section id="ai-evidence" class="fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>導入企業は既に先行。今こそ「計画DX」を加速する好機です</h2>
+            <p>
+              国内外で生成AIの導入率が急速に高まり、大企業と中小企業の間で格差が広がっています。意思決定を迅速にする仕組みを今整えることで、外部環境の急変にもぶれない戦略を描けます。
+            </p>
+          </div>
+          <div class="evidence-grid">
+            <article class="chart-card">
+              <h3><i class="fa-solid fa-chart-column"></i> 日本の業種別AI導入率（2024年後半）</h3>
+              <canvas id="industryChart" aria-label="日本における業種別のAI導入率チャート"></canvas>
+            </article>
+            <article class="chart-card">
+              <h3><i class="fa-solid fa-building"></i> 企業規模別の導入格差</h3>
+              <canvas id="scaleChart" aria-label="企業規模別のAI導入率チャート"></canvas>
+            </article>
+            <article class="chart-card">
+              <h3><i class="fa-solid fa-globe"></i> 世界のAI活用状況</h3>
+              <canvas id="globalChart" aria-label="世界企業のAI活用状況チャート"></canvas>
+            </article>
+          </div>
+          <div class="stat-highlight">
+            <article class="stat-card">
+              <strong>70%の企業が効果を実感</strong>
+              <p>
+                生成AIを導入した企業の約70%が、業務効率化・コスト削減・新サービス創出に「効果あり」と回答。単なる業務削減にとどまらず、収益機会の創出にも直結しています。
+              </p>
+            </article>
+            <article class="stat-card">
+              <strong>四半期ごとの見直しが常識に</strong>
+              <p>
+                米国商工会議所は、経営計画を四半期ごとに軽く見直し、年1回本格的な見直しを推奨。計画と実行を密接に結ぶ「ローリング運用」の重要性が高まっています。
+              </p>
+            </article>
+          </div>
+          <div class="timeline" role="presentation">
+            <h3><i class="fa-solid fa-timeline"></i> Q1→Q2→Q3→Q4のリズムで外部環境を点検</h3>
+            <p>
+              AIが最新データを取り込み、四半期ごとにシナリオと指標を更新。経営者は判断に集中し、専門家が重点論点を補強します。
+            </p>
+            <div class="timeline-quarters">
+              <div class="quarter">
+                <strong>Q1</strong>
+                <p>年度方針と市場予測を策定。為替・資材価格・制度改正の影響をAIが整理。</p>
+              </div>
+              <div class="quarter">
+                <strong>Q2</strong>
+                <p>進捗差異を分析し、投資配分を再計画。金融機関への報告資料も自動生成。</p>
+              </div>
+              <div class="quarter">
+                <strong>Q3</strong>
+                <p>需要ピークを見据えた攻めの施策を試算。新サービスのシナリオを複数提示。</p>
+              </div>
+              <div class="quarter">
+                <strong>Q4</strong>
+                <p>次年度のドラフトを先行作成。専門家と共に資本政策・人員計画を詰める。</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -851,13 +1277,27 @@
       <section id="analysis" class="analysis-section fade-in">
         <div class="container">
           <div class="section-heading">
-            <h2>データ入力だけで、AIが競争力と売上シナリオを描く</h2>
-            <p>経営陣が押さえるべき指標を瞬時に可視化。ダミーデータで体感できるインタラクティブデモです。</p>
+            <h2>時間を創出しながら精度を高める、AIダッシュボード</h2>
+            <p>生成AIが数値シミュレーションを担い、経営者は判断とコミュニケーションに集中。入力値を変えるとグラフが瞬時に更新されます。</p>
+          </div>
+          <div class="impact-counters" aria-label="AI活用による効果指標">
+            <div class="counter-card">
+              <span data-count="1750">0</span>
+              <small>AI活用による年間の業務時間削減（時間）</small>
+            </div>
+            <div class="counter-card">
+              <span data-count="1000">0</span>
+              <small>削減が見込めるコスト（万円）</small>
+            </div>
+            <div class="counter-card">
+              <span data-count="44">0</span>
+              <small>意思決定精度の平均向上率（％）</small>
+            </div>
           </div>
           <div class="analysis-grid">
             <div class="analysis-panel">
               <h3>自社と競合の差異を即座に把握</h3>
-              <p>スライダーで自社の強みを調整すると、レーダーチャートがリアルタイムで更新されます。</p>
+              <p>スライダーを調整すると、レーダーチャートがリアルタイムに更新されます。重点投資領域の仮説づくりにご活用ください。</p>
               <div class="control-group">
                 <label for="productFit">顧客適合度</label>
                 <input type="range" id="productFit" min="40" max="100" value="70" />
@@ -876,64 +1316,214 @@
             </div>
           </div>
           <div class="sales-simulator" id="demo">
-            <h3>売上予測シミュレーター</h3>
-            <p>月間新規案件数と平均単価を入力すると、12ヶ月の売上予測とキャッシュフローの推移が更新されます。</p>
-            <form class="sales-form" id="salesForm">
+            <h3>売上・キャッシュフローシミュレーター</h3>
+            <p>目標売上・初期投資・市場規模・粗利率を入力すると、12ヶ月の売上推移とキャッシュフローが更新されます。</p>
+            <form class="simulator-form" id="simulatorForm">
               <div>
-                <label for="monthlyDeals">月間新規案件数</label>
-                <input type="number" id="monthlyDeals" min="1" value="12" />
+                <label for="targetRevenue">目標年間売上（万円）</label>
+                <input type="number" id="targetRevenue" min="1000" step="100" value="12000" />
               </div>
               <div>
-                <label for="averageDeal">平均契約単価（万円）</label>
-                <input type="number" id="averageDeal" min="10" value="85" />
+                <label for="initialInvestment">初期投資額（万円）</label>
+                <input type="number" id="initialInvestment" min="0" step="50" value="1500" />
               </div>
               <div>
-                <label for="churnRate">解約率（%）</label>
-                <input type="number" id="churnRate" min="0" max="50" value="5" />
+                <label for="marketSize">想定市場規模（億円）</label>
+                <input type="number" id="marketSize" min="1" step="0.1" value="12" />
               </div>
               <div>
-                <label for="costRate">販管費率（%）</label>
-                <input type="number" id="costRate" min="10" max="90" value="42" />
+                <label for="grossMargin">粗利率（％）</label>
+                <input type="number" id="grossMargin" min="20" max="90" value="48" />
               </div>
             </form>
-            <div class="chart-frame" style="padding-top: 60%;">
-              <canvas id="lineChart" aria-label="売上とキャッシュフローの推移"></canvas>
-            </div>
+            <canvas id="performanceChart" aria-label="売上とキャッシュフローの推移"></canvas>
           </div>
         </div>
       </section>
 
-      <section id="workflow" class="fade-in" style="background: #fff;">
+      <section id="experts" class="fade-in">
         <div class="container">
           <div class="section-heading">
-            <h2>最短1日で「たたき台」完成。次の意思決定へ進む4ステップ</h2>
-            <p>無料トライアルから正式運用まで、経営者の時間を奪わない導線をご用意しています。</p>
+            <h2>専門家とAIと経営者、三位一体で「実行できる計画」を共創</h2>
+            <p>経験豊富な専門家がAIの提案を解釈し、経営者の意思決定を支える議論の土台を整えます。</p>
           </div>
-          <div class="steps">
-            <div class="step">
-              <strong>Step 1</strong>
-              <h3>30分ヒアリング＆データ連携</h3>
-              <p>現状課題・目標・利用中の会計/販売データをヒアリング。クラウド会計やスプレッドシートと安全に接続します。</p>
-            </div>
-            <div class="step">
-              <strong>Step 2</strong>
-              <h3>AIによるドラフト生成（1日）</h3>
-              <p>市場分析・財務モデル・章立てを自動生成。PDF/PowerPoint形式で納品し、重点項目のレビュー会議を設定します。</p>
-            </div>
-            <div class="step">
-              <strong>Step 3</strong>
-              <h3>専門家レビュー＆質疑対策</h3>
-              <p>想定質問集・投資家/金融機関向けサマリーを作成。必要に応じて会議同席やピッチ原稿のブラッシュアップを実施。</p>
-            </div>
-            <div class="step">
-              <strong>Step 4</strong>
-              <h3>ローリング更新と実行伴走</h3>
-              <p>月次実績を取り込み、差異分析と次月アクションをAIが提示。計画と実行を結ぶガバナンス体制まで支援します。</p>
-            </div>
+          <div class="expert-grid">
+            <article class="expert-card">
+              <div class="expert-meta">
+                <img
+                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=70"
+                  alt="経営戦略アドバイザー 田中祐介"
+                  loading="lazy"
+                />
+                <div>
+                  <strong>田中 祐介</strong>
+                  <span>中小企業診断士｜支援歴15年</span>
+                </div>
+              </div>
+              <p>
+                「金融機関が知りたいのは数字の裏付けと実行体制。AIが集めたデータに、経営者の想いと現場の熱量を乗せて投資判断に耐える計画へと磨きます。」
+              </p>
+            </article>
+            <article class="expert-card">
+              <div class="expert-meta">
+                <img
+                  src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=200&q=70"
+                  alt="財務コンサルタント 佐伯美咲"
+                  loading="lazy"
+                />
+                <div>
+                  <strong>佐伯 美咲</strong>
+                  <span>財務コンサルタント｜IPO支援10社</span>
+                </div>
+              </div>
+              <p>
+                「AIが生成する複数シナリオを基に、資金繰りとキャッシュフローの安全余裕をチェック。経営者の“攻めたい局面”を守りながら、打ち手の優先順位を定めます。」
+              </p>
+            </article>
+            <article class="expert-card">
+              <div class="expert-meta">
+                <img
+                  src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=200&q=70"
+                  alt="組織開発コーチ 山本彩"
+                  loading="lazy"
+                />
+                <div>
+                  <strong>山本 彩</strong>
+                  <span>組織開発コーチ｜伴走歴12年</span>
+                </div>
+              </div>
+              <p>
+                「AIの提案を現場に落とし込むため、人材配置やKPIをチームと対話しながら再設計。現場の納得感を高め、計画と実行のギャップを埋めます。」
+              </p>
+            </article>
           </div>
+          <p class="annotation">
+            ※研究では、AIが人間のパフォーマンスを約40%向上させる一方で、AIに依存しすぎると19ポイント低下する可能性が指摘されています。AI＋専門家＋経営者の連携が、最適な経営計画を生む鍵です。
+          </p>
         </div>
       </section>
 
+      <section id="journey" class="journey fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>お問い合わせから納品まで、経営者の時間を最優先する5ステップ</h2>
+            <p>各ステップで経営者が行うこととAIが担うことを明確化。意思決定の主導権は常に経営者にあります。</p>
+          </div>
+          <div class="journey-steps" role="tablist">
+            <button class="journey-step is-active" type="button" role="tab" aria-selected="true" data-step="0">Step1 お問い合わせ</button>
+            <button class="journey-step" type="button" role="tab" aria-selected="false" data-step="1">Step2 ヒアリング</button>
+            <button class="journey-step" type="button" role="tab" aria-selected="false" data-step="2">Step3 AIドラフト</button>
+            <button class="journey-step" type="button" role="tab" aria-selected="false" data-step="3">Step4 専門家レビュー</button>
+            <button class="journey-step" type="button" role="tab" aria-selected="false" data-step="4">Step5 納品・伴走</button>
+          </div>
+          <div class="journey-panels">
+            <article class="journey-panel is-active" data-step="0" role="tabpanel">
+              <h3>Step1 お問い合わせ</h3>
+              <p>フォームまたは無料相談で現状を共有いただき、守秘義務契約やスケジュールを即日提示します。</p>
+              <div class="journey-lists">
+                <div>
+                  <h4>経営者が行うこと</h4>
+                  <ul>
+                    <li>現状の課題・目標・希望納期を共有</li>
+                    <li>ヒアリング可能な日程を選択</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>AIが行うこと</h4>
+                  <ul>
+                    <li>公開情報から業界・市場の最新トピックを整理</li>
+                    <li>入力内容に合わせたヒアリング項目を提案</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+            <article class="journey-panel" data-step="1" role="tabpanel">
+              <h3>Step2 ヒアリング</h3>
+              <p>30分のオンラインヒアリングで経営課題とデータ連携方針を決定。必要に応じて会計・販売システムと安全に接続します。</p>
+              <div class="journey-lists">
+                <div>
+                  <h4>経営者が行うこと</h4>
+                  <ul>
+                    <li>重点指標と制約条件を確認</li>
+                    <li>社内データの提供範囲を決定</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>AIが行うこと</h4>
+                  <ul>
+                    <li>データ連携状況を診断し、不足データを抽出</li>
+                    <li>ヒアリング内容を自動要約し、次のアクションを提案</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+            <article class="journey-panel" data-step="2" role="tabpanel">
+              <h3>Step3 AIドラフト</h3>
+              <p>生成AIが市場分析、財務モデル、章立てを自動生成。複数シナリオの売上・キャッシュフローを提示します。</p>
+              <div class="journey-lists">
+                <div>
+                  <h4>経営者が行うこと</h4>
+                  <ul>
+                    <li>提示されたシナリオの優先順位を判断</li>
+                    <li>経営の意図を追記し、議論したい論点を指定</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>AIが行うこと</h4>
+                  <ul>
+                    <li>市場・競合・自社の強みを統合した分析レポートを作成</li>
+                    <li>財務指標の感度分析とリスクアラートを提示</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+            <article class="journey-panel" data-step="3" role="tabpanel">
+              <h3>Step4 専門家レビュー</h3>
+              <p>専門家がAIドラフトを精査し、金融機関・投資家・役員会向けの伝え方を最適化します。</p>
+              <div class="journey-lists">
+                <div>
+                  <h4>経営者が行うこと</h4>
+                  <ul>
+                    <li>重要な意思決定ポイントを確認</li>
+                    <li>実行体制・責任者のアサインを決定</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>AIが行うこと</h4>
+                  <ul>
+                    <li>想定質問と回答草案を自動生成</li>
+                    <li>資料に必要なグラフ・図表を生成し、整形</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+            <article class="journey-panel" data-step="4" role="tabpanel">
+              <h3>Step5 納品・伴走</h3>
+              <p>完成版を納品し、月次・四半期のローリング更新を伴走。経営会議や金融機関対応にも同席します。</p>
+              <div class="journey-lists">
+                <div>
+                  <h4>経営者が行うこと</h4>
+                  <ul>
+                    <li>最終承認と実行のゴーサインを出す</li>
+                    <li>定例レビューの頻度を設定</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>AIが行うこと</h4>
+                  <ul>
+                    <li>実績データを取り込み、差異分析と次月施策を提案</li>
+                    <li>経営会議で使用するサマリー資料を自動生成</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="journey-nav">
+            <button class="btn btn-outline" type="button" data-journey-nav="prev"><i class="fa-solid fa-chevron-left"></i> 前のステップ</button>
+            <button class="btn btn-primary" type="button" data-journey-nav="next">次のステップ <i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
       <section id="cases" class="fade-in">
         <div class="container">
           <div class="section-heading">
@@ -1036,12 +1626,12 @@
                 <span><i class="fa-solid fa-percent"></i> 想定ROI：計画書作成工数を最大60%削減</span>
               </div>
               <ul class="plan-features">
-                <li><i class="fa-solid fa-circle-check"></i> 月1回のAI計画書更新／ドラフト納品（PDF・PPT）</li>
+                <li><i class="fa-solid fa-circle-check"></i> 月1回のAI計画書更新ドラフト納品（PDF・PPT）</li>
                 <li><i class="fa-solid fa-circle-check"></i> 売上・キャッシュフロー予測（3シナリオ）</li>
                 <li><i class="fa-solid fa-circle-check"></i> 融資面談想定Q&Aテンプレート</li>
                 <li><i class="fa-solid fa-circle-check"></i> 導入初月の専門家レビュー1回</li>
               </ul>
-              <a class="btn btn-primary" href="#consultation">無料トライアルを申し込む</a>
+              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">無料トライアルを申し込む</button>
             </article>
             <article class="plan-card" style="border: 2px solid var(--primary);">
               <h3>プロプラン</h3>
@@ -1057,7 +1647,7 @@
                 <li><i class="fa-solid fa-circle-check"></i> 投資家・役員会向けピッチデッキ連動</li>
                 <li><i class="fa-solid fa-circle-check"></i> 常時チャット伴走／緊急シミュレーション対応</li>
               </ul>
-              <a class="btn btn-primary" href="#consultation">担当者と相談する</a>
+              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">担当者と相談する</button>
             </article>
           </div>
           <p style="margin-top: 18px; color: rgba(17, 24, 39, 0.6); font-size: 0.9rem;">
@@ -1075,19 +1665,19 @@
           <div class="security-grid">
             <article class="security-card">
               <h3><i class="fa-solid fa-shield-halved"></i> データ暗号化</h3>
-              <p>通信・保存ともにAES-256で暗号化。アクセス権限は担当コンサルタントに限定し、操作ログを全件記録します。</p>
+              <p>通信・保管ともにAES-256で暗号化し、第三者検証済みのクラウド環境で運用。</p>
             </article>
             <article class="security-card">
-              <h3><i class="fa-solid fa-trash-arrow-up"></i> データ削除ポリシー</h3>
-              <p>プロジェクト完了後30日以内にデータを削除。ご希望に応じて即時削除にも対応し、証跡レポートを提供します。</p>
+              <h3><i class="fa-solid fa-user-lock"></i> アクセス制御</h3>
+              <p>役割ベースアクセスと多要素認証で、経営層・専門家・AIアシスタントの権限を明確化。</p>
             </article>
             <article class="security-card">
-              <h3><i class="fa-solid fa-certificate"></i> 認証・外部監査</h3>
-              <p>ISMS取得企業と提携し、年1回の外部監査を実施。生成AIモデルは学習目的で顧客データを二次利用しません。</p>
+              <h3><i class="fa-solid fa-file-signature"></i> 守秘義務契約</h3>
+              <p>NDA・業務委託契約を標準化。AIに学習させないオプションも選択可能です。</p>
             </article>
             <article class="security-card">
-              <h3><i class="fa-solid fa-people-carry-box"></i> プライバシーと契約</h3>
-              <p>NDA締結は標準対応。データ取り扱いに関する社内研修とガイドラインを用意し、共通理解を徹底します。</p>
+              <h3><i class="fa-solid fa-database"></i> データ保全</h3>
+              <p>バックアップは国内2拠点で冗長化し、障害時の復旧を自動化しています。</p>
             </article>
           </div>
         </div>
@@ -1096,31 +1686,25 @@
       <section id="faq" class="fade-in" style="background: #fff;">
         <div class="container">
           <div class="section-heading">
-            <h2>よくある質問</h2>
-            <p>重要な疑問に絞って掲載。詳細は無料相談で個別にご案内します。</p>
+            <h2>よくあるご質問</h2>
+            <p>導入前によくお問い合わせいただく内容をまとめました。その他のご質問もお気軽にご相談ください。</p>
           </div>
           <div class="faq-list">
             <details>
-              <summary>無料トライアルでは何が確認できますか？</summary>
-              <p>
-                30分のオンライン相談と、生成AIが作成したドラフト計画書（抜粋3章）をお試しいただけます。トライアルで作成したデータは本契約前でも持ち帰り可能です。
-              </p>
+              <summary>どのくらいの期間で導入できますか？</summary>
+              <p>初回ヒアリングからドラフト納品までは最短1日、平均5営業日です。業務データ連携の状況により前後します。</p>
             </details>
             <details>
-              <summary>社内にAIの知見がなくても導入できますか？</summary>
-              <p>
-                導入時に「AI活用オリエンテーション」資料と操作トレーニング動画を提供します。経営会議への同席支援も選択できますので、初めての方でも安心です。
-              </p>
+              <summary>どのデータが必要になりますか？</summary>
+              <p>会計データ、販売管理データ、主要顧客の属性などをご提供いただくと、高精度なシナリオを作成できます。情報が不足していてもAIが推計値を提示します。</p>
             </details>
             <details>
-              <summary>利用に必要なデータ連携環境は？</summary>
-              <p>
-                クラウド会計、販売管理、Google Workspace、Microsoft 365など主要ツールと連携可能です。CSVアップロードのみでも利用できます。</p>
+              <summary>社内にAIの知見がなくても使えますか？</summary>
+              <p>はい。専門家が初期設定から運用まで伴走し、社内での意思決定プロセスへの組み込みまでサポートします。</p>
             </details>
             <details>
               <summary>守秘義務や契約期間はどうなりますか？</summary>
-              <p>
-                最短3か月からの契約で、NDAを標準締結。更新は1か月前までにご相談いただけます。機密情報の取り扱いは契約書に明記します。</p>
+              <p>最短3か月からの契約で、NDAを標準締結。更新は1か月前までにご相談いただけます。機密情報の取り扱いは契約書に明記します。</p>
             </details>
           </div>
         </div>
@@ -1131,7 +1715,7 @@
           <div class="cta-section">
             <h3>まずは無料相談で、御社専用のAI計画ロードマップを。</h3>
             <p>直近の経営課題に合わせて、AIが生成するシナリオとアウトプット例をその場でご紹介します。次の意思決定に必要な時間を今すぐ確保しましょう。</p>
-            <a class="btn btn-outline" href="#consultation" style="color: #fff; border-color: rgba(255, 255, 255, 0.5);">無料相談を予約</a>
+            <button class="btn btn-outline" type="button" data-open-modal="#contactModal" style="color: #fff; border-color: rgba(255, 255, 255, 0.5);">無料相談を予約</button>
           </div>
         </div>
       </section>
@@ -1143,17 +1727,24 @@
             <p>送信後はサンクスページで次のステップ（資料ダウンロード／日程調整リンク）をご案内します。</p>
           </div>
           <form class="contact-form" aria-label="お問い合わせフォーム">
+            <div class="form-error" aria-live="assertive" hidden>必須項目をご確認ください。</div>
             <label for="name">お名前</label>
             <input id="name" name="name" type="text" placeholder="例）山田 太郎" required />
 
             <label for="company">会社名</label>
             <input id="company" name="company" type="text" placeholder="例）株式会社サンプル" required />
 
+            <label for="position">役職</label>
+            <input id="position" name="position" type="text" placeholder="例）代表取締役" required />
+
             <label for="email">メールアドレス</label>
             <input id="email" name="email" type="email" placeholder="例）example@example.com" required />
 
             <label for="tel">電話番号</label>
-            <input id="tel" name="tel" type="tel" placeholder="例）090-1234-5678" />
+            <input id="tel" name="tel" type="tel" placeholder="例）090-1234-5678" required />
+
+            <label for="preferredDate">希望日時</label>
+            <input id="preferredDate" name="preferredDate" type="datetime-local" required />
 
             <label for="goal">導入目的</label>
             <select id="goal" name="goal" required>
@@ -1165,7 +1756,7 @@
             </select>
 
             <label for="message">ご相談内容</label>
-            <textarea id="message" name="message" placeholder="現状の課題や希望時期などをご記入ください"></textarea>
+            <textarea id="message" name="message" placeholder="現状の課題や希望時期などをご記入ください" required></textarea>
 
             <button class="btn btn-primary" type="submit">送信して次のステップを見る</button>
           </form>
@@ -1180,204 +1771,495 @@
       </div>
     </footer>
 
+    <div class="modal" id="contactModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+      <div class="modal-dialog">
+        <button class="modal-close" type="button" data-close-modal aria-label="閉じる"><i class="fa-solid fa-xmark"></i></button>
+        <h3 id="modalTitle" style="margin-top: 0;">無料相談・デモのお申し込み</h3>
+        <p>以下のフォームからお気軽にご連絡ください。担当より1営業日以内にご案内します。</p>
+        <form class="contact-form" aria-label="モーダルお問い合わせフォーム">
+          <div class="form-error" aria-live="assertive" hidden>必須項目をご確認ください。</div>
+          <label for="modalName">お名前</label>
+          <input id="modalName" name="name" type="text" placeholder="例）山田 太郎" required />
+
+          <label for="modalCompany">会社名</label>
+          <input id="modalCompany" name="company" type="text" placeholder="例）株式会社サンプル" required />
+
+          <label for="modalPosition">役職</label>
+          <input id="modalPosition" name="position" type="text" placeholder="例）代表取締役" required />
+
+          <label for="modalEmail">メールアドレス</label>
+          <input id="modalEmail" name="email" type="email" placeholder="例）example@example.com" required />
+
+          <label for="modalTel">電話番号</label>
+          <input id="modalTel" name="tel" type="tel" placeholder="例）090-1234-5678" required />
+
+          <label for="modalPreferredDate">希望日時</label>
+          <input id="modalPreferredDate" name="preferredDate" type="datetime-local" required />
+
+          <label for="modalGoal">導入目的</label>
+          <select id="modalGoal" name="goal" required>
+            <option value="" disabled selected>選択してください</option>
+            <option value="finance">金融機関提出・資金調達</option>
+            <option value="strategy">中期経営計画・戦略刷新</option>
+            <option value="expansion">新規事業・店舗展開</option>
+            <option value="other">その他</option>
+          </select>
+
+          <label for="modalMessage">ご相談内容</label>
+          <textarea id="modalMessage" name="message" placeholder="現状の課題や希望時期などをご記入ください" required></textarea>
+
+          <button class="btn btn-primary" type="submit">送信する</button>
+        </form>
+      </div>
+    </div>
+
     <script>
-      const observer = new IntersectionObserver(
+      const fadeObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
               entry.target.classList.add("is-visible");
-              observer.unobserve(entry.target);
+              fadeObserver.unobserve(entry.target);
             }
           });
         },
         { threshold: 0.2 }
       );
 
-      document.querySelectorAll(".fade-in").forEach((el) => observer.observe(el));
+      document.querySelectorAll(".fade-in").forEach((el) => fadeObserver.observe(el));
 
-      const radarCanvas = document.getElementById("radarChart");
-      const radarCtx = radarCanvas.getContext("2d");
+      const expertObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              expertObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.3 }
+      );
 
-      const radarState = {
+      document.querySelectorAll(".expert-card").forEach((card) => expertObserver.observe(card));
+
+      const heroVideos = document.querySelectorAll("[data-hero-video]");
+      const videoObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const video = entry.target;
+            if (!video.src && video.dataset.src) {
+              video.src = video.dataset.src;
+            }
+            video.play().catch(() => {});
+            observer.unobserve(video);
+          }
+        });
+      }, { threshold: 0.1 });
+      heroVideos.forEach((video) => videoObserver.observe(video));
+
+      const aiDataset = {
+        japan: {
+          labels: ["全企業", "情報通信業", "卸売・小売"],
+          data: [47, 50, 10],
+        },
+        scale: {
+          labels: ["売上高1兆円以上", "年商5,000万〜15億円"],
+          data: [72, 12],
+        },
+        global: {
+          labels: ["生成AI活用企業", "その他のAI活用企業", "未活用企業"],
+          data: [71, 7, 22],
+        },
+      };
+
+      let industryChart;
+      let scaleChart;
+      let globalChart;
+      let radarChart;
+      let simulatorChart;
+
+      function initEvidenceCharts() {
+        if (!window.Chart) return;
+        const industryCtx = document.getElementById("industryChart");
+        const scaleCtx = document.getElementById("scaleChart");
+        const globalCtx = document.getElementById("globalChart");
+
+        industryChart = new Chart(industryCtx, {
+          type: "bar",
+          data: {
+            labels: aiDataset.japan.labels,
+            datasets: [
+              {
+                label: "導入率（％）",
+                data: aiDataset.japan.data,
+                backgroundColor: ["#2563eb", "#1d4ed8", "#38bdf8"],
+                borderRadius: 12,
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: (context) => `${context.parsed.y}%`,
+                },
+              },
+            },
+            responsive: true,
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: { callback: (value) => `${value}%` },
+              },
+            },
+          },
+        });
+
+        scaleChart = new Chart(scaleCtx, {
+          type: "bar",
+          data: {
+            labels: aiDataset.scale.labels,
+            datasets: [
+              {
+                data: aiDataset.scale.data,
+                backgroundColor: ["#1d4ed8", "#f59e0b"],
+                borderRadius: 12,
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                callbacks: {
+                  label: (context) => `${context.parsed.y}%`,
+                },
+              },
+            },
+            indexAxis: "y",
+            scales: {
+              x: {
+                beginAtZero: true,
+                ticks: { callback: (value) => `${value}%` },
+              },
+            },
+          },
+        });
+
+        globalChart = new Chart(globalCtx, {
+          type: "doughnut",
+          data: {
+            labels: aiDataset.global.labels,
+            datasets: [
+              {
+                data: aiDataset.global.data,
+                backgroundColor: ["#2563eb", "#60a5fa", "#d1d5db"],
+                borderWidth: 0,
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              legend: { position: "bottom" },
+              tooltip: {
+                callbacks: {
+                  label: (context) => `${context.label}: ${context.parsed}%`,
+                },
+              },
+            },
+            cutout: "62%",
+          },
+        });
+      }
+
+      const radarConfig = {
         labels: ["顧客適合度", "ブランド", "供給力", "革新性", "財務健全性"],
         self: [70, 60, 75, 65, 80],
         competitor: [62, 72, 68, 58, 74],
       };
 
-      function drawRadar() {
-        const { width, height } = radarCanvas;
-        radarCtx.clearRect(0, 0, width, height);
-        const centerX = width / 2;
-        const centerY = height / 2;
-        const radius = Math.min(width, height) / 2 - 40;
-        const angleStep = (Math.PI * 2) / radarState.labels.length;
-
-        radarCtx.strokeStyle = "rgba(15, 23, 42, 0.15)";
-        radarCtx.lineWidth = 1;
-        for (let level = 1; level <= 5; level++) {
-          radarCtx.beginPath();
-          for (let i = 0; i < radarState.labels.length; i++) {
-            const angle = angleStep * i - Math.PI / 2;
-            const r = (radius * level) / 5;
-            const x = centerX + r * Math.cos(angle);
-            const y = centerY + r * Math.sin(angle);
-            if (i === 0) radarCtx.moveTo(x, y);
-            else radarCtx.lineTo(x, y);
-          }
-          radarCtx.closePath();
-          radarCtx.stroke();
-        }
-
-        radarCtx.fillStyle = "rgba(37, 99, 235, 0.18)";
-        radarCtx.strokeStyle = "rgba(37, 99, 235, 0.35)";
-        radarCtx.lineWidth = 2;
-        radarCtx.beginPath();
-        radarState.self.forEach((value, i) => {
-          const angle = angleStep * i - Math.PI / 2;
-          const r = (radius * value) / 100;
-          const x = centerX + r * Math.cos(angle);
-          const y = centerY + r * Math.sin(angle);
-          if (i === 0) radarCtx.moveTo(x, y);
-          else radarCtx.lineTo(x, y);
-        });
-        radarCtx.closePath();
-        radarCtx.fill();
-        radarCtx.stroke();
-
-        radarCtx.strokeStyle = "rgba(15, 23, 42, 0.4)";
-        radarCtx.lineWidth = 2;
-        radarCtx.beginPath();
-        radarState.competitor.forEach((value, i) => {
-          const angle = angleStep * i - Math.PI / 2;
-          const r = (radius * value) / 100;
-          const x = centerX + r * Math.cos(angle);
-          const y = centerY + r * Math.sin(angle);
-          if (i === 0) radarCtx.moveTo(x, y);
-          else radarCtx.lineTo(x, y);
-        });
-        radarCtx.closePath();
-        radarCtx.stroke();
-
-        radarCtx.fillStyle = "rgba(17, 24, 39, 0.75)";
-        radarCtx.font = "14px Manrope";
-        radarState.labels.forEach((label, i) => {
-          const angle = angleStep * i - Math.PI / 2;
-          const x = centerX + (radius + 16) * Math.cos(angle);
-          const y = centerY + (radius + 16) * Math.sin(angle);
-          radarCtx.fillText(label, x - 30, y + 4);
+      function initRadarChart() {
+        if (!window.Chart) return;
+        const ctx = document.getElementById("radarChart");
+        radarChart = new Chart(ctx, {
+          type: "radar",
+          data: {
+            labels: radarConfig.labels,
+            datasets: [
+              {
+                label: "自社",
+                data: radarConfig.self,
+                backgroundColor: "rgba(37, 99, 235, 0.2)",
+                borderColor: "rgba(37, 99, 235, 0.8)",
+                borderWidth: 2,
+                pointBackgroundColor: "#2563eb",
+              },
+              {
+                label: "競合平均",
+                data: radarConfig.competitor,
+                backgroundColor: "rgba(148, 163, 184, 0.2)",
+                borderColor: "rgba(148, 163, 184, 0.8)",
+                borderWidth: 2,
+                pointBackgroundColor: "#94a3b8",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            scales: {
+              r: {
+                suggestedMin: 0,
+                suggestedMax: 100,
+                ticks: { display: false },
+                grid: { color: "rgba(15, 23, 42, 0.12)" },
+                angleLines: { color: "rgba(15, 23, 42, 0.12)" },
+              },
+            },
+          },
         });
       }
 
-      function resizeCanvas(canvas) {
-        const rect = canvas.getBoundingClientRect();
-        canvas.width = rect.width * window.devicePixelRatio;
-        canvas.height = rect.height * window.devicePixelRatio;
-      }
-
-      function updateSelfScores() {
-        radarState.self = [
+      function updateRadarValues() {
+        radarConfig.self = [
           Number(document.getElementById("productFit").value),
           Number(document.getElementById("brand").value),
           Number(document.getElementById("supply").value),
           Number(document.getElementById("innovation").value),
           Number(document.getElementById("finance").value),
         ];
-        drawRadar();
+        radarChart.data.datasets[0].data = radarConfig.self;
+        radarChart.update();
       }
 
       ["productFit", "brand", "supply", "innovation", "finance"].forEach((id) => {
-        document.getElementById(id).addEventListener("input", updateSelfScores);
+        const input = document.getElementById(id);
+        input.addEventListener("input", updateRadarValues);
       });
 
-      const lineCanvas = document.getElementById("lineChart");
-      const lineCtx = lineCanvas.getContext("2d");
+      function buildForecast() {
+        const goal = Number(document.getElementById("targetRevenue").value);
+        const investment = Number(document.getElementById("initialInvestment").value);
+        const marketSize = Number(document.getElementById("marketSize").value) * 10000; // convert to 万円
+        const grossMargin = Number(document.getElementById("grossMargin").value) / 100;
 
-      function handleResize() {
-        resizeCanvas(radarCanvas);
-        drawRadar();
-        resizeCanvas(lineCanvas);
-        drawLineChart();
-      }
+        const months = Array.from({ length: 12 }, (_, i) => `${i + 1}月`);
+        const monthlyRevenue = [];
+        const cashBalance = [];
+        let cumulativeCash = -investment;
 
-      handleResize();
-      window.addEventListener("resize", handleResize);
-
-      function generateForecast(monthlyDeals, averageDeal, churnRate, costRate) {
-        const months = Array.from({ length: 12 }, (_, i) => i + 1);
-        const revenue = [];
-        const cashflow = [];
-        let activeCustomers = 0;
-        months.forEach((month) => {
-          activeCustomers = activeCustomers * (1 - churnRate / 100) + monthlyDeals;
-          const monthlyRevenue = activeCustomers * averageDeal;
-          const cash = monthlyRevenue * (1 - costRate / 100);
-          revenue.push(monthlyRevenue);
-          cashflow.push(cash);
+        months.forEach((_, index) => {
+          const ramp = Math.min(1, (index + 1) / 8 + marketSize / 1000000);
+          const revenue = Math.min(goal / 12 * (0.6 + ramp * 0.6), goal / 10);
+          const gp = revenue * grossMargin;
+          cumulativeCash += gp;
+          monthlyRevenue.push(Math.round(revenue));
+          cashBalance.push(Math.round(cumulativeCash));
         });
-        return { months, revenue, cashflow };
+
+        return { months, monthlyRevenue, cashBalance };
       }
 
-      function drawLineChart() {
-        const rect = lineCanvas.getBoundingClientRect();
-        lineCtx.clearRect(0, 0, lineCanvas.width, lineCanvas.height);
-        const padding = 60 * window.devicePixelRatio;
-        const width = lineCanvas.width;
-        const height = lineCanvas.height;
+      function initSimulatorChart() {
+        if (!window.Chart) return;
+        const ctx = document.getElementById("performanceChart");
+        simulatorChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: [],
+            datasets: [
+              {
+                label: "月次売上（万円）",
+                data: [],
+                borderColor: "rgba(37, 99, 235, 0.9)",
+                backgroundColor: "rgba(37, 99, 235, 0.18)",
+                fill: false,
+                tension: 0.35,
+              },
+              {
+                label: "累積キャッシュフロー（万円）",
+                data: [],
+                borderColor: "rgba(245, 158, 11, 0.9)",
+                backgroundColor: "rgba(245, 158, 11, 0.2)",
+                fill: true,
+                tension: 0.35,
+                yAxisID: "y1",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            interaction: { mode: "index", intersect: false },
+            stacked: false,
+            scales: {
+              y: {
+                type: "linear",
+                position: "left",
+                title: { display: true, text: "万円" },
+              },
+              y1: {
+                type: "linear",
+                position: "right",
+                title: { display: true, text: "累積CF（万円）" },
+                grid: { drawOnChartArea: false },
+              },
+            },
+          },
+        });
+        updateSimulatorChart();
+      }
 
-        const deals = Number(document.getElementById("monthlyDeals").value);
-        const dealSize = Number(document.getElementById("averageDeal").value);
-        const churn = Number(document.getElementById("churnRate").value);
-        const cost = Number(document.getElementById("costRate").value);
+      function updateSimulatorChart() {
+        if (!simulatorChart) return;
+        const forecast = buildForecast();
+        simulatorChart.data.labels = forecast.months;
+        simulatorChart.data.datasets[0].data = forecast.monthlyRevenue;
+        simulatorChart.data.datasets[1].data = forecast.cashBalance;
+        simulatorChart.update();
+      }
 
-        const { months, revenue, cashflow } = generateForecast(deals, dealSize, churn, cost);
-        const maxValue = Math.max(...revenue);
-        const scaleY = (height - padding * 2) / maxValue;
-        const scaleX = (width - padding * 2) / (months.length - 1);
+      ["targetRevenue", "initialInvestment", "marketSize", "grossMargin"].forEach((id) => {
+        document.getElementById(id).addEventListener("input", updateSimulatorChart);
+      });
 
-        lineCtx.strokeStyle = "rgba(15, 23, 42, 0.15)";
-        lineCtx.lineWidth = 1;
-        lineCtx.beginPath();
-        for (let i = 0; i <= 4; i++) {
-          const y = padding + ((height - padding * 2) / 4) * i;
-          lineCtx.moveTo(padding, y);
-          lineCtx.lineTo(width - padding, y);
-        }
-        lineCtx.stroke();
-
-        function drawSeries(data, color) {
-          lineCtx.beginPath();
-          data.forEach((value, index) => {
-            const x = padding + scaleX * index;
-            const y = height - padding - value * scaleY;
-            if (index === 0) lineCtx.moveTo(x, y);
-            else lineCtx.lineTo(x, y);
+      const counters = document.querySelectorAll("[data-count]");
+      const counterObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              animateCounter(entry.target);
+              counterObserver.unobserve(entry.target);
+            }
           });
-          lineCtx.strokeStyle = color;
-          lineCtx.lineWidth = 3;
-          lineCtx.stroke();
+        },
+        { threshold: 0.6 }
+      );
+
+      counters.forEach((counter) => counterObserver.observe(counter));
+
+      function animateCounter(el) {
+        const target = Number(el.dataset.count);
+        const duration = 1800;
+        const start = performance.now();
+
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const value = Math.floor(progress * target);
+          el.textContent = value.toLocaleString();
+          if (progress < 1) requestAnimationFrame(step);
         }
 
-        drawSeries(revenue, "rgba(37, 99, 235, 0.85)");
-        drawSeries(cashflow, "rgba(245, 158, 11, 0.9)");
+        requestAnimationFrame(step);
+      }
 
-        lineCtx.fillStyle = "rgba(17, 24, 39, 0.75)";
-        lineCtx.font = `${14 * window.devicePixelRatio}px Manrope`;
-        months.forEach((month, index) => {
-          const x = padding + scaleX * index;
-          lineCtx.fillText(`${month}月`, x - 12 * window.devicePixelRatio, height - padding + 24);
+      const journeySteps = Array.from(document.querySelectorAll(".journey-step"));
+      const journeyPanels = Array.from(document.querySelectorAll(".journey-panel"));
+      let activeStep = 0;
+
+      function setActiveStep(index) {
+        activeStep = (index + journeySteps.length) % journeySteps.length;
+        journeySteps.forEach((button, idx) => {
+          const isActive = idx === activeStep;
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-selected", String(isActive));
+        });
+        journeyPanels.forEach((panel, idx) => {
+          panel.classList.toggle("is-active", idx === activeStep);
         });
       }
 
-      drawLineChart();
-
-      ["monthlyDeals", "averageDeal", "churnRate", "costRate"].forEach((id) => {
-        document.getElementById(id).addEventListener("input", drawLineChart);
+      journeySteps.forEach((button, index) => {
+        button.addEventListener("click", () => setActiveStep(index));
       });
 
-      document.querySelector(".contact-form").addEventListener("submit", (event) => {
+      document.querySelectorAll("[data-journey-nav]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const direction = button.dataset.journeyNav === "next" ? 1 : -1;
+          setActiveStep(activeStep + direction);
+        });
+      });
+
+      const modal = document.getElementById("contactModal");
+      const openers = document.querySelectorAll("[data-open-modal]");
+      const closers = modal.querySelectorAll("[data-close-modal]");
+
+      function openModal(event) {
         event.preventDefault();
-        window.location.href = "thank-you.html";
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        const firstInput = modal.querySelector("input, select, textarea");
+        firstInput && firstInput.focus();
+      }
+
+      function closeModal() {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+      }
+
+      openers.forEach((opener) => {
+        opener.addEventListener("click", openModal);
       });
+
+      closers.forEach((closer) => {
+        closer.addEventListener("click", closeModal);
+      });
+
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeModal();
+      });
+
+      function setupForm(form) {
+        const errorMessage = form.querySelector(".form-error");
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          let isValid = true;
+          form.querySelectorAll(".is-invalid").forEach((field) => field.classList.remove("is-invalid"));
+
+          form.querySelectorAll("[required]").forEach((field) => {
+            const value = field.value.trim();
+            if (!value) {
+              isValid = false;
+              field.classList.add("is-invalid");
+            }
+            if (field.type === "email" && value) {
+              const emailPattern = /.+@.+\..+/;
+              if (!emailPattern.test(value)) {
+                isValid = false;
+                field.classList.add("is-invalid");
+              }
+            }
+          });
+
+          if (!isValid) {
+            errorMessage && errorMessage.removeAttribute("hidden");
+            return;
+          }
+
+          errorMessage && errorMessage.setAttribute("hidden", "");
+          window.location.href = "thank-you.html";
+        });
+
+        form.querySelectorAll("input, textarea, select").forEach((field) => {
+          field.addEventListener("input", () => {
+            field.classList.remove("is-invalid");
+            errorMessage && errorMessage.setAttribute("hidden", "");
+          });
+        });
+      }
+
+      document.querySelectorAll(".contact-form").forEach((form) => setupForm(form));
+
+      function initializeCharts() {
+        initEvidenceCharts();
+        initRadarChart();
+        initSimulatorChart();
+      }
+
+      if (document.readyState === "complete") {
+        initializeCharts();
+      } else {
+        window.addEventListener("load", initializeCharts);
+      }
     </script>
   </body>
 </html>
