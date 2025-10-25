@@ -1,7 +1,7 @@
 # 現状診断サマリー
 
 ## アクセス・計測状況
-- 対象URL https://furumachi-smec.lognowa.com/public/lp は社内プロキシ経由での取得が403により失敗。オフライン提供の既存Reactコードベースを一次情報として分析。
+- 対象URL https://furumachi-smec.lognowa.com/public/lp_1 は社内プロキシ経由での取得が403により失敗。オフライン提供の既存Reactコードベースを一次情報として分析。
 - Lighthouseの実測は不可能だったため、コード解析とビルド設定から推定。パフォーマンス測定は後述の改善計画で代替指標を設定。
 
 ## 主な課題（要点）

@@ -2,8 +2,8 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "株式会社創和経営コンサルティング",
-  url: "https://furumachi-smec.lognowa.com/public/lp",
-  logo: "https://furumachi-smec.lognowa.com/public/lp/assets/logo.png",
+  url: "https://furumachi-smec.lognowa.com/public/lp_1",
+  logo: "https://furumachi-smec.lognowa.com/public/lp_1/assets/logo.png",
   description: "福岡・九州の年商5000万円～10億円企業に向けたAI×管理会計×資金繰りの伴走型経営顧問サービス",
   founder: "古町 聖文",
   foundingDate: "2018-04-01",
@@ -28,7 +28,7 @@ export const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: "株式会社創和経営コンサルティング 福岡オフィス",
-  image: "https://furumachi-smec.lognowa.com/public/lp/og-image.svg",
+  image: "https://furumachi-smec.lognowa.com/public/lp_1/og-image.svg",
   priceRange: "¥180,000-¥280,000/月",
   address: organizationSchema.address,
   geo: { "@type": "GeoCoordinates", latitude: 33.5902, longitude: 130.4017 },
@@ -41,7 +41,7 @@ export const localBusinessSchema = {
       closes: "18:00",
     },
   ],
-  url: "https://furumachi-smec.lognowa.com/public/lp",
+  url: "https://furumachi-smec.lognowa.com/public/lp_1",
   telephone: organizationSchema.telephone,
   email: organizationSchema.email,
 };
@@ -64,7 +64,7 @@ export const productSchema = {
       maxPrice: "280000",
     },
     availability: "https://schema.org/InStock",
-    url: "https://furumachi-smec.lognowa.com/public/lp#plans",
+    url: "https://furumachi-smec.lognowa.com/public/lp_1#plans",
   },
   aggregateRating: { "@type": "AggregateRating", ratingValue: "4.8", reviewCount: "26" },
 };
@@ -74,7 +74,7 @@ export const serviceSchema = {
   "@type": "Service",
   name: "伴走型AI経営顧問",
   serviceType: "AI経営支援",
-  url: "https://furumachi-smec.lognowa.com/public/lp",
+  url: "https://furumachi-smec.lognowa.com/public/lp_1",
   description:
     "週1回のAIレポートと管理会計・資金繰り支援で、決断までの時間を50%削減し、3ヶ月で利益とキャッシュの同時改善を実現する伴走型サービス",
   provider: {
@@ -179,7 +179,7 @@ export const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "ホーム", item: "https://furumachi-smec.lognowa.com/" },
-    { "@type": "ListItem", position: 2, name: "AI経営顧問", item: "https://furumachi-smec.lognowa.com/public/lp" },
+    { "@type": "ListItem", position: 2, name: "AI経営顧問", item: "https://furumachi-smec.lognowa.com/public/lp_1" },
   ],
 };
 
@@ -187,7 +187,7 @@ export const webPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   name: "福岡のAI経営顧問",
-  url: "https://furumachi-smec.lognowa.com/public/lp",
+  url: "https://furumachi-smec.lognowa.com/public/lp_1",
   description:
     "AIが経営数字を先読みし、社長は意思決定だけに集中できるようにする福岡発の伴走型AI経営顧問サービス",
   inLanguage: "ja-JP",
@@ -196,7 +196,7 @@ export const webPageSchema = {
     name: "株式会社創和経営コンサルティング",
     url: "https://furumachi-smec.lognowa.com/",
   },
-  primaryImageOfPage: "https://furumachi-smec.lognowa.com/public/lp/og-image.svg",
+  primaryImageOfPage: "https://furumachi-smec.lognowa.com/public/lp_1/og-image.svg",
   speakable: {
     "@type": "SpeakableSpecification",
     xpath: [
