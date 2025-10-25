@@ -5,8 +5,8 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // ✅ デプロイ先を /office/public/lp に固定
-  base: "/public/lp/",
+  // ✅ デプロイ先を /office/public/lp_1 に固定
+  base: "/public/lp_1/",
   
   server: {
     host: "::",
