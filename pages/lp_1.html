@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生成AIによる経営計画書策定支援サービス</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../styles/lp.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">AI経営計画書ラボ</div>
+        <nav class="header-nav">
+          <a href="#services">サービス特徴</a>
+          <a href="#simulator">AIシミュレーター</a>
+          <a href="#cases">成功事例</a>
+          <a href="#plans">料金プラン</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <p class="badge">生成AI活用の経営計画支援</p>
+            <h1>AIで最短1日。誰でもプロ並みの経営計画書を。</h1>
+            <p class="subtitle">
+              市場分析から財務予測まで、生成AIが貴社専用の経営計画書ドラフトを自動作成。専門家がレビューして完成度を高めます。
+            </p>
+            <a class="btn btn-accent" href="#consultation">無料でAI計画書を体験する</a>
+          </div>
+          <div class="hero-visual">
+            <img src="../public/placeholder.svg" alt="AI経営計画書のイメージ" />
+          </div>
+        </div>
+      </section>
+
+      <section id="services" class="services">
+        <div class="container">
+          <h2 class="section-title">サービスの4つの柱</h2>
+          <p class="section-lead">
+            生成AIと専門家のハイブリッドにより、経営計画書作成のスピードと精度を両立します。
+          </p>
+          <div class="service-grid">
+            <article class="service-card">
+              <div class="icon-circle"><i class="fa-solid fa-chart-pie"></i></div>
+              <h3>市場・競合分析の自動化</h3>
+              <p>AIが業界データと競合情報を収集・要約し、機会と脅威を一目で把握できます。</p>
+            </article>
+            <article class="service-card">
+              <div class="icon-circle"><i class="fa-solid fa-chart-line"></i></div>
+              <h3>売上・収支予測</h3>
+              <p>目標売上や投資額を入力すると、5年間の財務予測グラフと主要指標を生成します。</p>
+            </article>
+            <article class="service-card">
+              <div class="icon-circle"><i class="fa-solid fa-file-lines"></i></div>
+              <h3>文章生成とレポート作成</h3>
+              <p>AIが事業概要、戦略、リスク分析、資金計画を日本語でドラフト。説得力ある構成で提示します。</p>
+            </article>
+            <article class="service-card">
+              <div class="icon-circle"><i class="fa-solid fa-user-check"></i></div>
+              <h3>専門家レビューと修正</h3>
+              <p>コンサルタントがAIドラフトをチェックし、融資審査や投資家説明に耐える計画書へ仕上げます。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="simulator" class="simulator">
+        <div class="container">
+          <div class="simulator-header">
+            <h2 class="section-title">AI計画書シミュレーター</h2>
+            <p class="section-lead">
+              目標数値を入力するだけで、6か月後と1年後の売上・キャッシュフロー予測とAIが提案する章立てを確認できます。
+            </p>
+          </div>
+          <div class="simulator-content">
+            <form class="sim-form" id="simForm">
+              <div class="form-field">
+                <label for="goalRevenue">目標売上（年額・万円）</label>
+                <input type="number" id="goalRevenue" name="goalRevenue" min="0" value="5000" />
+              </div>
+              <div class="form-field">
+                <label for="initialInvestment">初期投資額（万円）</label>
+                <input type="number" id="initialInvestment" name="initialInvestment" min="0" value="800" />
+              </div>
+              <div class="form-field">
+                <label for="marketSize">想定市場規模（億円）</label>
+                <input type="number" id="marketSize" name="marketSize" min="0" step="0.1" value="120" />
+              </div>
+              <div class="form-field">
+                <label for="grossMargin">粗利率（%）</label>
+                <input type="number" id="grossMargin" name="grossMargin" min="0" max="100" value="45" />
+              </div>
+            </form>
+            <div class="sim-result">
+              <div class="chart-container">
+                <canvas id="projectionChart" aria-label="売上とキャッシュフロー予測"></canvas>
+              </div>
+              <div class="sim-summary">
+                <h3>AIが提案する章立て</h3>
+                <ul id="chapterList">
+                  <li>市場分析：業界トレンドと競合ポジショニング</li>
+                  <li>商品・サービス戦略：提供価値と差別化要素</li>
+                  <li>財務計画：売上・キャッシュフロー、投資回収計画</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cases" class="cases">
+        <div class="container">
+          <h2 class="section-title">AI計画書による資金調達成功事例</h2>
+          <div class="case-grid">
+            <article class="case-card">
+              <h3>製造業・年商18億円</h3>
+              <dl>
+                <dt>課題</dt>
+                <dd>金融機関に提出する計画書が手作業で時間がかかり、説得力に欠けていた。</dd>
+                <dt>AI活用</dt>
+                <dd>生成AIが市場分析と5年分の財務計画を作成し、専門家がレビュー。</dd>
+                <dt>成果</dt>
+                <dd>計画書作成期間を60%短縮し、銀行融資がスムーズに承認された。</dd>
+              </dl>
+            </article>
+            <article class="case-card">
+              <h3>ITサービス・年商4億円</h3>
+              <dl>
+                <dt>課題</dt>
+                <dd>VC向けピッチ資料と計画書の整合性が取れず、追加投資が保留になっていた。</dd>
+                <dt>AI活用</dt>
+                <dd>AIが顧客獲得モデルとARR予測を作成し、専門家が投資家目線で校閲。</dd>
+                <dt>成果</dt>
+                <dd>3週間かかっていた資料準備を1週間に短縮し、シリーズBで2億円を調達。</dd>
+              </dl>
+            </article>
+            <article class="case-card">
+              <h3>飲食チェーン・年商7億円</h3>
+              <dl>
+                <dt>課題</dt>
+                <dd>新店舗展開の資金計画が曖昧で、金融機関からの質問に即答できなかった。</dd>
+                <dt>AI活用</dt>
+                <dd>AIがエリア別需要予測とキャッシュフロー計画を提示し、専門家が改善提案。</dd>
+                <dt>成果</dt>
+                <dd>説得力ある計画書を1週間で提出し、5,000万円の融資枠を確保した。</dd>
+              </dl>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="plans" class="plans">
+        <div class="container">
+          <h2 class="section-title">料金プラン</h2>
+          <div class="plan-wrapper">
+            <div class="plan">
+              <h3>ライトプラン</h3>
+              <p class="price">月額8万円</p>
+              <table>
+                <tbody>
+                  <tr>
+                    <th>自動生成内容</th>
+                    <td>市場分析、ビジネスモデル、財務予測のドラフト</td>
+                  </tr>
+                  <tr>
+                    <th>専門家レビュー</th>
+                    <td>ドラフトチェック（簡易フィードバック）</td>
+                  </tr>
+                  <tr>
+                    <th>サポート範囲</th>
+                    <td>メール相談（48時間以内回答）</td>
+                  </tr>
+                  <tr>
+                    <th>納品形態</th>
+                    <td>AI生成レポート（PowerPoint／PDF）</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="plan plan-featured">
+              <h3>プロプラン</h3>
+              <p class="price">月額18万円</p>
+              <table>
+                <tbody>
+                  <tr>
+                    <th>自動生成内容</th>
+                    <td>詳細な市場分析、競合比較、5年財務モデル</td>
+                  </tr>
+                  <tr>
+                    <th>専門家レビュー</th>
+                    <td>コンサルタントによる校閲＆加筆、金融機関向け最終調整</td>
+                  </tr>
+                  <tr>
+                    <th>サポート範囲</th>
+                    <td>オンラインMTG（月2回）・金融機関連携サポート</td>
+                  </tr>
+                  <tr>
+                    <th>納品形態</th>
+                    <td>カスタムテンプレート、審査向け提出データ一式</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="faq">
+        <div class="container">
+          <h2 class="section-title">よくある質問</h2>
+          <div class="faq-list">
+            <article class="faq-item">
+              <h3>AIが作成した文章を自社用にカスタマイズできますか？</h3>
+              <p>はい。ドラフトは編集可能な形式で納品され、貴社の強みや表現に合わせた調整を行えます。プロプランでは専門家が貴社の用語や語調に合わせて整えます。</p>
+            </article>
+            <article class="faq-item">
+              <h3>どんなデータを準備すべきですか？</h3>
+              <p>直近の売上・原価・固定費、見込み顧客数、平均単価などの基本数値があれば十分です。ヒアリングシートで不足分を補いながらAIが推計します。</p>
+            </article>
+            <article class="faq-item">
+              <h3>金融機関への提出フォーマットにも対応していますか？</h3>
+              <p>はい。各金融機関のフォーマットに合わせた提出資料を作成します。プロプランでは提出前レビューとリハーサル支援も提供します。</p>
+            </article>
+            <article class="faq-item">
+              <h3>利用開始までの流れはどのようになりますか？</h3>
+              <p>お申し込み後、初回ヒアリングで目標を確認し、AIによるドラフト生成（最短1日）→専門家レビュー→最終納品の順で進行します。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="security">
+        <div class="container">
+          <h2 class="section-title">セキュリティとデータ保護</h2>
+          <p>
+            経営計画書データは国内リージョンの暗号化環境で保管し、プロジェクト終了後はご要望に応じて安全に削除します。当社のAIモデルは学習目的で顧客データを二次利用せず、アクセス権限も専任コンサルタントに限定しています。
+          </p>
+        </div>
+      </section>
+
+      <section id="consultation" class="consultation">
+        <div class="container">
+          <h2 class="section-title">無料相談はこちら</h2>
+          <p class="section-lead">サービス内容や導入スケジュールについて、お気軽にお問い合わせください。</p>
+          <form class="contact-form">
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="name">氏名</label>
+                <input type="text" id="name" name="name" placeholder="例）山田 太郎" required />
+              </div>
+              <div class="form-field">
+                <label for="company">会社名</label>
+                <input type="text" id="company" name="company" placeholder="例）株式会社サンプル" required />
+              </div>
+              <div class="form-field">
+                <label for="email">メールアドレス</label>
+                <input type="email" id="email" name="email" placeholder="example@company.jp" required />
+              </div>
+              <div class="form-field">
+                <label for="phone">電話番号</label>
+                <input type="tel" id="phone" name="phone" placeholder="090-1234-5678" required />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="message">相談内容</label>
+              <textarea id="message" name="message" rows="4" placeholder="導入目的やご相談内容をご記入ください"></textarea>
+            </div>
+            <button type="submit" class="btn btn-accent">無料相談を申し込む</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© 2024 AI経営計画書ラボ</p>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" integrity="sha512-y/JW6DC5VdrSltnhIpnTMn7tbpqsZOobPAlnFvJBNpb7TU/Ob5VyEOgG0C8LmFoWDSDyZNaC3r+rMZkxYtjBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../scripts/lp.js"></script>
+  </body>
+</html>
