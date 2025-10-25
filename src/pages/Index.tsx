@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
 import "../../styles/lp.css";
 
@@ -34,7 +34,20 @@ type JourneyStep = {
   duration: string;
   timeSaved: string;
   description: string;
+  aiRole: string;
+  executiveRole: string;
 };
+
+type HeroMetric = {
+  label: string;
+  note: string;
+  prefix?: string;
+  suffix?: string;
+  target: number;
+  decimals?: number;
+};
+
+const easeOutCubic = (progress: number) => 1 - Math.pow(1 - progress, 3);
 
 const DEFAULT_FORM_DATA: SimulationFormData = {
   goalRevenue: 9600,
@@ -168,45 +181,79 @@ const capabilityTabs: CapabilityTab[] = [
   },
 ];
 
+const heroMetrics: HeroMetric[] = [
+  {
+    label: "計画書作成期間",
+    note: "準備期間を短縮",
+    prefix: "-",
+    suffix: "%",
+    target: 60,
+  },
+  {
+    label: "資金調達成功率",
+    note: "導入企業平均",
+    suffix: "×",
+    target: 2,
+    decimals: 1,
+  },
+  {
+    label: "経営会議準備時間",
+    note: "意思決定に充てられる時間",
+    prefix: "-",
+    suffix: "h",
+    target: 40,
+  },
+];
+
+const TIME_SAVED_TARGET = 15420;
+
 const journeySteps: JourneyStep[] = [
   {
     title: "課題ヒアリング",
     duration: "オンライン30分",
     timeSaved: "資料準備0時間",
     description: "事前アンケートと既存資料を共有いただくだけ。会議までに考えるべき論点をAIが整理します。",
+    aiRole: "ヒアリング内容を分析し、事業課題と外部環境のギャップをリスト化。",
+    executiveRole: "優先順位を指示し、意思決定期限と期待成果を定義。",
   },
   {
     title: "AIドラフト生成",
     duration: "最短1日",
     timeSaved: "分析時間-20時間",
     description: "市場データの取り込みから財務シミュレーション、文章ドラフトまで自動生成します。",
+    aiRole: "政策・市場データを自動収集し、財務モデルと章立てドラフトを提示。",
+    executiveRole: "提示されたシナリオを確認し、採用するストーリーの方向性を決定。",
   },
   {
     title: "専門家レビュー",
     duration: "2〜3営業日",
     timeSaved: "修正作業-12時間",
     description: "金融機関視点で裏付けをチェックし、リスクと対応策を補強。想定質問と答えも準備します。",
+    aiRole: "AIが算出したリスク指標と差分をリスト化し、修正候補を提示。",
+    executiveRole: "専門家の提案を踏まえ、採用する施策と意思決定スケジュールを確定。",
   },
   {
     title: "経営会議・提出",
     duration: "会議前に共有",
     timeSaved: "判断時間+15時間",
     description: "会議用サマリーと複数シナリオを提示。外部環境が変わってもその場で差し替え可能です。",
+    aiRole: "会議直前まで外部環境の変動を監視し、差分アラートを通知。",
+    executiveRole: "最終判断と次のアクションを確定し、組織に共有。",
   },
 ];
 
 const heroBenefits = [
   {
-    title: "意思決定の時間を確保",
-    description: "AIが資料づくりを担うので、経営者は考える時間に集中できます。",
+    title: "AIが右腕として分析",
+    description: "市場・政策・競合データを毎朝キャッチし、判断に使うべき要点だけを整理します。",
   },
   {
-    title: "外部環境を先に把握",
-    description: "政策や競合の変化を自動通知。会議前にシナリオを差し替えられます。",
+    title: "経営者が最終判断",
+    description: "財務シミュレーションやドラフトはAIが提示。意思決定は経営者が責任を持って選択できます。",
   },
   {
-    title: "信頼できる裏付け",
-    description: "専門家がレビューし、金融機関や投資家にも説明しやすい根拠を整理します。",
+    title: "専門家が裏付けと伴走",
+    description: "中小企業診断士・財務のプロがレビューし、説得力と実行確度を高めます。",
   },
 ];
 
@@ -343,6 +390,24 @@ const planData = [
   },
 ];
 
+const expertProfiles = [
+  {
+    name: "加藤 真司",
+    title: "中小企業診断士 / 元メガバンク審査部",
+    expertise: "資金調達支援とモニタリングの専門家。AIが生成した財務ドラフトに金融機関視点で裏付けを加えます。",
+  },
+  {
+    name: "佐藤 里奈",
+    title: "財務アナリスト / CFA",
+    expertise: "複数事業のキャッシュフロー設計を担当。感度分析や投資判断の整合性をレビューします。",
+  },
+  {
+    name: "大森 拓",
+    title: "事業戦略コンサルタント",
+    expertise: "成長戦略と組織設計に強み。AIドラフトのストーリーを業界知見で磨き上げ、実行計画を整理します。",
+  },
+];
+
 const formatNumber = (value: number) => Math.round(value).toLocaleString("ja-JP");
 
 const formatDecimal = (value: number) => (Number.isInteger(value) ? value.toString() : value.toFixed(1));
@@ -360,6 +425,130 @@ const Index = () => {
   const [selectedScenario, setSelectedScenario] = useState<RadarScenarioKey>("baseline");
   const [activeCapabilityId, setActiveCapabilityId] = useState<string>(capabilityTabs[0].id);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+  const [heroMetricValues, setHeroMetricValues] = useState<number[]>(heroMetrics.map(() => 0));
+  const [timeSavedValue, setTimeSavedValue] = useState(0);
+  const heroMetricsRef = useRef<HTMLDListElement | null>(null);
+  const timeCounterRef = useRef<HTMLDivElement | null>(null);
+  const [activeStoryIndex, setActiveStoryIndex] = useState(0);
+
+  useEffect(() => {
+    const metricContainer = heroMetricsRef.current;
+    if (!metricContainer) {
+      return;
+    }
+
+    let animationFrameId: number;
+    let hasPlayed = false;
+
+    const animateMetrics = () => {
+      const startTime = performance.now();
+      const duration = 1800;
+
+      const step = (timestamp: number) => {
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const eased = easeOutCubic(progress);
+        setHeroMetricValues(heroMetrics.map((metric) => metric.target * eased));
+        if (progress < 1) {
+          animationFrameId = requestAnimationFrame(step);
+        }
+      };
+
+      animationFrameId = requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (hasPlayed) {
+          return;
+        }
+        if (entries.some((entry) => entry.isIntersecting)) {
+          hasPlayed = true;
+          animateMetrics();
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(metricContainer);
+
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  useEffect(() => {
+    const counterElement = timeCounterRef.current;
+    if (!counterElement) {
+      return;
+    }
+
+    let animationFrameId: number;
+    let hasPlayed = false;
+    const target = TIME_SAVED_TARGET;
+
+    const animateCounter = () => {
+      const startTime = performance.now();
+      const duration = 2200;
+
+      const step = (timestamp: number) => {
+        const progress = Math.min((timestamp - startTime) / duration, 1);
+        const eased = easeOutCubic(progress);
+        setTimeSavedValue(target * eased);
+        if (progress < 1) {
+          animationFrameId = requestAnimationFrame(step);
+        }
+      };
+
+      animationFrameId = requestAnimationFrame(step);
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (hasPlayed) {
+          return;
+        }
+        if (entries.some((entry) => entry.isIntersecting)) {
+          hasPlayed = true;
+          animateCounter();
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(counterElement);
+
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      setActiveStoryIndex((prev) => (prev + 1) % successStories.length);
+    }, 8000);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  const formatHeroMetricValue = (metric: HeroMetric, value: number) => {
+    const decimals = metric.decimals ?? 0;
+    const rounded = decimals > 0 ? value.toFixed(decimals) : Math.round(value).toString();
+    return `${metric.prefix ?? ""}${rounded}${metric.suffix ?? ""}`;
+  };
+
+  const handlePrevStory = () => {
+    setActiveStoryIndex((prev) => (prev - 1 + successStories.length) % successStories.length);
+  };
+
+  const handleNextStory = () => {
+    setActiveStoryIndex((prev) => (prev + 1) % successStories.length);
+  };
+
+  const handleSelectStory = (index: number) => {
+    setActiveStoryIndex(index);
+  };
 
   const {
     sixMonthRevenue,
@@ -520,6 +709,8 @@ const Index = () => {
       .join(" ");
   };
 
+  const activeStory = successStories[activeStoryIndex];
+
   return (
     <div className="lp-root">
       <header className="site-header">
@@ -548,13 +739,13 @@ const Index = () => {
         <section className="hero reveal-on-scroll" id="hero">
           <div className="container hero-inner">
             <div className="hero-copy">
-              <p className="badge">中小企業のためのAI経営計画</p>
-              <h1>迷わず決断する時間を、AIがつくる。</h1>
+              <p className="badge">AIは経営者の右腕</p>
+              <h1>AIがあなたの意思決定時間を創出し、経営者の判断を後押しします。</h1>
               <p className="hero-subtitle">
-                外部環境の変化をAIが読み取り、最短1日で意思決定に使える経営計画書をお届けします。
+                生成AIが外部環境を常時モニタリングし、市場インサイト・財務シミュレーション・資料ドラフトを整備。最終判断は経営者が行い、私たちは判断材料をそろえます。
               </p>
               <p className="subtitle">
-                市場データ、資金繰りの予測、計画書の文章までをAIが下書き。専門家が裏付けを整えて、金融機関や投資家にも伝わる形で仕上げます。
+                日本中小企業診断士協会の報告書が示す通り、生成AIは経営者の判断を補完するツールです。情報の正確性を専門家がチェックし、東京商工会議所のガイドラインに沿って「AIに依存し過ぎない」運用を徹底しています。
               </p>
               <div className="hero-benefits">
                 {heroBenefits.map((benefit) => (
@@ -572,29 +763,30 @@ const Index = () => {
                   予測シミュレーションを見る
                 </a>
               </div>
-              <dl className="hero-metrics" aria-label="サービス導入後の成果">
-                <div>
-                  <dt>計画書作成期間</dt>
-                  <dd>
-                    <span className="metric-value">-60%</span>
-                    <span className="metric-note">準備期間を短縮</span>
-                  </dd>
-                </div>
-                <div>
-                  <dt>資金調達成功率</dt>
-                  <dd>
-                    <span className="metric-value">2.0×</span>
-                    <span className="metric-note">導入企業平均</span>
-                  </dd>
-                </div>
-                <div>
-                  <dt>経営会議準備時間</dt>
-                  <dd>
-                    <span className="metric-value">-40h</span>
-                    <span className="metric-note">意思決定に充てられる時間</span>
-                  </dd>
-                </div>
+              <div className="hero-time-counter" ref={timeCounterRef} aria-live="polite">
+                <span className="hero-time-counter__label">累計で創出した意思決定時間</span>
+                <strong className="hero-time-counter__value">{formatNumber(timeSavedValue)} 時間</strong>
+                <span className="hero-time-counter__note">AIが分析・提案 / 経営者が最終判断することで生まれた時間</span>
+              </div>
+              <dl className="hero-metrics" aria-label="サービス導入後の成果" ref={heroMetricsRef}>
+                {heroMetrics.map((metric, index) => (
+                  <div key={metric.label}>
+                    <dt>{metric.label}</dt>
+                    <dd>
+                      <span className="metric-value">{formatHeroMetricValue(metric, heroMetricValues[index])}</span>
+                      <span className="metric-note">{metric.note}</span>
+                    </dd>
+                  </div>
+                ))}
               </dl>
+              <div className="hero-security" role="note">
+                <span className="hero-security__title">セキュリティ概要</span>
+                <ul>
+                  <li>AES-256 による通信・保存の暗号化</li>
+                  <li>ISO/IEC 27001 取得と外部監査を実施</li>
+                  <li>プロジェクト終了後はリクエストに応じてデータ削除</li>
+                </ul>
+              </div>
             </div>
             <div className="hero-visual" aria-label="AIが経営計画書を生成する動画デモ">
               <div className="hero-video-frame">
@@ -610,7 +802,7 @@ const Index = () => {
                   AIが計画書を生成するデモ動画
                 </video>
                 <div className="hero-video-overlay">
-                  <span>AIが市場分析→財務予測→レポート生成まで自動化</span>
+                  <span>AIが市場分析→財務予測→レポート生成を支援 / 最終判断はあなたの手で</span>
                 </div>
               </div>
               <div className="hero-video-caption">
@@ -625,9 +817,9 @@ const Index = () => {
         <section className="journey reveal-on-scroll" id="journey">
           <div className="container">
             <div className="section-heading">
-              <h2 className="section-title">AIと専門家が経営者の時間を取り戻す流れ</h2>
+              <h2 className="section-title">AIが分析・提案 → 経営者が意思決定するまでのタイムライン</h2>
               <p className="section-lead">
-                最初のヒアリングから意思決定の瞬間まで。生成AIが外部環境を先に捉え、専門家が確度を高めることで、考える時間と行動のスピードを両立します。
+                ステップごとにAIと経営者の役割を併記し、「AIが行うこと」「経営者が行うこと」を明確化。判断すべき論点に集中するための伴走設計です。
               </p>
             </div>
             <div className="journey-steps">
@@ -638,8 +830,26 @@ const Index = () => {
                   <p className="journey-duration">{step.duration}</p>
                   <p className="journey-timesaved">{step.timeSaved}</p>
                   <p>{step.description}</p>
+                  <div className="journey-roles">
+                    <div className="journey-role journey-role--ai">
+                      <h4>AIが行うこと</h4>
+                      <p>{step.aiRole}</p>
+                    </div>
+                    <div className="journey-role journey-role--executive">
+                      <h4>経営者が行うこと</h4>
+                      <p>{step.executiveRole}</p>
+                    </div>
+                  </div>
                 </article>
               ))}
+            </div>
+            <div className="section-cta">
+              <a className="btn btn-accent" href="#demo">
+                タイムラインの詳細資料を請求
+              </a>
+              <a className="btn btn-outline" href="#consultation">
+                無料相談で導入スケジュールを確認
+              </a>
             </div>
           </div>
         </section>
@@ -647,33 +857,56 @@ const Index = () => {
         <section className="pain reveal-on-scroll" id="pain">
           <div className="container">
             <div className="section-heading">
-              <h2 className="section-title">中小企業の経営者が抱える3つの壁</h2>
+              <h2 className="section-title">経営者が共感する3つの課題と、AI×専門家の解決策</h2>
               <p className="section-lead">
-                外部環境の変化に追われるほど、経営者の時間は削られ、意思決定の質が下がってしまいます。生成AIと専門家の伴走で、その壁を突破します。
+                外部環境の変化に追われるほど意思決定の時間が不足します。AIが情報を集め・整理し、経営者は判断に集中することで、日本中小企業診断士協会が推奨する「AIは判断を補完する右腕」というスタンスを実現します。
               </p>
             </div>
             <div className="pain-grid">
               <article className="pain-card">
                 <h3>01. 情報過多で判断が追いつかない</h3>
                 <p>
-                  毎日のニュースや競合の動きが多すぎて、整理だけで会議の時間が来てしまう。
+                  ニュース・政策・競合の更新頻度が高く、整理するだけで半日が終わってしまう。
                 </p>
-                <p className="pain-solution">→ 生成AIが一次情報を自動収集・要約し、見るべき指標だけを可視化。</p>
+                <div className="pain-solution">
+                  <strong>AIが行うこと</strong>
+                  <p>72種類のデータを自動収集・要約し、優先度付きのアラートを表示。</p>
+                  <strong>経営者が行うこと</strong>
+                  <p>重要度の高い論点に集中し、意思決定の順番を指示。</p>
+                </div>
               </article>
               <article className="pain-card">
                 <h3>02. 数字の裏付けと文章づくりに時間を奪われる</h3>
                 <p>
-                  エクセルとスライドを行き来して整合性をとるうちに、肝心な判断の時間がなくなる。
+                  スプレッドシートと資料を行き来しながら整合性を取る作業に追われ、判断の時間が不足する。
                 </p>
-                <p className="pain-solution">→ AIが財務シミュレーションから文章ドラフトまで一気通貫で生成。</p>
+                <div className="pain-solution">
+                  <strong>AIが行うこと</strong>
+                  <p>財務シミュレーションとドラフトを同時生成し、差分を自動ハイライト。</p>
+                  <strong>経営者が行うこと</strong>
+                  <p>AIが提示したシナリオから採用案を選び、判断理由を言語化。</p>
+                </div>
               </article>
               <article className="pain-card">
                 <h3>03. 最新の外部環境を反映した更新ができない</h3>
                 <p>
-                  金融機関や投資家からの質問にすぐ答えられず、判断のタイミングを逃してしまう。
+                  金融機関や投資家からの質問対応に追われ、次の一手を考える余力が残らない。
                 </p>
-                <p className="pain-solution">→ ダッシュボードでシナリオを切り替え、専門家が24時間以内にレビューを返答。</p>
+                <div className="pain-solution">
+                  <strong>AIが行うこと</strong>
+                  <p>外部データの変化点を自動で差し替え、想定問答をアップデート。</p>
+                  <strong>経営者が行うこと</strong>
+                  <p>最終判断とアクションを決め、専門家と実行計画を共有。</p>
+                </div>
               </article>
+            </div>
+            <div className="section-cta">
+              <a className="btn btn-accent" href="#consultation">
+                あなたの課題に合わせた活用方法を相談
+              </a>
+              <a className="btn btn-outline" href="#simulator">
+                まずはAIシミュレーターを試す
+              </a>
             </div>
           </div>
         </section>
@@ -808,6 +1041,53 @@ const Index = () => {
                   <li>専門家コメントと連動し、次の打ち手を明確化</li>
                 </ul>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="partnership reveal-on-scroll" id="partnership">
+          <div className="container">
+            <div className="section-heading">
+              <h2 className="section-title">専門家とAIの協働で、最終判断は経営者が握る</h2>
+              <p className="section-lead">
+                東京商工会議所のガイドラインが指摘するように、生成AIは経営判断を支援するツールです。AIが提示したアウトプットを専門家がレビューし、経営者が自信を持って意思決定できる状態をつくります。
+              </p>
+            </div>
+            <div className="partnership-grid">
+              <article className="partnership-card">
+                <h3>AIドラフトを専門家が磨くプロセス</h3>
+                <ul>
+                  <li>AIが作成した章構成に、業界の成功事例やリスク視点を追加。</li>
+                  <li>財務シミュレーションの前提を金融機関基準でダブルチェック。</li>
+                  <li>経営会議・提出用の想定問答やエグゼクティブサマリーを共同編集。</li>
+                </ul>
+              </article>
+              <article className="partnership-card">
+                <h3>経営者が確認する判断チェックリスト</h3>
+                <ul>
+                  <li>AIが分析した外部環境の妥当性と一次情報の引用元。</li>
+                  <li>複数シナリオのリスク／リターンと判断期限。</li>
+                  <li>実行に向けた社内アクションと責任者の割り当て。</li>
+                </ul>
+                <p className="partnership-note">※ 最終判断は経営者が行い、AIは「新しい視点や解決策を提示するパートナー」（日本中小企業診断士協会報告書より）として活用します。</p>
+              </article>
+            </div>
+            <div className="expert-profiles">
+              {expertProfiles.map((expert) => (
+                <article className="expert-card" key={expert.name}>
+                  <h3>{expert.name}</h3>
+                  <p className="expert-title">{expert.title}</p>
+                  <p className="expert-expertise">{expert.expertise}</p>
+                </article>
+              ))}
+            </div>
+            <div className="section-cta">
+              <a className="btn btn-accent" href="#consultation">
+                専門家レビューの具体例を相談
+              </a>
+              <a className="btn btn-outline" href="#demo">
+                AIと専門家の連携デモを見る
+              </a>
             </div>
           </div>
         </section>
@@ -986,6 +1266,14 @@ const Index = () => {
                 </article>
               ))}
             </div>
+            <div className="section-cta">
+              <a className="btn btn-accent" href="#consultation">
+                伴走プロセスの詳細を無料相談で確認
+              </a>
+              <a className="btn btn-outline" href="#demo">
+                ワークフローのデモ動画を見る
+              </a>
+            </div>
           </div>
         </section>
 
@@ -994,43 +1282,64 @@ const Index = () => {
             <div className="section-heading">
               <h2 className="section-title">成功事例と成果のビフォー／アフター</h2>
               <p className="section-lead">
-                生成AIと専門家レビューによる具体的な成果を、定量データと経営者の声でご紹介します。
+                生成AIが分析し、専門家がレビューした成果をカルーセル形式でご紹介。各社の経営者がどのように時間を創出し、判断の質を高めたのかを確認できます。
               </p>
             </div>
-            <div className="case-grid">
-              {successStories.map((story) => (
-                <article className="case-card" key={story.industry}>
-                  <header>
-                    <h3>{story.industry}</h3>
-                    <p className="case-challenge">課題：{story.challenge}</p>
-                  </header>
-                  <p className="case-result">{story.result}</p>
-                  <div className="case-compare">
-                    {story.metrics.map((metric) => {
-                      const maxValue = Math.max(metric.before, metric.after, 1);
-                      const beforeWidth = Math.min(Math.max((metric.before / maxValue) * 100, 8), 100);
-                      const afterWidth = Math.min(Math.max((metric.after / maxValue) * 100, 8), 100);
-                      return (
-                        <div className="case-compare__item" key={metric.label}>
-                          <div className="case-compare__header">{metric.label}</div>
-                          <div className="case-compare__bars">
-                            <div className="case-bar case-bar--before" style={{ width: `${beforeWidth}%` }}>
-                              <span className="case-bar__label">導入前 {formatDecimal(metric.before)}{metric.unit}</span>
-                            </div>
-                            <div className="case-bar case-bar--after" style={{ width: `${afterWidth}%` }}>
-                              <span className="case-bar__label">導入後 {formatDecimal(metric.after)}{metric.unit}</span>
-                            </div>
+            <div className="case-carousel" role="region" aria-live="polite">
+              <article className="case-card is-active" key={activeStory.industry}>
+                <header>
+                  <h3>{activeStory.industry}</h3>
+                  <p className="case-challenge">課題：{activeStory.challenge}</p>
+                </header>
+                <p className="case-result">{activeStory.result}</p>
+                <div className="case-compare">
+                  {activeStory.metrics.map((metric) => {
+                    const maxValue = Math.max(metric.before, metric.after, 1);
+                    const beforeWidth = Math.min(Math.max((metric.before / maxValue) * 100, 8), 100);
+                    const afterWidth = Math.min(Math.max((metric.after / maxValue) * 100, 8), 100);
+                    return (
+                      <div className="case-compare__item" key={metric.label}>
+                        <div className="case-compare__header">{metric.label}</div>
+                        <div className="case-compare__bars">
+                          <div className="case-bar case-bar--before" style={{ width: `${beforeWidth}%` }}>
+                            <span className="case-bar__label">導入前 {formatDecimal(metric.before)}{metric.unit}</span>
+                          </div>
+                          <div className="case-bar case-bar--after" style={{ width: `${afterWidth}%` }}>
+                            <span className="case-bar__label">導入後 {formatDecimal(metric.after)}{metric.unit}</span>
                           </div>
                         </div>
-                      );
-                    })}
-                  </div>
-                  <blockquote>
-                    <p>{story.quote}</p>
-                    <cite>{story.person}</cite>
-                  </blockquote>
-                </article>
-              ))}
+                      </div>
+                    );
+                  })}
+                </div>
+                <blockquote>
+                  <p>{activeStory.quote}</p>
+                  <cite>{activeStory.person}</cite>
+                </blockquote>
+              </article>
+            </div>
+            <div className="case-controls" aria-label="事例の切り替え">
+              <button type="button" className="case-nav case-nav--prev" onClick={handlePrevStory} aria-label="前の事例へ">
+                ←
+              </button>
+              <div className="case-dots">
+                {successStories.map((story, index) => {
+                  const isActive = index === activeStoryIndex;
+                  return (
+                    <button
+                      key={story.industry}
+                      className={isActive ? "case-dot is-active" : "case-dot"}
+                      type="button"
+                      aria-label={`${story.industry}の事例を表示`}
+                      aria-pressed={isActive}
+                      onClick={() => handleSelectStory(index)}
+                    />
+                  );
+                })}
+              </div>
+              <button type="button" className="case-nav case-nav--next" onClick={handleNextStory} aria-label="次の事例へ">
+                →
+              </button>
             </div>
           </div>
         </section>
