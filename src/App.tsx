@@ -8,13 +8,37 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+const resolveBasename = () => {
+  const rawBase = import.meta.env.VITE_BASE_PATH ?? import.meta.env.BASE_URL ?? "/";
+
+  if (!rawBase || rawBase === "/" || rawBase === "." || rawBase === "./") {
+    return "/";
+  }
+
+  if (typeof window === "undefined") {
+    const normalised = rawBase.startsWith("/") ? rawBase : `/${rawBase}`;
+    return normalised.replace(/\/+$/, "");
+  }
+
+  try {
+    const url = new URL(rawBase, window.location.origin);
+    const pathname = url.pathname.replace(/\/+$/, "");
+    return pathname === "" ? "/" : pathname;
+  } catch (error) {
+    const normalised = rawBase.startsWith("/") ? rawBase : `/${rawBase}`;
+    return normalised.replace(/\/+$/, "");
+  }
+};
+
+const routerBasename = resolveBasename();
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      
-        <BrowserRouter>
+
+        <BrowserRouter basename={routerBasename}>
         <Routes>
           {/* /index.html 直打ち対策 */}
           <Route path="/index.html" element={<Navigate to="/" replace />} />
