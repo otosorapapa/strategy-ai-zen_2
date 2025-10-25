@@ -42,11 +42,13 @@ jobs:
           REMOTE_PATH_CLEAN=$(printf '%s' "$WP_REMOTE_PATH" | tr -d '\r\n')
           SSH_OPTIONS="-p 2222 -o StrictHostKeyChecking=no -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"
           PARENT_PATH=$(dirname "$REMOTE_PATH_CLEAN")
+          REMOTE_PATH_ESCAPED=$(printf '%q' "$REMOTE_PATH_CLEAN")
+          PARENT_PATH_ESCAPED=$(printf '%q' "$PARENT_PATH")
           sshpass -p "$PASS_CLEAN" ssh $SSH_OPTIONS "$USER_CLEAN@$HOST_CLEAN" "
-            mkdir -p $REMOTE_PATH_CLEAN &&
-            echo 'RewriteEngine Off' > $PARENT_PATH/.htaccess &&
-            echo 'RewriteEngine Off' > $REMOTE_PATH_CLEAN/.htaccess &&
-            chmod 644 $PARENT_PATH/.htaccess $REMOTE_PATH_CLEAN/.htaccess
+            mkdir -p $REMOTE_PATH_ESCAPED &&
+            echo 'RewriteEngine Off' > $PARENT_PATH_ESCAPED/.htaccess &&
+            echo 'RewriteEngine Off' > $REMOTE_PATH_ESCAPED/.htaccess &&
+            chmod 644 $PARENT_PATH_ESCAPED/.htaccess $REMOTE_PATH_ESCAPED/.htaccess
           "
 
       - name: Rsync Deploy
@@ -61,9 +63,10 @@ jobs:
           USER_CLEAN=$(printf '%s' "$WP_USER" | tr -d '\r\n')
           REMOTE_PATH_CLEAN=$(printf '%s' "$WP_REMOTE_PATH" | tr -d '\r\n')
           SSH_OPTIONS="-p 2222 -o StrictHostKeyChecking=no -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"
+          REMOTE_PATH_ESCAPED=$(printf '%q' "$REMOTE_PATH_CLEAN")
           sshpass -p "$PASS_CLEAN" rsync -avz --delete \
             -e "ssh $SSH_OPTIONS" \
-            dist/ "$USER_CLEAN@$HOST_CLEAN:$REMOTE_PATH_CLEAN/"
+            dist/ "$USER_CLEAN@$HOST_CLEAN:$REMOTE_PATH_ESCAPED/"
 
       - name: Show remote listing
         env:
@@ -77,8 +80,9 @@ jobs:
           USER_CLEAN=$(printf '%s' "$WP_USER" | tr -d '\r\n')
           REMOTE_PATH_CLEAN=$(printf '%s' "$WP_REMOTE_PATH" | tr -d '\r\n')
           SSH_OPTIONS="-p 2222 -o StrictHostKeyChecking=no -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"
+          REMOTE_PATH_ESCAPED=$(printf '%q' "$REMOTE_PATH_CLEAN")
           sshpass -p "$PASS_CLEAN" ssh $SSH_OPTIONS "$USER_CLEAN@$HOST_CLEAN" "
-            ls -la $REMOTE_PATH_CLEAN &&
+            ls -la $REMOTE_PATH_ESCAPED &&
             echo '== assets ==' &&
-            ls -la $REMOTE_PATH_CLEAN/assets || true
+            ls -la $REMOTE_PATH_ESCAPED/assets || true
           "
