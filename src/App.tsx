@@ -20,6 +20,8 @@ const App = () => (
           <Route path="/index.html" element={<Navigate to="/" replace />} />
           {/* /public/lp リダイレクト対策 */}
           <Route path="/public/lp" element={<Navigate to="/" replace />} />
+          {/* /office/?page_id=2877 での直接アクセスに対応 */}
+          <Route path="/office/*" element={<Index />} />
 
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
