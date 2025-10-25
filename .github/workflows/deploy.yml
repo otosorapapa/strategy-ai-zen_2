@@ -37,13 +37,16 @@ jobs:
           WP_REMOTE_PATH: ${{ secrets.WP_REMOTE_PATH }}
         run: |
           PASS_CLEAN=$(printf '%s' "$WP_SSH_PASS" | tr -d '\r\n')
+          HOST_CLEAN=$(printf '%s' "$WP_HOST" | tr -d '\r\n')
+          USER_CLEAN=$(printf '%s' "$WP_USER" | tr -d '\r\n')
+          REMOTE_PATH_CLEAN=$(printf '%s' "$WP_REMOTE_PATH" | tr -d '\r\n')
           SSH_OPTIONS="-p 2222 -o StrictHostKeyChecking=no -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"
-          PARENT_PATH=$(dirname "$WP_REMOTE_PATH")
-          sshpass -p "$PASS_CLEAN" ssh $SSH_OPTIONS "$WP_USER@$WP_HOST" "
-            mkdir -p $WP_REMOTE_PATH &&
+          PARENT_PATH=$(dirname "$REMOTE_PATH_CLEAN")
+          sshpass -p "$PASS_CLEAN" ssh $SSH_OPTIONS "$USER_CLEAN@$HOST_CLEAN" "
+            mkdir -p $REMOTE_PATH_CLEAN &&
             echo 'RewriteEngine Off' > $PARENT_PATH/.htaccess &&
-            echo 'RewriteEngine Off' > $WP_REMOTE_PATH/.htaccess &&
-            chmod 644 $PARENT_PATH/.htaccess $WP_REMOTE_PATH/.htaccess
+            echo 'RewriteEngine Off' > $REMOTE_PATH_CLEAN/.htaccess &&
+            chmod 644 $PARENT_PATH/.htaccess $REMOTE_PATH_CLEAN/.htaccess
           "
 
       - name: Rsync Deploy
@@ -54,10 +57,13 @@ jobs:
           WP_REMOTE_PATH: ${{ secrets.WP_REMOTE_PATH }}
         run: |
           PASS_CLEAN=$(printf '%s' "$WP_SSH_PASS" | tr -d '\r\n')
+          HOST_CLEAN=$(printf '%s' "$WP_HOST" | tr -d '\r\n')
+          USER_CLEAN=$(printf '%s' "$WP_USER" | tr -d '\r\n')
+          REMOTE_PATH_CLEAN=$(printf '%s' "$WP_REMOTE_PATH" | tr -d '\r\n')
           SSH_OPTIONS="-p 2222 -o StrictHostKeyChecking=no -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"
           sshpass -p "$PASS_CLEAN" rsync -avz --delete \
             -e "ssh $SSH_OPTIONS" \
-            dist/ "$WP_USER@$WP_HOST:$WP_REMOTE_PATH/"
+            dist/ "$USER_CLEAN@$HOST_CLEAN:$REMOTE_PATH_CLEAN/"
 
       - name: Show remote listing
         env:
@@ -67,9 +73,12 @@ jobs:
           WP_REMOTE_PATH: ${{ secrets.WP_REMOTE_PATH }}
         run: |
           PASS_CLEAN=$(printf '%s' "$WP_SSH_PASS" | tr -d '\r\n')
+          HOST_CLEAN=$(printf '%s' "$WP_HOST" | tr -d '\r\n')
+          USER_CLEAN=$(printf '%s' "$WP_USER" | tr -d '\r\n')
+          REMOTE_PATH_CLEAN=$(printf '%s' "$WP_REMOTE_PATH" | tr -d '\r\n')
           SSH_OPTIONS="-p 2222 -o StrictHostKeyChecking=no -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedAlgorithms=+ssh-rsa"
-          sshpass -p "$PASS_CLEAN" ssh $SSH_OPTIONS "$WP_USER@$WP_HOST" "
-            ls -la $WP_REMOTE_PATH &&
+          sshpass -p "$PASS_CLEAN" ssh $SSH_OPTIONS "$USER_CLEAN@$HOST_CLEAN" "
+            ls -la $REMOTE_PATH_CLEAN &&
             echo '== assets ==' &&
-            ls -la $WP_REMOTE_PATH/assets || true
+            ls -la $REMOTE_PATH_CLEAN/assets || true
           "
