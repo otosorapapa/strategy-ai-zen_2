@@ -1,8 +1,9 @@
-import { ChangeEvent, FormEvent, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useMemo, useState } from "react";
 
 import "../../styles/lp.css";
 
-const PLACEHOLDER_IMAGE = `${import.meta.env.BASE_URL}placeholder.svg`;
+const HERO_VIDEO = "https://storage.googleapis.com/coverr-main/mp4/Mt_Baker.mp4";
+const PLACEHOLDER_POSTER = `${import.meta.env.BASE_URL}placeholder.svg`;
 
 type SimulationFormData = {
   goalRevenue: number;
@@ -11,12 +12,173 @@ type SimulationFormData = {
   grossMargin: number;
 };
 
-const DEFAULT_FORM_DATA: SimulationFormData = {
-  goalRevenue: 5000,
-  initialInvestment: 800,
-  marketSize: 120,
-  grossMargin: 45,
+type RadarScenarioKey = "baseline" | "expansion" | "turnaround";
+
+type FaqItem = {
+  question: string;
+  answer: string;
 };
+
+const DEFAULT_FORM_DATA: SimulationFormData = {
+  goalRevenue: 9600,
+  initialInvestment: 1200,
+  marketSize: 180,
+  grossMargin: 48,
+};
+
+const radarCategories = ["顧客理解", "商品力", "販売力", "財務健全性", "デジタル化", "スピード"] as const;
+
+const radarScenarios: Record<
+  RadarScenarioKey,
+  {
+    label: string;
+    description: string;
+    our: number[];
+    competitor: number[];
+  }
+> = {
+  baseline: {
+    label: "既存事業の深堀り",
+    description:
+      "直近1年分の市場データと顧客インサイトから、既存事業の伸びしろとリスクをAIが可視化します。",
+    our: [4.3, 3.9, 3.6, 4.6, 3.8, 4.1],
+    competitor: [3.2, 3.5, 3.1, 3.7, 3.0, 3.2],
+  },
+  expansion: {
+    label: "新規事業のテスト",
+    description:
+      "新サービス案と競合比較をレーダーチャートで俯瞰。需要ポテンシャルと投資優先度が瞬時にわかります。",
+    our: [3.8, 4.5, 3.9, 4.0, 4.6, 4.8],
+    competitor: [2.9, 3.6, 3.2, 3.4, 3.1, 3.8],
+  },
+  turnaround: {
+    label: "収益改善シナリオ",
+    description:
+      "原価・在庫データを反映した収益改善シナリオを自動生成。改善インパクトが数値で確認できます。",
+    our: [4.1, 3.7, 4.6, 4.8, 3.9, 4.5],
+    competitor: [3.0, 3.1, 3.6, 3.8, 2.9, 3.3],
+  },
+};
+
+const faqItems: FaqItem[] = [
+  {
+    question: "生成AIがどこまで作成し、どこから専門家が関わりますか？",
+    answer:
+      "市場データ収集、外部環境分析、財務シミュレーション、文章ドラフトの初稿までは生成AIが自動化します。その上で、コンサルタントが融資・投資家視点でレビューし、用語統一や説得力の高いストーリーを仕上げます。",
+  },
+  {
+    question: "自社の機密情報は安全に扱われますか？",
+    answer:
+      "送信いただいたデータは国内リージョンで暗号化保管し、プロジェクト終了後はリクエストに応じて即時削除します。学習用途での二次利用は行わず、担当コンサルタントのみがアクセス可能です。",
+  },
+  {
+    question: "どの程度の準備が必要ですか？",
+    answer:
+      "売上・原価・固定費などの基本数値と、描きたい将来像をヒアリングシートにご記入いただくだけです。必要に応じて既存資料をアップロードいただければ、AIが自動で要約・反映します。",
+  },
+  {
+    question: "補助金や金融機関向けのフォーマットにも対応できますか？",
+    answer:
+      "はい。ものづくり補助金、事業再構築補助金、金融機関の独自フォーマットなどに合わせたテンプレートへ出力します。専門家が提出前レビューと想定問答の準備まで伴走します。",
+  },
+];
+
+const processSteps = [
+  {
+    title: "キックオフ（60分）",
+    description:
+      "ヒアリングシートと既存資料を共有いただき、目指す姿と意思決定の期限を整理します。",
+  },
+  {
+    title: "AIドラフト生成（最短1日）",
+    description:
+      "市場・競合データの収集、財務モデル試算、計画書ドラフトを自動生成。ダッシュボードで確認できます。",
+  },
+  {
+    title: "専門家レビュー（2～3営業日）",
+    description:
+      "コンサルタントが戦略の整合性・金融機関の着眼点を確認し、加筆修正とリスク補足を実施します。",
+  },
+  {
+    title: "納品＆意思決定サポート",
+    description:
+      "経営会議・金融機関向けの想定問答資料、更新用テンプレート、次の意思決定スケジュールをお渡しします。",
+  },
+];
+
+const successStories = [
+  {
+    industry: "製造業（年商22億円）",
+    challenge: "調達環境の変化で取引銀行から次年度計画の即時提出を求められていた。",
+    before: "計画書作成に3週間、部門ヒアリングに30時間超。",
+    after: "ドラフト作成を4日→1.5日に短縮し、交渉までの準備時間を60%削減。",
+    result: "事業性評価ローンで2.5億円の調達に成功。外部環境シナリオを即日で差し替え対応。",
+    quote:
+      "『生成AIで作成した複数シナリオが、役員会での意思決定を速めてくれました。銀行担当者の質問にも即答できました。』",
+    person: "代表取締役 A社長",
+  },
+  {
+    industry: "ITサービス（年商6.5億円）",
+    challenge: "海外展開を見据えたシリーズB資金調達で、説得力ある財務シナリオが不足。",
+    before: "担当者2名での資料更新に毎月80時間。",
+    after: "AIがARR予測と市場サイズ根拠を自動更新し、更新工数を1/3に削減。",
+    result: "海外投資家向けDDで追加質問ゼロ、調達成功率が2.1倍に向上。",
+    quote:
+      "『外部環境の指数データが毎週反映され、経営会議の議題が“次の一手”に変わりました。』",
+    person: "CFO B氏",
+  },
+  {
+    industry: "多店舗飲食（年商9億円）",
+    challenge: "新店出店の意思決定に必要な市場データが散在し、数字の裏付けが弱かった。",
+    before: "市場調査と損益シミュレーションに約14日。",
+    after: "AIが地区別データを統合し、計画書完成まで5日に短縮。",
+    result: "出店判断までのリードタイムが70%短縮し、月次での見直しが定着。",
+    quote:
+      "『AIが用意したビフォー／アフター図で現場との会話が揃い、意思決定が早くなりました。』",
+    person: "COO C氏",
+  },
+];
+
+const planData = [
+  {
+    name: "ライトプラン",
+    price: "月額 88,000円",
+    target: "初めてAIによる経営計画を試したい中小企業",
+    deliverables: [
+      "市場・競合インサイトレポート（毎月更新）",
+      "財務シナリオ（ベース＆楽観の2パターン）",
+      "経営計画書ドラフト（PowerPoint／PDF）",
+    ],
+    roi: "作成工数を平均35時間削減",
+    trial: "14日間の無料トライアル付き",
+  },
+  {
+    name: "プロプラン",
+    price: "月額 198,000円",
+    target: "金融機関・投資家向け資料をスピーディに整えたい企業",
+    deliverables: [
+      "市場・競合データ連携ダッシュボード",
+      "5年分の財務モデル＆感度分析",
+      "専門家レビュー（2往復）と提出用カスタム書式",
+      "意思決定会議向けサマリー／想定問答集",
+    ],
+    roi: "資金調達成功率 平均2.0倍／作成リードタイム60%削減",
+    trial: "専任コンサルとの導入ワークショップ付き",
+  },
+  {
+    name: "エンタープライズ",
+    price: "個別見積",
+    target: "複数事業・複数拠点の計画を統合したい企業",
+    deliverables: [
+      "自社データベース／BIとのAPI連携",
+      "部門別KPIトラッキングと自動リポート",
+      "専門家レビュー無制限・伴走支援",
+      "カスタムセキュリティポリシー／監査ログ",
+    ],
+    roi: "経営会議資料の更新リードタイムを最大80%短縮",
+    trial: "PoCプログラム（4週間）を提案",
+  },
+];
 
 const formatNumber = (value: number) => Math.round(value).toLocaleString("ja-JP");
 
@@ -30,23 +192,49 @@ const clampValue = (value: number, min: number, max?: number) => {
 
 const Index = () => {
   const [formData, setFormData] = useState<SimulationFormData>(DEFAULT_FORM_DATA);
-  const { sixMonthRevenue, annualRevenue, sixMonthCashFlow, annualCashFlow } = useMemo(() => {
+  const [selectedScenario, setSelectedScenario] = useState<RadarScenarioKey>("baseline");
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
+
+  const {
+    sixMonthRevenue,
+    annualRevenue,
+    sixMonthCashFlow,
+    annualCashFlow,
+    monthlyRevenueSeries,
+    monthlyCashflowSeries,
+    monthlyLabels,
+  } = useMemo(() => {
     const goalRevenue = Math.max(formData.goalRevenue, 0);
     const initialInvestment = Math.max(formData.initialInvestment, 0);
     const marketSize = Math.max(formData.marketSize, 0);
     const grossMarginRate = clampValue(formData.grossMargin, 0, 100) / 100;
 
-    const sixMonthRevenueValue = goalRevenue * 0.48;
-    const annualRevenueValue = goalRevenue;
-    const rampFactor = marketSize > 0 ? Math.min(goalRevenue / (marketSize * 800), 0.35) + 0.65 : 1;
-    const sixMonthCashFlowValue = sixMonthRevenueValue * grossMarginRate * rampFactor - initialInvestment * 0.55;
-    const annualCashFlowValue = annualRevenueValue * grossMarginRate * rampFactor - initialInvestment;
+    const rampFactor =
+      marketSize > 0 ? Math.min(goalRevenue / (marketSize * 700), 0.4) + 0.6 : 1;
+
+    const sixMonthRevenueValue = goalRevenue * 0.48 * rampFactor;
+    const annualRevenueValue = goalRevenue * rampFactor;
+    const sixMonthCashFlowValue = sixMonthRevenueValue * grossMarginRate - initialInvestment * 0.55;
+    const annualCashFlowValue = annualRevenueValue * grossMarginRate - initialInvestment;
+
+    const months = Array.from({ length: 12 }, (_, index) => index + 1);
+    const monthlyRevenue = months.map((month) => {
+      const growthCurve = Math.pow(month / 12, 0.85);
+      return (annualRevenueValue / 12) * month * growthCurve;
+    });
+    const monthlyCashflow = monthlyRevenue.map((revenue, index) => {
+      const investmentDecay = initialInvestment * Math.exp(-index / 4.5) * 0.1;
+      return revenue * grossMarginRate - investmentDecay;
+    });
 
     return {
       sixMonthRevenue: sixMonthRevenueValue,
       annualRevenue: annualRevenueValue,
       sixMonthCashFlow: sixMonthCashFlowValue,
       annualCashFlow: annualCashFlowValue,
+      monthlyRevenueSeries: monthlyRevenue,
+      monthlyCashflowSeries: monthlyCashflow,
+      monthlyLabels: months.map((month) => `${month}月`),
     };
   }, [formData]);
 
@@ -54,15 +242,59 @@ const Index = () => {
     const marketSize = Math.max(formData.marketSize, 0);
     const goalRevenue = Math.max(formData.goalRevenue, 0);
     const grossMargin = clampValue(formData.grossMargin, 0, 100);
-    const marketShare =
-      marketSize > 0 ? Math.min((goalRevenue / (marketSize * 1000)) * 100, 80).toFixed(1) : "0.0";
+    const estimatedShare =
+      marketSize > 0 ? Math.min((goalRevenue / (marketSize * 1000)) * 100, 85).toFixed(1) : "0.0";
 
     return [
-      `市場分析：想定市場規模 ${marketSize.toLocaleString()} 億円に対し、AI推計シェアは約 ${marketShare}%`,
-      `商品・サービス戦略：粗利率 ${grossMargin.toFixed(1)}% を維持する差別化要素と提供価値を整理`,
-      `財務計画：売上目標 ${formatNumber(goalRevenue)} 万円を基に、投資回収とキャッシュフローを最適化`,
+      `外部環境アップデート：市場規模 ${marketSize.toLocaleString()} 億円で推計シェア ${estimatedShare}% を想定。政策動向と競合の参入時期も自動反映。`,
+      `戦略サマリー：粗利率 ${grossMargin.toFixed(1)}% を守る価格・チャネル戦略と投資配分を提案。`,
+      `財務・実行計画：売上目標 ${formatNumber(goalRevenue)} 万円に合わせたキャッシュフロー、採用計画、KPIモニタリングを生成。`,
     ];
   }, [formData]);
+
+  const selectedRadar = radarScenarios[selectedScenario];
+
+  const radarPolygons = useMemo(() => {
+    const center = { x: 140, y: 140 };
+    const radius = 110;
+    const toPointString = (values: number[]) => {
+      return values
+        .map((value, index) => {
+          const angle = (Math.PI * 2 * index) / radarCategories.length - Math.PI / 2;
+          const scale = Math.max(Math.min(value, 5), 0) / 5;
+          const x = center.x + radius * scale * Math.cos(angle);
+          const y = center.y + radius * scale * Math.sin(angle);
+          return `${x.toFixed(1)},${y.toFixed(1)}`;
+        })
+        .join(" ");
+    };
+
+    return {
+      our: toPointString(selectedRadar.our),
+      competitor: toPointString(selectedRadar.competitor),
+    };
+  }, [selectedRadar]);
+
+  useEffect(() => {
+    const elements = document.querySelectorAll(".reveal-on-scroll");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => {
+      elements.forEach((element) => observer.unobserve(element));
+    };
+  }, []);
 
   const handleSimulationChange = (key: keyof SimulationFormData) => (event: ChangeEvent<HTMLInputElement>) => {
     const parsedValue = Number.parseFloat(event.target.value);
@@ -70,10 +302,7 @@ const Index = () => {
 
     setFormData((previous) => ({
       ...previous,
-      [key]:
-        key === "grossMargin"
-          ? clampValue(sanitized, 0, 100)
-          : clampValue(sanitized, 0),
+      [key]: key === "grossMargin" ? clampValue(sanitized, 0, 100) : clampValue(sanitized, 0),
     }));
   };
 
@@ -85,86 +314,296 @@ const Index = () => {
     event.preventDefault();
   };
 
+  const toggleFaq = (index: number) => {
+    setOpenFaqIndex((prev) => (prev === index ? null : index));
+  };
+
+  const chartDimensions = { width: 600, height: 260, padding: 32 };
+  const allValues = [...monthlyRevenueSeries, ...monthlyCashflowSeries];
+  const maxValue = Math.max(...allValues, 1);
+  const minValue = Math.min(0, ...allValues);
+  const valueRange = maxValue - minValue || 1;
+  const zeroY = chartDimensions.height -
+    chartDimensions.padding -
+    ((0 - minValue) / valueRange) * (chartDimensions.height - chartDimensions.padding * 2);
+
+  const buildPolyline = (values: number[]) => {
+    return values
+      .map((value, index) => {
+        const x =
+          chartDimensions.padding +
+          ((chartDimensions.width - chartDimensions.padding * 2) * index) / (values.length - 1);
+        const y =
+          chartDimensions.height -
+          chartDimensions.padding -
+          ((value - minValue) / valueRange) * (chartDimensions.height - chartDimensions.padding * 2);
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+      })
+      .join(" ");
+  };
+
   return (
     <div className="lp-root">
       <header className="site-header">
         <div className="container header-inner">
-          <div className="brand">AI経営計画書ラボ</div>
+          <div className="brand" aria-label="AI経営計画書ラボ">AI経営計画書ラボ</div>
           <nav className="header-nav" aria-label="主要ナビゲーション">
-            <a href="#services">サービス特徴</a>
-            <a href="#simulator">AIシミュレーター</a>
+            <a href="#pain">経営者の課題</a>
+            <a href="#capabilities">機能と特徴</a>
+            <a href="#simulator">シミュレーター</a>
             <a href="#cases">成功事例</a>
-            <a href="#plans">料金プラン</a>
-            <a href="#faq">FAQ</a>
+            <a href="#plans">料金</a>
+            <a href="#security">セキュリティ</a>
           </nav>
+          <div className="header-actions">
+            <a className="btn btn-outline" href="#demo">
+              デモを見る
+            </a>
+            <a className="btn btn-accent" href="#consultation">
+              無料相談
+            </a>
+          </div>
         </div>
       </header>
 
       <main>
-        <section className="hero">
+        <section className="hero reveal-on-scroll" id="hero">
           <div className="container hero-inner">
             <div className="hero-copy">
-              <p className="badge">生成AI活用の経営計画支援</p>
-              <h1>AIで最短1日。誰でもプロ並みの経営計画書を。</h1>
+              <p className="badge">先読みする経営計画 × 生成AI</p>
+              <h1>
+                生成AIで外部環境を先読み。
+                <span className="hero-highlight">最短1日で意思決定に使える経営計画書</span>
+                を。
+              </h1>
               <p className="subtitle">
-                市場分析から財務予測まで、生成AIが貴社専用の経営計画書ドラフトを自動作成。専門家がレビューして完成度を高めます。
+                市場データ・財務予測・文章ドラフトを自動生成し、専門家が戦略目線で磨き上げます。変化が激しい今だからこそ、経営者が本質的な意思決定に集中できる時間を生み出します。
               </p>
-              <a className="btn btn-accent" href="#consultation">
-                無料でAI計画書を体験する
-              </a>
+              <ul className="hero-painpoints">
+                <li>市場環境が毎月変わり、会議のたびに計画書を作り直している</li>
+                <li>資料づくりに追われ、意思決定のための思考時間が足りない</li>
+                <li>金融機関や投資家に刺さる裏付けデータを短期間で揃えたい</li>
+              </ul>
+              <div className="hero-actions">
+                <a className="btn btn-accent" href="#consultation">
+                  無料トライアルを予約
+                </a>
+                <a className="btn btn-ghost" href="#simulator">
+                  予測シミュレーションを見る
+                </a>
+              </div>
+              <dl className="hero-metrics" aria-label="サービス導入後の成果">
+                <div>
+                  <dt>計画書作成期間</dt>
+                  <dd>
+                    <span className="metric-value">-60%</span>
+                    <span className="metric-note">平均短縮</span>
+                  </dd>
+                </div>
+                <div>
+                  <dt>資金調達成功率</dt>
+                  <dd>
+                    <span className="metric-value">2.0×</span>
+                    <span className="metric-note">導入企業平均</span>
+                  </dd>
+                </div>
+                <div>
+                  <dt>経営会議準備時間</dt>
+                  <dd>
+                    <span className="metric-value">-40h</span>
+                    <span className="metric-note">／月の削減</span>
+                  </dd>
+                </div>
+              </dl>
             </div>
-            <div className="hero-visual">
-              <img src={PLACEHOLDER_IMAGE} alt="AI経営計画書のイメージ" />
+            <div className="hero-visual" aria-label="AIが経営計画書を生成する動画デモ">
+              <div className="hero-video-frame">
+                <video
+                  className="hero-video"
+                  autoPlay
+                  muted
+                  playsInline
+                  loop
+                  poster={PLACEHOLDER_POSTER}
+                >
+                  <source src={HERO_VIDEO} type="video/mp4" />
+                  AIが計画書を生成するデモ動画
+                </video>
+                <div className="hero-video-overlay">
+                  <span>AIが市場分析→財務予測→レポート生成まで自動化</span>
+                </div>
+              </div>
+              <div className="hero-video-caption">
+                <p>
+                  ダッシュボードでは、AIが収集した最新データや生成したドラフトをリアルタイムに確認。専門家のコメントも同じ画面でフィードバックされます。
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="services" className="services">
+        <section className="pain reveal-on-scroll" id="pain">
           <div className="container">
-            <h2 className="section-title">サービスの4つの柱</h2>
-            <p className="section-lead">
-              生成AIと専門家のハイブリッドにより、経営計画書作成のスピードと精度を両立します。
-            </p>
-            <div className="service-grid">
-              <article className="service-card">
-                <div className="icon-circle">
-                  <i className="fa-solid fa-chart-pie" aria-hidden="true" />
-                </div>
-                <h3>市場・競合分析の自動化</h3>
-                <p>AIが業界データと競合情報を収集・要約し、機会と脅威を一目で把握できます。</p>
+            <div className="section-heading">
+              <h2 className="section-title">中小企業の経営者が抱える3つの壁</h2>
+              <p className="section-lead">
+                外部環境の変化に追われるほど、経営者の時間は削られ、意思決定の質が下がってしまいます。生成AIと専門家の伴走で、その壁を突破します。
+              </p>
+            </div>
+            <div className="pain-grid">
+              <article className="pain-card">
+                <h3>01. 情報過多で判断が追いつかない</h3>
+                <p>
+                  マクロ環境・競合動向・政策支援情報を追い続けるのは現場にとって負荷が大きい。情報をまとめるだけで会議が始まってしまう。
+                </p>
+                <p className="pain-solution">→ 生成AIが一次情報を自動収集・要約し、意思決定に必要な指標だけを可視化。</p>
               </article>
-              <article className="service-card">
-                <div className="icon-circle">
-                  <i className="fa-solid fa-chart-line" aria-hidden="true" />
-                </div>
-                <h3>売上・収支予測</h3>
-                <p>目標売上や投資額を入力すると、5年間の財務予測グラフと主要指標を生成します。</p>
+              <article className="pain-card">
+                <h3>02. 数字の裏付けと文章づくりに時間を奪われる</h3>
+                <p>
+                  エクセルとスライドを行き来しながら整合性をとる作業が続き、経営者の思考時間が失われている。
+                </p>
+                <p className="pain-solution">→ AIが財務シミュレーションから文章ドラフトまで一気通貫で生成。</p>
               </article>
-              <article className="service-card">
-                <div className="icon-circle">
-                  <i className="fa-solid fa-file-lines" aria-hidden="true" />
-                </div>
-                <h3>文章生成とレポート作成</h3>
-                <p>AIが事業概要、戦略、リスク分析、資金計画を日本語でドラフト。説得力ある構成で提示します。</p>
-              </article>
-              <article className="service-card">
-                <div className="icon-circle">
-                  <i className="fa-solid fa-user-check" aria-hidden="true" />
-                </div>
-                <h3>専門家レビューと修正</h3>
-                <p>コンサルタントがAIドラフトをチェックし、融資審査や投資家説明に耐える計画書へ仕上げます。</p>
+              <article className="pain-card">
+                <h3>03. 最新の外部環境を反映した更新ができない</h3>
+                <p>
+                  金融機関・投資家からの追加質問に即時対応できず、判断のタイミングを逃してしまう。
+                </p>
+                <p className="pain-solution">→ ダッシュボードでシナリオを切り替え、専門家が24時間以内にレビューを返答。</p>
               </article>
             </div>
           </div>
         </section>
 
-        <section id="simulator" className="simulator">
+        <section className="capabilities reveal-on-scroll" id="capabilities">
+          <div className="container">
+            <div className="section-heading">
+              <h2 className="section-title">生成AIと専門家の4つの柱で、先見的な計画書を</h2>
+              <p className="section-lead">
+                具体的な成果とインタラクティブな分析で、経営判断のスピードと質を同時に引き上げます。
+              </p>
+            </div>
+            <div className="pillars-grid">
+              <article className="pillar-card">
+                <h3>市場・競合分析の自動化</h3>
+                <p>
+                  72件の外部データソースをクロールし、業界構造・トレンド・競合差分をレポート化。AIが影響度の高い指標を優先表示します。
+                </p>
+                <footer>
+                  <span className="pillar-metric">分析更新時間 90%短縮</span>
+                  <small>政策・需給データを毎朝反映</small>
+                </footer>
+              </article>
+              <article className="pillar-card">
+                <h3>売上・収支予測</h3>
+                <p>
+                  ユーザー入力のKPIから5年間の収支を自動算出。外部指数を掛け合わせて、市場変動を織り込んだ複数シナリオを提示します。
+                </p>
+                <footer>
+                  <span className="pillar-metric">財務モデル作成 6時間 → 45分</span>
+                  <small>感度分析とキャッシュフロー表を同時生成</small>
+                </footer>
+              </article>
+              <article className="pillar-card">
+                <h3>文章生成とレポート作成</h3>
+                <p>
+                  事業ストーリー、戦略、リスク、KPIを章立てしたドラフトを自動作成。金融機関・補助金フォーマットにも対応します。
+                </p>
+                <footer>
+                  <span className="pillar-metric">ドラフト整合率 95%以上</span>
+                  <small>社内資料との用語統一も自動</small>
+                </footer>
+              </article>
+              <article className="pillar-card">
+                <h3>専門家レビューと伴走</h3>
+                <p>
+                  元金融機関・戦略コンサル出身の専門家がレビュー。実行計画と想定問答までセットで提供し、意思決定を後押しします。
+                </p>
+                <footer>
+                  <span className="pillar-metric">レビュー満足度 4.8 / 5.0</span>
+                  <small>最短24時間でフィードバック</small>
+                </footer>
+              </article>
+            </div>
+
+            <div className="insight-lab">
+              <div className="insight-visual">
+                <div className="scenario-tabs" role="tablist" aria-label="市場分析シナリオ切り替え">
+                  {(Object.keys(radarScenarios) as RadarScenarioKey[]).map((scenarioKey) => {
+                    const scenario = radarScenarios[scenarioKey];
+                    const isActive = selectedScenario === scenarioKey;
+                    return (
+                      <button
+                        key={scenarioKey}
+                        className={isActive ? "scenario-tab is-active" : "scenario-tab"}
+                        role="tab"
+                        aria-selected={isActive}
+                        onClick={() => setSelectedScenario(scenarioKey)}
+                      >
+                        {scenario.label}
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="radar-chart" role="img" aria-label="自社と競合の比較レーダーチャート">
+                  <svg viewBox="0 0 280 280">
+                    {[1, 2, 3, 4, 5].map((level) => (
+                      <polygon
+                        key={level}
+                        className="radar-grid"
+                        points={radarCategories
+                          .map((_, index) => {
+                            const angle = (Math.PI * 2 * index) / radarCategories.length - Math.PI / 2;
+                            const radius = (110 * level) / 5;
+                            const x = 140 + radius * Math.cos(angle);
+                            const y = 140 + radius * Math.sin(angle);
+                            return `${x},${y}`;
+                          })
+                          .join(" ")}
+                      />
+                    ))}
+                    <line x1="140" y1="30" x2="140" y2="250" className="radar-axis" />
+                    <line x1="30" y1="140" x2="250" y2="140" className="radar-axis" />
+                    <polygon className="radar-polygon radar-polygon--competitor" points={radarPolygons.competitor} />
+                    <polygon className="radar-polygon radar-polygon--our" points={radarPolygons.our} />
+                    {radarCategories.map((category, index) => {
+                      const angle = (Math.PI * 2 * index) / radarCategories.length - Math.PI / 2;
+                      const labelRadius = 140;
+                      const x = 140 + labelRadius * Math.cos(angle);
+                      const y = 140 + labelRadius * Math.sin(angle);
+                      return (
+                        <text key={category} x={x} y={y} className="radar-label">
+                          {category}
+                        </text>
+                      );
+                    })}
+                  </svg>
+                </div>
+              </div>
+              <div className="insight-copy">
+                <h3>{selectedRadar.label}</h3>
+                <p>{selectedRadar.description}</p>
+                <ul className="insight-list">
+                  <li>自社の強み／弱みを定量化し、競合との差分を数値で理解</li>
+                  <li>AIが自動で収集した外部環境データを毎日反映</li>
+                  <li>専門家コメントと連動し、次の打ち手を明確化</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="simulator reveal-on-scroll" id="simulator">
           <div className="container">
             <div className="simulator-header">
-              <h2 className="section-title">AI計画書シミュレーター</h2>
-              <p className="section-lead">
-                目標数値を入力するだけで、6か月後と1年後の売上・キャッシュフロー予測とAIが提案する章立てを確認できます。
-              </p>
+              <div>
+                <h2 className="section-title">AI計画書シミュレーター</h2>
+                <p className="section-lead">
+                  目標値を入力するだけで、売上・キャッシュフローの推移とAIが提案する章立てがリアルタイムに更新されます。
+                </p>
+              </div>
+              <div className="simulator-note">※数値はデモ用のダミーデータです。実際は貴社データと連携します。</div>
             </div>
             <div className="simulator-content">
               <form className="sim-form" id="simForm" onSubmit={handleSimulationSubmit}>
@@ -216,7 +655,57 @@ const Index = () => {
                 </div>
               </form>
               <div className="sim-result">
-                <div className="chart-container" role="img" aria-label="売上とキャッシュフロー予測">
+                <div className="sim-chart" role="img" aria-label="売上とキャッシュフロー予測">
+                  <svg
+                    viewBox={`0 0 ${chartDimensions.width} ${chartDimensions.height}`}
+                    width="100%"
+                    height="100%"
+                    preserveAspectRatio="xMidYMid meet"
+                  >
+                    <rect
+                      x="0"
+                      y="0"
+                      width={chartDimensions.width}
+                      height={chartDimensions.height}
+                      rx="18"
+                      className="chart-background"
+                    />
+                    {[0.25, 0.5, 0.75, 1].map((ratio) => {
+                      const y =
+                        chartDimensions.padding +
+                        (chartDimensions.height - chartDimensions.padding * 2) * (1 - ratio);
+                      return <line key={ratio} x1="32" x2={chartDimensions.width - 32} y1={y} y2={y} className="chart-grid" />;
+                    })}
+                    <line
+                      x1="32"
+                      x2={chartDimensions.width - 32}
+                      y1={zeroY}
+                      y2={zeroY}
+                      className="chart-axis"
+                    />
+                    <polyline className="chart-line chart-line--revenue" points={buildPolyline(monthlyRevenueSeries)} />
+                    <polyline className="chart-line chart-line--cashflow" points={buildPolyline(monthlyCashflowSeries)} />
+                    {monthlyRevenueSeries.map((value, index) => {
+                      const x =
+                        chartDimensions.padding +
+                        ((chartDimensions.width - chartDimensions.padding * 2) * index) / (monthlyRevenueSeries.length - 1);
+                      const y =
+                        chartDimensions.height -
+                        chartDimensions.padding -
+                        ((value - minValue) / valueRange) * (chartDimensions.height - chartDimensions.padding * 2);
+                      return <circle key={`rev-${index}`} cx={x} cy={y} r={3} className="chart-dot chart-dot--revenue" />;
+                    })}
+                    {monthlyCashflowSeries.map((value, index) => {
+                      const x =
+                        chartDimensions.padding +
+                        ((chartDimensions.width - chartDimensions.padding * 2) * index) / (monthlyCashflowSeries.length - 1);
+                      const y =
+                        chartDimensions.height -
+                        chartDimensions.padding -
+                        ((value - minValue) / valueRange) * (chartDimensions.height - chartDimensions.padding * 2);
+                      return <circle key={`cash-${index}`} cx={x} cy={y} r={3} className="chart-dot chart-dot--cashflow" />;
+                    })}
+                  </svg>
                   <div className="chart-legend">
                     <span className="legend-item">
                       <span className="legend-swatch legend-swatch--revenue" />売上予測（万円）
@@ -225,191 +714,234 @@ const Index = () => {
                       <span className="legend-swatch legend-swatch--cashflow" />キャッシュフロー（万円）
                     </span>
                   </div>
-                  <div className="chart-bars">
-                    {["6か月後", "1年後"].map((timeframe, index) => {
-                      const revenue = index === 0 ? sixMonthRevenue : annualRevenue;
-                      const cashflow = index === 0 ? sixMonthCashFlow : annualCashFlow;
-                      const maxAbs = Math.max(Math.abs(revenue), Math.abs(cashflow), 1);
-
-                      const renderBar = (type: "revenue" | "cashflow", value: number) => {
-                        const baseClass = `chart-bar-fill chart-bar-fill--${type}`;
-                        const className = value < 0 ? `${baseClass} chart-bar-fill--negative` : baseClass;
-
-                        return (
-                          <div className="chart-bar" data-type={type}>
-                            <div className={className} style={{ height: `${(Math.abs(value) / maxAbs) * 100}%` }} />
-                            <span className="chart-bar-value">{formatNumber(value)}</span>
-                          </div>
-                        );
-                      };
-
-                      return (
-                        <div className="chart-group" key={timeframe}>
-                          <span className="chart-group-label">{timeframe}</span>
-                          <div className="chart-bar-wrapper">
-                            {renderBar("revenue", revenue)}
-                            {renderBar("cashflow", cashflow)}
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
                 </div>
                 <div className="sim-summary">
+                  <div className="sim-metrics">
+                    <div>
+                      <span className="label">6か月後売上</span>
+                      <strong>{formatNumber(sixMonthRevenue)} 万円</strong>
+                    </div>
+                    <div>
+                      <span className="label">6か月後キャッシュフロー</span>
+                      <strong>{formatNumber(sixMonthCashFlow)} 万円</strong>
+                    </div>
+                    <div>
+                      <span className="label">年間売上</span>
+                      <strong>{formatNumber(annualRevenue)} 万円</strong>
+                    </div>
+                    <div>
+                      <span className="label">年間キャッシュフロー</span>
+                      <strong>{formatNumber(annualCashFlow)} 万円</strong>
+                    </div>
+                  </div>
                   <h3>AIが提案する章立て</h3>
                   <ul>
                     {simulationChapters.map((chapter) => (
                       <li key={chapter}>{chapter}</li>
                     ))}
                   </ul>
+                  <div className="sim-labels">
+                    {monthlyLabels.map((label) => (
+                      <span key={label}>{label}</span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="cases" className="cases">
+        <section className="process reveal-on-scroll" id="process">
           <div className="container">
-            <h2 className="section-title">AI計画書による資金調達成功事例</h2>
+            <div className="section-heading">
+              <h2 className="section-title">導入から納品まで、最短1日の伴走プロセス</h2>
+              <p className="section-lead">
+                初回ヒアリングから納品、意思決定支援までをワンストップで。経営判断のタイミングを逃さない設計です。
+              </p>
+            </div>
+            <div className="process-steps">
+              {processSteps.map((step, index) => (
+                <article className="process-step" key={step.title}>
+                  <span className="process-index">STEP {index + 1}</span>
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="cases reveal-on-scroll" id="cases">
+          <div className="container">
+            <div className="section-heading">
+              <h2 className="section-title">成功事例と成果のビフォー／アフター</h2>
+              <p className="section-lead">
+                生成AIと専門家レビューによる具体的な成果を、定量データと経営者の声でご紹介します。
+              </p>
+            </div>
             <div className="case-grid">
-              <article className="case-card">
-                <h3>製造業・年商18億円</h3>
-                <dl>
-                  <dt>課題</dt>
-                  <dd>金融機関に提出する計画書が手作業で時間がかかり、説得力に欠けていた。</dd>
-                  <dt>AI活用</dt>
-                  <dd>生成AIが市場分析と5年分の財務計画を作成し、専門家がレビュー。</dd>
-                  <dt>成果</dt>
-                  <dd>計画書作成期間を60%短縮し、銀行融資がスムーズに承認された。</dd>
-                </dl>
-              </article>
-              <article className="case-card">
-                <h3>ITサービス・年商4億円</h3>
-                <dl>
-                  <dt>課題</dt>
-                  <dd>VC向けピッチ資料と計画書の整合性が取れず、追加投資が保留になっていた。</dd>
-                  <dt>AI活用</dt>
-                  <dd>AIが顧客獲得モデルとARR予測を作成し、専門家が投資家目線で校閲。</dd>
-                  <dt>成果</dt>
-                  <dd>3週間かかっていた資料準備を1週間に短縮し、シリーズBで2億円を調達。</dd>
-                </dl>
-              </article>
-              <article className="case-card">
-                <h3>飲食チェーン・年商7億円</h3>
-                <dl>
-                  <dt>課題</dt>
-                  <dd>新店舗展開の資金計画が曖昧で、金融機関からの質問に即答できなかった。</dd>
-                  <dt>AI活用</dt>
-                  <dd>AIがエリア別需要予測とキャッシュフロー計画を提示し、専門家が改善提案。</dd>
-                  <dt>成果</dt>
-                  <dd>説得力ある計画書を1週間で提出し、5,000万円の融資枠を確保した。</dd>
-                </dl>
-              </article>
+              {successStories.map((story) => (
+                <article className="case-card" key={story.industry}>
+                  <header>
+                    <h3>{story.industry}</h3>
+                    <p className="case-challenge">課題：{story.challenge}</p>
+                  </header>
+                  <dl className="case-metrics">
+                    <div>
+                      <dt>Before</dt>
+                      <dd>{story.before}</dd>
+                    </div>
+                    <div>
+                      <dt>After</dt>
+                      <dd>{story.after}</dd>
+                    </div>
+                    <div>
+                      <dt>成果</dt>
+                      <dd>{story.result}</dd>
+                    </div>
+                  </dl>
+                  <blockquote>
+                    <p>{story.quote}</p>
+                    <cite>{story.person}</cite>
+                  </blockquote>
+                </article>
+              ))}
             </div>
           </div>
         </section>
 
-        <section id="plans" className="plans">
+        <section className="plans reveal-on-scroll" id="plans">
           <div className="container">
-            <h2 className="section-title">料金プラン</h2>
-            <div className="plan-wrapper">
-              <div className="plan">
-                <h3>ライトプラン</h3>
-                <p className="price">月額8万円</p>
-                <table>
-                  <tbody>
-                    <tr>
-                      <th>自動生成内容</th>
-                      <td>市場分析、ビジネスモデル、財務予測のドラフト</td>
-                    </tr>
-                    <tr>
-                      <th>専門家レビュー</th>
-                      <td>ドラフトチェック（簡易フィードバック）</td>
-                    </tr>
-                    <tr>
-                      <th>サポート範囲</th>
-                      <td>メール相談（48時間以内回答）</td>
-                    </tr>
-                    <tr>
-                      <th>納品形態</th>
-                      <td>AI生成レポート（PowerPoint／PDF）</td>
-                    </tr>
-                  </tbody>
-                </table>
+            <div className="section-heading">
+              <h2 className="section-title">料金プランと得られる成果</h2>
+              <p className="section-lead">
+                目的や組織体制に合わせて選べる3つのプラン。導入後に得られるROIと提供内容を比較できます。
+              </p>
+            </div>
+            <div className="plan-table" role="table">
+              <div className="plan-table__header" role="row">
+                <div role="columnheader">プラン</div>
+                <div role="columnheader">料金（税込）</div>
+                <div role="columnheader">おすすめの企業</div>
+                <div role="columnheader">提供内容</div>
+                <div role="columnheader">想定成果（ROI）</div>
+                <div role="columnheader">トライアル</div>
               </div>
-              <div className="plan plan-featured">
-                <h3>プロプラン</h3>
-                <p className="price">月額18万円</p>
-                <table>
-                  <tbody>
-                    <tr>
-                      <th>自動生成内容</th>
-                      <td>詳細な市場分析、競合比較、5年財務モデル</td>
-                    </tr>
-                    <tr>
-                      <th>専門家レビュー</th>
-                      <td>コンサルタントによる校閲＆加筆、金融機関向け最終調整</td>
-                    </tr>
-                    <tr>
-                      <th>サポート範囲</th>
-                      <td>オンラインMTG（月2回）・金融機関連携サポート</td>
-                    </tr>
-                    <tr>
-                      <th>納品形態</th>
-                      <td>カスタムテンプレート、審査向け提出データ一式</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              {planData.map((plan) => (
+                <div className="plan-table__row" role="row" key={plan.name}>
+                  <div role="cell" className="plan-name">
+                    <strong>{plan.name}</strong>
+                  </div>
+                  <div role="cell">{plan.price}</div>
+                  <div role="cell">{plan.target}</div>
+                  <div role="cell">
+                    <ul>
+                      {plan.deliverables.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div role="cell">{plan.roi}</div>
+                  <div role="cell">{plan.trial}</div>
+                </div>
+              ))}
+            </div>
+            <div className="plan-footer">
+              <a className="btn btn-accent" href="#consultation">
+                無料トライアル・資料請求はこちら
+              </a>
             </div>
           </div>
         </section>
 
-        <section id="faq" className="faq">
+        <section className="security reveal-on-scroll" id="security">
           <div className="container">
-            <h2 className="section-title">よくある質問</h2>
-            <div className="faq-list">
-              <article className="faq-item">
-                <h3>AIが作成した文章を自社用にカスタマイズできますか？</h3>
-                <p>
-                  はい。ドラフトは編集可能な形式で納品され、貴社の強みや表現に合わせた調整を行えます。プロプランでは専門家が貴社の用語や語調に合わせて整えます。
-                </p>
+            <div className="section-heading">
+              <h2 className="section-title">セキュリティとガバナンス</h2>
+              <p className="section-lead">
+                機密性の高い経営情報を扱うからこそ、安心して任せていただける環境を整えています。
+              </p>
+            </div>
+            <div className="security-grid">
+              <article className="security-card">
+                <h3>暗号化とアクセス管理</h3>
+                <ul>
+                  <li>通信・保存ともにAES-256で暗号化</li>
+                  <li>ゼロトラスト方針でIP制限と多要素認証を実装</li>
+                </ul>
               </article>
-              <article className="faq-item">
-                <h3>どんなデータを準備すべきですか？</h3>
-                <p>
-                  直近の売上・原価・固定費、見込み顧客数、平均単価などの基本数値があれば十分です。ヒアリングシートで不足分を補いながらAIが推計します。
-                </p>
+              <article className="security-card">
+                <h3>データ保持ポリシー</h3>
+                <ul>
+                  <li>契約終了後30日以内の自動削除／即時削除リクエストにも対応</li>
+                  <li>監査ログを月次で共有し、内部統制に活用可能</li>
+                </ul>
               </article>
-              <article className="faq-item">
-                <h3>金融機関への提出フォーマットにも対応していますか？</h3>
-                <p>
-                  はい。各金融機関のフォーマットに合わせた提出資料を作成します。プロプランでは提出前レビューとリハーサル支援も提供します。
-                </p>
-              </article>
-              <article className="faq-item">
-                <h3>利用開始までの流れはどのようになりますか？</h3>
-                <p>
-                  お申し込み後、初回ヒアリングで目標を確認し、AIによるドラフト生成（最短1日）→専門家レビュー→最終納品の順で進行します。
-                </p>
+              <article className="security-card">
+                <h3>第三者認証</h3>
+                <ul>
+                  <li>ISO/IEC 27001, 27701 取得</li>
+                  <li>外部監査機関による年次ペネトレーションテスト</li>
+                </ul>
               </article>
             </div>
           </div>
         </section>
 
-        <section className="security">
+        <section className="faq reveal-on-scroll" id="faq">
           <div className="container">
-            <h2 className="section-title">セキュリティとデータ保護</h2>
-            <p>
-              経営計画書データは国内リージョンの暗号化環境で保管し、プロジェクト終了後はご要望に応じて安全に削除します。当社のAIモデルは学習目的で顧客データを二次利用せず、アクセス権限も専任コンサルタントに限定しています。
-            </p>
+            <div className="section-heading">
+              <h2 className="section-title">よくある質問</h2>
+              <p className="section-lead">重要な質問を厳選し、クリックで詳細を開閉できます。</p>
+            </div>
+            <div className="faq-accordion">
+              {faqItems.map((item, index) => {
+                const isOpen = openFaqIndex === index;
+                return (
+                  <article className={isOpen ? "faq-item is-open" : "faq-item"} key={item.question}>
+                    <button
+                      className="faq-trigger"
+                      type="button"
+                      aria-expanded={isOpen}
+                      onClick={() => toggleFaq(index)}
+                    >
+                      {item.question}
+                      <span className="faq-icon" aria-hidden="true">
+                        {isOpen ? "−" : "+"}
+                      </span>
+                    </button>
+                    <div className="faq-content" role="region">
+                      <p>{item.answer}</p>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
           </div>
         </section>
 
-        <section id="consultation" className="consultation">
+        <section className="cta-band reveal-on-scroll" id="demo">
+          <div className="container cta-band-inner">
+            <div>
+              <h2>デモでAI経営計画書のスピードを体験</h2>
+              <p>
+                実際のダッシュボード画面と生成された計画書の例をオンラインでご確認いただけます。経営課題をヒアリングし、その場でシミュレーションも可能です。
+              </p>
+            </div>
+            <a className="btn btn-accent" href="#consultation">
+              30分のデモを予約する
+            </a>
+          </div>
+        </section>
+
+        <section id="consultation" className="consultation reveal-on-scroll">
           <div className="container">
-            <h2 className="section-title">無料相談はこちら</h2>
-            <p className="section-lead">サービス内容や導入スケジュールについて、お気軽にお問い合わせください。</p>
+            <div className="section-heading">
+              <h2 className="section-title">無料相談・お問い合わせ</h2>
+              <p className="section-lead">
+                まずはお気軽にご相談ください。ご入力いただいた内容をもとに、最適な進め方とスケジュールをご提案します。
+              </p>
+            </div>
             <form className="contact-form" onSubmit={handleContactSubmit}>
               <div className="form-grid">
                 <div className="form-field">
@@ -421,31 +953,64 @@ const Index = () => {
                   <input type="text" id="company" name="company" placeholder="例）株式会社サンプル" required />
                 </div>
                 <div className="form-field">
+                  <label htmlFor="position">役職</label>
+                  <input type="text" id="position" name="position" placeholder="例）代表取締役" />
+                </div>
+                <div className="form-field">
                   <label htmlFor="email">メールアドレス</label>
                   <input type="email" id="email" name="email" placeholder="example@company.jp" required />
                 </div>
                 <div className="form-field">
                   <label htmlFor="phone">電話番号</label>
-                  <input type="tel" id="phone" name="phone" placeholder="090-1234-5678" required />
+                  <input type="tel" id="phone" name="phone" placeholder="090-1234-5678" />
+                </div>
+                <div className="form-field">
+                  <label htmlFor="preferredDate">希望日時</label>
+                  <input type="text" id="preferredDate" name="preferredDate" placeholder="例）6月12日 午前中 希望" />
                 </div>
               </div>
               <div className="form-field">
-                <label htmlFor="message">相談内容</label>
-                <textarea id="message" name="message" rows={4} placeholder="導入目的やご相談内容をご記入ください" />
+                <label htmlFor="message">ご相談内容</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  placeholder="現状の課題や検討しているテーマ、希望する導入時期などをご記入ください"
+                />
               </div>
               <button type="submit" className="btn btn-accent">
                 無料相談を申し込む
               </button>
+              <p className="form-note">送信後はサンクスページで次のステップをご案内します。</p>
             </form>
           </div>
         </section>
       </main>
 
       <footer className="site-footer">
-        <div className="container">
-          <p>© 2024 AI経営計画書ラボ</p>
+        <div className="container footer-inner">
+          <div>
+            <div className="brand">AI経営計画書ラボ</div>
+            <p>© 2024 Strategy AI Lab, Inc. All rights reserved.</p>
+          </div>
+          <nav className="footer-nav" aria-label="フッターナビゲーション">
+            <a href="#hero">トップ</a>
+            <a href="#capabilities">機能</a>
+            <a href="#cases">成功事例</a>
+            <a href="#plans">料金プラン</a>
+            <a href="#security">セキュリティ</a>
+          </nav>
         </div>
       </footer>
+
+      <nav className="floating-cta" aria-label="固定表示の申し込みボタン">
+        <a className="btn btn-accent" href="#consultation">
+          無料相談
+        </a>
+        <a className="btn btn-ghost" href="#demo">
+          デモ予約
+        </a>
+      </nav>
     </div>
   );
 };
