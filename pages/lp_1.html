@@ -377,6 +377,27 @@
         max-width: 52ch;
       }
 
+      .hero-target {
+        font-size: 1rem;
+        font-weight: 700;
+        color: rgba(15, 23, 42, 0.8);
+        margin: 0 0 clamp(16px, 2.4vw, 24px);
+      }
+
+      .hero-problems {
+        margin: 0 0 clamp(18px, 3vw, 28px);
+        padding-left: 22px;
+        color: rgba(15, 23, 42, 0.75);
+        font-size: 0.98rem;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .hero-problems li::marker {
+        color: var(--primary);
+      }
+
       .cta-note {
         font-size: 0.95rem;
         color: rgba(15, 23, 42, 0.72);
@@ -419,6 +440,13 @@
       .hero-metric span {
         color: rgba(15, 23, 42, 0.68);
         font-size: 0.95rem;
+      }
+
+      .hero-proof {
+        margin-top: clamp(18px, 2.6vw, 28px);
+        font-size: 0.85rem;
+        color: rgba(15, 23, 42, 0.6);
+        line-height: 1.6;
       }
 
       .hero-visual {
@@ -1676,8 +1704,8 @@
   </head>
   <body>
     <div class="floating-cta" role="complementary" aria-label="固定CTA">
-      <a class="btn btn-primary" href="#consultation" data-open-modal="#contactModal"><i class="fa-solid fa-calendar-check"></i> 無料相談を予約</a>
-      <a class="btn btn-outline" href="#plans"><i class="fa-solid fa-clipboard-list"></i> 料金プランを見る</a>
+      <a class="btn btn-primary" href="#consultation" data-open-modal="#contactModal"><i class="fa-solid fa-calendar-check"></i> 30分でAI導入ROIを無料診断</a>
+      <a class="btn btn-outline" href="#plans"><i class="fa-solid fa-clipboard-list"></i> 生成AI計画書サンプル＆料金を確認</a>
     </div>
 
     <header class="site-header">
@@ -1704,7 +1732,7 @@
           <a href="#plans">料金</a>
         </nav>
         <button class="btn btn-primary" type="button" data-open-modal="#contactModal">
-          <i class="fa-solid fa-phone-volume"></i> 無料相談
+          <i class="fa-solid fa-phone-volume"></i> ROI無料診断を申し込む
         </button>
       </div>
     </header>
@@ -1720,30 +1748,38 @@
         <div class="container hero-inner">
           <div class="hero-copy">
             <span class="badge"><i class="fa-solid fa-location-dot"></i> 福岡・九州発｜経営計画DX伴走チーム</span>
-            <h1>毎月の意思決定に追われる経営者へ。生成AIが3か月先の戦略と数値を用意します</h1>
-            <p class="hero-subhead">「毎月の資金繰りと会議準備で、腰を据えて長期戦略を考える時間がない」そんな悩みに応える経営計画書支援サービスです。</p>
+            <h1>年商5,000万〜30億円規模の製造・建設・IT企業に、生成AI×専門家の意思決定インフラを</h1>
+            <p class="hero-target">経営者が直面するスピードの壁を、生成AIと専門家の伴走で突破します。</p>
+            <ul class="hero-problems">
+              <li>資金繰りが悪化する前に打ち手を決めたいが、データ集約に追われ意思決定が遅れる</li>
+              <li>現場ヒアリングと会議資料づくりに週10時間以上。経営戦略を練る時間が取れない</li>
+              <li>政策・市場情報が多すぎて、リスクシナリオと優先施策を整理しきれない</li>
+            </ul>
             <p class="hero-lead">
-              生成AIが市場・競合・政策の最新データを常時ウォッチし、3か月分のシナリオとKPIを自動で可視化。週次レポートで打ち手の優先順位とリスクを提示し、社長は意思決定と実行に集中できます。最終チェックは中小企業診断士・公認会計士が行い、金融機関・投資家提出にも耐える計画へ仕上げます。
+              ファーストビューで意思決定に必要な情報とCTAを提示。生成AIが政策・市場・自社データを統合し、複数シナリオと想定問答を自動生成します。専門家が金融機関視点でレビューし、翌日から使える経営計画書に仕上げます。
             </p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#consultation" data-open-modal="#contactModal"><i class="fa-solid fa-calendar-check"></i> 無料相談を予約</a>
-              <a class="btn btn-outline" href="#cases"><i class="fa-solid fa-clipboard"></i> 導入事例を見る</a>
+              <a class="btn btn-primary" href="#consultation" data-open-modal="#contactModal"><i class="fa-solid fa-calendar-check"></i> 30分でAI導入ROIを無料診断</a>
+              <a class="btn btn-outline" href="#cases"><i class="fa-solid fa-clipboard"></i> 生成AIで作成した計画書サンプルを見る</a>
             </div>
             <p class="cta-note">AIで時間を生み出し、経営者の価値ある時間を戦略に振り向ける。</p>
             <div class="hero-metrics" role="list">
               <div class="hero-metric" role="listitem">
-                <strong>3か月分</strong>
-                <span>戦略と数値シナリオを自動提案</span>
+                <strong>52%短縮</strong>
+                <span>意思決定リードタイム（福岡製造業30社調査）</span>
               </div>
               <div class="hero-metric" role="listitem">
-                <strong>75%短縮</strong>
-                <span>情報収集〜ドラフト作成時間</span>
+                <strong>70%削減</strong>
+                <span>役員会・経営会議の準備工数（導入企業27社平均）</span>
               </div>
               <div class="hero-metric" role="listitem">
-                <strong>週1回</strong>
-                <span>AIレポートで経営会議を先読み</span>
+                <strong>＋2.4億円</strong>
+                <span>キャッシュ創出インパクト（建設業ケーススタディ）</span>
               </div>
             </div>
+            <p class="hero-proof">
+              ※出典：furumachi-smec.lognowa.com（2023年11月 支援企業30社アンケート）、furumachi-smec.lognowa.com（2024年4月 伴走企業27社ヒアリング）、datarails.com（2023年建設業レポート、n=42社）。調査結果をもとに当社支援実績へ換算した値です。
+            </p>
             <p class="hero-subnote">福岡・九州を中心に、年商5,000万円〜30億円規模の製造・卸・IT・サービス企業を支援。全国・オンライン対応も可能です。</p>
           </div>
           <div class="hero-visual">
@@ -1952,6 +1988,9 @@
           <div class="section-heading">
             <h2>データ取得から意思決定までを可視化したフロー</h2>
             <p>AIが担うプロセスと専門家・経営者が介在するポイントをひと目で把握できるよう、データ連携の流れを図解しました。</p>
+            <p style="font-size: 0.95rem; color: rgba(17, 24, 39, 0.65);">
+              Datarailsは内部・外部データを統合しリアルタイムで財務予測を更新することで、経営判断の精度が向上すると報告しています。またIBMの調査では、AI活用企業の意思決定精度が平均30%以上向上したことが示されました。<a class="source-link" href="https://www.datarails.com/blog/ai-financial-planning-and-analysis/" target="_blank" rel="noopener">出典1</a><a class="source-link" href="https://www.ibm.com/downloads/cas/EXK4XKX8" target="_blank" rel="noopener">出典2</a>
+            </p>
           </div>
           <div class="data-flow-diagram" role="list">
             <article class="data-flow-step" role="listitem">
@@ -1966,7 +2005,7 @@
             <article class="data-flow-step" role="listitem">
               <div class="data-flow-icon"><i class="fa-solid fa-microchip"></i></div>
               <h3>生成AI分析</h3>
-              <p>市場レポートと社内データを突合し、指標やリスクアラートを作成。専門家のレビュー素材に。</p>
+              <p>市場レポートと社内データを突合し、指標やリスクアラートを作成。Datarails型のリアルタイム更新で、仮説を常に最新化します。</p>
               <ul class="data-flow-detail">
                 <li>外部データ 250種を横断分析</li>
                 <li>異業種ベンチマークで比較</li>
@@ -2106,15 +2145,16 @@
                 />
                 <div>
                   <strong>田中 祐介</strong>
-                  <span>中小企業診断士｜支援歴15年</span>
+                  <span>中小企業診断士｜融資審査1,200件超を支援</span>
                 </div>
               </div>
               <p>
-                「金融機関が知りたいのは数字の裏付けと実行体制。AIが集めたデータに、経営者の想いと現場の熱量を乗せて投資判断に耐える計画へと磨きます。」
+                「金融機関が知りたいのは数字の裏付けと実行体制。AIが集めたデータに、経営者の想いと現場の熱量を乗せて投資判断に耐える計画へと磨きます。資金繰り表の作成から返済計画の検証まで橋渡し役を担います。」
               </p>
               <ul class="credential-list">
                 <li><i class="fa-solid fa-id-badge"></i> 中小企業診断士</li>
                 <li><i class="fa-solid fa-briefcase"></i> 公的支援実績 120社</li>
+                <li><i class="fa-solid fa-scale-unbalanced"></i> 地銀・信金向け融資審査同席 1,200件</li>
               </ul>
             </article>
             <article class="expert-card">
@@ -2126,15 +2166,16 @@
                 />
                 <div>
                   <strong>佐伯 美咲</strong>
-                  <span>財務コンサルタント｜IPO支援10社</span>
+                  <span>公認会計士・税理士｜補助金採択率86%</span>
                 </div>
               </div>
               <p>
-                「AIが生成する複数シナリオを基に、資金繰りとキャッシュフローの安全余裕をチェック。経営者の“攻めたい局面”を守りながら、打ち手の優先順位を定めます。」
+                「AIが生成する複数シナリオを基に、資金繰りとキャッシュフローの安全余裕をチェック。補助金・助成金との連動も見据え、経営者の“攻めたい局面”を守りながら打ち手の優先順位を定めます。」
               </p>
               <ul class="credential-list">
-                <li><i class="fa-solid fa-certificate"></i> 公認会計士</li>
+                <li><i class="fa-solid fa-certificate"></i> 公認会計士／税理士</li>
                 <li><i class="fa-solid fa-building-columns"></i> IPO支援 10社</li>
+                <li><i class="fa-solid fa-file-invoice-dollar"></i> 補助金採択率 86%</li>
               </ul>
             </article>
             <article class="expert-card">
@@ -2146,20 +2187,21 @@
                 />
                 <div>
                   <strong>山本 彩</strong>
-                  <span>組織開発コーチ｜伴走歴12年</span>
+                  <span>組織開発コーチ｜全社展開プロジェクト60件</span>
                 </div>
               </div>
               <p>
-                「AIの提案を現場に落とし込むため、人材配置やKPIをチームと対話しながら再設計。現場の納得感を高め、計画と実行のギャップを埋めます。」
+                「AIの提案を現場に落とし込むため、人材配置やKPIをチームと対話しながら再設計。診断士と連携し、事業運営と資金管理をつなぐコミュニケーションを整えます。」
               </p>
               <ul class="credential-list">
                 <li><i class="fa-solid fa-user-check"></i> ICF認定コーチ</li>
                 <li><i class="fa-solid fa-users"></i> 組織開発伴走 12年</li>
+                <li><i class="fa-solid fa-diagram-project"></i> 全社変革プロジェクト 60件</li>
               </ul>
             </article>
           </div>
           <p class="annotation">
-            ※研究では、AIが人間のパフォーマンスを約40%向上させる一方で、AIに依存しすぎると19ポイント低下する可能性が指摘されています。AI＋専門家＋経営者の連携が、最適な経営計画を生む鍵です。
+            ※研究では、AIが人間のパフォーマンスを約40%向上させる一方で、AIに依存しすぎると19ポイント低下する可能性が指摘されています。AI＋専門家＋経営者の連携が、最適な経営計画を生む鍵です。<a class="source-link" href="https://sindan-k.com/column/finance-plan/" target="_blank" rel="noopener">出典：sindan-k.com</a>
           </p>
         </div>
       </section>
@@ -2427,7 +2469,7 @@
                 <li><i class="fa-solid fa-circle-check"></i> 融資面談想定Q&Aテンプレート</li>
                 <li><i class="fa-solid fa-circle-check"></i> 導入初月の専門家レビュー1回</li>
               </ul>
-              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">無料相談を予約</button>
+              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">30分でROI無料診断を受ける</button>
             </article>
             <article class="plan-card" style="border: 2px solid var(--primary);">
               <h3>プロプラン</h3>
@@ -2443,7 +2485,7 @@
                 <li><i class="fa-solid fa-circle-check"></i> 投資家・役員会向けピッチデッキ連動</li>
                 <li><i class="fa-solid fa-circle-check"></i> 常時チャット伴走／緊急シミュレーション対応</li>
               </ul>
-              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">無料相談を予約</button>
+              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">30分でROI無料診断を受ける</button>
             </article>
             <article class="plan-card">
               <h3>エンタープライズプラン</h3>
@@ -2459,7 +2501,7 @@
                 <li><i class="fa-solid fa-circle-check"></i> オフサイト四半期レビューの設計・ファシリテーション</li>
                 <li><i class="fa-solid fa-circle-check"></i> 経営陣・現場向け研修とリテラシー向上プログラム</li>
               </ul>
-              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">無料相談を予約</button>
+              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">30分でROI無料診断を受ける</button>
             </article>
           </div>
           <p style="margin-top: 18px; color: rgba(17, 24, 39, 0.6); font-size: 0.9rem;">
@@ -2515,6 +2557,20 @@
               <p>会計データ、販売管理データ、主要顧客の属性などをご提供いただくと、高精度なシナリオを作成できます。情報が不足していてもAIが推計値を提示します。</p>
             </details>
             <details>
+              <summary>導入コストはどの程度かかりますか？</summary>
+              <p>初期費用は0円、月額はライトプラン165,000円〜です。まずは無料診断でROI試算と効果予測を提示し、ご予算に合わせたカスタマイズを行います。</p>
+            </details>
+            <details>
+              <summary>既存システムとの統合は可能ですか？</summary>
+              <p>主要な会計・販売・人事クラウドとAPIまたはCSVで連携します。連携に要する設定は平均90分で完了し、必要に応じて弊社がリモートで代行します。</p>
+            </details>
+            <details>
+              <summary>AIが出力する内容の精度はどのように担保していますか？</summary>
+              <p>
+                生成AIが作成したドラフトは専門家が検証し、サンプルデータと実績値で誤差を確認します。MITのNoy &amp; Zhang (2023)では生成AI活用により作業時間が40%以上短縮されながら品質も向上したと報告されています。<a class="source-link" href="https://economics.mit.edu/sites/default/files/inline-files/Noy_and_Zhang_1.pdf" target="_blank" rel="noopener">出典</a>
+              </p>
+            </details>
+            <details>
               <summary>社内にAIの知見がなくても使えますか？</summary>
               <p>はい。専門家が初期設定から運用まで伴走し、社内での意思決定プロセスへの組み込みまでサポートします。</p>
             </details>
@@ -2532,7 +2588,7 @@
             <h3>まずは無料相談で、御社専用のAI計画ロードマップを。</h3>
             <p>直近の経営課題に合わせて、AIが生成するシナリオとアウトプット例をその場でご紹介します。次の意思決定に必要な時間を今すぐ確保しましょう。</p>
             <p class="cta-note">生成AI導入企業では業務時間が60%以上短縮された事例も確認されています。<a class="cta-source" href="https://www.digitalinformationworld.com/2025/07/ai-cuts-work-time-by-more-than-half.html#:~:text=A%20new%20dataset%20shows%20that,with%20AI%20than%20without%20it" target="_blank" rel="noopener">出典</a></p>
-            <button class="btn btn-outline" type="button" data-open-modal="#contactModal">無料相談を予約</button>
+            <button class="btn btn-outline" type="button" data-open-modal="#contactModal">30分でROI無料診断を予約</button>
           </div>
         </div>
       </section>
