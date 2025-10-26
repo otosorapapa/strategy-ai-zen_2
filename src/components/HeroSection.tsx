@@ -1,8 +1,7 @@
-import { Button, buttonVariants } from "@/components/ui/button";
-import heroImage from "@/assets/hero-consulting.jpg";
+import { Button } from "@/components/ui/button";
+import heroImage from "@/assets/hero-fukuoka.jpg";
 import { PRIMARY_CTA } from "@/lib/ctaVariants";
 import AnimatedCounter from "@/components/AnimatedCounter";
-import { cn } from "@/lib/utils";
 import {
   ArrowRight,
   BarChart3,
@@ -12,7 +11,6 @@ import {
   JapaneseYen,
   LineChart,
   Lock,
-  Phone,
   PiggyBank,
   PieChart,
   ShieldCheck,
@@ -152,17 +150,17 @@ const HeroSection = () => {
               </span>
             </div>
             <h1 className="mt-5 text-balance text-[1.9rem] font-bold leading-[1.25] text-slate-900">
-              リアルタイムAIで意思決定時間を1/2に。資金繰りと売上を同時改善
+              経営改善に鍛えられた中小企業診断士×生成AI＝意思決定の質・速さ・先見性を高める経営計画
             </h1>
             <p className="mt-4 text-sm font-semibold uppercase tracking-[0.32em] text-primary/80">
-              製造業・建設業の中小企業経営者向け
+              経営者の判断時間を半減し、先読みできる打ち手を届ける
             </p>
             <div className="mt-4 space-y-3 text-[0.95rem] leading-relaxed text-muted-foreground">
               <p>
-                furumachi-smec.lognowa.com の生成AIが会計・現場・市場データを束ね、意思決定に必要な数字と根拠を同じ画面で提示。社長は判断に集中できます。
+                現場・会計・市場のデータを生成AIが束ね、意思決定に必要な数字と根拠を即時に提示。診断士がシナリオの妥当性を検証し、実行ロードマップまで伴走します。
               </p>
               <p>
-                週1回のAIレポートが粗利・キャッシュ・在庫の変動を図解し、意思決定の確度とスピードを両立。年間1,200時間の会議準備を削減した事例もあります。
+                重要指標の監視とレポートを自動化し、経営会議の準備時間を50％以上短縮。先行指標まで可視化された経営計画で、判断の速さと再現性を両立させます。
               </p>
             </div>
 
@@ -182,15 +180,11 @@ const HeroSection = () => {
                 <CheckCircle2 className="cta-check h-5 w-5" aria-hidden="true" />
               </Button>
               <a
-                href="tel:+81922312920"
-                aria-label="電話で無料経営診断を予約"
-                className={cn(
-                  buttonVariants({ variant: "hero", size: "lg" }),
-                  "call-now-button flex h-auto w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold shadow-card",
-                )}
+                href="#resources"
+                className="text-center text-sm font-semibold text-primary underline-offset-4 hover:underline"
+                data-cta-id="secondary-hero"
               >
-                <Phone className="h-5 w-5" aria-hidden="true" />
-                お電話で診断予約
+                資料ダウンロードはこちら
               </a>
               <p className="text-center text-xs font-semibold uppercase tracking-[0.32em] text-muted-foreground">
                 初回相談は無料｜所要30分
@@ -353,20 +347,20 @@ const HeroSection = () => {
                   </span>
                 </div>
                 <h1 className="text-balance text-3xl font-bold leading-[1.25] text-foreground md:text-4xl lg:text-[3.05rem] lg:leading-[1.25]">
-                  リアルタイムAIで意思決定時間を1/2に。資金繰りと売上を同時改善
+                  経営改善に鍛えられた中小企業診断士×生成AI＝意思決定の質・速さ・先見性を高める経営計画
                 </h1>
                 <div className="space-y-3 rounded-3xl bg-white/92 px-6 py-5 shadow-lg shadow-primary/10 ring-1 ring-primary/15">
                   <p className="text-sm font-semibold uppercase tracking-[0.28em] text-primary/80">
-                    製造業・建設業の中小企業経営者向け
+                    経営者の判断時間を半減し、未来の一手を先読み
                   </p>
                   <div className="space-y-2 text-[1.05rem] leading-relaxed text-muted-foreground md:text-lg">
-                    <p>furumachi-smec.lognowa.com の生成AIが会計・現場・市場データをリアルタイムで束ね、意思決定に必要な数字と根拠を同じ画面で提示。</p>
-                    <p>経営者は最適シナリオを選ぶだけで、粗利改善と資金計画が自動で整います。</p>
+                    <p>生成AIが会計・現場・市場データを統合し、意思決定に必要な根拠と数値を即時に整理。</p>
+                    <p>中小企業診断士がシナリオのリスクと実行手順を補強し、先読みできる経営計画へ落とし込みます。</p>
                   </div>
                 </div>
                 <div className="max-w-3xl space-y-2 text-[1.05rem] leading-relaxed text-muted-foreground md:text-lg">
-                  <p>週1回のAIレポートが粗利・キャッシュ・在庫の変動を数分で図解し、必要なデータをリアルタイムで経営陣に配信します。</p>
-                  <p>単純作業の自動化により年間1,200時間の資料作成を削減した事例も。金融機関への説明資料と経営会議の準備時間を最大70%短縮し、意思決定の確度と速度を両立させます。</p>
+                  <p>AIレポートが粗利・キャッシュ・在庫の変化を数分で図解し、判断材料をワンクリックで共有。</p>
+                  <p>会議準備を50％以上短縮しつつ、先行指標と複数シナリオを提示することで、意思決定の確度とスピードを両立します。</p>
                 </div>
                 <div className="flex flex-col gap-3 rounded-3xl border border-highlight/30 bg-highlight/10 px-6 py-5 text-highlight-foreground">
                   <span className="text-sm font-semibold uppercase tracking-[0.3em] text-highlight-foreground/80">実感できる成果</span>
@@ -437,17 +431,13 @@ const HeroSection = () => {
                   </span>
                 </Button>
               </div>
-              <div className="flex flex-wrap items-center gap-3 text-[0.95rem] text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-4 text-[0.95rem] text-muted-foreground">
                 <a
-                  href="tel:+81922312920"
-                  aria-label="電話で無料経営診断を予約"
-                  className={cn(
-                    buttonVariants({ variant: "hero", size: "lg" }),
-                    "call-now-button h-auto rounded-full px-8 py-4 text-[1.05rem] font-semibold shadow-card transition-transform duration-300 hover:-translate-y-0.5",
-                  )}
+                  href="#resources"
+                  className="font-semibold text-primary underline-offset-4 hover:underline"
+                  data-cta-id="secondary-hero"
                 >
-                  <Phone className="h-5 w-5" aria-hidden="true" />
-                  お電話で診断予約
+                  資料ダウンロードはこちら
                 </a>
                 <span>平日9:00-18:00｜オンライン・訪問どちらも対応</span>
               </div>
@@ -511,7 +501,7 @@ const HeroSection = () => {
               <div className="relative overflow-hidden rounded-[36px] border border-primary/20 bg-white shadow-elegant">
                 <img
                   src={heroImage}
-                  alt="AIと管理会計で中小企業の経営改善を支援する伴走型コンサルタント"
+                  alt="生成AIのダッシュボードを見ながら経営者と専門家が議論している様子"
                   className="h-full max-h-[420px] w-full object-cover brightness-110"
                   loading="eager"
                   fetchPriority="high"
