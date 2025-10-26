@@ -57,6 +57,7 @@ const sections = [
   { id: "outcome", label: "成果" },
   { id: "process", label: "導入の流れ" },
   { id: "quarterly", label: "四半期レビュー" },
+  { id: "simulator", label: "ROI試算" },
   { id: "pricing", label: "料金" },
   { id: "faq", label: "FAQ" },
   { id: "stories", label: "お客様の声" },
@@ -800,6 +801,7 @@ const contactSteps = [
 
 const Index = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>(sections[0].id);
   const [heroParallax, setHeroParallax] = useState(0);
   const [metricsActive, setMetricsActive] = useState(false);
   const [metricValues, setMetricValues] = useState(() =>
@@ -1043,6 +1045,19 @@ const Index = () => {
     setFormSubmitted(false);
   };
 
+  const handleNavClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
+    event.preventDefault();
+    const element = sectionRefs.current[id];
+    if (!element) return;
+
+    const headerOffset = 96;
+    const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: elementPosition - headerOffset, behavior: "smooth" });
+  };
+
   const validateContactStep = (step: number) => {
     if (step === 1) {
       if (!contactForm.name.trim()) {
@@ -1147,6 +1162,29 @@ const Index = () => {
       </header>
 
       <main>
+        <nav
+          className={`section-nav ${isScrolled ? "is-floating" : ""}`}
+          aria-label="ページ内ナビゲーション"
+        >
+          <div className="container">
+            <ul className="section-nav__list">
+              {sections.map((section) => (
+                <li key={section.id}>
+                  <a
+                    className={`section-nav__link ${
+                      activeSection === section.id ? "is-active" : ""
+                    }`}
+                    href={`#${section.id}`}
+                    onClick={(event) => handleNavClick(event, section.id)}
+                    aria-current={activeSection === section.id ? "page" : undefined}
+                  >
+                    {section.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
         {/* ヒーローセクション: 価値訴求とアニメーション */}
         <section
           id="hero"
@@ -1738,6 +1776,9 @@ const Index = () => {
         {/* ROIシミュレーター セクション */}
         <section
           id="simulator"
+          ref={(node) => {
+            sectionRefs.current["simulator"] = node ?? null;
+          }}
           className="section simulator"
           aria-labelledby="simulator-heading"
         >
@@ -1747,6 +1788,19 @@ const Index = () => {
               <p>
                 入力値に合わせて<abbr title="投資利益率">ROI</abbr>を更新。
                 生産性の伸びを即時に表示。
+              </p>
+            </div>
+            <div className="simulator-guidance" data-animate>
+              <h3>使い方のポイント</h3>
+              <ol>
+                <li>年商規模と意思決定工数を入力して現在の負荷を把握。</li>
+                <li>
+                  「月次AI投資予算」で想定コストを設定すると、年間投資額と削減効果が比較できます。
+                </li>
+                <li>優先領域を選ぶと、削減工数の内訳と期待ROIの解釈が表示されます。</li>
+              </ol>
+              <p>
+                数値は当社導入企業の平均値をもとに推計しています。個別相談では自社データで詳細試算が可能です。
               </p>
             </div>
             <div className="simulator-content" data-animate>
