@@ -1,5 +1,6 @@
 import {
   ChangeEvent,
+  FocusEvent,
   FormEvent,
   MouseEvent,
   useEffect,
@@ -51,19 +52,12 @@ import type { LucideIcon } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const sections = [
-  { id: "hero", label: "トップ" },
   { id: "problem", label: "課題" },
   { id: "solution", label: "解決策" },
   { id: "outcome", label: "成果" },
   { id: "process", label: "導入の流れ" },
-  { id: "quarterly", label: "四半期レビュー" },
-  { id: "simulator", label: "ROI試算" },
   { id: "pricing", label: "料金" },
   { id: "faq", label: "FAQ" },
-  { id: "stories", label: "お客様の声" },
-  { id: "resources", label: "資料" },
-  { id: "security", label: "セキュリティ" },
-  { id: "contact", label: "お問い合わせ" },
 ];
 
 const heroMetrics = [
@@ -788,25 +782,15 @@ type ContactFormState = {
   name: string;
   company: string;
   email: string;
-  phone: string;
   message: string;
-  preferredDate: string;
 };
 
 const initialContact: ContactFormState = {
   name: "",
   company: "",
   email: "",
-  phone: "",
   message: "",
-  preferredDate: "",
 };
-
-const contactSteps = [
-  { id: 1, title: "基本情報", description: "氏名と会社名" },
-  { id: 2, title: "連絡方法", description: "メールと任意の電話" },
-  { id: 3, title: "相談内容", description: "課題を共有" },
-];
 
 const Index = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -819,17 +803,16 @@ const Index = () => {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [simulator, setSimulator] = useState<SimulatorState>(defaultSimulator);
   const [contactForm, setContactForm] = useState<ContactFormState>(initialContact);
-  const [contactStep, setContactStep] = useState(1);
+  const [formErrors, setFormErrors] = useState<
+    Partial<Record<keyof ContactFormState, string>
+  >({});
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
-  const [stepError, setStepError] = useState<string | null>(null);
   const [isFloatingHidden, setIsFloatingHidden] = useState(false);
   const [isDemoOpen, setIsDemoOpen] = useState(false);
   const [isDemoPlaying, setIsDemoPlaying] = useState(false);
 
-  const contactStepCount = contactSteps.length;
-  const contactProgress = Math.round((contactStep / contactStepCount) * 100);
   const metricsRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const securityBadges = useMemo(() => securityPoints.slice(0, 3), []);
@@ -918,6 +901,11 @@ const Index = () => {
       explanation,
     };
   }, [simulator]);
+
+  const nameError = formErrors.name;
+  const companyError = formErrors.company;
+  const emailError = formErrors.email;
+  const messageError = formErrors.message;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -1044,14 +1032,67 @@ const Index = () => {
     }));
   };
 
+  const getFieldError = (
+    field: keyof ContactFormState,
+    value: string
+  ): string | undefined => {
+    const trimmed = value.trim();
+    if (field === "name" && trimmed.length === 0) {
+      return "氏名を入力してください。";
+    }
+    if (field === "company" && trimmed.length === 0) {
+      return "会社名を入力してください。";
+    }
+    if (field === "email") {
+      if (trimmed.length === 0) {
+        return "メールアドレスを入力してください。";
+      }
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(trimmed)) {
+        return "正しいメールアドレスを入力してください。";
+      }
+    }
+    if (field === "message" && trimmed.length > 0 && trimmed.length < 10) {
+      return "相談内容は10文字以上で入力してください。";
+    }
+    return undefined;
+  };
+
   const handleContactChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
-    setContactForm((prev) => ({ ...prev, [name]: value }));
-    setStepError(null);
+    const field = name as keyof ContactFormState;
+    setContactForm((prev) => ({ ...prev, [field]: value }));
+    setFormErrors((prev) => {
+      const next = { ...prev };
+      const error = getFieldError(field, value);
+      if (error) {
+        next[field] = error;
+      } else {
+        delete next[field];
+      }
+      return next;
+    });
     setSubmissionError(null);
     setFormSubmitted(false);
+  };
+
+  const handleContactBlur = (
+    event: FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    const field = name as keyof ContactFormState;
+    const error = getFieldError(field, value);
+    setFormErrors((prev) => {
+      const next = { ...prev };
+      if (error) {
+        next[field] = error;
+      } else {
+        delete next[field];
+      }
+      return next;
+    });
   };
 
   const handleNavClick = (
@@ -1062,83 +1103,46 @@ const Index = () => {
     const element = sectionRefs.current[id];
     if (!element) return;
 
-    const headerOffset = 96;
+    const headerOffset = 88;
     const elementPosition = element.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top: elementPosition - headerOffset, behavior: "smooth" });
-  };
-
-  const validateContactStep = (step: number) => {
-    if (step === 1) {
-      if (!contactForm.name.trim()) {
-        return "氏名を入力してください。";
-      }
-      if (!contactForm.company.trim()) {
-        return "会社名を入力してください。";
-      }
-    }
-    if (step === 2) {
-      if (!contactForm.email.trim()) {
-        return "メールアドレスを入力してください。";
-      }
-      if (
-        contactForm.phone.trim() &&
-        !/^[0-9+\-()\s]+$/.test(contactForm.phone.trim())
-      ) {
-        return "電話番号の形式をご確認ください。";
-      }
-    }
-    if (step === 3) {
-      if (!contactForm.message.trim()) {
-        return "相談内容を入力してください。";
-      }
-    }
-    return null;
-  };
-
-  const handleContactNext = () => {
-    const error = validateContactStep(contactStep);
-    if (error) {
-      setStepError(error);
-      return;
-    }
-    setStepError(null);
-    setContactStep((prev) => Math.min(contactStepCount, prev + 1));
-  };
-
-  const handleContactBack = () => {
-    setStepError(null);
-    setContactStep((prev) => Math.max(1, prev - 1));
   };
 
   const handleContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isSubmitting) return;
 
-    const error = validateContactStep(contactStep);
-    if (error) {
-      setStepError(error);
+    const nextErrors: Partial<Record<keyof ContactFormState, string>> = {};
+    (Object.keys(contactForm) as (keyof ContactFormState)[]).forEach((field) => {
+      const error = getFieldError(field, contactForm[field]);
+      if (error) {
+        nextErrors[field] = error;
+      }
+    });
+
+    if (Object.keys(nextErrors).length > 0) {
+      setFormErrors(nextErrors);
+      setSubmissionError("必須項目を確認してください。");
       return;
     }
-    setStepError(null);
 
     setIsSubmitting(true);
     setFormSubmitted(false);
     setSubmissionError(null);
 
     try {
-      const trimmedPhone = contactForm.phone.trim();
-      const trimmedPreferredDate = contactForm.preferredDate.trim();
       await submitContactForm({
         name: contactForm.name.trim(),
         company: contactForm.company.trim(),
         email: contactForm.email.trim(),
-        phone: trimmedPhone ? trimmedPhone : undefined,
-        message: contactForm.message.trim(),
-        preferredDate: trimmedPreferredDate ? trimmedPreferredDate : undefined,
+        message:
+          contactForm.message.trim().length > 0
+            ? contactForm.message.trim()
+            : "（相談内容未入力）",
       });
       setFormSubmitted(true);
       setContactForm(initialContact);
-      setContactStep(1);
+      setFormErrors({});
     } catch (error) {
       console.error("Failed to submit contact form", error);
       const message =
@@ -1161,10 +1165,10 @@ const Index = () => {
           </a>
           <div className="header-actions" role="group" aria-label="主要な申し込み導線">
             <a className="btn btn-outline" href="#resources">
-              資料ダウンロード
+              資料を無料で請求する
             </a>
             <a className="btn btn-primary" href="#contact">
-              30分無料相談
+              無料相談を予約する
             </a>
           </div>
         </div>
@@ -1207,31 +1211,27 @@ const Index = () => {
           <div className="hero-overlay" />
           <div className="container hero-inner">
             <div className="hero-copy" data-animate data-initial-visible="true">
-              <span className="badge">中小企業経営者向け</span>
-              <h1 id="hero-heading">
-                生成AIで経営判断を即断
-                <span>外部環境と自社データを同時分析</span>
-              </h1>
-              <ul className="hero-points">
-                <li>政策・市場・金融情報をAIが要約。</li>
-                <li>社長は優先課題だけを確認。</li>
-                <li>専門家が根拠資料を整備。</li>
-              </ul>
+              <span className="badge">経営計画DX支援</span>
+              <h1 id="hero-heading">経営改善に鍛えられた中小企業診断士 × 生成AI</h1>
+              <p className="hero-subheading">意思決定の質・速さ・先見性を高める経営計画を実現</p>
               <p className="hero-lead">
-                意思決定時間を平均52%短縮。
-                資料作成工数を80%削減。
-                月45時間の集中時間を創出。
+                経営改善のプロが生成AIを活用し、膨大な経営データと外部環境をリアルタイムに解析。
+                最適な経営シナリオを提示し、迅速かつ正確な意思決定を後押しします。
               </p>
+              <ul className="hero-points">
+                <li>診断士とAIが意思決定に必要な論点を事前に整理。</li>
+                <li>最新の政策・金融指標を自動反映し、経営リスクを先読み。</li>
+                <li>専門家が資料を監修し、金融機関との対話もスムーズに。</li>
+              </ul>
               <p className="hero-sub">
-                四半期ごとに外部データを自動更新。
-                リスクと機会を即時に共有。
+                まずは30分の無料相談で、生成AIがもたらす判断スピードと確信度の違いをご体験ください。
               </p>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
-                  30分無料相談を予約
+                  今すぐ無料相談を予約する
                 </a>
                 <a className="btn btn-ghost" href="#resources">
-                  資料で導入効果を見る
+                  資料を無料で請求する
                 </a>
               </div>
               <ul className="trust-badges" aria-label="セキュリティ対策">
@@ -2414,166 +2414,121 @@ const Index = () => {
                 );
               })}
             </ul>
-            <form className="contact-form" onSubmit={handleContactSubmit}>
-              <div className="contact-progress" aria-hidden="true">
-                <div className="contact-progress__track">
-                  <div
-                    className="contact-progress__bar"
-                    style={{ width: `${contactProgress}%` }}
-                  />
-                </div>
-                <span className="contact-progress__label">
-                  STEP {contactStep} / {contactStepCount}
-                </span>
-              </div>
-              <div className="contact-steps" role="list">
-                {contactSteps.map((step, index) => (
-                  <div
-                    key={step.id}
-                    className={`contact-step${contactStep === step.id ? " is-active" : ""}${contactStep > step.id ? " is-complete" : ""}`}
-                    role="listitem"
-                  >
-                    <span className="contact-step__number">{index + 1}</span>
-                    <div>
-                      <strong>{step.title}</strong>
-                      <span>{step.description}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              {stepError && (
-                <div className="form-error form-error--inline" role="alert" aria-live="assertive">
-                  {stepError}
-                </div>
-              )}
-              <fieldset
-                className={`contact-fieldset${contactStep === 1 ? " is-visible" : ""}`}
-                aria-hidden={contactStep !== 1}
-              >
-                <legend className="sr-only">基本情報</legend>
-                <div className="form-row">
-                  <label>
-                    氏名
-                    <input
-                      type="text"
-                      name="name"
-                      value={contactForm.name}
-                      onChange={handleContactChange}
-                      autoComplete="name"
-                      required
-                    />
-                  </label>
-                  <label>
-                    会社名
-                    <input
-                      type="text"
-                      name="company"
-                      value={contactForm.company}
-                      onChange={handleContactChange}
-                      autoComplete="organization"
-                      required
-                    />
-                  </label>
-                </div>
-              </fieldset>
-              <fieldset
-                className={`contact-fieldset${contactStep === 2 ? " is-visible" : ""}`}
-                aria-hidden={contactStep !== 2}
-              >
-                <legend className="sr-only">連絡方法</legend>
-                <div className="form-row">
-                  <label className="full-width">
-                    連絡先 (メール)
-                    <input
-                      type="email"
-                      name="email"
-                      value={contactForm.email}
-                      onChange={handleContactChange}
-                      placeholder="例: ceo@example.co.jp"
-                      autoComplete="email"
-                      required
-                    />
-                  </label>
-                  <label className="full-width optional">
-                    電話番号 (任意)
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={contactForm.phone}
-                      onChange={handleContactChange}
-                      placeholder="例: 03-1234-5678"
-                      autoComplete="tel"
-                    />
-                  </label>
-                </div>
-              </fieldset>
-              <fieldset
-                className={`contact-fieldset${contactStep === 3 ? " is-visible" : ""}`}
-                aria-hidden={contactStep !== 3}
-              >
-                <legend className="sr-only">相談内容</legend>
+            <form className="contact-form" onSubmit={handleContactSubmit} noValidate>
+              <p className="contact-form__note">必須項目は3つのみ。約60秒で送信が完了します。</p>
+              <div className="contact-form__grid">
                 <label>
-                  希望日時 (任意)
+                  氏名
                   <input
-                    type="datetime-local"
-                    name="preferredDate"
-                    value={contactForm.preferredDate}
+                    type="text"
+                    name="name"
+                    value={contactForm.name}
                     onChange={handleContactChange}
-                    min={new Date().toISOString().slice(0, 16)}
-                    aria-describedby="preferred-date-help"
-                  />
-                  <span id="preferred-date-help" className="input-help">
-                    カレンダーから希望する打ち合わせ日時を選択できます。
-                  </span>
-                </label>
-                <label>
-                  相談内容
-                  <textarea
-                    name="message"
-                    rows={5}
-                    value={contactForm.message}
-                    onChange={handleContactChange}
-                    placeholder="例: 事業計画の刷新時期と改善したい指標"
+                    onBlur={handleContactBlur}
+                    placeholder="例: 山田 太郎"
+                    autoComplete="name"
+                    aria-invalid={Boolean(nameError)}
+                    aria-describedby={nameError ? "contact-name-error" : "contact-name-help"}
                     required
                   />
+                  {nameError ? (
+                    <span className="input-error" id="contact-name-error">
+                      {nameError}
+                    </span>
+                  ) : (
+                    <span className="input-help" id="contact-name-help">
+                      ご担当者様のお名前をご入力ください。
+                    </span>
+                  )}
                 </label>
-                <ul className="contact-hints">
-                  <li>導入時期や予算感を一言で記入。</li>
-                  <li>気になる領域を箇条書きで共有。</li>
-                </ul>
-              </fieldset>
-              <div className="form-actions">
-                {contactStep > 1 && (
-                  <button
-                    type="button"
-                    className="btn btn-ghost"
-                    onClick={handleContactBack}
-                    disabled={isSubmitting}
-                  >
-                    戻る
-                  </button>
-                )}
-                {contactStep < contactStepCount ? (
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={handleContactNext}
-                    disabled={isSubmitting}
-                  >
-                    次へ進む
-                  </button>
+                <label>
+                  会社名
+                  <input
+                    type="text"
+                    name="company"
+                    value={contactForm.company}
+                    onChange={handleContactChange}
+                    onBlur={handleContactBlur}
+                    placeholder="例: 株式会社サンプル"
+                    autoComplete="organization"
+                    aria-invalid={Boolean(companyError)}
+                    aria-describedby={
+                      companyError ? "contact-company-error" : "contact-company-help"
+                    }
+                    required
+                  />
+                  {companyError ? (
+                    <span className="input-error" id="contact-company-error">
+                      {companyError}
+                    </span>
+                  ) : (
+                    <span className="input-help" id="contact-company-help">
+                      法人名または屋号をご記入ください。
+                    </span>
+                  )}
+                </label>
+                <label className="full-width">
+                  メールアドレス
+                  <input
+                    type="email"
+                    name="email"
+                    value={contactForm.email}
+                    onChange={handleContactChange}
+                    onBlur={handleContactBlur}
+                    placeholder="例: ceo@example.co.jp"
+                    autoComplete="email"
+                    aria-invalid={Boolean(emailError)}
+                    aria-describedby={
+                      emailError ? "contact-email-error" : "contact-email-help"
+                    }
+                    required
+                  />
+                  {emailError ? (
+                    <span className="input-error" id="contact-email-error">
+                      {emailError}
+                    </span>
+                  ) : (
+                    <span className="input-help" id="contact-email-help">
+                      ご連絡先のメールアドレスを入力してください。
+                    </span>
+                  )}
+                </label>
+              </div>
+              <label className="full-width optional">
+                相談したいこと (任意)
+                <textarea
+                  name="message"
+                  rows={5}
+                  value={contactForm.message}
+                  onChange={handleContactChange}
+                  onBlur={handleContactBlur}
+                  placeholder="例: 来期の投資判断を迅速化したい など"
+                  aria-invalid={Boolean(messageError)}
+                  aria-describedby={
+                    messageError ? "contact-message-error" : "contact-message-help"
+                  }
+                />
+                {messageError ? (
+                  <span className="input-error" id="contact-message-error">
+                    {messageError}
+                  </span>
                 ) : (
-                  <button className="btn btn-cta" type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <span className="btn-progress">
-                        <span className="btn-spinner" aria-hidden="true" />
-                        送信中...
-                      </span>
-                    ) : (
-                      "30分無料相談を申し込む"
-                    )}
-                  </button>
+                  <span className="input-help" id="contact-message-help">
+                    現状の課題や気になる点を自由にご記入ください。
+                  </span>
                 )}
+              </label>
+              <div className="form-actions">
+                <button className="btn btn-cta" type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <span className="btn-progress">
+                      <span className="btn-spinner" aria-hidden="true" />
+                      送信中...
+                    </span>
+                  ) : (
+                    "今すぐ無料相談を予約する"
+                  )}
+                </button>
                 <div className="form-messages">
                   <div className="form-feedback" role="status" aria-live="polite">
                     {isSubmitting && "送信を受け付けています..."}
@@ -2590,7 +2545,7 @@ const Index = () => {
           </div>
           <div className="mobile-form-cta" aria-hidden="true">
             <a className="btn btn-primary" href="#contact">
-              無料相談フォームを開く
+              無料相談を予約する
             </a>
           </div>
         </section>
