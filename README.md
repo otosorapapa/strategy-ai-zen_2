@@ -36,6 +36,24 @@ npm i
 npm run dev
 ```
 
+### Saving contact form submissions
+
+This project now ships with a lightweight Node.js server that stores contact form submissions as JSON files on disk.
+
+Start it locally alongside the Vite dev server:
+
+```sh
+# Terminal 1 – API for persisting form submissions
+npm run server
+
+# Terminal 2 – Frontend
+npm run dev
+```
+
+By default the frontend posts submissions to `http://localhost:3001/api/contact`. If you deploy the API elsewhere, set the
+`VITE_CONTACT_ENDPOINT` environment variable to the full endpoint URL before building or starting the frontend. Alternatively,
+define `VITE_CONTACT_API_BASE_URL` (e.g. `https://example.com`) to automatically append `/api/contact`.
+
 **Edit a file directly in GitHub**
 
 - Navigate to the desired file(s).
