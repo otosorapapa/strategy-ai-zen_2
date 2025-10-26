@@ -1159,7 +1159,7 @@ const Index = () => {
         >
           <div className="hero-overlay" />
           <div className="container hero-inner">
-            <div className="hero-copy" data-animate>
+            <div className="hero-copy" data-animate data-initial-visible="true">
               <span className="badge">中小企業経営者向け</span>
               <h1 id="hero-heading">
                 生成AIで経営判断を即断
@@ -1223,7 +1223,7 @@ const Index = () => {
               </div>
             </div>
             <div className="hero-visual">
-              <div className="hero-dashboard" data-animate aria-hidden="true">
+              <div className="hero-dashboard" data-animate data-initial-visible="true" aria-hidden="true">
                 <div className="dashboard-header">AIダッシュボード・ライブビュー</div>
                 <div className="dashboard-body">
                   <div className="dashboard-chart">
@@ -1256,7 +1256,7 @@ const Index = () => {
                 </div>
                 <div className="dashboard-footer">専門家レビュー中</div>
               </div>
-              <div className="hero-demo" data-animate>
+              <div className="hero-demo" data-animate data-initial-visible="true">
                 <div className="hero-demo__preview" aria-hidden="true">
                   <div className="hero-demo__glow" />
                   <div className="hero-demo__bars">
