@@ -1,0 +1,12 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="saitoGradient" x1="0" y1="40" x2="160" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#93c5fd" />
+      <stop offset="1" stop-color="#3dd6b5" />
+    </linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="159" height="159" rx="24" fill="url(#saitoGradient)" opacity="0.85" />
+  <circle cx="80" cy="62" r="30" fill="rgba(255,255,255,0.92)" />
+  <path d="M80 104c-25 0-40 10-46 30h92c-6-20-21-30-46-30z" fill="rgba(255,255,255,0.9)" />
+  <path d="M80 88c12 0 22-8 24-22-5 5-14 8-24 8s-19-3-24-8c2 14 12 22 24 22z" fill="#3dd6b5" opacity="0.25" />
+</svg>

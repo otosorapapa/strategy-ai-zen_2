@@ -1,0 +1,12 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="kobayashiGradient" x1="20" y1="0" x2="140" y2="160" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f59e58" />
+      <stop offset="1" stop-color="#60a5fa" />
+    </linearGradient>
+  </defs>
+  <rect x="0.5" y="0.5" width="159" height="159" rx="24" fill="url(#kobayashiGradient)" opacity="0.85" />
+  <circle cx="80" cy="68" r="30" fill="rgba(255,255,255,0.92)" />
+  <path d="M80 108c-26 0-42 11-48 32h96c-6-21-22-32-48-32z" fill="rgba(255,255,255,0.9)" />
+  <path d="M80 92c13 0 24-9 26-24-5 5-15 8-26 8s-21-3-26-8c2 15 13 24 26 24z" fill="#f59e58" opacity="0.25" />
+</svg>
