@@ -8,9 +8,39 @@ import {
   useState,
 } from "react";
 
+import {
+  Award,
+  BarChart3,
+  BarChart4,
+  BookOpen,
+  Bot,
+  BrainCircuit,
+  CheckCircle2,
+  ClipboardCheck,
+  Compass,
+  Database,
+  FileText,
+  Layers3,
+  LineChart,
+  Lock,
+  PlayCircle,
+  ScanSearch,
+  Shield,
+  ShieldCheck,
+  Sparkles,
+  Users2,
+  Workflow,
+} from "lucide-react";
+
 import { submitContactForm } from "@/lib/contact-api";
 
+import expertKobayashi from "@/assets/expert-kobayashi.svg";
+import expertSaito from "@/assets/expert-saito.svg";
+import expertTanaka from "@/assets/expert-tanaka.svg";
+
 import "../../styles/lp.css";
+
+import type { LucideIcon } from "lucide-react";
 
 const sections = [
   { id: "hero", label: "トップ" },
@@ -50,6 +80,27 @@ const heroMetrics = [
     prefix: "-",
     suffix: "万円",
     target: 1000,
+  },
+];
+
+const insightHighlights = [
+  {
+    value: "-67%",
+    label: "計画策定リードタイム",
+    description: "6週間→2週間への短縮",
+    accent: "sunrise",
+  },
+  {
+    value: "-1,750h",
+    label: "年間削減工数",
+    description: "AI自動化で創出した時間",
+    accent: "mint",
+  },
+  {
+    value: "92%",
+    label: "政策アップデート反映率",
+    description: "速報をダッシュボードに即時反映",
+    accent: "citrus",
   },
 ];
 
@@ -123,7 +174,17 @@ const utilizationComparisons = [
   },
 ];
 
-const responsibilityColumns = [
+type ResponsibilityColumn = {
+  id: string;
+  title: string;
+  summary: string;
+  detail: string;
+  points: string[];
+  icon: LucideIcon;
+  accent: "mint" | "sky" | "citrus";
+};
+
+const responsibilityColumns: ResponsibilityColumn[] = [
   {
     id: "ai",
     title: "AIがやること",
@@ -131,7 +192,8 @@ const responsibilityColumns = [
     detail:
       "最新の政策動向・市場統計・競合指標をクロールし、財務シミュレーションと想定問答、ドラフト資料を数分で提示します。",
     points: ["外部データの自動収集", "複数シナリオの財務予測", "想定問答と資料ドラフト"],
-    icon: "🤖",
+    icon: Bot,
+    accent: "mint",
   },
   {
     id: "ceo",
@@ -140,7 +202,8 @@ const responsibilityColumns = [
     detail:
       "AIの提案を精査し、自社のリスク許容度とビジョンに合わせて意思決定。社内外ステークホルダーへの説明と合意形成を行います。",
     points: ["重点施策の取捨選択", "リスクと投資配分の決定", "意思決定の説明責任"],
-    icon: "🧭",
+    icon: Compass,
+    accent: "citrus",
   },
   {
     id: "experts",
@@ -149,7 +212,8 @@ const responsibilityColumns = [
     detail:
       "金融機関・コンサル経験者がAI出力をレビューし、融資や投資審査で求められる水準に仕上げ、実行フェーズも伴走します。",
     points: ["レビューとチューニング", "金融機関連携・交渉支援", "四半期伴走ミーティング"],
-    icon: "🧑‍💼",
+    icon: Users2,
+    accent: "sky",
   },
 ];
 
@@ -239,78 +303,157 @@ const velocitySeries = [
 const velocityQuarters = ["2021Q4", "2022Q4", "2023Q4", "2024Q4"];
 const velocityMax = Math.max(...velocitySeries.flatMap((series) => series.values));
 
-const painPoints = [
+type PainPoint = {
+  title: string;
+  detail: string;
+  solution: string;
+  icon: LucideIcon;
+  accent: "mint" | "sky" | "citrus";
+};
+
+const painPoints: PainPoint[] = [
   {
     title: "情報が多すぎて追い切れない",
     detail: "ニュースや補助金情報が溢れ、重要度の判断に時間を奪われます。",
     solution: "AIが重要トピックを要約し、意思決定に直結する指標だけを提示。",
-    icon: "📡",
+    icon: ScanSearch,
+    accent: "sky",
   },
   {
     title: "資料作成に時間がかかる",
     detail: "計画書や金融機関向け資料の整形に多くの時間が割かれています。",
     solution: "ドラフトと図表をAIが生成。専門家チェックで信頼性を担保。",
-    icon: "📑",
+    icon: FileText,
+    accent: "mint",
   },
   {
     title: "最新環境を反映できない",
     detail: "市場変化を反映した計画更新が遅れ、競争力を失うリスクがあります。",
     solution: "ダッシュボードが外部データを自動更新し、シナリオを随時再計算。",
-    icon: "⚡",
+    icon: LineChart,
+    accent: "citrus",
   },
 ];
 
-const processSteps = [
+type ProcessStep = {
+  title: string;
+  description: string;
+  aiRole: string;
+  humanRole: string;
+  icon: LucideIcon;
+  accent: "mint" | "sky" | "citrus" | "navy";
+};
+
+const processSteps: ProcessStep[] = [
   {
     title: "キックオフ",
     description: "経営者の課題とゴールを共有。現状データを安全に受け渡します。",
     aiRole: "必要データのチェックリストを自動生成",
     humanRole: "経営者・専門家が優先順位を調整",
+    icon: ClipboardCheck,
+    accent: "mint",
   },
   {
     title: "AIドラフト生成",
     description: "AIが財務シミュレーションと戦略ドラフトを生成します。",
     aiRole: "情報収集・分析・KPI設計",
     humanRole: "経営者が仮説を確認しコメント",
+    icon: BrainCircuit,
+    accent: "sky",
   },
   {
     title: "専門家レビュー",
     description: "元コンサル・金融機関OBが内容の妥当性を検証。",
     aiRole: "フィードバック反映と再計算",
     humanRole: "専門家が修正と伴走支援",
+    icon: ShieldCheck,
+    accent: "navy",
   },
   {
     title: "意思決定・納品",
     description: "経営者が最終判断。金融機関提出用データと資料を納品します。",
     aiRole: "最終資料を整形しエビデンスを添付",
     humanRole: "経営者が意思決定し説明",
+    icon: CheckCircle2,
+    accent: "citrus",
   },
 ];
 
-const processTimeline = [
+type ProcessFlowStage = {
+  stage: string;
+  icon: LucideIcon;
+  aiFocus: string;
+  humanFocus: string;
+  accent: "mint" | "sky" | "citrus" | "navy";
+};
+
+const processTimeline: ProcessFlowStage[] = [
   {
     stage: "ヒアリング",
-    icon: "🗣️",
+    icon: Layers3,
     aiFocus: "AI: 議事録の自動要約とアクション抽出",
     humanFocus: "経営者×診断士: 経営課題と制約条件を言語化",
+    accent: "mint",
   },
   {
     stage: "AI分析",
-    icon: "🤖",
+    icon: BrainCircuit,
     aiFocus: "AI: 外部データ取得・財務シミュレーション・リスク検証",
     humanFocus: "経営者: 取捨選択と優先度の設定",
+    accent: "sky",
   },
   {
     stage: "専門家ブラッシュアップ",
-    icon: "🧑‍💼",
+    icon: ShieldCheck,
     aiFocus: "AI: 修正内容を反映し図表と想定問答を更新",
     humanFocus: "診断士: 金融機関目線と実行プランを整備",
+    accent: "navy",
   },
   {
     stage: "意思決定",
-    icon: "🧭",
+    icon: CheckCircle2,
     aiFocus: "AI: 最終資料と根拠データを整理",
     humanFocus: "経営者: 意思決定とステークホルダー説明",
+    accent: "citrus",
+  },
+];
+
+type DataFlowStage = {
+  label: string;
+  description: string;
+  icon: LucideIcon;
+  result: string;
+  accent: "mint" | "sky" | "citrus" | "navy";
+};
+
+const dataFlowStages: DataFlowStage[] = [
+  {
+    label: "外部・社内データの取り込み",
+    description: "政策更新、統計、金融機関レポート、社内実績を安全に連携",
+    icon: Database,
+    result: "信頼できるデータレイク",
+    accent: "mint",
+  },
+  {
+    label: "AI解析とシナリオ生成",
+    description: "Sparkエンジンで数百パターンのシミュレーションを高速計算",
+    icon: Sparkles,
+    result: "最適な戦略候補",
+    accent: "sky",
+  },
+  {
+    label: "専門家レビュー",
+    description: "融資・投資審査基準に沿ってエビデンスとリスクを補強",
+    icon: ShieldCheck,
+    result: "審査に耐える計画書",
+    accent: "navy",
+  },
+  {
+    label: "意思決定と実行",
+    description: "経営会議で決定し、実行ロードマップとKPIを共有",
+    icon: Workflow,
+    result: "実行フェーズへの移行",
+    accent: "citrus",
   },
 ];
 
@@ -374,65 +517,102 @@ const pricingPlans = [
   },
 ];
 
-const securityPoints = [
+type SecurityPoint = {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  badge: string;
+};
+
+const securityPoints: SecurityPoint[] = [
   {
     title: "AES-256暗号化",
     description: "通信・保存データを銀行水準の暗号化で保護。",
-    icon: "🔐",
+    icon: Lock,
     badge: "AES-256",
   },
   {
     title: "ISO/IEC 27001取得",
     description: "情報セキュリティマネジメントシステムを国際認証。",
-    icon: "🛡️",
+    icon: Shield,
     badge: "ISO 27001",
   },
   {
     title: "ISO/IEC 27701取得",
     description: "プライバシー情報管理の国際基準を満たしています。",
-    icon: "📜",
+    icon: ShieldCheck,
     badge: "ISO 27701",
   },
 ];
 
 const partnerLogos = ["A", "B", "C", "D", "E", "F"];
 
-const expertCards = [
+type ExpertCard = {
+  name: string;
+  title: string;
+  bio: string;
+  photo: string;
+  credentials: { icon: LucideIcon; label: string }[];
+};
+
+const expertCards: ExpertCard[] = [
   {
     name: "田中 圭",
     title: "元メガバンク法人融資担当",
     bio: "大型調達案件を多数支援。資本政策と金融機関交渉に精通。",
+    photo: expertTanaka,
+    credentials: [
+      { icon: ShieldCheck, label: "融資審査1,200件サポート" },
+      { icon: LineChart, label: "資金繰り最適化モデル監修" },
+    ],
   },
   {
     name: "小林 真",
     title: "元戦略コンサルティングファーム",
     bio: "事業再生・新規事業開発の戦略立案を20社以上支援。",
+    photo: expertKobayashi,
+    credentials: [
+      { icon: BarChart3, label: "中期経営計画策定 20社" },
+      { icon: Workflow, label: "DX推進プロジェクト伴走" },
+    ],
   },
   {
     name: "斎藤 美咲",
     title: "公認会計士 / 税理士",
     bio: "補助金・助成金対応と財務モデリングの専門家。",
+    photo: expertSaito,
+    credentials: [
+      { icon: Award, label: "認定支援機関 10年" },
+      { icon: FileText, label: "補助金採択率 86%" },
+    ],
   },
 ];
 
-const resourceCards = [
+type ResourceCard = {
+  title: string;
+  description: string;
+  cta: string;
+  icon: LucideIcon;
+};
+
+const resourceCards: ResourceCard[] = [
   {
     title: "経営計画ドラフトのサンプル",
     description: "匿名加工したドラフトの一部を公開。AIが生成するアウトプットの粒度をご確認いただけます。",
     cta: "サンプルを請求",
-    icon: "📄",
+    icon: FileText,
   },
   {
     title: "四半期レビューのチェックリスト",
     description: "外部環境の変化を90日ごとに見直すための観点をまとめたテンプレートを配布しています。",
     cta: "チェックリストを受け取る",
-    icon: "✅",
+    icon: ClipboardCheck,
   },
   {
     title: "生成AI活用レポート",
     description: "Generative AIの導入で成果を上げた中堅企業の事例集とリスク対策のまとめ資料です。",
     cta: "レポートをダウンロード",
-    icon: "📊",
+    icon: BarChart4,
   },
 ];
 
@@ -499,6 +679,8 @@ const Index = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
   const [isFloatingHidden, setIsFloatingHidden] = useState(false);
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
+  const [isDemoPlaying, setIsDemoPlaying] = useState(false);
 
   const metricsRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
@@ -564,7 +746,7 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    if (isMenuOpen) {
+    if (isMenuOpen || isDemoOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -572,7 +754,19 @@ const Index = () => {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isDemoOpen]);
+
+  useEffect(() => {
+    if (!isDemoOpen) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsDemoOpen(false);
+        setIsDemoPlaying(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isDemoOpen]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -812,8 +1006,8 @@ const Index = () => {
                 <span className="scroll-cue__label">スクロールして詳細を見る</span>
               </div>
             </div>
-            <div className="hero-visual" aria-hidden="true">
-              <div className="hero-dashboard" data-animate>
+            <div className="hero-visual">
+              <div className="hero-dashboard" data-animate aria-hidden="true">
                 <div className="dashboard-header">AIダッシュボード・ライブビュー</div>
                 <div className="dashboard-body">
                   <div className="dashboard-chart">
@@ -846,6 +1040,32 @@ const Index = () => {
                 </div>
                 <div className="dashboard-footer">専門家レビュー中</div>
               </div>
+              <div className="hero-demo" data-animate>
+                <div className="hero-demo__preview" aria-hidden="true">
+                  <div className="hero-demo__glow" />
+                  <div className="hero-demo__bars">
+                    <span />
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                  <div className="hero-demo__spark" />
+                </div>
+                <button
+                  type="button"
+                  className="hero-demo__button"
+                  onClick={() => {
+                    setIsDemoPlaying(false);
+                    setIsDemoOpen(true);
+                  }}
+                >
+                  <PlayCircle aria-hidden="true" />
+                  <span>1分で分かるAI意思決定デモ</span>
+                </button>
+                <p className="hero-demo__caption">
+                  AIが政策・市場データを束ねて経営者の判断材料を提示する流れを、アニメーションでご覧いただけます。
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -859,15 +1079,27 @@ const Index = () => {
           className="section insights"
           aria-labelledby="insights-heading"
         >
-          <div className="container">
-            <div className="section-header" data-animate>
-              <h2 id="insights-heading">導入後の定量インパクトを可視化</h2>
-              <p>
-                直近12か月で蓄積したデータを基に、導入企業の成果を定量化しました。
-                グラフや表で差分を確認しながら、自社導入時の投資対効果をイメージしていただけます。
-              </p>
-            </div>
-            <div className="insights-grid">
+            <div className="container">
+              <div className="section-header" data-animate>
+                <h2 id="insights-heading">導入後の定量インパクトを可視化</h2>
+                <p>
+                  直近12か月で蓄積したデータを基に、導入企業の成果を定量化しました。
+                  グラフや表で差分を確認しながら、自社導入時の投資対効果をイメージしていただけます。
+                </p>
+              </div>
+              <div className="insights-highlight-grid" data-animate>
+                {insightHighlights.map((highlight) => (
+                  <article
+                    key={highlight.label}
+                    className={`insight-highlight insight-highlight--${highlight.accent}`}
+                  >
+                    <span>{highlight.label}</span>
+                    <strong>{highlight.value}</strong>
+                    <p>{highlight.description}</p>
+                  </article>
+                ))}
+              </div>
+              <div className="insights-grid">
               <article className="insights-panel" data-animate>
                 <header className="insights-panel__header">
                   <h3>生成AI活用企業の戦略更新スピード</h3>
@@ -1012,14 +1244,18 @@ const Index = () => {
               </p>
             </div>
             <div className="roles-grid">
-              {responsibilityColumns.map((column) => (
-                <article
-                  key={column.id}
-                  className="role-card"
-                  data-animate
-                  tabIndex={0}
-                >
-                  <div className="role-icon" aria-hidden="true">{column.icon}</div>
+              {responsibilityColumns.map((column) => {
+                const RoleIcon = column.icon;
+                return (
+                  <article
+                    key={column.id}
+                    className={`role-card role-card--${column.accent}`}
+                    data-animate
+                    tabIndex={0}
+                  >
+                    <div className={`role-icon role-icon--${column.accent}`} aria-hidden="true">
+                      <RoleIcon />
+                    </div>
                   <h3>{column.title}</h3>
                   <p>{column.summary}</p>
                   <ul>
@@ -1030,8 +1266,9 @@ const Index = () => {
                   <div className="role-detail" aria-hidden="true">
                     {column.detail}
                   </div>
-                </article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-outline" href="#quarterly">
@@ -1187,14 +1424,19 @@ const Index = () => {
               <p>よくある悩みをAIがどう解消するのか、直感的に理解できます。</p>
             </div>
             <div className="pain-grid">
-              {painPoints.map((item) => (
-                <article key={item.title} className="pain-card" data-animate>
-                  <div className="pain-icon" aria-hidden="true">{item.icon}</div>
+              {painPoints.map((item) => {
+                const PainIcon = item.icon;
+                return (
+                  <article key={item.title} className={`pain-card pain-card--${item.accent}`} data-animate>
+                    <div className={`pain-icon pain-icon--${item.accent}`} aria-hidden="true">
+                      <PainIcon />
+                    </div>
                   <h3>{item.title}</h3>
                   <p>{item.detail}</p>
                   <div className="pain-solution">{item.solution}</div>
-                </article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -1214,37 +1456,64 @@ const Index = () => {
               <p>AIと人の役割を明確に分担し、意思決定の質を高めるプロセスです。</p>
             </div>
             <ol className="process-timeline">
-              {processSteps.map((step, index) => (
-                <li key={step.title} className="process-step" data-animate>
-                  <div className="process-marker" aria-hidden="true">
-                    <span>{index + 1}</span>
-                  </div>
-                  <div className="process-content">
-                    <h3>{step.title}</h3>
-                    <p>{step.description}</p>
-                    <div className="process-roles">
-                      <div>
-                        <strong>AI</strong>
-                        <span>{step.aiRole}</span>
-                      </div>
-                      <div>
-                        <strong>人</strong>
-                        <span>{step.humanRole}</span>
+              {processSteps.map((step, index) => {
+                const StepIcon = step.icon;
+                return (
+                  <li key={step.title} className={`process-step process-step--${step.accent}`} data-animate>
+                    <div className={`process-marker process-marker--${step.accent}`} aria-hidden="true">
+                      <span>{index + 1}</span>
+                      <StepIcon />
+                    </div>
+                    <div className="process-content">
+                      <h3>{step.title}</h3>
+                      <p>{step.description}</p>
+                      <div className="process-roles">
+                        <div>
+                          <strong>AI</strong>
+                          <span>{step.aiRole}</span>
+                        </div>
+                        <div>
+                          <strong>人</strong>
+                          <span>{step.humanRole}</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
-              ))}
+                  </li>
+                );
+              })}
             </ol>
             <div className="process-flowchart" data-animate>
-              {processTimeline.map((item) => (
-                <div key={item.stage} className="process-flow-item">
-                  <div className="process-flow-icon" aria-hidden="true">{item.icon}</div>
-                  <h3>{item.stage}</h3>
-                  <p>{item.aiFocus}</p>
-                  <p>{item.humanFocus}</p>
-                </div>
-              ))}
+              {processTimeline.map((item) => {
+                const FlowIcon = item.icon;
+                return (
+                  <div key={item.stage} className={`process-flow-item process-flow-item--${item.accent}`}>
+                    <div className="process-flow-icon" aria-hidden="true">
+                      <FlowIcon />
+                    </div>
+                    <h3>{item.stage}</h3>
+                    <p>{item.aiFocus}</p>
+                    <p>{item.humanFocus}</p>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="process-dataflow" data-animate>
+              {dataFlowStages.map((stage, index) => {
+                const DataIcon = stage.icon;
+                return (
+                  <div key={stage.label} className={`dataflow-card dataflow-card--${stage.accent}`}>
+                    <div className="dataflow-card__icon" aria-hidden="true">
+                      <DataIcon />
+                    </div>
+                    <div className="dataflow-card__body">
+                      <span>STEP {index + 1}</span>
+                      <h3>{stage.label}</h3>
+                      <p>{stage.description}</p>
+                      <strong>{stage.result}</strong>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-accent" href="#contact">
@@ -1325,11 +1594,24 @@ const Index = () => {
             <div className="expert-grid">
               {expertCards.map((expert) => (
                 <article key={expert.name} className="expert-card" data-animate>
-                  <div className="expert-photo" aria-hidden="true">📷</div>
+                  <div className="expert-photo">
+                    <img src={expert.photo} alt={`${expert.name}のプロフィール写真`} />
+                  </div>
                   <div className="expert-body">
                     <h3>{expert.name}</h3>
                     <span>{expert.title}</span>
                     <p>{expert.bio}</p>
+                    <ul className="expert-card__credentials">
+                      {expert.credentials.map((credential) => {
+                        const CredentialIcon = credential.icon;
+                        return (
+                          <li key={credential.label}>
+                            <CredentialIcon aria-hidden="true" />
+                            <span>{credential.label}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
                   </div>
                 </article>
               ))}
@@ -1439,16 +1721,21 @@ const Index = () => {
               <p>実際にどのようなアウトプットが得られるのか、匿名化したサンプルやテンプレートでご確認ください。</p>
             </div>
             <div className="resources-grid">
-              {resourceCards.map((resource) => (
-                <article key={resource.title} className="resource-card" data-animate>
-                  <div className="resource-icon" aria-hidden="true">{resource.icon}</div>
-                  <h3>{resource.title}</h3>
-                  <p>{resource.description}</p>
-                  <a className="btn btn-outline" href="#contact">
-                    {resource.cta}
-                  </a>
-                </article>
-              ))}
+              {resourceCards.map((resource) => {
+                const ResourceIcon = resource.icon;
+                return (
+                  <article key={resource.title} className="resource-card" data-animate>
+                    <div className="resource-icon" aria-hidden="true">
+                      <ResourceIcon />
+                    </div>
+                    <h3>{resource.title}</h3>
+                    <p>{resource.description}</p>
+                    <a className="btn btn-outline" href="#contact">
+                      {resource.cta}
+                    </a>
+                  </article>
+                );
+              })}
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-accent" href="#contact">
@@ -1556,14 +1843,19 @@ const Index = () => {
               <p>経営の機微情報を取り扱うため、最高水準のセキュリティを整えています。</p>
             </div>
             <div className="security-grid">
-              {securityPoints.map((point) => (
-                <article key={point.title} className="security-card" data-animate>
-                  <div className="security-icon" aria-hidden="true">{point.icon}</div>
-                  <span className="security-badge">{point.badge}</span>
-                  <h3>{point.title}</h3>
-                  <p>{point.description}</p>
-                </article>
-              ))}
+              {securityPoints.map((point) => {
+                const SecurityIcon = point.icon;
+                return (
+                  <article key={point.title} className="security-card" data-animate>
+                    <div className="security-icon" aria-hidden="true">
+                      <SecurityIcon />
+                    </div>
+                    <span className="security-badge">{point.badge}</span>
+                    <h3>{point.title}</h3>
+                    <p>{point.description}</p>
+                  </article>
+                );
+              })}
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-accent" href="#contact">
@@ -1668,6 +1960,62 @@ const Index = () => {
           </div>
         </section>
       </main>
+
+      {isDemoOpen && (
+        <div className="demo-dialog" role="dialog" aria-modal="true" aria-labelledby="demo-heading">
+          <button
+            type="button"
+            className="demo-dialog__backdrop"
+            aria-label="デモ動画を閉じる"
+            onClick={() => {
+              setIsDemoOpen(false);
+              setIsDemoPlaying(false);
+            }}
+          />
+          <div className="demo-dialog__panel">
+            <header className="demo-dialog__header">
+              <h2 id="demo-heading">AI意思決定デモ (1分)</h2>
+              <button
+                type="button"
+                className="demo-dialog__close"
+                onClick={() => {
+                  setIsDemoOpen(false);
+                  setIsDemoPlaying(false);
+                }}
+              >
+                閉じる
+              </button>
+            </header>
+            <div
+              className={`demo-dialog__video ${isDemoPlaying ? "is-playing" : ""}`}
+              role="img"
+              aria-label="AIがデータを解析し意思決定をサポートするアニメーション"
+            >
+              <div className="demo-dialog__wave" />
+              <div className="demo-dialog__pulse" />
+              <div className="demo-dialog__frames">
+                <span />
+                <span />
+                <span />
+              </div>
+              <button
+                type="button"
+                className="demo-dialog__play"
+                onClick={() => setIsDemoPlaying(true)}
+                aria-pressed={isDemoPlaying}
+              >
+                <PlayCircle aria-hidden="true" />
+                <span>{isDemoPlaying ? "再生中" : "デモを再生する"}</span>
+              </button>
+            </div>
+            <ul className="demo-dialog__bullets">
+              <li>外部データの自動取り込み → AIシミュレーション → 専門家レビューを俯瞰できます。</li>
+              <li>動画は自動再生しません。再生ボタンで任意のタイミングでご覧ください。</li>
+              <li>お問い合わせ後は、実際のダッシュボードで貴社データを用いたデモをご案内します。</li>
+            </ul>
+          </div>
+        </div>
+      )}
 
       {!isFloatingHidden && (
         <div className="floating-cta" role="complementary" aria-label="相談用ショートカット">
