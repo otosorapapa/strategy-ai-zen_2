@@ -29,15 +29,15 @@
     ></script>
     <style>
       :root {
-        --primary: #2563eb;
-        --primary-dark: #1d4ed8;
-        --secondary: #111827;
-        --accent: #f59e0b;
-        --bg: #f8fafc;
+        --primary: #1e3a8a;
+        --primary-dark: #172554;
+        --secondary: #0f172a;
+        --accent: #64748b;
+        --bg: #f4f6fb;
         --surface: #ffffff;
-        --border: rgba(15, 23, 42, 0.08);
+        --border: rgba(15, 23, 42, 0.12);
         --radius: 18px;
-        --shadow-lg: 0 28px 60px rgba(15, 23, 42, 0.12);
+        --shadow-lg: 0 28px 60px rgba(15, 23, 42, 0.1);
       }
 
       * {
@@ -213,15 +213,15 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(120deg, rgba(15, 23, 42, 0.85), rgba(37, 99, 235, 0.78));
+        background: linear-gradient(120deg, rgba(15, 23, 42, 0.88), rgba(30, 58, 138, 0.78));
         z-index: 1;
       }
 
-      .hero-background video {
+      .hero-background img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 0;
+        filter: grayscale(12%);
       }
 
       .hero-inner {
@@ -273,6 +273,20 @@
         margin-bottom: 32px;
       }
 
+      .hero-subhead {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.9);
+        margin-bottom: 18px;
+      }
+
+      .cta-note {
+        font-size: 0.95rem;
+        color: rgba(255, 255, 255, 0.88);
+        margin: 8px 0 28px;
+        font-weight: 600;
+      }
+
       .hero-lead strong {
         color: #fff;
       }
@@ -313,7 +327,7 @@
       }
 
       .hero-visual::after {
-        content: "意思決定に集中するためのAIダッシュボード";
+        content: "AIアシスタントと共に意思決定を設計";
         position: absolute;
         bottom: 16px;
         left: 50%;
@@ -387,6 +401,107 @@
       .chart-card canvas {
         width: 100% !important;
         height: 260px !important;
+      }
+
+      .chart-note {
+        font-size: 0.95rem;
+        color: rgba(15, 23, 42, 0.7);
+        margin: 0 0 12px;
+        line-height: 1.6;
+      }
+
+      .source-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--primary);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .source-link::after {
+        content: "\f08e";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 0.75rem;
+      }
+
+      .evidence-highlight {
+        background: linear-gradient(135deg, rgba(30, 58, 138, 0.08), rgba(148, 163, 184, 0.1));
+      }
+
+      .evidence-list {
+        margin: 0;
+        padding-left: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        color: rgba(15, 23, 42, 0.75);
+      }
+
+      .roles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px;
+      }
+
+      .role-card {
+        background: var(--surface);
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        padding: 28px;
+        box-shadow: 0 18px 32px rgba(15, 23, 42, 0.04);
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .role-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: rgba(30, 58, 138, 0.1);
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+      }
+
+      .role-card ul {
+        margin: 0;
+        padding-left: 20px;
+        color: rgba(15, 23, 42, 0.72);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .quarterly-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .quarterly-card {
+        background: var(--surface);
+        border-radius: var(--radius);
+        border: 1px solid var(--border);
+        padding: 28px;
+        box-shadow: 0 20px 36px rgba(15, 23, 42, 0.05);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .quarterly-card ul {
+        margin: 0;
+        padding-left: 18px;
+        color: rgba(15, 23, 42, 0.75);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
       }
 
       .stat-highlight {
@@ -916,11 +1031,11 @@
 
       .cta-section {
         text-align: center;
-        background: linear-gradient(120deg, rgba(37, 99, 235, 0.85), rgba(59, 130, 246, 0.75));
+        background: linear-gradient(120deg, rgba(15, 23, 42, 0.92), rgba(30, 64, 175, 0.82));
         color: #fff;
         border-radius: 28px;
         padding: 60px 40px;
-        box-shadow: 0 28px 60px rgba(37, 99, 235, 0.35);
+        box-shadow: 0 28px 60px rgba(15, 23, 42, 0.35);
         margin-top: 40px;
       }
 
@@ -934,10 +1049,28 @@
         color: rgba(255, 255, 255, 0.85);
       }
 
+      .cta-section .cta-source {
+        color: #bfdbfe;
+        text-decoration: underline;
+        font-weight: 600;
+      }
+
       .contact-form {
         display: grid;
         gap: 18px;
         margin-top: 32px;
+      }
+
+      .form-privacy {
+        font-size: 0.85rem;
+        color: rgba(15, 23, 42, 0.6);
+        margin-top: -10px;
+      }
+
+      .form-privacy a {
+        color: var(--primary);
+        text-decoration: underline;
+        font-weight: 600;
       }
 
       .contact-form label {
@@ -1059,8 +1192,8 @@
   </head>
   <body>
     <div class="floating-cta" role="complementary" aria-label="固定CTA">
-      <a class="btn btn-primary" href="#demo"><i class="fa-solid fa-display"></i> 無料デモを予約</a>
-      <a class="btn btn-outline" data-open-modal="#contactModal" href="#consultation"><i class="fa-solid fa-comments"></i> 無料相談を申し込む</a>
+      <a class="btn btn-primary" href="#contact" data-open-modal="#contactModal"><i class="fa-solid fa-calendar-check"></i> 無料相談を予約</a>
+      <a class="btn btn-outline" href="#plans"><i class="fa-solid fa-clipboard-list"></i> 料金プランを見る</a>
     </div>
 
     <header class="site-header">
@@ -1084,57 +1217,44 @@
     <main>
       <section class="hero" id="top">
         <div class="hero-background" aria-hidden="true">
-          <video
-            data-hero-video
-            data-src="https://cdn.coverr.co/videos/coverr-futuristic-digital-brain-technology-4475/1080p.mp4"
-            poster="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1920&q=70"
-            muted
-            loop
-            playsinline
-            preload="none"
-          ></video>
+          <img
+            src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1920&q=80"
+            alt="経営者とAIアシスタントが並んで戦略を検討している様子"
+          />
         </div>
         <div class="container hero-inner">
           <div class="hero-copy">
-            <span class="badge"><i class="fa-solid fa-bolt"></i> 激動の時代に備える経営計画DX</span>
-            <h1>
-              激動の時代に経営者の右腕となる生成AI<br />
-              <span style="font-size: clamp(2.2rem, 2vw + 1rem, 3.4rem);">意思決定時間を創出するAIパートナー</span>
-            </h1>
+            <span class="badge"><i class="fa-solid fa-shield-heart"></i> 誠実さと透明性にこだわった経営計画DX</span>
+            <h1>生成AIと専門家がサポート。経営者の意思決定を最短1日で形にする経営計画書支援サービス</h1>
+            <p class="hero-subhead">外部環境分析やドラフト作成はAIが担当。最終的な意思決定はあなたです。</p>
             <p class="hero-lead">
-              外部環境の分析から経営計画書のドラフトまでを生成AIが伴走。<strong>最終判断は経営者が行う</strong>前提で、専門家が現場感とガバナンスを踏まえた提案に磨き上げます。年商5,000万円〜15億円の中小企業が、変化の速い市場でも自信をもって次の一手を決められる状態をつくります。
+              年商5,000万円〜15億円の中小企業が、確かな根拠を持って次の一手を決められるように。生成AIが最新データを集約し、専門家が金融機関視点でレビュー。あなたは経営の優先順位付けと判断に集中できます。
             </p>
             <div class="hero-actions">
-              <a class="btn btn-primary" href="#demo"><i class="fa-solid fa-rocket"></i> 無料デモを予約</a>
-              <button class="btn btn-outline" type="button" data-open-modal="#contactModal">
-                <i class="fa-solid fa-handshake"></i> 無料相談を申し込む
-              </button>
+              <a class="btn btn-primary" href="#contact" data-open-modal="#contactModal"><i class="fa-solid fa-calendar-check"></i> 無料相談を予約</a>
+              <a class="btn btn-outline" href="#cases"><i class="fa-solid fa-clipboard"></i> 導入事例を見る</a>
             </div>
+            <p class="cta-note">AIで時間を生み出し、経営者の価値ある時間を戦略に振り向ける。</p>
             <div class="hero-metrics" role="list">
               <div class="hero-metric" role="listitem">
                 <strong>最短1日</strong>
                 <span>経営計画ドラフト納品</span>
               </div>
               <div class="hero-metric" role="listitem">
-                <strong>57%削減</strong>
-                <span>経営陣の資料準備時間</span>
+                <strong>60%短縮</strong>
+                <span>資料作成に費やす時間</span>
               </div>
               <div class="hero-metric" role="listitem">
-                <strong>44%向上</strong>
-                <span>意思決定の的中率（平均）</span>
+                <strong>90日ごと</strong>
+                <span>定期オフサイトレビュー</span>
               </div>
             </div>
           </div>
           <div class="hero-visual" aria-hidden="true">
-            <video
-              data-hero-video
-              data-src="https://cdn.coverr.co/videos/coverr-digital-business-visualization-6871/1080p.mp4"
-              poster="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=70"
-              muted
-              loop
-              playsinline
-              preload="none"
-            ></video>
+            <img
+              src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80"
+              alt="AIダッシュボードを見ながら意思決定を行う経営者"
+            />
           </div>
         </div>
       </section>
@@ -1142,62 +1262,81 @@
       <section id="ai-evidence" class="fade-in">
         <div class="container">
           <div class="section-heading">
-            <h2>導入企業は既に先行。今こそ「計画DX」を加速する好機です</h2>
+            <h2>透明なデータと第三者の出典で、導入判断を後押しします</h2>
             <p>
-              国内外で生成AIの導入率が急速に高まり、大企業と中小企業の間で格差が広がっています。意思決定を迅速にする仕組みを今整えることで、外部環境の急変にもぶれない戦略を描けます。
+              世界的に生成AIの導入が進む中、意思決定のスピード差が競争力の差になります。信頼できる調査データに基づき、投資判断の材料をご提供します。
             </p>
           </div>
           <div class="evidence-grid">
             <article class="chart-card">
-              <h3><i class="fa-solid fa-chart-column"></i> 日本の業種別AI導入率（2024年後半）</h3>
-              <canvas id="industryChart" aria-label="日本における業種別のAI導入率チャート"></canvas>
-            </article>
-            <article class="chart-card">
-              <h3><i class="fa-solid fa-building"></i> 企業規模別の導入格差</h3>
-              <canvas id="scaleChart" aria-label="企業規模別のAI導入率チャート"></canvas>
-            </article>
-            <article class="chart-card">
-              <h3><i class="fa-solid fa-globe"></i> 世界のAI活用状況</h3>
+              <h3><i class="fa-solid fa-earth-americas"></i> 世界のAI導入はすでに主流</h3>
+              <p class="chart-note">
+                世界の企業の78%がAIを導入し、71%が生成AIを活用しています。
+                <a class="source-link" href="https://explodingtopics.com/blog/companies-using-ai#:~:text=%2A%2078,or%20no%20training%20from%20employers" target="_blank" rel="noopener">出典</a>
+              </p>
               <canvas id="globalChart" aria-label="世界企業のAI活用状況チャート"></canvas>
             </article>
-          </div>
-          <div class="stat-highlight">
-            <article class="stat-card">
-              <strong>70%の企業が効果を実感</strong>
-              <p>
-                生成AIを導入した企業の約70%が、業務効率化・コスト削減・新サービス創出に「効果あり」と回答。単なる業務削減にとどまらず、収益機会の創出にも直結しています。
+            <article class="chart-card">
+              <h3><i class="fa-solid fa-user-clock"></i> 生成AIで生産性が最大60%向上</h3>
+              <p class="chart-note">
+                カスタマーサポートでは14%の生産性向上、バックオフィスでは60%以上の業務時間短縮が報告されています。
+                <a class="source-link" href="https://www.nber.org/system/files/working_papers/w31161/w31161.pdf#:~:text=AI,but%20with%20minimal%20impact%20on" target="_blank" rel="noopener">出典1</a>
+                <a class="source-link" href="https://www.digitalinformationworld.com/2025/07/ai-cuts-work-time-by-more-than-half.html#:~:text=A%20new%20dataset%20shows%20that,with%20AI%20than%20without%20it" target="_blank" rel="noopener">出典2</a>
               </p>
+              <canvas id="productivityChart" aria-label="生成AI導入による生産性向上チャート"></canvas>
             </article>
-            <article class="stat-card">
-              <strong>四半期ごとの見直しが常識に</strong>
-              <p>
-                米国商工会議所は、経営計画を四半期ごとに軽く見直し、年1回本格的な見直しを推奨。計画と実行を密接に結ぶ「ローリング運用」の重要性が高まっています。
+            <article class="chart-card evidence-highlight">
+              <h3><i class="fa-solid fa-chart-line"></i> 2030年には1.85兆ドル市場へ</h3>
+              <p class="chart-note">
+                生成AI市場は2030年に1.85兆ドル規模に達すると予測されています。投資先行企業との差が一気に開く前に、計画策定の土台を整えましょう。
+                <a class="source-link" href="https://explodingtopics.com/blog/companies-using-ai#:~:text=trillion%20by%202030" target="_blank" rel="noopener">出典</a>
               </p>
+              <ul class="evidence-list">
+                <li>市場拡大のスピードに合わせたローリングプラン</li>
+                <li>AI投資の費用対効果を可視化するダッシュボード</li>
+                <li>金融機関・株主への説明責任を果たす根拠資料</li>
+              </ul>
             </article>
           </div>
-          <div class="timeline" role="presentation">
-            <h3><i class="fa-solid fa-timeline"></i> Q1→Q2→Q3→Q4のリズムで外部環境を点検</h3>
+        </div>
+      </section>
+
+      <section id="roles" class="fade-in" style="background: #fff;">
+        <div class="container">
+          <div class="section-heading">
+            <h2>生成AI・経営者・専門家がそれぞれの強みを活かす体制</h2>
             <p>
-              AIが最新データを取り込み、四半期ごとにシナリオと指標を更新。経営者は判断に集中し、専門家が重点論点を補強します。
+              役割を明確にし、責任の所在をはっきりさせることで、迅速かつ安心感のある意思決定が実現します。
             </p>
-            <div class="timeline-quarters">
-              <div class="quarter">
-                <strong>Q1</strong>
-                <p>年度方針と市場予測を策定。為替・資材価格・制度改正の影響をAIが整理。</p>
-              </div>
-              <div class="quarter">
-                <strong>Q2</strong>
-                <p>進捗差異を分析し、投資配分を再計画。金融機関への報告資料も自動生成。</p>
-              </div>
-              <div class="quarter">
-                <strong>Q3</strong>
-                <p>需要ピークを見据えた攻めの施策を試算。新サービスのシナリオを複数提示。</p>
-              </div>
-              <div class="quarter">
-                <strong>Q4</strong>
-                <p>次年度のドラフトを先行作成。専門家と共に資本政策・人員計画を詰める。</p>
-              </div>
-            </div>
+          </div>
+          <div class="roles-grid">
+            <article class="role-card">
+              <div class="role-icon"><i class="fa-solid fa-robot"></i></div>
+              <h3>生成AI</h3>
+              <ul>
+                <li>外部環境データの収集とトレンド分析</li>
+                <li>財務シミュレーションとドラフト作成</li>
+                <li>意思決定に必要な根拠資料と図表の自動生成</li>
+              </ul>
+            </article>
+            <article class="role-card">
+              <div class="role-icon"><i class="fa-solid fa-user-tie"></i></div>
+              <h3>経営者</h3>
+              <ul>
+                <li>経営目標と優先順位の決定</li>
+                <li>投資判断・資源配分の最終承認</li>
+                <li>社内外へのメッセージとストーリーの提示</li>
+              </ul>
+            </article>
+            <article class="role-card">
+              <div class="role-icon"><i class="fa-solid fa-people-arrows"></i></div>
+              <h3>専門家（中小企業診断士等）</h3>
+              <ul>
+                <li>ドラフトのレビューとリスクチェック</li>
+                <li>金融機関・投資家との調整と交渉サポート</li>
+                <li>運用定着のための会議設計と伴走支援</li>
+              </ul>
+            </article>
           </div>
         </div>
       </section>
@@ -1337,6 +1476,35 @@
               </div>
             </form>
             <canvas id="performanceChart" aria-label="売上とキャッシュフローの推移"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section id="quarterly" class="fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>四半期ごとの1日オフサイトで計画を最新化</h2>
+            <p>
+              四半期に一度、1日かけて前期の進捗と外部環境を確認し、次の90日間の優先事項を整えることが最適だとされています。
+              <a class="source-link" href="https://www.impactsociety.co/articles/the-importance-of-conducting-quarterly-planning-with-your-team/#:~:text=The%20sweet%20spot%20is%20the,they%E2%80%99re%20prioritised%20in%20people%E2%80%99s%20calendars" target="_blank" rel="noopener">出典</a>
+            </p>
+          </div>
+          <div class="quarterly-grid">
+            <article class="quarterly-card">
+              <h3><i class="fa-solid fa-list-check"></i> レビューで確認する3つの視点</h3>
+              <ul>
+                <li>前期の進捗とKPIギャップをAIが可視化</li>
+                <li>外部環境の変化指数とリスクシナリオを専門家が整理</li>
+                <li>次の90日で集中すべき優先事項を経営者が決定</li>
+              </ul>
+              <p class="chart-note">Impact Societyは「四半期ごとの1日オフサイト」が最も効果的と推奨しています。</p>
+              <a class="btn btn-primary" href="#contact" data-open-modal="#contactModal">無料相談を予約</a>
+            </article>
+            <article class="quarterly-card">
+              <h3><i class="fa-solid fa-wave-square"></i> 変化のスピードを比較する</h3>
+              <canvas id="quarterlyChart" aria-label="外部環境変化指数とAIアップデート速度の比較"></canvas>
+              <p class="chart-note">指数は2021年を1.0とした相対値です。生成AIのアップデート速度が外部環境の変動を上回ることで、迅速な意思決定が求められます。</p>
+            </article>
           </div>
         </div>
       </section>
@@ -1613,8 +1781,8 @@
       <section id="plans" class="fade-in" style="background: #fff;">
         <div class="container">
           <div class="section-heading">
-            <h2>ニーズに合わせた2つのプラン</h2>
-            <p>どちらのプランも無料トライアル（初回ドラフト＋オンライン相談）付き。成果を確認してから本契約に進めます。</p>
+            <h2>ニーズに合わせた3つのプラン</h2>
+            <p>すべてのプランで無料トライアル（初回ドラフト＋オンライン相談）をご用意。導入前に成果と運用イメージをご確認いただけます。</p>
           </div>
           <div class="pricing-table">
             <article class="plan-card">
@@ -1631,7 +1799,7 @@
                 <li><i class="fa-solid fa-circle-check"></i> 融資面談想定Q&Aテンプレート</li>
                 <li><i class="fa-solid fa-circle-check"></i> 導入初月の専門家レビュー1回</li>
               </ul>
-              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">無料トライアルを申し込む</button>
+              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">無料相談を予約</button>
             </article>
             <article class="plan-card" style="border: 2px solid var(--primary);">
               <h3>プロプラン</h3>
@@ -1647,7 +1815,23 @@
                 <li><i class="fa-solid fa-circle-check"></i> 投資家・役員会向けピッチデッキ連動</li>
                 <li><i class="fa-solid fa-circle-check"></i> 常時チャット伴走／緊急シミュレーション対応</li>
               </ul>
-              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">担当者と相談する</button>
+              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">無料相談を予約</button>
+            </article>
+            <article class="plan-card">
+              <h3>エンタープライズプラン</h3>
+              <p class="plan-price">月額 660,000円～</p>
+              <div class="plan-meta">
+                <span><i class="fa-solid fa-city"></i> 対象：年商10億円以上の多拠点・多事業企業</span>
+                <span><i class="fa-solid fa-network-wired"></i> 目的：グループ経営管理・海外拠点連携</span>
+                <span><i class="fa-solid fa-scale-balanced"></i> 想定ROI：意思決定リードタイムを最大65%短縮</span>
+              </div>
+              <ul class="plan-features">
+                <li><i class="fa-solid fa-circle-check"></i> 週次データ連携とAIダッシュボードのカスタム開発</li>
+                <li><i class="fa-solid fa-circle-check"></i> 事業部別シナリオ分析とグループ資金計画の統合</li>
+                <li><i class="fa-solid fa-circle-check"></i> オフサイト四半期レビューの設計・ファシリテーション</li>
+                <li><i class="fa-solid fa-circle-check"></i> 経営陣・現場向け研修とリテラシー向上プログラム</li>
+              </ul>
+              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">無料相談を予約</button>
             </article>
           </div>
           <p style="margin-top: 18px; color: rgba(17, 24, 39, 0.6); font-size: 0.9rem;">
@@ -1656,7 +1840,7 @@
         </div>
       </section>
 
-      <section class="fade-in">
+      <section id="security" class="fade-in">
         <div class="container">
           <div class="section-heading">
             <h2>セキュリティとコンプライアンス</h2>
@@ -1678,6 +1862,10 @@
             <article class="security-card">
               <h3><i class="fa-solid fa-database"></i> データ保全</h3>
               <p>バックアップは国内2拠点で冗長化し、障害時の復旧を自動化しています。</p>
+            </article>
+            <article class="security-card">
+              <h3><i class="fa-solid fa-certificate"></i> 法令・認証</h3>
+              <p id="privacy">ISO/IEC 27001認証データセンターを利用し、日本の個人情報保護法（APPI）に準拠した管理体制で運用しています。</p>
             </article>
           </div>
         </div>
@@ -1715,6 +1903,7 @@
           <div class="cta-section">
             <h3>まずは無料相談で、御社専用のAI計画ロードマップを。</h3>
             <p>直近の経営課題に合わせて、AIが生成するシナリオとアウトプット例をその場でご紹介します。次の意思決定に必要な時間を今すぐ確保しましょう。</p>
+            <p class="cta-note">生成AI導入企業では業務時間が60%以上短縮された事例も確認されています。<a class="cta-source" href="https://www.digitalinformationworld.com/2025/07/ai-cuts-work-time-by-more-than-half.html#:~:text=A%20new%20dataset%20shows%20that,with%20AI%20than%20without%20it" target="_blank" rel="noopener">出典</a></p>
             <button class="btn btn-outline" type="button" data-open-modal="#contactModal" style="color: #fff; border-color: rgba(255, 255, 255, 0.5);">無料相談を予約</button>
           </div>
         </div>
@@ -1755,11 +1944,13 @@
               <option value="other">その他</option>
             </select>
 
-            <label for="message">ご相談内容</label>
-            <textarea id="message" name="message" placeholder="現状の課題や希望時期などをご記入ください" required></textarea>
+          <label for="message">ご相談内容</label>
+          <textarea id="message" name="message" placeholder="現状の課題や希望時期などをご記入ください" required></textarea>
 
-            <button class="btn btn-primary" type="submit">送信して次のステップを見る</button>
-          </form>
+          <p class="form-privacy">送信前に<a href="#privacy">プライバシーポリシー</a>をご確認ください。通信はすべて暗号化され、日本の個人情報保護法に準拠して取り扱います。</p>
+
+          <button class="btn btn-primary" type="submit">送信して次のステップを見る</button>
+        </form>
         </div>
       </section>
     </main>
@@ -1808,6 +1999,8 @@
           <label for="modalMessage">ご相談内容</label>
           <textarea id="modalMessage" name="message" placeholder="現状の課題や希望時期などをご記入ください" required></textarea>
 
+          <p class="form-privacy">送信前に<a href="#privacy">プライバシーポリシー</a>をご確認ください。通信は暗号化され、日本の個人情報保護法に準拠して運用しています。</p>
+
           <button class="btn btn-primary" type="submit">送信する</button>
         </form>
       </div>
@@ -1842,133 +2035,132 @@
 
       document.querySelectorAll(".expert-card").forEach((card) => expertObserver.observe(card));
 
-      const heroVideos = document.querySelectorAll("[data-hero-video]");
-      const videoObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const video = entry.target;
-            if (!video.src && video.dataset.src) {
-              video.src = video.dataset.src;
-            }
-            video.play().catch(() => {});
-            observer.unobserve(video);
-          }
-        });
-      }, { threshold: 0.1 });
-      heroVideos.forEach((video) => videoObserver.observe(video));
-
       const aiDataset = {
-        japan: {
-          labels: ["全企業", "情報通信業", "卸売・小売"],
-          data: [47, 50, 10],
-        },
-        scale: {
-          labels: ["売上高1兆円以上", "年商5,000万〜15億円"],
-          data: [72, 12],
-        },
         global: {
-          labels: ["生成AI活用企業", "その他のAI活用企業", "未活用企業"],
-          data: [71, 7, 22],
+          labels: ["AI導入企業", "生成AI活用企業", "未導入企業"],
+          data: [78, 71, 22],
+        },
+        productivity: {
+          labels: ["カスタマーサポート", "バックオフィス"],
+          data: [14, 60],
         },
       };
 
-      let industryChart;
-      let scaleChart;
       let globalChart;
+      let productivityChart;
+      let quarterlyChart;
       let radarChart;
       let simulatorChart;
 
+      const quarterlyDataset = {
+        labels: ["2021", "2022", "2023", "2024", "2025"],
+        external: [1.0, 1.2, 1.5, 1.8, 2.1],
+        ai: [1.0, 1.5, 2.2, 2.9, 3.6],
+      };
+
       function initEvidenceCharts() {
         if (!window.Chart) return;
-        const industryCtx = document.getElementById("industryChart");
-        const scaleCtx = document.getElementById("scaleChart");
         const globalCtx = document.getElementById("globalChart");
+        const productivityCtx = document.getElementById("productivityChart");
 
-        industryChart = new Chart(industryCtx, {
-          type: "bar",
+        if (globalCtx) {
+          globalChart = new Chart(globalCtx, {
+            type: "doughnut",
+            data: {
+              labels: aiDataset.global.labels,
+              datasets: [
+                {
+                  data: aiDataset.global.data,
+                  backgroundColor: ["#1e3a8a", "#3b82f6", "#cbd5f5"],
+                  borderWidth: 0,
+                },
+              ],
+            },
+            options: {
+              plugins: {
+                legend: { position: "bottom" },
+                tooltip: {
+                  callbacks: {
+                    label: (context) => `${context.label}: ${context.parsed}%`,
+                  },
+                },
+              },
+              cutout: "62%",
+            },
+          });
+        }
+
+        if (productivityCtx) {
+          productivityChart = new Chart(productivityCtx, {
+            type: "bar",
+            data: {
+              labels: aiDataset.productivity.labels,
+              datasets: [
+                {
+                  label: "生産性向上率（％）",
+                  data: aiDataset.productivity.data,
+                  backgroundColor: ["#1e40af", "#0f172a"],
+                  borderRadius: 12,
+                },
+              ],
+            },
+            options: {
+              plugins: {
+                legend: { display: false },
+                tooltip: {
+                  callbacks: {
+                    label: (context) => `${context.parsed.y}%`,
+                  },
+                },
+              },
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  ticks: { callback: (value) => `${value}%` },
+                },
+              },
+            },
+          });
+        }
+      }
+
+      function initQuarterlyChart() {
+        if (!window.Chart) return;
+        const ctx = document.getElementById("quarterlyChart");
+        if (!ctx) return;
+        quarterlyChart = new Chart(ctx, {
+          type: "line",
           data: {
-            labels: aiDataset.japan.labels,
+            labels: quarterlyDataset.labels,
             datasets: [
               {
-                label: "導入率（％）",
-                data: aiDataset.japan.data,
-                backgroundColor: ["#2563eb", "#1d4ed8", "#38bdf8"],
-                borderRadius: 12,
+                label: "外部環境変化指数",
+                data: quarterlyDataset.external,
+                borderColor: "rgba(30, 58, 138, 0.9)",
+                backgroundColor: "rgba(30, 58, 138, 0.15)",
+                tension: 0.35,
+                fill: true,
+              },
+              {
+                label: "AIアップデート速度指数",
+                data: quarterlyDataset.ai,
+                borderColor: "rgba(99, 102, 241, 0.95)",
+                backgroundColor: "rgba(99, 102, 241, 0.15)",
+                tension: 0.35,
+                fill: true,
               },
             ],
           },
           options: {
-            plugins: {
-              legend: { display: false },
-              tooltip: {
-                callbacks: {
-                  label: (context) => `${context.parsed.y}%`,
-                },
-              },
-            },
             responsive: true,
+            interaction: { mode: "index", intersect: false },
             scales: {
               y: {
                 beginAtZero: true,
-                ticks: { callback: (value) => `${value}%` },
+                title: { display: true, text: "相対指数" },
               },
             },
-          },
-        });
-
-        scaleChart = new Chart(scaleCtx, {
-          type: "bar",
-          data: {
-            labels: aiDataset.scale.labels,
-            datasets: [
-              {
-                data: aiDataset.scale.data,
-                backgroundColor: ["#1d4ed8", "#f59e0b"],
-                borderRadius: 12,
-              },
-            ],
-          },
-          options: {
-            plugins: {
-              legend: { display: false },
-              tooltip: {
-                callbacks: {
-                  label: (context) => `${context.parsed.y}%`,
-                },
-              },
-            },
-            indexAxis: "y",
-            scales: {
-              x: {
-                beginAtZero: true,
-                ticks: { callback: (value) => `${value}%` },
-              },
-            },
-          },
-        });
-
-        globalChart = new Chart(globalCtx, {
-          type: "doughnut",
-          data: {
-            labels: aiDataset.global.labels,
-            datasets: [
-              {
-                data: aiDataset.global.data,
-                backgroundColor: ["#2563eb", "#60a5fa", "#d1d5db"],
-                borderWidth: 0,
-              },
-            ],
-          },
-          options: {
-            plugins: {
-              legend: { position: "bottom" },
-              tooltip: {
-                callbacks: {
-                  label: (context) => `${context.label}: ${context.parsed}%`,
-                },
-              },
-            },
-            cutout: "62%",
           },
         });
       }
@@ -2252,6 +2444,7 @@
       function initializeCharts() {
         initEvidenceCharts();
         initRadarChart();
+        initQuarterlyChart();
         initSimulatorChart();
       }
 
