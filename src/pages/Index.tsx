@@ -60,26 +60,25 @@ const sections = [
 
 const heroMetrics = [
   {
-    label: "生成AI導入率",
-    note: "情報通信業の生成AI導入率",
-    prefix: "",
+    label: "意思決定リードタイム",
+    note: "導入企業平均の短縮率",
+    prefix: "-",
     suffix: "%",
-    target: 35.1,
-    decimals: 1,
+    target: 52,
   },
   {
-    label: "年間削減工数",
-    note: "生成AI活用による削減期待値",
+    label: "経営計画作成時間",
+    note: "自動ドラフト化による削減率",
     prefix: "-",
+    suffix: "%",
+    target: 80,
+  },
+  {
+    label: "経営者稼働時間",
+    note: "月間で創出された意思決定時間",
+    prefix: "+",
     suffix: "h",
-    target: 1750,
-  },
-  {
-    label: "年間コスト削減",
-    note: "生成AI活用によるコスト削減",
-    prefix: "-",
-    suffix: "万円",
-    target: 1000,
+    target: 45,
   },
 ];
 
@@ -934,9 +933,9 @@ const Index = () => {
               ))}
             </nav>
             <div className="header-actions">
-              <a className="btn btn-outline" href="#resources">まずは資料請求</a>
+              <a className="btn btn-outline" href="#resources">導入効果を資料で確認</a>
               <a className="btn btn-accent" href="#contact">
-                無料相談を予約
+                30分無料相談に申し込む
               </a>
             </div>
           </div>
@@ -968,21 +967,21 @@ const Index = () => {
             <div className="hero-copy" data-animate>
               <span className="badge">中小企業経営者向け</span>
               <h1 id="hero-heading">
-                AI × 経営者 × 専門家で、激動の時代を生き抜く経営計画を最速で策定
-                <span>生成AIが外部環境を分析し、経営者の意思決定を支援。専門家が伴走して実行をサポートします。</span>
+                生成AIが外部環境と自社データを解析し、次の一手を提案
+                <span>社長は意思決定だけに集中できる経営計画策定プラットフォーム</span>
               </h1>
               <p className="hero-lead">
-                政策・市場・金融データをAIが常時モニタリングし、複数シナリオの財務予測と資料ドラフトを自動生成。経営者は判断と優先順位付けに集中でき、専門家が融資・投資審査水準まで仕上げます。
+                政策・市場・金融・自社データを横断的にスキャンし、AIが複数シナリオの財務計画とアクション案を自動生成。社長は意思決定に直結する論点だけを確認し、専門家チームが資料と実行計画の磨き込みまで伴走します。
               </p>
               <p className="hero-sub">
-                四半期ごとのアップデートで最新の機会とリスクを反映し、資料更新は80時間→26時間、戦略更新は6週間→2週間に短縮した事例も。意思決定に充てる時間を取り戻しましょう。
+                「決断までの時間を平均52%短縮」「経営計画作成工数を80%削減」「月間45時間の経営者稼働を創出」などの成果が続々。四半期アップデートで最新の機会とリスクを反映し、迅速な経営判断を後押しします。
               </p>
               <div className="hero-actions">
-                <a className="btn btn-accent" href="#resources">
-                  まずは資料請求
+                <a className="btn btn-accent" href="#contact">
+                  30分無料相談に申し込む
                 </a>
-                <a className="btn btn-ghost" href="#contact">
-                  無料相談を予約
+                <a className="btn btn-ghost" href="#resources">
+                  資料で導入効果を見る
                 </a>
               </div>
               <ul className="hero-metrics" ref={metricsRef}>
