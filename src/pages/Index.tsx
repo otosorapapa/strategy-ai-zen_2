@@ -21,6 +21,7 @@ import {
   Database,
   FileText,
   Info,
+  ArrowUpRight,
   Layers3,
   LineChart,
   Lock,
@@ -256,6 +257,9 @@ const whyNowEvidence = [
     sourceLabel: "Switch Software (2024)",
     sourceUrl: "https://switchsoftware.io/blog/ai-adoption-statistics-2024",
     sourceNote: "Generative AI Adoption Is Accelerating",
+    category: "導入スピード",
+    impact: "意思決定の再設計を進める企業が多数派に",
+    accent: "mint",
   },
   {
     title: "先行導入企業は主要業務で成果を創出",
@@ -264,6 +268,9 @@ const whyNowEvidence = [
     sourceLabel: "Switch Software (2024)",
     sourceUrl: "https://switchsoftware.io/blog/generative-ai-use-cases",
     sourceNote: "Where Early Adopters See ROI",
+    category: "競争優位",
+    impact: "顧客接点と開発領域で差分が顕在化",
+    accent: "iris",
   },
   {
     title: "2030年に1.8兆ドル規模のAI市場",
@@ -273,6 +280,9 @@ const whyNowEvidence = [
     sourceLabel: "Switch Software (2024)",
     sourceUrl: "https://switchsoftware.io/blog/generative-ai-market-outlook",
     sourceNote: "AI Market Outlook to 2030",
+    category: "投資規模",
+    impact: "大型投資が意思決定のスピードと検証力を要求",
+    accent: "citrus",
   },
   {
     title: "AI支援でコンタクトセンターの生産性+14%",
@@ -281,6 +291,9 @@ const whyNowEvidence = [
     sourceLabel: "Stanford HAI (2024)",
     sourceUrl: "https://hai.stanford.edu/news/generative-ai-improves-customer-support-productivity",
     sourceNote: "Generative AI in Contact Centers",
+    category: "業務実証",
+    impact: "オペレーション改善が定量的に裏付け",
+    accent: "sky",
   },
   {
     title: "金融業界では分析とレポート作成を効率化",
@@ -289,6 +302,9 @@ const whyNowEvidence = [
     sourceLabel: "OECD (2024)",
     sourceUrl: "https://www.oecd.org/finance/ai-in-financial-markets.htm",
     sourceNote: "AI in Financial Markets",
+    category: "金融高度化",
+    impact: "金融の業務標準がAI前提にシフト",
+    accent: "navy",
   },
 ];
 
@@ -1370,22 +1386,39 @@ const Index = () => {
               <p>信頼ソースをもとに、対策を先送りした場合の機会損失と競争環境の変化を確認できます。</p>
             </div>
             <div className="evidence-grid">
-              {whyNowEvidence.map((item) => (
+              {whyNowEvidence.map((item, index) => (
                 <article
                   key={item.title}
-                  className="evidence-card"
+                  className={`evidence-card evidence-card--${item.accent}`}
                   data-animate
                   data-source={item.sourceNote}
                 >
-                  <div className="evidence-stat">{item.stat}</div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  <span className="evidence-source">{item.sourceLabel}</span>
+                  <div className="evidence-card__content">
+                    <header className="evidence-header">
+                      <span className="evidence-chip">{item.category}</span>
+                      <span className="evidence-index">{String(index + 1).padStart(2, "0")}</span>
+                    </header>
+                    <div className="evidence-metric">
+                      <span className="evidence-stat">{item.stat}</span>
+                      <span className="evidence-impact">{item.impact}</span>
+                    </div>
+                    <h3>{item.title}</h3>
+                    <p className="evidence-description">{item.description}</p>
+                    <a
+                      className="evidence-source"
+                      href={item.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                    >
+                      <ArrowUpRight aria-hidden="true" />
+                      <span>{item.sourceLabel}</span>
+                    </a>
+                  </div>
                 </article>
               ))}
             </div>
             <p className="footnote" data-animate>
-              ※ 各数値の詳細はカードをホバー/タップすると表示されます。
+              ※ 因果関係の要約はカードをホバー/タップで表示される研究サマリーから確認できます。
             </p>
           </div>
         </section>
