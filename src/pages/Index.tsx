@@ -706,10 +706,7 @@ const contactSteps = [
 ];
 
 const Index = () => {
-  const [activeSection, setActiveSection] = useState(sections[0].id);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const [heroParallax, setHeroParallax] = useState(0);
   const [metricsActive, setMetricsActive] = useState(false);
   const [metricValues, setMetricValues] = useState(() =>
@@ -779,20 +776,7 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    const handleResize = () => {
-      const isMobile = window.innerWidth <= 1080;
-      setIsMobileViewport(isMobile);
-      if (!isMobile) {
-        setIsMenuOpen(false);
-      }
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  useEffect(() => {
-    if (isMenuOpen || isDemoOpen) {
+    if (isDemoOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
@@ -800,7 +784,7 @@ const Index = () => {
     return () => {
       document.body.style.overflow = "";
     };
-  }, [isMenuOpen, isDemoOpen]);
+  }, [isDemoOpen]);
 
   useEffect(() => {
     if (!isDemoOpen) return;
@@ -891,16 +875,6 @@ const Index = () => {
     }, 6000);
     return () => clearInterval(timer);
   }, []);
-
-  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
-    event.preventDefault();
-    const element = sectionRefs.current[id];
-    if (element) {
-      const offsetTop = element.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top: offsetTop, behavior: "smooth" });
-    }
-    setIsMenuOpen(false);
-  };
 
   const handleSimulatorChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -1005,57 +979,21 @@ const Index = () => {
 
   return (
     <div className="lp-root">
-      {/* 固定ヘッダー: ナビゲーションとCTA */}
-      <header className={`site-header ${isScrolled ? "is-condensed" : ""}`} aria-label="メインナビゲーション">
+      {/* 固定ヘッダー: 主要CTAのみ */}
+      <header className={`site-header ${isScrolled ? "is-condensed" : ""}`} aria-label="主要アクション">
         <div className="container header-inner">
-          <a className="brand" href="#hero" aria-label="AI経営計画書ラボ トップへ">AI経営計画書ラボ</a>
-          <button
-            type="button"
-            className={`nav-toggle ${isMenuOpen ? "is-open" : ""}`}
-            aria-expanded={isMenuOpen}
-            aria-controls="primary-navigation"
-            onClick={() => setIsMenuOpen((prev) => !prev)}
-          >
-            <span className="sr-only">メニューを開閉</span>
-            <span aria-hidden="true" />
-          </button>
-          <div
-            className={`header-menu ${isMenuOpen ? "is-open" : ""}`}
-            aria-hidden={isMobileViewport && !isMenuOpen}
-          >
-            <nav
-              id="primary-navigation"
-              className="header-nav"
-              aria-label="主要セクション"
-            >
-              {sections.map((section) => (
-                <a
-                  key={section.id}
-                  href={`#${section.id}`}
-                  className={activeSection === section.id ? "is-active" : ""}
-                  onClick={(event) => handleNavClick(event, section.id)}
-                >
-                  {section.label}
-                </a>
-              ))}
-            </nav>
-            <div className="header-actions">
-              <a className="btn btn-outline" href="#resources">導入効果を資料で確認</a>
-              <a className="btn btn-cta" href="#contact">
-                30分無料相談を申し込む
-              </a>
-            </div>
+          <a className="brand" href="#hero" aria-label="AI経営計画書ラボ トップへ">
+            AI経営計画書ラボ
+          </a>
+          <div className="header-actions" role="group" aria-label="主要な申し込み導線">
+            <a className="btn btn-outline" href="#resources">
+              資料ダウンロード
+            </a>
+            <a className="btn btn-primary" href="#contact">
+              30分無料相談
+            </a>
           </div>
         </div>
-        <button
-          type="button"
-          className={`nav-backdrop ${isMenuOpen ? "is-visible" : ""}`}
-          aria-hidden={!isMenuOpen}
-          tabIndex={isMenuOpen ? 0 : -1}
-          onClick={() => setIsMenuOpen(false)}
-        >
-          <span className="sr-only">メニューを閉じる</span>
-        </button>
       </header>
 
       <main>
@@ -1247,14 +1185,12 @@ const Index = () => {
                   <div className="evidence-stat">{item.stat}</div>
                   <h3>{item.title}</h3>
                   <p>{item.description}</p>
-                  <a href={item.sourceUrl} target="_blank" rel="noreferrer" className="evidence-link">
-                    {item.sourceLabel}
-                  </a>
+                  <span className="evidence-source">{item.sourceLabel}</span>
                 </article>
               ))}
             </div>
             <p className="footnote" data-animate>
-              ※ 各数値の詳細はカードをホバー/タップすると表示されます。リンクは別タブで開きます。
+              ※ 各数値の詳細はカードをホバー/タップすると表示されます。
             </p>
           </div>
         </section>
@@ -1479,7 +1415,7 @@ const Index = () => {
                 </article>
               </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
+              <a className="btn btn-primary" href="#contact">
                 定量効果の詳しい内訳を見る
               </a>
             </div>
@@ -1584,12 +1520,7 @@ const Index = () => {
             <div className="section-header" data-animate>
               <h2 id="quarterly-heading">四半期ごとに戦略と実行を再設計</h2>
               <ul className="section-intro">
-                <li>
-                  <a href="https://dragonboat.io/blog/quarterly-planning-guide" target="_blank" rel="noreferrer">
-                    Dragonboat
-                  </a>
-                  が説く90日アライン。
-                </li>
+                <li>Dragonboatが説く90日アライン。</li>
                 <li>生成AIと専門家で更新を自動化。</li>
               </ul>
             </div>
@@ -1599,21 +1530,9 @@ const Index = () => {
                   <article key={signal.title} className="quarterly-card">
                     <h3>{signal.title}</h3>
                     <p>{signal.description}</p>
-                    {signal.sourceUrl && (
-                      <a
-                        className="quarterly-link"
-                        href={signal.sourceUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        {signal.sourceLabel}
-                      </a>
-                    )}
-                    {!signal.sourceUrl && (
-                      <span className="quarterly-link" aria-label="社内知見">
-                        {signal.sourceLabel}
-                      </span>
-                    )}
+                    <span className="quarterly-link" aria-label="出典">
+                      {signal.sourceLabel}
+                    </span>
                   </article>
                 ))}
               </div>
@@ -1811,7 +1730,7 @@ const Index = () => {
               </table>
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
+              <a className="btn btn-primary" href="#contact">
                 最適なプランを提案してもらう
               </a>
             </div>
@@ -1844,7 +1763,7 @@ const Index = () => {
               ))}
             </dl>
             <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
+              <a className="btn btn-primary" href="#contact">
                 個別の懸念を相談する
               </a>
             </div>
@@ -2003,7 +1922,7 @@ const Index = () => {
               })}
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
+              <a className="btn btn-primary" href="#contact">
                 資料ダウンロードの案内を受け取る
               </a>
             </div>
@@ -2043,7 +1962,7 @@ const Index = () => {
               })}
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
+              <a className="btn btn-primary" href="#contact">
                 セキュリティ要件を相談する
               </a>
             </div>
@@ -2187,7 +2106,7 @@ const Index = () => {
                 {contactStep < contactStepCount ? (
                   <button
                     type="button"
-                    className="btn btn-cta"
+                    className="btn btn-primary"
                     onClick={handleContactNext}
                     disabled={isSubmitting}
                   >
@@ -2220,7 +2139,7 @@ const Index = () => {
             </form>
           </div>
           <div className="mobile-form-cta" aria-hidden="true">
-            <a className="btn btn-cta" href="#contact">
+            <a className="btn btn-primary" href="#contact">
               無料相談フォームを開く
             </a>
           </div>
