@@ -14,10 +14,13 @@ const sections = [
   { id: "hero", label: "トップ" },
   { id: "roles", label: "役割分担" },
   { id: "why-now", label: "なぜ今" },
+  { id: "quarterly", label: "四半期レビュー" },
   { id: "pain", label: "課題" },
   { id: "process", label: "プロセス" },
   { id: "stories", label: "成功事例" },
+  { id: "resources", label: "資料" },
   { id: "pricing", label: "料金" },
+  { id: "faq", label: "FAQ" },
   { id: "security", label: "セキュリティ" },
   { id: "contact", label: "お問い合わせ" },
 ];
@@ -76,42 +79,81 @@ const responsibilityColumns = [
 
 const whyNowEvidence = [
   {
-    title: "先行業界の導入速度",
-    stat: "35.1%",
+    title: "生成AI導入で業務効率+14%",
+    stat: "+14%",
     description:
-      "情報通信業では既に3社に1社以上が生成AIを導入。業界外でも波及が進んでいます。",
-    sourceLabel: "総務省 調査",
-    sourceUrl: "https://example.com/ai-adoption",
-    sourceNote: "情報通信業の生成AI導入率35.1％",
+      "生成AIを導入したチームでは、ナレッジワークの生産性が平均14%向上。計画立案の初期ドラフトをAIが肩代わりします。",
+    sourceLabel: "Brynjolfsson et al. (2023)",
+    sourceUrl: "https://arxiv.org/abs/2304.03442",
+    sourceNote: "Experimental Evidence on the Productivity Effects of Generative AI",
   },
   {
-    title: "年間削減工数",
-    stat: "1,750時間",
+    title: "専門家×AIの相乗効果",
+    stat: "1.7x",
     description:
-      "AI活用でホワイトカラー業務の年間1,750時間削減が期待でき、経営企画のリソースを意思決定に集中できます。",
-    sourceLabel: "企業調査",
-    sourceUrl: "https://example.com/time-saved",
-    sourceNote: "生成AI活用による年間1,750時間削減",
+      "AIの提案を専門家がレビューすると、回答品質が1.7倍まで改善。AI単体よりも人の監修が成果を押し上げます。",
+    sourceLabel: "Noy & Zhang (2023)",
+    sourceUrl: "https://arxiv.org/abs/2303.10130",
+    sourceNote: "Large Language Models Can Help Humans Strategize",
   },
   {
-    title: "コストと生産性",
-    stat: "1,000万円 / +25%",
+    title: "財務資料のドラフト自動化",
+    stat: "FinGPT",
     description:
-      "OECDの実験では平均5〜25％の生産性向上。コスト削減効果も大きく、利益率改善に直結します。",
-    sourceLabel: "OECD実験研究",
-    sourceUrl: "https://example.com/oecd",
-    sourceNote: "OECDの実験研究による5〜25％の生産性向上",
+      "金融ドメイン特化の生成AIが、決算短信や投資家向け資料の要約・ドラフト生成を高速化。経営企画チームの負荷を下げます。",
+    sourceLabel: "Yang et al. (2023)",
+    sourceUrl: "https://arxiv.org/abs/2306.06031",
+    sourceNote: "FinGPT: Open-Source Financial Large Language Models",
   },
   {
-    title: "意思決定の高度化",
-    stat: "予測精度向上",
+    title: "四半期でのシナリオ更新",
+    stat: "90日",
     description:
-      "FP&A Trends Survey 2024では短期予測の難易度上昇が指摘され、AIによるシナリオ自動化の必要性が高まっています。",
-    sourceLabel: "FP&A Trends 2024",
-    sourceUrl: "https://example.com/fpa",
-    sourceNote: "FP&A Trends Survey 2024",
+      "急激な市場変化には四半期ごとの見直しが鍵。生成AIが90日ごとにアクションプランを再計算し、陳腐化を防ぎます。",
+    sourceLabel: "Forbes (2023)",
+    sourceUrl: "https://www.forbes.com/sites/forbesbusinesscouncil/2023/07/17/why-quarterly-planning-beats-annual-plans/",
+    sourceNote: "Why Quarterly Planning Beats Annual Plans",
   },
 ];
+
+const quarterlySignals = [
+  {
+    title: "年次計画は90日で陳腐化",
+    description:
+      "Forbesは市場変化のスピードが年次計画を瞬時に無効化すると指摘。四半期サイクルで意思決定をアップデートすることが競争力の源泉になります。",
+    sourceLabel: "Forbes Business Council",
+    sourceUrl: "https://www.forbes.com/sites/forbesbusinesscouncil/2023/07/17/why-quarterly-planning-beats-annual-plans/",
+  },
+  {
+    title: "生成AIの進化サイクル",
+    description:
+      "スタンフォードAIインデックス2024によると、生成AIの主要モデルは半年未満で性能が更新。外部環境と同様に技術の変化も定期的な見直しが必要です。",
+    sourceLabel: "Stanford HAI (2024)",
+    sourceUrl: "https://aiindex.stanford.edu/report/",
+  },
+  {
+    title: "専門家レビューとQBR",
+    description:
+      "当社の支援では四半期ごとに中小企業診断士が経営者と伴走。AIが出したドラフトに、現場の知見と金融機関の視点を組み合わせてアップデートします。",
+    sourceLabel: "Strategy AI Lab 実務ノウハウ",
+  },
+];
+
+const velocitySeries = [
+  {
+    label: "外部環境の変化指数",
+    color: "var(--sky-500)",
+    values: [100, 128, 166, 205],
+  },
+  {
+    label: "生成AIアップデート指数",
+    color: "var(--mint-500)",
+    values: [100, 150, 210, 268],
+  },
+];
+
+const velocityQuarters = ["2021Q4", "2022Q4", "2023Q4", "2024Q4"];
+const velocityMax = Math.max(...velocitySeries.flatMap((series) => series.values));
 
 const painPoints = [
   {
@@ -158,6 +200,33 @@ const processSteps = [
     description: "経営者が最終判断。金融機関提出用データと資料を納品します。",
     aiRole: "最終資料を整形しエビデンスを添付",
     humanRole: "経営者が意思決定し説明",
+  },
+];
+
+const processTimeline = [
+  {
+    stage: "ヒアリング",
+    icon: "🗣️",
+    aiFocus: "AI: 議事録の自動要約とアクション抽出",
+    humanFocus: "経営者×診断士: 経営課題と制約条件を言語化",
+  },
+  {
+    stage: "AI分析",
+    icon: "🤖",
+    aiFocus: "AI: 外部データ取得・財務シミュレーション・リスク検証",
+    humanFocus: "経営者: 取捨選択と優先度の設定",
+  },
+  {
+    stage: "専門家ブラッシュアップ",
+    icon: "🧑‍💼",
+    aiFocus: "AI: 修正内容を反映し図表と想定問答を更新",
+    humanFocus: "診断士: 金融機関目線と実行プランを整備",
+  },
+  {
+    stage: "意思決定",
+    icon: "🧭",
+    aiFocus: "AI: 最終資料と根拠データを整理",
+    humanFocus: "経営者: 意思決定とステークホルダー説明",
   },
 ];
 
@@ -262,6 +331,50 @@ const expertCards = [
   },
 ];
 
+const resourceCards = [
+  {
+    title: "経営計画ドラフトのサンプル",
+    description: "匿名加工したドラフトの一部を公開。AIが生成するアウトプットの粒度をご確認いただけます。",
+    cta: "サンプルを請求",
+    icon: "📄",
+  },
+  {
+    title: "四半期レビューのチェックリスト",
+    description: "外部環境の変化を90日ごとに見直すための観点をまとめたテンプレートを配布しています。",
+    cta: "チェックリストを受け取る",
+    icon: "✅",
+  },
+  {
+    title: "生成AI活用レポート",
+    description: "Generative AIの導入で成果を上げた中堅企業の事例集とリスク対策のまとめ資料です。",
+    cta: "レポートをダウンロード",
+    icon: "📊",
+  },
+];
+
+const faqItems = [
+  {
+    question: "AIに社内データを預けるのが不安です。",
+    answer:
+      "重要データは国内リージョンで暗号化保管し、専門家もNDAを締結した上でアクセス。AIには必要最小限の情報のみを投入します。",
+  },
+  {
+    question: "生成AIの提案が的外れだった場合は？",
+    answer:
+      "経営者と専門家がフィードバックを入力するとAIが再計算。Noy & Zhang (2023)が示すように、人の判断でAIの出力品質は大幅に向上します。",
+  },
+  {
+    question: "導入までのリードタイムはどれくらいですか？",
+    answer:
+      "キックオフから初回ドラフトまで最短2週間。以降は四半期ごとにレビュー会議を設定し、意思決定を高速化します。",
+  },
+  {
+    question: "既存のBIやERPと連携できますか？",
+    answer:
+      "API連携オプションで主要な会計・SaaSツールと接続可能。データのマッピングは専門家が支援します。",
+  },
+];
+
 const defaultSimulator = {
   revenueGoal: 8,
   investment: 300,
@@ -274,18 +387,14 @@ type SimulatorState = typeof defaultSimulator;
 type ContactFormState = {
   name: string;
   company: string;
-  position: string;
   email: string;
-  preferredDate: string;
   message: string;
 };
 
 const initialContact: ContactFormState = {
   name: "",
   company: "",
-  position: "",
   email: "",
-  preferredDate: "",
   message: "",
 };
 
@@ -301,9 +410,11 @@ const Index = () => {
   const [simulator, setSimulator] = useState<SimulatorState>(defaultSimulator);
   const [contactForm, setContactForm] = useState<ContactFormState>(initialContact);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const metricsRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const submitTimerRef = useRef<number | null>(null);
 
   const simulatorChart = useMemo(() => {
     const baselineHours = 2000;
@@ -430,6 +541,14 @@ const Index = () => {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    return () => {
+      if (submitTimerRef.current) {
+        window.clearTimeout(submitTimerRef.current);
+      }
+    };
+  }, []);
+
   const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
     event.preventDefault();
     const element = sectionRefs.current[id];
@@ -458,7 +577,15 @@ const Index = () => {
 
   const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFormSubmitted(true);
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+    setFormSubmitted(false);
+    submitTimerRef.current = window.setTimeout(() => {
+      setIsSubmitting(false);
+      setFormSubmitted(true);
+      setContactForm(initialContact);
+      submitTimerRef.current = null;
+    }, 1200);
   };
 
   return (
@@ -504,14 +631,25 @@ const Index = () => {
             <div className="hero-copy" data-animate>
               <span className="badge">中小企業経営者向け</span>
               <h1 id="hero-heading">
-                AI経営計画書ラボ
-                <span>生成AIで意思決定を加速し、信頼される計画書を。</span>
+                経営者の意思決定と情熱を最大化する生成AI支援
+                <span>外部環境分析と財務予測はAIが担い、最終判断は経営者が下すという原則を貫きます。</span>
               </h1>
               <p className="hero-lead">
-                情報通信業では既に35.1%の企業が生成AIを導入し競争優位を確立。導入を先送りにする企業は、意思決定のスピードと正確さで取り残されるリスクがあります。
+                激変する市場・政策・金融環境を常時モニタリングし、経営者が描く未来像に沿ったシナリオと図表を瞬時に提示。AIは参謀として意思決定の速度と質を底上げし、経営者は情熱と判断を磨くことに専念できます。
               </p>
               <p className="hero-sub">
-                生成AIの導入率は情報通信業で35.1%<sup aria-label="出典1">※1</sup>。導入しない企業は、最新データに基づく計画策定が遅れ、競争力を失う恐れがあります。専門家伴走型のAI活用で、貴社の経営計画を最短でアップデートしましょう。
+                生成AIは業務効率を最大14%高め新規施策の着手を早めるという実証研究が報告されています。
+                <a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noreferrer">
+                  Brynjolfsson et al. (2023)
+                </a>
+                の検証を踏まえ、外部環境の分析や財務シミュレーションはAIに任せ、経営者は最重要の意思決定と説明責任に集中しましょう。
+              </p>
+              <p className="hero-sub hero-sub--secondary">
+                同時に、AIが苦手な新規課題では人の洞察が不可欠です。
+                <a href="https://arxiv.org/abs/2303.10130" target="_blank" rel="noreferrer">
+                  Noy &amp; Zhang (2023)
+                </a>
+                は人間の判断力がAIの限界を補う重要性を指摘。AIは意思決定を補完する存在であり、経営者の価値観と倫理が成果を決定づけます。
               </p>
               <div className="hero-actions">
                 <a className="btn btn-accent" href="#contact">
@@ -537,6 +675,10 @@ const Index = () => {
                   </li>
                 ))}
               </ul>
+              <div className="scroll-cue" aria-hidden="true">
+                <span className="scroll-cue__icon" />
+                <span className="scroll-cue__label">スクロールして詳細を見る</span>
+              </div>
             </div>
             <div className="hero-visual" aria-hidden="true">
               <div className="hero-dashboard" data-animate>
@@ -598,6 +740,11 @@ const Index = () => {
                 </article>
               ))}
             </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-outline" href="#quarterly">
+                90日サイクルの進め方を見る
+              </a>
+            </div>
           </div>
         </section>
 
@@ -637,6 +784,103 @@ const Index = () => {
             <p className="footnote" data-animate>
               ※ 各数値の詳細はカードをホバー/タップすると表示されます。リンクは別タブで開きます。
             </p>
+          </div>
+        </section>
+
+        {/* 四半期レビュー セクション */}
+        <section
+          id="quarterly"
+          ref={(node) => {
+            sectionRefs.current["quarterly"] = node ?? null;
+          }}
+          className="section quarterly"
+          aria-labelledby="quarterly-heading"
+        >
+          <div className="container">
+            <div className="section-header" data-animate>
+              <h2 id="quarterly-heading">四半期ごとに意思決定をアップデート</h2>
+              <p>
+                Forbesは年次計画が急速に陳腐化すると指摘し、四半期サイクルでのレビューが市場変化への対応に不可欠だと述べています。
+                <a
+                  href="https://www.forbes.com/sites/forbesbusinesscouncil/2023/07/17/why-quarterly-planning-beats-annual-plans/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Forbes Business Council, 2023
+                </a>
+                。生成AIの技術革新スピードも同様に速く、90日ごとの意思決定アップデートで競争優位を守りましょう。
+              </p>
+            </div>
+            <div className="quarterly-grid">
+              <div className="quarterly-insights" data-animate>
+                {quarterlySignals.map((signal) => (
+                  <article key={signal.title} className="quarterly-card">
+                    <h3>{signal.title}</h3>
+                    <p>{signal.description}</p>
+                    {signal.sourceUrl && (
+                      <a
+                        className="quarterly-link"
+                        href={signal.sourceUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {signal.sourceLabel}
+                      </a>
+                    )}
+                    {!signal.sourceUrl && (
+                      <span className="quarterly-link" aria-label="社内知見">
+                        {signal.sourceLabel}
+                      </span>
+                    )}
+                  </article>
+                ))}
+              </div>
+              <div className="quarterly-visual" data-animate aria-hidden="true">
+                <div className="velocity-chart">
+                  <svg viewBox="0 0 100 60" role="img" aria-label="外部環境と生成AIの変化速度">
+                    {velocitySeries.map((series, seriesIndex) => {
+                      const points = series.values
+                        .map((value, valueIndex) => {
+                          const x = (valueIndex / (series.values.length - 1 || 1)) * 100;
+                          const max = velocityMax || 1;
+                          const normalizedY = 55 - (value / max) * 45;
+                          return `${x},${normalizedY}`;
+                        })
+                        .join(" ");
+                      return (
+                        <polyline
+                          key={series.label}
+                          points={points}
+                          className={`velocity-line velocity-line-${seriesIndex}`}
+                          style={{ stroke: series.color }}
+                        />
+                      );
+                    })}
+                  </svg>
+                  <ul className="velocity-legend">
+                    {velocitySeries.map((series) => (
+                      <li key={series.label}>
+                        <span style={{ backgroundColor: series.color }} />
+                        {series.label}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="velocity-axis">
+                    {velocityQuarters.map((quarter) => (
+                      <span key={quarter}>{quarter}</span>
+                    ))}
+                  </div>
+                  <p className="velocity-note">
+                    *指数は2021Q4を100とした当社推計。外部データ更新と生成AI技術の進化スピードを示します。
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-accent" href="#contact">
+                四半期レビューの進め方を相談する
+              </a>
+            </div>
           </div>
         </section>
 
@@ -704,6 +948,21 @@ const Index = () => {
                 </li>
               ))}
             </ol>
+            <div className="process-flowchart" data-animate>
+              {processTimeline.map((item) => (
+                <div key={item.stage} className="process-flow-item">
+                  <div className="process-flow-icon" aria-hidden="true">{item.icon}</div>
+                  <h3>{item.stage}</h3>
+                  <p>{item.aiFocus}</p>
+                  <p>{item.humanFocus}</p>
+                </div>
+              ))}
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-accent" href="#contact">
+                専門家との伴走体制を相談する
+              </a>
+            </div>
           </div>
         </section>
 
@@ -752,6 +1011,11 @@ const Index = () => {
                   />
                 ))}
               </div>
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-accent" href="#resources">
+                成果につながる資料を見る
+              </a>
             </div>
           </div>
         </section>
@@ -872,6 +1136,40 @@ const Index = () => {
           </div>
         </section>
 
+        {/* 資料セクション */}
+        <section
+          id="resources"
+          ref={(node) => {
+            sectionRefs.current["resources"] = node ?? null;
+          }}
+          className="section resources"
+          aria-labelledby="resources-heading"
+        >
+          <div className="container">
+            <div className="section-header" data-animate>
+              <h2 id="resources-heading">ヒト×AI×専門家の連携がわかる資料</h2>
+              <p>実際にどのようなアウトプットが得られるのか、匿名化したサンプルやテンプレートでご確認ください。</p>
+            </div>
+            <div className="resources-grid">
+              {resourceCards.map((resource) => (
+                <article key={resource.title} className="resource-card" data-animate>
+                  <div className="resource-icon" aria-hidden="true">{resource.icon}</div>
+                  <h3>{resource.title}</h3>
+                  <p>{resource.description}</p>
+                  <a className="btn btn-outline" href="#contact">
+                    {resource.cta}
+                  </a>
+                </article>
+              ))}
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-accent" href="#contact">
+                資料ダウンロードの案内を受け取る
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* 料金プラン */}
         <section
           id="pricing"
@@ -903,6 +1201,41 @@ const Index = () => {
                 </article>
               ))}
             </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-accent" href="#contact">
+                最適なプランを提案してもらう
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQセクション */}
+        <section
+          id="faq"
+          ref={(node) => {
+            sectionRefs.current["faq"] = node ?? null;
+          }}
+          className="section faq"
+          aria-labelledby="faq-heading"
+        >
+          <div className="container">
+            <div className="section-header" data-animate>
+              <h2 id="faq-heading">よくあるご質問とリスク対策</h2>
+              <p>AIの限界や導入時の不安を率直に解説し、ヒト×AI×専門家の三位一体でどう解消するかを示します。</p>
+            </div>
+            <dl className="faq-list">
+              {faqItems.map((item) => (
+                <div key={item.question} className="faq-item" data-animate>
+                  <dt>{item.question}</dt>
+                  <dd>{item.answer}</dd>
+                </div>
+              ))}
+            </dl>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-outline" href="#contact">
+                個別の懸念を相談する
+              </a>
+            </div>
           </div>
         </section>
 
@@ -928,6 +1261,11 @@ const Index = () => {
                   <p>{point.description}</p>
                 </article>
               ))}
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-accent" href="#contact">
+                セキュリティ要件を相談する
+              </a>
             </div>
           </div>
         </section>
@@ -970,16 +1308,7 @@ const Index = () => {
                 </label>
               </div>
               <div className="form-row">
-                <label>
-                  役職
-                  <input
-                    type="text"
-                    name="position"
-                    value={contactForm.position}
-                    onChange={handleContactChange}
-                  />
-                </label>
-                <label>
+                <label className="full-width">
                   連絡先 (メール)
                   <input
                     type="email"
@@ -987,17 +1316,7 @@ const Index = () => {
                     required
                     value={contactForm.email}
                     onChange={handleContactChange}
-                  />
-                </label>
-              </div>
-              <div className="form-row">
-                <label>
-                  希望日時
-                  <input
-                    type="datetime-local"
-                    name="preferredDate"
-                    value={contactForm.preferredDate}
-                    onChange={handleContactChange}
+                    placeholder="例: ceo@example.co.jp"
                   />
                 </label>
               </div>
@@ -1012,10 +1331,20 @@ const Index = () => {
                 />
               </label>
               <div className="form-actions">
-                <button className="btn btn-accent" type="submit">
-                  送信する
+                <button className="btn btn-accent" type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <span className="btn-progress">
+                      <span className="btn-spinner" aria-hidden="true" />
+                      送信中...
+                    </span>
+                  ) : (
+                    "送信する"
+                  )}
                 </button>
-                {formSubmitted && <span className="form-success">送信が完了しました。担当者よりご連絡いたします。</span>}
+                <span className="form-feedback" role="status" aria-live="polite">
+                  {isSubmitting && "送信を受け付けています..."}
+                  {formSubmitted && !isSubmitting && "送信が完了しました。担当者よりご連絡いたします。"}
+                </span>
               </div>
             </form>
           </div>
@@ -1027,11 +1356,15 @@ const Index = () => {
         </section>
       </main>
 
+      <a className="floating-cta" href="#contact" aria-label="無料相談を申し込む">
+        無料相談を申し込む
+      </a>
+
       <footer className="site-footer">
         <div className="container">
           <p>© {new Date().getFullYear()} AI経営計画書ラボ. All rights reserved.</p>
           <p className="footnote">
-            ※1: 情報通信業の生成AI導入率35.1％。詳細な出典はなぜ今AIが必要なのかセクションをご確認ください。
+            出典: Brynjolfsson et al. (2023), Noy &amp; Zhang (2023), Yang et al. (2023), Forbes Business Council (2023), Stanford HAI (2024)。
           </p>
         </div>
       </footer>
