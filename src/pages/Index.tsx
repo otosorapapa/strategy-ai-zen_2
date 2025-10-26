@@ -8,6 +8,8 @@ import {
   useState,
 } from "react";
 
+import { submitContactForm } from "@/lib/contact-api";
+
 import "../../styles/lp.css";
 
 const sections = [
@@ -411,10 +413,10 @@ const Index = () => {
   const [contactForm, setContactForm] = useState<ContactFormState>(initialContact);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
 
   const metricsRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
-  const submitTimerRef = useRef<number | null>(null);
 
   const simulatorChart = useMemo(() => {
     const baselineHours = 2000;
@@ -541,14 +543,6 @@ const Index = () => {
     return () => clearInterval(timer);
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (submitTimerRef.current) {
-        window.clearTimeout(submitTimerRef.current);
-      }
-    };
-  }, []);
-
   const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
     event.preventDefault();
     const element = sectionRefs.current[id];
@@ -575,17 +569,28 @@ const Index = () => {
     setContactForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleContactSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isSubmitting) return;
+
     setIsSubmitting(true);
     setFormSubmitted(false);
-    submitTimerRef.current = window.setTimeout(() => {
-      setIsSubmitting(false);
+    setSubmissionError(null);
+
+    try {
+      await submitContactForm(contactForm);
       setFormSubmitted(true);
       setContactForm(initialContact);
-      submitTimerRef.current = null;
-    }, 1200);
+    } catch (error) {
+      console.error("Failed to submit contact form", error);
+      const message =
+        error instanceof Error
+          ? error.message
+          : "送信に失敗しました。時間をおいて再度お試しください。";
+      setSubmissionError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -1341,10 +1346,17 @@ const Index = () => {
                     "送信する"
                   )}
                 </button>
-                <span className="form-feedback" role="status" aria-live="polite">
-                  {isSubmitting && "送信を受け付けています..."}
-                  {formSubmitted && !isSubmitting && "送信が完了しました。担当者よりご連絡いたします。"}
-                </span>
+                <div className="form-messages">
+                  <div className="form-feedback" role="status" aria-live="polite">
+                    {isSubmitting && "送信を受け付けています..."}
+                    {formSubmitted && !isSubmitting && "送信が完了しました。担当者よりご連絡いたします。"}
+                  </div>
+                  {submissionError && (
+                    <div className="form-error" role="alert">
+                      {submissionError}
+                    </div>
+                  )}
+                </div>
               </div>
             </form>
           </div>
