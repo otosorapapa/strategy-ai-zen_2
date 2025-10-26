@@ -61,12 +61,29 @@ const primaryCtaLabel = "無料相談を申し込む";
 
 const headerNavItems = [
   { id: "hero", label: "サービス概要" },
-  { id: "problem", label: "課題と解決策" },
+  { id: "problem", label: "課題" },
+  { id: "solution", label: "解決策" },
+  { id: "outcome", label: "成果" },
   { id: "process", label: "導入と料金" },
   { id: "faq", label: "よくある質問・事例" },
 ];
 
 const sectionNavItems = [...headerNavItems, { id: "contact", label: "無料相談" }];
+
+const heroEvidence = [
+  {
+    summary:
+      "AIはリアルタイムのデータを提供し、経営者が正確かつ迅速に意思決定できると報告。",
+    source: "University of Cincinnati Online",
+    url: "https://online.uc.edu/news-stories/generative-ai-in-business/",
+  },
+  {
+    summary:
+      "生成AIは膨大なデータを要約し、複数シナリオを短時間で評価できると指摘。",
+    source: "JAGGAER",
+    url: "https://www.jaggaer.com/blog/how-to-use-generative-ai-procurement",
+  },
+];
 
 const heroMetrics = [
   {
@@ -95,6 +112,27 @@ const heroMetrics = [
     prefix: "+",
     suffix: "h",
     target: 45,
+  },
+];
+
+const heroAllianceExperts = [
+  {
+    name: "田中 圭",
+    role: "元メガバンク法人融資担当",
+    focus: "資金繰り・融資交渉",
+    photo: expertTanakaPhoto,
+  },
+  {
+    name: "小林 真",
+    role: "元戦略コンサルティングファーム",
+    focus: "戦略再設計・DX",
+    photo: expertKobayashiPhoto,
+  },
+  {
+    name: "斎藤 美咲",
+    role: "公認会計士 / 税理士",
+    focus: "財務管理・補助金対策",
+    photo: expertSaitoPhoto,
   },
 ];
 
@@ -136,14 +174,14 @@ const aiValuePoints: AiValuePoint[] = [
   {
     title: "リアルタイム分析で判断を即断",
     description:
-      "Itrex Group (2024) が指摘する通り、リアルタイム分析は市場の変化へ迅速に応答する競争力になります。ダッシュボードが政策・金融データを常に同期し、意思決定の材料を即座に提示します。",
+      "University of Cincinnati Online (2024) は、AIがリアルタイムのデータを提供し経営者の迅速で正確な意思決定を支援すると報告。ダッシュボードが政策・金融データを常に同期し、材料を即座に提示します。",
     example: "最新の補助金更新と資金繰り感度を自動で突き合わせ、経営者は判断に集中できます。",
     icon: BarChart4,
   },
   {
     title: "シナリオ比較と生成ドラフト",
     description:
-      "MIT Sloan Management Reviewの研究が示すように、人とAIの反復でアイデアの質が向上します。生成AIが過去データから将来シナリオを複数生成し、計画書や想定問答を即座にドラフトします。",
+      "JAGGAER (2024) は生成AIが膨大なデータを要約し、複数シナリオを短時間で評価できると指摘。生成AIが過去データから将来シナリオを複数生成し、計画書や想定問答を即座にドラフトします。",
     example: "四半期計画書や想定問答集をAIが下書きし、専門家が数分でレビューします。",
     icon: Sparkles,
   },
@@ -414,15 +452,15 @@ type ProcessStep = {
 
 const processSteps: ProcessStep[] = [
   {
-    title: "初回相談",
-    description: "現状課題とゴールを整理。MIT Sloanが指摘する協働プロセス再設計の方針を合意します。",
+    title: "無料相談",
+    description: "現状の詰まりと達成したいKGIを整理。必要な関係者と進め方を決定します。",
     aiRole: "ヒアリング内容を要約し課題マップを自動生成",
     humanRole: "経営者・専門家が優先順位とスコープを決定",
     icon: ClipboardCheck,
     accent: "mint",
   },
   {
-    title: "データ準備",
+    title: "データ入力・連携",
     description: "社内外データの棚卸しと連携を安全に実施。NDA締結後にアクセス権を設定します。",
     aiRole: "不足データのチェックリスト提示とフォーマット変換",
     humanRole: "専門家が連携ルールを整備しガバナンスを確認",
@@ -430,7 +468,7 @@ const processSteps: ProcessStep[] = [
     accent: "sky",
   },
   {
-    title: "AIシナリオ生成",
+    title: "AIレポート生成",
     description: "AIが財務・需要・人材シナリオを生成し、複数ケースのKPIを比較。",
     aiRole: "外部データ収集とシミュレーション、ドラフト作成",
     humanRole: "経営者が仮説をレビューし意思決定基準を設定",
@@ -438,15 +476,15 @@ const processSteps: ProcessStep[] = [
     accent: "navy",
   },
   {
-    title: "専門家レビュー",
-    description: "コンサル・金融OBが内容を審査。金融機関が求める根拠を補強します。",
+    title: "専門家との面談",
+    description: "診断士と会計士が内容を審査。金融機関が求める根拠を補強します。",
     aiRole: "フィードバックを反映しモデルと資料を更新",
     humanRole: "専門家が審査目線で修正し実行計画を調整",
     icon: ShieldCheck,
     accent: "mint",
   },
   {
-    title: "運用開始",
+    title: "計画書完成・実行",
     description: "経営会議で最終判断を行い、ダッシュボードと四半期レビューに組み込みます。",
     aiRole: "最終資料を整形し、リアルタイムのアラート設定を実施",
     humanRole: "経営者が説明責任を担い、専門家が伴走して定着化",
@@ -465,14 +503,14 @@ type ProcessFlowStage = {
 
 const processTimeline: ProcessFlowStage[] = [
   {
-    stage: "ヒアリング",
+    stage: "無料相談",
     icon: Layers3,
     aiFocus: "AI: 議事録の自動要約とアクション抽出",
     humanFocus: "経営者×診断士: 経営課題と制約条件を言語化",
     accent: "mint",
   },
   {
-    stage: "AI分析",
+    stage: "データ連携・AI分析",
     icon: BrainCircuit,
     aiFocus: "AI: 外部データ取得・財務シミュレーション・リスク検証",
     humanFocus: "経営者: 取捨選択と優先度の設定",
@@ -1348,24 +1386,22 @@ const Index = () => {
           <div className="hero-overlay" />
           <div className="container hero-inner">
             <div className="hero-copy" data-animate data-initial-visible="true">
-              <span className="badge">中小企業経営者向け</span>
+              <span className="badge">年商5,000万〜15億円の経営者向け</span>
               <h1 id="hero-heading">
-                生成AIで経営判断を即断
-                <span>外部環境と自社データを同時分析</span>
+                経営改善で鍛えた専門家 × 生成AI
+                <span>意思決定の質・速さ・先見性を高める経営計画</span>
               </h1>
-              <ul className="hero-points">
-                <li>政策・市場・金融情報をAIが要約。</li>
-                <li>社長は優先課題だけを確認。</li>
-                <li>専門家が根拠資料を整備。</li>
-              </ul>
               <p className="hero-lead">
-                意思決定時間を平均52%短縮。
-                資料作成工数を80%削減。
-                月45時間の集中時間を創出。
+                週1回のAIレポートと診断士のブラッシュアップで、経営判断の時間を平均52%短縮。
+                四半期ごとに先手を打てる意思決定サイクルを構築します。
               </p>
+              <ul className="hero-points">
+                <li>政策・市場・自社データを横断し、生成AIが複数シナリオを即時比較。</li>
+                <li>中小企業診断士・公認会計士が週次でドラフトを金融審査レベルに補強。</li>
+                <li>社長は優先施策の判断と説明に集中。会議準備と資料作成を50%以上削減。</li>
+              </ul>
               <p className="hero-sub">
-                四半期ごとに外部データを自動更新。
-                リスクと機会を即時に共有。
+                リアルタイムの外部データと社内指標を組み合わせ、投資・資金繰りの判断材料を常に最新化。
               </p>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
@@ -1436,19 +1472,49 @@ const Index = () => {
                   loading="lazy"
                 />
                 <figcaption>
-                  リアルタイム分析で政策・市場データと財務指標を一画面で確認
+                  政策・市場データと財務指標を一画面で確認し、次の一手を即断する下地をつくります。
                 </figcaption>
               </figure>
               <div className="hero-demo" data-animate data-initial-visible="true">
-                <div className="hero-demo__preview" aria-hidden="true">
-                  <div className="hero-demo__glow" />
-                  <div className="hero-demo__bars">
-                    <span />
-                    <span />
-                    <span />
-                    <span />
+                <div className="hero-collab" aria-label="生成AIと専門家チームの連携イメージ">
+                  <div className="hero-collab__panel hero-collab__panel--ai">
+                    <span className="hero-collab__label">生成AI</span>
+                    <p>
+                      政策・市場・自社データをクロス分析し、資金繰りと成長の複数シナリオを毎週ドラフト。
+                      JAGGAER (2024) が示すように、膨大なデータから最適解を素早く抽出します。
+                    </p>
                   </div>
-                  <div className="hero-demo__spark" />
+                  <div className="hero-collab__connector" aria-hidden="true">
+                    <Bot />
+                  </div>
+                  <div className="hero-collab__panel hero-collab__panel--experts">
+                    <span className="hero-collab__label">専門家チーム</span>
+                    <ul className="hero-collab__experts">
+                      {heroAllianceExperts.map((expert) => (
+                        <li key={expert.name}>
+                          <img src={expert.photo} alt={expert.name} loading="lazy" />
+                          <div>
+                            <strong>{expert.name}</strong>
+                            <span>{expert.role}</span>
+                            <small>{expert.focus}</small>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <div className="hero-evidence" aria-label="外部調査による裏付け">
+                  <span className="hero-evidence__eyebrow">Evidence</span>
+                  <ul className="hero-evidence__list">
+                    {heroEvidence.map((item) => (
+                      <li key={item.source} className="hero-evidence__item">
+                        <p>{item.summary}</p>
+                        <a href={item.url} target="_blank" rel="noreferrer">
+                          {item.source}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
                 <button
                   type="button"
@@ -1459,16 +1525,12 @@ const Index = () => {
                   }}
                 >
                   <PlayCircle aria-hidden="true" />
-                  <span>1分で分かるAI意思決定デモ</span>
+                  <span>1分で分かるAI×専門家デモを見る</span>
                 </button>
                 <p className="hero-demo__caption">
-                  リアルタイム分析で意思決定材料を提示し、生成AIがシナリオ比較と資料ドラフトを作成。専門家レビューと経営者の判断で最終決定まで伴走する流れをご覧いただけます。
+                  週1回のAIレポートと専門家セッションで、University of Cincinnati Onlineが指摘するリアルタイム意思決定の仕組みを体現。
+                  経営者は重要な判断に集中し、資料の整合性はチームが担保します。
                 </p>
-                <ul className="hero-demo__points">
-                  <li>Itrex Group (2024) が示すリアルタイム分析のメリットを体感。</li>
-                  <li>MIT Sloanの研究の通り、人とAIの反復でシナリオの質を高めます。</li>
-                  <li>University of Cincinnati OnlineとRossumの知見を取り入れた客観的なリスク管理。</li>
-                </ul>
               </div>
             </div>
           </div>
@@ -1545,7 +1607,7 @@ const Index = () => {
               <span className="story-eyebrow">STORY 02</span>
               <h2 id="solution-heading">AIと専門家の協働で意思決定を加速</h2>
               <p>
-                生成AIが情報を束ね、専門家と経営者がレビューと判断に集中。役割分担を明確にし、実行精度を高めます。
+                生成AIが政策・市場・自社データを束ね、専門家と経営者がレビューと判断に集中。週1回のレポートで意思決定の先回りが可能になります。
               </p>
             </div>
             <div className="roles-grid">
@@ -1809,7 +1871,7 @@ const Index = () => {
             <div className="section-header" data-animate>
               <h2 id="process-heading">導入の流れ（最短4週間）</h2>
               <ul className="section-intro">
-                <li>初回相談から運用開始まで5ステップで伴走。</li>
+                <li>無料相談→データ連携→AIレポート→専門家面談→計画書完成を明確化。</li>
                 <li>MIT Sloanの研究が示す「AIと人の協働に向けたプロセス再設計」を実装。</li>
               </ul>
             </div>
