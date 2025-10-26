@@ -2251,154 +2251,291 @@ svg {
 .story-carousel {
   position: relative;
   overflow: hidden;
+  padding: clamp(24px, 5vw, 40px);
+  border-radius: 32px;
+  background: linear-gradient(145deg, rgba(18, 49, 92, 0.9), rgba(32, 76, 128, 0.88));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 40px 80px rgba(6, 20, 40, 0.45);
+  isolation: isolate;
+}
+
+.story-carousel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 16% 20%, rgba(96, 165, 250, 0.25), transparent 58%),
+    radial-gradient(circle at 82% 28%, rgba(61, 214, 181, 0.24), transparent 62%),
+    radial-gradient(circle at 50% 110%, rgba(255, 255, 255, 0.1), transparent 70%);
+  pointer-events: none;
+  mix-blend-mode: screen;
 }
 
 .story-slider {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: min(100%, 360px);
-  gap: 24px;
-  transition: transform 0.6s ease;
+  position: relative;
+  display: flex;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-  .story-card {
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    padding: 28px;
-    display: grid;
-    gap: 16px;
-    box-shadow: var(--shadow-sm);
-  }
+.story-card {
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
 
+.story-card__content {
+  position: relative;
+  width: min(960px, 100%);
+  border-radius: 28px;
+  padding: clamp(24px, 4vw, 44px);
+  display: grid;
+  gap: clamp(20px, 3vw, 30px);
+  background: linear-gradient(160deg, rgba(4, 21, 42, 0.8), rgba(9, 30, 56, 0.75));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 54px rgba(5, 12, 28, 0.45);
+  backdrop-filter: blur(16px);
+}
+
+.story-card__content::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(61, 214, 181, 0.18), rgba(96, 165, 250, 0.12));
+  opacity: 0.65;
+  filter: blur(0.5px);
+  z-index: -1;
+}
+
+.story-meta {
+  display: flex;
+  gap: clamp(16px, 2.5vw, 32px);
+  align-items: center;
+}
+
+.story-photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 16px 32px rgba(10, 28, 54, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.story-profile {
+  display: grid;
+  gap: 6px;
+}
+
+.story-logo {
+  width: 104px;
+  height: auto;
+  margin-bottom: 4px;
+  border-radius: 12px;
+  box-shadow: 0 12px 26px rgba(10, 26, 52, 0.35);
+  background: rgba(255, 255, 255, 0.95);
+  padding: 6px 10px;
+}
+
+.story-company {
+  font-weight: 700;
+  display: block;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.05rem;
+}
+
+.story-role {
+  display: block;
+  font-size: 0.88rem;
+  opacity: 0.82;
+}
+
+.story-industry {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: rgba(200, 221, 255, 0.85);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.story-quote {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+  font-style: normal;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.story-quote__icon {
+  font-size: 2.5rem;
+  color: rgba(61, 214, 181, 0.85);
+  line-height: 1;
+  filter: drop-shadow(0 8px 14px rgba(61, 214, 181, 0.35));
+}
+
+.story-quote p {
+  margin: 0;
+  font-size: clamp(1rem, 1.2rem, 1.25rem);
+  line-height: 1.6;
+}
+
+.story-structure {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+}
+
+.story-structure__item {
+  background: rgba(15, 45, 80, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 16px 18px;
+  display: grid;
+  gap: 8px;
+}
+
+.story-structure__label {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(61, 214, 181, 0.88);
+  font-weight: 700;
+}
+
+.story-structure__item p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: rgba(226, 236, 255, 0.9);
+}
+
+.story-summary {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(230, 240, 255, 0.92);
+  padding: 18px 22px;
+  border-radius: 18px;
+  background: linear-gradient(120deg, rgba(96, 165, 250, 0.18), rgba(255, 255, 255, 0.04));
+  border: 1px solid rgba(120, 184, 255, 0.18);
+}
+
+.story-metrics {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.story-metrics li {
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.14), rgba(61, 214, 181, 0.12));
+  border-radius: 18px;
+  padding: 14px 18px;
+  display: grid;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.story-metric__label {
+  font-size: 0.85rem;
+  color: rgba(217, 229, 255, 0.88);
+  letter-spacing: 0.04em;
+}
+
+.story-metric__values {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-variant-numeric: tabular-nums;
+}
+
+.story-metric__before,
+.story-metric__after {
+  font-weight: 600;
+}
+
+.story-metric__arrow {
+  opacity: 0.7;
+}
+
+.story-metric__impact {
+  font-size: 1.12rem;
+  color: rgba(61, 214, 181, 0.92);
+  font-weight: 700;
+}
+
+@media (max-width: 680px) {
   .story-meta {
-    display: flex;
-    gap: 16px;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .story-photo {
     width: 64px;
     height: 64px;
-    border-radius: 16px;
-    object-fit: cover;
-    box-shadow: 0 12px 26px rgba(15, 37, 71, 0.2);
-  }
-
-  .story-profile {
-    display: grid;
-    gap: 4px;
   }
 
   .story-logo {
-    width: 96px;
-    height: auto;
-    margin-bottom: 6px;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(15, 37, 71, 0.25);
+    width: 92px;
   }
 
-  .story-company {
-    font-weight: 700;
-    display: block;
-    color: rgba(255, 255, 255, 0.92);
+  .story-structure__item {
+    padding: 14px 16px;
+  }
+}
+
+@media (min-width: 768px) {
+  .story-structure {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .story-structure {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .story-role {
-    display: block;
-    font-size: 0.85rem;
-    opacity: 0.75;
+  .story-card__content {
+    gap: 32px;
   }
-
-  .story-industry {
-    display: block;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.75);
-  }
-
-  .story-summary {
-    margin: 0;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.78);
-    line-height: 1.5;
-  }
-
-  .story-metrics {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  }
-
-  .story-metrics li {
-    background: rgba(255, 255, 255, 0.14);
-    border-radius: 16px;
-    padding: 12px 14px;
-    display: grid;
-    gap: 6px;
-  }
-
-  .story-metric__label {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.78);
-  }
-
-  .story-metric__values {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.78);
-    font-variant-numeric: tabular-nums;
-  }
-
-  .story-metric__before,
-  .story-metric__after {
-    font-weight: 600;
-  }
-
-  .story-metric__arrow {
-    opacity: 0.7;
-  }
-
-  .story-metric__impact {
-    font-size: 1.05rem;
-    color: var(--mint-200);
-  }
-
-  blockquote.story-quote {
-    margin: 0;
-    padding-left: 16px;
-    border-left: 4px solid rgba(61, 214, 181, 0.55);
-    font-style: normal;
-    color: rgba(255, 255, 255, 0.88);
-  }
-
-  blockquote.story-quote p {
-    margin: 0;
-  }
+}
 
 .story-controls {
   margin-top: 24px;
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .story-controls button {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.32);
   cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
+  position: relative;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 6px 16px rgba(6, 15, 32, 0.25);
 }
 
 .story-controls button.is-active {
-  transform: scale(1.2);
-  background: var(--sky-500);
+  transform: scale(1.35);
+  background: linear-gradient(135deg, rgba(61, 214, 181, 0.9), rgba(96, 165, 250, 0.85));
+  box-shadow: 0 0 0 4px rgba(61, 214, 181, 0.25);
+}
+
+.story-controls button:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 4px;
 }
 
 .stories .footnote {

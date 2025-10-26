@@ -551,6 +551,10 @@ type SuccessStory = {
   title: string;
   quote: string;
   summary: string;
+  challenge: string;
+  aiRole: string;
+  expertRole: string;
+  governance: string;
   metrics: SuccessMetric[];
   photo: string;
   logo: string;
@@ -566,6 +570,13 @@ const successStories: SuccessStory[] = [
       "週次の経営会議前にAIが優先課題と打ち手を提示してくれるので、議論は意思決定に集中できます。役員全員が同じダッシュボードを見ており、判断の速度と質が両立しました。",
     summary:
       "需要変動が激しい新規事業の利益率改善が課題でした。AIが在庫・仕入・販促のデータを横断的に解析し、粗利改善シナリオを提示。導入3か月で意思決定準備時間を週8時間削減し、粗利益率を7pt引き上げました。",
+    challenge: "需要変動が大きいサブスクリプション事業で粗利率が低迷。複数部門でデータが分断され、意思決定が属人的になっていた。",
+    aiRole:
+      "在庫・仕入・販促データを統合し、利益貢献度をスコアリング。優先すべきSKUと打ち手を週次で自動提案。",
+    expertRole:
+      "サプライチェーン専門家がシナリオ妥当性を検証し、金融機関説明用のロジックを整備。",
+    governance:
+      "経営会議前にAIダッシュボードと論点メモを共有。意思決定の根拠をテンプレート化し、実行管理まで可視化。",
     metrics: [
       { label: "意思決定準備時間", before: "週12h", after: "週4h", impact: "-8h/週" },
       { label: "粗利益率", before: "28%", after: "35%", impact: "+7pt" },
@@ -583,6 +594,13 @@ const successStories: SuccessStory[] = [
       "会議前の論点整理からシナリオ比較までAIが下書きしてくれるので、役員は判断が必要な論点だけに集中できます。意思決定の根拠が可視化され、部門間の合意形成スピードが格段に上がりました。",
     summary:
       "複数事業の成長戦略を同時進行させるため、意思決定プロセスの可視化が急務でした。AIが事業別KPIの乖離要因を自動抽出し、専門家が投資判断メモをレビュー。役員レビュー時間を月12時間削減し、新施策の実行率は24pt向上、投資対効果の検証スピードは従来比2.3倍になりました。",
+    challenge: "事業ポートフォリオが拡大する中、投資判断のスピードと説明責任がネックに。会議で論点が堂々巡りになっていた。",
+    aiRole:
+      "事業別KPIの乖離要因をAIが自動診断。ROI試算とシナリオ比較レポートを経営会議向けに生成。",
+    expertRole:
+      "戦略コンサル出身者が投資メモをレビューし、リスクと打ち手をエビデンス付きで補強。",
+    governance:
+      "AIが施策進捗を追跡し、役員会に論点ヒートマップを提示。決裁から実行までの合意形成を定型化。",
     metrics: [
       { label: "役員レビュー時間", before: "月18h", after: "月6h", impact: "-12h/月" },
       { label: "新施策実行率", before: "54%", after: "78%", impact: "+24pt" },
@@ -600,6 +618,13 @@ const successStories: SuccessStory[] = [
       "国内外のマクロ指標がリアルタイムで反映され、シナリオの前提が透明化されました。資金繰りの山谷が早期に見えるので、攻めるべき投資と守るべきコストの判断が迷わなくなりました。",
     summary:
       "大型投資が重なるタイミングで、キャッシュイン・アウトの可視化と金融機関への説明責任が課題でした。AIが金融データと受注情報を統合し、専門家が調達シナリオを監修。戦略更新サイクルを4倍高速化し、キャッシュ創出効果は年2.4億円、金融機関からの追加与信枠も1.6倍に拡大しました。",
+    challenge: "複数の大型投資が重なる中でキャッシュポジションが不透明。金融機関から説明責任を求められていた。",
+    aiRole:
+      "金融・受注・マクロ指標を統合し、資金繰りシミュレーションとリスクアラートをリアルタイム生成。",
+    expertRole:
+      "元メガバンク担当者が調達シナリオを監修し、交渉資料と想定問答を準備。",
+    governance:
+      "投資委員会向けにAIが前提条件と感度分析を自動更新。金融機関共有用ダイジェストも同時作成。",
     metrics: [
       { label: "戦略更新サイクル", before: "四半期1回", after: "毎月", impact: "4倍" },
       { label: "キャッシュ創出効果", before: "-", after: "年2.4億円", impact: "+2.4億円" },
@@ -2139,48 +2164,69 @@ const Index = () => {
               <div className="story-slider" style={{ transform: `translateX(-${carouselIndex * 100}%)` }}>
                 {successStories.map((story) => (
                   <article key={story.company} className="story-card">
-                    <div className="story-meta">
-                      <img
-                        className="story-photo"
-                        src={story.photo}
-                        alt={`${story.company} ${story.title} ${story.name}の顔写真`}
-                        loading="lazy"
-                      />
-                      <div className="story-profile">
+                    <div className="story-card__content">
+                      <div className="story-meta">
                         <img
-                          className="story-logo"
-                          src={story.logo}
-                          alt={`${story.company}のロゴ`}
+                          className="story-photo"
+                          src={story.photo}
+                          alt={`${story.company} ${story.title} ${story.name}の顔写真`}
                           loading="lazy"
                         />
-                        <span className="story-company">{story.company}</span>
-                        <span className="story-role">{story.title} / {story.name}</span>
-                        <span className="story-industry">{story.industry}</span>
+                        <div className="story-profile">
+                          <img
+                            className="story-logo"
+                            src={story.logo}
+                            alt={`${story.company}のロゴ`}
+                            loading="lazy"
+                          />
+                          <span className="story-company">{story.company}</span>
+                          <span className="story-role">{story.title} / {story.name}</span>
+                          <span className="story-industry">{story.industry}</span>
+                        </div>
                       </div>
+                      <blockquote className="story-quote">
+                        <span className="story-quote__icon" aria-hidden="true">“</span>
+                        <p>{story.quote}</p>
+                      </blockquote>
+                      <div className="story-structure" role="list">
+                        <div className="story-structure__item" role="listitem">
+                          <span className="story-structure__label">課題</span>
+                          <p>{story.challenge}</p>
+                        </div>
+                        <div className="story-structure__item" role="listitem">
+                          <span className="story-structure__label">AIの役割</span>
+                          <p>{story.aiRole}</p>
+                        </div>
+                        <div className="story-structure__item" role="listitem">
+                          <span className="story-structure__label">専門家の伴走</span>
+                          <p>{story.expertRole}</p>
+                        </div>
+                        <div className="story-structure__item" role="listitem">
+                          <span className="story-structure__label">意思決定プロセス</span>
+                          <p>{story.governance}</p>
+                        </div>
+                      </div>
+                      <p className="story-summary">{story.summary}</p>
+                      <ul className="story-metrics">
+                        {story.metrics.map((metric) => (
+                          <li key={metric.label}>
+                            <span className="story-metric__label">{metric.label}</span>
+                            <div className="story-metric__values">
+                              <span className="story-metric__before" aria-label="導入前の数値">
+                                {metric.before}
+                              </span>
+                              <span className="story-metric__arrow" aria-hidden="true">
+                                →
+                              </span>
+                              <span className="story-metric__after" aria-label="導入後の数値">
+                                {metric.after}
+                              </span>
+                            </div>
+                            <strong className="story-metric__impact">{metric.impact}</strong>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <p className="story-summary">{story.summary}</p>
-                    <ul className="story-metrics">
-                      {story.metrics.map((metric) => (
-                        <li key={metric.label}>
-                          <span className="story-metric__label">{metric.label}</span>
-                          <div className="story-metric__values">
-                            <span className="story-metric__before" aria-label="導入前の数値">
-                              {metric.before}
-                            </span>
-                            <span className="story-metric__arrow" aria-hidden="true">
-                              →
-                            </span>
-                            <span className="story-metric__after" aria-label="導入後の数値">
-                              {metric.after}
-                            </span>
-                          </div>
-                          <strong className="story-metric__impact">{metric.impact}</strong>
-                        </li>
-                      ))}
-                    </ul>
-                    <blockquote className="story-quote">
-                      <p>{story.quote}</p>
-                    </blockquote>
                   </article>
                 ))}
               </div>
