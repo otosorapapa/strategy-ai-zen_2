@@ -1332,40 +1332,90 @@ svg {
 
 .evidence-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 26px;
+  position: relative;
+}
+
+.evidence-grid::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(148, 163, 184, 0.25), rgba(148, 163, 184, 0));
+  pointer-events: none;
+  transform: translateX(-50%);
+  opacity: 0.4;
+}
+
+@media (max-width: 960px) {
+  .evidence-grid::before {
+    display: none;
+  }
 }
 
 .evidence-card {
   position: relative;
-  background: var(--white);
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: var(--shadow-sm);
-  min-height: 240px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 2px;
+  background: linear-gradient(145deg, rgba(226, 232, 240, 0.4), rgba(255, 255, 255, 0));
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 18px 45px -30px rgba(15, 23, 42, 0.3);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  --chip-bg: rgba(59, 130, 246, 0.14);
+  --chip-fg: var(--navy-600);
+  --metric-color: var(--navy-700);
+  --impact-color: var(--gray-600);
+  --index-color: rgba(15, 23, 42, 0.12);
+  --glow-start: rgba(59, 130, 246, 0.35);
+  --glow-end: rgba(148, 163, 184, 0.08);
 }
 
-.evidence-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-md);
+.evidence-card::before {
+  content: "";
+  position: absolute;
+  top: -40%;
+  left: -30%;
+  right: -30%;
+  height: 180%;
+  background: radial-gradient(120% 90% at 0% 0%, var(--glow-start), transparent 70%);
+  opacity: 0.9;
+  z-index: 0;
+  transition: transform 0.35s ease;
 }
 
 .evidence-card::after {
   content: attr(data-source);
   position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  padding: 10px 14px;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  padding: 12px 16px;
   font-size: 0.85rem;
-  color: var(--gray-900);
-  background: rgba(147, 197, 253, 0.25);
-  border-radius: 10px;
+  color: var(--navy-700);
+  background: rgba(241, 245, 249, 0.94);
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.2);
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none;
+  z-index: 3;
+}
+
+.evidence-card:hover,
+.evidence-card:focus-within {
+  transform: translateY(-12px);
+  box-shadow: 0 22px 55px -24px rgba(15, 23, 42, 0.32);
+  border-color: rgba(59, 130, 246, 0.28);
+}
+
+.evidence-card:hover::before,
+.evidence-card:focus-within::before {
+  transform: translateY(-6%);
 }
 
 .evidence-card:hover::after,
@@ -1374,20 +1424,139 @@ svg {
   transform: translateY(0);
 }
 
+.evidence-card__content {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.88));
+  border-radius: 20px;
+  padding: 26px 26px 32px;
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.evidence-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.evidence-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: var(--chip-bg);
+  color: var(--chip-fg);
+}
+
+.evidence-index {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--index-color);
+  letter-spacing: 0.12em;
+}
+
+.evidence-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 .evidence-stat {
-  font-size: 2rem;
+  font-size: 2.35rem;
   font-weight: 800;
-  color: var(--navy-600);
-  margin-bottom: 12px;
+  color: var(--metric-color);
+  line-height: 1.1;
+}
+
+.evidence-impact {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--impact-color);
+  letter-spacing: 0.01em;
+}
+
+.evidence-description {
+  color: var(--gray-700);
+  line-height: 1.7;
 }
 
 .evidence-source {
+  margin-top: auto;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: var(--navy-600);
+  gap: 8px;
+  color: var(--chip-fg);
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.evidence-source svg {
+  width: 18px;
+  height: 18px;
+}
+
+.evidence-card:hover .evidence-source,
+.evidence-card:focus-within .evidence-source {
+  gap: 10px;
+}
+
+.evidence-card--mint {
+  --chip-bg: rgba(16, 185, 129, 0.18);
+  --chip-fg: #047857;
+  --metric-color: #0f766e;
+  --impact-color: rgba(15, 118, 110, 0.82);
+  --index-color: rgba(20, 184, 166, 0.4);
+  --glow-start: rgba(34, 197, 94, 0.32);
+  --glow-end: rgba(20, 184, 166, 0.08);
+}
+
+.evidence-card--iris {
+  --chip-bg: rgba(99, 102, 241, 0.2);
+  --chip-fg: #4338ca;
+  --metric-color: #3730a3;
+  --impact-color: rgba(55, 48, 163, 0.78);
+  --index-color: rgba(99, 102, 241, 0.36);
+  --glow-start: rgba(99, 102, 241, 0.38);
+  --glow-end: rgba(129, 140, 248, 0.1);
+}
+
+.evidence-card--citrus {
+  --chip-bg: rgba(251, 191, 36, 0.24);
+  --chip-fg: #b45309;
+  --metric-color: #c2410c;
+  --impact-color: rgba(180, 83, 9, 0.8);
+  --index-color: rgba(251, 191, 36, 0.38);
+  --glow-start: rgba(245, 158, 11, 0.32);
+  --glow-end: rgba(252, 211, 77, 0.12);
+}
+
+.evidence-card--sky {
+  --chip-bg: rgba(59, 130, 246, 0.18);
+  --chip-fg: #1d4ed8;
+  --metric-color: #1e3a8a;
+  --impact-color: rgba(37, 99, 235, 0.82);
+  --index-color: rgba(96, 165, 250, 0.38);
+  --glow-start: rgba(59, 130, 246, 0.35);
+  --glow-end: rgba(147, 197, 253, 0.12);
+}
+
+.evidence-card--navy {
+  --chip-bg: rgba(30, 64, 175, 0.22);
+  --chip-fg: #1e3a8a;
+  --metric-color: #1e40af;
+  --impact-color: rgba(30, 58, 138, 0.82);
+  --index-color: rgba(30, 58, 138, 0.42);
+  --glow-start: rgba(30, 64, 175, 0.38);
+  --glow-end: rgba(30, 58, 138, 0.14);
 }
 
 .footnote {
