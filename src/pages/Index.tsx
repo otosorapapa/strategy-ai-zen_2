@@ -47,10 +47,9 @@ import type { LucideIcon } from "lucide-react";
 
 const sections = [
   { id: "hero", label: "トップ" },
-  { id: "pain", label: "課題" },
-  { id: "why-now", label: "なぜ今" },
-  { id: "roles", label: "解決策" },
-  { id: "insights", label: "導入効果" },
+  { id: "problem", label: "課題" },
+  { id: "solution", label: "解決策" },
+  { id: "outcome", label: "成果" },
   { id: "process", label: "導入の流れ" },
   { id: "quarterly", label: "四半期レビュー" },
   { id: "pricing", label: "料金" },
@@ -689,6 +688,7 @@ type ContactFormState = {
   email: string;
   phone: string;
   message: string;
+  preferredDate: string;
 };
 
 const initialContact: ContactFormState = {
@@ -697,6 +697,7 @@ const initialContact: ContactFormState = {
   email: "",
   phone: "",
   message: "",
+  preferredDate: "",
 };
 
 const contactSteps = [
@@ -725,8 +726,10 @@ const Index = () => {
   const [isDemoPlaying, setIsDemoPlaying] = useState(false);
 
   const contactStepCount = contactSteps.length;
+  const contactProgress = Math.round((contactStep / contactStepCount) * 100);
   const metricsRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
+  const securityBadges = useMemo(() => securityPoints.slice(0, 3), []);
 
   const simulatorChart = useMemo(() => {
     const baselineHours = 2000;
@@ -955,12 +958,15 @@ const Index = () => {
     setSubmissionError(null);
 
     try {
+      const trimmedPhone = contactForm.phone.trim();
+      const trimmedPreferredDate = contactForm.preferredDate.trim();
       await submitContactForm({
         name: contactForm.name.trim(),
         company: contactForm.company.trim(),
         email: contactForm.email.trim(),
-        phone: contactForm.phone.trim(),
+        phone: trimmedPhone ? trimmedPhone : undefined,
         message: contactForm.message.trim(),
+        preferredDate: trimmedPreferredDate ? trimmedPreferredDate : undefined,
       });
       setFormSubmitted(true);
       setContactForm(initialContact);
@@ -1031,12 +1037,26 @@ const Index = () => {
               </p>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
-                  30分無料相談を申し込む
+                  30分無料相談を予約
                 </a>
                 <a className="btn btn-ghost" href="#resources">
                   資料で導入効果を見る
                 </a>
               </div>
+              <ul className="trust-badges" aria-label="セキュリティ対策">
+                {securityBadges.map((badge) => {
+                  const BadgeIcon = badge.icon;
+                  return (
+                    <li key={badge.title}>
+                      <span className="trust-badge__icon" aria-hidden="true">
+                        <BadgeIcon />
+                      </span>
+                      <span className="trust-badge__label">{badge.badge}</span>
+                      <span className="trust-badge__title">{badge.title}</span>
+                    </li>
+                  );
+                })}
+              </ul>
               <ul className="hero-metrics" ref={metricsRef}>
                 {heroMetrics.map((metric, index) => (
                   <li key={metric.label}>
@@ -1122,22 +1142,22 @@ const Index = () => {
           </div>
         </section>
 
-        {/* 課題セクション */}
+        {/* ストーリー1: 課題 */}
         <section
-          id="pain"
+          id="problem"
           ref={(node) => {
-            sectionRefs.current["pain"] = node ?? null;
+            sectionRefs.current["problem"] = node ?? null;
           }}
-          className="section pain"
-          aria-labelledby="pain-heading"
+          className="section story story--problem"
+          aria-labelledby="problem-heading"
         >
           <div className="container">
-            <div className="section-header" data-animate>
-              <h2 id="pain-heading">経営者が抱える代表的な課題</h2>
-              <ul className="section-intro">
-                <li>意思決定の詰まりを短文で整理。</li>
-                <li>図解で課題と対策を即把握。</li>
-              </ul>
+            <div className="story-header" data-animate>
+              <span className="story-eyebrow">STORY 01</span>
+              <h2 id="problem-heading">経営判断を遅らせる課題を見える化</h2>
+              <p>
+                政策や市場情報が増えるほど判断材料は飽和します。経営者の時間を奪っている代表的な詰まりを3つの視点で整理しました。
+              </p>
             </div>
             <div className="pain-grid">
               {painPoints.map((item) => {
@@ -1154,25 +1174,9 @@ const Index = () => {
                 );
               })}
             </div>
-          </div>
-        </section>
-
-        {/* なぜ今AIが必要なのか セクション */}
-        <section
-          id="why-now"
-          ref={(node) => {
-            sectionRefs.current["why-now"] = node ?? null;
-          }}
-          className="section why-now"
-          aria-labelledby="why-now-heading"
-        >
-          <div className="container">
-            <div className="section-header" data-animate>
-              <h2 id="why-now-heading">なぜ今すぐ対策が必要なのか</h2>
-              <ul className="section-intro">
-                <li>信頼データで導入の必然性を提示。</li>
-                <li>遅延リスクを数値で把握。</li>
-              </ul>
+            <div className="story-subheader" data-animate>
+              <h3>データが示す「待ったなし」の背景</h3>
+              <p>信頼ソースをもとに、対策を先送りした場合の機会損失と競争環境の変化を確認できます。</p>
             </div>
             <div className="evidence-grid">
               {whyNowEvidence.map((item) => (
@@ -1195,22 +1199,22 @@ const Index = () => {
           </div>
         </section>
 
-        {/* 解決策セクション */}
+        {/* ストーリー2: 解決策 */}
         <section
-          id="roles"
+          id="solution"
           ref={(node) => {
-            sectionRefs.current["roles"] = node ?? null;
+            sectionRefs.current["solution"] = node ?? null;
           }}
-          className="section roles"
-          aria-labelledby="roles-heading"
+          className="section story story--solution"
+          aria-labelledby="solution-heading"
         >
           <div className="container">
-            <div className="section-header" data-animate>
-              <h2 id="roles-heading">AIと専門家伴走による解決策</h2>
-              <ul className="section-intro">
-                <li>役割分担を短文で可視化。</li>
-                <li>AI・経営者・専門家の協働を明示。</li>
-              </ul>
+            <div className="story-header" data-animate>
+              <span className="story-eyebrow">STORY 02</span>
+              <h2 id="solution-heading">AIと専門家の協働で意思決定を加速</h2>
+              <p>
+                生成AIが情報を束ね、専門家と経営者がレビューと判断に集中。役割分担を明確にし、実行精度を高めます。
+              </p>
             </div>
             <div className="roles-grid">
               {responsibilityColumns.map((column) => {
@@ -1239,7 +1243,10 @@ const Index = () => {
                 );
               })}
             </div>
-            <div className="section-cta" data-animate>
+            <div className="story-cta" data-animate>
+              <a className="btn btn-primary" href="#resources">
+                AIサンプルを請求
+              </a>
               <a className="btn btn-outline" href="#process">
                 導入プロセスを詳しく見る
               </a>
@@ -1247,21 +1254,21 @@ const Index = () => {
           </div>
         </section>
 
-        {/* インサイト: グラフと表で導入効果を可視化 */}
+        {/* ストーリー3: 成果 */}
         <section
-          id="insights"
+          id="outcome"
           ref={(node) => {
-            sectionRefs.current["insights"] = node ?? null;
+            sectionRefs.current["outcome"] = node ?? null;
           }}
-          className="section insights"
-          aria-labelledby="insights-heading"
+          className="section insights story story--outcome"
+          aria-labelledby="outcome-heading"
         >
             <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="insights-heading">導入後の定量インパクトを可視化</h2>
+              <h2 id="outcome-heading">導入後に現れる成果とインパクト</h2>
               <ul className="section-intro">
-                <li>直近12か月の実績データを公開。</li>
-                <li>グラフと表で投資対効果を把握。</li>
+                <li>リードタイム短縮や会議準備時間の削減を定量で提示。</li>
+                <li>グラフと表で投資回収までの道筋を描写。</li>
               </ul>
             </div>
               <div className="insights-highlight-grid" data-animate>
@@ -1415,8 +1422,8 @@ const Index = () => {
                 </article>
               </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-primary" href="#contact">
-                定量効果の詳しい内訳を見る
+              <a className="btn btn-cta" href="#simulator">
+                <abbr title="投資利益率">ROI</abbr>試算を試す
               </a>
             </div>
           </div>
@@ -1863,7 +1870,11 @@ const Index = () => {
               {expertCards.map((expert) => (
                 <article key={expert.name} className="expert-card" data-animate>
                   <div className="expert-photo">
-                    <img src={expert.photo} alt={`${expert.name}のプロフィール写真`} />
+                    <img
+                      src={expert.photo}
+                      alt={`${expert.name}のプロフィール写真`}
+                      loading="lazy"
+                    />
                   </div>
                   <div className="expert-body">
                     <h3>{expert.name}</h3>
@@ -1989,7 +2000,32 @@ const Index = () => {
                 1営業日以内に担当が連絡。
               </p>
             </div>
+            <ul className="trust-badges trust-badges--compact" aria-label="セキュリティ対策" data-animate>
+              {securityBadges.map((badge) => {
+                const BadgeIcon = badge.icon;
+                return (
+                  <li key={`contact-${badge.title}`}>
+                    <span className="trust-badge__icon" aria-hidden="true">
+                      <BadgeIcon />
+                    </span>
+                    <span className="trust-badge__label">{badge.badge}</span>
+                    <span className="trust-badge__title">{badge.title}</span>
+                  </li>
+                );
+              })}
+            </ul>
             <form className="contact-form" onSubmit={handleContactSubmit}>
+              <div className="contact-progress" aria-hidden="true">
+                <div className="contact-progress__track">
+                  <div
+                    className="contact-progress__bar"
+                    style={{ width: `${contactProgress}%` }}
+                  />
+                </div>
+                <span className="contact-progress__label">
+                  STEP {contactStep} / {contactStepCount}
+                </span>
+              </div>
               <div className="contact-steps" role="list">
                 {contactSteps.map((step, index) => (
                   <div
@@ -2076,6 +2112,20 @@ const Index = () => {
                 aria-hidden={contactStep !== 3}
               >
                 <legend className="sr-only">相談内容</legend>
+                <label>
+                  希望日時 (任意)
+                  <input
+                    type="datetime-local"
+                    name="preferredDate"
+                    value={contactForm.preferredDate}
+                    onChange={handleContactChange}
+                    min={new Date().toISOString().slice(0, 16)}
+                    aria-describedby="preferred-date-help"
+                  />
+                  <span id="preferred-date-help" className="input-help">
+                    カレンダーから希望する打ち合わせ日時を選択できます。
+                  </span>
+                </label>
                 <label>
                   相談内容
                   <textarea
