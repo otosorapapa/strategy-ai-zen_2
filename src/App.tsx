@@ -9,13 +9,16 @@ import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
+const normalizedBase = import.meta.env.BASE_URL.replace(/\/+$/, "");
+const routerBasename = normalizedBase === "" ? undefined : normalizedBase;
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
       
-      <BrowserRouter>
+      <BrowserRouter basename={routerBasename}>
         <ScrollToTop />
         <Routes>
           {/* /index.html 直打ち対策 */}
