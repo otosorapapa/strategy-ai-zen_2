@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>生成AI経営判断ラボ｜粗利とキャッシュを同時最大化</title>
+    <title>生成AI経営計画書ラボ｜先進的な経営計画策定支援</title>
     <meta
       name="description"
-      content="生成AIと経営の専門家が意思決定を伴走。粗利とキャッシュを同時に最大化するための最新経営判断インテリジェンスを提供します。"
+      content="生成AIと専門家の伴走で、市場分析・財務予測・経営計画書ドラフトを最短1日で完成。意思決定時間を削減し、外部環境に先手で対応する中小企業向け経営計画策定支援サービス。"
     />
     <link
       rel="stylesheet"
@@ -29,33 +29,36 @@
     ></script>
     <style>
       :root {
-        --primary: #0b1e3c;
-        --primary-light: #1f3c6d;
-        --accent: #f97316;
-        --accent-dark: #ea580c;
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --secondary: #0f172a;
+        --accent-sky: #38bdf8;
+        --accent-slate: #64748b;
+        --accent-mint: #5dd3b3;
+        --accent-sun: #f97316;
+        --neutral-50: #f8fafc;
+        --neutral-100: #eef2ff;
+        --neutral-200: #e2e8f0;
+        --bg: #f4f7fb;
         --surface: #ffffff;
-        --surface-alt: #f8fbff;
-        --border: rgba(11, 30, 60, 0.12);
-        --shadow: 0 24px 60px rgba(15, 23, 42, 0.08);
+        --border: rgba(15, 23, 42, 0.12);
         --radius: 18px;
+        --shadow-lg: 0 28px 60px rgba(15, 23, 42, 0.08);
       }
 
       * {
         box-sizing: border-box;
       }
 
+      html,
       body {
         margin: 0;
+        padding: 0;
         font-family: "Manrope", "Hiragino Sans", "ヒラギノ角ゴ ProN", "Noto Sans JP", sans-serif;
-        color: var(--primary);
-        background: linear-gradient(180deg, #f7fbff 0%, #edf2ff 45%, #ffffff 100%);
+        color: var(--secondary);
+        background: linear-gradient(180deg, #fafdff 0%, #edf5ff 52%, #ffffff 100%);
         line-height: 1.6;
-      }
-
-      img {
-        max-width: 100%;
-        border-radius: var(--radius);
-        display: block;
+        scroll-behavior: smooth;
       }
 
       a {
@@ -65,29 +68,36 @@
       a:focus-visible,
       button:focus-visible,
       input:focus-visible,
+      select:focus-visible,
       textarea:focus-visible {
-        outline: 3px solid rgba(249, 115, 22, 0.4);
+        outline: 3px solid rgba(37, 99, 235, 0.4);
         outline-offset: 2px;
       }
 
-      .container {
-        width: min(1100px, 92vw);
-        margin: 0 auto;
-        padding: clamp(20px, 5vw, 48px) 0;
+      img,
+      video {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        border-radius: var(--radius);
       }
 
-      header {
+      .container {
+        width: min(1080px, 92vw);
+        margin: 0 auto;
+        padding-inline: clamp(20px, 4vw, 48px);
+      }
+
+      .site-header {
         position: sticky;
         top: 0;
-        z-index: 50;
-        backdrop-filter: blur(16px);
-        background: rgba(247, 251, 255, 0.92);
-        border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+        z-index: 40;
+        backdrop-filter: blur(14px);
+        background: linear-gradient(120deg, rgba(248, 250, 252, 0.92), rgba(219, 234, 254, 0.9));
+        border-bottom: 1px solid rgba(148, 163, 184, 0.2);
       }
 
       .header-inner {
-        width: min(1100px, 92vw);
-        margin: 0 auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -96,825 +106,3054 @@
 
       .brand {
         font-weight: 800;
+        font-size: 1.1rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
-        color: var(--primary-light);
+        color: var(--primary);
       }
 
-      .cta-button,
-      .plan-button,
-      .form-button {
+      .header-nav {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-size: 0.95rem;
+      }
+
+      .header-nav > a,
+      .nav-group summary {
+        text-decoration: none;
+        color: var(--secondary);
+        font-weight: 600;
+        position: relative;
+      }
+
+      .header-nav > a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -6px;
+        width: 100%;
+        height: 2px;
+        background: var(--primary);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s ease;
+      }
+
+      .header-nav > a:hover::after,
+      .header-nav > a:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      .nav-group {
+        position: relative;
+      }
+
+      .nav-group summary {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        list-style: none;
+        padding: 8px 14px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .nav-group summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .nav-group[open] summary,
+      .nav-group summary:hover,
+      .nav-group summary:focus-visible {
+        color: var(--primary);
+        background: rgba(148, 163, 184, 0.12);
+        box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.22);
+      }
+
+      .nav-group-panel {
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-width: 220px;
+        padding: 18px;
+        border-radius: 18px;
+        background: var(--surface);
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        z-index: 60;
+      }
+
+      .nav-group-panel a {
+        text-decoration: none;
+        color: var(--secondary);
+        font-weight: 600;
+        padding: 6px 0;
+        transition: color 0.2s ease;
+        white-space: nowrap;
+      }
+
+      .nav-group-panel a:hover,
+      .nav-group-panel a:focus-visible {
+        color: var(--primary);
+      }
+
+      .btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
-        padding: 14px 24px;
+        padding: 14px 26px;
         border-radius: 999px;
-        border: none;
-        cursor: pointer;
         font-weight: 700;
-        font-size: 1rem;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        background: var(--accent);
-        color: #ffffff;
         text-decoration: none;
-        box-shadow: 0 18px 40px rgba(234, 88, 12, 0.25);
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        cursor: pointer;
+        border: none;
       }
 
-      .cta-button:hover,
-      .plan-button:hover,
-      .form-button:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 22px 44px rgba(234, 88, 12, 0.28);
-        background: var(--accent-dark);
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 12px 30px rgba(37, 99, 235, 0.18);
+      }
+
+      .btn-primary:hover,
+      .btn-primary:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 34px rgba(37, 99, 235, 0.28);
+        background: var(--primary-dark);
+      }
+
+      .btn-outline {
+        border: 1px solid rgba(37, 99, 235, 0.4);
+        color: var(--primary);
+        background: rgba(255, 255, 255, 0.85);
+      }
+
+      .btn-outline:hover,
+      .btn-outline:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 34px rgba(37, 99, 235, 0.15);
+        background: rgba(37, 99, 235, 0.08);
+      }
+
+      .floating-cta {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 60;
+      }
+
+      .floating-cta a {
+        min-width: 200px;
+        text-align: center;
+        font-size: 0.95rem;
+        padding: 14px 20px;
       }
 
       .hero {
-        padding-block: clamp(40px, 12vw, 96px);
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: clamp(28px, 8vw, 52px);
+        position: relative;
+        min-height: 88vh;
+        display: flex;
         align-items: center;
+        padding: clamp(140px, 18vw, 200px) 0 clamp(120px, 16vw, 180px);
+        overflow: hidden;
+        color: var(--secondary);
+        background: linear-gradient(140deg, rgba(255, 255, 255, 0.96) 0%, rgba(219, 234, 254, 0.85) 48%, rgba(236, 253, 245, 0.9) 100%);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -3;
+        background: radial-gradient(circle at 15% 20%, rgba(93, 211, 179, 0.25), transparent 60%),
+          radial-gradient(circle at 80% 10%, rgba(56, 189, 248, 0.25), transparent 62%);
+      }
+
+      .hero-background {
+        position: absolute;
+        inset: 0;
+        z-index: -2;
+      }
+
+      .hero-background::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(130deg, rgba(255, 255, 255, 0.78), rgba(226, 242, 255, 0.72));
+        z-index: 1;
+      }
+
+      .hero-background::before {
+        content: "";
+        position: absolute;
+        inset: 10% 20% 30% 10%;
+        background: radial-gradient(circle, rgba(93, 211, 179, 0.15), transparent 60%);
+        z-index: 2;
+        filter: blur(10px);
+      }
+
+      .hero-background img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(1.05) brightness(0.92);
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        gap: clamp(48px, 6vw, 96px);
+        grid-template-columns: minmax(320px, 1.618fr) minmax(280px, 1fr);
+        align-items: start;
       }
 
       .hero-copy {
+        max-width: min(640px, 62ch);
+        animation: heroFade 1s ease both;
+      }
+
+      @keyframes heroFade {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        border-radius: 999px;
+        background: rgba(37, 99, 235, 0.12);
+        color: var(--primary-dark);
+        font-size: 0.85rem;
+        font-weight: 700;
+      }
+
+      h1 {
+        font-size: clamp(2.7rem, 3vw + 1.3rem, 4rem);
+        line-height: 1.12;
+        margin: clamp(24px, 4vw, 36px) 0 clamp(20px, 2.6vw, 28px);
+        font-weight: 800;
+      }
+
+      .hero-lead {
+        font-size: 1.15rem;
+        color: rgba(15, 23, 42, 0.75);
+        line-height: 1.75;
+        max-width: 58ch;
+        margin: 0 0 clamp(20px, 2.8vw, 32px);
+      }
+
+      .hero-subhead {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: rgba(15, 23, 42, 0.8);
+        max-width: 52ch;
+        margin: 0 0 clamp(12px, 2vw, 18px);
+      }
+
+      .hero-subnote {
+        margin: clamp(24px, 3vw, 36px) 0 0;
+        font-size: 0.95rem;
+        color: rgba(15, 23, 42, 0.7);
+        line-height: 1.75;
+        max-width: 52ch;
+      }
+
+      .cta-note {
+        font-size: 0.95rem;
+        color: rgba(15, 23, 42, 0.72);
+        margin: 0 0 clamp(20px, 2.8vw, 32px);
+        font-weight: 600;
+      }
+
+      .hero-lead strong {
+        color: var(--primary-dark);
+      }
+
+      .hero-actions {
         display: flex;
-        flex-direction: column;
-        gap: 20px;
+        flex-wrap: wrap;
+        gap: clamp(16px, 3vw, 28px);
+        margin: clamp(16px, 3vw, 32px) 0 0;
       }
 
-      .hero-copy h1 {
-        font-size: clamp(2.1rem, 3vw + 1rem, 3.4rem);
-        line-height: 1.2;
-        margin: 0;
+      .hero-metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: clamp(18px, 3vw, 28px);
+        margin: clamp(12px, 2.4vw, 24px) 0 0;
       }
 
-      .hero-copy p {
-        margin: 0;
-        font-size: 1.05rem;
-        color: rgba(11, 30, 60, 0.8);
+      .hero-metric {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: var(--radius);
+        padding: clamp(20px, 2.6vw, 26px) clamp(22px, 3vw, 28px);
+        border: 1px solid rgba(37, 99, 235, 0.12);
+        box-shadow: 0 24px 48px rgba(15, 23, 42, 0.06);
+      }
+
+      .hero-metric strong {
+        display: block;
+        font-size: 1.5rem;
+        color: var(--primary);
+      }
+
+      .hero-metric span {
+        color: rgba(15, 23, 42, 0.68);
+        font-size: 0.95rem;
       }
 
       .hero-visual {
         position: relative;
-        padding: clamp(24px, 6vw, 40px);
-        border-radius: calc(var(--radius) + 6px);
-        background: radial-gradient(circle at top right, rgba(249, 115, 22, 0.15), transparent 50%),
-          radial-gradient(circle at bottom left, rgba(31, 60, 109, 0.12), transparent 60%),
-          var(--surface);
-        box-shadow: var(--shadow);
-      }
-
-      .hero-visual h2 {
-        font-size: 1.2rem;
-        margin-top: 0;
-        color: var(--primary-light);
-      }
-
-      .hero-visual .stat {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 16px 0;
-        padding: 14px 16px;
-        border-radius: var(--radius);
-        background: rgba(15, 23, 42, 0.05);
-        font-weight: 600;
-      }
-
-      .section-title {
-        font-size: clamp(1.8rem, 2vw + 1rem, 2.4rem);
-        margin: 0 0 18px;
-        text-align: center;
-      }
-
-      .section-lead {
-        text-align: center;
-        color: rgba(11, 30, 60, 0.75);
-        margin-bottom: 32px;
-      }
-
-      .grid-cards {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: clamp(20px, 4vw, 32px);
+        gap: clamp(18px, 2.6vw, 28px);
+        max-width: min(520px, 46vw);
+        width: 100%;
+        justify-self: center;
       }
 
-      .card {
-        background: var(--surface);
-        padding: clamp(20px, 3vw, 28px);
-        border-radius: var(--radius);
-        border: 1px solid var(--border);
-        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.05);
+      .hero-visual::after {
+        display: none;
+      }
+
+      .hero-video {
+        position: relative;
+        border-radius: 32px;
+        overflow: hidden;
+        box-shadow: 0 36px 72px rgba(15, 23, 42, 0.1);
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(93, 211, 179, 0.3));
+      }
+
+      .hero-video video {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: none;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+      }
+
+      .hero-video-controls {
+        position: absolute;
+        inset: 0;
         display: flex;
-        flex-direction: column;
-        gap: 12px;
-        min-height: 100%;
-      }
-
-      .card-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 14px;
-        background: rgba(249, 115, 22, 0.12);
-        color: var(--accent);
-        display: inline-flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.3rem;
+        background: linear-gradient(160deg, rgba(255, 255, 255, 0.86), rgba(226, 242, 255, 0.86));
+        transition: opacity 0.3s ease;
       }
 
-      .card h3 {
-        margin: 0;
+      .hero-video-controls.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .hero-video button {
+        border: none;
+        border-radius: 999px;
+        padding: 16px 26px;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(120deg, var(--primary), var(--accent-sky));
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        box-shadow: 0 16px 34px rgba(37, 99, 235, 0.25);
+      }
+
+      .hero-video button i {
         font-size: 1.2rem;
       }
 
-      .card p {
-        margin: 0;
-        color: rgba(11, 30, 60, 0.75);
-        font-size: 0.98rem;
-      }
-
-      .pains-list {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .pains-list li {
-        display: grid;
-        grid-template-columns: 32px 1fr;
-        gap: 14px;
-        align-items: flex-start;
-        padding: 14px 18px;
-        border-radius: var(--radius);
-        background: rgba(15, 23, 42, 0.05);
-        font-weight: 600;
-        color: rgba(11, 30, 60, 0.85);
-      }
-
-      .metrics {
+      .hero-highlight {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 20px;
+        gap: clamp(18px, 2.6vw, 28px);
       }
 
-      .metric-card {
-        text-align: center;
-        padding: 28px 24px;
-        border-radius: var(--radius);
-        background: linear-gradient(160deg, rgba(31, 60, 109, 0.08), rgba(249, 115, 22, 0.08));
-        border: 1px solid rgba(15, 23, 42, 0.06);
-        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.06);
-      }
-
-      .metric-card strong {
-        display: block;
-        font-size: 2.2rem;
-        font-weight: 800;
-      }
-
-      .metric-card span {
-        display: block;
-        font-weight: 600;
-        color: rgba(11, 30, 60, 0.7);
-      }
-
-      .chart-area {
-        background: var(--surface);
-        border-radius: var(--radius);
-        padding: clamp(24px, 4vw, 36px);
-        border: 1px solid var(--border);
-        box-shadow: 0 20px 48px rgba(15, 23, 42, 0.06);
-      }
-
-      .chart-meta {
+      .hero-highlight-card {
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 24px;
+        padding: clamp(22px, 2.8vw, 28px);
+        border: 1px solid rgba(37, 99, 235, 0.12);
+        color: rgba(17, 24, 39, 0.85);
         display: flex;
-        flex-direction: column;
-        gap: 4px;
-        margin-top: 18px;
-        color: rgba(11, 30, 60, 0.75);
+        gap: clamp(12px, 2vw, 18px);
+        align-items: flex-start;
+      }
+
+      .hero-highlight-card i {
+        color: var(--accent-mint);
+        font-size: 1.4rem;
+      }
+
+      .hero-highlight-card strong {
+        font-size: 1.05rem;
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .hero-highlight-card p {
+        margin: 0;
+        color: rgba(17, 24, 39, 0.65);
         font-size: 0.95rem;
       }
 
-      .steps {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 18px;
-      }
-
-      .step {
-        background: var(--surface-alt);
-        padding: 22px 20px;
-        border-radius: var(--radius);
-        border: 1px solid rgba(11, 30, 60, 0.08);
-        display: grid;
+      .hero-scroll-indicator {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
         gap: 8px;
+        color: rgba(15, 23, 42, 0.6);
+        font-weight: 600;
+        text-decoration: none;
+        transition: transform 0.25s ease;
       }
 
-      .step-number {
+      .hero-scroll-indicator i {
+        font-size: 1.4rem;
+        animation: bounce 1.6s ease-in-out infinite;
+        color: var(--primary);
+      }
+
+      .hero-scroll-indicator:hover,
+      .hero-scroll-indicator:focus-visible {
+        transform: translate(-50%, -6px);
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(6px);
+        }
+      }
+
+      section {
+        padding: clamp(100px, 14vw, 160px) 0;
+      }
+
+      .section-heading {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(16px, 2.2vw, 24px);
+        max-width: min(720px, 64ch);
+        width: 100%;
+        margin: 0 auto clamp(56px, 6vw, 80px);
+        position: relative;
+        align-items: flex-start;
+      }
+
+      .section-heading h2 {
+        font-size: clamp(2rem, 1.6vw + 1.4rem, 2.7rem);
         font-weight: 800;
-        color: var(--accent);
-        letter-spacing: 0.08em;
+        margin: 0;
       }
 
-      .pricing-grid {
+      .section-heading p {
+        margin: 0;
+        color: rgba(17, 24, 39, 0.7);
+        font-size: 1rem;
+        line-height: 1.75;
+      }
+
+      .section-heading::before {
+        content: "";
+        width: 72px;
+        height: 4px;
+        border-radius: 999px;
+        background: linear-gradient(120deg, var(--accent-mint), var(--accent-sun));
+        display: inline-flex;
+        margin-bottom: clamp(12px, 1.8vw, 16px);
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .fade-in.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      #ai-evidence {
+        background: #fff;
+      }
+
+      .evidence-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: clamp(20px, 4vw, 28px);
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: clamp(24px, 4vw, 40px);
       }
 
-      .plan {
-        background: var(--surface);
-        padding: 28px 24px;
+      .chart-card {
+        background: linear-gradient(150deg, rgba(255, 255, 255, 0.95), rgba(236, 252, 255, 0.7));
         border-radius: var(--radius);
-        border: 2px solid transparent;
-        box-shadow: 0 18px 44px rgba(15, 23, 42, 0.07);
+        padding: clamp(28px, 3vw, 34px);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        box-shadow: 0 22px 38px rgba(15, 23, 42, 0.06);
+      }
+
+      .chart-card h3 {
+        margin: 0 0 16px;
+        font-size: 1.2rem;
+      }
+
+      .chart-card canvas {
+        width: 100% !important;
+        height: 260px !important;
+      }
+
+      .chart-note {
+        font-size: 0.95rem;
+        color: rgba(15, 23, 42, 0.7);
+        margin: 0 0 12px;
+        line-height: 1.6;
+      }
+
+      .source-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--primary);
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .source-link::after {
+        content: "\f08e";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 0.75rem;
+      }
+
+      .evidence-highlight {
+        background: linear-gradient(135deg, rgba(29, 78, 216, 0.12), rgba(104, 197, 168, 0.18));
+      }
+
+      .evidence-list {
+        margin: 0;
+        padding-left: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        color: rgba(15, 23, 42, 0.75);
+      }
+
+      .roles-grid {
         display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: clamp(24px, 4vw, 40px);
+      }
+
+      .role-card {
+        position: relative;
+        background: linear-gradient(160deg, #ffffff, rgba(236, 253, 245, 0.76));
+        border-radius: var(--radius);
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        padding: clamp(32px, 3.4vw, 40px);
+        box-shadow: 0 24px 42px rgba(15, 23, 42, 0.08);
+        display: flex;
+        flex-direction: column;
         gap: 16px;
+        overflow: hidden;
       }
 
-      .plan.recommended {
-        border-color: rgba(249, 115, 22, 0.4);
+      .role-card::after {
+        content: "";
+        position: absolute;
+        inset: auto -40px -60px auto;
+        width: 160px;
+        height: 160px;
+        background: radial-gradient(circle, rgba(249, 115, 22, 0.12), transparent 68%);
+        z-index: 0;
       }
 
-      .plan h3 {
+      .role-card > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .role-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        background: linear-gradient(140deg, rgba(29, 78, 216, 0.15), rgba(104, 197, 168, 0.35));
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+      }
+
+      .role-card ul {
+        margin: 0;
+        padding-left: 20px;
+        color: rgba(15, 23, 42, 0.72);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .role-card h3 {
         margin: 0;
         font-size: 1.2rem;
       }
 
-      .plan-price {
-        font-size: 2rem;
+      .quarterly-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: clamp(24px, 4vw, 40px);
+        align-items: stretch;
+      }
+
+      .quarterly-card {
+        background: linear-gradient(150deg, #ffffff, rgba(239, 246, 255, 0.78));
+        border-radius: var(--radius);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        padding: clamp(32px, 3.4vw, 40px);
+        box-shadow: 0 26px 46px rgba(15, 23, 42, 0.07);
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .quarterly-card ul {
+        margin: 0;
+        padding-left: 18px;
+        color: rgba(15, 23, 42, 0.75);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .stat-highlight {
+        margin-top: clamp(36px, 5vw, 52px);
+        display: grid;
+        gap: clamp(20px, 3.6vw, 36px);
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+
+      .stat-card {
+        background: linear-gradient(150deg, #ffffff, rgba(236, 253, 245, 0.78));
+        border-radius: var(--radius);
+        padding: clamp(24px, 3vw, 32px);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .stat-card strong {
+        font-size: 1.6rem;
+        color: var(--primary);
+      }
+
+      .timeline {
+        margin-top: 48px;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(59, 130, 246, 0.08));
+        border-radius: 24px;
+        padding: 32px;
+        border: 1px solid rgba(37, 99, 235, 0.12);
+      }
+
+      .timeline p {
+        color: rgba(17, 24, 39, 0.75);
+        margin-top: 0;
+      }
+
+      .timeline-quarters {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 18px;
+        margin-top: 24px;
+      }
+
+      .quarter {
+        background: #fff;
+        border-radius: 18px;
+        padding: 18px;
+        border: 1px solid rgba(37, 99, 235, 0.18);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .quarter::before {
+        content: "";
+        position: absolute;
+        inset: auto auto 0 0;
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(circle, rgba(37, 99, 235, 0.18), transparent 70%);
+        transform: translate(-40%, 40%);
+      }
+
+      .quarter strong {
+        display: block;
+        font-size: 1.2rem;
+        margin-bottom: 6px;
+        color: var(--primary);
+      }
+
+      .problems-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: clamp(24px, 4vw, 40px);
+      }
+
+      .problem-card {
+        background: linear-gradient(160deg, #ffffff, rgba(239, 246, 255, 0.72));
+        border-radius: var(--radius);
+        padding: clamp(32px, 3.4vw, 40px);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        box-shadow: 0 26px 44px rgba(15, 23, 42, 0.06);
+      }
+
+      .problem-card h3 {
+        margin-top: 0;
+        font-size: 1.1rem;
+      }
+
+      .problem-card p {
+        margin-bottom: 0;
+        color: rgba(17, 24, 39, 0.72);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: clamp(24px, 4vw, 40px);
+      }
+
+      .feature-card {
+        background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(236, 253, 245, 0.85));
+        border-radius: var(--radius);
+        padding: clamp(32px, 3.6vw, 42px);
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 26px 46px rgba(15, 23, 42, 0.07);
+      }
+
+      .feature-card::after {
+        content: "";
+        position: absolute;
+        inset: auto auto 0 0;
+        width: 140px;
+        height: 140px;
+        background: radial-gradient(circle, rgba(249, 115, 22, 0.16), transparent 70%);
+        transform: translate(-30%, 30%);
+      }
+
+      .feature-card h3 {
+        margin-top: 0;
+        font-size: 1.2rem;
+      }
+
+      .feature-metric {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 14px;
+        background: linear-gradient(120deg, rgba(104, 197, 168, 0.25), rgba(249, 115, 22, 0.18));
+        color: var(--primary);
+        border-radius: 999px;
+        font-weight: 700;
+        margin: 18px 0;
+      }
+
+      .feature-card ul {
+        padding-left: 20px;
+        margin: 0;
+        color: rgba(17, 24, 39, 0.75);
+      }
+
+      .data-flow-section {
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(93, 211, 179, 0.12));
+      }
+
+      .data-flow-diagram {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: clamp(24px, 4vw, 40px);
+        position: relative;
+      }
+
+      .data-flow-diagram::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(120deg, rgba(29, 78, 216, 0.35), rgba(249, 115, 22, 0.28));
+        transform: translateY(-50%);
+        z-index: 0;
+      }
+
+      .data-flow-step {
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 22px;
+        padding: clamp(28px, 3.2vw, 34px) clamp(24px, 3vw, 32px);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        box-shadow: 0 22px 38px rgba(15, 23, 42, 0.06);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .data-flow-icon {
+        width: 54px;
+        height: 54px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        color: var(--primary);
+        background: linear-gradient(140deg, rgba(29, 78, 216, 0.16), rgba(104, 197, 168, 0.3));
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+      }
+
+      .data-flow-step h3 {
+        margin: 0;
+        font-size: 1.1rem;
+      }
+
+      .data-flow-step p {
+        margin: 0;
+        color: rgba(17, 24, 39, 0.7);
+        font-size: 0.95rem;
+      }
+
+      .data-flow-detail {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin: 0;
+        padding-left: 18px;
+        color: rgba(17, 24, 39, 0.7);
+      }
+
+      .analysis-section {
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(93, 211, 179, 0.12));
+      }
+
+      .impact-counters {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        margin-bottom: 36px;
+      }
+
+      .counter-card {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: var(--radius);
+        padding: 24px;
+        border: 1px solid rgba(37, 99, 235, 0.12);
+        box-shadow: 0 20px 34px rgba(15, 23, 42, 0.08);
+        text-align: center;
+      }
+
+      .counter-card span {
+        display: block;
+        font-size: 2.2rem;
         font-weight: 800;
+        color: var(--primary);
+      }
+
+      .counter-card small {
+        display: block;
+        font-size: 0.9rem;
+        color: rgba(17, 24, 39, 0.68);
+      }
+
+      .analysis-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 40px;
+        align-items: center;
+      }
+
+      .analysis-panel {
+        background: rgba(255, 255, 255, 0.94);
+        border-radius: var(--radius);
+        padding: 28px;
+        border: 1px solid rgba(37, 99, 235, 0.1);
+        box-shadow: 0 20px 38px rgba(15, 23, 42, 0.08);
+      }
+
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .control-group label {
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .control-group input[type="range"] {
+        width: 100%;
+      }
+
+      .chart-frame {
+        background: #fff;
+        border-radius: 24px;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.06);
+        padding: 24px;
+      }
+
+      .chart-frame canvas {
+        width: 100% !important;
+        height: 360px !important;
+      }
+
+      .sales-simulator {
+        margin-top: clamp(48px, 6vw, 72px);
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: var(--radius);
+        padding: clamp(32px, 3.4vw, 40px);
+        border: 1px solid rgba(14, 116, 144, 0.12);
+        box-shadow: 0 20px 36px rgba(15, 23, 42, 0.06);
+      }
+
+      .simulator-form {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: clamp(18px, 3vw, 28px);
+        margin-bottom: clamp(24px, 3vw, 32px);
+      }
+
+      .simulator-form label {
+        display: block;
+        font-size: 0.92rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+
+      .simulator-form input {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(15, 23, 42, 0.14);
+        font-size: 1rem;
+      }
+
+      #performanceChart {
+        width: 100% !important;
+        height: 380px !important;
+      }
+
+      #experts {
+        background: #fff;
+      }
+
+      .expert-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: clamp(24px, 4vw, 40px);
+      }
+
+      .expert-card {
+        position: relative;
+        background: linear-gradient(150deg, #ffffff, rgba(236, 253, 245, 0.85));
+        border-radius: var(--radius);
+        padding: clamp(30px, 3.4vw, 38px);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        box-shadow: 0 28px 48px rgba(15, 23, 42, 0.08);
+        display: flex;
+        flex-direction: column;
+        gap: clamp(14px, 2.4vw, 22px);
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .expert-card::after {
+        content: "";
+        position: absolute;
+        inset: -40px 50% auto -40px;
+        height: 140px;
+        background: radial-gradient(circle, rgba(29, 78, 216, 0.18), transparent 70%);
+        z-index: 0;
+      }
+
+      .expert-card.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .expert-card img {
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 12px 20px rgba(15, 23, 42, 0.12);
+      }
+
+      .expert-meta {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .expert-meta div {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .expert-meta strong {
+        font-size: 1.1rem;
+      }
+
+      .expert-meta span {
+        font-size: 0.9rem;
+        color: rgba(17, 24, 39, 0.65);
+      }
+
+      .expert-card p {
+        margin: 0;
+        color: rgba(17, 24, 39, 0.75);
+        position: relative;
+        z-index: 1;
+      }
+
+      .credential-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0;
+        margin: 4px 0 0;
+        list-style: none;
+        position: relative;
+        z-index: 1;
+      }
+
+      .credential-list li {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        background: rgba(30, 64, 175, 0.12);
+        color: var(--primary);
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .annotation {
+        margin-top: 32px;
+        font-size: 0.9rem;
+        color: rgba(17, 24, 39, 0.65);
+        padding-left: 16px;
+        border-left: 3px solid rgba(37, 99, 235, 0.4);
+      }
+
+      .journey {
+        background: linear-gradient(120deg, rgba(37, 99, 235, 0.08), rgba(104, 197, 168, 0.12));
+      }
+
+      .journey-timeline {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 18px;
+        list-style: none;
+        padding: 0;
+        margin: 0 0 32px;
+        position: relative;
+      }
+
+      .journey-timeline::before {
+        content: "";
+        position: absolute;
+        top: 32px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(120deg, rgba(29, 78, 216, 0.25), rgba(249, 115, 22, 0.25));
+        z-index: 0;
+      }
+
+      .journey-node {
+        position: relative;
+        z-index: 1;
+      }
+
+      .journey-node-button {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 18px 20px 20px;
+        border-radius: 18px;
+        border: 1px solid rgba(148, 163, 184, 0.24);
+        background: rgba(255, 255, 255, 0.9);
+        cursor: pointer;
+        font-weight: 700;
+        color: var(--secondary);
+        transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      }
+
+      .journey-node-button:hover,
+      .journey-node-button:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
+        background: rgba(255, 255, 255, 1);
+      }
+
+      .journey-node.is-active .journey-node-button {
+        background: linear-gradient(140deg, rgba(29, 78, 216, 0.16), rgba(104, 197, 168, 0.35));
+        border-color: rgba(29, 78, 216, 0.4);
+        box-shadow: 0 22px 38px rgba(15, 23, 42, 0.14);
+      }
+
+      .journey-node-index {
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        background: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--primary);
+        box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+      }
+
+      .journey-node-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: rgba(15, 23, 42, 0.7);
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .journey-node strong {
+        font-size: 1.05rem;
+        font-weight: 700;
+      }
+
+      .journey-node p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: rgba(15, 23, 42, 0.68);
+      }
+
+      .journey-panels {
+        position: relative;
+      }
+
+      .journey-panel {
+        background: #fff;
+        border-radius: var(--radius);
+        padding: clamp(30px, 3.4vw, 40px);
+        border: 1px solid rgba(37, 99, 235, 0.14);
+        box-shadow: 0 24px 36px rgba(15, 23, 42, 0.06);
+        display: none;
+      }
+
+      .journey-panel.is-active {
+        display: block;
+      }
+
+      .journey-panel h3 {
+        margin-top: 0;
+      }
+
+      .journey-lists {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: clamp(20px, 3.6vw, 32px);
+        margin-top: clamp(18px, 2.6vw, 28px);
+      }
+
+      .journey-lists ul {
+        padding-left: 20px;
+        margin: 0;
+        color: rgba(17, 24, 39, 0.75);
+      }
+
+      .journey-nav {
+        margin-top: clamp(20px, 2.8vw, 32px);
+        display: flex;
+        justify-content: space-between;
+        gap: clamp(16px, 3vw, 24px);
+      }
+
+      .journey-nav button {
+        flex: 1;
+      }
+
+      .case-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: clamp(24px, 4vw, 40px);
+      }
+
+      .case-card {
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: clamp(28px, 3.2vw, 36px);
+        border: 1px solid var(--border);
+        box-shadow: 0 22px 34px rgba(15, 23, 42, 0.06);
+      }
+
+      .case-card h3 {
+        margin-top: 0;
+      }
+
+      .case-metrics {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(16px, 3vw, 24px);
+        margin: clamp(20px, 2.8vw, 32px) 0;
+      }
+
+      .pricing-table {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: clamp(24px, 4vw, 40px);
+      }
+
+      .plan-card {
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: clamp(30px, 3.4vw, 40px);
+        border: 1px solid var(--border);
+        box-shadow: 0 20px 30px rgba(15, 23, 42, 0.05);
+        display: flex;
+        flex-direction: column;
+        gap: clamp(18px, 3vw, 28px);
+      }
+
+      .plan-card .btn {
+        align-self: flex-start;
+      }
+
+      .plan-price {
+        font-size: 1.4rem;
+        margin: 0;
+        color: var(--primary);
+      }
+
+      .plan-meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.9rem;
       }
 
       .plan-features {
         list-style: none;
         padding: 0;
-        margin: 0;
-        display: grid;
-        gap: 10px;
-        color: rgba(11, 30, 60, 0.75);
-      }
-
-      .testimonials {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: clamp(20px, 4vw, 28px);
-      }
-
-      .testimonial {
-        background: var(--surface);
-        padding: 24px;
-        border-radius: var(--radius);
-        border: 1px solid rgba(11, 30, 60, 0.08);
-        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
-        display: grid;
-        gap: 14px;
-      }
-
-      .testimonial-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-
-      .testimonial-header img {
-        width: 52px;
-        height: 52px;
-        object-fit: cover;
-        border-radius: 50%;
-      }
-
-      .faq {
-        display: grid;
-        gap: 16px;
-      }
-
-      .faq-item {
-        background: var(--surface);
-        border-radius: var(--radius);
-        border: 1px solid rgba(11, 30, 60, 0.1);
-        padding: 18px 22px;
-      }
-
-      .faq-item summary {
-        cursor: pointer;
-        font-weight: 700;
-        list-style: none;
-      }
-
-      .faq-item summary::-webkit-details-marker {
-        display: none;
-      }
-
-      .faq-item p {
-        margin: 12px 0 0;
-        color: rgba(11, 30, 60, 0.75);
-      }
-
-      .contact-section {
-        display: grid;
-        gap: 22px;
-        padding: clamp(28px, 6vw, 40px);
-        border-radius: calc(var(--radius) + 6px);
-        background: linear-gradient(130deg, rgba(31, 60, 109, 0.1), rgba(249, 115, 22, 0.1));
-        border: 1px solid rgba(11, 30, 60, 0.08);
-        box-shadow: 0 20px 52px rgba(15, 23, 42, 0.08);
-      }
-
-      .contact-header {
+        margin: 0 0 clamp(24px, 3vw, 36px);
         display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: clamp(12px, 2.4vw, 20px);
       }
 
-      .contact-header span {
-        color: rgba(11, 30, 60, 0.7);
+      .plan-features li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        color: rgba(17, 24, 39, 0.75);
       }
 
-      form {
+      .plan-features li i {
+        color: var(--primary);
+        margin-top: 3px;
+      }
+
+      .security-grid {
         display: grid;
-        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: clamp(20px, 3.6vw, 32px);
       }
 
-      .form-step {
-        display: none;
-        gap: 18px;
+      .security-card {
+        background: #fff;
+        border-radius: var(--radius);
+        padding: clamp(24px, 3vw, 32px);
+        border: 1px solid rgba(15, 23, 42, 0.08);
       }
 
-      .form-step.active {
+      details {
+        background: #fff;
+        border-radius: var(--radius);
+        border: 1px solid rgba(15, 23, 42, 0.1);
+        padding: clamp(18px, 3vw, 26px) clamp(22px, 3.4vw, 30px);
+        transition: box-shadow 0.2s ease;
+      }
+
+      details[open] {
+        box-shadow: 0 18px 38px rgba(15, 23, 42, 0.08);
+      }
+
+      summary {
+        cursor: pointer;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      summary::after {
+        content: "＋";
+        font-size: 1.2rem;
+        color: var(--primary);
+        transition: transform 0.2s ease;
+      }
+
+      details[open] summary::after {
+        transform: rotate(45deg);
+      }
+
+      .faq-list {
         display: grid;
+        gap: clamp(16px, 3vw, 28px);
       }
 
-      label {
+      .cta-section {
+        text-align: center;
+        background: linear-gradient(140deg, rgba(255, 255, 255, 0.92), rgba(219, 234, 254, 0.9));
+        color: var(--secondary);
+        border-radius: 32px;
+        padding: clamp(60px, 8vw, 90px) clamp(40px, 6vw, 64px);
+        box-shadow: 0 32px 64px rgba(15, 23, 42, 0.1);
+        margin-top: clamp(40px, 5vw, 64px);
+      }
+
+      .cta-section h3 {
+        font-size: 2rem;
+        margin-bottom: clamp(12px, 2vw, 20px);
+      }
+
+      .cta-section p {
+        margin-bottom: clamp(24px, 3vw, 36px);
+        color: rgba(15, 23, 42, 0.7);
+        line-height: 1.7;
+      }
+
+      .cta-section .cta-source {
+        color: var(--primary);
+        text-decoration: underline;
         font-weight: 600;
-        display: grid;
-        gap: 8px;
       }
 
-      input,
-      textarea {
+      .cta-section .btn-outline {
+        background: #fff;
+        color: var(--primary);
+        border-color: rgba(37, 99, 235, 0.35) !important;
+        box-shadow: 0 18px 36px rgba(37, 99, 235, 0.1);
+      }
+
+      .form-card {
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 24px;
+        padding: clamp(32px, 3.6vw, 44px);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        box-shadow: 0 26px 48px rgba(15, 23, 42, 0.08);
+        margin-top: clamp(32px, 4vw, 48px);
+      }
+
+      .form-card-title {
+        margin-top: 0;
+        margin-bottom: 18px;
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .contact-form {
+        display: grid;
+        gap: 18px;
+      }
+
+      .form-privacy {
+        font-size: 0.85rem;
+        color: rgba(15, 23, 42, 0.6);
+        margin-top: -10px;
+      }
+
+      .form-privacy a {
+        color: var(--primary);
+        text-decoration: underline;
+        font-weight: 600;
+      }
+
+      .contact-form label {
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .contact-form input,
+      .contact-form textarea,
+      .contact-form select {
+        width: 100%;
         padding: 12px 14px;
         border-radius: 12px;
-        border: 1px solid rgba(11, 30, 60, 0.18);
-        font-family: inherit;
+        border: 1px solid rgba(15, 23, 42, 0.15);
         font-size: 1rem;
-        background: #ffffff;
+        transition: border 0.2s ease, box-shadow 0.2s ease;
       }
 
-      textarea {
-        min-height: 120px;
+      .contact-form input:focus,
+      .contact-form textarea:focus,
+      .contact-form select:focus {
+        border-color: rgba(37, 99, 235, 0.6);
+        box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+      }
+
+      .contact-form textarea {
         resize: vertical;
+        min-height: 140px;
       }
 
-      .form-footnote {
+      .contact-form .is-invalid {
+        border-color: #dc2626;
+        box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.15);
+      }
+
+      .form-error {
+        color: #dc2626;
+        font-size: 0.85rem;
+      }
+
+      .footer {
+        padding: 40px 0 60px;
+        border-top: 1px solid rgba(15, 23, 42, 0.08);
         font-size: 0.9rem;
-        color: rgba(11, 30, 60, 0.7);
+        color: rgba(17, 24, 39, 0.65);
       }
 
-      footer {
-        background: #0b1e3c;
-        color: #e2e8f0;
-        margin-top: clamp(40px, 10vw, 80px);
-      }
-
-      .footer-inner {
-        width: min(1100px, 92vw);
-        margin: 0 auto;
-        padding: 32px 0 40px;
-        display: grid;
-        gap: 24px;
-      }
-
-      .footer-links {
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.55);
         display: flex;
-        flex-wrap: wrap;
-        gap: 18px;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 80;
       }
 
-      .footer-links a {
-        color: #cbd5f5;
-        text-decoration: none;
-        font-weight: 600;
+      .modal.is-open {
+        opacity: 1;
+        pointer-events: all;
       }
 
-      .footer-meta {
-        font-size: 0.9rem;
-        color: rgba(226, 232, 240, 0.7);
+      .modal-dialog {
+        max-width: 520px;
+        width: 100%;
+        background: #fff;
+        border-radius: 24px;
+        padding: 32px;
+        position: relative;
+        box-shadow: var(--shadow-lg);
       }
 
-      @media (max-width: 720px) {
-        .header-inner {
-          flex-direction: column;
-          gap: 12px;
+      .modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        background: none;
+        border: none;
+        font-size: 1.4rem;
+        cursor: pointer;
+      }
+
+      @media (max-width: 960px) {
+        .hero {
+          min-height: auto;
+          padding-top: clamp(120px, 22vw, 160px);
+        }
+
+        .hero-inner {
+          grid-template-columns: 1fr;
           text-align: center;
+          gap: clamp(32px, 8vw, 56px);
+        }
+
+        .hero-copy {
+          max-width: 100%;
+          margin: 0 auto;
         }
 
         .hero-visual {
-          order: -1;
+          max-width: min(560px, 100%);
         }
 
-        .footer-links {
-          justify-content: center;
+        .hero-visual::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        .header-nav {
+          display: none;
+        }
+
+        .journey-timeline {
+          grid-template-columns: 1fr;
+        }
+
+        .journey-timeline::before {
+          display: none;
+        }
+
+        .journey-node-button {
+          align-items: flex-start;
+        }
+
+        .data-flow-diagram::after {
+          display: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        section {
+          padding: 72px 0;
+        }
+
+        .cta-section {
+          padding: 40px 24px;
+        }
+
+        .form-card {
+          padding: 24px;
+        }
+
+        .floating-cta {
+          right: 12px;
+          bottom: 12px;
+        }
+
+        .floating-cta a {
+          min-width: 160px;
         }
       }
     </style>
   </head>
   <body>
-    <header>
-      <div class="header-inner">
-        <div class="brand">Strategy AI Lab</div>
-        <a class="cta-button" href="#contact">30分無料相談を申し込む</a>
+    <div class="floating-cta" role="complementary" aria-label="固定CTA">
+      <a class="btn btn-primary" href="#consultation" data-open-modal="#contactModal"><i class="fa-solid fa-calendar-check"></i> 無料相談を予約</a>
+      <a class="btn btn-outline" href="#plans"><i class="fa-solid fa-clipboard-list"></i> 料金プランを見る</a>
+    </div>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="brand">AI経営計画書ラボ</div>
+        <nav class="header-nav" aria-label="主要メニュー">
+          <details class="nav-group">
+            <summary>サービス概要</summary>
+            <div class="nav-group-panel" role="menu">
+              <a href="#ai-evidence" role="menuitem">導入状況</a>
+              <a href="#pain" role="menuitem">課題</a>
+              <a href="#features" role="menuitem">サービス</a>
+              <a href="#analysis" role="menuitem">AI分析デモ</a>
+            </div>
+          </details>
+          <details class="nav-group">
+            <summary>実行サポート</summary>
+            <div class="nav-group-panel" role="menu">
+              <a href="#experts" role="menuitem">専門家</a>
+              <a href="#journey" role="menuitem">進め方</a>
+              <a href="#cases" role="menuitem">導入事例</a>
+            </div>
+          </details>
+          <a href="#plans">料金</a>
+        </nav>
+        <button class="btn btn-primary" type="button" data-open-modal="#contactModal">
+          <i class="fa-solid fa-phone-volume"></i> 無料相談
+        </button>
       </div>
     </header>
 
     <main>
-      <section class="container hero" id="hero">
-        <div class="hero-copy">
-          <h1>生成AIで経営判断時間を半減。粗利とキャッシュを同時に最大化</h1>
-          <p>
-            製造・物流・IT・専門サービスなど、複数部門を抱える企業の意思決定を高速化。AIがデータ収集とシナリオ生成を行い、経営者と専門家が最終判断を下すハイブリッドな体制で成果を引き出します。
+      <section class="hero" id="top">
+        <div class="hero-background" aria-hidden="true">
+          <img
+            src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1920&q=80"
+            alt="経営者とAIアシスタントが並んで戦略を検討している様子"
+          />
+        </div>
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <span class="badge"><i class="fa-solid fa-location-dot"></i> 福岡・九州発｜経営計画DX伴走チーム</span>
+            <h1>毎月の意思決定に追われる経営者へ。生成AIが3か月先の戦略と数値を用意します</h1>
+            <p class="hero-subhead">「毎月の資金繰りと会議準備で、腰を据えて長期戦略を考える時間がない」そんな悩みに応える経営計画書支援サービスです。</p>
+            <p class="hero-lead">
+              生成AIが市場・競合・政策の最新データを常時ウォッチし、3か月分のシナリオとKPIを自動で可視化。週次レポートで打ち手の優先順位とリスクを提示し、社長は意思決定と実行に集中できます。最終チェックは中小企業診断士・公認会計士が行い、金融機関・投資家提出にも耐える計画へ仕上げます。
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#consultation" data-open-modal="#contactModal"><i class="fa-solid fa-calendar-check"></i> 無料相談を予約</a>
+              <a class="btn btn-outline" href="#cases"><i class="fa-solid fa-clipboard"></i> 導入事例を見る</a>
+            </div>
+            <p class="cta-note">AIで時間を生み出し、経営者の価値ある時間を戦略に振り向ける。</p>
+            <div class="hero-metrics" role="list">
+              <div class="hero-metric" role="listitem">
+                <strong>3か月分</strong>
+                <span>戦略と数値シナリオを自動提案</span>
+              </div>
+              <div class="hero-metric" role="listitem">
+                <strong>75%短縮</strong>
+                <span>情報収集〜ドラフト作成時間</span>
+              </div>
+              <div class="hero-metric" role="listitem">
+                <strong>週1回</strong>
+                <span>AIレポートで経営会議を先読み</span>
+              </div>
+            </div>
+            <p class="hero-subnote">福岡・九州を中心に、年商5,000万円〜30億円規模の製造・卸・IT・サービス企業を支援。全国・オンライン対応も可能です。</p>
+          </div>
+          <div class="hero-visual">
+            <figure class="hero-video">
+              <video id="heroVideo" poster="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1400&q=80">
+                <source
+                  src="https://cdn.coverr.co/videos/coverr-data-analytics-team-3356/1080p.mp4"
+                  type="video/mp4"
+                />
+                お使いのブラウザは動画をサポートしていません。
+              </video>
+              <div class="hero-video-controls" id="heroVideoControls">
+                <button type="button" data-video-control="heroVideo">
+                  <i class="fa-solid fa-circle-play"></i> 1分で見るデモ
+                </button>
+              </div>
+            </figure>
+            <div class="hero-highlight">
+              <div class="hero-highlight-card">
+                <i class="fa-solid fa-chart-pie"></i>
+                <div>
+                  <strong>AIが24時間モニタリング</strong>
+                  <p>市場・競合・政策・補助金情報を自動収集。重要な変化を検知すると即座に意思決定の論点と推奨アクションを通知します。</p>
+                </div>
+              </div>
+              <div class="hero-highlight-card">
+                <i class="fa-solid fa-handshake"></i>
+                <div>
+                  <strong>週次レポート×専門家レビュー</strong>
+                  <p>AIがまとめた週1回の経営レポートを専門家が精査。新たな打ち手アイデアと見落としがちなリスクを事前に共有し、経営会議を先読みできます。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a class="hero-scroll-indicator" href="#ai-evidence">
+          <span>スクロールして詳しく見る</span>
+          <i class="fa-solid fa-arrow-down-long" aria-hidden="true"></i>
+        </a>
+      </section>
+
+      <section id="ai-evidence" class="fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>透明なデータと第三者の出典で、導入判断を後押しします</h2>
+            <p>
+              世界的に生成AIの導入が進む中、意思決定のスピード差が競争力の差になります。信頼できる調査データに基づき、投資判断の材料をご提供します。
+            </p>
+          </div>
+          <div class="evidence-grid">
+            <article class="chart-card">
+              <h3><i class="fa-solid fa-earth-americas"></i> 世界のAI導入はすでに主流</h3>
+              <p class="chart-note">
+                世界の企業の78%がAIを導入し、71%が生成AIを活用しています。
+                <a class="source-link" href="https://explodingtopics.com/blog/companies-using-ai#:~:text=%2A%2078,or%20no%20training%20from%20employers" target="_blank" rel="noopener">出典</a>
+              </p>
+              <canvas id="globalChart" aria-label="世界企業のAI活用状況チャート"></canvas>
+            </article>
+            <article class="chart-card">
+              <h3><i class="fa-solid fa-user-clock"></i> 生成AIで情報収集とドラフト作成が数日→数時間</h3>
+              <p class="chart-note">
+                福岡の経営支援事例では、市場調査と資料ドラフトの所要時間が数日から数時間へ短縮。
+                MITの実証実験でもタスク完了時間が著しく縮み、アウトプット品質も向上しました。
+                <a class="source-link" href="https://zidaiinc.com/blog/generative-ai-management-plan" target="_blank" rel="noopener">出典：zidaiinc.com</a>
+                <a class="source-link" href="https://www5.cao.go.jp/keizai4/mit-generative-ai-report.pdf" target="_blank" rel="noopener">出典：内閣府×MIT実験</a>
+              </p>
+              <canvas id="productivityChart" aria-label="生成AI活用による作業時間短縮チャート"></canvas>
+            </article>
+            <article class="chart-card evidence-highlight">
+              <h3><i class="fa-solid fa-chart-line"></i> 2030年には1.85兆ドル市場へ</h3>
+              <p class="chart-note">
+                生成AI市場は2030年に1.85兆ドル規模に達すると予測されています。投資先行企業との差が一気に開く前に、計画策定の土台を整えましょう。
+                <a class="source-link" href="https://explodingtopics.com/blog/companies-using-ai#:~:text=trillion%20by%202030" target="_blank" rel="noopener">出典</a>
+              </p>
+              <p class="chart-note">
+                Intelliasの調査では、AIがリアルタイムデータからパターンとリスクを抽出することで意思決定の速度と精度が向上することが示されています。週1回のAIレポートが経営会議での議論材料を先取りします。
+                <a class="source-link" href="https://intellias.com/ai-decision-making-automation/" target="_blank" rel="noopener">出典1</a>
+                <a class="source-link" href="https://intellias.com/data-driven-decision-making-with-ai/" target="_blank" rel="noopener">出典2</a>
+              </p>
+              <ul class="evidence-list">
+                <li>市場拡大のスピードに合わせたローリングプラン</li>
+                <li>AI投資の費用対効果を可視化するダッシュボード</li>
+                <li>金融機関・株主への説明責任を果たす根拠資料</li>
+                <li>見落としがちなシナリオやリスクを可視化する週次AIレポート</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="roles" class="fade-in" style="background: #fff;">
+        <div class="container">
+          <div class="section-heading">
+            <h2>生成AI・経営者・専門家がそれぞれの強みを活かす体制</h2>
+            <p>
+              役割を明確にし、責任の所在をはっきりさせることで、迅速かつ安心感のある意思決定が実現します。
+            </p>
+          </div>
+          <div class="roles-grid">
+            <article class="role-card">
+              <div class="role-icon"><i class="fa-solid fa-robot"></i></div>
+              <h3>生成AI</h3>
+              <ul>
+                <li>市場・競合・政策・補助金データの24時間モニタリング</li>
+                <li>財務シミュレーションとドラフト作成</li>
+                <li>週次AIレポートでリスクと注目シナリオを提示</li>
+                <li>意思決定に必要な根拠資料と図表の自動生成</li>
+              </ul>
+            </article>
+            <article class="role-card">
+              <div class="role-icon"><i class="fa-solid fa-user-tie"></i></div>
+              <h3>経営者</h3>
+              <ul>
+                <li>経営目標と優先順位の決定</li>
+                <li>投資判断・資源配分の最終承認</li>
+                <li>社内外へのメッセージとストーリーの提示</li>
+              </ul>
+            </article>
+            <article class="role-card">
+              <div class="role-icon"><i class="fa-solid fa-people-arrows"></i></div>
+              <h3>専門家（中小企業診断士等）</h3>
+              <ul>
+                <li>ドラフトのレビューとリスクチェック</li>
+                <li>金融機関・投資家との調整と交渉サポート</li>
+                <li>運用定着のための会議設計と伴走支援</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="pain" class="fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>社長が直面するスピードの壁を、AIが突破口に変える</h2>
+            <p>
+              急速に変わる市場や資金調達環境。気づけば資料づくりに追われ、意思決定に割ける時間がなくなっていませんか？現場の温度感と数字をつなげる経営計画づくりを、生成AIが共創します。
+            </p>
+          </div>
+          <div class="problems-grid">
+            <article class="problem-card">
+              <h3><i class="fa-solid fa-hourglass-half"></i> 経営会議の準備に週10時間</h3>
+              <p>各部署からデータを集め、ExcelとPowerPointを往復。意思決定の核となる議論に入る頃にはエネルギーが尽きてしまう。</p>
+            </article>
+            <article class="problem-card">
+              <h3><i class="fa-solid fa-earth-asia"></i> 外部環境の変化に追いつけない</h3>
+              <p>為替や原価の変動、業界再編などが相次ぐ中、最新データを反映したシナリオを用意できず、投資判断が遅れがち。</p>
+            </article>
+            <article class="problem-card">
+              <h3><i class="fa-solid fa-people-group"></i> 説明責任を果たす資料が足りない</h3>
+              <p>金融機関や投資家、役員会からの質問に即答できる根拠資料が不足。計画書のアップデートも後手に回る。</p>
+            </article>
+            <article class="problem-card">
+              <h3><i class="fa-solid fa-clipboard-list"></i> 現場への落とし込みが不十分</h3>
+              <p>ビジョンと数字を結びつけるストーリーが欠け、実行フェーズで施策が空中分解。計画が“絵に描いた餅”になってしまう。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="fade-in" style="background: #fff;">
+        <div class="container">
+          <div class="section-heading">
+            <h2>4つの生成AIコア機能で、経営計画の完成度とスピードを両立</h2>
+            <p>単なる文章生成ではなく、データソース連携・財務モデル化・専門家による最終レビューまでを一気通貫で支援します。</p>
+          </div>
+          <div class="features-grid">
+            <article class="feature-card">
+              <h3><i class="fa-solid fa-magnifying-glass-chart"></i> 市場・競合インサイト自動生成</h3>
+              <div class="feature-metric"><i class="fa-solid fa-arrow-trend-up"></i>リサーチ時間 68%削減</div>
+              <ul>
+                <li>最新ニュース、統計、SNSの声をクロールし、業界別の機会と脅威をレポート化</li>
+                <li>競合と自社の差異をレーダーチャートで可視化し、差別化戦略を提案</li>
+              </ul>
+            </article>
+            <article class="feature-card">
+              <h3><i class="fa-solid fa-sack-dollar"></i> 売上・収支予測エンジン</h3>
+              <div class="feature-metric"><i class="fa-solid fa-chart-line"></i>シナリオ比較 3パターン自動生成</div>
+              <ul>
+                <li>PL・CF・BSを連動させた5年分の財務モデルを自動作成</li>
+                <li>投資・採用計画の調整によるROIや回収期間の変化を即時反映</li>
+              </ul>
+            </article>
+            <article class="feature-card">
+              <h3><i class="fa-solid fa-pen-nib"></i> 経営計画ドラフト自動構成</h3>
+              <div class="feature-metric"><i class="fa-solid fa-file-pen"></i>15章構成を自動生成</div>
+              <ul>
+                <li>経営理念からリスク管理、行動計画までをテンプレート化し、文章の骨子をドラフト</li>
+                <li>金融機関・投資家向けに求められる指標・根拠を網羅</li>
+              </ul>
+            </article>
+            <article class="feature-card">
+              <h3><i class="fa-solid fa-user-tie"></i> 専門家レビュー＆伴走</h3>
+              <div class="feature-metric"><i class="fa-solid fa-person-chalkboard"></i>修正提案 平均23件</div>
+              <ul>
+                <li>中小企業診断士・財務専門家がドラフトを精査し、審査想定Q&Aを整備</li>
+                <li>提出後もローリング更新を支援し、外部環境変化に合わせた改訂を伴走</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="data-flow" class="data-flow-section fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>データ取得から意思決定までを可視化したフロー</h2>
+            <p>AIが担うプロセスと専門家・経営者が介在するポイントをひと目で把握できるよう、データ連携の流れを図解しました。</p>
+          </div>
+          <div class="data-flow-diagram" role="list">
+            <article class="data-flow-step" role="listitem">
+              <div class="data-flow-icon"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+              <h3>データ取得</h3>
+              <p>会計・販売・HRシステムや公開情報を接続し、AIがインポートとクレンジングを実施。</p>
+              <ul class="data-flow-detail">
+                <li>API/CSV連携を15分で設定</li>
+                <li>欠損値や異常値を自動補正</li>
+              </ul>
+            </article>
+            <article class="data-flow-step" role="listitem">
+              <div class="data-flow-icon"><i class="fa-solid fa-microchip"></i></div>
+              <h3>生成AI分析</h3>
+              <p>市場レポートと社内データを突合し、指標やリスクアラートを作成。専門家のレビュー素材に。</p>
+              <ul class="data-flow-detail">
+                <li>外部データ 250種を横断分析</li>
+                <li>異業種ベンチマークで比較</li>
+              </ul>
+            </article>
+            <article class="data-flow-step" role="listitem">
+              <div class="data-flow-icon"><i class="fa-solid fa-user-tie"></i></div>
+              <h3>専門家レビュー</h3>
+              <p>金融機関視点で資料を整備し、ヒアリング内容を反映して計画書の骨子をブラッシュアップ。</p>
+              <ul class="data-flow-detail">
+                <li>提出先に合わせた文体と構成</li>
+                <li>質疑応答シナリオを準備</li>
+              </ul>
+            </article>
+            <article class="data-flow-step" role="listitem">
+              <div class="data-flow-icon"><i class="fa-solid fa-chart-gantt"></i></div>
+              <h3>意思決定と実行</h3>
+              <p>経営者がKPIと優先施策を決定。実行状況はダッシュボードで追跡し、90日ごとに再計画します。</p>
+              <ul class="data-flow-detail">
+                <li>進捗が遅れる指標を自動通知</li>
+                <li>四半期レビューの議事案作成</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="analysis" class="analysis-section fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>時間を創出しながら精度を高める、AIダッシュボード</h2>
+            <p>生成AIが数値シミュレーションを担い、経営者は判断とコミュニケーションに集中。入力値を変えるとグラフが瞬時に更新されます。</p>
+          </div>
+          <div class="impact-counters" aria-label="AI活用による効果指標">
+            <div class="counter-card">
+              <span data-count="1750">0</span>
+              <small>AI活用による年間の業務時間削減（時間）</small>
+            </div>
+            <div class="counter-card">
+              <span data-count="1000">0</span>
+              <small>削減が見込めるコスト（万円）</small>
+            </div>
+            <div class="counter-card">
+              <span data-count="44">0</span>
+              <small>意思決定精度の平均向上率（％）</small>
+            </div>
+          </div>
+          <div class="analysis-grid">
+            <div class="analysis-panel">
+              <h3>自社と競合の差異を即座に把握</h3>
+              <p>スライダーを調整すると、レーダーチャートがリアルタイムに更新されます。重点投資領域の仮説づくりにご活用ください。</p>
+              <div class="control-group">
+                <label for="productFit">顧客適合度</label>
+                <input type="range" id="productFit" min="40" max="100" value="70" />
+                <label for="brand">ブランド浸透度</label>
+                <input type="range" id="brand" min="30" max="100" value="60" />
+                <label for="supply">供給力・オペレーション</label>
+                <input type="range" id="supply" min="30" max="100" value="75" />
+                <label for="innovation">革新性</label>
+                <input type="range" id="innovation" min="20" max="100" value="65" />
+                <label for="finance">財務健全性</label>
+                <input type="range" id="finance" min="30" max="100" value="80" />
+              </div>
+            </div>
+            <div class="chart-frame">
+              <canvas id="radarChart" aria-label="自社と競合の比較レーダーチャート"></canvas>
+            </div>
+          </div>
+          <div class="sales-simulator" id="demo">
+            <h3>売上・キャッシュフローシミュレーター</h3>
+            <p>目標売上・初期投資・市場規模・粗利率を入力すると、12ヶ月の売上推移とキャッシュフローが更新されます。</p>
+            <form class="simulator-form" id="simulatorForm">
+              <div>
+                <label for="targetRevenue">目標年間売上（万円）</label>
+                <input type="number" id="targetRevenue" min="1000" step="100" value="12000" />
+              </div>
+              <div>
+                <label for="initialInvestment">初期投資額（万円）</label>
+                <input type="number" id="initialInvestment" min="0" step="50" value="1500" />
+              </div>
+              <div>
+                <label for="marketSize">想定市場規模（億円）</label>
+                <input type="number" id="marketSize" min="1" step="0.1" value="12" />
+              </div>
+              <div>
+                <label for="grossMargin">粗利率（％）</label>
+                <input type="number" id="grossMargin" min="20" max="90" value="48" />
+              </div>
+            </form>
+            <canvas id="performanceChart" aria-label="売上とキャッシュフローの推移"></canvas>
+          </div>
+        </div>
+      </section>
+
+      <section id="quarterly" class="fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>四半期ごとの1日オフサイトで計画を最新化</h2>
+            <p>
+              四半期に一度、1日かけて前期の進捗と外部環境を確認し、次の90日間の優先事項を整えることが最適だとされています。
+              <a class="source-link" href="https://www.impactsociety.co/articles/the-importance-of-conducting-quarterly-planning-with-your-team/#:~:text=The%20sweet%20spot%20is%20the,they%E2%80%99re%20prioritised%20in%20people%E2%80%99s%20calendars" target="_blank" rel="noopener">出典</a>
+            </p>
+          </div>
+          <div class="quarterly-grid">
+            <article class="quarterly-card">
+              <h3><i class="fa-solid fa-list-check"></i> レビューで確認する3つの視点</h3>
+              <ul>
+                <li>前期の進捗とKPIギャップをAIが可視化</li>
+                <li>外部環境の変化指数とリスクシナリオを専門家が整理</li>
+                <li>次の90日で集中すべき優先事項を経営者が決定</li>
+              </ul>
+              <p class="chart-note">Impact Societyは「四半期ごとの1日オフサイト」が最も効果的と推奨しています。</p>
+              <a class="btn btn-primary" href="#consultation" data-open-modal="#contactModal">無料相談を予約</a>
+            </article>
+            <article class="quarterly-card">
+              <h3><i class="fa-solid fa-wave-square"></i> 変化のスピードを比較する</h3>
+              <canvas id="quarterlyChart" aria-label="外部環境変化指数とAIアップデート速度の比較"></canvas>
+              <p class="chart-note">指数は2021年を1.0とした相対値です。生成AIのアップデート速度が外部環境の変動を上回ることで、迅速な意思決定が求められます。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="experts" class="fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>専門家とAIと経営者、三位一体で「実行できる計画」を共創</h2>
+            <p>経験豊富な専門家がAIの提案を精査し、金融機関・投資家提出にも耐える根拠資料へと磨き上げます。最終的なチェックを経て、実行段階で迷わない計画に仕上げます。</p>
+          </div>
+          <div class="expert-grid">
+            <article class="expert-card">
+              <div class="expert-meta">
+                <img
+                  src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=200&q=70"
+                  alt="経営戦略アドバイザー 田中祐介"
+                  loading="lazy"
+                />
+                <div>
+                  <strong>田中 祐介</strong>
+                  <span>中小企業診断士｜支援歴15年</span>
+                </div>
+              </div>
+              <p>
+                「金融機関が知りたいのは数字の裏付けと実行体制。AIが集めたデータに、経営者の想いと現場の熱量を乗せて投資判断に耐える計画へと磨きます。」
+              </p>
+              <ul class="credential-list">
+                <li><i class="fa-solid fa-id-badge"></i> 中小企業診断士</li>
+                <li><i class="fa-solid fa-briefcase"></i> 公的支援実績 120社</li>
+              </ul>
+            </article>
+            <article class="expert-card">
+              <div class="expert-meta">
+                <img
+                  src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=200&q=70"
+                  alt="財務コンサルタント 佐伯美咲"
+                  loading="lazy"
+                />
+                <div>
+                  <strong>佐伯 美咲</strong>
+                  <span>財務コンサルタント｜IPO支援10社</span>
+                </div>
+              </div>
+              <p>
+                「AIが生成する複数シナリオを基に、資金繰りとキャッシュフローの安全余裕をチェック。経営者の“攻めたい局面”を守りながら、打ち手の優先順位を定めます。」
+              </p>
+              <ul class="credential-list">
+                <li><i class="fa-solid fa-certificate"></i> 公認会計士</li>
+                <li><i class="fa-solid fa-building-columns"></i> IPO支援 10社</li>
+              </ul>
+            </article>
+            <article class="expert-card">
+              <div class="expert-meta">
+                <img
+                  src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=200&q=70"
+                  alt="組織開発コーチ 山本彩"
+                  loading="lazy"
+                />
+                <div>
+                  <strong>山本 彩</strong>
+                  <span>組織開発コーチ｜伴走歴12年</span>
+                </div>
+              </div>
+              <p>
+                「AIの提案を現場に落とし込むため、人材配置やKPIをチームと対話しながら再設計。現場の納得感を高め、計画と実行のギャップを埋めます。」
+              </p>
+              <ul class="credential-list">
+                <li><i class="fa-solid fa-user-check"></i> ICF認定コーチ</li>
+                <li><i class="fa-solid fa-users"></i> 組織開発伴走 12年</li>
+              </ul>
+            </article>
+          </div>
+          <p class="annotation">
+            ※研究では、AIが人間のパフォーマンスを約40%向上させる一方で、AIに依存しすぎると19ポイント低下する可能性が指摘されています。AI＋専門家＋経営者の連携が、最適な経営計画を生む鍵です。
           </p>
-          <a class="cta-button" href="#contact">30分無料相談を申し込む</a>
-          <span style="font-size: 0.9rem; color: rgba(11, 30, 60, 0.7)">
-            平均導入期間 2 週間 ｜ NDA 即日締結可能
-          </span>
         </div>
-        <div class="hero-visual">
-          <h2>導入企業の成果スナップショット</h2>
-          <div class="stat">
-            <span>意思決定時間</span>
-            <strong>-52%</strong>
+      </section>
+
+      <section id="journey" class="journey fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>お問い合わせから納品まで、経営者の時間を最優先する5ステップ</h2>
+            <p>各ステップで経営者が行うこととAIが担うことを明確化。意思決定の主導権は常に経営者にあります。</p>
           </div>
-          <div class="stat">
-            <span>会議準備時間</span>
-            <strong>-38%</strong>
+          <ol class="journey-timeline" role="tablist">
+            <li class="journey-node is-active" data-step="0">
+              <button class="journey-node-button" type="button" role="tab" aria-selected="true" data-step="0">
+                <span class="journey-node-index">1</span>
+                <span class="journey-node-label">Step 1</span>
+                <strong>お問い合わせ</strong>
+                <p>現状の課題と希望納期を共有。即日でNDAと進行スケジュールを返信します。</p>
+              </button>
+            </li>
+            <li class="journey-node" data-step="1">
+              <button class="journey-node-button" type="button" role="tab" aria-selected="false" data-step="1">
+                <span class="journey-node-index">2</span>
+                <span class="journey-node-label">Step 2</span>
+                <strong>ヒアリング</strong>
+                <p>30分のオンラインで重点指標とデータ連携を決定。AIが議事録と次アクションを整理。</p>
+              </button>
+            </li>
+            <li class="journey-node" data-step="2">
+              <button class="journey-node-button" type="button" role="tab" aria-selected="false" data-step="2">
+                <span class="journey-node-index">3</span>
+                <span class="journey-node-label">Step 3</span>
+                <strong>AIドラフト</strong>
+                <p>市場分析と財務シナリオをAIが生成。経営者が優先順位を指示し骨子を調整。</p>
+              </button>
+            </li>
+            <li class="journey-node" data-step="3">
+              <button class="journey-node-button" type="button" role="tab" aria-selected="false" data-step="3">
+                <span class="journey-node-index">4</span>
+                <span class="journey-node-label">Step 4</span>
+                <strong>専門家レビュー</strong>
+                <p>金融機関視点で資料を整備し、想定質問と回答草案を準備します。</p>
+              </button>
+            </li>
+            <li class="journey-node" data-step="4">
+              <button class="journey-node-button" type="button" role="tab" aria-selected="false" data-step="4">
+                <span class="journey-node-index">5</span>
+                <span class="journey-node-label">Step 5</span>
+                <strong>納品・伴走</strong>
+                <p>完成版を納品し、月次・四半期レビューでローリング更新をサポート。</p>
+              </button>
+            </li>
+          </ol>
+          <div class="journey-panels">
+            <article class="journey-panel is-active" data-step="0" role="tabpanel">
+              <h3>Step1 お問い合わせ</h3>
+              <p>フォームまたは無料相談で現状を共有いただき、守秘義務契約やスケジュールを即日提示します。</p>
+              <div class="journey-lists">
+                <div>
+                  <h4>経営者が行うこと</h4>
+                  <ul>
+                    <li>現状の課題・目標・希望納期を共有</li>
+                    <li>ヒアリング可能な日程を選択</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>AIが行うこと</h4>
+                  <ul>
+                    <li>公開情報から業界・市場の最新トピックを整理</li>
+                    <li>入力内容に合わせたヒアリング項目を提案</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+            <article class="journey-panel" data-step="1" role="tabpanel">
+              <h3>Step2 ヒアリング</h3>
+              <p>30分のオンラインヒアリングで経営課題とデータ連携方針を決定。必要に応じて会計・販売システムと安全に接続します。</p>
+              <div class="journey-lists">
+                <div>
+                  <h4>経営者が行うこと</h4>
+                  <ul>
+                    <li>重点指標と制約条件を確認</li>
+                    <li>社内データの提供範囲を決定</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>AIが行うこと</h4>
+                  <ul>
+                    <li>データ連携状況を診断し、不足データを抽出</li>
+                    <li>ヒアリング内容を自動要約し、次のアクションを提案</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+            <article class="journey-panel" data-step="2" role="tabpanel">
+              <h3>Step3 AIドラフト</h3>
+              <p>生成AIが市場分析、財務モデル、章立てを自動生成。複数シナリオの売上・キャッシュフローを提示します。</p>
+              <div class="journey-lists">
+                <div>
+                  <h4>経営者が行うこと</h4>
+                  <ul>
+                    <li>提示されたシナリオの優先順位を判断</li>
+                    <li>経営の意図を追記し、議論したい論点を指定</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>AIが行うこと</h4>
+                  <ul>
+                    <li>市場・競合・自社の強みを統合した分析レポートを作成</li>
+                    <li>財務指標の感度分析とリスクアラートを提示</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+            <article class="journey-panel" data-step="3" role="tabpanel">
+              <h3>Step4 専門家レビュー</h3>
+              <p>専門家がAIドラフトを精査し、金融機関・投資家・役員会向けの伝え方を最適化します。</p>
+              <div class="journey-lists">
+                <div>
+                  <h4>経営者が行うこと</h4>
+                  <ul>
+                    <li>重要な意思決定ポイントを確認</li>
+                    <li>実行体制・責任者のアサインを決定</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>AIが行うこと</h4>
+                  <ul>
+                    <li>想定質問と回答草案を自動生成</li>
+                    <li>資料に必要なグラフ・図表を生成し、整形</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
+            <article class="journey-panel" data-step="4" role="tabpanel">
+              <h3>Step5 納品・伴走</h3>
+              <p>完成版を納品し、月次・四半期のローリング更新を伴走。経営会議や金融機関対応にも同席します。</p>
+              <div class="journey-lists">
+                <div>
+                  <h4>経営者が行うこと</h4>
+                  <ul>
+                    <li>最終承認と実行のゴーサインを出す</li>
+                    <li>定例レビューの頻度を設定</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4>AIが行うこと</h4>
+                  <ul>
+                    <li>実績データを取り込み、差異分析と次月施策を提案</li>
+                    <li>経営会議で使用するサマリー資料を自動生成</li>
+                  </ul>
+                </div>
+              </div>
+            </article>
           </div>
-          <div class="stat">
-            <span>キャッシュ創出インパクト</span>
-            <strong>+¥84M</strong>
+          <div class="journey-nav">
+            <button class="btn btn-outline" type="button" data-journey-nav="prev"><i class="fa-solid fa-chevron-left"></i> 前のステップ</button>
+            <button class="btn btn-primary" type="button" data-journey-nav="next">次のステップ <i class="fa-solid fa-chevron-right"></i></button>
           </div>
-          <p style="margin: 0; font-size: 0.9rem; color: rgba(11, 30, 60, 0.7)">
-            ※ 2023-2024年度導入企業平均。部門横断プロジェクトの決裁期間が最短 7 日まで短縮。
+        </div>
+      </section>
+      <section id="cases" class="fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>導入企業の声と成果</h2>
+            <p>製造業・ITサービス・地域密着ビジネスなど、さまざまな業種で意思決定のスピードと成果が向上しています。</p>
+          </div>
+          <div class="case-stats">
+            <article class="case-card">
+              <h3>製造業（年商18億円）</h3>
+              <div class="case-metrics">
+                <div>
+                  <span>Before</span>
+                  <strong>作成30日</strong>
+                </div>
+                <div>
+                  <span>After</span>
+                  <strong>12日</strong>
+                </div>
+                <div>
+                  <span>資金調達</span>
+                  <strong>2.5億円</strong>
+                </div>
+                <div>
+                  <span>成功率</span>
+                  <strong>1.8倍</strong>
+                </div>
+              </div>
+              <p>
+                「需要変動が激しい中、AIが為替・原材料のシナリオを作ってくれたおかげで、銀行交渉も先手で進められました。経営会議の準備時間が半分以下になり、意思決定の議論に集中できています。」
+              </p>
+              <p style="font-size: 0.9rem; color: rgba(17, 24, 39, 0.6);">代表取締役／機械部品メーカー</p>
+            </article>
+            <article class="case-card">
+              <h3>SaaS（年商4.2億円）</h3>
+              <div class="case-metrics">
+                <div>
+                  <span>Before</span>
+                  <strong>ARR成長率 18%</strong>
+                </div>
+                <div>
+                  <span>After</span>
+                  <strong>36%</strong>
+                </div>
+                <div>
+                  <span>資料準備</span>
+                  <strong>3週→5日</strong>
+                </div>
+                <div>
+                  <span>投資獲得</span>
+                  <strong>シリーズB成功</strong>
+                </div>
+              </div>
+              <p>
+                「AIが顧客セグメント別の伸びしろを可視化し、投資家が求めるKPIを含んだ計画書を自動で整えてくれました。資金調達の質疑にも事前に備えられ、調達額は計画の130％を達成。」
+              </p>
+              <p style="font-size: 0.9rem; color: rgba(17, 24, 39, 0.6);">CEO／クラウドサービス企業</p>
+            </article>
+            <article class="case-card">
+              <h3>地域密着サービス（年商7.5億円）</h3>
+              <div class="case-metrics">
+                <div>
+                  <span>Before</span>
+                  <strong>更新頻度 年1回</strong>
+                </div>
+                <div>
+                  <span>After</span>
+                  <strong>月次ローリング</strong>
+                </div>
+                <div>
+                  <span>意思決定</span>
+                  <strong>議題時間 40%短縮</strong>
+                </div>
+                <div>
+                  <span>新規店舗</span>
+                  <strong>6か月で2店</strong>
+                </div>
+              </div>
+              <p>
+                「外部環境に応じた“次の手”をAIが示してくれるので、出店判断が迷いなく進みます。社内説明資料も自動で整うため、現場が動きやすくなりました。」
+              </p>
+              <p style="font-size: 0.9rem; color: rgba(17, 24, 39, 0.6);">代表／地域チェーン事業</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="plans" class="fade-in" style="background: #fff;">
+        <div class="container">
+          <div class="section-heading">
+            <h2>ニーズに合わせた3つのプラン</h2>
+            <p>すべてのプランで無料トライアル（初回ドラフト＋オンライン相談）をご用意。導入前に成果と運用イメージをご確認いただけます。</p>
+          </div>
+          <div class="pricing-table">
+            <article class="plan-card">
+              <h3>ライトプラン</h3>
+              <p class="plan-price">月額 165,000円～</p>
+              <div class="plan-meta">
+                <span><i class="fa-solid fa-user"></i> 対象：年商5,000万～3億円の成長期企業</span>
+                <span><i class="fa-solid fa-flag"></i> 目的：金融機関提出・助成金申請のスピード化</span>
+                <span><i class="fa-solid fa-percent"></i> 想定ROI：計画書作成工数を最大60%削減</span>
+              </div>
+              <ul class="plan-features">
+                <li><i class="fa-solid fa-circle-check"></i> 月1回のAI計画書更新ドラフト納品（PDF・PPT）</li>
+                <li><i class="fa-solid fa-circle-check"></i> 売上・キャッシュフロー予測（3シナリオ）</li>
+                <li><i class="fa-solid fa-circle-check"></i> 融資面談想定Q&Aテンプレート</li>
+                <li><i class="fa-solid fa-circle-check"></i> 導入初月の専門家レビュー1回</li>
+              </ul>
+              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">無料相談を予約</button>
+            </article>
+            <article class="plan-card" style="border: 2px solid var(--primary);">
+              <h3>プロプラン</h3>
+              <p class="plan-price">月額 330,000円～</p>
+              <div class="plan-meta">
+                <span><i class="fa-solid fa-building"></i> 対象：年商3億～15億円、マルチ事業展開企業</span>
+                <span><i class="fa-solid fa-bullseye"></i> 目的：中期経営計画・投資家資料の高度化</span>
+                <span><i class="fa-solid fa-arrow-up-right-dots"></i> 想定ROI：意思決定時間を平均57%削減、資金調達成功率1.6倍</span>
+              </div>
+              <ul class="plan-features">
+                <li><i class="fa-solid fa-circle-check"></i> 月2回のAIドラフト更新＋実績差異分析</li>
+                <li><i class="fa-solid fa-circle-check"></i> 管理会計KPI設計・経営会議ファシリテーション</li>
+                <li><i class="fa-solid fa-circle-check"></i> 投資家・役員会向けピッチデッキ連動</li>
+                <li><i class="fa-solid fa-circle-check"></i> 常時チャット伴走／緊急シミュレーション対応</li>
+              </ul>
+              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">無料相談を予約</button>
+            </article>
+            <article class="plan-card">
+              <h3>エンタープライズプラン</h3>
+              <p class="plan-price">月額 660,000円～</p>
+              <div class="plan-meta">
+                <span><i class="fa-solid fa-city"></i> 対象：年商10億円以上の多拠点・多事業企業</span>
+                <span><i class="fa-solid fa-network-wired"></i> 目的：グループ経営管理・海外拠点連携</span>
+                <span><i class="fa-solid fa-scale-balanced"></i> 想定ROI：意思決定リードタイムを最大65%短縮</span>
+              </div>
+              <ul class="plan-features">
+                <li><i class="fa-solid fa-circle-check"></i> 週次データ連携とAIダッシュボードのカスタム開発</li>
+                <li><i class="fa-solid fa-circle-check"></i> 事業部別シナリオ分析とグループ資金計画の統合</li>
+                <li><i class="fa-solid fa-circle-check"></i> オフサイト四半期レビューの設計・ファシリテーション</li>
+                <li><i class="fa-solid fa-circle-check"></i> 経営陣・現場向け研修とリテラシー向上プログラム</li>
+              </ul>
+              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">無料相談を予約</button>
+            </article>
+          </div>
+          <p style="margin-top: 18px; color: rgba(17, 24, 39, 0.6); font-size: 0.9rem;">
+            ※上記は税別。初回ヒアリング後に正式お見積りを提示します。年間契約で月額10%割引、カスタムAPI連携や社内研修はオプションで追加可能です。
           </p>
         </div>
       </section>
 
-      <section class="container" id="pains">
-        <h2 class="section-title">経営者が抱える情報過多と判断遅延の課題</h2>
-        <p class="section-lead">
-          経営環境の変化が激しい今、情報整理と資料作成に時間が取られ、意思決定が後手に回るケースが増えています。
-        </p>
-        <div class="grid-cards">
-          <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-database"></i></div>
-            <h3>情報過多で見極めが困難</h3>
-            <ul class="pains-list">
-              <li><i class="fa-solid fa-circle-exclamation"></i>週次で更新される市場・競合情報の取捨選択が追いつかない</li>
-              <li><i class="fa-solid fa-circle-exclamation"></i>複数部門からの数値報告がフォーマットごとにバラバラ</li>
-            </ul>
+      <section id="security" class="fade-in">
+        <div class="container">
+          <div class="section-heading">
+            <h2>セキュリティとコンプライアンス</h2>
+            <p>経営データを安心して預けていただくために、国内リージョンのセキュアな環境で運用しています。</p>
           </div>
-          <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-file-pen"></i></div>
-            <h3>資料作成の負荷が高い</h3>
-            <ul class="pains-list">
-              <li><i class="fa-solid fa-circle-exclamation"></i>意思決定会議の資料準備に平均 12 時間/週を消費</li>
-              <li><i class="fa-solid fa-circle-exclamation"></i>最新データの反映に人的ミスが発生しやすい</li>
-            </ul>
-          </div>
-          <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-rotate"></i></div>
-            <h3>外部環境の変化を反映しづらい</h3>
-            <ul class="pains-list">
-              <li><i class="fa-solid fa-circle-exclamation"></i>為替・資材価格・金利など、重要指標をリアルタイムで追えない</li>
-              <li><i class="fa-solid fa-circle-exclamation"></i>複数シナリオの比較検討が遅れ、投資判断が後手に回る</li>
-            </ul>
+          <div class="security-grid">
+            <article class="security-card">
+              <h3><i class="fa-solid fa-shield-halved"></i> データ暗号化</h3>
+              <p>通信・保管ともにAES-256で暗号化し、第三者検証済みのクラウド環境で運用。</p>
+            </article>
+            <article class="security-card">
+              <h3><i class="fa-solid fa-user-lock"></i> アクセス制御</h3>
+              <p>役割ベースアクセスと多要素認証で、経営層・専門家・AIアシスタントの権限を明確化。</p>
+            </article>
+            <article class="security-card">
+              <h3><i class="fa-solid fa-file-signature"></i> 守秘義務契約</h3>
+              <p>NDA・業務委託契約を標準化。AIに学習させないオプションも選択可能です。</p>
+            </article>
+            <article class="security-card">
+              <h3><i class="fa-solid fa-database"></i> データ保全</h3>
+              <p>バックアップは国内2拠点で冗長化し、障害時の復旧を自動化しています。</p>
+            </article>
+            <article class="security-card">
+              <h3><i class="fa-solid fa-certificate"></i> 法令・認証</h3>
+              <p id="privacy">ISO/IEC 27001認証データセンターを利用し、日本の個人情報保護法（APPI）に準拠した管理体制で運用しています。</p>
+            </article>
           </div>
         </div>
       </section>
 
-      <section class="container" id="solution">
-        <h2 class="section-title">AI × 経営者 × 専門家の協働で意思決定をアップデート</h2>
-        <p class="section-lead">役割分担を明確化し、スピードと確度を両立させる仕組みを提供します。</p>
-        <div class="grid-cards">
-          <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
-            <h3>AI の役割</h3>
-            <p>社内外のデータ収集、自動シナリオ生成、数分でのレポートドラフト作成を担当。最新環境を常に反映します。</p>
+      <section id="faq" class="fade-in" style="background: #fff;">
+        <div class="container">
+          <div class="section-heading">
+            <h2>よくあるご質問</h2>
+            <p>導入前によくお問い合わせいただく内容をまとめました。その他のご質問もお気軽にご相談ください。</p>
           </div>
-          <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-user-tie"></i></div>
-            <h3>経営者の役割</h3>
-            <p>AI が提示する複数シナリオをもとに優先順位を判断。意思決定のスピードと再現性を担保します。</p>
-          </div>
-          <div class="card">
-            <div class="card-icon"><i class="fa-solid fa-handshake"></i></div>
-            <h3>専門家の役割</h3>
-            <p>公認会計士・金融機関出身者がレビューと融資支援を実施。リスクの洗い出しと外部折衝を支援します。</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="container" id="metrics">
-        <h2 class="section-title">導入後のインパクトを数値で確認</h2>
-        <div class="metrics">
-          <div class="metric-card">
-            <strong>52%短縮</strong>
-            <span>意思決定時間の平均短縮率</span>
-          </div>
-          <div class="metric-card">
-            <strong>38%削減</strong>
-            <span>経営会議の資料準備時間</span>
-          </div>
-          <div class="metric-card">
-            <strong>+¥84M</strong>
-            <span>キャッシュ創出インパクト（年平均）</span>
-          </div>
-          <div class="metric-card">
-            <strong>91%</strong>
-            <span>複数部門での活用率</span>
+          <div class="faq-list">
+            <details>
+              <summary>どのくらいの期間で導入できますか？</summary>
+              <p>初回ヒアリングからドラフト納品までは最短1日、平均5営業日です。業務データ連携の状況により前後します。</p>
+            </details>
+            <details>
+              <summary>どのデータが必要になりますか？</summary>
+              <p>会計データ、販売管理データ、主要顧客の属性などをご提供いただくと、高精度なシナリオを作成できます。情報が不足していてもAIが推計値を提示します。</p>
+            </details>
+            <details>
+              <summary>社内にAIの知見がなくても使えますか？</summary>
+              <p>はい。専門家が初期設定から運用まで伴走し、社内での意思決定プロセスへの組み込みまでサポートします。</p>
+            </details>
+            <details>
+              <summary>守秘義務や契約期間はどうなりますか？</summary>
+              <p>最短3か月からの契約で、NDAを標準締結。更新は1か月前までにご相談いただけます。機密情報の取り扱いは契約書に明記します。</p>
+            </details>
           </div>
         </div>
       </section>
 
-      <section class="container" id="stats">
-        <h2 class="section-title">生成AI導入企業は前年比 65% 増加</h2>
-        <p class="section-lead">複数部門での活用が急速に進み、意思決定プロセスの再設計が急務となっています。</p>
-        <div class="chart-area">
-          <canvas id="adoptionChart" aria-label="生成AI導入率の推移グラフ" role="img"></canvas>
-          <div class="chart-meta">
-            <strong>出典：</strong><span>switchsoftware.io 内部調査 2024</span>
-            <span>・導入済み企業の 65% が生成AIを経営判断に活用</span>
-            <span>・50%以上の企業が 2 部門以上で利用し ROI を把握</span>
+      <section class="fade-in">
+        <div class="container">
+          <div class="cta-section">
+            <h3>まずは無料相談で、御社専用のAI計画ロードマップを。</h3>
+            <p>直近の経営課題に合わせて、AIが生成するシナリオとアウトプット例をその場でご紹介します。次の意思決定に必要な時間を今すぐ確保しましょう。</p>
+            <p class="cta-note">生成AI導入企業では業務時間が60%以上短縮された事例も確認されています。<a class="cta-source" href="https://www.digitalinformationworld.com/2025/07/ai-cuts-work-time-by-more-than-half.html#:~:text=A%20new%20dataset%20shows%20that,with%20AI%20than%20without%20it" target="_blank" rel="noopener">出典</a></p>
+            <button class="btn btn-outline" type="button" data-open-modal="#contactModal">無料相談を予約</button>
           </div>
         </div>
       </section>
 
-      <section class="container" id="steps">
-        <h2 class="section-title">最短 5 ステップで運用開始</h2>
-        <div class="steps">
-          <div class="step">
-            <span class="step-number">STEP 1</span>
-            <strong>無料相談</strong>
-            <p>30 分のオンラインセッションで現状の課題と活用方針を整理。</p>
+      <section id="consultation" class="fade-in" style="background: #fff;">
+        <div class="container">
+          <div class="section-heading">
+            <h2>お問い合わせ・無料トライアル申し込み</h2>
+            <p>送信後はサンクスページで次のステップ（資料ダウンロード／日程調整リンク）をご案内します。</p>
           </div>
-          <div class="step">
-            <span class="step-number">STEP 2</span>
-            <strong>データ連携</strong>
-            <p>既存 BI や会計システムと安全に接続。暗号化 & 国内リージョンに保存。</p>
-          </div>
-          <div class="step">
-            <span class="step-number">STEP 3</span>
-            <strong>AI 分析・シミュレーション</strong>
-            <p>最新データでシナリオ生成、粗利・キャッシュの両面を自動算定。</p>
-          </div>
-          <div class="step">
-            <span class="step-number">STEP 4</span>
-            <strong>専門家レビュー</strong>
-            <p>公認会計士がレポートを監査し、リスクと施策を明確化。</p>
-          </div>
-          <div class="step">
-            <span class="step-number">STEP 5</span>
-            <strong>意思決定・実行</strong>
-            <p>経営会議で合意形成、実行計画と KPI を伴うフォローアップを提供。</p>
-          </div>
-        </div>
-      </section>
+          <div class="form-card" role="group" aria-labelledby="consultationFormTitle">
+            <h3 id="consultationFormTitle" class="form-card-title">1分で完了するお問い合わせフォーム</h3>
+            <form class="contact-form" aria-label="お問い合わせフォーム">
+              <div class="form-error" aria-live="assertive" hidden>必須項目をご確認ください。</div>
+              <label for="name">お名前</label>
+              <input id="name" name="name" type="text" placeholder="例）山田 太郎" required />
 
-      <section class="container" id="pricing">
-        <h2 class="section-title">月額料金と ROI の目安</h2>
-        <div class="pricing-grid">
-          <div class="plan">
-            <h3>ライトプラン</h3>
-            <div class="plan-price">¥180,000/月</div>
-            <ul class="plan-features">
-              <li>主要指標の自動収集</li>
-              <li>意思決定レポート月 2 回</li>
-              <li>メール/チャットサポート</li>
-              <li>期待 ROI：投資回収 3 ヶ月</li>
-            </ul>
-            <a class="plan-button" href="#contact">無料相談を申し込む</a>
-          </div>
-          <div class="plan recommended">
-            <h3>スタンダード</h3>
-            <div class="plan-price">¥280,000/月</div>
-            <ul class="plan-features">
-              <li>部門横断データ連携</li>
-              <li>週次シナリオ生成</li>
-              <li>専門家レビュー月 2 回</li>
-              <li>期待 ROI：キャッシュ創出 +¥50M/年</li>
-            </ul>
-            <a class="plan-button" href="#contact">無料相談を申し込む</a>
-          </div>
-          <div class="plan">
-            <h3>エンタープライズ</h3>
-            <div class="plan-price">¥420,000/月〜</div>
-            <ul class="plan-features">
-              <li>複数拠点・海外子会社対応</li>
-              <li>日次データ更新・自動警告</li>
-              <li>融資・M&A デューデリ支援</li>
-              <li>期待 ROI：意思決定短縮 60% 以上</li>
-            </ul>
-            <a class="plan-button" href="#contact">無料相談を申し込む</a>
-          </div>
-        </div>
-      </section>
+              <label for="company">会社名</label>
+              <input id="company" name="company" type="text" placeholder="例）株式会社サンプル" required />
 
-      <section class="container" id="testimonials">
-        <h2 class="section-title">お客様の声と実績</h2>
-        <div class="testimonials">
-          <article class="testimonial">
-            <div class="testimonial-header">
-              <img src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=facearea&w=200&h=200&q=80" alt="顧客1の顔写真" />
-              <div>
-                <strong>株式会社アステリア 代表取締役 佐藤 拓也 様</strong>
-                <span style="display:block; color: rgba(11, 30, 60, 0.7); font-size: 0.9rem;">製造業｜売上 50 億円規模</span>
-              </div>
-            </div>
-            <p>「粗利改善シナリオの比較が 1 日で完了。キャッシュ創出額は導入前の 2.3 倍になり、月次の資金繰りが安定しました。」</p>
-            <strong style="color: var(--accent)">粗利 +12% / 意思決定期間 4 日 → 2 日</strong>
-          </article>
-          <article class="testimonial">
-            <div class="testimonial-header">
-              <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=facearea&w=200&h=200&q=80" alt="顧客2の顔写真" />
-              <div>
-                <strong>デルタロジ株式会社 CFO 山口 亜紀 様</strong>
-                <span style="display:block; color: rgba(11, 30, 60, 0.7); font-size: 0.9rem;">物流業｜社員 300 名</span>
-              </div>
-            </div>
-            <p>「AI が候補シナリオを毎週生成してくれるので、経営会議の議題設定がシンプルに。銀行交渉の資料作成も工数が半減しました。」</p>
-            <strong style="color: var(--accent)">会議準備時間 -42% / 調達コスト -8%</strong>
-          </article>
-          <article class="testimonial">
-            <div class="testimonial-header">
-              <img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=facearea&w=200&h=200&q=80" alt="顧客3の顔写真" />
-              <div>
-                <strong>メディクスホールディングス COO 井上 大地 様</strong>
-                <span style="display:block; color: rgba(11, 30, 60, 0.7); font-size: 0.9rem;">医療サービス｜全国 12 拠点</span>
-              </div>
-            </div>
-            <p>「各拠点の収益性がリアルタイムで見えるようになり、投資判断を迅速に実行。専門家レビューでリスク対策も明確になりました。」</p>
-            <strong style="color: var(--accent)">キャッシュ創出 +¥120M / 投資回収 2 ヶ月</strong>
-          </article>
-        </div>
-      </section>
+              <label for="position">役職</label>
+              <input id="position" name="position" type="text" placeholder="例）代表取締役" required />
 
-      <section class="container" id="faq">
-        <h2 class="section-title">よくある質問とリスク対策</h2>
-        <div class="faq">
-          <details class="faq-item" open>
-            <summary>データセキュリティはどのように担保されていますか？</summary>
-            <p>国内リージョンの ISO27001 認証データセンターを利用し、通信と保存時の双方で暗号化を実施。アクセス権限は役割ベースで細かく管理します。</p>
-          </details>
-          <details class="faq-item">
-            <summary>AI の誤答や偏りはどのように防いでいますか？</summary>
-            <p>AI が生成したシナリオは全て専門家がレビューし、リスクと根拠を明文化。重要指標は人間がダブルチェックし、NDA を締結した専任チームが監査します。</p>
-          </details>
-          <details class="faq-item">
-            <summary>どの程度の期間で ROI を実感できますか？</summary>
-            <p>平均 3 ヶ月で投資回収を達成。導入初月から意思決定会議の準備時間が削減され、2 ヶ月目以降はキャッシュフロー改善効果が表れます。</p>
-          </details>
-        </div>
-      </section>
+              <label for="email">メールアドレス</label>
+              <input id="email" name="email" type="email" placeholder="例）example@example.com" required />
 
-      <section class="container contact-section" id="contact">
-        <div class="contact-header">
-          <h2 style="margin: 0">無料相談フォーム</h2>
-          <span>所要時間：1 分｜秘密厳守（NDA 対応）</span>
+              <label for="tel">電話番号</label>
+              <input id="tel" name="tel" type="tel" placeholder="例）090-1234-5678" required />
+
+              <label for="preferredDate">希望日時</label>
+              <input id="preferredDate" name="preferredDate" type="datetime-local" required />
+
+              <label for="goal">導入目的</label>
+              <select id="goal" name="goal" required>
+                <option value="" disabled selected>選択してください</option>
+                <option value="finance">金融機関提出・資金調達</option>
+                <option value="strategy">中期経営計画・戦略刷新</option>
+                <option value="expansion">新規事業・店舗展開</option>
+                <option value="other">その他</option>
+              </select>
+
+              <label for="message">ご相談内容</label>
+              <textarea id="message" name="message" placeholder="現状の課題や希望時期などをご記入ください" required></textarea>
+
+              <p class="form-privacy">送信前に<a href="#privacy">プライバシーポリシー</a>をご確認ください。通信はすべて暗号化され、日本の個人情報保護法に準拠して取り扱います。</p>
+
+              <button class="btn btn-primary" type="submit">送信して次のステップを見る</button>
+            </form>
+          </div>
         </div>
-        <form id="contactForm">
-          <div class="form-step active" data-step="1">
-            <label>
-              会社名
-              <input type="text" name="company" placeholder="例：株式会社サンプル" required />
-            </label>
-            <label>
-              メールアドレス
-              <input type="email" name="email" placeholder="example@company.jp" required />
-            </label>
-            <button type="button" class="form-button" data-action="next">次へ進む</button>
-            <p class="form-footnote">まずは最小入力で送信準備。次のステップで相談内容を記入いただけます。</p>
-          </div>
-          <div class="form-step" data-step="2">
-            <label>
-              ご相談内容
-              <textarea name="message" placeholder="現状の課題や導入希望時期などをご記入ください"></textarea>
-            </label>
-            <button type="button" class="form-button" data-action="prev" style="background: rgba(15, 23, 42, 0.1); color: var(--primary); box-shadow: none">戻る</button>
-            <button type="submit" class="form-button">無料相談を申し込む</button>
-            <p class="form-footnote">送信後 1 営業日以内に担当者より NDA と日程候補をご案内します。</p>
-          </div>
-        </form>
       </section>
     </main>
 
-    <footer>
-      <div class="footer-inner">
-        <div>
-          <strong>Strategy AI Lab株式会社</strong>
-          <p class="footer-meta">東京都千代田区丸の内 1-1-1 ｜ TEL 03-1234-5678</p>
-        </div>
-        <div class="footer-links">
-          <a href="#">会社情報</a>
-          <a href="#">プライバシーポリシー</a>
-          <a href="#">利用規約</a>
-          <a href="#">採用情報</a>
-          <a href="#">LinkedIn</a>
-          <a href="#">X (旧 Twitter)</a>
-        </div>
-        <div class="footer-meta">© 2024 Strategy AI Lab Inc. All rights reserved.</div>
+    <footer class="footer">
+      <div class="container">
+        <p>© 2024 生成AI経営計画書ラボ｜株式会社創和経営コンサルティング</p>
+        <p>福岡県福岡市博多区博多駅前2-1-1／info@example.com／092-000-0000</p>
       </div>
     </footer>
 
+    <div class="modal" id="contactModal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+      <div class="modal-dialog">
+        <button class="modal-close" type="button" data-close-modal aria-label="閉じる"><i class="fa-solid fa-xmark"></i></button>
+        <h3 id="modalTitle" style="margin-top: 0;">無料相談・デモのお申し込み</h3>
+        <p>以下のフォームからお気軽にご連絡ください。担当より1営業日以内にご案内します。</p>
+        <form class="contact-form" aria-label="モーダルお問い合わせフォーム">
+          <div class="form-error" aria-live="assertive" hidden>必須項目をご確認ください。</div>
+          <label for="modalName">お名前</label>
+          <input id="modalName" name="name" type="text" placeholder="例）山田 太郎" required />
+
+          <label for="modalCompany">会社名</label>
+          <input id="modalCompany" name="company" type="text" placeholder="例）株式会社サンプル" required />
+
+          <label for="modalPosition">役職</label>
+          <input id="modalPosition" name="position" type="text" placeholder="例）代表取締役" required />
+
+          <label for="modalEmail">メールアドレス</label>
+          <input id="modalEmail" name="email" type="email" placeholder="例）example@example.com" required />
+
+          <label for="modalTel">電話番号</label>
+          <input id="modalTel" name="tel" type="tel" placeholder="例）090-1234-5678" required />
+
+          <label for="modalPreferredDate">希望日時</label>
+          <input id="modalPreferredDate" name="preferredDate" type="datetime-local" required />
+
+          <label for="modalGoal">導入目的</label>
+          <select id="modalGoal" name="goal" required>
+            <option value="" disabled selected>選択してください</option>
+            <option value="finance">金融機関提出・資金調達</option>
+            <option value="strategy">中期経営計画・戦略刷新</option>
+            <option value="expansion">新規事業・店舗展開</option>
+            <option value="other">その他</option>
+          </select>
+
+          <label for="modalMessage">ご相談内容</label>
+          <textarea id="modalMessage" name="message" placeholder="現状の課題や希望時期などをご記入ください" required></textarea>
+
+          <p class="form-privacy">送信前に<a href="#privacy">プライバシーポリシー</a>をご確認ください。通信は暗号化され、日本の個人情報保護法に準拠して運用しています。</p>
+
+          <button class="btn btn-primary" type="submit">送信する</button>
+        </form>
+      </div>
+    </div>
+
     <script>
-      window.addEventListener("DOMContentLoaded", () => {
-        const ctx = document.getElementById("adoptionChart");
-        if (ctx) {
-          const chart = new Chart(ctx, {
-            type: "bar",
+      const fadeObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              fadeObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0,
+          rootMargin: "0px",
+        }
+      );
+
+      document.querySelectorAll(".fade-in").forEach((el) => fadeObserver.observe(el));
+
+      const navGroups = Array.from(document.querySelectorAll(".nav-group"));
+
+      if (navGroups.length) {
+        navGroups.forEach((group) => {
+          group.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+              group.removeAttribute("open");
+            });
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          navGroups.forEach((group) => {
+            if (!group.contains(event.target)) {
+              group.removeAttribute("open");
+            }
+          });
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            navGroups.forEach((group) => group.removeAttribute("open"));
+          }
+        });
+      }
+
+      const expertObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              expertObserver.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.12,
+          rootMargin: "0px 0px -15% 0px",
+        }
+      );
+
+      document.querySelectorAll(".expert-card").forEach((card) => expertObserver.observe(card));
+
+      const aiDataset = {
+        global: {
+          labels: ["AI導入企業", "生成AI活用企業", "未導入企業"],
+          data: [78, 71, 22],
+        },
+        productivity: {
+          labels: ["情報収集", "ドラフト作成"],
+          datasets: [
+            {
+              label: "従来の平均所要時間",
+              data: [24, 16],
+              backgroundColor: "rgba(148, 163, 184, 0.7)",
+              borderRadius: 12,
+            },
+            {
+              label: "生成AI活用後",
+              data: [6, 4],
+              backgroundColor: "#2563eb",
+              borderRadius: 12,
+            },
+          ],
+        },
+      };
+
+      let globalChart;
+      let productivityChart;
+      let quarterlyChart;
+      let radarChart;
+      let simulatorChart;
+
+      const quarterlyDataset = {
+        labels: ["2021", "2022", "2023", "2024", "2025"],
+        external: [1.0, 1.2, 1.5, 1.8, 2.1],
+        ai: [1.0, 1.5, 2.2, 2.9, 3.6],
+      };
+
+      function initEvidenceCharts() {
+        if (!window.Chart) return;
+        const globalCtx = document.getElementById("globalChart");
+        const productivityCtx = document.getElementById("productivityChart");
+
+        if (globalCtx) {
+          globalChart = new Chart(globalCtx, {
+            type: "doughnut",
             data: {
-              labels: ["2021", "2022", "2023", "2024"],
+              labels: aiDataset.global.labels,
               datasets: [
                 {
-                  label: "生成AI導入率",
-                  data: [18, 32, 44, 65],
-                  borderRadius: 12,
-                  backgroundColor: "rgba(249, 115, 22, 0.7)",
-                },
-                {
-                  label: "複数部門活用率",
-                  data: [12, 24, 36, 50],
-                  borderRadius: 12,
-                  backgroundColor: "rgba(31, 60, 109, 0.6)",
+                  data: aiDataset.global.data,
+                  backgroundColor: ["#1d4ed8", "#68c5a8", "#facc15"],
+                  borderWidth: 0,
                 },
               ],
             },
             options: {
-              responsive: true,
-              scales: {
-                y: {
-                  ticks: {
-                    callback: (value) => `${value}%`,
-                  },
-                  beginAtZero: true,
-                  max: 80,
-                  grid: {
-                    color: "rgba(15, 23, 42, 0.08)",
-                  },
-                },
-                x: {
-                  grid: {
-                    display: false,
+              plugins: {
+                legend: { position: "bottom" },
+                tooltip: {
+                  callbacks: {
+                    label: (context) => `${context.label}: ${context.parsed}%`,
                   },
                 },
               },
+              cutout: "62%",
+            },
+          });
+        }
+
+        if (productivityCtx) {
+          productivityChart = new Chart(productivityCtx, {
+            type: "bar",
+            data: {
+              labels: aiDataset.productivity.labels,
+              datasets: aiDataset.productivity.datasets,
+            },
+            options: {
               plugins: {
-                legend: {
-                  labels: {
-                    usePointStyle: true,
+                legend: { position: "bottom" },
+                tooltip: {
+                  callbacks: {
+                    label: (context) => `${context.dataset.label}: ${context.parsed.y}時間`,
                   },
+                },
+              },
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                  title: { display: true, text: "時間（時間）" },
                 },
               },
             },
           });
         }
+      }
 
-        const form = document.getElementById("contactForm");
-        const steps = form.querySelectorAll(".form-step");
-        let currentStep = 0;
+      function initQuarterlyChart() {
+        if (!window.Chart) return;
+        const ctx = document.getElementById("quarterlyChart");
+        if (!ctx) return;
+        quarterlyChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: quarterlyDataset.labels,
+            datasets: [
+              {
+                label: "外部環境変化指数",
+                data: quarterlyDataset.external,
+                borderColor: "rgba(30, 58, 138, 0.9)",
+                backgroundColor: "rgba(30, 58, 138, 0.15)",
+                tension: 0.35,
+                fill: true,
+              },
+              {
+                label: "AIアップデート速度指数",
+                data: quarterlyDataset.ai,
+                borderColor: "rgba(99, 102, 241, 0.95)",
+                backgroundColor: "rgba(99, 102, 241, 0.15)",
+                tension: 0.35,
+                fill: true,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            interaction: { mode: "index", intersect: false },
+            scales: {
+              y: {
+                beginAtZero: true,
+                title: { display: true, text: "相対指数" },
+              },
+            },
+          },
+        });
+      }
 
-        const updateSteps = (nextIndex) => {
-          steps[currentStep].classList.remove("active");
-          steps[nextIndex].classList.add("active");
-          currentStep = nextIndex;
-        };
+      const radarConfig = {
+        labels: ["顧客適合度", "ブランド", "供給力", "革新性", "財務健全性"],
+        self: [70, 60, 75, 65, 80],
+        competitor: [62, 72, 68, 58, 74],
+      };
 
-        form.addEventListener("click", (event) => {
-          const target = event.target;
-          if (!(target instanceof HTMLElement)) return;
+      function initRadarChart() {
+        if (!window.Chart) return;
+        const ctx = document.getElementById("radarChart");
+        radarChart = new Chart(ctx, {
+          type: "radar",
+          data: {
+            labels: radarConfig.labels,
+            datasets: [
+              {
+                label: "自社",
+                data: radarConfig.self,
+                backgroundColor: "rgba(37, 99, 235, 0.2)",
+                borderColor: "rgba(37, 99, 235, 0.8)",
+                borderWidth: 2,
+                pointBackgroundColor: "#2563eb",
+              },
+              {
+                label: "競合平均",
+                data: radarConfig.competitor,
+                backgroundColor: "rgba(148, 163, 184, 0.2)",
+                borderColor: "rgba(148, 163, 184, 0.8)",
+                borderWidth: 2,
+                pointBackgroundColor: "#94a3b8",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            scales: {
+              r: {
+                suggestedMin: 0,
+                suggestedMax: 100,
+                ticks: { display: false },
+                grid: { color: "rgba(15, 23, 42, 0.12)" },
+                angleLines: { color: "rgba(15, 23, 42, 0.12)" },
+              },
+            },
+          },
+        });
+      }
 
-          if (target.dataset.action === "next") {
-            if (form.reportValidity()) {
-              updateSteps(1);
-            }
-          }
+      function updateRadarValues() {
+        radarConfig.self = [
+          Number(document.getElementById("productFit").value),
+          Number(document.getElementById("brand").value),
+          Number(document.getElementById("supply").value),
+          Number(document.getElementById("innovation").value),
+          Number(document.getElementById("finance").value),
+        ];
+        radarChart.data.datasets[0].data = radarConfig.self;
+        radarChart.update();
+      }
 
-          if (target.dataset.action === "prev") {
-            updateSteps(0);
-          }
+      ["productFit", "brand", "supply", "innovation", "finance"].forEach((id) => {
+        const input = document.getElementById(id);
+        input.addEventListener("input", updateRadarValues);
+      });
+
+      function buildForecast() {
+        const goal = Number(document.getElementById("targetRevenue").value);
+        const investment = Number(document.getElementById("initialInvestment").value);
+        const marketSize = Number(document.getElementById("marketSize").value) * 10000; // convert to 万円
+        const grossMargin = Number(document.getElementById("grossMargin").value) / 100;
+
+        const months = Array.from({ length: 12 }, (_, i) => `${i + 1}月`);
+        const monthlyRevenue = [];
+        const cashBalance = [];
+        let cumulativeCash = -investment;
+
+        months.forEach((_, index) => {
+          const ramp = Math.min(1, (index + 1) / 8 + marketSize / 1000000);
+          const revenue = Math.min(goal / 12 * (0.6 + ramp * 0.6), goal / 10);
+          const gp = revenue * grossMargin;
+          cumulativeCash += gp;
+          monthlyRevenue.push(Math.round(revenue));
+          cashBalance.push(Math.round(cumulativeCash));
         });
 
-        form.addEventListener("submit", (event) => {
-          event.preventDefault();
-          form.reset();
-          updateSteps(0);
-          alert("ありがとうございます。担当者よりご連絡いたします。");
+        return { months, monthlyRevenue, cashBalance };
+      }
+
+      function initSimulatorChart() {
+        if (!window.Chart) return;
+        const ctx = document.getElementById("performanceChart");
+        simulatorChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: [],
+            datasets: [
+              {
+                label: "月次売上（万円）",
+                data: [],
+                borderColor: "rgba(37, 99, 235, 0.9)",
+                backgroundColor: "rgba(37, 99, 235, 0.18)",
+                fill: false,
+                tension: 0.35,
+              },
+              {
+                label: "累積キャッシュフロー（万円）",
+                data: [],
+                borderColor: "rgba(245, 158, 11, 0.9)",
+                backgroundColor: "rgba(245, 158, 11, 0.2)",
+                fill: true,
+                tension: 0.35,
+                yAxisID: "y1",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            interaction: { mode: "index", intersect: false },
+            stacked: false,
+            scales: {
+              y: {
+                type: "linear",
+                position: "left",
+                title: { display: true, text: "万円" },
+              },
+              y1: {
+                type: "linear",
+                position: "right",
+                title: { display: true, text: "累積CF（万円）" },
+                grid: { drawOnChartArea: false },
+              },
+            },
+          },
+        });
+        updateSimulatorChart();
+      }
+
+      function updateSimulatorChart() {
+        if (!simulatorChart) return;
+        const forecast = buildForecast();
+        simulatorChart.data.labels = forecast.months;
+        simulatorChart.data.datasets[0].data = forecast.monthlyRevenue;
+        simulatorChart.data.datasets[1].data = forecast.cashBalance;
+        simulatorChart.update();
+      }
+
+      ["targetRevenue", "initialInvestment", "marketSize", "grossMargin"].forEach((id) => {
+        document.getElementById(id).addEventListener("input", updateSimulatorChart);
+      });
+
+      const counters = document.querySelectorAll("[data-count]");
+      const counterObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              animateCounter(entry.target);
+              counterObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.6 }
+      );
+
+      counters.forEach((counter) => counterObserver.observe(counter));
+
+      function animateCounter(el) {
+        const target = Number(el.dataset.count);
+        const duration = 1800;
+        const start = performance.now();
+
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const value = Math.floor(progress * target);
+          el.textContent = value.toLocaleString();
+          if (progress < 1) requestAnimationFrame(step);
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      const journeyNodes = Array.from(document.querySelectorAll(".journey-node"));
+      const journeyButtons = journeyNodes.map((node) => node.querySelector(".journey-node-button"));
+      const journeyPanels = Array.from(document.querySelectorAll(".journey-panel"));
+      let activeStep = 0;
+
+      function setActiveStep(index) {
+        if (!journeyButtons.length) return;
+        activeStep = (index + journeyButtons.length) % journeyButtons.length;
+        journeyNodes.forEach((node, idx) => {
+          const isActive = idx === activeStep;
+          node.classList.toggle("is-active", isActive);
+          const button = journeyButtons[idx];
+          button && button.setAttribute("aria-selected", String(isActive));
+        });
+        journeyPanels.forEach((panel, idx) => {
+          panel.classList.toggle("is-active", idx === activeStep);
+        });
+      }
+
+      journeyButtons.forEach((button, index) => {
+        button.addEventListener("click", () => setActiveStep(index));
+      });
+
+      if (journeyButtons.length) {
+        setActiveStep(activeStep);
+      }
+
+      document.querySelectorAll("[data-journey-nav]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const direction = button.dataset.journeyNav === "next" ? 1 : -1;
+          setActiveStep(activeStep + direction);
         });
       });
+
+      document.querySelectorAll("[data-video-control]").forEach((button) => {
+        const videoId = button.dataset.videoControl;
+        const video = document.getElementById(videoId);
+        const overlay = button.closest(".hero-video-controls");
+        if (!video) return;
+
+        video.controls = false;
+
+        button.addEventListener("click", () => {
+          video.controls = true;
+          overlay && overlay.classList.add("is-hidden");
+          const playPromise = video.play();
+          if (playPromise && typeof playPromise.catch === "function") {
+            playPromise.catch(() => {
+              video.controls = true;
+            });
+          }
+        });
+
+        video.addEventListener("ended", () => {
+          overlay && overlay.classList.remove("is-hidden");
+          video.controls = false;
+        });
+      });
+
+      const modal = document.getElementById("contactModal");
+      const openers = document.querySelectorAll("[data-open-modal]");
+      const closers = modal.querySelectorAll("[data-close-modal]");
+
+      function openModal(event) {
+        event.preventDefault();
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        const firstInput = modal.querySelector("input, select, textarea");
+        firstInput && firstInput.focus();
+      }
+
+      function closeModal() {
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+      }
+
+      openers.forEach((opener) => {
+        opener.addEventListener("click", openModal);
+      });
+
+      closers.forEach((closer) => {
+        closer.addEventListener("click", closeModal);
+      });
+
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeModal();
+      });
+
+      function setupForm(form) {
+        const errorMessage = form.querySelector(".form-error");
+        form.addEventListener("submit", (event) => {
+          event.preventDefault();
+          let isValid = true;
+          form.querySelectorAll(".is-invalid").forEach((field) => field.classList.remove("is-invalid"));
+
+          form.querySelectorAll("[required]").forEach((field) => {
+            const value = field.value.trim();
+            if (!value) {
+              isValid = false;
+              field.classList.add("is-invalid");
+            }
+            if (field.type === "email" && value) {
+              const emailPattern = /.+@.+\..+/;
+              if (!emailPattern.test(value)) {
+                isValid = false;
+                field.classList.add("is-invalid");
+              }
+            }
+          });
+
+          if (!isValid) {
+            errorMessage && errorMessage.removeAttribute("hidden");
+            return;
+          }
+
+          errorMessage && errorMessage.setAttribute("hidden", "");
+          window.location.href = "thank-you.html";
+        });
+
+        form.querySelectorAll("input, textarea, select").forEach((field) => {
+          field.addEventListener("input", () => {
+            field.classList.remove("is-invalid");
+            errorMessage && errorMessage.setAttribute("hidden", "");
+          });
+        });
+      }
+
+      document.querySelectorAll(".contact-form").forEach((form) => setupForm(form));
+
+      function initializeCharts() {
+        initEvidenceCharts();
+        initRadarChart();
+        initQuarterlyChart();
+        initSimulatorChart();
+      }
+
+      if (document.readyState === "complete") {
+        initializeCharts();
+      } else {
+        window.addEventListener("load", initializeCharts);
+      }
     </script>
   </body>
 </html>
