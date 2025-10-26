@@ -4,6 +4,7 @@ export type ContactFormPayload = {
   email: string;
   phone?: string;
   message: string;
+  preferredDate?: string;
 };
 
 export type ContactSubmission = ContactFormPayload & {
