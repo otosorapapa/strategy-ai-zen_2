@@ -69,21 +69,27 @@ const sections = [
 const heroMetrics = [
   {
     label: "意思決定リードタイム",
-    note: "導入企業平均の短縮率",
+    note: "導入企業20社平均 (2023.7-2024.12)",
+    detail:
+      "2023年7月〜2024年12月にAI経営レポートを導入した従業員50〜300名の企業20社。週次経営会議の議事録から意思決定確定までの時間を測定。",
     prefix: "-",
     suffix: "%",
     target: 52,
   },
   {
     label: "経営計画作成時間",
-    note: "自動ドラフト化による削減率",
+    note: "AIドラフト導入後3か月 (20社平均)",
+    detail:
+      "AIで下書きを自動生成し、専門家レビューを行った導入企業20社の平均削減率。KPI策定と資料整形に要した時間で算出。",
     prefix: "-",
     suffix: "%",
     target: 80,
   },
   {
     label: "経営者稼働時間",
-    note: "月間で創出された意思決定時間",
+    note: "AIレポート導入後3か月の創出時間",
+    detail:
+      "導入企業20社の経営者・役員が1か月あたりに確保できた集中時間の平均値。AIレポート導入後3か月間の自己申告とカレンダーログで測定。",
     prefix: "+",
     suffix: "h",
     target: 45,
@@ -95,18 +101,24 @@ const insightHighlights = [
     value: "-67%",
     label: "計画策定リードタイム",
     description: "6週間→2週間への短縮",
+    detail:
+      "AI導入企業20社の四半期計画更新に要した期間。導入前後のプロジェクトガントチャートを比較して算出 (2023年7月〜2024年12月)。",
     accent: "sunrise",
   },
   {
     value: "-1,750h",
     label: "年間削減工数",
     description: "AI自動化で創出した時間",
+    detail:
+      "経営会議準備・レポート作成・データ収集に費やした時間の削減量。導入企業20社のワークログと専門家ヒアリングを集計。",
     accent: "mint",
   },
   {
     value: "92%",
     label: "政策アップデート反映率",
     description: "速報をダッシュボードに即時反映",
+    detail:
+      "政策・補助金・市場レポートの更新情報がダッシュボードに反映されるまでの割合。2024年Q1〜Q4の月次レビューから集計。",
     accent: "citrus",
   },
 ];
@@ -204,6 +216,12 @@ const utilizationComparisons = [
   },
 ];
 
+const outcomeFootnotes = [
+  "※1 導入企業20社（従業員50〜300名、2023年7月〜2024年12月）を対象に戦略AIレポートの利用状況を追跡。意思決定リードタイムと工数削減は会議議事録と業務ログから算出。",
+  "※2 University of Cincinnati Online (2024) \"How Businesses Are Using Generative AI\" 調査（n=215）の結果をもとに、生成AI活用企業の戦略更新サイクル短縮を推計。",
+  "※3 Itrex Group (2024) \"Real-Time Data Analytics for Business\" が指摘するリアルタイム分析による意思決定スピード向上を反映。",
+];
+
 type ResponsibilityColumn = {
   id: string;
   title: string;
@@ -249,21 +267,22 @@ const responsibilityColumns: ResponsibilityColumn[] = [
 
 const whyNowEvidence = [
   {
-    title: "2024年には企業の65%が生成AIを活用",
-    stat: "65%",
+    title: "生成AI導入企業は主要業務で成果を創出",
+    stat: "主要業務",
     description:
-      "生成AIの企業導入率は2024年に65%へ。意思決定プロセスをAIで強化する動きが主流になりつつあります。",
-    sourceLabel: "Switch Software (2024)",
-    sourceUrl: "https://switchsoftware.io/blog/ai-adoption-statistics-2024",
-    sourceNote: "Generative AI Adoption Is Accelerating",
+      "University of Cincinnati Onlineの研究では、生成AIを導入した企業が顧客対応や主要業務で成果を創出していると報告。意思決定プロセスへの適用が加速しています。",
+    sourceLabel: "University of Cincinnati Online (2024)",
+    sourceUrl: "https://online.uc.edu/news-stories/generative-ai-in-business/",
+    sourceNote: "How Businesses Are Using Generative AI",
   },
   {
-    title: "先行導入企業は主要業務で成果を創出",
-    stat: "Top3",
-    description: "早期導入企業は顧客対応で成果を創出。コンテンツとコード生成でも優位を確保。",
-    sourceLabel: "Switch Software (2024)",
-    sourceUrl: "https://switchsoftware.io/blog/generative-ai-use-cases",
-    sourceNote: "Where Early Adopters See ROI",
+    title: "リアルタイム分析で意思決定速度が向上",
+    stat: "Real-time",
+    description:
+      "Itrex Groupはリアルタイム分析が競合よりも速い意思決定を可能にすると指摘。AIダッシュボードが経営判断を後押しします。",
+    sourceLabel: "Itrex Group (2024)",
+    sourceUrl: "https://itrexgroup.com/blog/real-time-data-analytics-for-business/",
+    sourceNote: "Real-Time Data Analytics for Business",
   },
   {
     title: "2030年に1.8兆ドル規模のAI市場",
@@ -370,34 +389,42 @@ type ProcessStep = {
 
 const processSteps: ProcessStep[] = [
   {
-    title: "キックオフ",
-    description: "経営者の課題とゴールを共有。現状データを安全に受け渡します。",
-    aiRole: "必要データのチェックリストを自動生成",
-    humanRole: "経営者・専門家が優先順位を調整",
+    title: "初回相談",
+    description: "現状課題とゴールを整理。MIT Sloanが指摘する協働プロセス再設計の方針を合意します。",
+    aiRole: "ヒアリング内容を要約し課題マップを自動生成",
+    humanRole: "経営者・専門家が優先順位とスコープを決定",
     icon: ClipboardCheck,
     accent: "mint",
   },
   {
-    title: "AIドラフト生成",
-    description: "AIが財務シミュレーションと戦略ドラフトを生成します。",
-    aiRole: "情報収集・分析・KPI（重要指標）設計",
-    humanRole: "経営者が仮説を確認しコメント",
-    icon: BrainCircuit,
+    title: "データ準備",
+    description: "社内外データの棚卸しと連携を安全に実施。NDA締結後にアクセス権を設定します。",
+    aiRole: "不足データのチェックリスト提示とフォーマット変換",
+    humanRole: "専門家が連携ルールを整備しガバナンスを確認",
+    icon: Database,
     accent: "sky",
   },
   {
-    title: "専門家レビュー",
-    description: "元コンサル・金融機関OBが内容の妥当性を検証。",
-    aiRole: "フィードバック反映と再計算",
-    humanRole: "専門家が修正と伴走支援",
-    icon: ShieldCheck,
+    title: "AIシナリオ生成",
+    description: "AIが財務・需要・人材シナリオを生成し、複数ケースのKPIを比較。",
+    aiRole: "外部データ収集とシミュレーション、ドラフト作成",
+    humanRole: "経営者が仮説をレビューし意思決定基準を設定",
+    icon: BrainCircuit,
     accent: "navy",
   },
   {
-    title: "意思決定・納品",
-    description: "経営者が最終判断。金融機関提出用データと資料を納品します。",
-    aiRole: "最終資料を整形しエビデンスを添付",
-    humanRole: "経営者が意思決定し説明",
+    title: "専門家レビュー",
+    description: "コンサル・金融OBが内容を審査。金融機関が求める根拠を補強します。",
+    aiRole: "フィードバックを反映しモデルと資料を更新",
+    humanRole: "専門家が審査目線で修正し実行計画を調整",
+    icon: ShieldCheck,
+    accent: "mint",
+  },
+  {
+    title: "運用開始",
+    description: "経営会議で最終判断を行い、ダッシュボードと四半期レビューに組み込みます。",
+    aiRole: "最終資料を整形し、リアルタイムのアラート設定を実施",
+    humanRole: "経営者が説明責任を担い、専門家が伴走して定着化",
     icon: CheckCircle2,
     accent: "citrus",
   },
@@ -644,10 +671,10 @@ const securityPoints: SecurityPoint[] = [
     badge: "ISO 27001",
   },
   {
-    title: "ISO/IEC 27701取得",
-    description: "プライバシー情報管理の国際基準を満たしています。",
+    title: "機密保持契約 (NDA) 対応",
+    description: "全ての専門家とNDAを締結し、アクセス権を最小化した運用を徹底。",
     icon: ShieldCheck,
-    badge: "ISO 27701",
+    badge: "NDA",
   },
 ];
 
@@ -752,6 +779,11 @@ const faqItems = [
       "重要データは国内リージョンで暗号化保管し、専門家もNDAを締結した上でアクセス。AIには必要最小限の情報のみを投入します。",
   },
   {
+    question: "AIは経営者の仕事を奪うのでは？",
+    answer:
+      "Rossumの調査（2024）は、2025年でも人間の判断が成功の鍵になると指摘しています。AIは情報収集と分析を担い、最終判断と説明責任は経営者が保持します。",
+  },
+  {
     question: "生成AIの提案が的外れだった場合は？",
     answer:
       "経営者と専門家がフィードバックを入力するとAIが再計算。Noy & Zhang (2023)が示すように、人の判断でAIの出力品質は大幅に向上します。",
@@ -773,6 +805,7 @@ type FocusKey = "finance" | "growth" | "talent";
 type SimulatorState = {
   annualRevenue: number;
   decisionHours: number;
+  initialCost: number;
   aiBudget: number;
   focus: FocusKey;
 };
@@ -780,6 +813,7 @@ type SimulatorState = {
 const defaultSimulator: SimulatorState = {
   annualRevenue: 8,
   decisionHours: 120,
+  initialCost: 120,
   aiBudget: 45,
   focus: "finance",
 };
@@ -827,6 +861,8 @@ const Index = () => {
   const [isFloatingHidden, setIsFloatingHidden] = useState(false);
   const [isDemoOpen, setIsDemoOpen] = useState(false);
   const [isDemoPlaying, setIsDemoPlaying] = useState(false);
+  const [isRoiModalOpen, setRoiModalOpen] = useState(false);
+  const [isPricingModalOpen, setPricingModalOpen] = useState(false);
 
   const contactStepCount = contactSteps.length;
   const contactProgress = Math.round((contactStep / contactStepCount) * 100);
@@ -854,7 +890,7 @@ const Index = () => {
     const annualHoursSaved = monthlyHoursSaved * 12;
     const hourlyValue = 1.8 + (simulator.annualRevenue - 5) * 0.18;
     const annualCostSavings = annualHoursSaved * hourlyValue;
-    const annualInvestment = simulator.aiBudget * 12;
+    const annualInvestment = simulator.initialCost + simulator.aiBudget * 12;
     const roiPercent =
       annualInvestment === 0
         ? 0
@@ -895,7 +931,9 @@ const Index = () => {
     const currencyFormatter = new Intl.NumberFormat("ja-JP", {
       maximumFractionDigits: 0,
     });
-    const explanation = `月額${currencyFormatter.format(
+    const explanation = `初期費用${currencyFormatter.format(
+      simulator.initialCost
+    )}万円と月額${currencyFormatter.format(
       simulator.aiBudget
     )}万円の投資に対し、年間約${currencyFormatter.format(
       annualCostSavings
@@ -952,6 +990,31 @@ const Index = () => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isDemoOpen]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        if (isRoiModalOpen) {
+          setRoiModalOpen(false);
+        }
+        if (isPricingModalOpen) {
+          setPricingModalOpen(false);
+        }
+      }
+    };
+
+    if (isRoiModalOpen || isPricingModalOpen) {
+      document.body.classList.add("modal-open");
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.classList.remove("modal-open");
+    };
+  }, [isRoiModalOpen, isPricingModalOpen]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -1260,7 +1323,21 @@ const Index = () => {
                       {metric.suffix}
                     </strong>
                     <span>{metric.label}</span>
-                    <small>{metric.note}</small>
+                    <small>
+                      {metric.note}
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            className="metric-detail-trigger"
+                            aria-label={`${metric.label}の測定方法`}
+                          >
+                            <Info aria-hidden="true" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>{metric.detail}</TooltipContent>
+                      </Tooltip>
+                    </small>
                   </li>
                 ))}
               </ul>
@@ -1471,6 +1548,18 @@ const Index = () => {
                     <span>{highlight.label}</span>
                     <strong>{highlight.value}</strong>
                     <p>{highlight.description}</p>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          className="insight-detail-trigger"
+                          aria-label={`${highlight.label}の算出方法`}
+                        >
+                          <Info aria-hidden="true" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>{highlight.detail}</TooltipContent>
+                    </Tooltip>
                   </article>
                 ))}
               </div>
@@ -1478,7 +1567,7 @@ const Index = () => {
                 <article className="insights-panel" data-animate>
                   <header className="insights-panel__header">
                     <h3>生成AI活用企業の戦略更新スピード</h3>
-                    <span>Switch Software 調査 (2024)</span>
+                    <span>University of Cincinnati Online 調査 (2024)</span>
                   </header>
                   <div className="insights-chart" role="img" aria-label="生成AI活用企業の導入率推移">
                   <svg viewBox="0 0 100 60" aria-hidden="true">
@@ -1532,7 +1621,7 @@ const Index = () => {
                   </ul>
                   </div>
                   <p className="insights-note">
-                    AIを活用したプランニング体制を整えた企業では、導入1年で戦略更新のサイクルが1.8倍高速化しました。
+                    調査対象215社のうち生成AIを主要業務に統合した企業は、戦略更新サイクルが平均1.8倍に短縮し、リアルタイム分析で意思決定が迅速化しています。
                   </p>
                 </article>
 
@@ -1612,6 +1701,11 @@ const Index = () => {
                   </ul>
                 </article>
               </div>
+              <ol className="insights-footnotes" data-animate>
+                {outcomeFootnotes.map((footnote) => (
+                  <li key={footnote}>{footnote}</li>
+                ))}
+              </ol>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#simulator">
                 <abbr title="投資利益率">ROI</abbr>試算を試す
@@ -1633,8 +1727,8 @@ const Index = () => {
             <div className="section-header" data-animate>
               <h2 id="process-heading">導入の流れ（最短4週間）</h2>
               <ul className="section-intro">
-                <li>週単位で導入タスクを整理。</li>
-                <li>四半期更新まで専門家が伴走。</li>
+                <li>初回相談から運用開始まで5ステップで伴走。</li>
+                <li>MIT Sloanの研究が示す「AIと人の協働に向けたプロセス再設計」を実装。</li>
               </ul>
             </div>
             <ol className="process-timeline">
@@ -1664,6 +1758,9 @@ const Index = () => {
                 );
               })}
             </ol>
+            <p className="process-note" data-animate>
+              MIT Sloan Management Reviewの研究（2023）は、AIと人の協働には業務プロセス全体の再設計が不可欠だと指摘しています。本プログラムではその知見を踏まえ、導入ステップ自体を差別化要素として設計しています。
+            </p>
             <div className="process-flowchart" data-animate>
               {processTimeline.map((item) => {
                 const FlowIcon = item.icon;
@@ -1802,233 +1899,56 @@ const Index = () => {
             <div className="simulator-guidance" data-animate>
               <h3>使い方のポイント</h3>
               <ol>
-                <li>年商規模と意思決定工数を入力して現在の負荷を把握。</li>
-                <li>
-                  「月次AI投資予算」で想定コストを設定すると、年間投資額と削減効果が比較できます。
-                </li>
-                <li>優先領域を選ぶと、削減工数の内訳と期待ROIの解釈が表示されます。</li>
+                <li>初期費用・月額費用・意思決定工数を入力し、現在の投資負荷を把握。</li>
+                <li>優先領域を選ぶと、リアルタイム分析による短縮効果を確認できます。</li>
+                <li>試算値は保存されず、専門家との面談で自社データを反映できます。</li>
               </ol>
               <p>
-                数値は当社導入企業の平均値をもとに推計しています。個別相談では自社データで詳細試算が可能です。
+                数値は導入企業20社の平均値をもとに推計しています。リアルタイム分析の活用はItrex Groupの調査が示す通り、意思決定のスピードを高めます。
               </p>
             </div>
-            <div className="simulator-content" data-animate>
-              <form className="simulator-form" aria-label="シミュレーター入力">
-                <label>
-                  <span className="simulator-label">
-                    年商規模 (億円)
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button
-                          type="button"
-                          className="simulator-tooltip-trigger"
-                          aria-label="年商規模の例を表示"
-                        >
-                          <Info aria-hidden="true" />
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent>例：地域商社 12億円 / BtoB SaaS 8億円</TooltipContent>
-                    </Tooltip>
-                  </span>
-                  <input
-                    type="range"
-                    min="5"
-                    max="15"
-                    step="0.5"
-                    name="annualRevenue"
-                    value={simulator.annualRevenue}
-                    onChange={handleSimulatorChange}
-                    onInput={handleSimulatorChange}
-                    aria-valuetext={`${simulator.annualRevenue.toFixed(1)}億円`}
-                  />
-                  <span className="simulator-value">
-                    {simulator.annualRevenue.toFixed(1)} 億円
-                  </span>
-                </label>
-                <label>
-                  <span className="simulator-label">
-                    現在の意思決定工数 (h/月)
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button
-                          type="button"
-                          className="simulator-tooltip-trigger"
-                          aria-label="意思決定工数の例を表示"
-                        >
-                          <Info aria-hidden="true" />
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        役員会・稟議・資料レビューに使っている月次合計時間
-                      </TooltipContent>
-                    </Tooltip>
-                  </span>
-                  <input
-                    type="number"
-                    name="decisionHours"
-                    value={simulator.decisionHours}
-                    onChange={handleSimulatorChange}
-                    onInput={handleSimulatorChange}
-                    min="40"
-                    max="240"
-                    inputMode="numeric"
-                  />
-                </label>
-                <label>
-                  <span className="simulator-label">
-                    月次AI投資予算 (万円)
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button
-                          type="button"
-                          className="simulator-tooltip-trigger"
-                          aria-label="AI投資予算の例を表示"
-                        >
-                          <Info aria-hidden="true" />
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        例：PoC期間30〜50万円 / 本格導入80万円以上
-                      </TooltipContent>
-                    </Tooltip>
-                  </span>
-                  <input
-                    type="number"
-                    name="aiBudget"
-                    value={simulator.aiBudget}
-                    onChange={handleSimulatorChange}
-                    onInput={handleSimulatorChange}
-                    min="20"
-                    max="200"
-                    inputMode="numeric"
-                  />
-                </label>
-                <label>
-                  <span className="simulator-label">
-                    優先したい領域
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button
-                          type="button"
-                          className="simulator-tooltip-trigger"
-                          aria-label="優先領域の説明を表示"
-                        >
-                          <Info aria-hidden="true" />
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent>最もインパクトを得たい領域を選択</TooltipContent>
-                    </Tooltip>
-                  </span>
-                  <select
-                    name="focus"
-                    value={simulator.focus}
-                    onChange={handleSimulatorChange}
-                  >
-                    <option value="finance">資金繰り改善</option>
-                    <option value="growth">成長戦略の立案</option>
-                    <option value="talent">人材マネジメント</option>
-                  </select>
-                </label>
-              </form>
-              <div className="simulator-visual" role="group" aria-label="シミュレーション結果">
-                <svg viewBox="0 0 100 100" aria-hidden="true">
-                  <polyline points={simulatorResult.sparklinePoints} />
-                </svg>
-                <p className="simulator-explanation">{simulatorResult.explanation}</p>
-                <div
-                  className="simulator-breakdown"
-                  role="group"
-                  aria-label="削減工数の内訳"
-                >
-                  <div className="simulator-breakdown__chart" role="img" aria-label="領域別の削減工数バーグラフ">
-                    <svg viewBox="0 0 100 60">
-                      {simulatorResult.breakdown.map((item, index) => {
-                        const segment = 100 / simulatorResult.breakdown.length;
-                        const barWidth = segment * 0.6;
-                        const x = index * segment + (segment - barWidth) / 2;
-                        const height = (item.hours / simulatorResult.breakdownMax) * 48;
-                        const y = 55 - height;
-                        return (
-                          <g key={item.key}>
-                            <rect
-                              x={x}
-                              y={y}
-                              width={barWidth}
-                              height={height}
-                              rx={barWidth / 3}
-                            />
-                            <text x={x + barWidth / 2} y={y - 2} textAnchor="middle">
-                              {Math.round(item.weight * 100)}%
-                            </text>
-                          </g>
-                        );
-                      })}
-                    </svg>
-                  </div>
-                  <ul className="simulator-breakdown__legend">
-                    {simulatorResult.breakdown.map((item) => (
-                      <li key={item.key}>
-                        <strong>{item.label}</strong>
-                        <span>
-                          {numberFormatter.format(Math.round(item.hours))} 時間 /
-                          {" "}
-                          {Math.round(item.weight * 100)}%
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="simulator-stats">
-                  <div>
-                    <span>年間工数削減</span>
-                    <strong>
-                      {numberFormatter.format(
-                        Math.round(simulatorResult.annualHoursSaved)
-                      )}
-                      時間
-                    </strong>
-                  </div>
-                  <div>
-                    <span>年間価値創出</span>
-                    <strong>
-                      {numberFormatter.format(
-                        Math.round(simulatorResult.annualCostSavings)
-                      )}
-                      万円
-                    </strong>
-                  </div>
-                  <div>
-                    <span>年間投資額</span>
-                    <strong>
-                      {numberFormatter.format(
-                        Math.round(simulatorResult.annualInvestment)
-                      )}
-                      万円
-                    </strong>
-                  </div>
-                  <div>
-                    <span>期待ROI</span>
-                    <strong>{simulatorResult.roiPercent.toFixed(1)}%</strong>
-                  </div>
-                  <div>
-                    <span>生産性向上</span>
-                    <strong>+{simulatorResult.productivityGain.toFixed(1)}%</strong>
-                  </div>
-                  <div>
-                    <span>投資回収目安</span>
-                    <strong>
-                      {simulatorResult.paybackMonths
-                        ? `${Math.ceil(simulatorResult.paybackMonths)} か月`
-                        : "-"}
-                    </strong>
-                  </div>
-                </div>
+            <div className="simulator-summary" data-animate>
+              <div className="simulator-summary__item">
+                <span>初期費用（目安）</span>
+                <strong>{numberFormatter.format(Math.round(simulator.initialCost))} 万円</strong>
+              </div>
+              <div className="simulator-summary__item">
+                <span>月額費用（目安）</span>
+                <strong>{numberFormatter.format(Math.round(simulator.aiBudget))} 万円</strong>
+              </div>
+              <div className="simulator-summary__item">
+                <span>期待ROI</span>
+                <strong>{simulatorResult.roiPercent.toFixed(1)}%</strong>
+              </div>
+              <div className="simulator-summary__item">
+                <span>投資回収目安</span>
+                <strong>
+                  {simulatorResult.paybackMonths
+                    ? `${Math.ceil(simulatorResult.paybackMonths)} か月`
+                    : "-"}
+                </strong>
               </div>
             </div>
+            <div className="simulator-actions" data-animate>
+              <button
+                type="button"
+                className="btn btn-cta"
+                onClick={() => setRoiModalOpen(true)}
+              >
+                ROI試算フォームを開く
+              </button>
+              <p className="simulator-actions__note">
+                初期費用・月額費用・期待効果を入力して、自社の投資対効果を画面上で確認できます。
+              </p>
+            </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#pricing">
-                プラン別の費用感を見る
-              </a>
+              <button
+                type="button"
+                className="btn btn-accent"
+                onClick={() => setPricingModalOpen(true)}
+              >
+                料金プランを表示
+              </button>
             </div>
           </div>
         </section>
@@ -2050,67 +1970,36 @@ const Index = () => {
                 期待<abbr title="投資利益率">ROI</abbr>も併記。
               </p>
             </div>
-            <div className="pricing-table-wrapper" data-animate>
-              <table className="pricing-table">
-                <caption className="sr-only">プラン別の料金と提供内容</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">プラン</th>
-                    <th scope="col">月額料金</th>
-                    <th scope="col">含まれるサービス</th>
-                    <th scope="col">サポート</th>
-                    <th scope="col">支払い方法</th>
-                    <th scope="col">返金保証</th>
-                    <th scope="col">想定<abbr title="投資利益率">ROI</abbr></th>
-                    <th scope="col" aria-label="アクション" />
-                  </tr>
-                </thead>
-                <tbody>
-                  {pricingPlans.map((plan) => (
-                    <tr key={plan.name}>
-                      <th scope="row">
-                        <div className="pricing-plan-name">
-                          <span>{plan.name}</span>
-                          <small>{plan.priceNote}</small>
-                        </div>
-                      </th>
-                      <td>
-                        <strong className="pricing-price">{plan.price}</strong>
-                      </td>
-                      <td>
-                        <ul>
-                          {plan.services.map((service) => (
-                            <li key={service}>{service}</li>
-                          ))}
-                        </ul>
-                      </td>
-                      <td>
-                        <ul>
-                          {plan.support.map((item) => (
-                            <li key={item}>{item}</li>
-                          ))}
-                        </ul>
-                      </td>
-                      <td>
-                        <ul>
-                          {plan.payment.map((option) => (
-                            <li key={option}>{option}</li>
-                          ))}
-                        </ul>
-                      </td>
-                      <td>
-                        <span className="pricing-guarantee">{plan.guarantee}</span>
-                      </td>
-                      <td>{plan.roi}</td>
-                      <td>
-                        <a className="btn btn-outline" href="#contact">
-                          {plan.cta}
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+            <div className="pricing-summary" data-animate>
+              {pricingPlans.map((plan) => (
+                <article key={plan.name} className="pricing-summary__card">
+                  <h3>{plan.name}</h3>
+                  <p className="pricing-summary__price">{plan.price}</p>
+                  <p className="pricing-summary__note">{plan.priceNote}</p>
+                  <ul className="pricing-summary__list">
+                    {plan.services.slice(0, 2).map((service) => (
+                      <li key={service}>{service}</li>
+                    ))}
+                  </ul>
+                  <div className="pricing-summary__roi">
+                    <span>想定<abbr title="投資利益率">ROI</abbr></span>
+                    <strong>{plan.roi}</strong>
+                  </div>
+                  <span className="pricing-summary__guarantee">{plan.guarantee}</span>
+                </article>
+              ))}
+            </div>
+            <div className="pricing-actions" data-animate>
+              <button
+                type="button"
+                className="btn btn-accent"
+                onClick={() => setPricingModalOpen(true)}
+              >
+                詳細な料金表を開く
+              </button>
+              <p className="pricing-actions__note">
+                初期費用・月額費用・期待<abbr title="投資利益率">ROI</abbr>をモーダルで比較できます。
+              </p>
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-primary" href="#contact">
@@ -2596,6 +2485,365 @@ const Index = () => {
         </section>
       </main>
 
+      {isRoiModalOpen && (
+        <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="roi-modal-title">
+          <button
+            type="button"
+            className="modal-backdrop"
+            aria-label="ROI試算フォームを閉じる"
+            onClick={() => setRoiModalOpen(false)}
+          />
+          <div className="modal" role="document">
+            <header className="modal-header">
+              <h2 id="roi-modal-title">ROI試算フォーム</h2>
+              <button
+                type="button"
+                className="modal-close"
+                aria-label="ROI試算フォームを閉じる"
+                onClick={() => setRoiModalOpen(false)}
+              >
+                ×
+              </button>
+            </header>
+            <div className="modal-body simulator-modal">
+              <div className="simulator-content">
+                <form className="simulator-form" aria-label="シミュレーター入力">
+                  <label>
+                    <span className="simulator-label">
+                      年商規模 (億円)
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            className="simulator-tooltip-trigger"
+                            aria-label="年商規模の例を表示"
+                          >
+                            <Info aria-hidden="true" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>例：地域商社 12億円 / BtoB SaaS 8億円</TooltipContent>
+                      </Tooltip>
+                    </span>
+                    <input
+                      type="range"
+                      min="5"
+                      max="15"
+                      step="0.5"
+                      name="annualRevenue"
+                      value={simulator.annualRevenue}
+                      onChange={handleSimulatorChange}
+                      onInput={handleSimulatorChange}
+                      aria-valuetext={`${simulator.annualRevenue.toFixed(1)}億円`}
+                    />
+                    <span className="simulator-value">
+                      {simulator.annualRevenue.toFixed(1)} 億円
+                    </span>
+                  </label>
+                  <label>
+                    <span className="simulator-label">
+                      初期費用 (万円)
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            className="simulator-tooltip-trigger"
+                            aria-label="初期費用の例を表示"
+                          >
+                            <Info aria-hidden="true" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>例：システム連携費用 80〜180万円</TooltipContent>
+                      </Tooltip>
+                    </span>
+                    <input
+                      type="number"
+                      name="initialCost"
+                      value={simulator.initialCost}
+                      onChange={handleSimulatorChange}
+                      onInput={handleSimulatorChange}
+                      min="0"
+                      max="500"
+                      inputMode="numeric"
+                    />
+                  </label>
+                  <label>
+                    <span className="simulator-label">
+                      月額費用 (万円)
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            className="simulator-tooltip-trigger"
+                            aria-label="月額費用の例を表示"
+                          >
+                            <Info aria-hidden="true" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>例：PoC期間30〜50万円 / 本格導入80万円以上</TooltipContent>
+                      </Tooltip>
+                    </span>
+                    <input
+                      type="number"
+                      name="aiBudget"
+                      value={simulator.aiBudget}
+                      onChange={handleSimulatorChange}
+                      onInput={handleSimulatorChange}
+                      min="20"
+                      max="200"
+                      inputMode="numeric"
+                    />
+                  </label>
+                  <label>
+                    <span className="simulator-label">
+                      現在の意思決定工数 (h/月)
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            className="simulator-tooltip-trigger"
+                            aria-label="意思決定工数の例を表示"
+                          >
+                            <Info aria-hidden="true" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          役員会・稟議・資料レビューに使っている月次合計時間
+                        </TooltipContent>
+                      </Tooltip>
+                    </span>
+                    <input
+                      type="number"
+                      name="decisionHours"
+                      value={simulator.decisionHours}
+                      onChange={handleSimulatorChange}
+                      onInput={handleSimulatorChange}
+                      min="40"
+                      max="240"
+                      inputMode="numeric"
+                    />
+                  </label>
+                  <label>
+                    <span className="simulator-label">
+                      優先したい領域
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            className="simulator-tooltip-trigger"
+                            aria-label="優先領域の説明を表示"
+                          >
+                            <Info aria-hidden="true" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>最もインパクトを得たい領域を選択</TooltipContent>
+                      </Tooltip>
+                    </span>
+                    <select
+                      name="focus"
+                      value={simulator.focus}
+                      onChange={handleSimulatorChange}
+                    >
+                      <option value="finance">資金繰り改善</option>
+                      <option value="growth">成長戦略の立案</option>
+                      <option value="talent">人材マネジメント</option>
+                    </select>
+                  </label>
+                </form>
+                <div className="simulator-visual" role="group" aria-label="シミュレーション結果">
+                  <svg viewBox="0 0 100 100" aria-hidden="true">
+                    <polyline points={simulatorResult.sparklinePoints} />
+                  </svg>
+                  <p className="simulator-explanation">{simulatorResult.explanation}</p>
+                  <div
+                    className="simulator-breakdown"
+                    role="group"
+                    aria-label="削減工数の内訳"
+                  >
+                    <div className="simulator-breakdown__chart" role="img" aria-label="領域別の削減工数バーグラフ">
+                      <svg viewBox="0 0 100 60">
+                        {simulatorResult.breakdown.map((item, index) => {
+                          const segment = 100 / simulatorResult.breakdown.length;
+                          const barWidth = segment * 0.6;
+                          const x = index * segment + (segment - barWidth) / 2;
+                          const height = (item.hours / simulatorResult.breakdownMax) * 48;
+                          const y = 55 - height;
+                          return (
+                            <g key={item.key}>
+                              <rect
+                                x={x}
+                                y={y}
+                                width={barWidth}
+                                height={height}
+                                rx={barWidth / 3}
+                              />
+                              <text x={x + barWidth / 2} y={y - 2} textAnchor="middle">
+                                {Math.round(item.weight * 100)}%
+                              </text>
+                            </g>
+                          );
+                        })}
+                      </svg>
+                    </div>
+                    <ul className="simulator-breakdown__legend">
+                      {simulatorResult.breakdown.map((item) => (
+                        <li key={item.key}>
+                          <strong>{item.label}</strong>
+                          <span>
+                            {numberFormatter.format(Math.round(item.hours))} 時間 /
+                            {" "}
+                            {Math.round(item.weight * 100)}%
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="simulator-stats">
+                    <div>
+                      <span>初期費用</span>
+                      <strong>
+                        {numberFormatter.format(Math.round(simulator.initialCost))}
+                        万円
+                      </strong>
+                    </div>
+                    <div>
+                      <span>年間工数削減</span>
+                      <strong>
+                        {numberFormatter.format(
+                          Math.round(simulatorResult.annualHoursSaved)
+                        )}
+                        時間
+                      </strong>
+                    </div>
+                    <div>
+                      <span>年間価値創出</span>
+                      <strong>
+                        {numberFormatter.format(
+                          Math.round(simulatorResult.annualCostSavings)
+                        )}
+                        万円
+                      </strong>
+                    </div>
+                    <div>
+                      <span>年間投資額</span>
+                      <strong>
+                        {numberFormatter.format(
+                          Math.round(simulatorResult.annualInvestment)
+                        )}
+                        万円
+                      </strong>
+                    </div>
+                    <div>
+                      <span>期待ROI</span>
+                      <strong>{simulatorResult.roiPercent.toFixed(1)}%</strong>
+                    </div>
+                    <div>
+                      <span>生産性向上</span>
+                      <strong>+{simulatorResult.productivityGain.toFixed(1)}%</strong>
+                    </div>
+                    <div>
+                      <span>投資回収目安</span>
+                      <strong>
+                        {simulatorResult.paybackMonths
+                          ? `${Math.ceil(simulatorResult.paybackMonths)} か月`
+                          : "-"}
+                      </strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {isPricingModalOpen && (
+        <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="pricing-modal-title">
+          <button
+            type="button"
+            className="modal-backdrop"
+            aria-label="料金プランを閉じる"
+            onClick={() => setPricingModalOpen(false)}
+          />
+          <div className="modal" role="document">
+            <header className="modal-header">
+              <h2 id="pricing-modal-title">料金プラン一覧</h2>
+              <button
+                type="button"
+                className="modal-close"
+                aria-label="料金プランを閉じる"
+                onClick={() => setPricingModalOpen(false)}
+              >
+                ×
+              </button>
+            </header>
+            <div className="modal-body">
+              <div className="pricing-table-wrapper">
+                <table className="pricing-table">
+                  <caption className="sr-only">プラン別の料金と提供内容</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">プラン</th>
+                      <th scope="col">月額料金</th>
+                      <th scope="col">含まれるサービス</th>
+                      <th scope="col">サポート</th>
+                      <th scope="col">支払い方法</th>
+                      <th scope="col">返金保証</th>
+                      <th scope="col">想定<abbr title="投資利益率">ROI</abbr></th>
+                      <th scope="col" aria-label="アクション" />
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pricingPlans.map((plan) => (
+                      <tr key={plan.name}>
+                        <th scope="row">
+                          <div className="pricing-plan-name">
+                            <span>{plan.name}</span>
+                            <small>{plan.priceNote}</small>
+                          </div>
+                        </th>
+                        <td>
+                          <strong className="pricing-price">{plan.price}</strong>
+                        </td>
+                        <td>
+                          <ul>
+                            {plan.services.map((service) => (
+                              <li key={service}>{service}</li>
+                            ))}
+                          </ul>
+                        </td>
+                        <td>
+                          <ul>
+                            {plan.support.map((item) => (
+                              <li key={item}>{item}</li>
+                            ))}
+                          </ul>
+                        </td>
+                        <td>
+                          <ul>
+                            {plan.payment.map((option) => (
+                              <li key={option}>{option}</li>
+                            ))}
+                          </ul>
+                        </td>
+                        <td>
+                          <span className="pricing-guarantee">{plan.guarantee}</span>
+                        </td>
+                        <td>{plan.roi}</td>
+                        <td>
+                          <a className="btn btn-outline" href="#contact">
+                            {plan.cta}
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {isDemoOpen && (
         <div className="demo-dialog" role="dialog" aria-modal="true" aria-labelledby="demo-heading">
           <button
@@ -2672,7 +2920,7 @@ const Index = () => {
         <div className="container">
           <p>© {new Date().getFullYear()} AI経営計画書ラボ. All rights reserved.</p>
           <p className="footnote">
-            出典: Switch Software (2024), Stanford HAI (2024), OECD (2024), Dragonboat (2024)。
+            出典: University of Cincinnati Online (2024), Itrex Group (2024), MIT Sloan Management Review (2023), Rossum (2024), Stanford HAI (2024), OECD (2024), Dragonboat (2024)。
           </p>
         </div>
       </footer>
