@@ -138,6 +138,35 @@ const dashboardHighlights = [
   },
 ];
 
+const dashboardStats = [
+  {
+    label: "シナリオ探索",
+    value: "9",
+    unit: "パターン",
+    trend: "+4",
+    trendLabel: "前週比",
+    tone: "up" as const,
+  },
+  {
+    label: "意思決定所要時間",
+    value: "-42",
+    unit: "%",
+    trend: "-12pt",
+    trendLabel: "自動分析",
+    tone: "down" as const,
+  },
+  {
+    label: "レビュー待ち",
+    value: "2",
+    unit: "件",
+    trend: "12分",
+    trendLabel: "平均応答",
+    tone: "neutral" as const,
+  },
+];
+
+const dashboardReviewProgress = 68;
+
 const adoptionTrend = [
   { label: "2023Q1", value: 18 },
   { label: "2023Q3", value: 27 },
@@ -1348,37 +1377,84 @@ const Index = () => {
             </div>
             <div className="hero-visual">
               <div className="hero-dashboard" data-animate data-initial-visible="true" aria-hidden="true">
-                <div className="dashboard-header">AIダッシュボード・ライブビュー</div>
-                <div className="dashboard-body">
-                  <div className="dashboard-chart">
-                    <svg viewBox="0 0 100 60" role="img" aria-label="AIシミュレーション予測線">
-                      <polyline points="0,55 25,48 50,40 75,30 100,20" />
-                    </svg>
+                <div className="dashboard-surface">
+                  <div className="dashboard-header">
+                    <div className="dashboard-header__brand">
+                      <span className="dashboard-header__icon" aria-hidden="true">
+                        <BrainCircuit />
+                      </span>
+                      <div>
+                        <span className="dashboard-header__label">AIダッシュボード</span>
+                        <strong>ライブ・インサイト</strong>
+                      </div>
+                    </div>
+                    <span className="dashboard-header__status">
+                      <span className="status-dot" aria-hidden="true" />
+                      シンク中
+                    </span>
                   </div>
-                  <div className="dashboard-stats">
-                    <div>
-                      <span>シナリオ</span>
-                      <strong>9パターン</strong>
+                  <div className="dashboard-body">
+                    <div className="dashboard-visual" role="img" aria-label="意思決定AIの予測ライン">
+                      <svg viewBox="0 0 100 60" aria-hidden="true">
+                        <polyline points="0,55 20,46 42,40 66,31 100,20" />
+                      </svg>
+                      <div className="dashboard-visual__marker">
+                        <span>意思決定AI予測</span>
+                        <strong>-42%</strong>
+                      </div>
+                      <div className="dashboard-visual__caption">
+                        因果モデル: 政策変動 × キャッシュフロー感度
+                      </div>
                     </div>
-                    <div>
-                      <span>意思決定所要時間</span>
-                      <strong>-42%</strong>
+                    <div className="dashboard-metrics" aria-label="主要なライブ指標">
+                      {dashboardStats.map((stat) => (
+                        <div key={stat.label} className="dashboard-metrics__item">
+                          <span className="dashboard-metrics__label">{stat.label}</span>
+                          <div className="dashboard-metrics__value">
+                            <strong>{stat.value}</strong>
+                            <span>{stat.unit}</span>
+                          </div>
+                          <span className={`dashboard-metrics__trend dashboard-metrics__trend--${stat.tone}`}>
+                            <span aria-hidden="true">
+                              {stat.tone === "up" ? "↑" : stat.tone === "down" ? "↓" : "→"}
+                            </span>
+                            <strong>{stat.trend}</strong>
+                            <small>{stat.trendLabel}</small>
+                          </span>
+                        </div>
+                      ))}
                     </div>
-                    <div>
-                      <span>レビュー待ち</span>
-                      <strong>2件</strong>
+                    <div className="dashboard-logic">
+                      <div>
+                        <span className="dashboard-logic__label">因果仮説</span>
+                        <p>政策変動と資金繰り感度をリアルタイムで突き合わせ、影響度の高いシナリオを抽出。</p>
+                      </div>
+                      <div>
+                        <span className="dashboard-logic__label">推奨アクション</span>
+                        <p>優先度「高」の打ち手を経営会議へ自動共有し、レビュー滞留を防ぎます。</p>
+                      </div>
                     </div>
+                    <ul className="dashboard-highlights">
+                      {dashboardHighlights.map((item) => (
+                        <li key={item.title}>
+                          <span className="dashboard-highlights__title">{item.title}</span>
+                          <span className="dashboard-highlights__detail">{item.detail}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <ul className="dashboard-highlights">
-                    {dashboardHighlights.map((item) => (
-                      <li key={item.title}>
-                        <strong>{item.title}</strong>
-                        <span>{item.detail}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="dashboard-footer">
+                    <span className="dashboard-footer__label">レビュー進捗</span>
+                    <div
+                      className="dashboard-footer__progress"
+                      role="img"
+                      aria-label={`レビュー進捗 ${dashboardReviewProgress}%`}
+                    >
+                      <span style={{ width: `${dashboardReviewProgress}%` }} />
+                    </div>
+                    <span className="dashboard-footer__meta">専門家レビュー中</span>
+                  </div>
                 </div>
-                <div className="dashboard-footer">専門家レビュー中</div>
               </div>
               <div className="hero-demo" data-animate data-initial-visible="true">
                 <div className="hero-demo__preview" aria-hidden="true">
