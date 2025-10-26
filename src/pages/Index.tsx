@@ -44,16 +44,16 @@ import type { LucideIcon } from "lucide-react";
 
 const sections = [
   { id: "hero", label: "トップ" },
-  { id: "insights", label: "導入効果" },
-  { id: "roles", label: "役割分担" },
-  { id: "why-now", label: "なぜ今" },
-  { id: "quarterly", label: "四半期レビュー" },
   { id: "pain", label: "課題" },
-  { id: "process", label: "プロセス" },
-  { id: "stories", label: "成功事例" },
-  { id: "resources", label: "資料" },
+  { id: "why-now", label: "なぜ今" },
+  { id: "roles", label: "解決策" },
+  { id: "insights", label: "導入効果" },
+  { id: "process", label: "導入の流れ" },
+  { id: "quarterly", label: "四半期レビュー" },
   { id: "pricing", label: "料金" },
   { id: "faq", label: "FAQ" },
+  { id: "stories", label: "お客様の声" },
+  { id: "resources", label: "資料" },
   { id: "security", label: "セキュリティ" },
   { id: "contact", label: "お問い合わせ" },
 ];
@@ -934,7 +934,7 @@ const Index = () => {
             </nav>
             <div className="header-actions">
               <a className="btn btn-outline" href="#resources">導入効果を資料で確認</a>
-              <a className="btn btn-accent" href="#contact">
+              <a className="btn btn-cta" href="#contact">
                 30分無料相談に申し込む
               </a>
             </div>
@@ -977,7 +977,7 @@ const Index = () => {
                 「決断までの時間を平均52%短縮」「経営計画作成工数を80%削減」「月間45時間の経営者稼働を創出」などの成果が続々。四半期アップデートで最新の機会とリスクを反映し、迅速な経営判断を後押しします。
               </p>
               <div className="hero-actions">
-                <a className="btn btn-accent" href="#contact">
+                <a className="btn btn-cta" href="#contact">
                   30分無料相談に申し込む
                 </a>
                 <a className="btn btn-ghost" href="#resources">
@@ -1065,6 +1065,128 @@ const Index = () => {
                   AIが政策・市場データを束ねて経営者の判断材料を提示する流れを、アニメーションでご覧いただけます。
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 課題セクション */}
+        <section
+          id="pain"
+          ref={(node) => {
+            sectionRefs.current["pain"] = node ?? null;
+          }}
+          className="section pain"
+          aria-labelledby="pain-heading"
+        >
+          <div className="container">
+            <div className="section-header" data-animate>
+              <h2 id="pain-heading">経営者が抱える代表的な課題</h2>
+              <p>短い文章と図解で、意思決定の現場で起きているボトルネックを整理しました。</p>
+            </div>
+            <div className="pain-grid">
+              {painPoints.map((item) => {
+                const PainIcon = item.icon;
+                return (
+                  <article key={item.title} className={`pain-card pain-card--${item.accent}`} data-animate>
+                    <div className={`pain-icon pain-icon--${item.accent}`} aria-hidden="true">
+                      <PainIcon />
+                    </div>
+                    <h3>{item.title}</h3>
+                    <p>{item.detail}</p>
+                    <div className="pain-solution">{item.solution}</div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* なぜ今AIが必要なのか セクション */}
+        <section
+          id="why-now"
+          ref={(node) => {
+            sectionRefs.current["why-now"] = node ?? null;
+          }}
+          className="section why-now"
+          aria-labelledby="why-now-heading"
+        >
+          <div className="container">
+            <div className="section-header" data-animate>
+              <h2 id="why-now-heading">なぜ今すぐ対策が必要なのか</h2>
+              <p>
+                AI活用を先延ばしにした企業では、政策対応とシナリオ検証のスピードが顕著に遅れています。信頼できる調査データを引用し、意思決定の遅延がもたらすリスクを数値で明示しました。
+              </p>
+            </div>
+            <div className="evidence-grid">
+              {whyNowEvidence.map((item) => (
+                <article
+                  key={item.title}
+                  className="evidence-card"
+                  data-animate
+                  data-source={item.sourceNote}
+                >
+                  <div className="evidence-stat">{item.stat}</div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <a href={item.sourceUrl} target="_blank" rel="noreferrer" className="evidence-link">
+                    {item.sourceLabel}
+                  </a>
+                </article>
+              ))}
+            </div>
+            <p className="footnote" data-animate>
+              ※ 各数値の詳細はカードをホバー/タップすると表示されます。リンクは別タブで開きます。
+            </p>
+          </div>
+        </section>
+
+        {/* 解決策セクション */}
+        <section
+          id="roles"
+          ref={(node) => {
+            sectionRefs.current["roles"] = node ?? null;
+          }}
+          className="section roles"
+          aria-labelledby="roles-heading"
+        >
+          <div className="container">
+            <div className="section-header" data-animate>
+              <h2 id="roles-heading">AIと専門家伴走による解決策</h2>
+              <p>
+                AI、経営者、専門家の役割を明確に分担し、透明性の高い体制で意思決定を前に進めます。最終判断は経営者が担い、AIが情報を整理、専門家が検証と実行支援を担当します。
+              </p>
+            </div>
+            <div className="roles-grid">
+              {responsibilityColumns.map((column) => {
+                const RoleIcon = column.icon;
+                return (
+                  <article
+                    key={column.id}
+                    className={`role-card role-card--${column.accent}`}
+                    data-animate
+                    tabIndex={0}
+                  >
+                    <div className={`role-icon role-icon--${column.accent}`} aria-hidden="true">
+                      <RoleIcon />
+                    </div>
+                    <h3>{column.title}</h3>
+                    <p>{column.summary}</p>
+                    <ul>
+                      {column.points.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                    <div className="role-detail" aria-hidden="true">
+                      {column.detail}
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-outline" href="#process">
+                導入プロセスを詳しく見る
+              </a>
             </div>
           </div>
         </section>
@@ -1190,129 +1312,117 @@ const Index = () => {
                 <ul className="insights-bars">
                   {utilizationComparisons.map((item) => {
                     const base = Math.max(item.ai, item.manual, 1);
-                    const manualRatio = Math.round((item.manual / base) * 100);
-                    const aiRatio = Math.round((item.ai / base) * 100);
-                    const improvementRatio = Math.max(aiRatio - manualRatio, 0);
+                    const manualPercent = (item.manual / base) * 100;
+                    const aiPercent = (item.ai / base) * 100;
                     return (
                       <li key={item.label}>
-                        <div className="insights-bars__labels">
-                          <span>{item.label}</span>
-                          <span>
-                            <strong>{item.ai}</strong>
+                        <div className="insights-bars__label">
+                          <strong>{item.label}</strong>
+                          <span>{item.description}</span>
+                        </div>
+                        <div className="insights-bars__bar">
+                          <span style={{ width: `${manualPercent}%` }}>
+                            手作業 {item.manual}
+                            {item.unit}
+                          </span>
+                          <span style={{ width: `${aiPercent}%` }}>
+                            AI活用 {item.ai}
                             {item.unit}
                           </span>
                         </div>
-                        <div className="insights-bars__track" aria-hidden="true">
-                          <span
-                            className="insights-bars__bar insights-bars__bar--manual"
-                            style={{ width: `${manualRatio}%` }}
-                          />
-                          <span
-                            className="insights-bars__bar insights-bars__bar--growth"
-                            style={{ width: `${improvementRatio}%`, marginLeft: `${manualRatio}%` }}
-                          />
-                        </div>
-                        <div className="insights-bars__scale">
-                          <span>従来: {item.manual}{item.unit}</span>
-                          <span>AI活用: {item.ai}{item.unit}</span>
-                        </div>
-                        <p className="insights-bars__description">{item.description}</p>
                       </li>
                     );
                   })}
                 </ul>
               </article>
             </div>
-          </div>
-        </section>
-
-        {/* 役割分担セクション */}
-        <section
-          id="roles"
-          ref={(node) => {
-            sectionRefs.current["roles"] = node ?? null;
-          }}
-          className="section roles"
-          aria-labelledby="roles-heading"
-        >
-          <div className="container">
-            <div className="section-header" data-animate>
-              <h2 id="roles-heading">役割が明確だから安心</h2>
-              <p>
-                AI、経営者、専門家がそれぞれの強みを発揮。最終判断は経営者が行い、AIは情報収集と分析、専門家はレビューと伴走を担当します。
-              </p>
-            </div>
-            <div className="roles-grid">
-              {responsibilityColumns.map((column) => {
-                const RoleIcon = column.icon;
-                return (
-                  <article
-                    key={column.id}
-                    className={`role-card role-card--${column.accent}`}
-                    data-animate
-                    tabIndex={0}
-                  >
-                    <div className={`role-icon role-icon--${column.accent}`} aria-hidden="true">
-                      <RoleIcon />
-                    </div>
-                  <h3>{column.title}</h3>
-                  <p>{column.summary}</p>
-                  <ul>
-                    {column.points.map((point) => (
-                      <li key={point}>{point}</li>
-                    ))}
-                  </ul>
-                  <div className="role-detail" aria-hidden="true">
-                    {column.detail}
-                  </div>
-                  </article>
-                );
-              })}
-            </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-outline" href="#quarterly">
-                90日サイクルの進め方を見る
+              <a className="btn btn-cta" href="#contact">
+                定量効果の詳しい内訳を見る
               </a>
             </div>
           </div>
         </section>
 
-        {/* なぜ今AIが必要なのか セクション */}
+        {/* 導入プロセスセクション */}
         <section
-          id="why-now"
+          id="process"
           ref={(node) => {
-            sectionRefs.current["why-now"] = node ?? null;
+            sectionRefs.current["process"] = node ?? null;
           }}
-          className="section why-now"
-          aria-labelledby="why-now-heading"
+          className="section process"
+          aria-labelledby="process-heading"
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="why-now-heading">なぜ今AIが必要なのか</h2>
-              <p>
-                信頼できるエビデンスが示すように、AIの活用はもはや先進企業だけのものではありません。導入を後回しにすると、意思決定の速度と精度で差が開きます。
-              </p>
+              <h2 id="process-heading">導入の流れ（最短4週間）</h2>
+              <p>AIと専門家のタスクを週単位で整理し、四半期更新までをワンストップで伴走します。</p>
             </div>
-            <div className="evidence-grid">
-              {whyNowEvidence.map((item) => (
-                <article
-                  key={item.title}
-                  className="evidence-card"
-                  data-animate
-                  data-source={item.sourceNote}
-                >
-                  <div className="evidence-stat">{item.stat}</div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  <a href={item.sourceUrl} target="_blank" rel="noreferrer" className="evidence-link">
-                    {item.sourceLabel}
-                  </a>
-                </article>
-              ))}
+            <ol className="process-timeline">
+              {processSteps.map((step, index) => {
+                const StepIcon = step.icon;
+                return (
+                  <li key={step.title} className={`process-step process-step--${step.accent}`} data-animate>
+                    <div className={`process-marker process-marker--${step.accent}`} aria-hidden="true">
+                      <span>{index + 1}</span>
+                      <StepIcon />
+                    </div>
+                    <div className="process-content">
+                      <h3>{step.title}</h3>
+                      <p>{step.description}</p>
+                      <div className="process-roles">
+                        <div>
+                          <strong>AI</strong>
+                          <span>{step.aiRole}</span>
+                        </div>
+                        <div>
+                          <strong>人</strong>
+                          <span>{step.humanRole}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ol>
+            <div className="process-flowchart" data-animate>
+              {processTimeline.map((item) => {
+                const FlowIcon = item.icon;
+                return (
+                  <div key={item.stage} className={`process-flow-item process-flow-item--${item.accent}`}>
+                    <div className="process-flow-icon" aria-hidden="true">
+                      <FlowIcon />
+                    </div>
+                    <h3>{item.stage}</h3>
+                    <p>{item.aiFocus}</p>
+                    <p>{item.humanFocus}</p>
+                  </div>
+                );
+              })}
             </div>
-            <p className="footnote" data-animate>
-              ※ 各数値の詳細はカードをホバー/タップすると表示されます。リンクは別タブで開きます。
-            </p>
+            <div className="process-dataflow" data-animate>
+              {dataFlowStages.map((stage, index) => {
+                const DataIcon = stage.icon;
+                return (
+                  <div key={stage.label} className={`dataflow-card dataflow-card--${stage.accent}`}>
+                    <div className="dataflow-card__icon" aria-hidden="true">
+                      <DataIcon />
+                    </div>
+                    <div className="dataflow-card__body">
+                      <span>STEP {index + 1}</span>
+                      <h3>{stage.label}</h3>
+                      <p>{stage.description}</p>
+                      <strong>{stage.result}</strong>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-accent" href="#pricing">
+                コストとROIシミュレーターを試す
+              </a>
+            </div>
           </div>
         </section>
 
@@ -1401,122 +1511,184 @@ const Index = () => {
               </div>
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#contact">
-                四半期レビューの進め方を相談する
+              <a className="btn btn-accent" href="#simulator">
+                ROIシミュレーターで効果を確認
+              </a>
+            </div>
+          </div>
+        </section>
+        {/* ROIシミュレーター セクション */}
+        <section
+          id="simulator"
+          className="section simulator"
+          aria-labelledby="simulator-heading"
+        >
+          <div className="container">
+            <div className="section-header" data-animate>
+              <h2 id="simulator-heading">AI活用インパクトを即時シミュレート</h2>
+              <p>入力値に合わせてROIと生産性向上の見込みがリアルタイムに更新されます。</p>
+            </div>
+            <div className="simulator-content" data-animate>
+              <form className="simulator-form" aria-label="シミュレーター入力">
+                <label>
+                  年商規模 (億円)
+                  <input
+                    type="range"
+                    min="5"
+                    max="15"
+                    step="0.5"
+                    name="revenueGoal"
+                    value={simulator.revenueGoal}
+                    onChange={handleSimulatorChange}
+                    aria-valuetext={`${simulator.revenueGoal}億円`}
+                  />
+                  <span>{simulator.revenueGoal.toFixed(1)} 億円</span>
+                </label>
+                <label>
+                  現在の意思決定工数 (h/月)
+                  <input
+                    type="number"
+                    name="hoursCurrent"
+                    value={simulator.hoursCurrent}
+                    onChange={handleSimulatorChange}
+                    min="10"
+                    max="160"
+                  />
+                </label>
+                <label>
+                  月次AI投資予算 (万円)
+                  <input
+                    type="number"
+                    name="budget"
+                    value={simulator.budget}
+                    onChange={handleSimulatorChange}
+                    min="10"
+                    max="200"
+                  />
+                </label>
+                <label>
+                  経営課題の優先度
+                  <select
+                    name="focus"
+                    value={simulator.focus}
+                    onChange={handleSimulatorChange}
+                  >
+                    <option value="finance">資金繰り改善</option>
+                    <option value="growth">成長戦略の立案</option>
+                    <option value="talent">人材マネジメント</option>
+                  </select>
+                </label>
+              </form>
+              <div className="simulator-visual" role="img" aria-label="シミュレーション結果グラフ">
+                <svg viewBox="0 0 100 100">
+                  <polyline points={simulatorChart.svgPoints} />
+                </svg>
+                <div className="simulator-stats">
+                  <div>
+                    <span>年間工数削減</span>
+                    <strong>{simulatorChart.hoursSaved.toFixed(0)} 時間</strong>
+                  </div>
+                  <div>
+                    <span>年間コスト削減</span>
+                    <strong>{simulatorChart.costSaved.toFixed(0)} 万円</strong>
+                  </div>
+                  <div>
+                    <span>期待ROI</span>
+                    <strong>{simulatorChart.roi.toFixed(1)}%</strong>
+                  </div>
+                  <div>
+                    <span>生産性向上</span>
+                    <strong>+{simulatorChart.productivityGain.toFixed(1)}%</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-accent" href="#pricing">
+                プラン別の費用感を見る
               </a>
             </div>
           </div>
         </section>
 
-        {/* 課題と解決策セクション */}
+        {/* 料金プラン */}
         <section
-          id="pain"
+          id="pricing"
           ref={(node) => {
-            sectionRefs.current["pain"] = node ?? null;
+            sectionRefs.current["pricing"] = node ?? null;
           }}
-          className="section pain"
-          aria-labelledby="pain-heading"
+          className="section pricing"
+          aria-labelledby="pricing-heading"
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="pain-heading">経営者が抱える課題と解決策</h2>
-              <p>よくある悩みをAIがどう解消するのか、直感的に理解できます。</p>
+              <h2 id="pricing-heading">料金プラン</h2>
+              <p>規模や目的に合わせて3つのプランをご用意。期待できるROIも明記しています。</p>
             </div>
-            <div className="pain-grid">
-              {painPoints.map((item) => {
-                const PainIcon = item.icon;
-                return (
-                  <article key={item.title} className={`pain-card pain-card--${item.accent}`} data-animate>
-                    <div className={`pain-icon pain-icon--${item.accent}`} aria-hidden="true">
-                      <PainIcon />
-                    </div>
-                  <h3>{item.title}</h3>
-                  <p>{item.detail}</p>
-                  <div className="pain-solution">{item.solution}</div>
-                  </article>
-                );
-              })}
+            <div className="pricing-table-wrapper" data-animate>
+              <table className="pricing-table">
+                <caption className="sr-only">プラン別の料金と提供内容</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">プラン</th>
+                    <th scope="col">月額</th>
+                    <th scope="col">主な機能</th>
+                    <th scope="col">サポート</th>
+                    <th scope="col">想定ROI</th>
+                    <th scope="col" aria-label="アクション" />
+                  </tr>
+                </thead>
+                <tbody>
+                  {pricingPlans.map((plan) => (
+                    <tr key={plan.name}>
+                      <th scope="row">{plan.name}</th>
+                      <td>{plan.price}</td>
+                      <td>{plan.features}</td>
+                      <td>{plan.support}</td>
+                      <td>{plan.roi}</td>
+                      <td>
+                        <a className="btn btn-outline" href="#contact">
+                          {plan.cta}
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-cta" href="#contact">
+                最適なプランを提案してもらう
+              </a>
             </div>
           </div>
         </section>
 
-        {/* プロセスセクション */}
+        {/* FAQセクション */}
         <section
-          id="process"
+          id="faq"
           ref={(node) => {
-            sectionRefs.current["process"] = node ?? null;
+            sectionRefs.current["faq"] = node ?? null;
           }}
-          className="section process"
-          aria-labelledby="process-heading"
+          className="section faq"
+          aria-labelledby="faq-heading"
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="process-heading">成功までの4ステップ</h2>
-              <p>AIと人の役割を明確に分担し、意思決定の質を高めるプロセスです。</p>
+              <h2 id="faq-heading">よくあるご質問とリスク対策</h2>
+              <p>AIの限界や導入時の不安を率直に解説し、ヒト×AI×専門家の三位一体でどう解消するかを示します。</p>
             </div>
-            <ol className="process-timeline">
-              {processSteps.map((step, index) => {
-                const StepIcon = step.icon;
-                return (
-                  <li key={step.title} className={`process-step process-step--${step.accent}`} data-animate>
-                    <div className={`process-marker process-marker--${step.accent}`} aria-hidden="true">
-                      <span>{index + 1}</span>
-                      <StepIcon />
-                    </div>
-                    <div className="process-content">
-                      <h3>{step.title}</h3>
-                      <p>{step.description}</p>
-                      <div className="process-roles">
-                        <div>
-                          <strong>AI</strong>
-                          <span>{step.aiRole}</span>
-                        </div>
-                        <div>
-                          <strong>人</strong>
-                          <span>{step.humanRole}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                );
-              })}
-            </ol>
-            <div className="process-flowchart" data-animate>
-              {processTimeline.map((item) => {
-                const FlowIcon = item.icon;
-                return (
-                  <div key={item.stage} className={`process-flow-item process-flow-item--${item.accent}`}>
-                    <div className="process-flow-icon" aria-hidden="true">
-                      <FlowIcon />
-                    </div>
-                    <h3>{item.stage}</h3>
-                    <p>{item.aiFocus}</p>
-                    <p>{item.humanFocus}</p>
-                  </div>
-                );
-              })}
-            </div>
-            <div className="process-dataflow" data-animate>
-              {dataFlowStages.map((stage, index) => {
-                const DataIcon = stage.icon;
-                return (
-                  <div key={stage.label} className={`dataflow-card dataflow-card--${stage.accent}`}>
-                    <div className="dataflow-card__icon" aria-hidden="true">
-                      <DataIcon />
-                    </div>
-                    <div className="dataflow-card__body">
-                      <span>STEP {index + 1}</span>
-                      <h3>{stage.label}</h3>
-                      <p>{stage.description}</p>
-                      <strong>{stage.result}</strong>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+            <dl className="faq-list">
+              {faqItems.map((item) => (
+                <div key={item.question} className="faq-item" data-animate>
+                  <dt>{item.question}</dt>
+                  <dd>{item.answer}</dd>
+                </div>
+              ))}
+            </dl>
             <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#contact">
-                専門家との伴走体制を相談する
+              <a className="btn btn-cta" href="#contact">
+                個別の懸念を相談する
               </a>
             </div>
           </div>
@@ -1618,93 +1790,6 @@ const Index = () => {
           </div>
         </section>
 
-        {/* シミュレーターセクション */}
-        <section className="section simulator" aria-labelledby="simulator-heading">
-          <div className="container">
-            <div className="section-header" data-animate>
-              <h2 id="simulator-heading">AI活用インパクトを即時シミュレート</h2>
-              <p>入力値に合わせてROIと生産性向上の見込みがリアルタイムに更新されます。</p>
-            </div>
-            <div className="simulator-content" data-animate>
-              <form className="simulator-form" aria-label="シミュレーター入力">
-                <label>
-                  年商規模 (億円)
-                  <input
-                    type="range"
-                    min="5"
-                    max="15"
-                    step="0.5"
-                    name="revenueGoal"
-                    value={simulator.revenueGoal}
-                    onChange={handleSimulatorChange}
-                    aria-valuetext={`${simulator.revenueGoal}億円`}
-                  />
-                  <span>{simulator.revenueGoal.toFixed(1)} 億円</span>
-                </label>
-                <label>
-                  初期投資 (万円)
-                  <input
-                    type="number"
-                    name="investment"
-                    min={100}
-                    step={50}
-                    value={simulator.investment}
-                    onChange={handleSimulatorChange}
-                  />
-                </label>
-                <label>
-                  自動化レベル (%)
-                  <input
-                    type="range"
-                    min="30"
-                    max="100"
-                    step="5"
-                    name="automation"
-                    value={simulator.automation}
-                    onChange={handleSimulatorChange}
-                    aria-valuetext={`${simulator.automation}%`}
-                  />
-                  <span>{simulator.automation}%</span>
-                </label>
-                <label>
-                  チーム人数
-                  <input
-                    type="number"
-                    name="teamSize"
-                    min={3}
-                    step={1}
-                    value={simulator.teamSize}
-                    onChange={handleSimulatorChange}
-                  />
-                </label>
-              </form>
-              <div className="simulator-visual" role="img" aria-label="シミュレーション結果グラフ">
-                <svg viewBox="0 0 100 100">
-                  <polyline points={simulatorChart.svgPoints} />
-                </svg>
-                <div className="simulator-stats">
-                  <div>
-                    <span>年間工数削減</span>
-                    <strong>{simulatorChart.hoursSaved.toFixed(0)} 時間</strong>
-                  </div>
-                  <div>
-                    <span>年間コスト削減</span>
-                    <strong>{simulatorChart.costSaved.toFixed(0)} 万円</strong>
-                  </div>
-                  <div>
-                    <span>期待ROI</span>
-                    <strong>{simulatorChart.roi.toFixed(1)}%</strong>
-                  </div>
-                  <div>
-                    <span>生産性向上</span>
-                    <strong>+{simulatorChart.productivityGain.toFixed(1)}%</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* 資料セクション */}
         <section
           id="resources"
@@ -1737,91 +1822,8 @@ const Index = () => {
               })}
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#contact">
+              <a className="btn btn-cta" href="#contact">
                 資料ダウンロードの案内を受け取る
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* 料金プラン */}
-        <section
-          id="pricing"
-          ref={(node) => {
-            sectionRefs.current["pricing"] = node ?? null;
-          }}
-          className="section pricing"
-          aria-labelledby="pricing-heading"
-        >
-          <div className="container">
-            <div className="section-header" data-animate>
-              <h2 id="pricing-heading">料金プラン</h2>
-              <p>規模や目的に合わせて3つのプランをご用意。期待できるROIも明記しています。</p>
-            </div>
-            <div className="pricing-table-wrapper" data-animate>
-              <table className="pricing-table">
-                <caption className="sr-only">プラン別の料金と提供内容</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">プラン</th>
-                    <th scope="col">月額</th>
-                    <th scope="col">主な機能</th>
-                    <th scope="col">サポート</th>
-                    <th scope="col">想定ROI</th>
-                    <th scope="col" aria-label="アクション" />
-                  </tr>
-                </thead>
-                <tbody>
-                  {pricingPlans.map((plan) => (
-                    <tr key={plan.name}>
-                      <th scope="row">{plan.name}</th>
-                      <td>{plan.price}</td>
-                      <td>{plan.features}</td>
-                      <td>{plan.support}</td>
-                      <td>{plan.roi}</td>
-                      <td>
-                        <a className="btn btn-outline" href="#contact">
-                          {plan.cta}
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#contact">
-                最適なプランを提案してもらう
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* FAQセクション */}
-        <section
-          id="faq"
-          ref={(node) => {
-            sectionRefs.current["faq"] = node ?? null;
-          }}
-          className="section faq"
-          aria-labelledby="faq-heading"
-        >
-          <div className="container">
-            <div className="section-header" data-animate>
-              <h2 id="faq-heading">よくあるご質問とリスク対策</h2>
-              <p>AIの限界や導入時の不安を率直に解説し、ヒト×AI×専門家の三位一体でどう解消するかを示します。</p>
-            </div>
-            <dl className="faq-list">
-              {faqItems.map((item) => (
-                <div key={item.question} className="faq-item" data-animate>
-                  <dt>{item.question}</dt>
-                  <dd>{item.answer}</dd>
-                </div>
-              ))}
-            </dl>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-outline" href="#contact">
-                個別の懸念を相談する
               </a>
             </div>
           </div>
@@ -1857,7 +1859,7 @@ const Index = () => {
               })}
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#contact">
+              <a className="btn btn-cta" href="#contact">
                 セキュリティ要件を相談する
               </a>
             </div>
@@ -1928,7 +1930,7 @@ const Index = () => {
                 />
               </label>
               <div className="form-actions">
-                <button className="btn btn-accent" type="submit" disabled={isSubmitting}>
+                <button className="btn btn-cta" type="submit" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <span className="btn-progress">
                       <span className="btn-spinner" aria-hidden="true" />
@@ -1953,7 +1955,7 @@ const Index = () => {
             </form>
           </div>
           <div className="mobile-form-cta" aria-hidden="true">
-            <a className="btn btn-accent" href="#contact">
+            <a className="btn btn-cta" href="#contact">
               フォームを送信
             </a>
           </div>

@@ -29,6 +29,9 @@
   --citrus-400: #f7b267;
   --citrus-200: #ffe7cc;
   --citrus-100: #fff4e8;
+  --sunset-600: #ff5a5f;
+  --sunset-500: #ff7a59;
+  --sunset-400: #ff9a73;
   --error-500: #e11d48;
   --white: #ffffff;
   --page-bg: #fafdff;
@@ -46,7 +49,7 @@
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, var(--gray-25), #ffffff 60%, var(--gray-25));
+  background: linear-gradient(180deg, rgba(240, 248, 255, 0.94), #ffffff 55%, rgba(240, 248, 255, 0.9));
   color: var(--gray-900);
   line-height: 1.7;
 }
@@ -86,7 +89,9 @@ svg {
 }
 
 .lp-root {
-  background: linear-gradient(180deg, rgba(236, 244, 255, 0.85), rgba(255, 250, 245, 0.92));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(235, 245, 255, 0.92)),
+    radial-gradient(circle at 12% 8%, rgba(147, 197, 253, 0.18), transparent 55%),
+    radial-gradient(circle at 88% 12%, rgba(247, 178, 103, 0.18), transparent 60%);
 }
 
 /* ======================================================
@@ -106,15 +111,27 @@ svg {
 }
 
 .btn-accent {
-  background: linear-gradient(135deg, var(--mint-400), var(--sky-500));
+  background: linear-gradient(135deg, rgba(90, 190, 255, 0.96), rgba(61, 214, 181, 0.96));
   color: var(--white);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 16px 30px rgba(34, 100, 171, 0.16);
 }
 
 .btn-accent:hover,
 .btn-accent:focus-visible {
-  transform: translateY(-1px) scale(1.01);
+  transform: translateY(-1px) scale(1.02);
   box-shadow: var(--shadow-lg);
+}
+
+.btn-cta {
+  background: linear-gradient(135deg, var(--sunset-400), var(--sunset-600));
+  color: var(--white);
+  box-shadow: 0 20px 44px rgba(255, 90, 95, 0.28);
+}
+
+.btn-cta:hover,
+.btn-cta:focus-visible {
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 26px 54px rgba(255, 90, 95, 0.34);
 }
 
 .btn-outline {
@@ -345,12 +362,13 @@ svg {
 /* ======================================================
    Hero section with parallax & metrics
    ====================================================== */
+
 .hero {
   position: relative;
   padding: 104px 0 120px;
-  background: radial-gradient(circle at 15% 20%, rgba(147, 197, 253, 0.3), transparent 60%),
-    radial-gradient(circle at 82% 12%, rgba(247, 178, 103, 0.28), transparent 65%),
-    linear-gradient(135deg, #f5f9ff, #fef4e9 60%, #ffffff 100%);
+  background: linear-gradient(135deg, rgba(237, 247, 255, 0.97), rgba(255, 255, 255, 0.98) 55%, rgba(237, 247, 255, 0.94)),
+    radial-gradient(circle at 18% 18%, rgba(147, 197, 253, 0.25), transparent 60%),
+    radial-gradient(circle at 82% 10%, rgba(255, 214, 170, 0.22), transparent 65%);
   color: var(--navy-900);
   overflow: hidden;
 }
@@ -359,7 +377,7 @@ svg {
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 78% 8%, rgba(34, 198, 165, 0.16), transparent 65%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0), rgba(147, 197, 253, 0.08) 90%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(147, 197, 253, 0.12) 90%);
   pointer-events: none;
 }
 
