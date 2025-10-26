@@ -165,6 +165,19 @@ svg {
   color: var(--navy-700);
 }
 
+.btn-next {
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(79, 163, 255, 0.16), rgba(31, 157, 122, 0.16));
+  border-color: rgba(60, 128, 193, 0.28);
+  color: var(--navy-700);
+}
+
+.btn-next:hover,
+.btn-next:focus-visible {
+  background: linear-gradient(135deg, rgba(79, 163, 255, 0.28), rgba(31, 157, 122, 0.28));
+  box-shadow: var(--shadow-sm);
+}
+
 .btn-progress {
   display: inline-flex;
   align-items: center;
@@ -178,6 +191,22 @@ svg {
   border: 2px solid rgba(255, 255, 255, 0.6);
   border-top-color: var(--white);
   animation: spin 0.9s linear infinite;
+}
+
+.next-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 56px;
+}
+
+.next-section__label {
+  font-weight: 700;
+  color: var(--navy-600);
+}
+
+.next-section .btn svg {
+  width: 18px;
+  height: 18px;
 }
 
 @keyframes spin {
@@ -255,6 +284,61 @@ svg {
   font-size: 0.9rem;
 }
 
+.quick-nav {
+  position: sticky;
+  top: 72px;
+  z-index: 35;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(15, 33, 55, 0.08);
+}
+
+.quick-nav__inner {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.quick-nav__inner::-webkit-scrollbar {
+  height: 6px;
+}
+
+.quick-nav__inner::-webkit-scrollbar-thumb {
+  background: rgba(60, 128, 193, 0.35);
+  border-radius: 999px;
+}
+
+.quick-nav__link {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(60, 128, 193, 0.28);
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--navy-700);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  transition: background 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+}
+
+.quick-nav__link:hover,
+.quick-nav__link:focus-visible {
+  background: linear-gradient(135deg, rgba(79, 163, 255, 0.2), rgba(31, 157, 122, 0.2));
+  box-shadow: var(--shadow-sm);
+}
+
+.quick-nav__link.is-active {
+  background: linear-gradient(135deg, rgba(60, 128, 193, 0.92), rgba(31, 157, 122, 0.92));
+  color: var(--white);
+  border-color: transparent;
+  box-shadow: var(--shadow-md);
+}
+
 /* ======================================================
    Hero section with parallax & metrics
    ====================================================== */
@@ -290,6 +374,7 @@ svg {
   font-size: clamp(2.6rem, 4vw, 3.2rem);
   line-height: 1.2;
   margin: 0 0 18px;
+  word-break: keep-all;
 }
 
 .hero-copy h1 span {
@@ -298,6 +383,7 @@ svg {
   font-weight: 500;
   margin-top: 8px;
   color: var(--gray-600);
+  word-break: keep-all;
 }
 
 .hero-points {
@@ -2877,6 +2963,36 @@ svg {
   max-width: 320px;
 }
 
+.back-to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 108px;
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(60, 128, 193, 0.95), rgba(31, 157, 122, 0.95));
+  color: var(--white);
+  box-shadow: 0 20px 38px rgba(15, 37, 71, 0.26);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+  z-index: 55;
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 26px 48px rgba(15, 37, 71, 0.3);
+}
+
+.back-to-top svg {
+  width: 22px;
+  height: 22px;
+}
+
 .floating-cta {
   position: fixed;
   bottom: 24px;
@@ -2996,6 +3112,10 @@ svg {
   .pricing-table {
     min-width: 100%;
   }
+
+  .quick-nav__inner {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 768px) {
@@ -3041,6 +3161,36 @@ svg {
   .faq-list,
   .security-grid {
     grid-template-columns: 1fr;
+  }
+
+  .quick-nav {
+    top: 64px;
+  }
+
+  .quick-nav__inner {
+    padding: 10px 8px;
+    gap: 8px;
+  }
+
+  .quick-nav__link {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  .next-section {
+    margin-top: 40px;
+  }
+
+  .back-to-top {
+    right: 16px;
+    bottom: 96px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .back-to-top svg {
+    width: 18px;
+    height: 18px;
   }
 
   .process-timeline::before {
@@ -3164,5 +3314,13 @@ svg {
 
   .velocity-axis {
     grid-template-columns: 1fr;
+  }
+
+  .quick-nav__link {
+    font-size: 0.8rem;
+  }
+
+  .next-section {
+    margin-top: 32px;
   }
 }
