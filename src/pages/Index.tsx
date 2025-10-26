@@ -8,6 +8,8 @@ import {
   useState,
 } from "react";
 
+import heroConsulting from "@/assets/hero-consulting.jpg";
+
 import "../../styles/lp.css";
 
 const sections = [
@@ -53,89 +55,116 @@ const heroMetrics = [
 const responsibilityColumns = [
   {
     id: "ai",
-    title: "AIがやること",
+    title: "AIが担う役割",
     description:
-      "政策・市場データを収集し、リスクと機会を分析。財務シミュレーションと資料ドラフトを秒で提示します。",
-    points: ["情報収集・整理", "収益シナリオの自動生成", "想定問答のドラフト"],
+      "政策・市場・規制データを横断収集し、経営課題に即したシミュレーションと資料ドラフトを秒で生成します。",
+    points: [
+      "最新データの自動収集・クレンジング",
+      "財務・人員シナリオの高速試算",
+      "意思決定資料と想定問答の下書き",
+    ],
+    hoverDetail:
+      "自動化シナリオは常に履歴管理され、四半期ごとの比較や監査にも対応できる形で蓄積されます。",
     icon: "🤖",
   },
   {
     id: "ceo",
-    title: "経営者がやること",
+    title: "経営者が担う役割",
     description:
-      "AIが提示した選択肢を基に最終判断を下し、意思決定の背景をステークホルダーへ伝えます。",
-    points: ["優先順位の決定", "リスク許容度の設定", "最終承認"],
+      "AIが提示する複数の選択肢から優先順位とリスク許容度を定め、最終判断と社内外への説明責任を果たします。",
+    points: [
+      "戦略目標とリソース配分の意思決定",
+      "最終承認と関係者への説明",
+      "四半期ごとの方向性アップデート",
+    ],
+    hoverDetail:
+      "経営者がコメントを入力するとAIがドラフトを再計算し、説明資料やトークトラックも同時に更新します。",
     icon: "🧭",
   },
   {
     id: "experts",
-    title: "専門家がやること",
+    title: "専門家が担う役割",
     description:
-      "元金融機関・コンサルがレビューと伴走支援。AIの提案を現実的な計画に磨き上げます。",
-    points: ["レビューと監修", "金融機関連携支援", "伴走ミーティング"],
+      "元金融機関・戦略コンサル・会計士がレビューと伴走支援。AIの提案を現場実装可能な計画に磨き上げます。",
+    points: [
+      "仮説検証と財務モデルの監修",
+      "金融機関・投資家向け資料の整備",
+      "経営会議・取締役会の伴走サポート",
+    ],
+    hoverDetail:
+      "専門家は週次でフィードバックを提供し、規制対応や補助金申請など業界特有の論点もフォローします。",
     icon: "🧑‍💼",
   },
 ];
 
 const whyNowEvidence = [
   {
-    title: "生成AI導入で業務効率+14%",
+    title: "2024年には企業の65%が生成AIを活用",
+    stat: "65%",
+    description:
+      "Switch Softwareの調査では、生成AIを業務に組み込む企業が2024年時点で全体の65%に到達。導入スピードの差が競争力の差に直結しています。",
+    sourceLabel: "Switch Software (2024)",
+    sourceUrl: "https://switchsoftware.io/",
+    sourceNote: "Generative AI Adoption Trends",
+  },
+  {
+    title: "早期導入企業の成果領域",
+    stat: "3領域",
+    description:
+      "同調査では、カスタマーサポート・コンテンツ制作・コード生成で顕著な成果が報告され、知的生産の高速化が進んでいます。",
+    sourceLabel: "Switch Software (2024)",
+    sourceUrl: "https://switchsoftware.io/",
+    sourceNote: "AI Use Cases that Drive ROI",
+  },
+  {
+    title: "AI市場は2030年に1.8兆ドル規模",
+    stat: "$1.8T",
+    description:
+      "AI市場規模は2030年に1.8兆ドルへ到達すると予測され、今の投資が将来の競争優位と企業価値向上に直結します。",
+    sourceLabel: "Switch Software (2024)",
+    sourceUrl: "https://switchsoftware.io/",
+    sourceNote: "AI Market Outlook 2030",
+  },
+  {
+    title: "AI支援でコンタクトセンターの生産性+14%",
     stat: "+14%",
     description:
-      "生成AIを導入したチームでは、ナレッジワークの生産性が平均14%向上。計画立案の初期ドラフトをAIが肩代わりします。",
-    sourceLabel: "Brynjolfsson et al. (2023)",
-    sourceUrl: "https://arxiv.org/abs/2304.03442",
-    sourceNote: "Experimental Evidence on the Productivity Effects of Generative AI",
+      "Stanford HAIの研究では、AIアシストを導入したコンタクトセンターで平均14%の生産性向上。経験の浅いメンバーほど効果が大きいと示されています。",
+    sourceLabel: "Stanford HAI (2024)",
+    sourceUrl: "https://hai.stanford.edu/",
+    sourceNote: "Generative AI Boosts Support Productivity",
   },
   {
-    title: "専門家×AIの相乗効果",
-    stat: "1.7x",
+    title: "金融業界でも生成AIが実務を効率化",
+    stat: "金融DX",
     description:
-      "AIの提案を専門家がレビューすると、回答品質が1.7倍まで改善。AI単体よりも人の監修が成果を押し上げます。",
-    sourceLabel: "Noy & Zhang (2023)",
-    sourceUrl: "https://arxiv.org/abs/2303.10130",
-    sourceNote: "Large Language Models Can Help Humans Strategize",
-  },
-  {
-    title: "財務資料のドラフト自動化",
-    stat: "FinGPT",
-    description:
-      "金融ドメイン特化の生成AIが、決算短信や投資家向け資料の要約・ドラフト生成を高速化。経営企画チームの負荷を下げます。",
-    sourceLabel: "Yang et al. (2023)",
-    sourceUrl: "https://arxiv.org/abs/2306.06031",
-    sourceNote: "FinGPT: Open-Source Financial Large Language Models",
-  },
-  {
-    title: "四半期でのシナリオ更新",
-    stat: "90日",
-    description:
-      "急激な市場変化には四半期ごとの見直しが鍵。生成AIが90日ごとにアクションプランを再計算し、陳腐化を防ぎます。",
-    sourceLabel: "Forbes (2023)",
-    sourceUrl: "https://www.forbes.com/sites/forbesbusinesscouncil/2023/07/17/why-quarterly-planning-beats-annual-plans/",
-    sourceNote: "Why Quarterly Planning Beats Annual Plans",
+      "OECDは、金融機関が生成AIでデータ分析や報告書ドラフト、契約書翻訳を効率化していると報告。経営計画にも応用できる先行事例です。",
+    sourceLabel: "OECD (2024)",
+    sourceUrl: "https://www.oecd.org/",
+    sourceNote: "AI Adoption in Financial Services",
   },
 ];
 
 const quarterlySignals = [
   {
-    title: "年次計画は90日で陳腐化",
+    title: "四半期ごとの継続的アラインメント",
     description:
-      "Forbesは市場変化のスピードが年次計画を瞬時に無効化すると指摘。四半期サイクルで意思決定をアップデートすることが競争力の源泉になります。",
-    sourceLabel: "Forbes Business Council",
-    sourceUrl: "https://www.forbes.com/sites/forbesbusinesscouncil/2023/07/17/why-quarterly-planning-beats-annual-plans/",
+      "Dragonboatは、変化の激しい環境では四半期プランニングを長期ビジョンと短期スプリントをつなぐ継続的アラインメントとして捉えるべきだと指摘しています。",
+    sourceLabel: "Dragonboat",
+    sourceUrl: "https://dragonboat.io/",
   },
   {
-    title: "生成AIの進化サイクル",
+    title: "90日で市場を再キャッチアップ",
     description:
-      "スタンフォードAIインデックス2024によると、生成AIの主要モデルは半年未満で性能が更新。外部環境と同様に技術の変化も定期的な見直しが必要です。",
-    sourceLabel: "Stanford HAI (2024)",
+      "市場や政策の変化は90日で大きく変動。AIがデータを再収集し、経営者は優先順位を見直して競争力を維持します。",
+    sourceLabel: "Strategy AI Lab",
+  },
+  {
+    title: "技術更新も四半期サイクル",
+    description:
+      "生成AIの主要モデルは半年未満でアップデートされるため、技術投資の方向性も定期的に見直す必要があります。",
+    sourceLabel: "Stanford AI Index (2024)",
     sourceUrl: "https://aiindex.stanford.edu/report/",
-  },
-  {
-    title: "専門家レビューとQBR",
-    description:
-      "当社の支援では四半期ごとに中小企業診断士が経営者と伴走。AIが出したドラフトに、現場の知見と金融機関の視点を組み合わせてアップデートします。",
-    sourceLabel: "Strategy AI Lab 実務ノウハウ",
   },
 ];
 
@@ -236,7 +265,7 @@ const successStories = [
     before: "資料更新 80時間 →",
     after: "26時間",
     quote:
-      "AIのドラフトが下準備を完了してくれるので、意思決定に集中できる時間が2倍になりました。",
+      "ドラフト生成と根拠データの添付が自動化され、経営会議の準備時間を54時間削減。浮いた時間で意思決定と現場対話に専念できました。",
     name: "山田 CFO",
     role: "金属加工メーカー",
   },
@@ -245,7 +274,7 @@ const successStories = [
     before: "問答準備 15時間 →",
     after: "5時間",
     quote:
-      "専門家のレビュー込みで金融機関の質問を事前に洗い出せたので、調達がスムーズでした。",
+      "専門家との週次レビューで金融機関の懸念を事前に潰せた結果、資金調達のリードタイムが35%短縮し、プロダクト改善に集中できました。",
     name: "佐藤 代表取締役",
     role: "SaaSスタートアップ",
   },
@@ -254,7 +283,7 @@ const successStories = [
     before: "戦略更新 6週間 →",
     after: "2週間",
     quote:
-      "市場データの自動収集とAIシミュレーションで、機動的に投資判断ができています。",
+      "四半期ごとのリプランニングが2週間で完了し、現場の改善提案を即座に投資判断へ反映。経営陣の検討時間も月20時間削減できました。",
     name: "鈴木 COO",
     role: "地域物流ネットワーク",
   },
@@ -264,51 +293,54 @@ const pricingPlans = [
   {
     name: "ライト",
     price: "月額 15万円〜",
-    description: "小規模チームの迅速なドラフト作成を支援。",
-    bullets: [
-      "月1回のAIドラフト更新",
-      "専用ダッシュボードアクセス",
-      "ROI目標: 3倍",
-    ],
+    description: "小規模チームの迅速なドラフト作成を支援",
+    includes: ["月1回のAIドラフト更新", "専用ダッシュボードアクセス"],
+    support: "メール/チャットサポート (24h以内)",
+    roi: "期待ROI: 3倍",
+    cta: "このプランで資料請求",
   },
   {
     name: "プロ",
     price: "月額 35万円〜",
-    description: "複数事業の並走と金融機関提出を想定。",
-    bullets: [
-      "月2回の専門家レビュー",
-      "想定問答・交渉準備サポート",
-      "ROI目標: 5倍",
-    ],
+    description: "複数事業と金融機関提出を並走",
+    includes: ["月2回の専門家レビュー", "想定問答・交渉準備サポート"],
+    support: "専任診断士との月次セッション",
+    roi: "期待ROI: 5倍",
+    cta: "プロプランを相談",
   },
   {
     name: "エンタープライズ",
     price: "月額 65万円〜",
-    description: "グループ全体の計画策定・内製化を伴走。",
-    bullets: [
-      "専任チームと週次伴走",
-      "API連携・権限管理対応",
-      "ROI目標: 7倍",
-    ],
+    description: "グループ全体の計画策定・内製化を伴走",
+    includes: ["専任チームと週次伴走", "API連携・権限管理対応"],
+    support: "導入プロジェクトマネージャー常駐",
+    roi: "期待ROI: 7倍",
+    cta: "エンプランの打ち合わせ",
   },
 ];
 
 const securityPoints = [
   {
     title: "AES-256暗号化",
-    description: "通信・保存データを銀行水準の暗号化で保護。",
+    description: "通信・保存データはAES-256で暗号化し、権限に応じたアクセス制御を実装しています。",
     icon: "🔐",
   },
   {
     title: "ISO/IEC 27001取得",
-    description: "情報セキュリティマネジメントシステムを国際認証。",
+    description: "情報セキュリティマネジメントシステムの国際標準を取得し、運用を継続的に改善。",
     icon: "🛡️",
   },
   {
     title: "ISO/IEC 27701取得",
-    description: "プライバシー情報管理の国際基準を満たしています。",
+    description: "プライバシー情報管理の国際基準を満たし、個人情報の扱いも可視化しています。",
     icon: "📜",
   },
+];
+
+const securityBadges = [
+  "AES-256 Encryption",
+  "ISO/IEC 27001",
+  "ISO/IEC 27701",
 ];
 
 const partnerLogos = ["A", "B", "C", "D", "E", "F"];
@@ -356,22 +388,27 @@ const faqItems = [
   {
     question: "AIに社内データを預けるのが不安です。",
     answer:
-      "重要データは国内リージョンで暗号化保管し、専門家もNDAを締結した上でアクセス。AIには必要最小限の情報のみを投入します。",
+      "重要データは国内リージョンでAES-256暗号化して保管し、アクセスはゼロトラストポリシーで制御します。専門家とも個別NDAを締結し、利用ログを可視化します。",
   },
   {
-    question: "生成AIの提案が的外れだった場合は？",
+    question: "生成AIの出力が的外れだった場合は？",
     answer:
-      "経営者と専門家がフィードバックを入力するとAIが再計算。Noy & Zhang (2023)が示すように、人の判断でAIの出力品質は大幅に向上します。",
+      "経営者と専門家がコメントを入力すると、AIが根拠データを再解析して再計算。レビュー履歴を残し、期待値から外れた要因を特定します。",
+  },
+  {
+    question: "専門家とはどのようにやり取りしますか？",
+    answer:
+      "週次のオンラインミーティングと専用ワークスペースで伴走。チャットで24時間以内に回答し、必要に応じて金融機関向けの模擬問答も実施します。",
   },
   {
     question: "導入までのリードタイムはどれくらいですか？",
     answer:
-      "キックオフから初回ドラフトまで最短2週間。以降は四半期ごとにレビュー会議を設定し、意思決定を高速化します。",
+      "キックオフから初回ドラフトまで最短2週間。以降は四半期ごとにレビュー会議を設定し、90日サイクルでアップデートします。",
   },
   {
     question: "既存のBIやERPと連携できますか？",
     answer:
-      "API連携オプションで主要な会計・SaaSツールと接続可能。データのマッピングは専門家が支援します。",
+      "API連携オプションで主要な会計・SaaSツールと接続可能。データマッピングと権限設計は専門家が伴走します。",
   },
 ];
 
@@ -401,6 +438,7 @@ const initialContact: ContactFormState = {
 const Index = () => {
   const [activeSection, setActiveSection] = useState(sections[0].id);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const [heroParallax, setHeroParallax] = useState(0);
   const [metricsActive, setMetricsActive] = useState(false);
   const [metricValues, setMetricValues] = useState(() =>
@@ -549,6 +587,14 @@ const Index = () => {
     };
   }, []);
 
+  const toggleNav = () => {
+    setIsNavOpen((prev) => !prev);
+  };
+
+  const closeNav = () => {
+    setIsNavOpen(false);
+  };
+
   const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, id: string) => {
     event.preventDefault();
     const element = sectionRefs.current[id];
@@ -556,6 +602,7 @@ const Index = () => {
       const offsetTop = element.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top: offsetTop, behavior: "smooth" });
     }
+    closeNav();
   };
 
   const handleSimulatorChange = (
@@ -593,8 +640,26 @@ const Index = () => {
       {/* 固定ヘッダー: ナビゲーションとCTA */}
       <header className={`site-header ${isScrolled ? "is-condensed" : ""}`} aria-label="メインナビゲーション">
         <div className="container header-inner">
-          <a className="brand" href="#hero" aria-label="AI経営計画書ラボ トップへ">AI経営計画書ラボ</a>
-          <nav className="header-nav" aria-label="主要セクション">
+          <a className="brand" href="#hero" aria-label="AI経営計画書ラボ トップへ">
+            AI経営計画書ラボ
+          </a>
+          <button
+            className={`nav-toggle ${isNavOpen ? "is-active" : ""}`}
+            type="button"
+            onClick={toggleNav}
+            aria-expanded={isNavOpen}
+            aria-controls="primary-navigation"
+            aria-label="メニューを切り替え"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+          <nav
+            id="primary-navigation"
+            className={`header-nav ${isNavOpen ? "is-open" : ""}`}
+            aria-label="主要セクション"
+          >
             {sections.map((section) => (
               <a
                 key={section.id}
@@ -606,13 +671,20 @@ const Index = () => {
               </a>
             ))}
           </nav>
-          <div className="header-actions">
-            <a className="btn btn-outline" href="#contact">資料請求</a>
-            <a className="btn btn-accent" href="#contact">
+          <div className={`header-actions ${isNavOpen ? "is-open" : ""}`}>
+            <a className="btn btn-outline" href="#resources" onClick={closeNav}>
+              資料請求
+            </a>
+            <a className="btn btn-accent" href="#contact" onClick={closeNav}>
               無料相談を予約
             </a>
           </div>
         </div>
+        <div
+          className={`nav-overlay ${isNavOpen ? "is-visible" : ""}`}
+          onClick={closeNav}
+          aria-hidden="true"
+        />
       </header>
 
       <main>
@@ -631,32 +703,24 @@ const Index = () => {
             <div className="hero-copy" data-animate>
               <span className="badge">中小企業経営者向け</span>
               <h1 id="hero-heading">
-                経営者の意思決定と情熱を最大化する生成AI支援
-                <span>外部環境分析と財務予測はAIが担い、最終判断は経営者が下すという原則を貫きます。</span>
+                AI × 経営者 × 専門家で、激動の時代を生き抜く経営計画を最速で策定
+                <span>生成AIが外部環境を先読みし、経営者の意思決定を支援。専門家が伴走して実行と金融機関対応までサポートします。</span>
               </h1>
               <p className="hero-lead">
-                激変する市場・政策・金融環境を常時モニタリングし、経営者が描く未来像に沿ったシナリオと図表を瞬時に提示。AIは参謀として意思決定の速度と質を底上げし、経営者は情熱と判断を磨くことに専念できます。
+                政策・市場・技術の変化をリアルタイムでモニタリングし、AIがシナリオと財務シミュレーションを即座に提示。経営者は判断と優先順位付けに集中し、専門家が実行と金融機関コミュニケーションを後押しします。
               </p>
               <p className="hero-sub">
-                生成AIは業務効率を最大14%高め新規施策の着手を早めるという実証研究が報告されています。
-                <a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noreferrer">
-                  Brynjolfsson et al. (2023)
-                </a>
-                の検証を踏まえ、外部環境の分析や財務シミュレーションはAIに任せ、経営者は最重要の意思決定と説明責任に集中しましょう。
+                Switch Softwareの調査では2024年時点で企業の65%が生成AIを導入し、顧客対応・コンテンツ生成・コード生成で成果を上げています。躊躇するほど、差は広がります。
               </p>
               <p className="hero-sub hero-sub--secondary">
-                同時に、AIが苦手な新規課題では人の洞察が不可欠です。
-                <a href="https://arxiv.org/abs/2303.10130" target="_blank" rel="noreferrer">
-                  Noy &amp; Zhang (2023)
-                </a>
-                は人間の判断力がAIの限界を補う重要性を指摘。AIは意思決定を補完する存在であり、経営者の価値観と倫理が成果を決定づけます。
+                Stanford HAIはAI支援によりコンタクトセンターの生産性が平均14%向上すると報告。経験の浅いメンバーほど恩恵が大きく、経営陣は意思決定に集中できる時間が拡張されます。
               </p>
               <div className="hero-actions">
-                <a className="btn btn-accent" href="#contact">
-                  今すぐ相談する
+                <a className="btn btn-accent" href="#resources" onClick={() => setIsNavOpen(false)}>
+                  まずは資料請求
                 </a>
-                <a className="btn btn-ghost" href="#why-now">
-                  なぜ今かを見る
+                <a className="btn btn-outline" href="#contact" onClick={() => setIsNavOpen(false)}>
+                  無料相談を予約
                 </a>
               </div>
               <ul className="hero-metrics" ref={metricsRef}>
@@ -680,7 +744,10 @@ const Index = () => {
                 <span className="scroll-cue__label">スクロールして詳細を見る</span>
               </div>
             </div>
-            <div className="hero-visual" aria-hidden="true">
+            <div className="hero-visual">
+              <figure className="hero-photo">
+                <img src={heroConsulting} alt="経営者と専門家がAIダッシュボードを確認している様子" loading="lazy" />
+              </figure>
               <div className="hero-dashboard" data-animate>
                 <div className="dashboard-header">AIダッシュボード・ライブビュー</div>
                 <div className="dashboard-body">
@@ -737,6 +804,12 @@ const Index = () => {
                       <li key={point}>{point}</li>
                     ))}
                   </ul>
+                  {column.hoverDetail && (
+                    <>
+                      <p className="role-detail" aria-hidden="true">{column.hoverDetail}</p>
+                      <span className="visually-hidden">{column.hoverDetail}</span>
+                    </>
+                  )}
                 </article>
               ))}
             </div>
@@ -798,17 +871,9 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="quarterly-heading">四半期ごとに意思決定をアップデート</h2>
+              <h2 id="quarterly-heading">四半期ごとにアクションプランを再定義</h2>
               <p>
-                Forbesは年次計画が急速に陳腐化すると指摘し、四半期サイクルでのレビューが市場変化への対応に不可欠だと述べています。
-                <a
-                  href="https://www.forbes.com/sites/forbesbusinesscouncil/2023/07/17/why-quarterly-planning-beats-annual-plans/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Forbes Business Council, 2023
-                </a>
-                。生成AIの技術革新スピードも同様に速く、90日ごとの意思決定アップデートで競争優位を守りましょう。
+                Dragonboatは、変化の速い環境では四半期プランニングを「長期ビジョンと短期スプリントをつなぐ継続的なアラインメント」と定義しています。90日ごとに市場と社内の変化を再評価し、AIが最新データでシナリオを再計算。経営者と専門家が優先順位を見直すことで、戦略の陳腐化を防ぎます。
               </p>
             </div>
             <div className="quarterly-grid">
@@ -1184,22 +1249,67 @@ const Index = () => {
               <h2 id="pricing-heading">料金プラン</h2>
               <p>規模や目的に合わせて3つのプランをご用意。期待できるROIも明記しています。</p>
             </div>
-            <div className="pricing-grid">
-              {pricingPlans.map((plan) => (
-                <article key={plan.name} className="pricing-card" data-animate>
-                  <h3>{plan.name}</h3>
-                  <p className="pricing-price">{plan.price}</p>
-                  <p className="pricing-desc">{plan.description}</p>
-                  <ul>
-                    {plan.bullets.map((bullet) => (
-                      <li key={bullet}>{bullet}</li>
+            <div className="pricing-table-wrapper" data-animate>
+              <table className="pricing-table">
+                <caption className="visually-hidden">
+                  プラン別の料金とROI、サポート内容の比較表
+                </caption>
+                <thead>
+                  <tr>
+                    <th scope="col">比較項目</th>
+                    {pricingPlans.map((plan) => (
+                      <th key={plan.name} scope="col">
+                        <div className="pricing-plan-name">{plan.name}</div>
+                        <div className="pricing-plan-price">{plan.price}</div>
+                      </th>
                     ))}
-                  </ul>
-                  <a className="btn btn-outline" href="#contact">
-                    プランの詳細を相談
-                  </a>
-                </article>
-              ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">想定規模・特徴</th>
+                    {pricingPlans.map((plan) => (
+                      <td key={`${plan.name}-desc`}>{plan.description}</td>
+                    ))}
+                  </tr>
+                  <tr>
+                    <th scope="row">主な提供内容</th>
+                    {pricingPlans.map((plan) => (
+                      <td key={`${plan.name}-includes`}>
+                        <ul>
+                          {plan.includes.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </td>
+                    ))}
+                  </tr>
+                  <tr>
+                    <th scope="row">サポート</th>
+                    {pricingPlans.map((plan) => (
+                      <td key={`${plan.name}-support`}>{plan.support}</td>
+                    ))}
+                  </tr>
+                  <tr>
+                    <th scope="row">想定ROI</th>
+                    {pricingPlans.map((plan) => (
+                      <td key={`${plan.name}-roi`} className="pricing-roi">
+                        {plan.roi}
+                      </td>
+                    ))}
+                  </tr>
+                  <tr>
+                    <th scope="row">お問い合わせ</th>
+                    {pricingPlans.map((plan) => (
+                      <td key={`${plan.name}-cta`}>
+                        <a className="btn btn-outline" href="#contact" onClick={closeNav}>
+                          {plan.cta}
+                        </a>
+                      </td>
+                    ))}
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-accent" href="#contact">
@@ -1253,6 +1363,13 @@ const Index = () => {
               <h2 id="security-heading">信頼を支えるセキュリティ</h2>
               <p>経営の機微情報を取り扱うため、最高水準のセキュリティを整えています。</p>
             </div>
+            <div className="security-badges" data-animate>
+              {securityBadges.map((badge) => (
+                <span key={badge} className="security-badge">
+                  {badge}
+                </span>
+              ))}
+            </div>
             <div className="security-grid">
               {securityPoints.map((point) => (
                 <article key={point.title} className="security-card" data-animate>
@@ -1266,6 +1383,13 @@ const Index = () => {
               <a className="btn btn-accent" href="#contact">
                 セキュリティ要件を相談する
               </a>
+              <p className="security-note">
+                詳細は
+                <a href="/privacy-policy" target="_blank" rel="noreferrer">
+                  プライバシーポリシー
+                </a>
+                をご参照ください。
+              </p>
             </div>
           </div>
         </section>
@@ -1364,7 +1488,7 @@ const Index = () => {
         <div className="container">
           <p>© {new Date().getFullYear()} AI経営計画書ラボ. All rights reserved.</p>
           <p className="footnote">
-            出典: Brynjolfsson et al. (2023), Noy &amp; Zhang (2023), Yang et al. (2023), Forbes Business Council (2023), Stanford HAI (2024)。
+            出典: Switch Software (2024), Stanford HAI (2024), OECD (2024), Dragonboat (2024)。
           </p>
         </div>
       </footer>
