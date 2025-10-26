@@ -359,11 +359,45 @@ const painPoints: PainPoint[] = [
   },
 ];
 
+type ProcessProofPoint = {
+  title: string;
+  cause: string;
+  effect: string;
+  icon: LucideIcon;
+  accent: "mint" | "sky" | "citrus" | "navy";
+};
+
+const processProofPoints: ProcessProofPoint[] = [
+  {
+    title: "意思決定の質を底上げ",
+    cause: "週次で重要指標とアクションをAIが要約",
+    effect: "経営者は論点整理に集中でき、判断が早まります",
+    icon: Workflow,
+    accent: "mint",
+  },
+  {
+    title: "論理の一貫性を担保",
+    cause: "ドラフト段階で想定問答とリスクを自動生成",
+    effect: "金融機関・取引先への説明材料が揃います",
+    icon: Compass,
+    accent: "sky",
+  },
+  {
+    title: "納得感のある最終アウトプット",
+    cause: "専門家がシナリオの実現性と根拠を検証",
+    effect: "意思決定に必要な裏付けが揃った資料を納品",
+    icon: Shield,
+    accent: "navy",
+  },
+];
+
 type ProcessStep = {
   title: string;
   description: string;
   aiRole: string;
   humanRole: string;
+  deliverable: string;
+  evidence: string;
   icon: LucideIcon;
   accent: "mint" | "sky" | "citrus" | "navy";
 };
@@ -374,6 +408,8 @@ const processSteps: ProcessStep[] = [
     description: "経営者の課題とゴールを共有。現状データを安全に受け渡します。",
     aiRole: "必要データのチェックリストを自動生成",
     humanRole: "経営者・専門家が優先順位を調整",
+    deliverable: "経営ゴール要件と優先課題マップ",
+    evidence: "現状KPIギャップサマリとアクション仮説",
     icon: ClipboardCheck,
     accent: "mint",
   },
@@ -382,6 +418,8 @@ const processSteps: ProcessStep[] = [
     description: "AIが財務シミュレーションと戦略ドラフトを生成します。",
     aiRole: "情報収集・分析・KPI（重要指標）設計",
     humanRole: "経営者が仮説を確認しコメント",
+    deliverable: "財務シナリオと実行ロードマップの初版",
+    evidence: "外部データ連動のシミュレーション根拠",
     icon: BrainCircuit,
     accent: "sky",
   },
@@ -390,6 +428,8 @@ const processSteps: ProcessStep[] = [
     description: "元コンサル・金融機関OBが内容の妥当性を検証。",
     aiRole: "フィードバック反映と再計算",
     humanRole: "専門家が修正と伴走支援",
+    deliverable: "金融機関・投資家向け説明資料",
+    evidence: "想定問答とリスク対策リスト",
     icon: ShieldCheck,
     accent: "navy",
   },
@@ -398,6 +438,8 @@ const processSteps: ProcessStep[] = [
     description: "経営者が最終判断。金融機関提出用データと資料を納品します。",
     aiRole: "最終資料を整形しエビデンスを添付",
     humanRole: "経営者が意思決定し説明",
+    deliverable: "意思決定レポートとダッシュボードアクセス",
+    evidence: "意思決定ログと投資回収シナリオ",
     icon: CheckCircle2,
     accent: "citrus",
   },
@@ -1637,6 +1679,32 @@ const Index = () => {
                 <li>四半期更新まで専門家が伴走。</li>
               </ul>
             </div>
+            <div className="process-proof-grid" data-animate>
+              {processProofPoints.map((point) => {
+                const ProofIcon = point.icon;
+                return (
+                  <article
+                    key={point.title}
+                    className={`process-proof-card process-proof-card--${point.accent}`}
+                  >
+                    <div className="process-proof-icon" aria-hidden="true">
+                      <ProofIcon />
+                    </div>
+                    <h3>{point.title}</h3>
+                    <dl>
+                      <div>
+                        <dt>仕組み</dt>
+                        <dd>{point.cause}</dd>
+                      </div>
+                      <div>
+                        <dt>得られる効果</dt>
+                        <dd>{point.effect}</dd>
+                      </div>
+                    </dl>
+                  </article>
+                );
+              })}
+            </div>
             <ol className="process-timeline">
               {processSteps.map((step, index) => {
                 const StepIcon = step.icon;
@@ -1649,6 +1717,16 @@ const Index = () => {
                     <div className="process-content">
                       <h3>{step.title}</h3>
                       <p>{step.description}</p>
+                      <div className="process-evidence">
+                        <div>
+                          <span>アウトプット</span>
+                          <strong>{step.deliverable}</strong>
+                        </div>
+                        <div>
+                          <span>意思決定の根拠</span>
+                          <strong>{step.evidence}</strong>
+                        </div>
+                      </div>
                       <div className="process-roles">
                         <div>
                           <strong>AI</strong>
