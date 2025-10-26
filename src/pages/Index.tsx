@@ -35,9 +35,10 @@ import {
 
 import { submitContactForm } from "@/lib/contact-api";
 
-import expertKobayashi from "@/assets/expert-kobayashi.svg";
-import expertSaito from "@/assets/expert-saito.svg";
-import expertTanaka from "@/assets/expert-tanaka.svg";
+import aiDashboardShot from "@/assets/growth-chart.jpg";
+import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
+import expertSaitoPhoto from "@/assets/representative_.jpg";
+import expertTanakaPhoto from "@/assets/representative.jpg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -49,22 +50,23 @@ import "../../styles/lp.css";
 
 import type { LucideIcon } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
-const sections = [
-  { id: "hero", label: "トップ" },
-  { id: "problem", label: "課題" },
-  { id: "solution", label: "解決策" },
-  { id: "outcome", label: "成果" },
-  { id: "process", label: "導入の流れ" },
-  { id: "quarterly", label: "四半期レビュー" },
-  { id: "simulator", label: "ROI試算" },
-  { id: "pricing", label: "料金" },
-  { id: "faq", label: "FAQ" },
-  { id: "stories", label: "お客様の声" },
-  { id: "resources", label: "資料" },
-  { id: "security", label: "セキュリティ" },
-  { id: "contact", label: "お問い合わせ" },
+const primaryCtaLabel = "無料相談を申し込む";
+
+const headerNavItems = [
+  { id: "hero", label: "サービス概要" },
+  { id: "problem", label: "課題と解決策" },
+  { id: "process", label: "導入と料金" },
+  { id: "faq", label: "よくある質問・事例" },
 ];
+
+const sectionNavItems = [...headerNavItems, { id: "contact", label: "無料相談" }];
 
 const heroMetrics = [
   {
@@ -123,49 +125,43 @@ const insightHighlights = [
   },
 ];
 
-const dashboardHighlights = [
+type AiValuePoint = {
+  title: string;
+  description: string;
+  example: string;
+  icon: LucideIcon;
+};
+
+const aiValuePoints: AiValuePoint[] = [
   {
-    title: "リスク検知アラート",
-    detail: "政策・補助金・金利変動をリアルタイム通知",
+    title: "リアルタイム分析で判断を即断",
+    description:
+      "Itrex Group (2024) が指摘する通り、リアルタイム分析は市場の変化へ迅速に応答する競争力になります。ダッシュボードが政策・金融データを常に同期し、意思決定の材料を即座に提示します。",
+    example: "最新の補助金更新と資金繰り感度を自動で突き合わせ、経営者は判断に集中できます。",
+    icon: BarChart4,
   },
   {
-    title: "外部データソース",
-    detail: "47都道府県の統計・金融機関レポートを統合",
+    title: "シナリオ比較と生成ドラフト",
+    description:
+      "MIT Sloan Management Reviewの研究が示すように、人とAIの反復でアイデアの質が向上します。生成AIが過去データから将来シナリオを複数生成し、計画書や想定問答を即座にドラフトします。",
+    example: "四半期計画書や想定問答集をAIが下書きし、専門家が数分でレビューします。",
+    icon: Sparkles,
   },
   {
-    title: "共同編集ログ",
-    detail: "経営者と専門家のコメント履歴を自動記録",
+    title: "バイアスを抑えたリスク検知",
+    description:
+      "University of Cincinnati Onlineのレポートは生成AIが客観的な提案でリスク管理を強化すると報告。AIが資金繰り悪化や市況変化の兆候を早期に警告し、人のバイアスを補正します。",
+    example: "資金繰りアラートと金融機関向け説明資料を自動作成し、経営者の不安を軽減します。",
+    icon: ShieldCheck,
+  },
+  {
+    title: "人の判断力を拡張",
+    description:
+      "Rossum (2024) はAIが副操縦士となり、人の創造性と直感を引き出すと述べています。AIが意思決定材料を整え、専門家と経営者は本質的な議論に時間を使えます。",
+    example: "役員会議ではAIが論点を整理し、経営者は戦略の優先順位づけに集中できます。",
+    icon: Users2,
   },
 ];
-
-const dashboardStats = [
-  {
-    label: "シナリオ探索",
-    value: "9",
-    unit: "パターン",
-    trend: "+4",
-    trendLabel: "前週比",
-    tone: "up" as const,
-  },
-  {
-    label: "意思決定所要時間",
-    value: "-42",
-    unit: "%",
-    trend: "-12pt",
-    trendLabel: "自動分析",
-    tone: "down" as const,
-  },
-  {
-    label: "レビュー待ち",
-    value: "2",
-    unit: "件",
-    trend: "12分",
-    trendLabel: "平均応答",
-    tone: "neutral" as const,
-  },
-];
-
-const dashboardReviewProgress = 68;
 
 const adoptionTrend = [
   { label: "2023Q1", value: 18 },
@@ -639,7 +635,7 @@ const pricingPlans: PricingPlan[] = [
     payment: ["月次サブスクリプション", "請求書払い（分割可）"],
     guarantee: "導入初月の返金保証付き",
     roi: "3倍目標",
-    cta: "ライトプランを相談",
+    cta: primaryCtaLabel,
   },
   {
     name: "プロ",
@@ -657,7 +653,7 @@ const pricingPlans: PricingPlan[] = [
     payment: ["月次サブスクリプション", "四半期ごとの分割払い"],
     guarantee: "60日間の成果保証オプション",
     roi: "5倍目標",
-    cta: "プロプランを相談",
+    cta: primaryCtaLabel,
   },
   {
     name: "エンタープライズ",
@@ -675,7 +671,7 @@ const pricingPlans: PricingPlan[] = [
     payment: ["年次契約（分割請求可）", "導入費用の分割払い"],
     guarantee: "成果レビュー後の返金条項を個別設定",
     roi: "7倍目標",
-    cta: "エンタープライズ相談",
+    cta: primaryCtaLabel,
   },
 ];
 
@@ -722,7 +718,7 @@ const expertCards: ExpertCard[] = [
     name: "田中 圭",
     title: "元メガバンク法人融資担当",
     bio: "大型調達案件を多数支援。資本政策と金融機関交渉に精通。",
-    photo: expertTanaka,
+    photo: expertTanakaPhoto,
     credentials: [
       { icon: ShieldCheck, label: "融資審査1,200件サポート" },
       { icon: LineChart, label: "資金繰り最適化モデル監修" },
@@ -732,7 +728,7 @@ const expertCards: ExpertCard[] = [
     name: "小林 真",
     title: "元戦略コンサルティングファーム",
     bio: "事業再生・新規事業開発の戦略立案を20社以上支援。",
-    photo: expertKobayashi,
+    photo: expertKobayashiPhoto,
     credentials: [
       { icon: BarChart3, label: "中期経営計画策定 20社" },
       { icon: Workflow, label: "DX推進プロジェクト伴走" },
@@ -742,7 +738,7 @@ const expertCards: ExpertCard[] = [
     name: "斎藤 美咲",
     title: "公認会計士 / 税理士",
     bio: "補助金・助成金対応と財務モデリングの専門家。",
-    photo: expertSaito,
+    photo: expertSaitoPhoto,
     credentials: [
       { icon: Award, label: "認定支援機関 10年" },
       { icon: FileText, label: "補助金採択率 86%" },
@@ -873,7 +869,7 @@ const contactSteps = [
 
 const Index = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>(sections[0].id);
+  const [activeSection, setActiveSection] = useState<string>(sectionNavItems[0].id);
   const [heroParallax, setHeroParallax] = useState(0);
   const [metricsActive, setMetricsActive] = useState(false);
   const [metricValues, setMetricValues] = useState(() =>
@@ -892,6 +888,7 @@ const Index = () => {
   const [isDemoPlaying, setIsDemoPlaying] = useState(false);
   const [isRoiModalOpen, setRoiModalOpen] = useState(false);
   const [isPricingModalOpen, setPricingModalOpen] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   const contactStepCount = contactSteps.length;
   const contactProgress = Math.round((contactStep / contactStepCount) * 100);
@@ -1064,7 +1061,7 @@ const Index = () => {
       }
     );
 
-    sections.forEach((section) => {
+    sectionNavItems.forEach((section) => {
       const element = sectionRefs.current[section.id];
       if (element) {
         observer.observe(element);
@@ -1157,6 +1154,7 @@ const Index = () => {
     const headerOffset = 96;
     const elementPosition = element.getBoundingClientRect().top + window.scrollY;
     window.scrollTo({ top: elementPosition - headerOffset, behavior: "smooth" });
+    setIsMobileNavOpen(false);
   };
 
   const validateContactStep = (step: number) => {
@@ -1246,18 +1244,44 @@ const Index = () => {
   return (
     <div className="lp-root">
       {/* 固定ヘッダー: 主要CTAのみ */}
-      <header className={`site-header ${isScrolled ? "is-condensed" : ""}`} aria-label="主要アクション">
+      <header className={`site-header ${isScrolled ? "is-condensed" : ""}`} aria-label="グローバルナビゲーション">
         <div className="container header-inner">
           <a className="brand" href="#hero" aria-label="AI経営計画書ラボ トップへ">
             AI経営計画書ラボ
           </a>
+          <nav
+            className={`header-nav ${isMobileNavOpen ? "is-open" : ""}`}
+            aria-label="主要メニュー"
+          >
+            <ul>
+              {headerNavItems.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
+                    onClick={(event) => handleNavClick(event, item.id)}
+                    aria-current={activeSection === item.id ? "page" : undefined}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
           <div className="header-actions" role="group" aria-label="主要な申し込み導線">
-            <a className="btn btn-outline" href="#resources">
-              資料ダウンロード
+            <a className="btn btn-cta" href="#contact">
+              {primaryCtaLabel}
             </a>
-            <a className="btn btn-primary" href="#contact">
-              30分無料相談
-            </a>
+            <button
+              type="button"
+              className={`header-menu ${isMobileNavOpen ? "is-active" : ""}`}
+              aria-label="メニューを開閉する"
+              aria-expanded={isMobileNavOpen}
+              onClick={() => setIsMobileNavOpen((prev) => !prev)}
+            >
+              <span />
+              <span />
+              <span />
+            </button>
           </div>
         </div>
       </header>
@@ -1269,7 +1293,7 @@ const Index = () => {
         >
           <div className="container">
             <ul className="section-nav__list">
-              {sections.map((section) => (
+              {sectionNavItems.map((section) => (
                 <li key={section.id}>
                   <a
                     className={`section-nav__link ${
@@ -1320,10 +1344,10 @@ const Index = () => {
               </p>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
-                  30分無料相談を予約
+                  {primaryCtaLabel}
                 </a>
-                <a className="btn btn-ghost" href="#resources">
-                  資料で導入効果を見る
+                <a className="hero-secondary-link" href="#resources">
+                  ROIシミュレーションと資料を見る
                 </a>
               </div>
               <ul className="trust-badges" aria-label="セキュリティ対策">
@@ -1376,86 +1400,20 @@ const Index = () => {
               </div>
             </div>
             <div className="hero-visual">
-              <div className="hero-dashboard" data-animate data-initial-visible="true" aria-hidden="true">
-                <div className="dashboard-surface">
-                  <div className="dashboard-header">
-                    <div className="dashboard-header__brand">
-                      <span className="dashboard-header__icon" aria-hidden="true">
-                        <BrainCircuit />
-                      </span>
-                      <div>
-                        <span className="dashboard-header__label">AIダッシュボード</span>
-                        <strong>ライブ・インサイト</strong>
-                      </div>
-                    </div>
-                    <span className="dashboard-header__status">
-                      <span className="status-dot" aria-hidden="true" />
-                      シンク中
-                    </span>
-                  </div>
-                  <div className="dashboard-body">
-                    <div className="dashboard-visual" role="img" aria-label="意思決定AIの予測ライン">
-                      <svg viewBox="0 0 100 60" aria-hidden="true">
-                        <polyline points="0,55 20,46 42,40 66,31 100,20" />
-                      </svg>
-                      <div className="dashboard-visual__marker">
-                        <span>意思決定AI予測</span>
-                        <strong>-42%</strong>
-                      </div>
-                      <div className="dashboard-visual__caption">
-                        因果モデル: 政策変動 × キャッシュフロー感度
-                      </div>
-                    </div>
-                    <div className="dashboard-metrics" aria-label="主要なライブ指標">
-                      {dashboardStats.map((stat) => (
-                        <div key={stat.label} className="dashboard-metrics__item">
-                          <span className="dashboard-metrics__label">{stat.label}</span>
-                          <div className="dashboard-metrics__value">
-                            <strong>{stat.value}</strong>
-                            <span>{stat.unit}</span>
-                          </div>
-                          <span className={`dashboard-metrics__trend dashboard-metrics__trend--${stat.tone}`}>
-                            <span aria-hidden="true">
-                              {stat.tone === "up" ? "↑" : stat.tone === "down" ? "↓" : "→"}
-                            </span>
-                            <strong>{stat.trend}</strong>
-                            <small>{stat.trendLabel}</small>
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="dashboard-logic">
-                      <div>
-                        <span className="dashboard-logic__label">因果仮説</span>
-                        <p>政策変動と資金繰り感度をリアルタイムで突き合わせ、影響度の高いシナリオを抽出。</p>
-                      </div>
-                      <div>
-                        <span className="dashboard-logic__label">推奨アクション</span>
-                        <p>優先度「高」の打ち手を経営会議へ自動共有し、レビュー滞留を防ぎます。</p>
-                      </div>
-                    </div>
-                    <ul className="dashboard-highlights">
-                      {dashboardHighlights.map((item) => (
-                        <li key={item.title}>
-                          <span className="dashboard-highlights__title">{item.title}</span>
-                          <span className="dashboard-highlights__detail">{item.detail}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="dashboard-footer">
-                    <span className="dashboard-footer__label">レビュー進捗</span>
-                    <div
-                      className="dashboard-footer__progress"
-                      role="img"
-                      aria-label={`レビュー進捗 ${dashboardReviewProgress}%`}
-                    >
-                      <span style={{ width: `${dashboardReviewProgress}%` }} />
-                    </div>
-                    <span className="dashboard-footer__meta">専門家レビュー中</span>
-                  </div>
-                </div>
-              </div>
+              <figure
+                className="hero-dashboard-shot"
+                data-animate
+                data-initial-visible="true"
+              >
+                <img
+                  src={aiDashboardShot}
+                  alt="AIダッシュボードのスクリーンショット"
+                  loading="lazy"
+                />
+                <figcaption>
+                  リアルタイム分析で政策・市場データと財務指標を一画面で確認
+                </figcaption>
+              </figure>
               <div className="hero-demo" data-animate data-initial-visible="true">
                 <div className="hero-demo__preview" aria-hidden="true">
                   <div className="hero-demo__glow" />
@@ -1479,8 +1437,13 @@ const Index = () => {
                   <span>1分で分かるAI意思決定デモ</span>
                 </button>
                 <p className="hero-demo__caption">
-                  AIが政策・市場データを束ねて経営者の判断材料を提示する流れを、アニメーションでご覧いただけます。
+                  リアルタイム分析で意思決定材料を提示し、生成AIがシナリオ比較と資料ドラフトを作成。専門家レビューと経営者の判断で最終決定まで伴走する流れをご覧いただけます。
                 </p>
+                <ul className="hero-demo__points">
+                  <li>Itrex Group (2024) が示すリアルタイム分析のメリットを体感。</li>
+                  <li>MIT Sloanの研究の通り、人とAIの反復でシナリオの質を高めます。</li>
+                  <li>University of Cincinnati OnlineとRossumの知見を取り入れた客観的なリスク管理。</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -1587,11 +1550,26 @@ const Index = () => {
                 );
               })}
             </div>
+            <div className="ai-value-grid" data-animate>
+              {aiValuePoints.map((point) => {
+                const ValueIcon = point.icon;
+                return (
+                  <article key={point.title} className="ai-value-card">
+                    <div className="ai-value-card__icon" aria-hidden="true">
+                      <ValueIcon />
+                    </div>
+                    <h3>{point.title}</h3>
+                    <p>{point.description}</p>
+                    <span>{point.example}</span>
+                  </article>
+                );
+              })}
+            </div>
             <div className="story-cta" data-animate>
-              <a className="btn btn-primary" href="#resources">
-                AIサンプルを請求
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
               </a>
-              <a className="btn btn-outline" href="#process">
+              <a className="story-cta__link" href="#process">
                 導入プロセスを詳しく見る
               </a>
             </div>
@@ -1783,8 +1761,11 @@ const Index = () => {
                 ))}
               </ol>
             <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#simulator">
-                <abbr title="投資利益率">ROI</abbr>試算を試す
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
+              </a>
+              <a className="section-cta__link" href="#simulator">
+                <abbr title="投資利益率">ROI</abbr>試算で効果を確認
               </a>
             </div>
           </div>
@@ -1871,8 +1852,11 @@ const Index = () => {
               })}
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#pricing">
-                コストと<abbr title="投資利益率">ROI</abbr>を試算
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
+              </a>
+              <a className="section-cta__link" href="#pricing">
+                コストと<abbr title="投資利益率">ROI</abbr>を比較
               </a>
             </div>
           </div>
@@ -1949,9 +1933,16 @@ const Index = () => {
               </div>
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#simulator">
-                <abbr title="投資利益率">ROI</abbr>シミュレーションを試す
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
               </a>
+              <button
+                type="button"
+                className="link-button"
+                onClick={() => setRoiModalOpen(true)}
+              >
+                <abbr title="投資利益率">ROI</abbr>シミュレーションを試す
+              </button>
             </div>
           </div>
         </section>
@@ -2008,7 +1999,7 @@ const Index = () => {
             <div className="simulator-actions" data-animate>
               <button
                 type="button"
-                className="btn btn-cta"
+                className="link-button"
                 onClick={() => setRoiModalOpen(true)}
               >
                 ROI試算フォームを開く
@@ -2018,9 +2009,12 @@ const Index = () => {
               </p>
             </div>
             <div className="section-cta" data-animate>
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
+              </a>
               <button
                 type="button"
-                className="btn btn-accent"
+                className="link-button"
                 onClick={() => setPricingModalOpen(true)}
               >
                 料金プランを表示
@@ -2068,7 +2062,7 @@ const Index = () => {
             <div className="pricing-actions" data-animate>
               <button
                 type="button"
-                className="btn btn-accent"
+                className="link-button"
                 onClick={() => setPricingModalOpen(true)}
               >
                 詳細な料金表を開く
@@ -2078,8 +2072,8 @@ const Index = () => {
               </p>
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-primary" href="#contact">
-                最適なプランを提案してもらう
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
               </a>
             </div>
           </div>
@@ -2102,17 +2096,26 @@ const Index = () => {
                 <li>人とAIの分担でリスクを軽減。</li>
               </ul>
             </div>
-            <dl className="faq-list">
-              {faqItems.map((item) => (
-                <div key={item.question} className="faq-item" data-animate>
-                  <dt>{item.question}</dt>
-                  <dd>{item.answer}</dd>
-                </div>
-              ))}
-            </dl>
+            <div className="faq-accordion" data-animate>
+              <Accordion type="multiple" className="faq-list">
+                {faqItems.map((item) => (
+                  <AccordionItem key={item.question} value={item.question}>
+                    <AccordionTrigger className="faq-question">
+                      {item.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="faq-answer">
+                      {item.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-primary" href="#contact">
-                個別の懸念を相談する
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
+              </a>
+              <a className="section-cta__link" href="#stories">
+                導入事例も確認する
               </a>
             </div>
           </div>
@@ -2198,8 +2201,11 @@ const Index = () => {
               </div>
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#resources">
-                成果につながる資料を見る
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
+              </a>
+              <a className="section-cta__link" href="#resources">
+                資料で出力例を見る
               </a>
             </div>
             <p className="footnote" data-animate>
@@ -2289,7 +2295,7 @@ const Index = () => {
                         <li key={highlight}>{highlight}</li>
                       ))}
                     </ul>
-                    <a className="btn btn-outline" href="#contact">
+                    <a className="resource-card__link" href="#contact">
                       {resource.cta}
                     </a>
                     <p className="resource-note">{resource.note}</p>
@@ -2298,8 +2304,8 @@ const Index = () => {
               })}
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-primary" href="#contact">
-                メールでPDF資料を受け取る
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
               </a>
             </div>
           </div>
@@ -2322,24 +2328,32 @@ const Index = () => {
                 <li>権限管理と監査で安心を担保。</li>
               </ul>
             </div>
-            <div className="security-grid">
-              {securityPoints.map((point) => {
-                const SecurityIcon = point.icon;
-                return (
-                  <article key={point.title} className="security-card" data-animate>
-                    <div className="security-icon" aria-hidden="true">
-                      <SecurityIcon />
-                    </div>
-                    <span className="security-badge">{point.badge}</span>
-                    <h3>{point.title}</h3>
-                    <p>{point.description}</p>
-                  </article>
-                );
-              })}
+            <div className="security-accordion" data-animate>
+              <Accordion type="multiple" className="security-list">
+                {securityPoints.map((point) => {
+                  const SecurityIcon = point.icon;
+                  return (
+                    <AccordionItem key={point.title} value={point.title}>
+                      <AccordionTrigger className="security-question">
+                        <span className="security-question__icon" aria-hidden="true">
+                          <SecurityIcon />
+                        </span>
+                        <div className="security-question__text">
+                          <span className="security-question__badge">{point.badge}</span>
+                          <span>{point.title}</span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="security-answer">
+                        {point.description}
+                      </AccordionContent>
+                    </AccordionItem>
+                  );
+                })}
+              </Accordion>
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-primary" href="#contact">
-                セキュリティ要件を相談する
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
               </a>
             </div>
             <p className="privacy-note" data-animate>
@@ -2535,7 +2549,7 @@ const Index = () => {
                         送信中...
                       </span>
                     ) : (
-                      "30分無料相談を申し込む"
+                      primaryCtaLabel
                     )}
                   </button>
                 )}
@@ -2554,8 +2568,8 @@ const Index = () => {
             </form>
           </div>
           <div className="mobile-form-cta" aria-hidden="true">
-            <a className="btn btn-primary" href="#contact">
-              無料相談フォームを開く
+            <a className="btn btn-cta" href="#contact">
+              {primaryCtaLabel}
             </a>
           </div>
         </section>
@@ -2906,7 +2920,7 @@ const Index = () => {
                         </td>
                         <td>{plan.roi}</td>
                         <td>
-                          <a className="btn btn-outline" href="#contact">
+                          <a className="link-button" href="#contact">
                             {plan.cta}
                           </a>
                         </td>
