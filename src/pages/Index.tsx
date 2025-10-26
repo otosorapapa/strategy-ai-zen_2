@@ -9,6 +9,8 @@ import {
 } from "react";
 
 import {
+  ArrowRight,
+  ArrowUp,
   Award,
   BarChart3,
   BarChart4,
@@ -57,6 +59,7 @@ const sections = [
   { id: "outcome", label: "成果" },
   { id: "process", label: "導入の流れ" },
   { id: "quarterly", label: "四半期レビュー" },
+  { id: "simulator", label: "ROIシミュレーター" },
   { id: "pricing", label: "料金" },
   { id: "faq", label: "FAQ" },
   { id: "stories", label: "お客様の声" },
@@ -64,6 +67,11 @@ const sections = [
   { id: "security", label: "セキュリティ" },
   { id: "contact", label: "お問い合わせ" },
 ];
+
+const quickNavSectionIds = ["process", "pricing", "faq", "contact"];
+const quickNavSections = sections.filter((section) =>
+  quickNavSectionIds.includes(section.id)
+);
 
 const heroMetrics = [
   {
@@ -805,6 +813,8 @@ const Index = () => {
   const [metricValues, setMetricValues] = useState(() =>
     heroMetrics.map(() => 0)
   );
+  const [activeSection, setActiveSection] = useState<string>(sections[0].id);
+  const [showBackToTop, setShowBackToTop] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [simulator, setSimulator] = useState<SimulatorState>(defaultSimulator);
   const [contactForm, setContactForm] = useState<ContactFormState>(initialContact);
@@ -823,6 +833,39 @@ const Index = () => {
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const securityBadges = useMemo(() => securityPoints.slice(0, 3), []);
   const numberFormatter = useMemo(() => new Intl.NumberFormat("ja-JP"), []);
+
+  const getSectionLabel = (id: string) =>
+    sections.find((section) => section.id === id)?.label ?? "";
+
+  const scrollToSection = (sectionId: string) => {
+    const target = document.getElementById(sectionId);
+    if (!target) return;
+    const headerOffset = 96;
+    const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({ top: elementPosition - headerOffset, behavior: "smooth" });
+  };
+
+  const renderNextSectionLink = (nextSectionId?: string) => {
+    if (!nextSectionId) return null;
+    const label = getSectionLabel(nextSectionId);
+    return (
+      <div className="next-section" data-animate>
+        <a
+          className="btn btn-next"
+          href={`#${nextSectionId}`}
+          onClick={(event) => {
+            event.preventDefault();
+            scrollToSection(nextSectionId);
+          }}
+          aria-label={label ? `次の章へ (${label})` : "次の章へ"}
+        >
+          <span>次の章へ</span>
+          {label && <span className="next-section__label">{label}</span>}
+          <ArrowRight aria-hidden="true" />
+        </a>
+      </div>
+    );
+  };
 
   const simulatorResult = useMemo(() => {
     const focusMultiplier: Record<FocusKey, number> = {
@@ -913,6 +956,7 @@ const Index = () => {
       const y = window.scrollY;
       setIsScrolled(y > 32);
       setHeroParallax(y * 0.2);
+      setShowBackToTop(y > 480);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -1033,6 +1077,19 @@ const Index = () => {
     }));
   };
 
+  const handleQuickNavClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    sectionId: string
+  ) => {
+    event.preventDefault();
+    scrollToSection(sectionId);
+  };
+
+  const handleBackToTop = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const handleContactChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -1145,6 +1202,24 @@ const Index = () => {
           </div>
         </div>
       </header>
+
+      <nav className="quick-nav" aria-label="主要セクションへのショートカット">
+        <div className="container quick-nav__inner">
+          {quickNavSections.map((section) => (
+            <a
+              key={section.id}
+              href={`#${section.id}`}
+              className={`quick-nav__link ${
+                activeSection === section.id ? "is-active" : ""
+              }`}
+              aria-current={activeSection === section.id ? "true" : undefined}
+              onClick={(event) => handleQuickNavClick(event, section.id)}
+            >
+              {section.label}
+            </a>
+          ))}
+        </div>
+      </nav>
 
       <main>
         {/* ヒーローセクション: 価値訴求とアニメーション */}
@@ -1340,6 +1415,7 @@ const Index = () => {
             <p className="footnote" data-animate>
               ※ 各数値の詳細はカードをホバー/タップすると表示されます。
             </p>
+            {renderNextSectionLink("solution")}
           </div>
         </section>
 
@@ -1395,6 +1471,7 @@ const Index = () => {
                 導入プロセスを詳しく見る
               </a>
             </div>
+            {renderNextSectionLink("outcome")}
           </div>
         </section>
 
@@ -1565,12 +1642,13 @@ const Index = () => {
                   </ul>
                 </article>
               </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#simulator">
-                <abbr title="投資利益率">ROI</abbr>試算を試す
-              </a>
+              <div className="section-cta" data-animate>
+                <a className="btn btn-cta" href="#simulator">
+                  <abbr title="投資利益率">ROI</abbr>試算を試す
+                </a>
+              </div>
+              {renderNextSectionLink("process")}
             </div>
-          </div>
         </section>
 
         {/* 導入プロセスセクション */}
@@ -1655,6 +1733,7 @@ const Index = () => {
                 コストと<abbr title="投資利益率">ROI</abbr>を試算
               </a>
             </div>
+            {renderNextSectionLink("quarterly")}
           </div>
         </section>
 
@@ -1733,11 +1812,15 @@ const Index = () => {
                 <abbr title="投資利益率">ROI</abbr>シミュレーションを試す
               </a>
             </div>
+            {renderNextSectionLink("simulator")}
           </div>
         </section>
         {/* ROIシミュレーター セクション */}
         <section
           id="simulator"
+          ref={(node) => {
+            sectionRefs.current["simulator"] = node ?? null;
+          }}
           className="section simulator"
           aria-labelledby="simulator-heading"
         >
@@ -1967,6 +2050,7 @@ const Index = () => {
                 プラン別の費用感を見る
               </a>
             </div>
+            {renderNextSectionLink("pricing")}
           </div>
         </section>
 
@@ -2054,6 +2138,7 @@ const Index = () => {
                 最適なプランを提案してもらう
               </a>
             </div>
+            {renderNextSectionLink("faq")}
           </div>
         </section>
 
@@ -2087,6 +2172,7 @@ const Index = () => {
                 個別の懸念を相談する
               </a>
             </div>
+            {renderNextSectionLink("stories")}
           </div>
         </section>
 
@@ -2177,6 +2263,7 @@ const Index = () => {
             <p className="footnote" data-animate>
               ※ 掲載コメントは各社から許諾済みです。
             </p>
+            {renderNextSectionLink("resources")}
           </div>
         </section>
 
@@ -2274,6 +2361,7 @@ const Index = () => {
                 メールでPDF資料を受け取る
               </a>
             </div>
+            {renderNextSectionLink("security")}
           </div>
         </section>
 
@@ -2317,6 +2405,7 @@ const Index = () => {
             <p className="privacy-note" data-animate>
               データの取り扱いについては<a href="/privacy" target="_blank" rel="noreferrer">プライバシーポリシー</a>をご覧ください。
             </p>
+            {renderNextSectionLink("contact")}
           </div>
         </section>
 
@@ -2532,6 +2621,17 @@ const Index = () => {
           </div>
         </section>
       </main>
+
+      {showBackToTop && (
+        <button
+          type="button"
+          className="back-to-top"
+          onClick={handleBackToTop}
+          aria-label="ページトップへ戻る"
+        >
+          <ArrowUp aria-hidden="true" />
+        </button>
+      )}
 
       {isDemoOpen && (
         <div className="demo-dialog" role="dialog" aria-modal="true" aria-labelledby="demo-heading">
