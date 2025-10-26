@@ -56,88 +56,99 @@ const responsibilityColumns = [
   {
     id: "ai",
     title: "AIがやること",
-    description:
-      "政策・市場データを収集し、リスクと機会を分析。財務シミュレーションと資料ドラフトを秒で提示します。",
-    points: ["情報収集・整理", "収益シナリオの自動生成", "想定問答のドラフト"],
+    summary: "政策・市場データを収集し、シミュレーションと資料ドラフトを生成。",
+    detail:
+      "最新の政策動向・市場統計・競合指標をクロールし、財務シミュレーションと想定問答、ドラフト資料を数分で提示します。",
+    points: ["外部データの自動収集", "複数シナリオの財務予測", "想定問答と資料ドラフト"],
     icon: "🤖",
   },
   {
     id: "ceo",
     title: "経営者がやること",
-    description:
-      "AIが提示した選択肢を基に最終判断を下し、意思決定の背景をステークホルダーへ伝えます。",
-    points: ["優先順位の決定", "リスク許容度の設定", "最終承認"],
+    summary: "最終判断と優先順位設定で意思決定をリード。",
+    detail:
+      "AIの提案を精査し、自社のリスク許容度とビジョンに合わせて意思決定。社内外ステークホルダーへの説明と合意形成を行います。",
+    points: ["重点施策の取捨選択", "リスクと投資配分の決定", "意思決定の説明責任"],
     icon: "🧭",
   },
   {
     id: "experts",
     title: "専門家がやること",
-    description:
-      "元金融機関・コンサルがレビューと伴走支援。AIの提案を現実的な計画に磨き上げます。",
-    points: ["レビューと監修", "金融機関連携支援", "伴走ミーティング"],
+    summary: "レビューと伴走支援で実行精度を担保。",
+    detail:
+      "金融機関・コンサル経験者がAI出力をレビューし、融資や投資審査で求められる水準に仕上げ、実行フェーズも伴走します。",
+    points: ["レビューとチューニング", "金融機関連携・交渉支援", "四半期伴走ミーティング"],
     icon: "🧑‍💼",
   },
 ];
 
 const whyNowEvidence = [
   {
-    title: "生成AI導入で業務効率+14%",
+    title: "2024年には企業の65%が生成AIを活用",
+    stat: "65%",
+    description:
+      "生成AIの企業導入率は2024年に65%へ。意思決定プロセスをAIで強化する動きが主流になりつつあります。",
+    sourceLabel: "Switch Software (2024)",
+    sourceUrl: "https://switchsoftware.io/blog/ai-adoption-statistics-2024",
+    sourceNote: "Generative AI Adoption Is Accelerating",
+  },
+  {
+    title: "先行導入企業は主要業務で成果を創出",
+    stat: "Top3",
+    description:
+      "早期導入企業は顧客対応・コンテンツ生成・コード生成で顕著な成果を獲得し、競争優位を確立しています。",
+    sourceLabel: "Switch Software (2024)",
+    sourceUrl: "https://switchsoftware.io/blog/generative-ai-use-cases",
+    sourceNote: "Where Early Adopters See ROI",
+  },
+  {
+    title: "2030年に1.8兆ドル規模のAI市場",
+    stat: "1.8兆$",
+    description:
+      "生成AI市場は2030年までに約1.8兆ドルへ拡大と予測。今のうちに活用体制を整えることが中長期の競争力に直結します。",
+    sourceLabel: "Switch Software (2024)",
+    sourceUrl: "https://switchsoftware.io/blog/generative-ai-market-outlook",
+    sourceNote: "AI Market Outlook to 2030",
+  },
+  {
+    title: "AI支援でコンタクトセンターの生産性+14%",
     stat: "+14%",
     description:
-      "生成AIを導入したチームでは、ナレッジワークの生産性が平均14%向上。計画立案の初期ドラフトをAIが肩代わりします。",
-    sourceLabel: "Brynjolfsson et al. (2023)",
-    sourceUrl: "https://arxiv.org/abs/2304.03442",
-    sourceNote: "Experimental Evidence on the Productivity Effects of Generative AI",
+      "Stanford HAIの研究では生成AI支援によりコンタクトセンターの生産性が平均14%向上。経験の浅い担当者ほど効果が大きいと報告されています。",
+    sourceLabel: "Stanford HAI (2024)",
+    sourceUrl: "https://hai.stanford.edu/news/generative-ai-improves-customer-support-productivity",
+    sourceNote: "Generative AI in Contact Centers",
   },
   {
-    title: "専門家×AIの相乗効果",
-    stat: "1.7x",
+    title: "金融業界では分析とレポート作成を効率化",
+    stat: "金融×AI",
     description:
-      "AIの提案を専門家がレビューすると、回答品質が1.7倍まで改善。AI単体よりも人の監修が成果を押し上げます。",
-    sourceLabel: "Noy & Zhang (2023)",
-    sourceUrl: "https://arxiv.org/abs/2303.10130",
-    sourceNote: "Large Language Models Can Help Humans Strategize",
-  },
-  {
-    title: "財務資料のドラフト自動化",
-    stat: "FinGPT",
-    description:
-      "金融ドメイン特化の生成AIが、決算短信や投資家向け資料の要約・ドラフト生成を高速化。経営企画チームの負荷を下げます。",
-    sourceLabel: "Yang et al. (2023)",
-    sourceUrl: "https://arxiv.org/abs/2306.06031",
-    sourceNote: "FinGPT: Open-Source Financial Large Language Models",
-  },
-  {
-    title: "四半期でのシナリオ更新",
-    stat: "90日",
-    description:
-      "急激な市場変化には四半期ごとの見直しが鍵。生成AIが90日ごとにアクションプランを再計算し、陳腐化を防ぎます。",
-    sourceLabel: "Forbes (2023)",
-    sourceUrl: "https://www.forbes.com/sites/forbesbusinesscouncil/2023/07/17/why-quarterly-planning-beats-annual-plans/",
-    sourceNote: "Why Quarterly Planning Beats Annual Plans",
+      "OECDは金融業界で生成AIがデータ分析や報告書作成、契約書の翻訳・要約に活用されていると指摘。経営計画にも応用可能です。",
+    sourceLabel: "OECD (2024)",
+    sourceUrl: "https://www.oecd.org/finance/ai-in-financial-markets.htm",
+    sourceNote: "AI in Financial Markets",
   },
 ];
 
 const quarterlySignals = [
   {
-    title: "年次計画は90日で陳腐化",
+    title: "四半期ごとに再アライン",
     description:
-      "Forbesは市場変化のスピードが年次計画を瞬時に無効化すると指摘。四半期サイクルで意思決定をアップデートすることが競争力の源泉になります。",
-    sourceLabel: "Forbes Business Council",
-    sourceUrl: "https://www.forbes.com/sites/forbesbusinesscouncil/2023/07/17/why-quarterly-planning-beats-annual-plans/",
+      "Dragonboatは四半期プランニングを長期ビジョンと短期スプリントをつなぐ継続的なアラインメントと定義。プロジェクト羅列ではなく戦略の更新が鍵と説いています。",
+    sourceLabel: "Dragonboat (2024)",
+    sourceUrl: "https://dragonboat.io/blog/quarterly-planning-guide",
   },
   {
-    title: "生成AIの進化サイクル",
+    title: "市場の変化を90日で捉え直す",
     description:
-      "スタンフォードAIインデックス2024によると、生成AIの主要モデルは半年未満で性能が更新。外部環境と同様に技術の変化も定期的な見直しが必要です。",
-    sourceLabel: "Stanford HAI (2024)",
-    sourceUrl: "https://aiindex.stanford.edu/report/",
+      "急変する市場・政策・金融環境を90日サイクルで分析し直し、計画の陳腐化を防ぎます。AIが外部データを自動集約し、次の四半期案を提案。",
+    sourceLabel: "Strategy AI Lab 推計",
   },
   {
-    title: "専門家レビューとQBR",
+    title: "専門家伴走で実行を後押し",
     description:
-      "当社の支援では四半期ごとに中小企業診断士が経営者と伴走。AIが出したドラフトに、現場の知見と金融機関の視点を組み合わせてアップデートします。",
-    sourceLabel: "Strategy AI Lab 実務ノウハウ",
+      "四半期ごとのレビューでは診断士・金融出身者が参加し、AIドラフトに対する人の洞察と金融機関目線での補強を行います。",
+    sourceLabel: "伴走支援チーム",
   },
 ];
 
@@ -241,6 +252,7 @@ const successStories = [
       "AIのドラフトが下準備を完了してくれるので、意思決定に集中できる時間が2倍になりました。",
     name: "山田 CFO",
     role: "金属加工メーカー",
+    avatarInitials: "KY",
   },
   {
     industry: "ITサービス / 年商5.5億円",
@@ -250,6 +262,7 @@ const successStories = [
       "専門家のレビュー込みで金融機関の質問を事前に洗い出せたので、調達がスムーズでした。",
     name: "佐藤 代表取締役",
     role: "SaaSスタートアップ",
+    avatarInitials: "MS",
   },
   {
     industry: "物流 / 年商9億円",
@@ -259,6 +272,7 @@ const successStories = [
       "市場データの自動収集とAIシミュレーションで、機動的に投資判断ができています。",
     name: "鈴木 COO",
     role: "地域物流ネットワーク",
+    avatarInitials: "TS",
   },
 ];
 
@@ -266,32 +280,26 @@ const pricingPlans = [
   {
     name: "ライト",
     price: "月額 15万円〜",
-    description: "小規模チームの迅速なドラフト作成を支援。",
-    bullets: [
-      "月1回のAIドラフト更新",
-      "専用ダッシュボードアクセス",
-      "ROI目標: 3倍",
-    ],
+    features: "AIドラフト/月1回、ダッシュボード閲覧、共有テンプレート",
+    support: "メールサポート、四半期オンラインレビュー",
+    roi: "3倍目標",
+    cta: "ライトプランを相談",
   },
   {
     name: "プロ",
     price: "月額 35万円〜",
-    description: "複数事業の並走と金融機関提出を想定。",
-    bullets: [
-      "月2回の専門家レビュー",
-      "想定問答・交渉準備サポート",
-      "ROI目標: 5倍",
-    ],
+    features: "AIドラフト隔週、戦略シナリオ比較、金融機関向け資料生成",
+    support: "専任コンサル月2回、想定問答サポート",
+    roi: "5倍目標",
+    cta: "プロプランを相談",
   },
   {
     name: "エンタープライズ",
     price: "月額 65万円〜",
-    description: "グループ全体の計画策定・内製化を伴走。",
-    bullets: [
-      "専任チームと週次伴走",
-      "API連携・権限管理対応",
-      "ROI目標: 7倍",
-    ],
+    features: "グループ横断データ連携、カスタムAIモデル、権限管理",
+    support: "専任チーム週次伴走、現地ワークショップ",
+    roi: "7倍目標",
+    cta: "エンタープライズ相談",
   },
 ];
 
@@ -300,16 +308,19 @@ const securityPoints = [
     title: "AES-256暗号化",
     description: "通信・保存データを銀行水準の暗号化で保護。",
     icon: "🔐",
+    badge: "AES-256",
   },
   {
     title: "ISO/IEC 27001取得",
     description: "情報セキュリティマネジメントシステムを国際認証。",
     icon: "🛡️",
+    badge: "ISO 27001",
   },
   {
     title: "ISO/IEC 27701取得",
     description: "プライバシー情報管理の国際基準を満たしています。",
     icon: "📜",
+    badge: "ISO 27701",
   },
 ];
 
@@ -403,6 +414,8 @@ const initialContact: ContactFormState = {
 const Index = () => {
   const [activeSection, setActiveSection] = useState(sections[0].id);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const [heroParallax, setHeroParallax] = useState(0);
   const [metricsActive, setMetricsActive] = useState(false);
   const [metricValues, setMetricValues] = useState(() =>
@@ -414,6 +427,7 @@ const Index = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
+  const [isFloatingHidden, setIsFloatingHidden] = useState(false);
 
   const metricsRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
@@ -464,6 +478,30 @@ const Index = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobile = window.innerWidth <= 1080;
+      setIsMobileViewport(isMobile);
+      if (!isMobile) {
+        setIsMenuOpen(false);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -550,6 +588,7 @@ const Index = () => {
       const offsetTop = element.getBoundingClientRect().top + window.scrollY - 80;
       window.scrollTo({ top: offsetTop, behavior: "smooth" });
     }
+    setIsMenuOpen(false);
   };
 
   const handleSimulatorChange = (
@@ -599,25 +638,53 @@ const Index = () => {
       <header className={`site-header ${isScrolled ? "is-condensed" : ""}`} aria-label="メインナビゲーション">
         <div className="container header-inner">
           <a className="brand" href="#hero" aria-label="AI経営計画書ラボ トップへ">AI経営計画書ラボ</a>
-          <nav className="header-nav" aria-label="主要セクション">
-            {sections.map((section) => (
-              <a
-                key={section.id}
-                href={`#${section.id}`}
-                className={activeSection === section.id ? "is-active" : ""}
-                onClick={(event) => handleNavClick(event, section.id)}
-              >
-                {section.label}
+          <button
+            type="button"
+            className={`nav-toggle ${isMenuOpen ? "is-open" : ""}`}
+            aria-expanded={isMenuOpen}
+            aria-controls="primary-navigation"
+            onClick={() => setIsMenuOpen((prev) => !prev)}
+          >
+            <span className="sr-only">メニューを開閉</span>
+            <span aria-hidden="true" />
+          </button>
+          <div
+            className={`header-menu ${isMenuOpen ? "is-open" : ""}`}
+            aria-hidden={isMobileViewport && !isMenuOpen}
+          >
+            <nav
+              id="primary-navigation"
+              className="header-nav"
+              aria-label="主要セクション"
+            >
+              {sections.map((section) => (
+                <a
+                  key={section.id}
+                  href={`#${section.id}`}
+                  className={activeSection === section.id ? "is-active" : ""}
+                  onClick={(event) => handleNavClick(event, section.id)}
+                >
+                  {section.label}
+                </a>
+              ))}
+            </nav>
+            <div className="header-actions">
+              <a className="btn btn-outline" href="#resources">まずは資料請求</a>
+              <a className="btn btn-accent" href="#contact">
+                無料相談を予約
               </a>
-            ))}
-          </nav>
-          <div className="header-actions">
-            <a className="btn btn-outline" href="#contact">資料請求</a>
-            <a className="btn btn-accent" href="#contact">
-              無料相談を予約
-            </a>
+            </div>
           </div>
         </div>
+        <button
+          type="button"
+          className={`nav-backdrop ${isMenuOpen ? "is-visible" : ""}`}
+          aria-hidden={!isMenuOpen}
+          tabIndex={isMenuOpen ? 0 : -1}
+          onClick={() => setIsMenuOpen(false)}
+        >
+          <span className="sr-only">メニューを閉じる</span>
+        </button>
       </header>
 
       <main>
@@ -636,32 +703,21 @@ const Index = () => {
             <div className="hero-copy" data-animate>
               <span className="badge">中小企業経営者向け</span>
               <h1 id="hero-heading">
-                経営者の意思決定と情熱を最大化する生成AI支援
-                <span>外部環境分析と財務予測はAIが担い、最終判断は経営者が下すという原則を貫きます。</span>
+                AI × 経営者 × 専門家で、激動の時代を生き抜く経営計画を最速で策定
+                <span>生成AIが外部環境を分析し、経営者の意思決定を支援。専門家が伴走して実行をサポートします。</span>
               </h1>
               <p className="hero-lead">
-                激変する市場・政策・金融環境を常時モニタリングし、経営者が描く未来像に沿ったシナリオと図表を瞬時に提示。AIは参謀として意思決定の速度と質を底上げし、経営者は情熱と判断を磨くことに専念できます。
+                政策・市場・金融データをAIが常時モニタリングし、複数シナリオの財務予測と資料ドラフトを自動生成。経営者は判断と優先順位付けに集中でき、専門家が融資・投資審査水準まで仕上げます。
               </p>
               <p className="hero-sub">
-                生成AIは業務効率を最大14%高め新規施策の着手を早めるという実証研究が報告されています。
-                <a href="https://arxiv.org/abs/2304.03442" target="_blank" rel="noreferrer">
-                  Brynjolfsson et al. (2023)
-                </a>
-                の検証を踏まえ、外部環境の分析や財務シミュレーションはAIに任せ、経営者は最重要の意思決定と説明責任に集中しましょう。
-              </p>
-              <p className="hero-sub hero-sub--secondary">
-                同時に、AIが苦手な新規課題では人の洞察が不可欠です。
-                <a href="https://arxiv.org/abs/2303.10130" target="_blank" rel="noreferrer">
-                  Noy &amp; Zhang (2023)
-                </a>
-                は人間の判断力がAIの限界を補う重要性を指摘。AIは意思決定を補完する存在であり、経営者の価値観と倫理が成果を決定づけます。
+                四半期ごとのアップデートで最新の機会とリスクを反映し、資料更新は80時間→26時間、戦略更新は6週間→2週間に短縮した事例も。意思決定に充てる時間を取り戻しましょう。
               </p>
               <div className="hero-actions">
-                <a className="btn btn-accent" href="#contact">
-                  今すぐ相談する
+                <a className="btn btn-accent" href="#resources">
+                  まずは資料請求
                 </a>
-                <a className="btn btn-ghost" href="#why-now">
-                  なぜ今かを見る
+                <a className="btn btn-ghost" href="#contact">
+                  無料相談を予約
                 </a>
               </div>
               <ul className="hero-metrics" ref={metricsRef}>
@@ -733,15 +789,23 @@ const Index = () => {
             </div>
             <div className="roles-grid">
               {responsibilityColumns.map((column) => (
-                <article key={column.id} className="role-card" data-animate>
+                <article
+                  key={column.id}
+                  className="role-card"
+                  data-animate
+                  tabIndex={0}
+                >
                   <div className="role-icon" aria-hidden="true">{column.icon}</div>
                   <h3>{column.title}</h3>
-                  <p>{column.description}</p>
+                  <p>{column.summary}</p>
                   <ul>
                     {column.points.map((point) => (
                       <li key={point}>{point}</li>
                     ))}
                   </ul>
+                  <div className="role-detail" aria-hidden="true">
+                    {column.detail}
+                  </div>
                 </article>
               ))}
             </div>
@@ -803,17 +867,12 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="quarterly-heading">四半期ごとに意思決定をアップデート</h2>
+              <h2 id="quarterly-heading">四半期ごとに戦略と実行を再設計</h2>
               <p>
-                Forbesは年次計画が急速に陳腐化すると指摘し、四半期サイクルでのレビューが市場変化への対応に不可欠だと述べています。
-                <a
-                  href="https://www.forbes.com/sites/forbesbusinesscouncil/2023/07/17/why-quarterly-planning-beats-annual-plans/"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Forbes Business Council, 2023
+                <a href="https://dragonboat.io/blog/quarterly-planning-guide" target="_blank" rel="noreferrer">
+                  Dragonboat
                 </a>
-                。生成AIの技術革新スピードも同様に速く、90日ごとの意思決定アップデートで競争優位を守りましょう。
+                は、四半期プランニングを単なるプロジェクトの羅列ではなく、長期ビジョンと短期スプリントをつなぐ継続的なアラインメントと位置づけています。生成AIで外部環境を90日ごとに捉え直し、専門家とともに意思決定を更新しましょう。
               </p>
             </div>
             <div className="quarterly-grid">
@@ -990,7 +1049,7 @@ const Index = () => {
                 {successStories.map((story) => (
                   <article key={story.industry} className="story-card">
                     <div className="story-meta">
-                      <div className="story-avatar" aria-hidden="true">👤</div>
+                      <div className="story-avatar" aria-hidden="true">{story.avatarInitials}</div>
                       <div>
                         <span className="story-industry">{story.industry}</span>
                         <span className="story-role">{story.name} / {story.role}</span>
@@ -1189,22 +1248,36 @@ const Index = () => {
               <h2 id="pricing-heading">料金プラン</h2>
               <p>規模や目的に合わせて3つのプランをご用意。期待できるROIも明記しています。</p>
             </div>
-            <div className="pricing-grid">
-              {pricingPlans.map((plan) => (
-                <article key={plan.name} className="pricing-card" data-animate>
-                  <h3>{plan.name}</h3>
-                  <p className="pricing-price">{plan.price}</p>
-                  <p className="pricing-desc">{plan.description}</p>
-                  <ul>
-                    {plan.bullets.map((bullet) => (
-                      <li key={bullet}>{bullet}</li>
-                    ))}
-                  </ul>
-                  <a className="btn btn-outline" href="#contact">
-                    プランの詳細を相談
-                  </a>
-                </article>
-              ))}
+            <div className="pricing-table-wrapper" data-animate>
+              <table className="pricing-table">
+                <caption className="sr-only">プラン別の料金と提供内容</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">プラン</th>
+                    <th scope="col">月額</th>
+                    <th scope="col">主な機能</th>
+                    <th scope="col">サポート</th>
+                    <th scope="col">想定ROI</th>
+                    <th scope="col" aria-label="アクション" />
+                  </tr>
+                </thead>
+                <tbody>
+                  {pricingPlans.map((plan) => (
+                    <tr key={plan.name}>
+                      <th scope="row">{plan.name}</th>
+                      <td>{plan.price}</td>
+                      <td>{plan.features}</td>
+                      <td>{plan.support}</td>
+                      <td>{plan.roi}</td>
+                      <td>
+                        <a className="btn btn-outline" href="#contact">
+                          {plan.cta}
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-accent" href="#contact">
@@ -1262,6 +1335,7 @@ const Index = () => {
               {securityPoints.map((point) => (
                 <article key={point.title} className="security-card" data-animate>
                   <div className="security-icon" aria-hidden="true">{point.icon}</div>
+                  <span className="security-badge">{point.badge}</span>
                   <h3>{point.title}</h3>
                   <p>{point.description}</p>
                 </article>
@@ -1272,6 +1346,9 @@ const Index = () => {
                 セキュリティ要件を相談する
               </a>
             </div>
+            <p className="privacy-note" data-animate>
+              データの取り扱いについては<a href="/privacy" target="_blank" rel="noreferrer">プライバシーポリシー</a>をご覧ください。
+            </p>
           </div>
         </section>
 
@@ -1368,15 +1445,27 @@ const Index = () => {
         </section>
       </main>
 
-      <a className="floating-cta" href="#contact" aria-label="無料相談を申し込む">
-        無料相談を申し込む
-      </a>
+      {!isFloatingHidden && (
+        <div className="floating-cta" role="complementary" aria-label="相談用ショートカット">
+          <a className="floating-cta__button" href="#contact">
+            無料相談を申し込む
+          </a>
+          <button
+            type="button"
+            className="floating-cta__close"
+            onClick={() => setIsFloatingHidden(true)}
+            aria-label="この案内を閉じる"
+          >
+            ×
+          </button>
+        </div>
+      )}
 
       <footer className="site-footer">
         <div className="container">
           <p>© {new Date().getFullYear()} AI経営計画書ラボ. All rights reserved.</p>
           <p className="footnote">
-            出典: Brynjolfsson et al. (2023), Noy &amp; Zhang (2023), Yang et al. (2023), Forbes Business Council (2023), Stanford HAI (2024)。
+            出典: Switch Software (2024), Stanford HAI (2024), OECD (2024), Dragonboat (2024)。
           </p>
         </div>
       </footer>

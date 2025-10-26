@@ -51,6 +51,18 @@ a:focus-visible {
   outline-offset: 4px;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 img,
 svg {
   max-width: 100%;
@@ -189,6 +201,12 @@ svg {
   color: var(--navy-700);
 }
 
+.header-menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
 .header-nav {
   display: flex;
   align-items: center;
@@ -224,6 +242,76 @@ svg {
 .header-actions {
   display: flex;
   gap: 12px;
+}
+
+.nav-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(15, 37, 71, 0.16);
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--navy-700);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-toggle span[aria-hidden="true"] {
+  position: relative;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  display: block;
+}
+
+.nav-toggle span[aria-hidden="true"]::before,
+.nav-toggle span[aria-hidden="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  transition: transform 0.2s ease;
+}
+
+.nav-toggle span[aria-hidden="true"]::before {
+  top: -6px;
+}
+
+.nav-toggle span[aria-hidden="true"]::after {
+  top: 6px;
+}
+
+.nav-toggle.is-open span[aria-hidden="true"] {
+  background: transparent;
+}
+
+.nav-toggle.is-open span[aria-hidden="true"]::before {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.nav-toggle.is-open span[aria-hidden="true"]::after {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  border: none;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 30;
+}
+
+.nav-backdrop.is-visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* ======================================================
@@ -510,11 +598,16 @@ svg {
   display: grid;
   gap: 16px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
 .role-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-md);
+}
+
+.role-card:focus-visible {
+  outline: 3px solid rgba(61, 214, 181, 0.5);
 }
 
 .role-icon {
@@ -536,6 +629,28 @@ svg {
   color: var(--gray-700);
 }
 
+.role-detail {
+  background: rgba(63, 121, 197, 0.08);
+  border-radius: 16px;
+  padding: 14px 18px;
+  color: var(--gray-700);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.25s ease, max-height 0.25s ease, transform 0.25s ease;
+  transform: translateY(12px);
+}
+
+.role-card:hover .role-detail,
+.role-card:focus .role-detail,
+.role-card:focus-within .role-detail {
+  opacity: 1;
+  max-height: 240px;
+  transform: translateY(0);
+}
+
 /* ======================================================
    Why now section
    ====================================================== */
@@ -545,7 +660,7 @@ svg {
 
 .evidence-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
 }
 
@@ -910,6 +1025,8 @@ svg {
   display: grid;
   place-items: center;
   font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .story-industry {
@@ -1161,35 +1278,47 @@ svg {
   background: var(--white);
 }
 
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-}
-
-.pricing-card {
-  background: var(--gray-50);
-  border-radius: 24px;
-  padding: 32px 28px;
+.pricing-table-wrapper {
+  overflow-x: auto;
+  border-radius: 20px;
   box-shadow: var(--shadow-sm);
-  display: grid;
-  gap: 16px;
+  background: var(--white);
+}
+
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.pricing-table th,
+.pricing-table td {
+  padding: 20px;
   text-align: left;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+  vertical-align: top;
 }
 
-.pricing-price {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--navy-600);
+.pricing-table thead th {
+  background: rgba(63, 121, 197, 0.08);
+  font-weight: 700;
+  color: var(--navy-700);
+  letter-spacing: 0.02em;
 }
 
-.pricing-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 10px;
-  color: var(--gray-700);
+.pricing-table tbody th {
+  font-size: 1.1rem;
+  color: var(--navy-700);
+  white-space: nowrap;
+}
+
+.pricing-table tbody td:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.pricing-table .btn {
+  min-width: 180px;
 }
 
 /* ======================================================
@@ -1261,6 +1390,32 @@ svg {
   display: grid;
   place-items: center;
   font-size: 1.6rem;
+}
+
+.security-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(63, 121, 197, 0.16);
+  color: var(--navy-700);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+.privacy-note {
+  margin-top: 24px;
+  font-size: 0.95rem;
+  color: var(--gray-700);
+  text-align: center;
+}
+
+.privacy-note a {
+  color: var(--navy-600);
+  font-weight: 600;
+  text-decoration: underline;
 }
 
 /* ======================================================
@@ -1354,23 +1509,54 @@ svg {
 
 .floating-cta {
   position: fixed;
-  bottom: 32px;
-  right: 32px;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px 12px 20px;
+  border-radius: 999px;
+  background: rgba(15, 37, 71, 0.92);
+  box-shadow: var(--shadow-lg);
+  color: var(--white);
+  z-index: 45;
+}
+
+.floating-cta__button {
   display: inline-flex;
-  padding: 16px 28px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--mint-400), var(--sky-500));
   color: var(--white);
   font-weight: 700;
-  box-shadow: var(--shadow-lg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  z-index: 45;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
-.floating-cta:hover,
-.floating-cta:focus-visible {
-  transform: translateY(-2px);
-  box-shadow: 0 24px 40px rgba(15, 37, 71, 0.18);
+.floating-cta__button:hover,
+.floating-cta__button:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.floating-cta__close {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.85);
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.floating-cta__close:hover,
+.floating-cta__close:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .site-footer {
@@ -1389,6 +1575,54 @@ svg {
    Responsive adjustments
    ====================================================== */
 @media (max-width: 1080px) {
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .header-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(320px, 82%);
+    background: rgba(248, 251, 255, 0.96);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 96px 24px 40px;
+    box-shadow: -12px 0 32px rgba(15, 37, 71, 0.16);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    max-height: 100vh;
+    overflow-y: auto;
+    z-index: 40;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .header-menu.is-open {
+    transform: translateX(0);
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .header-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .header-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .header-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
   .hero-inner {
     grid-template-columns: 1fr;
   }
@@ -1403,7 +1637,6 @@ svg {
   .quarterly-grid,
   .expert-grid,
   .resources-grid,
-  .pricing-grid,
   .security-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1415,24 +1648,13 @@ svg {
   .process-flowchart {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .pricing-table {
+    min-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
-  .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .header-actions {
-    align-self: stretch;
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  .header-actions .btn {
-    flex: 1;
-  }
-
   .hero {
     padding: 96px 0 110px;
   }
@@ -1449,7 +1671,6 @@ svg {
   .process-flowchart,
   .resources-grid,
   .faq-list,
-  .pricing-grid,
   .security-grid {
     grid-template-columns: 1fr;
   }
