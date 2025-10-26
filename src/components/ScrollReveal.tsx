@@ -19,7 +19,10 @@ export const ScrollReveal = <T extends ElementType = "div">({
   ...props
 }: ScrollRevealProps<T>) => {
   const Component = (as ?? "div") as ElementType;
-  const { ref, isVisible } = useRevealOnScroll<HTMLElement>({ threshold: 0.2 });
+  const { ref, isVisible } = useRevealOnScroll<HTMLElement>({
+    threshold: 0.05,
+    rootMargin: "0px 0px -5% 0px",
+  });
 
   const baseStyles = "will-change-transform transition-all duration-700 ease-out";
   const hiddenStyles =

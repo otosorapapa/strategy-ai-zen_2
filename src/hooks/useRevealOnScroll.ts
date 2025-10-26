@@ -10,7 +10,7 @@ type UseRevealOnScrollOptions = {
 };
 
 export const useRevealOnScroll = <T extends HTMLElement = HTMLElement>(
-  { threshold = 0.2, rootMargin = "0px", once = true }: UseRevealOnScrollOptions = {},
+  { threshold = 0.05, rootMargin = "0px 0px -5% 0px", once = true }: UseRevealOnScrollOptions = {},
 ) => {
   const elementRef = useRef<T | null>(null);
   const [isVisible, setIsVisible] = useState(false);

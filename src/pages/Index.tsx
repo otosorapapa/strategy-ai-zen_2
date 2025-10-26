@@ -828,8 +828,8 @@ const Index = () => {
         });
       },
       {
-        rootMargin: "0px 0px -40% 0px",
-        threshold: 0.15,
+        rootMargin: "0px 0px -10% 0px",
+        threshold: 0.05,
       }
     );
 
