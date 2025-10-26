@@ -93,6 +93,10 @@ function validatePayload(payload) {
     errors.push("メールアドレスは必須です。");
   }
 
+  if (payload.phone && typeof payload.phone !== "string") {
+    errors.push("電話番号は文字列で指定してください。");
+  }
+
   if (payload.message && typeof payload.message !== "string") {
     errors.push("相談内容は文字列で指定してください。");
   }
@@ -138,6 +142,7 @@ const server = createServer(async (req, res) => {
         name: payload.name.trim(),
         company: payload.company.trim(),
         email: payload.email.trim(),
+        phone: payload.phone?.toString().trim() ?? "",
         message: payload.message?.toString().trim() ?? "",
         receivedAt: new Date().toISOString(),
       };

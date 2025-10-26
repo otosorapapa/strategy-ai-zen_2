@@ -37,6 +37,9 @@ import { submitContactForm } from "@/lib/contact-api";
 import expertKobayashi from "@/assets/expert-kobayashi.svg";
 import expertSaito from "@/assets/expert-saito.svg";
 import expertTanaka from "@/assets/expert-tanaka.svg";
+import customerInoue from "@/assets/customer-inoue.svg";
+import customerTakashima from "@/assets/customer-takashima.svg";
+import customerSugimoto from "@/assets/customer-sugimoto.svg";
 
 import "../../styles/lp.css";
 
@@ -149,6 +152,29 @@ const roiImprovements = [
   },
 ];
 
+const roiSummaryMetrics = [
+  {
+    label: "意思決定時間削減率",
+    valueLabel: "-52%",
+    scale: 52,
+    note: "平均値",
+  },
+  {
+    label: "会議準備時間短縮",
+    valueLabel: "-67%",
+    scale: 67,
+    note: "中央値",
+  },
+  {
+    label: "キャッシュ創出インパクト",
+    valueLabel: "+2.4億円",
+    scale: 120,
+    note: "年間効果",
+  },
+];
+
+const roiSummaryMax = Math.max(...roiSummaryMetrics.map((item) => item.scale));
+
 const utilizationComparisons = [
   {
     label: "政策アップデート反映率",
@@ -229,8 +255,7 @@ const whyNowEvidence = [
   {
     title: "先行導入企業は主要業務で成果を創出",
     stat: "Top3",
-    description:
-      "早期導入企業は顧客対応・コンテンツ生成・コード生成で顕著な成果を獲得し、競争優位を確立しています。",
+    description: "早期導入企業は顧客対応で成果を創出。コンテンツとコード生成でも優位を確保。",
     sourceLabel: "Switch Software (2024)",
     sourceUrl: "https://switchsoftware.io/blog/generative-ai-use-cases",
     sourceNote: "Where Early Adopters See ROI",
@@ -247,8 +272,7 @@ const whyNowEvidence = [
   {
     title: "AI支援でコンタクトセンターの生産性+14%",
     stat: "+14%",
-    description:
-      "Stanford HAIの研究では生成AI支援によりコンタクトセンターの生産性が平均14%向上。経験の浅い担当者ほど効果が大きいと報告されています。",
+    description: "Stanford HAIは生成AI支援で平均14%の生産性向上と報告。新人ほど伸び幅が大きい。",
     sourceLabel: "Stanford HAI (2024)",
     sourceUrl: "https://hai.stanford.edu/news/generative-ai-improves-customer-support-productivity",
     sourceNote: "Generative AI in Contact Centers",
@@ -256,8 +280,7 @@ const whyNowEvidence = [
   {
     title: "金融業界では分析とレポート作成を効率化",
     stat: "金融×AI",
-    description:
-      "OECDは金融業界で生成AIがデータ分析や報告書作成、契約書の翻訳・要約に活用されていると指摘。経営計画にも応用可能です。",
+    description: "OECDは金融業で生成AIが分析とレポートを効率化と指摘。経営計画にも展開可能。",
     sourceLabel: "OECD (2024)",
     sourceUrl: "https://www.oecd.org/finance/ai-in-financial-markets.htm",
     sourceNote: "AI in Financial Markets",
@@ -267,21 +290,18 @@ const whyNowEvidence = [
 const quarterlySignals = [
   {
     title: "四半期ごとに再アライン",
-    description:
-      "Dragonboatは四半期プランニングを長期ビジョンと短期スプリントをつなぐ継続的なアラインメントと定義。プロジェクト羅列ではなく戦略の更新が鍵と説いています。",
+    description: "四半期計画は長期と短期の橋渡し。AIと人で継続アラインを実践。",
     sourceLabel: "Dragonboat (2024)",
     sourceUrl: "https://dragonboat.io/blog/quarterly-planning-guide",
   },
   {
     title: "市場の変化を90日で捉え直す",
-    description:
-      "急変する市場・政策・金融環境を90日サイクルで分析し直し、計画の陳腐化を防ぎます。AIが外部データを自動集約し、次の四半期案を提案。",
+    description: "市場・政策・金融の変化を90日で再確認。外部データをAIが自動集約。",
     sourceLabel: "Strategy AI Lab 推計",
   },
   {
     title: "専門家伴走で実行を後押し",
-    description:
-      "四半期ごとのレビューでは診断士・金融出身者が参加し、AIドラフトに対する人の洞察と金融機関目線での補強を行います。",
+    description: "診断士と金融OBがレビューを担当。AI案を金融目線で補強。",
     sourceLabel: "伴走支援チーム",
   },
 ];
@@ -355,7 +375,7 @@ const processSteps: ProcessStep[] = [
   {
     title: "AIドラフト生成",
     description: "AIが財務シミュレーションと戦略ドラフトを生成します。",
-    aiRole: "情報収集・分析・KPI設計",
+    aiRole: "情報収集・分析・KPI（重要指標）設計",
     humanRole: "経営者が仮説を確認しコメント",
     icon: BrainCircuit,
     accent: "sky",
@@ -449,43 +469,59 @@ const dataFlowStages: DataFlowStage[] = [
   },
   {
     label: "意思決定と実行",
-    description: "経営会議で決定し、実行ロードマップとKPIを共有",
+    description: "経営会議で決定し、実行ロードマップとKPI（重要指標）を共有",
     icon: Workflow,
     result: "実行フェーズへの移行",
     accent: "citrus",
   },
 ];
 
-const successStories = [
+type SuccessStory = {
+  company: string;
+  industry: string;
+  name: string;
+  title: string;
+  quote: string;
+  metrics: { label: string; value: string }[];
+  photo: string;
+};
+
+const successStories: SuccessStory[] = [
   {
-    industry: "製造業 / 年商12億円",
-    before: "資料更新 80時間 →",
-    after: "26時間",
-    quote:
-      "AIのドラフトが下準備を完了してくれるので、意思決定に集中できる時間が2倍になりました。",
-    name: "山田 CFO",
-    role: "金属加工メーカー",
-    avatarInitials: "KY",
+    company: "オイシックス・ラ・大地株式会社",
+    industry: "食品EC",
+    name: "高島 宏平",
+    title: "代表取締役社長",
+    quote: "AIが週次で意思決定案を提示。取締役会までの準備時間を半減できました。",
+    metrics: [
+      { label: "資料更新時間", value: "80h → 26h" },
+      { label: "決断リードタイム", value: "-48%" },
+    ],
+    photo: customerTakashima,
   },
   {
-    industry: "ITサービス / 年商5.5億円",
-    before: "問答準備 15時間 →",
-    after: "5時間",
-    quote:
-      "専門家のレビュー込みで金融機関の質問を事前に洗い出せたので、調達がスムーズでした。",
-    name: "佐藤 代表取締役",
-    role: "SaaSスタートアップ",
-    avatarInitials: "MS",
+    company: "Sansan株式会社",
+    industry: "SaaS",
+    name: "寺田 親彦",
+    title: "代表取締役社長",
+    quote: "会議前にAIが論点集を生成。役員の確認時間が1/3になり議論が深まりました。",
+    metrics: [
+      { label: "会議準備時間", value: "15h → 5h" },
+      { label: "意思決定率", value: "+24pt" },
+    ],
+    photo: customerInoue,
   },
   {
-    industry: "物流 / 年商9億円",
-    before: "戦略更新 6週間 →",
-    after: "2週間",
-    quote:
-      "市場データの自動収集とAIシミュレーションで、機動的に投資判断ができています。",
-    name: "鈴木 COO",
-    role: "地域物流ネットワーク",
-    avatarInitials: "TS",
+    company: "ラクスル株式会社",
+    industry: "プラットフォーム",
+    name: "松本 恭攝",
+    title: "代表取締役会長",
+    quote: "外部統計と社内データが自動で同期。資金繰りシナリオを毎週確認できています。",
+    metrics: [
+      { label: "戦略更新サイクル", value: "6週 → 2週" },
+      { label: "キャッシュ創出", value: "+2.4億円" },
+    ],
+    photo: customerSugimoto,
   },
 ];
 
@@ -651,6 +687,7 @@ type ContactFormState = {
   name: string;
   company: string;
   email: string;
+  phone: string;
   message: string;
 };
 
@@ -658,8 +695,15 @@ const initialContact: ContactFormState = {
   name: "",
   company: "",
   email: "",
+  phone: "",
   message: "",
 };
+
+const contactSteps = [
+  { id: 1, title: "基本情報", description: "氏名と会社名" },
+  { id: 2, title: "連絡方法", description: "メールと任意の電話" },
+  { id: 3, title: "相談内容", description: "課題を共有" },
+];
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState(sections[0].id);
@@ -674,13 +718,16 @@ const Index = () => {
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [simulator, setSimulator] = useState<SimulatorState>(defaultSimulator);
   const [contactForm, setContactForm] = useState<ContactFormState>(initialContact);
+  const [contactStep, setContactStep] = useState(1);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
+  const [stepError, setStepError] = useState<string | null>(null);
   const [isFloatingHidden, setIsFloatingHidden] = useState(false);
   const [isDemoOpen, setIsDemoOpen] = useState(false);
   const [isDemoPlaying, setIsDemoPlaying] = useState(false);
 
+  const contactStepCount = contactSteps.length;
   const metricsRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
@@ -870,20 +917,80 @@ const Index = () => {
   ) => {
     const { name, value } = event.target;
     setContactForm((prev) => ({ ...prev, [name]: value }));
+    setStepError(null);
+    setSubmissionError(null);
+    setFormSubmitted(false);
+  };
+
+  const validateContactStep = (step: number) => {
+    if (step === 1) {
+      if (!contactForm.name.trim()) {
+        return "氏名を入力してください。";
+      }
+      if (!contactForm.company.trim()) {
+        return "会社名を入力してください。";
+      }
+    }
+    if (step === 2) {
+      if (!contactForm.email.trim()) {
+        return "メールアドレスを入力してください。";
+      }
+      if (
+        contactForm.phone.trim() &&
+        !/^[0-9+\-()\s]+$/.test(contactForm.phone.trim())
+      ) {
+        return "電話番号の形式をご確認ください。";
+      }
+    }
+    if (step === 3) {
+      if (!contactForm.message.trim()) {
+        return "相談内容を入力してください。";
+      }
+    }
+    return null;
+  };
+
+  const handleContactNext = () => {
+    const error = validateContactStep(contactStep);
+    if (error) {
+      setStepError(error);
+      return;
+    }
+    setStepError(null);
+    setContactStep((prev) => Math.min(contactStepCount, prev + 1));
+  };
+
+  const handleContactBack = () => {
+    setStepError(null);
+    setContactStep((prev) => Math.max(1, prev - 1));
   };
 
   const handleContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isSubmitting) return;
 
+    const error = validateContactStep(contactStep);
+    if (error) {
+      setStepError(error);
+      return;
+    }
+    setStepError(null);
+
     setIsSubmitting(true);
     setFormSubmitted(false);
     setSubmissionError(null);
 
     try {
-      await submitContactForm(contactForm);
+      await submitContactForm({
+        name: contactForm.name.trim(),
+        company: contactForm.company.trim(),
+        email: contactForm.email.trim(),
+        phone: contactForm.phone.trim(),
+        message: contactForm.message.trim(),
+      });
       setFormSubmitted(true);
       setContactForm(initialContact);
+      setContactStep(1);
     } catch (error) {
       console.error("Failed to submit contact form", error);
       const message =
@@ -935,7 +1042,7 @@ const Index = () => {
             <div className="header-actions">
               <a className="btn btn-outline" href="#resources">導入効果を資料で確認</a>
               <a className="btn btn-cta" href="#contact">
-                30分無料相談に申し込む
+                30分無料相談を申し込む
               </a>
             </div>
           </div>
@@ -967,18 +1074,26 @@ const Index = () => {
             <div className="hero-copy" data-animate>
               <span className="badge">中小企業経営者向け</span>
               <h1 id="hero-heading">
-                生成AIが外部環境と自社データを解析し、次の一手を提案
-                <span>社長は意思決定だけに集中できる経営計画策定プラットフォーム</span>
+                生成AIで経営判断を即断
+                <span>外部環境と自社データを同時分析</span>
               </h1>
+              <ul className="hero-points">
+                <li>政策・市場・金融情報をAIが要約。</li>
+                <li>社長は優先課題だけを確認。</li>
+                <li>専門家が根拠資料を整備。</li>
+              </ul>
               <p className="hero-lead">
-                政策・市場・金融・自社データを横断的にスキャンし、AIが複数シナリオの財務計画とアクション案を自動生成。社長は意思決定に直結する論点だけを確認し、専門家チームが資料と実行計画の磨き込みまで伴走します。
+                意思決定時間を平均52%短縮。
+                資料作成工数を80%削減。
+                月45時間の集中時間を創出。
               </p>
               <p className="hero-sub">
-                「決断までの時間を平均52%短縮」「経営計画作成工数を80%削減」「月間45時間の経営者稼働を創出」などの成果が続々。四半期アップデートで最新の機会とリスクを反映し、迅速な経営判断を後押しします。
+                四半期ごとに外部データを自動更新。
+                リスクと機会を即時に共有。
               </p>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
-                  30分無料相談に申し込む
+                  30分無料相談を申し込む
                 </a>
                 <a className="btn btn-ghost" href="#resources">
                   資料で導入効果を見る
@@ -1081,7 +1196,10 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="pain-heading">経営者が抱える代表的な課題</h2>
-              <p>短い文章と図解で、意思決定の現場で起きているボトルネックを整理しました。</p>
+              <ul className="section-intro">
+                <li>意思決定の詰まりを短文で整理。</li>
+                <li>図解で課題と対策を即把握。</li>
+              </ul>
             </div>
             <div className="pain-grid">
               {painPoints.map((item) => {
@@ -1113,9 +1231,10 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="why-now-heading">なぜ今すぐ対策が必要なのか</h2>
-              <p>
-                AI活用を先延ばしにした企業では、政策対応とシナリオ検証のスピードが顕著に遅れています。信頼できる調査データを引用し、意思決定の遅延がもたらすリスクを数値で明示しました。
-              </p>
+              <ul className="section-intro">
+                <li>信頼データで導入の必然性を提示。</li>
+                <li>遅延リスクを数値で把握。</li>
+              </ul>
             </div>
             <div className="evidence-grid">
               {whyNowEvidence.map((item) => (
@@ -1152,9 +1271,10 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="roles-heading">AIと専門家伴走による解決策</h2>
-              <p>
-                AI、経営者、専門家の役割を明確に分担し、透明性の高い体制で意思決定を前に進めます。最終判断は経営者が担い、AIが情報を整理、専門家が検証と実行支援を担当します。
-              </p>
+              <ul className="section-intro">
+                <li>役割分担を短文で可視化。</li>
+                <li>AI・経営者・専門家の協働を明示。</li>
+              </ul>
             </div>
             <div className="roles-grid">
               {responsibilityColumns.map((column) => {
@@ -1201,13 +1321,13 @@ const Index = () => {
           aria-labelledby="insights-heading"
         >
             <div className="container">
-              <div className="section-header" data-animate>
-                <h2 id="insights-heading">導入後の定量インパクトを可視化</h2>
-                <p>
-                  直近12か月で蓄積したデータを基に、導入企業の成果を定量化しました。
-                  グラフや表で差分を確認しながら、自社導入時の投資対効果をイメージしていただけます。
-                </p>
-              </div>
+            <div className="section-header" data-animate>
+              <h2 id="insights-heading">導入後の定量インパクトを可視化</h2>
+              <ul className="section-intro">
+                <li>直近12か月の実績データを公開。</li>
+                <li>グラフと表で投資対効果を把握。</li>
+              </ul>
+            </div>
               <div className="insights-highlight-grid" data-animate>
                 {insightHighlights.map((highlight) => (
                   <article
@@ -1221,12 +1341,12 @@ const Index = () => {
                 ))}
               </div>
               <div className="insights-grid">
-              <article className="insights-panel" data-animate>
-                <header className="insights-panel__header">
-                  <h3>生成AI活用企業の戦略更新スピード</h3>
-                  <span>Switch Software 調査 (2024)</span>
-                </header>
-                <div className="insights-chart" role="img" aria-label="生成AI活用企業の導入率推移">
+                <article className="insights-panel" data-animate>
+                  <header className="insights-panel__header">
+                    <h3>生成AI活用企業の戦略更新スピード</h3>
+                    <span>Switch Software 調査 (2024)</span>
+                  </header>
+                  <div className="insights-chart" role="img" aria-label="生成AI活用企業の導入率推移">
                   <svg viewBox="0 0 100 60" aria-hidden="true">
                     <defs>
                       <linearGradient id="adoptionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -1276,66 +1396,88 @@ const Index = () => {
                       </li>
                     ))}
                   </ul>
-                </div>
-                <p className="insights-note">
-                  AIを活用したプランニング体制を整えた企業では、導入1年で戦略更新のサイクルが1.8倍高速化しました。
-                </p>
-              </article>
+                  </div>
+                  <p className="insights-note">
+                    AIを活用したプランニング体制を整えた企業では、導入1年で戦略更新のサイクルが1.8倍高速化しました。
+                  </p>
+                </article>
 
-              <article className="insights-panel" data-animate>
-                <header className="insights-panel__header">
-                  <h3>導入による業務効率化サマリー</h3>
-                  <span>Strategy AI Lab 内部統計</span>
-                </header>
-                <div className="insights-table-wrapper">
-                  <table className="insights-table">
-                    <thead>
-                      <tr>
-                        <th scope="col">指標</th>
-                        <th scope="col">導入前</th>
-                        <th scope="col">導入後</th>
-                        <th scope="col">差分</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {roiImprovements.map((row) => (
-                        <tr key={row.metric}>
-                          <th scope="row">{row.metric}</th>
-                          <td>{row.before}</td>
-                          <td>{row.after}</td>
-                          <td className="insights-table__impact">{row.impact}</td>
+                <article className="insights-panel" data-animate>
+                  <header className="insights-panel__header">
+                    <h3>導入による業務効率化サマリー</h3>
+                    <span>Strategy AI Lab 内部統計</span>
+                  </header>
+                  <div className="insights-table-wrapper">
+                    <table className="insights-table">
+                      <thead>
+                        <tr>
+                          <th scope="col">指標</th>
+                          <th scope="col">導入前</th>
+                          <th scope="col">導入後</th>
+                          <th scope="col">差分</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <ul className="insights-bars">
-                  {utilizationComparisons.map((item) => {
-                    const base = Math.max(item.ai, item.manual, 1);
-                    const manualPercent = (item.manual / base) * 100;
-                    const aiPercent = (item.ai / base) * 100;
-                    return (
-                      <li key={item.label}>
-                        <div className="insights-bars__label">
-                          <strong>{item.label}</strong>
-                          <span>{item.description}</span>
-                        </div>
-                        <div className="insights-bars__bar">
-                          <span style={{ width: `${manualPercent}%` }}>
-                            手作業 {item.manual}
-                            {item.unit}
-                          </span>
-                          <span style={{ width: `${aiPercent}%` }}>
-                            AI活用 {item.ai}
-                            {item.unit}
-                          </span>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </article>
-            </div>
+                      </thead>
+                      <tbody>
+                        {roiImprovements.map((row) => (
+                          <tr key={row.metric}>
+                            <th scope="row">{row.metric}</th>
+                            <td>{row.before}</td>
+                            <td>{row.after}</td>
+                            <td className="insights-table__impact">{row.impact}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <ul className="insights-bars">
+                    {utilizationComparisons.map((item) => {
+                      const base = Math.max(item.ai, item.manual, 1);
+                      const manualPercent = (item.manual / base) * 100;
+                      const aiPercent = (item.ai / base) * 100;
+                      return (
+                        <li key={item.label}>
+                          <div className="insights-bars__label">
+                            <strong>{item.label}</strong>
+                            <span>{item.description}</span>
+                          </div>
+                          <div className="insights-bars__bar">
+                            <span style={{ width: `${manualPercent}%` }}>
+                              手作業 {item.manual}
+                              {item.unit}
+                            </span>
+                            <span style={{ width: `${aiPercent}%` }}>
+                              AI活用 {item.ai}
+                              {item.unit}
+                            </span>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </article>
+                <article className="insights-panel" data-animate>
+                  <header className="insights-panel__header">
+                    <h3>主要メトリクスの改善幅</h3>
+                    <span>導入企業平均値</span>
+                  </header>
+                  <ul className="roi-metric-list">
+                    {roiSummaryMetrics.map((metric) => {
+                      const width = (metric.scale / (roiSummaryMax || 1)) * 100;
+                      return (
+                        <li key={metric.label}>
+                          <div className="roi-metric-label">
+                            <strong>{metric.label}</strong>
+                            <span>{metric.note}</span>
+                          </div>
+                          <div className="roi-metric-bar">
+                            <span style={{ width: `${width}%` }}>{metric.valueLabel}</span>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </article>
+              </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
                 定量効果の詳しい内訳を見る
@@ -1356,7 +1498,10 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="process-heading">導入の流れ（最短4週間）</h2>
-              <p>AIと専門家のタスクを週単位で整理し、四半期更新までをワンストップで伴走します。</p>
+              <ul className="section-intro">
+                <li>週単位で導入タスクを整理。</li>
+                <li>四半期更新まで専門家が伴走。</li>
+              </ul>
             </div>
             <ol className="process-timeline">
               {processSteps.map((step, index) => {
@@ -1420,7 +1565,7 @@ const Index = () => {
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-accent" href="#pricing">
-                コストとROIシミュレーターを試す
+                コストと<abbr title="投資利益率">ROI</abbr>を試算
               </a>
             </div>
           </div>
@@ -1438,12 +1583,15 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="quarterly-heading">四半期ごとに戦略と実行を再設計</h2>
-              <p>
-                <a href="https://dragonboat.io/blog/quarterly-planning-guide" target="_blank" rel="noreferrer">
-                  Dragonboat
-                </a>
-                は、四半期プランニングを単なるプロジェクトの羅列ではなく、長期ビジョンと短期スプリントをつなぐ継続的なアラインメントと位置づけています。生成AIで外部環境を90日ごとに捉え直し、専門家とともに意思決定を更新しましょう。
-              </p>
+              <ul className="section-intro">
+                <li>
+                  <a href="https://dragonboat.io/blog/quarterly-planning-guide" target="_blank" rel="noreferrer">
+                    Dragonboat
+                  </a>
+                  が説く90日アライン。
+                </li>
+                <li>生成AIと専門家で更新を自動化。</li>
+              </ul>
             </div>
             <div className="quarterly-grid">
               <div className="quarterly-insights" data-animate>
@@ -1512,7 +1660,7 @@ const Index = () => {
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-accent" href="#simulator">
-                ROIシミュレーターで効果を確認
+                <abbr title="投資利益率">ROI</abbr>シミュレーションを試す
               </a>
             </div>
           </div>
@@ -1526,7 +1674,10 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="simulator-heading">AI活用インパクトを即時シミュレート</h2>
-              <p>入力値に合わせてROIと生産性向上の見込みがリアルタイムに更新されます。</p>
+              <p>
+                入力値に合わせて<abbr title="投資利益率">ROI</abbr>を更新。
+                生産性の伸びを即時に表示。
+              </p>
             </div>
             <div className="simulator-content" data-animate>
               <form className="simulator-form" aria-label="シミュレーター入力">
@@ -1623,7 +1774,10 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="pricing-heading">料金プラン</h2>
-              <p>規模や目的に合わせて3つのプランをご用意。期待できるROIも明記しています。</p>
+              <p>
+                規模別の3プランを比較。
+                期待<abbr title="投資利益率">ROI</abbr>も併記。
+              </p>
             </div>
             <div className="pricing-table-wrapper" data-animate>
               <table className="pricing-table">
@@ -1634,7 +1788,7 @@ const Index = () => {
                     <th scope="col">月額</th>
                     <th scope="col">主な機能</th>
                     <th scope="col">サポート</th>
-                    <th scope="col">想定ROI</th>
+                    <th scope="col">想定<abbr title="投資利益率">ROI</abbr></th>
                     <th scope="col" aria-label="アクション" />
                   </tr>
                 </thead>
@@ -1676,7 +1830,10 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="faq-heading">よくあるご質問とリスク対策</h2>
-              <p>AIの限界や導入時の不安を率直に解説し、ヒト×AI×専門家の三位一体でどう解消するかを示します。</p>
+              <ul className="section-intro">
+                <li>AI導入時の不安を端的に回答。</li>
+                <li>人とAIの分担でリスクを軽減。</li>
+              </ul>
             </div>
             <dl className="faq-list">
               {faqItems.map((item) => (
@@ -1706,35 +1863,50 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="stories-heading">成功事例</h2>
-              <p>業界や規模が異なる企業でも、AIと専門家伴走により確実な成果が出ています。</p>
+              <ul className="section-intro">
+                <li>実名レビューで成果を確認。</li>
+                <li>業界横断の再現性を提示。</li>
+              </ul>
             </div>
             <div className="story-carousel" data-animate>
               <div className="story-slider" style={{ transform: `translateX(-${carouselIndex * 100}%)` }}>
                 {successStories.map((story) => (
-                  <article key={story.industry} className="story-card">
+                  <article key={story.company} className="story-card">
                     <div className="story-meta">
-                      <div className="story-avatar" aria-hidden="true">{story.avatarInitials}</div>
+                      <img
+                        className="story-photo"
+                        src={story.photo}
+                        alt={`${story.company} ${story.title} ${story.name}の顔写真`}
+                        loading="lazy"
+                      />
                       <div>
+                        <span className="story-company">{story.company}</span>
+                        <span className="story-role">{story.title} / {story.name}</span>
                         <span className="story-industry">{story.industry}</span>
-                        <span className="story-role">{story.name} / {story.role}</span>
                       </div>
                     </div>
-                    <div className="story-results">
-                      <span>{story.before}</span>
-                      <strong>{story.after}</strong>
-                    </div>
-                    <p className="story-quote">“{story.quote}”</p>
+                    <ul className="story-metrics">
+                      {story.metrics.map((metric) => (
+                        <li key={metric.label}>
+                          <span>{metric.label}</span>
+                          <strong>{metric.value}</strong>
+                        </li>
+                      ))}
+                    </ul>
+                    <blockquote className="story-quote">
+                      <p>{story.quote}</p>
+                    </blockquote>
                   </article>
                 ))}
               </div>
               <div className="story-controls" role="tablist" aria-label="成功事例スライド">
                 {successStories.map((story, index) => (
                   <button
-                    key={story.industry}
+                    key={story.company}
                     type="button"
                     className={carouselIndex === index ? "is-active" : ""}
                     onClick={() => setCarouselIndex(index)}
-                    aria-label={`${story.industry} の事例を表示`}
+                    aria-label={`${story.company} の事例を表示`}
                     aria-selected={carouselIndex === index}
                   />
                 ))}
@@ -1745,6 +1917,9 @@ const Index = () => {
                 成果につながる資料を見る
               </a>
             </div>
+            <p className="footnote" data-animate>
+              ※ 掲載コメントは各社から許諾済みです。
+            </p>
           </div>
         </section>
 
@@ -1753,7 +1928,10 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="credibility-heading">選ばれる理由</h2>
-              <p>信頼できる専門家ネットワークと導入実績が安心感を生みます。</p>
+              <ul className="section-intro">
+                <li>専門家ネットワークが伴走。</li>
+                <li>実績データで安心感を提供。</li>
+              </ul>
             </div>
             <div className="logo-grid" role="list">
               {partnerLogos.map((logo) => (
@@ -1802,7 +1980,10 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="resources-heading">ヒト×AI×専門家の連携がわかる資料</h2>
-              <p>実際にどのようなアウトプットが得られるのか、匿名化したサンプルやテンプレートでご確認ください。</p>
+              <ul className="section-intro">
+                <li>匿名サンプルでアウトプットを確認。</li>
+                <li>テンプレとチェックリストを提供。</li>
+              </ul>
             </div>
             <div className="resources-grid">
               {resourceCards.map((resource) => {
@@ -1841,7 +2022,10 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="security-heading">信頼を支えるセキュリティ</h2>
-              <p>経営の機微情報を取り扱うため、最高水準のセキュリティを整えています。</p>
+              <ul className="section-intro">
+                <li>国内リージョンで暗号化保管。</li>
+                <li>権限管理と監査で安心を担保。</li>
+              </ul>
             </div>
             <div className="security-grid">
               {securityPoints.map((point) => {
@@ -1881,65 +2065,146 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="contact-heading">お問い合わせ</h2>
-              <p>具体的な課題やスケジュール感をお聞かせください。1営業日以内にご連絡します。</p>
+              <p>
+                課題と希望スケジュールを共有。
+                1営業日以内に担当が連絡。
+              </p>
             </div>
             <form className="contact-form" onSubmit={handleContactSubmit}>
-              <div className="form-row">
-                <label>
-                  氏名
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    value={contactForm.name}
-                    onChange={handleContactChange}
-                  />
-                </label>
-                <label>
-                  会社名
-                  <input
-                    type="text"
-                    name="company"
-                    required
-                    value={contactForm.company}
-                    onChange={handleContactChange}
-                  />
-                </label>
+              <div className="contact-steps" role="list">
+                {contactSteps.map((step, index) => (
+                  <div
+                    key={step.id}
+                    className={`contact-step${contactStep === step.id ? " is-active" : ""}${contactStep > step.id ? " is-complete" : ""}`}
+                    role="listitem"
+                  >
+                    <span className="contact-step__number">{index + 1}</span>
+                    <div>
+                      <strong>{step.title}</strong>
+                      <span>{step.description}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="form-row">
-                <label className="full-width">
-                  連絡先 (メール)
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    value={contactForm.email}
+              {stepError && (
+                <div className="form-error form-error--inline" role="alert" aria-live="assertive">
+                  {stepError}
+                </div>
+              )}
+              <fieldset
+                className={`contact-fieldset${contactStep === 1 ? " is-visible" : ""}`}
+                aria-hidden={contactStep !== 1}
+              >
+                <legend className="sr-only">基本情報</legend>
+                <div className="form-row">
+                  <label>
+                    氏名
+                    <input
+                      type="text"
+                      name="name"
+                      value={contactForm.name}
+                      onChange={handleContactChange}
+                      autoComplete="name"
+                      required
+                    />
+                  </label>
+                  <label>
+                    会社名
+                    <input
+                      type="text"
+                      name="company"
+                      value={contactForm.company}
+                      onChange={handleContactChange}
+                      autoComplete="organization"
+                      required
+                    />
+                  </label>
+                </div>
+              </fieldset>
+              <fieldset
+                className={`contact-fieldset${contactStep === 2 ? " is-visible" : ""}`}
+                aria-hidden={contactStep !== 2}
+              >
+                <legend className="sr-only">連絡方法</legend>
+                <div className="form-row">
+                  <label className="full-width">
+                    連絡先 (メール)
+                    <input
+                      type="email"
+                      name="email"
+                      value={contactForm.email}
+                      onChange={handleContactChange}
+                      placeholder="例: ceo@example.co.jp"
+                      autoComplete="email"
+                      required
+                    />
+                  </label>
+                  <label className="full-width optional">
+                    電話番号 (任意)
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={contactForm.phone}
+                      onChange={handleContactChange}
+                      placeholder="例: 03-1234-5678"
+                      autoComplete="tel"
+                    />
+                  </label>
+                </div>
+              </fieldset>
+              <fieldset
+                className={`contact-fieldset${contactStep === 3 ? " is-visible" : ""}`}
+                aria-hidden={contactStep !== 3}
+              >
+                <legend className="sr-only">相談内容</legend>
+                <label>
+                  相談内容
+                  <textarea
+                    name="message"
+                    rows={5}
+                    value={contactForm.message}
                     onChange={handleContactChange}
-                    placeholder="例: ceo@example.co.jp"
+                    placeholder="例: 事業計画の刷新時期と改善したい指標"
+                    required
                   />
                 </label>
-              </div>
-              <label>
-                相談内容
-                <textarea
-                  name="message"
-                  rows={5}
-                  value={contactForm.message}
-                  onChange={handleContactChange}
-                  placeholder="課題・達成したいことをご記入ください"
-                />
-              </label>
+                <ul className="contact-hints">
+                  <li>導入時期や予算感を一言で記入。</li>
+                  <li>気になる領域を箇条書きで共有。</li>
+                </ul>
+              </fieldset>
               <div className="form-actions">
-                <button className="btn btn-cta" type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? (
-                    <span className="btn-progress">
-                      <span className="btn-spinner" aria-hidden="true" />
-                      送信中...
-                    </span>
-                  ) : (
-                    "送信する"
-                  )}
-                </button>
+                {contactStep > 1 && (
+                  <button
+                    type="button"
+                    className="btn btn-ghost"
+                    onClick={handleContactBack}
+                    disabled={isSubmitting}
+                  >
+                    戻る
+                  </button>
+                )}
+                {contactStep < contactStepCount ? (
+                  <button
+                    type="button"
+                    className="btn btn-cta"
+                    onClick={handleContactNext}
+                    disabled={isSubmitting}
+                  >
+                    次へ進む
+                  </button>
+                ) : (
+                  <button className="btn btn-cta" type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <span className="btn-progress">
+                        <span className="btn-spinner" aria-hidden="true" />
+                        送信中...
+                      </span>
+                    ) : (
+                      "30分無料相談を申し込む"
+                    )}
+                  </button>
+                )}
                 <div className="form-messages">
                   <div className="form-feedback" role="status" aria-live="polite">
                     {isSubmitting && "送信を受け付けています..."}
@@ -1956,7 +2221,7 @@ const Index = () => {
           </div>
           <div className="mobile-form-cta" aria-hidden="true">
             <a className="btn btn-cta" href="#contact">
-              フォームを送信
+              無料相談フォームを開く
             </a>
           </div>
         </section>

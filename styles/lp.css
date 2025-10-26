@@ -404,6 +404,32 @@ svg {
   color: var(--gray-600);
 }
 
+.hero-points {
+  list-style: none;
+  margin: 12px 0 8px;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  color: var(--navy-700);
+  font-weight: 600;
+}
+
+.hero-points li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.hero-points li::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mint-500);
+  box-shadow: 0 0 0 3px rgba(34, 198, 165, 0.18);
+}
+
 .hero-lead {
   font-size: 1.05rem;
   margin-bottom: 16px;
@@ -525,7 +551,7 @@ svg {
 
 .insights-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 28px;
   align-items: stretch;
 }
@@ -712,6 +738,55 @@ svg {
   margin: 0;
   font-size: 0.85rem;
   color: var(--gray-600);
+}
+
+.roi-metric-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.roi-metric-list li {
+  display: grid;
+  gap: 6px;
+}
+
+.roi-metric-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--gray-600);
+}
+
+.roi-metric-label strong {
+  color: var(--navy-700);
+}
+
+.roi-metric-label span {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.roi-metric-bar {
+  background: rgba(148, 163, 184, 0.18);
+  border-radius: 999px;
+  overflow: hidden;
+  height: 16px;
+}
+
+.roi-metric-bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(135deg, var(--mint-400), var(--sky-500));
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-align: right;
+  padding: 0 12px;
+  line-height: 16px;
 }
 
 .hero-metrics strong {
@@ -1044,6 +1119,20 @@ svg {
 .section-header p {
   color: var(--gray-700);
   margin: 0;
+}
+
+.section-header .section-intro {
+  margin: 12px auto 0;
+  padding-left: 1.2em;
+  display: inline-block;
+  text-align: left;
+  color: var(--gray-700);
+  font-size: 0.95rem;
+}
+
+.section-intro li {
+  margin-bottom: 4px;
+  line-height: 1.6;
 }
 
 .section-cta {
@@ -1695,47 +1784,85 @@ svg {
   transition: transform 0.6s ease;
 }
 
-.story-card {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 28px;
-  display: grid;
-  gap: 16px;
-  box-shadow: var(--shadow-sm);
-}
+  .story-card {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 28px;
+    display: grid;
+    gap: 16px;
+    box-shadow: var(--shadow-sm);
+  }
 
-.story-meta {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
+  .story-meta {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
 
-.story-avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 16px;
-  background: rgba(31, 158, 140, 0.18);
-  display: grid;
-  place-items: center;
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
+  .story-photo {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    object-fit: cover;
+    box-shadow: 0 12px 26px rgba(15, 37, 71, 0.2);
+  }
 
-.story-industry {
-  font-weight: 700;
-}
+  .story-company {
+    font-weight: 700;
+    display: block;
+    color: rgba(255, 255, 255, 0.92);
+  }
 
-.story-role {
-  display: block;
-  font-size: 0.85rem;
-  opacity: 0.7;
-}
+  .story-role {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.75;
+  }
 
-.story-results span {
-  display: inline-block;
-  margin-right: 8px;
-}
+  .story-industry {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  .story-metrics {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .story-metrics li {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 16px;
+    padding: 12px 14px;
+    display: grid;
+    gap: 4px;
+  }
+
+  .story-metrics span {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .story-metrics strong {
+    font-size: 1.2rem;
+    color: var(--white);
+  }
+
+  blockquote.story-quote {
+    margin: 0;
+    padding-left: 16px;
+    border-left: 4px solid rgba(61, 214, 181, 0.55);
+    font-style: normal;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  blockquote.story-quote p {
+    margin: 0;
+  }
 
 .story-controls {
   margin-top: 24px;
@@ -1757,6 +1884,11 @@ svg {
 .story-controls button.is-active {
   transform: scale(1.2);
   background: var(--sky-500);
+}
+
+.stories .footnote {
+  color: rgba(255, 255, 255, 0.78);
+  margin-top: 20px;
 }
 
 /* ======================================================
@@ -2385,6 +2517,85 @@ svg {
   resize: vertical;
 }
 
+.contact-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.contact-step {
+  flex: 1 1 160px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: rgba(147, 197, 253, 0.12);
+  color: var(--gray-600);
+  transition: background 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+}
+
+.contact-step__number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(96, 165, 250, 0.28);
+  color: var(--navy-700);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+}
+
+.contact-step strong {
+  display: block;
+  font-size: 0.95rem;
+  color: inherit;
+}
+
+.contact-step span {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.contact-step.is-active {
+  background: rgba(96, 165, 250, 0.22);
+  color: var(--navy-700);
+}
+
+.contact-step.is-active .contact-step__number {
+  background: var(--sky-500);
+  color: var(--white);
+}
+
+.contact-step.is-complete {
+  opacity: 0.75;
+}
+
+.contact-step.is-complete .contact-step__number {
+  background: var(--mint-500);
+  color: var(--white);
+}
+
+.contact-fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+  display: none;
+}
+
+.contact-fieldset.is-visible {
+  display: block;
+}
+
+.contact-hints {
+  margin: 12px 0 0;
+  padding-left: 1.2em;
+  display: grid;
+  gap: 4px;
+  color: var(--gray-600);
+  font-size: 0.9rem;
+}
+
 .form-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2412,6 +2623,14 @@ svg {
 }
 
 .form-error {
+  color: var(--error-500);
+  font-weight: 600;
+}
+
+.form-error--inline {
+  background: rgba(225, 29, 72, 0.08);
+  border-radius: 14px;
+  padding: 10px 16px;
   color: var(--error-500);
   font-weight: 600;
 }
