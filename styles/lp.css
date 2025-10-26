@@ -387,6 +387,49 @@ svg {
   margin-bottom: 32px;
 }
 
+.hero-pains {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+.hero-pains li {
+  background: rgba(63, 121, 197, 0.14);
+  color: var(--navy-700);
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.cta-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0 0 0 12px;
+  list-style: none;
+  color: var(--gray-600);
+  font-size: 0.85rem;
+  flex: 1 1 260px;
+}
+
+.cta-benefits li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.cta-benefits li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--mint-500);
+  font-weight: 700;
+}
+
 .hero-metrics {
   list-style: none;
   padding: 0;
@@ -422,6 +465,35 @@ svg {
 .hero-visual {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.hero-value-grid {
+  display: grid;
+  gap: 14px;
+  margin-top: 24px;
+  width: min(100%, 420px);
+}
+
+.hero-value-card {
+  background: rgba(255, 255, 255, 0.88);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: inset 0 0 0 1px rgba(96, 165, 250, 0.16), 0 12px 28px rgba(15, 37, 71, 0.1);
+}
+
+.hero-value-card h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: var(--navy-700);
+}
+
+.hero-value-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--gray-600);
 }
 
 .scroll-cue {
@@ -575,6 +647,30 @@ svg {
 
 .section-cta .btn {
   min-width: 240px;
+}
+
+.cta-note {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+}
+
+.resource-benefit {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+}
+
+.pricing-note {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: var(--gray-600);
+}
+
+.story-impact {
+  margin: 12px 0 0;
+  font-size: 0.85rem;
+  color: var(--gray-600);
 }
 
 /* ======================================================
@@ -1694,6 +1790,15 @@ svg {
 
   .section-cta .btn {
     width: 100%;
+  }
+
+  .cta-benefits {
+    padding-left: 0;
+    flex-basis: 100%;
+  }
+
+  .cta-benefits li {
+    padding-left: 22px;
   }
 
   .floating-cta {

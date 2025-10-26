@@ -38,19 +38,48 @@ const heroMetrics = [
   },
   {
     label: "年間削減工数",
-    note: "生成AI活用による削減期待値",
-    prefix: "-",
-    suffix: "h",
+    note: "12名規模のチームでの削減期待値",
+    prefix: "",
+    suffix: "時間",
     target: 1750,
   },
   {
     label: "年間コスト削減",
-    note: "生成AI活用によるコスト削減",
-    prefix: "-",
+    note: "専門家レビュー込みの平均削減額",
+    prefix: "",
     suffix: "万円",
     target: 1000,
   },
 ];
+
+const heroPainPoints = [
+  "外部環境を追う時間が足りない",
+  "情報が多すぎて何を信じれば良いか迷う",
+  "経営判断の裏付けに自信が持てない",
+];
+
+const heroAiValue = [
+  {
+    title: "データソース",
+    description: "政策・統計・業界ニュース・為替や金利データを日次で取得し更新。",
+  },
+  {
+    title: "生成アルゴリズム",
+    description: "LLMと時系列モデルを組み合わせ、複数シナリオの財務予測を自動生成。",
+  },
+  {
+    title: "専門家レビュー",
+    description: "金融機関・コンサル出身者がドラフトを監修し、実務に耐える品質へ仕上げ。",
+  },
+];
+
+const primaryCta = {
+  href: "#contact",
+  label: "無料相談を予約",
+  benefits: ["30分で導入ステップをご案内", "相談後、AIドラフトのサンプルを無料提供"],
+};
+
+const primaryCtaNote = primaryCta.benefits.join(" / ");
 
 const responsibilityColumns = [
   {
@@ -248,6 +277,7 @@ const successStories = [
     industry: "製造業 / 年商12億円",
     before: "資料更新 80時間 →",
     after: "26時間",
+    impact: "経営会議の準備工数を67%削減、設備投資判断のリードタイムを3週間短縮。",
     quote:
       "AIのドラフトが下準備を完了してくれるので、意思決定に集中できる時間が2倍になりました。",
     name: "山田 CFO",
@@ -258,6 +288,7 @@ const successStories = [
     industry: "ITサービス / 年商5.5億円",
     before: "問答準備 15時間 →",
     after: "5時間",
+    impact: "金融機関からの質問想定を網羅し、資金調達の承認率を25%向上。",
     quote:
       "専門家のレビュー込みで金融機関の質問を事前に洗い出せたので、調達がスムーズでした。",
     name: "佐藤 代表取締役",
@@ -268,11 +299,45 @@ const successStories = [
     industry: "物流 / 年商9億円",
     before: "戦略更新 6週間 →",
     after: "2週間",
+    impact: "市場データ更新にかかる時間を70%削減し、投資判断の確度を役員会で定量化。",
     quote:
       "市場データの自動収集とAIシミュレーションで、機動的に投資判断ができています。",
     name: "鈴木 COO",
     role: "地域物流ネットワーク",
     avatarInitials: "TS",
+  },
+  {
+    industry: "医療機器 / 年商7億円",
+    before: "政策調査 40時間 →",
+    after: "12時間",
+    impact: "政策動向の整理にAIを活用し、新規事業の意思決定会議を月2回から週1回に増加。",
+    quote:
+      "規制情報の収集が追い付かず困っていましたが、AIが主要トピックをまとめてくれるので先手で議論できます。",
+    name: "高橋 代表取締役",
+    role: "医療機器メーカー",
+    avatarInitials: "HT",
+  },
+  {
+    industry: "建設 / 年商20億円",
+    before: "原価シミュレーション 4日 →",
+    after: "6時間",
+    impact: "案件別の粗利シミュレーションを自動化し、受注精度を8ポイント改善。",
+    quote:
+      "AIが複数シナリオを提示してくれるので、どこにリスクがあるかを専門家と即座に確認できます。",
+    name: "伊藤 常務",
+    role: "総合建設会社",
+    avatarInitials: "AI",
+  },
+  {
+    industry: "食品卸 / 年商15億円",
+    before: "仕入れ交渉準備 30時間 →",
+    after: "10時間",
+    impact: "価格改定シナリオを自動生成し、仕入れコストを年間1,200万円削減。",
+    quote:
+      "交渉材料の整理から資料作成までAIが下支えしてくれるので、社外との折衝が格段に進めやすくなりました。",
+    name: "中村 CEO",
+    role: "食品卸企業",
+    avatarInitials: "MN",
   },
 ];
 
@@ -283,7 +348,7 @@ const pricingPlans = [
     features: "AIドラフト/月1回、ダッシュボード閲覧、共有テンプレート",
     support: "メールサポート、四半期オンラインレビュー",
     roi: "3倍目標",
-    cta: "ライトプランを相談",
+    note: "初回ヒアリングで導入範囲を整理",
   },
   {
     name: "プロ",
@@ -291,7 +356,7 @@ const pricingPlans = [
     features: "AIドラフト隔週、戦略シナリオ比較、金融機関向け資料生成",
     support: "専任コンサル月2回、想定問答サポート",
     roi: "5倍目標",
-    cta: "プロプランを相談",
+    note: "資金調達・投資計画の要件を確認",
   },
   {
     name: "エンタープライズ",
@@ -299,7 +364,7 @@ const pricingPlans = [
     features: "グループ横断データ連携、カスタムAIモデル、権限管理",
     support: "専任チーム週次伴走、現地ワークショップ",
     roi: "7倍目標",
-    cta: "エンタープライズ相談",
+    note: "セキュリティ要件とカスタム開発をヒアリング",
   },
 ];
 
@@ -348,19 +413,19 @@ const resourceCards = [
   {
     title: "経営計画ドラフトのサンプル",
     description: "匿名加工したドラフトの一部を公開。AIが生成するアウトプットの粒度をご確認いただけます。",
-    cta: "サンプルを請求",
+    benefit: "相談後にドラフトサンプルをお送りします",
     icon: "📄",
   },
   {
     title: "四半期レビューのチェックリスト",
     description: "外部環境の変化を90日ごとに見直すための観点をまとめたテンプレートを配布しています。",
-    cta: "チェックリストを受け取る",
+    benefit: "無料相談でチェックリストを共有",
     icon: "✅",
   },
   {
     title: "生成AI活用レポート",
     description: "Generative AIの導入で成果を上げた中堅企業の事例集とリスク対策のまとめ資料です。",
-    cta: "レポートをダウンロード",
+    benefit: "導入検討状況に合わせたレポートを提供",
     icon: "📊",
   },
 ];
@@ -439,6 +504,7 @@ const Index = () => {
     const hoursSaved = 1750 * automationRate * Math.min(1.2, normalizedTeam + 0.3);
     const costSaved = 1000 * automationRate * (0.4 + normalizedTeam);
     const roi = ((costSaved * 100 - simulator.investment) / simulator.investment) * 100;
+    const safeRoi = Math.max(0, roi);
     const productivityGain = 5 + (25 - 5) * automationRate;
 
     const chartPoints = [
@@ -461,7 +527,7 @@ const Index = () => {
     return {
       hoursSaved,
       costSaved,
-      roi,
+      roi: safeRoi,
       productivityGain,
       svgPoints,
       normalized,
@@ -670,8 +736,8 @@ const Index = () => {
             </nav>
             <div className="header-actions">
               <a className="btn btn-outline" href="#resources">まずは資料請求</a>
-              <a className="btn btn-accent" href="#contact">
-                無料相談を予約
+              <a className="btn btn-accent" href={primaryCta.href}>
+                {primaryCta.label}
               </a>
             </div>
           </div>
@@ -703,22 +769,29 @@ const Index = () => {
             <div className="hero-copy" data-animate>
               <span className="badge">中小企業経営者向け</span>
               <h1 id="hero-heading">
-                AI × 経営者 × 専門家で、激動の時代を生き抜く経営計画を最速で策定
-                <span>生成AIが外部環境を分析し、経営者の意思決定を支援。専門家が伴走して実行をサポートします。</span>
+                外部環境を追う時間がない経営者へ。
+                <span>生成AIが環境分析と財務予測を自動化し、専門家レビューで経営判断の精度とスピードを両立します。</span>
               </h1>
               <p className="hero-lead">
-                政策・市場・金融データをAIが常時モニタリングし、複数シナリオの財務予測と資料ドラフトを自動生成。経営者は判断と優先順位付けに集中でき、専門家が融資・投資審査水準まで仕上げます。
+                政策・市場・金融データをAIが常時モニタリングし、複数シナリオの財務・資金繰り予測と資料ドラフトを自動生成。経営者は判断と優先順位付けに集中し、専門家が融資・投資審査水準の品質まで整えます。
               </p>
+              <ul className="hero-pains" aria-label="経営者が抱える代表的な課題">
+                {heroPainPoints.map((pain) => (
+                  <li key={pain}>{pain}</li>
+                ))}
+              </ul>
               <p className="hero-sub">
-                四半期ごとのアップデートで最新の機会とリスクを反映し、資料更新は80時間→26時間、戦略更新は6週間→2週間に短縮した事例も。意思決定に充てる時間を取り戻しましょう。
+                四半期ごとのアップデートで最新の機会とリスクを反映。資料更新は80時間→26時間、戦略更新は6週間→2週間に短縮した事例もあり、意思決定に充てる時間を取り戻せます。
               </p>
               <div className="hero-actions">
-                <a className="btn btn-accent" href="#resources">
-                  まずは資料請求
+                <a className="btn btn-accent" href={primaryCta.href}>
+                  {primaryCta.label}
                 </a>
-                <a className="btn btn-ghost" href="#contact">
-                  無料相談を予約
-                </a>
+                <ul className="cta-benefits" aria-label="無料相談で得られるメリット">
+                  {primaryCta.benefits.map((benefit) => (
+                    <li key={benefit}>{benefit}</li>
+                  ))}
+                </ul>
               </div>
               <ul className="hero-metrics" ref={metricsRef}>
                 {heroMetrics.map((metric, index) => (
@@ -741,7 +814,7 @@ const Index = () => {
                 <span className="scroll-cue__label">スクロールして詳細を見る</span>
               </div>
             </div>
-            <div className="hero-visual" aria-hidden="true">
+            <div className="hero-visual" role="complementary" aria-label="AIの分析プロセスと進捗">
               <div className="hero-dashboard" data-animate>
                 <div className="dashboard-header">AIダッシュボード・ライブビュー</div>
                 <div className="dashboard-body">
@@ -757,7 +830,7 @@ const Index = () => {
                     </div>
                     <div>
                       <span>意思決定所要時間</span>
-                      <strong>-42%</strong>
+                      <strong>42%短縮</strong>
                     </div>
                     <div>
                       <span>レビュー待ち</span>
@@ -766,6 +839,14 @@ const Index = () => {
                   </div>
                 </div>
                 <div className="dashboard-footer">専門家レビュー中</div>
+              </div>
+              <div className="hero-value-grid" data-animate>
+                {heroAiValue.map((item) => (
+                  <div key={item.title} className="hero-value-card">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -941,9 +1022,10 @@ const Index = () => {
               </div>
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#contact">
-                四半期レビューの進め方を相談する
+              <a className="btn btn-accent" href={primaryCta.href}>
+                {primaryCta.label}
               </a>
+              <p className="cta-note">{primaryCtaNote}</p>
             </div>
           </div>
         </section>
@@ -1023,9 +1105,10 @@ const Index = () => {
               ))}
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#contact">
-                専門家との伴走体制を相談する
+              <a className="btn btn-accent" href={primaryCta.href}>
+                {primaryCta.label}
               </a>
+              <p className="cta-note">{primaryCtaNote}</p>
             </div>
           </div>
         </section>
@@ -1059,6 +1142,7 @@ const Index = () => {
                       <span>{story.before}</span>
                       <strong>{story.after}</strong>
                     </div>
+                    {story.impact && <p className="story-impact">{story.impact}</p>}
                     <p className="story-quote">“{story.quote}”</p>
                   </article>
                 ))}
@@ -1077,9 +1161,10 @@ const Index = () => {
               </div>
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#resources">
-                成果につながる資料を見る
+              <a className="btn btn-accent" href={primaryCta.href}>
+                {primaryCta.label}
               </a>
+              <p className="cta-note">{primaryCtaNote}</p>
             </div>
           </div>
         </section>
@@ -1220,16 +1305,18 @@ const Index = () => {
                   <div className="resource-icon" aria-hidden="true">{resource.icon}</div>
                   <h3>{resource.title}</h3>
                   <p>{resource.description}</p>
-                  <a className="btn btn-outline" href="#contact">
-                    {resource.cta}
+                  <a className="btn btn-outline" href={primaryCta.href}>
+                    {primaryCta.label}
                   </a>
+                  <p className="resource-benefit">{resource.benefit}</p>
                 </article>
               ))}
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#contact">
-                資料ダウンロードの案内を受け取る
+              <a className="btn btn-accent" href={primaryCta.href}>
+                {primaryCta.label}
               </a>
+              <p className="cta-note">{primaryCtaNote}</p>
             </div>
           </div>
         </section>
@@ -1270,9 +1357,10 @@ const Index = () => {
                       <td>{plan.support}</td>
                       <td>{plan.roi}</td>
                       <td>
-                        <a className="btn btn-outline" href="#contact">
-                          {plan.cta}
+                        <a className="btn btn-outline" href={primaryCta.href}>
+                          {primaryCta.label}
                         </a>
+                        <p className="pricing-note">{plan.note}</p>
                       </td>
                     </tr>
                   ))}
@@ -1280,9 +1368,10 @@ const Index = () => {
               </table>
             </div>
             <div className="section-cta" data-animate>
-              <a className="btn btn-accent" href="#contact">
-                最適なプランを提案してもらう
+              <a className="btn btn-accent" href={primaryCta.href}>
+                {primaryCta.label}
               </a>
+              <p className="cta-note">{primaryCtaNote}</p>
             </div>
           </div>
         </section>
@@ -1447,8 +1536,8 @@ const Index = () => {
 
       {!isFloatingHidden && (
         <div className="floating-cta" role="complementary" aria-label="相談用ショートカット">
-          <a className="floating-cta__button" href="#contact">
-            無料相談を申し込む
+          <a className="floating-cta__button" href={primaryCta.href}>
+            {primaryCta.label}
           </a>
           <button
             type="button"
