@@ -20,6 +20,7 @@ import {
   Compass,
   Database,
   FileText,
+  Info,
   Layers3,
   LineChart,
   Lock,
@@ -40,10 +41,14 @@ import expertTanaka from "@/assets/expert-tanaka.svg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
+import logoOisix from "@/assets/logo-oisix.svg";
+import logoSansan from "@/assets/logo-sansan.svg";
+import logoRaksul from "@/assets/logo-raksul.svg";
 
 import "../../styles/lp.css";
 
 import type { LucideIcon } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const sections = [
   { id: "hero", label: "トップ" },
@@ -475,14 +480,23 @@ const dataFlowStages: DataFlowStage[] = [
   },
 ];
 
+type SuccessMetric = {
+  label: string;
+  before: string;
+  after: string;
+  impact: string;
+};
+
 type SuccessStory = {
   company: string;
   industry: string;
   name: string;
   title: string;
   quote: string;
-  metrics: { label: string; value: string }[];
+  summary: string;
+  metrics: SuccessMetric[];
   photo: string;
+  logo: string;
 };
 
 const successStories: SuccessStory[] = [
@@ -492,11 +506,13 @@ const successStories: SuccessStory[] = [
     name: "高島 宏平",
     title: "代表取締役社長",
     quote: "AIが週次で意思決定案を提示。取締役会までの準備時間を半減できました。",
+    summary: "週8時間の意思決定時間を創出し、粗利益率を7pt改善。",
     metrics: [
-      { label: "資料更新時間", value: "80h → 26h" },
-      { label: "決断リードタイム", value: "-48%" },
+      { label: "意思決定準備時間", before: "週12h", after: "週4h", impact: "-8h/週" },
+      { label: "粗利益率", before: "28%", after: "35%", impact: "+7pt" },
     ],
     photo: customerTakashima,
+    logo: logoOisix,
   },
   {
     company: "Sansan株式会社",
@@ -504,11 +520,13 @@ const successStories: SuccessStory[] = [
     name: "寺田 親彦",
     title: "代表取締役社長",
     quote: "会議前にAIが論点集を生成。役員の確認時間が1/3になり議論が深まりました。",
+    summary: "役員レビュー時間を月12時間削減し、新施策の実行率が24pt向上。",
     metrics: [
-      { label: "会議準備時間", value: "15h → 5h" },
-      { label: "意思決定率", value: "+24pt" },
+      { label: "役員レビュー時間", before: "月18h", after: "月6h", impact: "-12h/月" },
+      { label: "新施策実行率", before: "54%", after: "78%", impact: "+24pt" },
     ],
     photo: customerInoue,
+    logo: logoSansan,
   },
   {
     company: "ラクスル株式会社",
@@ -516,36 +534,80 @@ const successStories: SuccessStory[] = [
     name: "松本 恭攝",
     title: "代表取締役会長",
     quote: "外部統計と社内データが自動で同期。資金繰りシナリオを毎週確認できています。",
+    summary: "戦略更新サイクルを4倍高速化し、キャッシュ創出効果は年2.4億円。",
     metrics: [
-      { label: "戦略更新サイクル", value: "6週 → 2週" },
-      { label: "キャッシュ創出", value: "+2.4億円" },
+      { label: "資金繰りシナリオ", before: "月1回", after: "週次", impact: "4倍" },
+      { label: "キャッシュ創出効果", before: "-", after: "年2.4億円", impact: "+2.4億円" },
     ],
     photo: customerSugimoto,
+    logo: logoRaksul,
   },
 ];
 
-const pricingPlans = [
+type PricingPlan = {
+  name: string;
+  price: string;
+  priceNote: string;
+  services: string[];
+  support: string[];
+  payment: string[];
+  guarantee: string;
+  roi: string;
+  cta: string;
+};
+
+const pricingPlans: PricingPlan[] = [
   {
     name: "ライト",
-    price: "月額 15万円〜",
-    features: "AIドラフト/月1回、ダッシュボード閲覧、共有テンプレート",
-    support: "メールサポート、四半期オンラインレビュー",
+    price: "月額15万円〜",
+    priceNote: "従業員〜50名の方向け",
+    services: [
+      "経営計画AIドラフト（月1回）",
+      "指標ダッシュボード閲覧",
+      "経営会議テンプレート共有",
+    ],
+    support: [
+      "メール・チャットサポート",
+      "四半期オンラインレビュー",
+    ],
+    payment: ["月次サブスクリプション", "請求書払い（分割可）"],
+    guarantee: "導入初月の返金保証付き",
     roi: "3倍目標",
     cta: "ライトプランを相談",
   },
   {
     name: "プロ",
-    price: "月額 35万円〜",
-    features: "AIドラフト隔週、戦略シナリオ比較、金融機関向け資料生成",
-    support: "専任コンサル月2回、想定問答サポート",
+    price: "月額35万円〜",
+    priceNote: "年商10〜50億円規模向け",
+    services: [
+      "AIドラフト隔週更新",
+      "戦略シナリオ自動比較",
+      "金融機関向け資料生成",
+    ],
+    support: [
+      "専任コンサル月2回同席",
+      "想定問答・エビデンス補強",
+    ],
+    payment: ["月次サブスクリプション", "四半期ごとの分割払い"],
+    guarantee: "60日間の成果保証オプション",
     roi: "5倍目標",
     cta: "プロプランを相談",
   },
   {
     name: "エンタープライズ",
-    price: "月額 65万円〜",
-    features: "グループ横断データ連携、カスタムAIモデル、権限管理",
-    support: "専任チーム週次伴走、現地ワークショップ",
+    price: "月額65万円〜",
+    priceNote: "複数事業部・子会社をお持ちの方向け",
+    services: [
+      "グループ横断データ連携",
+      "カスタムAIモデル構築",
+      "権限管理・監査ログ",
+    ],
+    support: [
+      "専任チーム週次伴走",
+      "現地ワークショップと研修",
+    ],
+    payment: ["年次契約（分割請求可）", "導入費用の分割払い"],
+    guarantee: "成果レビュー後の返金条項を個別設定",
     roi: "7倍目標",
     cta: "エンタープライズ相談",
   },
@@ -625,28 +687,51 @@ const expertCards: ExpertCard[] = [
 type ResourceCard = {
   title: string;
   description: string;
+  highlights: string[];
   cta: string;
   icon: LucideIcon;
+  note: string;
 };
 
 const resourceCards: ResourceCard[] = [
   {
-    title: "経営計画ドラフトのサンプル",
-    description: "匿名加工したドラフトの一部を公開。AIが生成するアウトプットの粒度をご確認いただけます。",
-    cta: "サンプルを請求",
+    title: "AI経営計画ドラフトの匿名サンプル",
+    description:
+      "実際に生成された経営計画書を匿名加工し、AIが提示する粒度と論点構成を確認できます。",
+    highlights: [
+      "主要KPIとアクションアイテムの抜粋",
+      "投資判断メモと改善提案コメント",
+      "専門家レビューで加筆した注釈の例",
+    ],
+    cta: "AIドラフトサンプル（PDF）を受け取る",
     icon: FileText,
+    note: "フォーム送信直後にメールで自動送付します。",
   },
   {
-    title: "四半期レビューのチェックリスト",
-    description: "外部環境の変化を90日ごとに見直すための観点をまとめたテンプレートを配布しています。",
-    cta: "チェックリストを受け取る",
+    title: "四半期レビュー用チェックリスト",
+    description:
+      "外部環境・資金繰り・組織の3領域を90日ごとに見直すためのフレームワークをまとめました。",
+    highlights: [
+      "政策・補助金アップデートの確認項目",
+      "キャッシュフロー感応度分析テンプレ",
+      "レビュー会議の進行サンプルアジェンダ",
+    ],
+    cta: "チェックリスト一式をダウンロード",
     icon: ClipboardCheck,
+    note: "登録いただいたメールへ即時にPDFリンクを送信します。",
   },
   {
-    title: "生成AI活用レポート",
-    description: "Generative AIの導入で成果を上げた中堅企業の事例集とリスク対策のまとめ資料です。",
-    cta: "レポートをダウンロード",
+    title: "生成AI活用レポート（四半期版）",
+    description:
+      "Generative AIで成果を上げた中堅企業15社の最新事例とROIの出し方、リスク対策を整理しています。",
+    highlights: [
+      "導入前後のKPI推移とROI指標",
+      "社内浸透の成功要因と失敗パターン",
+      "セキュリティ・ガバナンスのチェックポイント",
+    ],
+    cta: "レポート（PDF）を入手する",
     icon: BarChart4,
+    note: "毎四半期の最新号を自動でお届けします。",
   },
 ];
 
@@ -673,14 +758,21 @@ const faqItems = [
   },
 ];
 
-const defaultSimulator = {
-  revenueGoal: 8,
-  investment: 300,
-  automation: 65,
-  teamSize: 12,
+type FocusKey = "finance" | "growth" | "talent";
+
+type SimulatorState = {
+  annualRevenue: number;
+  decisionHours: number;
+  aiBudget: number;
+  focus: FocusKey;
 };
 
-type SimulatorState = typeof defaultSimulator;
+const defaultSimulator: SimulatorState = {
+  annualRevenue: 8,
+  decisionHours: 120,
+  aiBudget: 45,
+  focus: "finance",
+};
 
 type ContactFormState = {
   name: string;
@@ -730,40 +822,89 @@ const Index = () => {
   const metricsRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const securityBadges = useMemo(() => securityPoints.slice(0, 3), []);
+  const numberFormatter = useMemo(() => new Intl.NumberFormat("ja-JP"), []);
 
-  const simulatorChart = useMemo(() => {
-    const baselineHours = 2000;
-    const automationRate = simulator.automation / 100;
-    const normalizedTeam = Math.max(1, simulator.teamSize) / 12;
-    const hoursSaved = 1750 * automationRate * Math.min(1.2, normalizedTeam + 0.3);
-    const costSaved = 1000 * automationRate * (0.4 + normalizedTeam);
-    const roi = ((costSaved * 100 - simulator.investment) / simulator.investment) * 100;
-    const productivityGain = 5 + (25 - 5) * automationRate;
+  const simulatorResult = useMemo(() => {
+    const focusMultiplier: Record<FocusKey, number> = {
+      finance: 1.12,
+      growth: 1.18,
+      talent: 1.08,
+    };
 
-    const chartPoints = [
-      simulator.investment / 10,
-      costSaved * 4,
-      hoursSaved * 2,
-      productivityGain * 6,
+    const breakdownWeights: Record<FocusKey, { meetings: number; reporting: number; scenario: number }> = {
+      finance: { meetings: 0.3, reporting: 0.45, scenario: 0.25 },
+      growth: { meetings: 0.26, reporting: 0.34, scenario: 0.4 },
+      talent: { meetings: 0.4, reporting: 0.32, scenario: 0.28 },
+    };
+
+    const focus = simulator.focus;
+    const focusBoost = focusMultiplier[focus];
+    const monthlyHoursSaved = simulator.decisionHours * 0.55 * focusBoost;
+    const annualHoursSaved = monthlyHoursSaved * 12;
+    const hourlyValue = 1.8 + (simulator.annualRevenue - 5) * 0.18;
+    const annualCostSavings = annualHoursSaved * hourlyValue;
+    const annualInvestment = simulator.aiBudget * 12;
+    const roiPercent =
+      annualInvestment === 0
+        ? 0
+        : ((annualCostSavings - annualInvestment) / annualInvestment) * 100;
+    const productivityGain = 14 + focusBoost * 18 + Math.min(10, simulator.annualRevenue - 5) * 1.2;
+    const paybackMonths =
+      annualCostSavings <= 0
+        ? null
+        : Math.max(1, annualInvestment / Math.max(annualCostSavings / 12, 1));
+
+    const chartValues = [
+      annualInvestment,
+      annualCostSavings,
+      annualHoursSaved / 3,
+      productivityGain * 8,
     ];
-
-    const maxValue = Math.max(...chartPoints, 1);
-    const normalized = chartPoints.map((value) => (value / maxValue) * 100);
-    const svgPoints = normalized
+    const chartMax = Math.max(...chartValues, 1);
+    const sparklinePoints = chartValues
       .map((value, index) => {
-        const x = (index / (normalized.length - 1 || 1)) * 100;
-        const y = 100 - value;
+        const x = (index / (chartValues.length - 1 || 1)) * 100;
+        const y = 100 - (value / chartMax) * 100;
         return `${x},${y}`;
       })
       .join(" ");
 
+    const breakdown = Object.entries(breakdownWeights[focus]).map(([key, weight]) => {
+      const hours = annualHoursSaved * weight;
+      const label =
+        key === "meetings"
+          ? "会議準備"
+          : key === "reporting"
+          ? "レポート自動化"
+          : "シナリオ検討";
+      return { key, label, hours, weight };
+    });
+
+    const breakdownMax = Math.max(...breakdown.map((item) => item.hours), 1);
+    const currencyFormatter = new Intl.NumberFormat("ja-JP", {
+      maximumFractionDigits: 0,
+    });
+    const explanation = `月額${currencyFormatter.format(
+      simulator.aiBudget
+    )}万円の投資に対し、年間約${currencyFormatter.format(
+      annualCostSavings
+    )}万円の価値創出を見込めます。期待ROIは${roiPercent.toFixed(
+      1
+    )}%で、回収目安は${
+      paybackMonths ? Math.ceil(paybackMonths) : "-"
+    }か月です。`;
+
     return {
-      hoursSaved,
-      costSaved,
-      roi,
+      annualHoursSaved,
+      annualCostSavings,
+      annualInvestment,
+      roiPercent,
       productivityGain,
-      svgPoints,
-      normalized,
+      paybackMonths,
+      sparklinePoints,
+      breakdown,
+      breakdownMax,
+      explanation,
     };
   }, [simulator]);
 
@@ -880,12 +1021,15 @@ const Index = () => {
   }, []);
 
   const handleSimulatorChange = (
-    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event:
+      | ChangeEvent<HTMLInputElement | HTMLSelectElement>
+      | FormEvent<HTMLInputElement>
   ) => {
-    const { name, value } = event.target;
+    const target = event.currentTarget as HTMLInputElement | HTMLSelectElement;
+    const { name, value } = target;
     setSimulator((prev) => ({
       ...prev,
-      [name]: Number(value),
+      [name]: name === "focus" ? (value as FocusKey) : Number(value),
     }));
   };
 
@@ -1608,43 +1752,110 @@ const Index = () => {
             <div className="simulator-content" data-animate>
               <form className="simulator-form" aria-label="シミュレーター入力">
                 <label>
-                  年商規模 (億円)
+                  <span className="simulator-label">
+                    年商規模 (億円)
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          className="simulator-tooltip-trigger"
+                          aria-label="年商規模の例を表示"
+                        >
+                          <Info aria-hidden="true" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>例：地域商社 12億円 / BtoB SaaS 8億円</TooltipContent>
+                    </Tooltip>
+                  </span>
                   <input
                     type="range"
                     min="5"
                     max="15"
                     step="0.5"
-                    name="revenueGoal"
-                    value={simulator.revenueGoal}
+                    name="annualRevenue"
+                    value={simulator.annualRevenue}
                     onChange={handleSimulatorChange}
-                    aria-valuetext={`${simulator.revenueGoal}億円`}
+                    onInput={handleSimulatorChange}
+                    aria-valuetext={`${simulator.annualRevenue.toFixed(1)}億円`}
                   />
-                  <span>{simulator.revenueGoal.toFixed(1)} 億円</span>
+                  <span className="simulator-value">
+                    {simulator.annualRevenue.toFixed(1)} 億円
+                  </span>
                 </label>
                 <label>
-                  現在の意思決定工数 (h/月)
+                  <span className="simulator-label">
+                    現在の意思決定工数 (h/月)
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          className="simulator-tooltip-trigger"
+                          aria-label="意思決定工数の例を表示"
+                        >
+                          <Info aria-hidden="true" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        役員会・稟議・資料レビューに使っている月次合計時間
+                      </TooltipContent>
+                    </Tooltip>
+                  </span>
                   <input
                     type="number"
-                    name="hoursCurrent"
-                    value={simulator.hoursCurrent}
+                    name="decisionHours"
+                    value={simulator.decisionHours}
                     onChange={handleSimulatorChange}
-                    min="10"
-                    max="160"
+                    onInput={handleSimulatorChange}
+                    min="40"
+                    max="240"
+                    inputMode="numeric"
                   />
                 </label>
                 <label>
-                  月次AI投資予算 (万円)
+                  <span className="simulator-label">
+                    月次AI投資予算 (万円)
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          className="simulator-tooltip-trigger"
+                          aria-label="AI投資予算の例を表示"
+                        >
+                          <Info aria-hidden="true" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        例：PoC期間30〜50万円 / 本格導入80万円以上
+                      </TooltipContent>
+                    </Tooltip>
+                  </span>
                   <input
                     type="number"
-                    name="budget"
-                    value={simulator.budget}
+                    name="aiBudget"
+                    value={simulator.aiBudget}
                     onChange={handleSimulatorChange}
-                    min="10"
+                    onInput={handleSimulatorChange}
+                    min="20"
                     max="200"
+                    inputMode="numeric"
                   />
                 </label>
                 <label>
-                  経営課題の優先度
+                  <span className="simulator-label">
+                    優先したい領域
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <button
+                          type="button"
+                          className="simulator-tooltip-trigger"
+                          aria-label="優先領域の説明を表示"
+                        >
+                          <Info aria-hidden="true" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent>最もインパクトを得たい領域を選択</TooltipContent>
+                    </Tooltip>
+                  </span>
                   <select
                     name="focus"
                     value={simulator.focus}
@@ -1656,26 +1867,97 @@ const Index = () => {
                   </select>
                 </label>
               </form>
-              <div className="simulator-visual" role="img" aria-label="シミュレーション結果グラフ">
-                <svg viewBox="0 0 100 100">
-                  <polyline points={simulatorChart.svgPoints} />
+              <div className="simulator-visual" role="group" aria-label="シミュレーション結果">
+                <svg viewBox="0 0 100 100" aria-hidden="true">
+                  <polyline points={simulatorResult.sparklinePoints} />
                 </svg>
+                <p className="simulator-explanation">{simulatorResult.explanation}</p>
+                <div
+                  className="simulator-breakdown"
+                  role="group"
+                  aria-label="削減工数の内訳"
+                >
+                  <div className="simulator-breakdown__chart" role="img" aria-label="領域別の削減工数バーグラフ">
+                    <svg viewBox="0 0 100 60">
+                      {simulatorResult.breakdown.map((item, index) => {
+                        const segment = 100 / simulatorResult.breakdown.length;
+                        const barWidth = segment * 0.6;
+                        const x = index * segment + (segment - barWidth) / 2;
+                        const height = (item.hours / simulatorResult.breakdownMax) * 48;
+                        const y = 55 - height;
+                        return (
+                          <g key={item.key}>
+                            <rect
+                              x={x}
+                              y={y}
+                              width={barWidth}
+                              height={height}
+                              rx={barWidth / 3}
+                            />
+                            <text x={x + barWidth / 2} y={y - 2} textAnchor="middle">
+                              {Math.round(item.weight * 100)}%
+                            </text>
+                          </g>
+                        );
+                      })}
+                    </svg>
+                  </div>
+                  <ul className="simulator-breakdown__legend">
+                    {simulatorResult.breakdown.map((item) => (
+                      <li key={item.key}>
+                        <strong>{item.label}</strong>
+                        <span>
+                          {numberFormatter.format(Math.round(item.hours))} 時間 /
+                          {" "}
+                          {Math.round(item.weight * 100)}%
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 <div className="simulator-stats">
                   <div>
                     <span>年間工数削減</span>
-                    <strong>{simulatorChart.hoursSaved.toFixed(0)} 時間</strong>
+                    <strong>
+                      {numberFormatter.format(
+                        Math.round(simulatorResult.annualHoursSaved)
+                      )}
+                      時間
+                    </strong>
                   </div>
                   <div>
-                    <span>年間コスト削減</span>
-                    <strong>{simulatorChart.costSaved.toFixed(0)} 万円</strong>
+                    <span>年間価値創出</span>
+                    <strong>
+                      {numberFormatter.format(
+                        Math.round(simulatorResult.annualCostSavings)
+                      )}
+                      万円
+                    </strong>
+                  </div>
+                  <div>
+                    <span>年間投資額</span>
+                    <strong>
+                      {numberFormatter.format(
+                        Math.round(simulatorResult.annualInvestment)
+                      )}
+                      万円
+                    </strong>
                   </div>
                   <div>
                     <span>期待ROI</span>
-                    <strong>{simulatorChart.roi.toFixed(1)}%</strong>
+                    <strong>{simulatorResult.roiPercent.toFixed(1)}%</strong>
                   </div>
                   <div>
                     <span>生産性向上</span>
-                    <strong>+{simulatorChart.productivityGain.toFixed(1)}%</strong>
+                    <strong>+{simulatorResult.productivityGain.toFixed(1)}%</strong>
+                  </div>
+                  <div>
+                    <span>投資回収目安</span>
+                    <strong>
+                      {simulatorResult.paybackMonths
+                        ? `${Math.ceil(simulatorResult.paybackMonths)} か月`
+                        : "-"}
+                    </strong>
                   </div>
                 </div>
               </div>
@@ -1711,9 +1993,11 @@ const Index = () => {
                 <thead>
                   <tr>
                     <th scope="col">プラン</th>
-                    <th scope="col">月額</th>
-                    <th scope="col">主な機能</th>
+                    <th scope="col">月額料金</th>
+                    <th scope="col">含まれるサービス</th>
                     <th scope="col">サポート</th>
+                    <th scope="col">支払い方法</th>
+                    <th scope="col">返金保証</th>
                     <th scope="col">想定<abbr title="投資利益率">ROI</abbr></th>
                     <th scope="col" aria-label="アクション" />
                   </tr>
@@ -1721,10 +2005,39 @@ const Index = () => {
                 <tbody>
                   {pricingPlans.map((plan) => (
                     <tr key={plan.name}>
-                      <th scope="row">{plan.name}</th>
-                      <td>{plan.price}</td>
-                      <td>{plan.features}</td>
-                      <td>{plan.support}</td>
+                      <th scope="row">
+                        <div className="pricing-plan-name">
+                          <span>{plan.name}</span>
+                          <small>{plan.priceNote}</small>
+                        </div>
+                      </th>
+                      <td>
+                        <strong className="pricing-price">{plan.price}</strong>
+                      </td>
+                      <td>
+                        <ul>
+                          {plan.services.map((service) => (
+                            <li key={service}>{service}</li>
+                          ))}
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          {plan.support.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </td>
+                      <td>
+                        <ul>
+                          {plan.payment.map((option) => (
+                            <li key={option}>{option}</li>
+                          ))}
+                        </ul>
+                      </td>
+                      <td>
+                        <span className="pricing-guarantee">{plan.guarantee}</span>
+                      </td>
                       <td>{plan.roi}</td>
                       <td>
                         <a className="btn btn-outline" href="#contact">
@@ -1805,17 +2118,35 @@ const Index = () => {
                         alt={`${story.company} ${story.title} ${story.name}の顔写真`}
                         loading="lazy"
                       />
-                      <div>
+                      <div className="story-profile">
+                        <img
+                          className="story-logo"
+                          src={story.logo}
+                          alt={`${story.company}のロゴ`}
+                          loading="lazy"
+                        />
                         <span className="story-company">{story.company}</span>
                         <span className="story-role">{story.title} / {story.name}</span>
                         <span className="story-industry">{story.industry}</span>
                       </div>
                     </div>
+                    <p className="story-summary">{story.summary}</p>
                     <ul className="story-metrics">
                       {story.metrics.map((metric) => (
                         <li key={metric.label}>
-                          <span>{metric.label}</span>
-                          <strong>{metric.value}</strong>
+                          <span className="story-metric__label">{metric.label}</span>
+                          <div className="story-metric__values">
+                            <span className="story-metric__before" aria-label="導入前の数値">
+                              {metric.before}
+                            </span>
+                            <span className="story-metric__arrow" aria-hidden="true">
+                              →
+                            </span>
+                            <span className="story-metric__after" aria-label="導入後の数値">
+                              {metric.after}
+                            </span>
+                          </div>
+                          <strong className="story-metric__impact">{metric.impact}</strong>
                         </li>
                       ))}
                     </ul>
@@ -1925,16 +2256,22 @@ const Index = () => {
                     </div>
                     <h3>{resource.title}</h3>
                     <p>{resource.description}</p>
+                    <ul className="resource-highlights">
+                      {resource.highlights.map((highlight) => (
+                        <li key={highlight}>{highlight}</li>
+                      ))}
+                    </ul>
                     <a className="btn btn-outline" href="#contact">
                       {resource.cta}
                     </a>
+                    <p className="resource-note">{resource.note}</p>
                   </article>
                 );
               })}
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-primary" href="#contact">
-                資料ダウンロードの案内を受け取る
+                メールでPDF資料を受け取る
               </a>
             </div>
           </div>
