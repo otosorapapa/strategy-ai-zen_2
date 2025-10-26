@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>専門家×生成AIで意思決定の速い精度を実現する経営計画支援</title>
+    <meta
+      name="description"
+      content="中小企業診断士の実務フレームワークと生成AIの探索力を統合し、経営計画の策定と更新を高速化。リードタイム短縮や金融機関説明負担の軽減など、年商5,000万円〜15億円の経営者向けの伴走支援。"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.4/dist/tailwind.min.css"
+      integrity="sha384-eFELw4N7v9nKbJsvhEO5niJhf8ETxk0Heqcg0f+Oq/fr3PFi0kTzPWAI3RmR2Z1C"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: 'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'ヒラギノ角ゴ ProN', 'Yu Gothic', sans-serif;
+        background: linear-gradient(180deg, #f3f6fb 0%, #ffffff 40%, #f7f9fc 100%);
+        color: #0f172a;
+        overflow-x: hidden;
+      }
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9999px;
+        background-color: rgb(14 165 233);
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #fff;
+        box-shadow: 0 10px 24px rgba(14, 165, 233, 0.25);
+        transition: all 0.2s ease-out;
+        min-height: 44px;
+      }
+      .btn-primary:hover,
+      .btn-primary:focus-visible {
+        background-color: rgb(12 131 198);
+        box-shadow: 0 14px 32px rgba(14, 165, 233, 0.35);
+      }
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9999px;
+        border: 1px solid rgb(14 165 233);
+        padding: 0.75rem 1.25rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: rgb(14 165 233);
+        transition: all 0.2s ease-out;
+        background-color: transparent;
+        min-height: 44px;
+      }
+      .btn-secondary:hover,
+      .btn-secondary:focus-visible {
+        background-color: rgba(14, 165, 233, 0.08);
+      }
+      .card {
+        border-radius: 1.5rem;
+        border: 1px solid rgba(148, 163, 184, 0.45);
+        background-color: rgba(255, 255, 255, 0.92);
+        padding: 1.5rem;
+        box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+        backdrop-filter: blur(6px);
+      }
+      .section-title {
+        font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
+        font-weight: 600;
+        color: rgb(15, 23, 42);
+      }
+      .section-subtitle {
+        margin-top: 0.5rem;
+        font-size: clamp(1rem, 1.2vw + 0.6rem, 1.125rem);
+        color: rgb(71, 85, 105);
+      }
+      .metric {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        border-radius: 1.25rem;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 1rem;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
+      }
+      [data-animate] {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 260ms ease-out, transform 260ms ease-out;
+      }
+      [data-animate].is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .cta-ring {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        border-radius: 1.5rem;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background-color: rgb(15, 23, 42);
+        color: white;
+        box-shadow: 0 32px 64px rgba(15, 23, 42, 0.25);
+      }
+      .cta-ring::before {
+        content: '';
+        position: absolute;
+        inset: -120px -40px 40px;
+        background: radial-gradient(circle at top, rgba(56, 189, 248, 0.28), transparent 65%);
+        opacity: 0.9;
+        pointer-events: none;
+      }
+      .faq-question {
+        text-align: left;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: rgb(15, 23, 42);
+      }
+      .faq-answer {
+        margin-top: 0.5rem;
+        font-size: 1rem;
+        color: rgb(71, 85, 105);
+        line-height: 1.7;
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-radius: 9999px;
+        background-color: rgb(241, 245, 249);
+        padding: 0.25rem 0.75rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: rgb(100, 116, 139);
+      }
+    </style>
+  </head>
+  <body class="antialiased">
+    <header class="sticky top-0 z-30 border-b border-slate-200/60 bg-white/80 backdrop-blur">
+      <div class="mx-auto flex w-full max-w-6xl items-center justify-between px-5 py-3">
+        <a href="#hero" class="text-sm font-semibold tracking-[0.18em] text-slate-800">STRATEGY AI LAB</a>
+        <nav class="hidden items-center gap-6 text-sm font-medium text-slate-700 md:flex">
+          <a href="#challenges" class="hover:text-slate-900">課題</a>
+          <a href="#approach" class="hover:text-slate-900">解決策</a>
+          <a href="#benefits" class="hover:text-slate-900">成果</a>
+          <a href="#process" class="hover:text-slate-900">支援プロセス</a>
+          <a href="#pricing" class="hover:text-slate-900">料金</a>
+          <a href="#contact" class="hover:text-slate-900">相談</a>
+        </nav>
+        <a href="#consult-form" class="btn-secondary min-w-[44px]">無料相談</a>
+      </div>
+    </header>
+    <main class="space-y-20 pb-24 pt-16 md:space-y-28 md:pt-24">
+      <section id="hero" class="mx-auto w-full max-w-6xl px-5" data-animate>
+        <div class="grid gap-10 rounded-3xl border border-slate-200 bg-white/90 p-8 shadow-lg md:grid-cols-2 md:p-12">
+          <div class="space-y-6">
+            <span class="badge">年商5,000万円〜15億円の中小企業経営者向け</span>
+            <h1 class="text-3xl font-bold leading-snug text-slate-900 md:text-4xl">
+              専門家×生成AIで、意思決定の“速い精度”をつくる経営計画
+            </h1>
+            <p class="text-base leading-relaxed text-slate-700 md:text-lg">
+              経営改善で鍛えた実務フレームワークに、生成AIの探索力と定量性を統合。<strong>計画策定のリードタイム短縮（{{導入効果_リードタイム短縮_％}}）／金融機関説明の負担軽減（{{導入効果_金融機関説明工数削減_％}}）／外部環境の早期検知（{{外部環境モニタリング頻度}}）</strong>を実現します。
+            </p>
+            <ul class="grid gap-4 text-sm text-slate-600 md:grid-cols-2">
+              <li class="metric">
+                <div class="mt-1 h-10 w-10 shrink-0 rounded-full bg-sky-100 text-center text-lg font-semibold leading-[40px] text-sky-600">AI</div>
+                <div>
+                  <p class="font-semibold text-slate-900">診断士の課題特定×生成AIの高速探索</p>
+                  <p>業界・制度・競合データを{{探索期間}}内に整理。</p>
+                </div>
+              </li>
+              <li class="metric">
+                <div class="mt-1 h-10 w-10 shrink-0 rounded-full bg-slate-900 text-center text-lg font-semibold leading-[40px] text-white">DX</div>
+                <div>
+                  <p class="font-semibold text-slate-900">実行性まで落とし込むアクション設計</p>
+                  <p>経営会議向けKPIダッシュボードを{{KPI更新頻度}}で更新。</p>
+                </div>
+              </li>
+            </ul>
+            <div class="flex flex-col gap-3 sm:flex-row">
+              <form id="cta-hero" aria-label="無料オンライン相談申し込み" class="flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="仕事用メールアドレス"
+                  class="w-full min-h-[44px] rounded-full border border-slate-300 bg-white px-5 py-3 text-sm text-slate-800 focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                />
+                <button type="submit" class="btn-primary w-full sm:w-auto">
+                  無料オンライン相談（30分）
+                </button>
+              </form>
+              <a href="#sample" class="btn-secondary w-full sm:w-auto">サンプル経営計画を見る</a>
+            </div>
+            <p class="text-xs text-slate-500">
+              ※AIは意思決定を補助するツールであり、最終判断は経営者が行います。
+            </p>
+          </div>
+          <div class="flex flex-col justify-between gap-6 rounded-3xl bg-slate-900/90 p-8 text-slate-100">
+            <div class="space-y-4">
+              <h2 class="text-xl font-semibold">激動の外部環境に先手を打つ</h2>
+              <ul class="space-y-4 text-sm leading-relaxed">
+                <li>
+                  <span class="font-semibold">最新のマクロ・制度情報</span>：{{参考カテゴリ_マクロ統計}}・{{参考カテゴリ_制度情報}}からシグナル抽出。
+                </li>
+                <li>
+                  <span class="font-semibold">競争環境の即時分析</span>：競合ベンチマークを{{競合分析頻度}}で更新。
+                </li>
+                <li>
+                  <span class="font-semibold">資金繰りとKPIを一枚で把握</span>：CF・PL・BSを連動した経営ダッシュボードを提供。
+                </li>
+              </ul>
+            </div>
+            <div class="rounded-2xl bg-white/10 p-5 text-xs leading-relaxed text-slate-200">
+              <p class="font-semibold">導入企業の声（要約）</p>
+              <p class="mt-2">
+                「月次モニタリングが{{モニタリング導入まで期間}}で立ち上がり、金融機関の追加資料要求が{{追加資料削減率}}削減。意思決定のタイミングが揃いました。」
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="challenges" class="mx-auto w-full max-w-5xl px-5" data-animate>
+        <div class="space-y-6">
+          <h2 class="section-title">経営者が直面する停滞要因</h2>
+          <p class="section-subtitle">
+            マクロ・制度・競争の変化が加速する中で、意思決定の「質」「速さ」「先見性」を同時に高めるためのリソースが枯渇しています。
+          </p>
+          <div class="grid gap-4 md:grid-cols-3">
+            <div class="card space-y-3">
+              <h3 class="text-lg font-semibold text-slate-900">情報更新の遅れ</h3>
+              <p class="text-sm leading-relaxed text-slate-600">
+                手作業での調査・集計では外部環境の変化に追随できず、意思決定の前提が古くなる。
+              </p>
+            </div>
+            <div class="card space-y-3">
+              <h3 class="text-lg font-semibold text-slate-900">計画策定の属人化</h3>
+              <p class="text-sm leading-relaxed text-slate-600">
+                経営改善ノウハウが一部の担当者に依存し、経営陣全体で共有された再現性が生まれない。
+              </p>
+            </div>
+            <div class="card space-y-3">
+              <h3 class="text-lg font-semibold text-slate-900">金融機関への説明負担</h3>
+              <p class="text-sm leading-relaxed text-slate-600">
+                補助金・融資・リスケ対応での資料づくりに工数がかかり、打ち手の検討が後手に回る。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="approach" class="mx-auto w-full max-w-5xl px-5" data-animate>
+        <div class="space-y-6">
+          <h2 class="section-title">診断士の実務知見×生成AIで解決</h2>
+          <p class="section-subtitle">
+            中小企業診断士が経営改善で培ったフレームワークを骨格に、生成AIで高速・網羅的に仮説検証。意思決定の質を担保しながらスピードを最大化します。
+          </p>
+          <div class="grid gap-6 md:grid-cols-2">
+            <div class="card space-y-4">
+              <h3 class="text-lg font-semibold text-slate-900">Feature</h3>
+              <ul class="space-y-3 text-sm text-slate-600">
+                <li>
+                  経営診断フレーム（SWOT／3C／財務モデリング）とAIを統合した分析テンプレート。
+                </li>
+                <li>公的統計・業界データをAPI連携で取得し、即座に可視化。</li>
+                <li>仮説検証のプロンプト設計を診断士が監修。</li>
+              </ul>
+            </div>
+            <div class="card space-y-4">
+              <h3 class="text-lg font-semibold text-slate-900">Advantage</h3>
+              <ul class="space-y-3 text-sm text-slate-600">
+                <li>調査フェーズを{{調査短縮率}}短縮、分析ミスのダブルチェックを自動化。</li>
+                <li>部門横断で同じ指標を参照するためのダッシュボード設計。</li>
+                <li>戦略〜実行計画までをワークショップ型で共創。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="benefits" class="mx-auto w-full max-w-5xl px-5" data-animate>
+        <div class="space-y-6">
+          <h2 class="section-title">導入後に得られる3つの成果</h2>
+          <p class="section-subtitle">定量指標で意思決定のスピードと精度を確認できます。</p>
+          <div class="grid gap-4 md:grid-cols-3">
+            <div class="card space-y-3">
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Benefit 01</p>
+              <h3 class="text-lg font-semibold text-slate-900">計画策定リードタイム▲{{導入効果_リードタイム短縮_％}}</h3>
+              <p class="text-sm text-slate-600">
+                生成AIによる情報収集・ドラフト化で、経営計画初稿までの時間を圧縮。意思決定が{{会議頻度}}に合致します。
+              </p>
+            </div>
+            <div class="card space-y-3">
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Benefit 02</p>
+              <h3 class="text-lg font-semibold text-slate-900">金融機関説明工数▲{{導入効果_金融機関説明工数削減_％}}</h3>
+              <p class="text-sm text-slate-600">
+                ファクトと根拠をテンプレート化し、融資・補助金のヒアリング回答を標準化。決裁スピードが{{決裁スピード向上率}}向上。
+              </p>
+            </div>
+            <div class="card space-y-3">
+              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Benefit 03</p>
+              <h3 class="text-lg font-semibold text-slate-900">外部環境の先読みを{{外部環境モニタリング頻度}}</h3>
+              <p class="text-sm text-slate-600">
+                {{参考カテゴリ_マクロ統計}}・{{参考カテゴリ_制度情報}}・{{参考カテゴリ_業界調査}}をAIが監視し、変化シグナルをアラート。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="process" class="mx-auto w-full max-w-5xl px-5" data-animate>
+        <div class="space-y-6">
+          <h2 class="section-title">支援プロセス</h2>
+          <p class="section-subtitle">診断士が伴走し、AIを活用して実行可能性の高い計画を仕上げます。</p>
+          <div class="grid gap-4 md:grid-cols-4">
+            <div class="card space-y-2">
+              <h3 class="text-base font-semibold text-slate-900">1. 着眼共有（Week 0）</h3>
+              <p class="text-sm text-slate-600">課題ヒアリングと財務・業界データの初期収集を{{着眼期間}}で完了。</p>
+            </div>
+            <div class="card space-y-2">
+              <h3 class="text-base font-semibold text-slate-900">2. 分析・仮説生成</h3>
+              <p class="text-sm text-slate-600">AIで複数シナリオを生成し、診断士が優先順位づけを実施。</p>
+            </div>
+            <div class="card space-y-2">
+              <h3 class="text-base font-semibold text-slate-900">3. 計画ドラフト共創</h3>
+              <p class="text-sm text-slate-600">ワークショップ形式でアクションプランとKPIを定義。</p>
+            </div>
+            <div class="card space-y-2">
+              <h3 class="text-base font-semibold text-slate-900">4. 実行モニタリング</h3>
+              <p class="text-sm text-slate-600">週次レビューと月次ダッシュボード更新、修正提案を継続。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing" class="mx-auto w-full max-w-5xl px-5" data-animate>
+        <div class="space-y-6">
+          <h2 class="section-title">料金と期間</h2>
+          <p class="section-subtitle">明瞭なフィーで短期立ち上げと中期伴走の両方を提供します。</p>
+          <div class="grid gap-6 md:grid-cols-2">
+            <div class="card space-y-4">
+              <h3 class="text-lg font-semibold text-slate-900">スプリントプラン</h3>
+              <p class="text-sm text-slate-600">経営計画ドラフト作成までを{{スプリント期間}}で完遂。</p>
+              <p class="text-2xl font-bold text-slate-900">{{料金_スプリント}}</p>
+              <ul class="space-y-2 text-sm text-slate-600">
+                <li>ヒアリング2回、AI分析レポート、財務モデリング。</li>
+                <li>経営会議向けサマリー資料一式。</li>
+              </ul>
+            </div>
+            <div class="card space-y-4">
+              <h3 class="text-lg font-semibold text-slate-900">伴走プラン</h3>
+              <p class="text-sm text-slate-600">計画運用とモニタリングを{{伴走期間}}伴走。</p>
+              <p class="text-2xl font-bold text-slate-900">{{料金_伴走}}</p>
+              <ul class="space-y-2 text-sm text-slate-600">
+                <li>週次KPIレビュー、施策ブラッシュアップ。</li>
+                <li>金融機関・投資家向け説明資料の継続支援。</li>
+              </ul>
+            </div>
+          </div>
+          <div class="rounded-3xl border border-slate-200 bg-slate-50 p-5 text-xs text-slate-500">
+            料金は企業規模・業種によりカスタマイズします。AI活用は意思決定を補助するものであり、最終判断は経営者様にてお願いいたします。
+          </div>
+        </div>
+      </section>
+
+      <section id="sample" class="mx-auto w-full max-w-5xl px-5" data-animate>
+        <div class="space-y-6">
+          <h2 class="section-title">成果物サンプルと実績</h2>
+          <p class="section-subtitle">経営会議でそのまま使えるフォーマットと、公的指標に基づく分析を提供します。</p>
+          <div class="grid gap-4 md:grid-cols-3">
+            <div class="card space-y-3">
+              <h3 class="text-lg font-semibold text-slate-900">サンプル経営計画</h3>
+              <p class="text-sm text-slate-600">財務・顧客・業務プロセスのバランススコアカードを{{KPI更新頻度}}で更新。</p>
+              <a href="#consult-form" class="btn-secondary">ダイジェストPDFを見る</a>
+            </div>
+            <div class="card space-y-3">
+              <h3 class="text-lg font-semibold text-slate-900">採択・融資実績</h3>
+              <p class="text-sm text-slate-600">補助金・制度融資の採択率{{採択率}}、銀行折衝期間{{折衝期間短縮率}}短縮。</p>
+            </div>
+            <div class="card space-y-3">
+              <h3 class="text-lg font-semibold text-slate-900">参照データソース</h3>
+              <p class="text-sm text-slate-600">{{参考カテゴリ_マクロ統計}}／{{参考カテゴリ_業界調査}}／{{参考カテゴリ_制度情報}} など一次情報を横断分析。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="mx-auto w-full max-w-5xl px-5" data-animate>
+        <div class="space-y-6">
+          <h2 class="section-title">FAQ</h2>
+          <div class="space-y-5">
+            <div class="card">
+              <p class="faq-question">AIに任せすぎるリスクはありませんか？</p>
+              <p class="faq-answer">
+                生成AIは調査・分析のスピードと網羅性を高める補助ツールです。重要な意思決定は診断士と経営陣がレビューし、最終判断は経営者様が行う体制を徹底します。
+              </p>
+            </div>
+            <div class="card">
+              <p class="faq-question">社内データの取り扱いは？</p>
+              <p class="faq-answer">
+                セキュアな環境で限定的に利用し、外部サービスに保存しない運用も可能です。機密保持契約（NDA）を締結した上で取り組みます。
+              </p>
+            </div>
+            <div class="card">
+              <p class="faq-question">既に計画はあるがアップデートだけお願いできますか？</p>
+              <p class="faq-answer">
+                はい。既存計画を診断士が棚卸しし、生成AIでシナリオを補強。外部環境の変化に合わせた更新版を{{更新版納品期間}}で提示します。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="mx-auto w-full max-w-4xl px-5" data-animate>
+        <div class="cta-ring p-10">
+          <div class="relative z-10 grid gap-10 md:grid-cols-[1.1fr,0.9fr] md:items-center">
+            <div class="space-y-4">
+              <h2 class="text-3xl font-bold">30分で現状と打ち手を診断</h2>
+              <p class="text-base text-slate-200">
+                経営改善の経験をもつ診断士がオンラインでヒアリングし、生成AIで抽出した環境変化のシグナルとともに初回提案を行います。
+              </p>
+              <ul class="space-y-2 text-sm text-slate-200">
+                <li>・ヒアリング項目を事前共有し、準備工数を最小化。</li>
+                <li>・{{初回提案資料納期}}以内に提案サマリーを送付。</li>
+                <li>・AIは補助的に活用し、意思決定は経営者主体で進行。</li>
+              </ul>
+            </div>
+            <form
+              id="consult-form"
+              aria-label="無料オンライン相談申し込みフォーム"
+              class="space-y-4 rounded-2xl bg-white/90 p-6 text-slate-800 shadow-lg"
+              action="{{フォーム送信URL}}"
+              method="post"
+            >
+              <h3 class="text-lg font-semibold text-slate-900">無料オンライン相談（30分）</h3>
+              <div class="space-y-3">
+                <label class="block text-sm font-medium text-slate-700" for="company">
+                  会社名
+                </label>
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  required
+                  class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                  placeholder="例：株式会社サンプル"
+                />
+              </div>
+              <div class="grid gap-4 md:grid-cols-2">
+                <div class="space-y-3">
+                  <label class="block text-sm font-medium text-slate-700" for="role">役職</label>
+                  <input
+                    id="role"
+                    name="role"
+                    type="text"
+                    required
+                    class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                    placeholder="例：代表取締役"
+                  />
+                </div>
+                <div class="space-y-3">
+                  <label class="block text-sm font-medium text-slate-700" for="email">メール</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                    placeholder="example@company.jp"
+                  />
+                </div>
+              </div>
+              <fieldset class="space-y-3">
+                <legend class="block text-sm font-medium text-slate-700">関心のある課題</legend>
+                <div class="grid gap-2">
+                  <label class="flex items-center gap-3 text-sm text-slate-700">
+                    <input type="checkbox" name="needs" value="plan-update" class="h-5 w-5 rounded border-slate-300 text-sky-600 focus:ring-sky-500" />
+                    経営計画のアップデート
+                  </label>
+                  <label class="flex items-center gap-3 text-sm text-slate-700">
+                    <input type="checkbox" name="needs" value="finance" class="h-5 w-5 rounded border-slate-300 text-sky-600 focus:ring-sky-500" />
+                    金融機関向け説明資料の整備
+                  </label>
+                  <label class="flex items-center gap-3 text-sm text-slate-700">
+                    <input type="checkbox" name="needs" value="monitoring" class="h-5 w-5 rounded border-slate-300 text-sky-600 focus:ring-sky-500" />
+                    KPIモニタリング体制の構築
+                  </label>
+                </div>
+              </fieldset>
+              <button type="submit" class="btn-primary w-full">送信して日程調整</button>
+              <p class="text-xs text-slate-500">
+                ※送信後に担当者から{{初回連絡所要時間}}以内にご連絡します。
+              </p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-slate-200 bg-white/80 py-10">
+      <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-5 text-center text-xs text-slate-500 md:flex-row md:justify-between md:text-left">
+        <p>© {{著作権表記年度}} Strategy AI Lab. All rights reserved.</p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a href="#consult-form" class="btn-secondary text-xs">無料オンライン相談へ</a>
+          <a href="#sample" class="btn-secondary text-xs">サンプルを見る</a>
+        </div>
+      </div>
+    </footer>
+    <script src="./b2b_lp_expert_ai.js" defer></script>
+  </body>
+</html>
