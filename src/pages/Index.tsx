@@ -14,6 +14,7 @@ import "../../styles/lp.css";
 
 const sections = [
   { id: "hero", label: "トップ" },
+  { id: "insights", label: "導入効果" },
   { id: "roles", label: "役割分担" },
   { id: "why-now", label: "なぜ今" },
   { id: "quarterly", label: "四半期レビュー" },
@@ -49,6 +50,76 @@ const heroMetrics = [
     prefix: "-",
     suffix: "万円",
     target: 1000,
+  },
+];
+
+const dashboardHighlights = [
+  {
+    title: "リスク検知アラート",
+    detail: "政策・補助金・金利変動をリアルタイム通知",
+  },
+  {
+    title: "外部データソース",
+    detail: "47都道府県の統計・金融機関レポートを統合",
+  },
+  {
+    title: "共同編集ログ",
+    detail: "経営者と専門家のコメント履歴を自動記録",
+  },
+];
+
+const adoptionTrend = [
+  { label: "2023Q1", value: 18 },
+  { label: "2023Q3", value: 27 },
+  { label: "2024Q1", value: 36 },
+  { label: "2024Q3", value: 48 },
+  { label: "2024Q4", value: 54 },
+];
+
+const adoptionMax = Math.max(...adoptionTrend.map((point) => point.value));
+
+const roiImprovements = [
+  {
+    metric: "計画策定リードタイム",
+    before: "6週間",
+    after: "2週間",
+    impact: "-67%",
+  },
+  {
+    metric: "資料整備工数",
+    before: "80時間",
+    after: "26時間",
+    impact: "-54h",
+  },
+  {
+    metric: "融資面談準備",
+    before: "14日",
+    after: "5日",
+    impact: "-64%",
+  },
+];
+
+const utilizationComparisons = [
+  {
+    label: "政策アップデート反映率",
+    manual: 48,
+    ai: 92,
+    unit: "%",
+    description: "AIが速報を自動集約し、重要な変更をダッシュボードへ即時反映。",
+  },
+  {
+    label: "財務シナリオ検証数",
+    manual: 3,
+    ai: 12,
+    unit: "件",
+    description: "想定ケースが4倍に増え、意思決定の幅が拡大しました。",
+  },
+  {
+    label: "定例会議の意思決定率",
+    manual: 58,
+    ai: 86,
+    unit: "%",
+    description: "専門家レビューとAI提案で会議中の確定事項が大幅に増加。",
   },
 ];
 
@@ -764,9 +835,162 @@ const Index = () => {
                       <strong>2件</strong>
                     </div>
                   </div>
+                  <ul className="dashboard-highlights">
+                    {dashboardHighlights.map((item) => (
+                      <li key={item.title}>
+                        <strong>{item.title}</strong>
+                        <span>{item.detail}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
                 <div className="dashboard-footer">専門家レビュー中</div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* インサイト: グラフと表で導入効果を可視化 */}
+        <section
+          id="insights"
+          ref={(node) => {
+            sectionRefs.current["insights"] = node ?? null;
+          }}
+          className="section insights"
+          aria-labelledby="insights-heading"
+        >
+          <div className="container">
+            <div className="section-header" data-animate>
+              <h2 id="insights-heading">導入後の定量インパクトを可視化</h2>
+              <p>
+                直近12か月で蓄積したデータを基に、導入企業の成果を定量化しました。
+                グラフや表で差分を確認しながら、自社導入時の投資対効果をイメージしていただけます。
+              </p>
+            </div>
+            <div className="insights-grid">
+              <article className="insights-panel" data-animate>
+                <header className="insights-panel__header">
+                  <h3>生成AI活用企業の戦略更新スピード</h3>
+                  <span>Switch Software 調査 (2024)</span>
+                </header>
+                <div className="insights-chart" role="img" aria-label="生成AI活用企業の導入率推移">
+                  <svg viewBox="0 0 100 60" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="adoptionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="rgba(96, 165, 250, 0.45)" />
+                        <stop offset="100%" stopColor="rgba(96, 165, 250, 0.05)" />
+                      </linearGradient>
+                    </defs>
+                    <polygon
+                      fill="url(#adoptionGradient)"
+                      points={`0,60 ${adoptionTrend
+                        .map((point, index) => {
+                          const x = (index / (adoptionTrend.length - 1 || 1)) * 100;
+                          const normalizedY = 55 - (point.value / (adoptionMax || 1)) * 45;
+                          return `${x},${normalizedY}`;
+                        })
+                        .join(" ")} 100,60`}
+                    />
+                    <polyline
+                      className="insights-chart__line"
+                      points={adoptionTrend
+                        .map((point, index) => {
+                          const x = (index / (adoptionTrend.length - 1 || 1)) * 100;
+                          const normalizedY = 55 - (point.value / (adoptionMax || 1)) * 45;
+                          return `${x},${normalizedY}`;
+                        })
+                        .join(" ")}
+                    />
+                    {adoptionTrend.map((point, index) => {
+                      const x = (index / (adoptionTrend.length - 1 || 1)) * 100;
+                      const normalizedY = 55 - (point.value / (adoptionMax || 1)) * 45;
+                      return (
+                        <circle
+                          key={`${point.label}-dot`}
+                          className="insights-chart__dot"
+                          cx={x}
+                          cy={normalizedY}
+                          r={1.8}
+                        />
+                      );
+                    })}
+                  </svg>
+                  <ul className="insights-chart__legend">
+                    {adoptionTrend.map((point) => (
+                      <li key={point.label}>
+                        <span>{point.label}</span>
+                        <strong>{point.value}%</strong>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <p className="insights-note">
+                  AIを活用したプランニング体制を整えた企業では、導入1年で戦略更新のサイクルが1.8倍高速化しました。
+                </p>
+              </article>
+
+              <article className="insights-panel" data-animate>
+                <header className="insights-panel__header">
+                  <h3>導入による業務効率化サマリー</h3>
+                  <span>Strategy AI Lab 内部統計</span>
+                </header>
+                <div className="insights-table-wrapper">
+                  <table className="insights-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">指標</th>
+                        <th scope="col">導入前</th>
+                        <th scope="col">導入後</th>
+                        <th scope="col">差分</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {roiImprovements.map((row) => (
+                        <tr key={row.metric}>
+                          <th scope="row">{row.metric}</th>
+                          <td>{row.before}</td>
+                          <td>{row.after}</td>
+                          <td className="insights-table__impact">{row.impact}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                <ul className="insights-bars">
+                  {utilizationComparisons.map((item) => {
+                    const base = Math.max(item.ai, item.manual, 1);
+                    const manualRatio = Math.round((item.manual / base) * 100);
+                    const aiRatio = Math.round((item.ai / base) * 100);
+                    const improvementRatio = Math.max(aiRatio - manualRatio, 0);
+                    return (
+                      <li key={item.label}>
+                        <div className="insights-bars__labels">
+                          <span>{item.label}</span>
+                          <span>
+                            <strong>{item.ai}</strong>
+                            {item.unit}
+                          </span>
+                        </div>
+                        <div className="insights-bars__track" aria-hidden="true">
+                          <span
+                            className="insights-bars__bar insights-bars__bar--manual"
+                            style={{ width: `${manualRatio}%` }}
+                          />
+                          <span
+                            className="insights-bars__bar insights-bars__bar--growth"
+                            style={{ width: `${improvementRatio}%`, marginLeft: `${manualRatio}%` }}
+                          />
+                        </div>
+                        <div className="insights-bars__scale">
+                          <span>従来: {item.manual}{item.unit}</span>
+                          <span>AI活用: {item.ai}{item.unit}</span>
+                        </div>
+                        <p className="insights-bars__description">{item.description}</p>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </article>
             </div>
           </div>
         </section>
