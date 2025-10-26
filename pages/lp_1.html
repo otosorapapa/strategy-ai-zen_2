@@ -112,18 +112,20 @@
 
       .header-nav {
         display: flex;
-        gap: 22px;
+        align-items: center;
+        gap: 18px;
         font-size: 0.95rem;
       }
 
-      .header-nav a {
+      .header-nav > a,
+      .nav-group summary {
         text-decoration: none;
         color: var(--secondary);
         font-weight: 600;
         position: relative;
       }
 
-      .header-nav a::after {
+      .header-nav > a::after {
         content: "";
         position: absolute;
         left: 0;
@@ -136,9 +138,66 @@
         transition: transform 0.25s ease;
       }
 
-      .header-nav a:hover::after,
-      .header-nav a:focus-visible::after {
+      .header-nav > a:hover::after,
+      .header-nav > a:focus-visible::after {
         transform: scaleX(1);
+      }
+
+      .nav-group {
+        position: relative;
+      }
+
+      .nav-group summary {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        list-style: none;
+        padding: 8px 14px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .nav-group summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .nav-group[open] summary,
+      .nav-group summary:hover,
+      .nav-group summary:focus-visible {
+        color: var(--primary);
+        background: rgba(148, 163, 184, 0.12);
+        box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.22);
+      }
+
+      .nav-group-panel {
+        position: absolute;
+        top: calc(100% + 12px);
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        min-width: 220px;
+        padding: 18px;
+        border-radius: 18px;
+        background: var(--surface);
+        box-shadow: var(--shadow-lg);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        z-index: 60;
+      }
+
+      .nav-group-panel a {
+        text-decoration: none;
+        color: var(--secondary);
+        font-weight: 600;
+        padding: 6px 0;
+        transition: color 0.2s ease;
+        white-space: nowrap;
+      }
+
+      .nav-group-panel a:hover,
+      .nav-group-panel a:focus-visible {
+        color: var(--primary);
       }
 
       .btn {
@@ -1524,12 +1583,23 @@
       <div class="container header-inner">
         <div class="brand">AI経営計画書ラボ</div>
         <nav class="header-nav" aria-label="主要メニュー">
-          <a href="#ai-evidence">導入状況</a>
-          <a href="#pain">課題</a>
-          <a href="#features">サービス</a>
-          <a href="#analysis">AI分析デモ</a>
-          <a href="#experts">専門家</a>
-          <a href="#journey">進め方</a>
+          <details class="nav-group">
+            <summary>サービス概要</summary>
+            <div class="nav-group-panel" role="menu">
+              <a href="#ai-evidence" role="menuitem">導入状況</a>
+              <a href="#pain" role="menuitem">課題</a>
+              <a href="#features" role="menuitem">サービス</a>
+              <a href="#analysis" role="menuitem">AI分析デモ</a>
+            </div>
+          </details>
+          <details class="nav-group">
+            <summary>実行サポート</summary>
+            <div class="nav-group-panel" role="menu">
+              <a href="#experts" role="menuitem">専門家</a>
+              <a href="#journey" role="menuitem">進め方</a>
+              <a href="#cases" role="menuitem">導入事例</a>
+            </div>
+          </details>
           <a href="#plans">料金</a>
         </nav>
         <button class="btn btn-primary" type="button" data-open-modal="#contactModal">
@@ -2467,6 +2537,32 @@
       );
 
       document.querySelectorAll(".fade-in").forEach((el) => fadeObserver.observe(el));
+
+      const navGroups = Array.from(document.querySelectorAll(".nav-group"));
+
+      if (navGroups.length) {
+        navGroups.forEach((group) => {
+          group.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+              group.removeAttribute("open");
+            });
+          });
+        });
+
+        document.addEventListener("click", (event) => {
+          navGroups.forEach((group) => {
+            if (!group.contains(event.target)) {
+              group.removeAttribute("open");
+            }
+          });
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            navGroups.forEach((group) => group.removeAttribute("open"));
+          }
+        });
+      }
 
       const expertObserver = new IntersectionObserver(
         (entries) => {
