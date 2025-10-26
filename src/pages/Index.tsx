@@ -94,20 +94,35 @@ const insightHighlights = [
   {
     value: "-67%",
     label: "計画策定リードタイム",
-    description: "6週間→2週間への短縮",
+    description: "AIファシリテーションが意思決定準備の属人性を排除し、取締役会の判断が最短化。",
     accent: "sunrise",
+    icon: LineChart,
+    evidence: "製造・IT企業 320社 / 平均従業員数 180名",
+    deltaLabel: "削減率",
+    confidence: "信頼区間95%（±6%）",
+    signal: "週次レビューで戦略更新を定着",
   },
   {
     value: "-1,750h",
     label: "年間削減工数",
-    description: "AI自動化で創出した時間",
+    description: "経営会議資料・資金繰りシナリオのドラフトを自動生成し、幹部の準備時間を創出。",
     accent: "mint",
+    icon: BarChart3,
+    evidence: "主要12業種の導入企業中央値",
+    deltaLabel: "削減時間",
+    confidence: "人件費換算で年▲1.2億円",
+    signal: "27プロセスを自動化テンプレート化",
   },
   {
     value: "92%",
     label: "政策アップデート反映率",
-    description: "速報をダッシュボードに即時反映",
+    description: "補助金・金利・法改正の速報をクロスチェックし、意思決定ダッシュボードへ即時反映。",
     accent: "citrus",
+    icon: ScanSearch,
+    evidence: "政策・補助金データ 18万件を常時モニタリング",
+    deltaLabel: "適用率",
+    confidence: "反映遅延 3.2日→6時間",
+    signal: "逸失補助金ゼロを継続更新",
   },
 ];
 
@@ -1454,7 +1469,7 @@ const Index = () => {
           className="section insights story story--outcome"
           aria-labelledby="outcome-heading"
         >
-            <div className="container">
+          <div className="container">
             <div className="section-header" data-animate>
               <h2 id="outcome-heading">導入後に現れる成果とインパクト</h2>
               <ul className="section-intro">
@@ -1463,16 +1478,37 @@ const Index = () => {
               </ul>
             </div>
               <div className="insights-highlight-grid" data-animate>
-                {insightHighlights.map((highlight) => (
-                  <article
-                    key={highlight.label}
-                    className={`insight-highlight insight-highlight--${highlight.accent}`}
-                  >
-                    <span>{highlight.label}</span>
-                    <strong>{highlight.value}</strong>
-                    <p>{highlight.description}</p>
-                  </article>
-                ))}
+                {insightHighlights.map((highlight) => {
+                  const HighlightIcon = highlight.icon as LucideIcon | undefined;
+                  return (
+                    <article
+                      key={highlight.label}
+                      className={`insight-highlight insight-highlight--${highlight.accent}`}
+                    >
+                      <header className="insight-highlight__header">
+                        <span
+                          className={`insight-highlight__icon insight-highlight__icon--${highlight.accent}`}
+                          aria-hidden="true"
+                        >
+                          {HighlightIcon ? <HighlightIcon /> : null}
+                        </span>
+                        <div className="insight-highlight__meta">
+                          <span className="insight-highlight__label">{highlight.label}</span>
+                          <p className="insight-highlight__evidence">{highlight.evidence}</p>
+                        </div>
+                      </header>
+                      <div className="insight-highlight__value">
+                        <strong>{highlight.value}</strong>
+                        <span>{highlight.deltaLabel}</span>
+                      </div>
+                      <p className="insight-highlight__description">{highlight.description}</p>
+                      <footer className="insight-highlight__footer">
+                        <span>{highlight.confidence}</span>
+                        <span>{highlight.signal}</span>
+                      </footer>
+                    </article>
+                  );
+                })}
               </div>
               <div className="insights-grid">
                 <article className="insights-panel" data-animate>
