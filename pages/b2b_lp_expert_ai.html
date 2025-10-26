@@ -78,6 +78,237 @@
         box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
         backdrop-filter: blur(6px);
       }
+      .cooperate-surface {
+        position: relative;
+        border-radius: 2rem;
+        padding: clamp(2rem, 4vw, 3rem);
+        background: linear-gradient(145deg, rgba(226, 242, 255, 0.55), rgba(255, 255, 255, 0.95));
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        box-shadow: 0 32px 64px rgba(15, 23, 42, 0.12);
+        overflow: hidden;
+      }
+      .cooperate-surface::before {
+        content: '';
+        position: absolute;
+        inset: -30% auto auto -10%;
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.25), transparent 65%);
+        filter: blur(0);
+        pointer-events: none;
+      }
+      .cooperate-surface::after {
+        content: '';
+        position: absolute;
+        inset: auto -25% -40% auto;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.18), transparent 70%);
+        pointer-events: none;
+      }
+      .role-grid {
+        position: relative;
+        display: grid;
+        gap: clamp(1.25rem, 2vw, 1.75rem);
+      }
+      @media (min-width: 768px) {
+        .role-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+      .role-card {
+        position: relative;
+        border-radius: 1.75rem;
+        padding: clamp(1.75rem, 3vw, 2.25rem);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 18px 42px rgba(15, 23, 42, 0.12);
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+      .role-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 26px 58px rgba(15, 23, 42, 0.18);
+      }
+      .role-card::after {
+        content: '';
+        position: absolute;
+        inset: -40% 45% auto -20%;
+        height: 220px;
+        background: radial-gradient(circle at center, rgba(255, 255, 255, 0.35), transparent 70%);
+        opacity: 0.85;
+        pointer-events: none;
+      }
+      .role-card--ai {
+        border-color: rgba(56, 189, 248, 0.45);
+        background: linear-gradient(155deg, rgba(240, 249, 255, 0.92), rgba(224, 242, 254, 0.85));
+      }
+      .role-card--ai::after {
+        background: radial-gradient(circle at center, rgba(14, 165, 233, 0.28), transparent 70%);
+      }
+      .role-card--expert {
+        border-color: rgba(96, 165, 250, 0.45);
+        background: linear-gradient(160deg, rgba(239, 246, 255, 0.96), rgba(219, 234, 254, 0.9));
+      }
+      .role-card--expert::after {
+        background: radial-gradient(circle at center, rgba(37, 99, 235, 0.24), transparent 70%);
+      }
+      .role-card--leader {
+        border-color: rgba(148, 163, 184, 0.45);
+        background: linear-gradient(165deg, rgba(248, 250, 252, 0.96), rgba(226, 232, 240, 0.82));
+      }
+      .role-card--leader::after {
+        background: radial-gradient(circle at center, rgba(148, 163, 184, 0.22), transparent 70%);
+      }
+      .role-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .role-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 3rem;
+        width: 3rem;
+        border-radius: 0.75rem;
+        background: rgba(15, 23, 42, 0.85);
+        color: white;
+        font-size: 0.875rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+      .role-card--ai .role-icon {
+        background: linear-gradient(145deg, rgba(14, 165, 233, 0.92), rgba(56, 189, 248, 0.92));
+      }
+      .role-card--expert .role-icon {
+        background: linear-gradient(145deg, rgba(37, 99, 235, 0.92), rgba(59, 130, 246, 0.92));
+      }
+      .role-card--leader .role-icon {
+        background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95));
+      }
+      .role-title {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: rgb(15, 23, 42);
+      }
+      .role-caption {
+        margin-top: 0.25rem;
+        font-size: 0.875rem;
+        color: rgb(71, 85, 105);
+      }
+      .role-chain {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 0.35rem 0.6rem;
+        padding: 0.65rem 0.9rem;
+        border-radius: 9999px;
+        background: rgba(15, 23, 42, 0.06);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgb(30, 64, 175);
+        margin-bottom: 1.5rem;
+      }
+      .role-card--ai .role-chain {
+        background: rgba(14, 165, 233, 0.12);
+        color: rgb(14, 116, 144);
+      }
+      .role-card--expert .role-chain {
+        background: rgba(59, 130, 246, 0.12);
+        color: rgb(37, 99, 235);
+      }
+      .role-card--leader .role-chain {
+        background: rgba(15, 23, 42, 0.08);
+        color: rgb(15, 23, 42);
+      }
+      .role-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .role-list li {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+      }
+      .role-bullet {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: rgb(15, 23, 42);
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.1);
+      }
+      .role-card--ai .role-bullet {
+        color: rgb(13, 148, 136);
+        box-shadow: inset 0 0 0 1px rgba(13, 148, 136, 0.4);
+        background: rgba(240, 253, 250, 0.92);
+      }
+      .role-card--expert .role-bullet {
+        color: rgb(30, 64, 175);
+        box-shadow: inset 0 0 0 1px rgba(30, 64, 175, 0.4);
+        background: rgba(239, 246, 255, 0.95);
+      }
+      .role-card--leader .role-bullet {
+        color: rgb(15, 23, 42);
+        box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.25);
+        background: rgba(248, 250, 252, 0.95);
+      }
+      .role-point-title {
+        font-weight: 600;
+        color: rgb(15, 23, 42);
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+      }
+      .role-point-copy {
+        font-size: 0.85rem;
+        line-height: 1.6;
+        color: rgb(71, 85, 105);
+      }
+      .role-outcome {
+        border-radius: 1.25rem;
+        padding: 1rem 1.25rem;
+        background: rgba(15, 23, 42, 0.06);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+      }
+      .role-card--ai .role-outcome {
+        background: rgba(125, 211, 252, 0.16);
+        border-color: rgba(56, 189, 248, 0.35);
+      }
+      .role-card--expert .role-outcome {
+        background: rgba(147, 197, 253, 0.16);
+        border-color: rgba(59, 130, 246, 0.35);
+      }
+      .role-card--leader .role-outcome {
+        background: rgba(203, 213, 225, 0.18);
+        border-color: rgba(148, 163, 184, 0.35);
+      }
+      .role-outcome span {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(15, 23, 42, 0.6);
+        margin-bottom: 0.4rem;
+      }
+      .role-outcome p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: rgb(30, 41, 59);
+        margin: 0;
+      }
       .section-title {
         font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
         font-weight: 600;
@@ -315,32 +546,121 @@
         <div class="space-y-6">
           <h2 class="section-title">AIがやること・専門家がやること・経営者がやることを明確化</h2>
           <p class="section-subtitle">
-            MIT Sloanの研究が示すように、人とAIが役割分担するほど成果が高まります。私たちは生成AI、専門家、経営者の協働体制を明文化し、誰がどこで価値を出すかを透明化します。
+            MIT Sloanの研究が示すように、人とAIが役割分担するほど成果が高まります。因果性・論理性・デザイン性を同時に担保するため、生成AI、専門家、経営者がどのタイミングでバトンを渡すかを視覚化しました。
           </p>
-          <div class="grid gap-6 md:grid-cols-3">
-            <div class="card space-y-3">
-              <h3 class="text-lg font-semibold text-slate-900">AIがやること</h3>
-              <ul class="space-y-2 text-sm text-slate-600">
-                <li>公的統計・需要データ・政策情報を自動収集し、リアルタイム分析。</li>
-                <li>売上・利益・資金繰りのシナリオを複数生成し、KPIの感度を可視化。</li>
-                <li>審査書類のドラフト、リスクアラート、会議アジェンダ案を24時間以内に提示。</li>
-              </ul>
-            </div>
-            <div class="card space-y-3">
-              <h3 class="text-lg font-semibold text-slate-900">専門家がやること</h3>
-              <ul class="space-y-2 text-sm text-slate-600">
-                <li>中小企業診断士が財務データを整理し、AI出力の仮説を現場ヒアリングで検証。</li>
-                <li>公認会計士が資金繰り計画・投資計画を金融機関の審査基準でレビュー。</li>
-                <li>元銀行審査役が補助金・融資書類をブラッシュアップし、倫理・リスクをチェック。</li>
-              </ul>
-            </div>
-            <div class="card space-y-3">
-              <h3 class="text-lg font-semibold text-slate-900">経営者がやること</h3>
-              <ul class="space-y-2 text-sm text-slate-600">
-                <li>優先したい事業テーマ・投資案件を提示し、AIと専門家に判断軸を共有。</li>
-                <li>週次レビューで意思決定を下し、実行責任者への落とし込みを主導。</li>
-                <li>意思決定ログを社内共有し、学習サイクルを加速させるガバナンスを整備。</li>
-              </ul>
+          <div class="cooperate-surface">
+            <div class="role-grid">
+              <article class="role-card role-card--ai">
+                <div class="role-header">
+                  <span class="role-icon">AI</span>
+                  <div>
+                    <p class="role-title">AIがやること</p>
+                    <p class="role-caption">膨大なデータを体系化し、意思決定の前提条件をリアルタイムで整備。</p>
+                  </div>
+                </div>
+                <p class="role-chain">Data Mapping → Pattern Mining → Decision Canvas</p>
+                <ul class="role-list">
+                  <li>
+                    <span class="role-bullet">因果</span>
+                    <div>
+                      <p class="role-point-title">公的統計・政策・需要データを即時統合</p>
+                      <p class="role-point-copy">自社KPIと外部指標を突合し、優先順位が曖昧な要因をスコア化して見える化。</p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="role-bullet">論理</span>
+                    <div>
+                      <p class="role-point-title">PL・BS・CFを貫く感度分析</p>
+                      <p class="role-point-copy">投資シナリオごとに利益・資金繰りの波及を瞬時に試算し、リスク変数を抽出。</p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="role-bullet">スマート</span>
+                    <div>
+                      <p class="role-point-title">審査書類・アジェンダを24時間以内に生成</p>
+                      <p class="role-point-copy">意思決定に必要なドラフト資料とアラートを自動作成し、会議準備の手戻りを削減。</p>
+                    </div>
+                  </li>
+                </ul>
+                <div class="role-outcome">
+                  <span>OUTPUT</span>
+                  <p>48時間以内に意思決定素材が揃い、全員が同じダッシュボードで議論を開始できます。</p>
+                </div>
+              </article>
+              <article class="role-card role-card--expert">
+                <div class="role-header">
+                  <span class="role-icon">PRO</span>
+                  <div>
+                    <p class="role-title">専門家がやること</p>
+                    <p class="role-caption">論理の飛躍とリスクを人間の視点で補正し、意思決定の実行性を保証。</p>
+                  </div>
+                </div>
+                <p class="role-chain">Insight Review → Feasibility Audit → Execution Design</p>
+                <ul class="role-list">
+                  <li>
+                    <span class="role-bullet">検証</span>
+                    <div>
+                      <p class="role-point-title">中小企業診断士が現場ヒアリングで仮説精度を確認</p>
+                      <p class="role-point-copy">AIが導いた優先課題をヒアリングで裏付けし、経営資源との整合性を調整。</p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="role-bullet">整合</span>
+                    <div>
+                      <p class="role-point-title">公認会計士が資金繰りと投資計画を審査基準でレビュー</p>
+                      <p class="role-point-copy">金融機関・補助金審査で問われる指標に合わせ、指摘リスクを事前に除去。</p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="role-bullet">信頼</span>
+                    <div>
+                      <p class="role-point-title">元銀行審査役が倫理・リスク観点で最終点検</p>
+                      <p class="role-point-copy">意思決定の根拠と説明責任を整理し、社内外のステークホルダーに耐える資料に仕上げます。</p>
+                    </div>
+                  </li>
+                </ul>
+                <div class="role-outcome">
+                  <span>OUTPUT</span>
+                  <p>実行計画と金融機関説明資料がワンセットで揃い、承認プロセスの滞りを解消します。</p>
+                </div>
+              </article>
+              <article class="role-card role-card--leader">
+                <div class="role-header">
+                  <span class="role-icon">CEO</span>
+                  <div>
+                    <p class="role-title">経営者がやること</p>
+                    <p class="role-caption">判断軸を明確に伝え、組織を意思決定から実行まで牽引。</p>
+                  </div>
+                </div>
+                <p class="role-chain">Strategic Intent → Decision Gate → Governance Share</p>
+                <ul class="role-list">
+                  <li>
+                    <span class="role-bullet">優先</span>
+                    <div>
+                      <p class="role-point-title">注力したい事業テーマ・投資仮説を提示</p>
+                      <p class="role-point-copy">成長したい領域と制約条件を明文化し、AIと専門家の検討方向を揃えます。</p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="role-bullet">決断</span>
+                    <div>
+                      <p class="role-point-title">週次レビューで意思決定し責任者をアサイン</p>
+                      <p class="role-point-copy">シナリオ比較を基に投資/撤退を判断し、KPIと実行期限を即時に設定。</p>
+                    </div>
+                  </li>
+                  <li>
+                    <span class="role-bullet">共有</span>
+                    <div>
+                      <p class="role-point-title">意思決定ログを全社で共有し学習サイクルを加速</p>
+                      <p class="role-point-copy">判断理由と結果を蓄積し、次の経営会議での議論をスマートに更新します。</p>
+                    </div>
+                  </li>
+                </ul>
+                <div class="role-outcome">
+                  <span>OUTPUT</span>
+                  <p>意思決定リードタイムを半減し、全社が同じコンテキストで実行フェーズへ移行できます。</p>
+                </div>
+              </article>
             </div>
           </div>
         </div>
