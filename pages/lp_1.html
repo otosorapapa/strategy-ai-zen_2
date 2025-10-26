@@ -2460,7 +2460,10 @@
             }
           });
         },
-        { threshold: 0.2 }
+        {
+          threshold: 0.05,
+          rootMargin: "0px 0px -20% 0px",
+        }
       );
 
       document.querySelectorAll(".fade-in").forEach((el) => fadeObserver.observe(el));
@@ -2474,7 +2477,10 @@
             }
           });
         },
-        { threshold: 0.3 }
+        {
+          threshold: 0.12,
+          rootMargin: "0px 0px -15% 0px",
+        }
       );
 
       document.querySelectorAll(".expert-card").forEach((card) => expertObserver.observe(card));
