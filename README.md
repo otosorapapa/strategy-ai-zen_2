@@ -50,9 +50,10 @@ npm run server
 npm run dev
 ```
 
-By default the frontend posts submissions to `http://localhost:3001/api/contact`. If you deploy the API elsewhere, set the
-`VITE_CONTACT_ENDPOINT` environment variable to the full endpoint URL before building or starting the frontend. Alternatively,
-define `VITE_CONTACT_API_BASE_URL` (e.g. `https://example.com`) to automatically append `/api/contact`.
+By default the frontend posts submissions to the same origin at `/api/contact`. If your API lives on a different host (for
+example when running the provided Node.js server locally on port 3001), set the `VITE_CONTACT_ENDPOINT` environment variable
+to the full endpoint URL before building or starting the frontend. Alternatively, define `VITE_CONTACT_API_BASE_URL` (e.g.
+`https://example.com`) to automatically append `/api/contact`.
 
 **Edit a file directly in GitHub**
 
