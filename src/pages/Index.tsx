@@ -38,6 +38,7 @@ import {
   Users2,
   Workflow,
 } from "lucide-react";
+import PlansSection from "@/components/PlansSection";
 
 import { submitContactForm } from "@/lib/contact-api";
 
@@ -3191,60 +3192,12 @@ const Index = () => {
         </section>
 
         {/* 料金プラン */}
-        <section
-          id="pricing"
-          ref={(node) => {
-            sectionRefs.current["pricing"] = node ?? null;
-          }}
-          className="section pricing"
-          aria-labelledby="pricing-heading"
-        >
-          <div className="container">
-            <div className="section-header" data-animate>
-              <h2 id="pricing-heading">料金プラン</h2>
-              <p>
-                規模別の3プランを比較。
-                料金と支援範囲、期待<abbr title="投資利益率">ROI</abbr>を明示します。
-              </p>
-            </div>
-            <div className="pricing-summary" data-animate>
-              {pricingPlans.map((plan) => (
-                <article key={plan.name} className="pricing-summary__card">
-                  <h3>{plan.name}</h3>
-                  <p className="pricing-summary__price">{plan.price}</p>
-                  <p className="pricing-summary__note">{plan.priceNote}</p>
-                  <ul className="pricing-summary__list">
-                    {plan.services.slice(0, 2).map((service) => (
-                      <li key={service}>{service}</li>
-                    ))}
-                  </ul>
-                  <div className="pricing-summary__roi">
-                    <span>想定<abbr title="投資利益率">ROI</abbr></span>
-                    <strong>{plan.roi}</strong>
-                  </div>
-                  <span className="pricing-summary__guarantee">{plan.guarantee}</span>
-                </article>
-              ))}
-            </div>
-            <div className="pricing-actions" data-animate>
-              <button
-                type="button"
-                className="link-button"
-                onClick={() => setPricingModalOpen(true)}
-              >
-                詳細な料金表を開く
-              </button>
-              <p className="pricing-actions__note">
-                初期費用・月額費用・期待<abbr title="投資利益率">ROI</abbr>をモーダルで比較できます。
-              </p>
-            </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
-                {primaryCtaLabel}
-              </a>
-            </div>
-          </div>
-        </section>
+          <PlansSection
+            ref={(node) => {
+              sectionRefs.current["pricing"] = node ?? null;
+            }}
+            onOpenPricingModal={() => setPricingModalOpen(true)}
+          />
 
         {/* FAQセクション */}
         <section
