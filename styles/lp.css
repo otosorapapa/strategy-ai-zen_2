@@ -1899,64 +1899,273 @@ svg {
   gap: 24px;
 }
 
+
 .ai-value-grid {
-  margin-top: 32px;
+  margin-top: 36px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 28px;
 }
 
 .ai-value-card {
-  background: linear-gradient(135deg, rgba(20, 61, 106, 0.05), rgba(255, 122, 26, 0.08));
-  border-radius: 20px;
-  padding: 28px;
-  border: 1px solid rgba(20, 61, 106, 0.12);
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 32px;
   display: grid;
-  gap: 12px;
-  box-shadow: 0 20px 36px rgba(15, 37, 71, 0.1);
+  gap: 20px;
+  border: 1px solid rgba(20, 61, 106, 0.14);
+  box-shadow: 0 28px 54px rgba(15, 37, 71, 0.12);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.92), rgba(246, 247, 249, 0.9));
+}
+
+.ai-value-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.65;
+  transition: opacity 0.3s ease;
+}
+
+.ai-value-card--navy::after {
+  background: radial-gradient(circle at 10% 10%, rgba(20, 61, 106, 0.22), transparent 55%),
+    linear-gradient(135deg, rgba(20, 61, 106, 0.08), rgba(79, 163, 255, 0.18));
+}
+
+.ai-value-card--mint::after {
+  background: radial-gradient(circle at 90% 10%, rgba(31, 157, 122, 0.2), transparent 60%),
+    linear-gradient(135deg, rgba(31, 157, 122, 0.08), rgba(94, 209, 173, 0.2));
+}
+
+.ai-value-card--sky::after {
+  background: radial-gradient(circle at 10% 85%, rgba(79, 163, 255, 0.2), transparent 58%),
+    linear-gradient(135deg, rgba(79, 163, 255, 0.08), rgba(230, 242, 255, 0.6));
+}
+
+.ai-value-card--citrus::after {
+  background: radial-gradient(circle at 85% 85%, rgba(255, 122, 26, 0.2), transparent 58%),
+    linear-gradient(135deg, rgba(255, 154, 69, 0.08), rgba(255, 245, 235, 0.72));
+}
+
+.ai-value-card:hover::after,
+.ai-value-card:focus-visible::after {
+  opacity: 0.82;
+}
+
+.ai-value-card__header {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .ai-value-card__icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
   display: grid;
   place-items: center;
-  background: rgba(20, 61, 106, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
 }
 
 .ai-value-card__icon svg {
-  width: 26px;
-  height: 26px;
-  color: var(--cta-600);
+  width: 30px;
+  height: 30px;
 }
 
-.ai-value-card p {
+.ai-value-card__icon--navy {
+  background: linear-gradient(135deg, rgba(20, 61, 106, 0.95), rgba(79, 163, 255, 0.7));
+  color: var(--white);
+}
+
+.ai-value-card__icon--mint {
+  background: linear-gradient(135deg, rgba(31, 157, 122, 0.9), rgba(94, 209, 173, 0.72));
+  color: var(--white);
+}
+
+.ai-value-card__icon--sky {
+  background: linear-gradient(135deg, rgba(79, 163, 255, 0.92), rgba(157, 210, 255, 0.7));
+  color: var(--white);
+}
+
+.ai-value-card__icon--citrus {
+  background: linear-gradient(135deg, rgba(255, 122, 26, 0.92), rgba(255, 154, 69, 0.72));
+  color: var(--white);
+}
+
+.ai-value-card__meta {
+  display: grid;
+  gap: 6px;
+}
+
+.ai-value-card__evidence {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(15, 33, 55, 0.7);
+}
+
+.ai-value-card__content {
+  display: grid;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.ai-value-card__challenge,
+.ai-value-card__mechanism {
   margin: 0;
   color: var(--gray-600);
   line-height: 1.7;
+  display: grid;
+  gap: 4px;
 }
 
-.ai-value-card span {
-  font-size: 0.9rem;
+.ai-value-card__challenge strong,
+.ai-value-card__mechanism strong {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray-500);
+}
+
+.ai-value-card__impact {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 18px;
+  padding: 20px 22px;
+  display: grid;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+  box-shadow: inset 0 0 0 1px rgba(20, 61, 106, 0.08);
+}
+
+.ai-value-card__impact span {
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: rgba(20, 61, 106, 0.72);
+}
+
+.ai-value-card__impact strong {
+  font-size: 1.35rem;
   color: var(--navy-700);
 }
 
-.role-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(243, 248, 255, 0.9));
-  border-radius: 22px;
-  padding: 30px;
-  border: 1px solid rgba(147, 197, 253, 0.22);
-  box-shadow: 0 20px 40px rgba(15, 37, 71, 0.1);
-  display: grid;
-  gap: 16px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  position: relative;
+.ai-value-card__impact p {
+  margin: 0;
+  color: var(--gray-600);
+  line-height: 1.6;
 }
 
-.role-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-md);
+.role-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(240, 245, 255, 0.92));
+  border-radius: 26px;
+  padding: 34px;
+  border: 1px solid rgba(147, 197, 253, 0.24);
+  box-shadow: 0 30px 52px rgba(15, 37, 71, 0.12);
+  display: grid;
+  gap: 18px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.role-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  transition: opacity 0.3s ease;
+}
+
+.role-card:hover,
+.role-card:focus-visible {
+  transform: translateY(-8px);
+  box-shadow: 0 36px 62px rgba(15, 37, 71, 0.18);
+}
+
+.role-card:hover::after,
+.role-card:focus-visible::after {
+  opacity: 0.75;
+}
+
+.role-card--mint::after {
+  background: radial-gradient(circle at 85% 20%, rgba(94, 209, 173, 0.32), transparent 58%);
+}
+
+.role-card--citrus::after {
+  background: radial-gradient(circle at 10% 80%, rgba(255, 154, 69, 0.28), transparent 55%);
+}
+
+.role-card--sky::after {
+  background: radial-gradient(circle at 15% 15%, rgba(157, 210, 255, 0.34), transparent 60%);
+}
+
+.role-card__step {
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(20, 61, 106, 0.65);
+  position: relative;
+  z-index: 1;
+}
+
+.role-card__header {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.role-card__titles h3 {
+  margin: 0 0 6px;
+}
+
+.role-card__titles p {
+  margin: 0;
+  color: var(--gray-600);
+}
+
+.role-card__body,
+.role-detail {
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: 18px;
+  padding: 18px 20px;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 12px;
+  box-shadow: inset 0 0 0 1px rgba(79, 163, 255, 0.14);
+}
+
+.role-card__body ul,
+.role-detail p {
+  margin: 0;
+}
+
+.role-card__body ul {
+  padding-left: 18px;
+  display: grid;
+  gap: 6px;
+  color: var(--gray-600);
+}
+
+.role-card__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(20, 61, 106, 0.7);
+}
+
+.role-detail p {
+  color: var(--gray-600);
+  line-height: 1.7;
 }
 
 .role-card:focus-visible {
