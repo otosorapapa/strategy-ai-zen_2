@@ -10,6 +10,7 @@ import {
 
 import {
   ArrowDownRight,
+  ArrowUp,
   ArrowUpRight,
   Award,
   BarChart3,
@@ -1252,6 +1253,7 @@ const Index = () => {
   const [isQuickSubmitting, setIsQuickSubmitting] = useState(false);
   const [quickSubmitted, setQuickSubmitted] = useState(false);
   const [quickError, setQuickError] = useState<string | null>(null);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   const contactStepCount = contactSteps.length;
   const contactProgress = Math.round((contactStep / contactStepCount) * 100);
@@ -1351,6 +1353,7 @@ const Index = () => {
       const y = window.scrollY;
       setIsScrolled(y > 32);
       setHeroParallax(y * 0.2);
+      setShowBackToTop(y > 400);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -3800,6 +3803,15 @@ const Index = () => {
           </button>
         </div>
       )}
+
+      <button
+        type="button"
+        className={`back-to-top ${showBackToTop ? "is-visible" : ""}`}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        aria-label="ページの先頭へ戻る"
+      >
+        <ArrowUp aria-hidden="true" />
+      </button>
 
       <footer className="site-footer">
         <div className="container">
