@@ -1200,6 +1200,8 @@ type ResourceCard = {
   cta: string;
   icon: LucideIcon;
   note: string;
+  proof: string;
+  causalFlow: { label: string; result: string }[];
 };
 
 const resourceCards: ResourceCard[] = [
@@ -1215,6 +1217,21 @@ const resourceCards: ResourceCard[] = [
     cta: "AIドラフトサンプル（PDF）を受け取る",
     icon: FileText,
     note: "フォーム送信直後にメールで自動送付します。",
+    proof: "AIドラフト×専門家レビューで意思決定資料を即戦力化",
+    causalFlow: [
+      {
+        label: "経営課題・KPI・会議ログを入力",
+        result: "AIが論点と優先順位、シナリオ比較を抽出",
+      },
+      {
+        label: "生成ドラフトを専門家が精査",
+        result: "融資審査レベルの根拠と数値整合を補強",
+      },
+      {
+        label: "テンプレを会議前に共有",
+        result: "意思決定のスピードと納得性を両立",
+      },
+    ],
   },
   {
     title: "四半期レビュー用チェックリスト",
@@ -1228,6 +1245,21 @@ const resourceCards: ResourceCard[] = [
     cta: "チェックリスト一式をダウンロード",
     icon: ClipboardCheck,
     note: "登録いただいたメールへ即時にPDFリンクを送信します。",
+    proof: "90日サイクルで因果と実行を結び直すレビュー設計",
+    causalFlow: [
+      {
+        label: "外部環境と資金繰りの変化をAIが集約",
+        result: "90日サイクルで脅威・機会を定量化",
+      },
+      {
+        label: "専門家がレビュー項目を精査",
+        result: "優先順位と責任者を明確化",
+      },
+      {
+        label: "チェックリストを会議運営に適用",
+        result: "実行状況と次アクションを同期",
+      },
+    ],
   },
   {
     title: "生成AI活用レポート（四半期版）",
@@ -1241,6 +1273,21 @@ const resourceCards: ResourceCard[] = [
     cta: "レポート（PDF）を入手する",
     icon: BarChart4,
     note: "毎四半期の最新号を自動でお届けします。",
+    proof: "国内15社のROIデータとリスク対策を網羅",
+    causalFlow: [
+      {
+        label: "生成AI活用企業の実績を収集",
+        result: "業種別ROIと導入シナリオを比較",
+      },
+      {
+        label: "AIがKPI推移をモデリング",
+        result: "投資対効果とキャッシュ創出を算定",
+      },
+      {
+        label: "専門家がリスク対策を整理",
+        result: "社内稟議と金融機関説明を加速",
+      },
+    ],
   },
 ];
 
@@ -3302,10 +3349,12 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
+              <p className="section-eyebrow">四半期ごとに戦略と実行を再設計</p>
               <h2 id="resources-heading">ヒト×AI×専門家の連携がわかる資料</h2>
               <ul className="section-intro">
-                <li>匿名サンプルでアウトプットを確認。</li>
-                <li>テンプレとチェックリストを提供。</li>
+                <li>因果チェーンでAIと専門家の役割と成果が直感的に理解できます。</li>
+                <li>匿名サンプルで経営会議のアウトプット品質を事前に確認できます。</li>
+                <li>テンプレとチェックリストで即日からチームに展開できます。</li>
               </ul>
             </div>
             <div className="resources-grid">
@@ -3313,20 +3362,48 @@ const Index = () => {
                 const ResourceIcon = resource.icon;
                 return (
                   <article key={resource.title} className="resource-card" data-animate>
-                    <div className="resource-icon" aria-hidden="true">
-                      <ResourceIcon />
+                    <span className="resource-card__halo" aria-hidden="true" />
+                    <header className="resource-card__header">
+                      <div className="resource-icon" aria-hidden="true">
+                        <ResourceIcon />
+                      </div>
+                      <div className="resource-card__titles">
+                        <span className="resource-card__proof">{resource.proof}</span>
+                        <h3>{resource.title}</h3>
+                        <p>{resource.description}</p>
+                      </div>
+                    </header>
+                    <div
+                      className="resource-card__causal"
+                      role="list"
+                      aria-label="資料で確認できる因果チェーン"
+                    >
+                      {resource.causalFlow.map((step, index) => (
+                        <div
+                          key={`${resource.title}-${step.label}`}
+                          className="resource-causal__item"
+                          role="listitem"
+                        >
+                          <span className="resource-causal__index">{index + 1}</span>
+                          <div className="resource-causal__body">
+                            <span className="resource-causal__label">{step.label}</span>
+                            <span className="resource-causal__result">{step.result}</span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                    <h3>{resource.title}</h3>
-                    <p>{resource.description}</p>
+                    <div className="resource-card__divider" aria-hidden="true" />
                     <ul className="resource-highlights">
                       {resource.highlights.map((highlight) => (
                         <li key={highlight}>{highlight}</li>
                       ))}
                     </ul>
-                    <a className="resource-card__link" href="#contact">
-                      {resource.cta}
-                    </a>
-                    <p className="resource-note">{resource.note}</p>
+                    <div className="resource-card__footer">
+                      <a className="resource-card__link" href="#contact">
+                        {resource.cta}
+                      </a>
+                      <p className="resource-note">{resource.note}</p>
+                    </div>
                   </article>
                 );
               })}
