@@ -97,6 +97,64 @@
         color: rgba(15, 118, 110, 0.9);
         font-weight: 600;
       }
+      .hero-visual {
+        position: relative;
+        border-radius: 1.75rem;
+        overflow: hidden;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: linear-gradient(160deg, rgba(14, 165, 233, 0.16), rgba(13, 148, 136, 0.12));
+        box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
+      }
+      .hero-visual::before {
+        content: '';
+        position: absolute;
+        inset: auto -20% -35% auto;
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.45), transparent 70%);
+        pointer-events: none;
+      }
+      .hero-visual img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .hero-visual figcaption {
+        position: absolute;
+        inset: auto 1.5rem 1.5rem 1.5rem;
+        padding: 1rem 1.25rem;
+        border-radius: 1.25rem;
+        background: rgba(15, 23, 42, 0.82);
+        color: white;
+        font-size: 0.8rem;
+        line-height: 1.6;
+        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.32);
+      }
+      .scroll-indicator {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.75rem;
+        color: rgba(15, 23, 42, 0.65);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-top: 1.5rem;
+        animation: float 2.6s ease-in-out infinite;
+      }
+      .scroll-indicator svg {
+        width: 1.1rem;
+        height: 1.1rem;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(6px);
+        }
+      }
       .card {
         border-radius: 1.5rem;
         border: 1px solid rgba(148, 163, 184, 0.45);
@@ -712,6 +770,52 @@
         color: rgb(71, 85, 105);
         font-size: 0.85rem;
       }
+      .roi-grid {
+        display: grid;
+        gap: 1.25rem;
+      }
+      @media (min-width: 768px) {
+        .roi-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+      .roi-card {
+        border-radius: 1.5rem;
+        border: 1px solid rgba(14, 165, 233, 0.35);
+        background: linear-gradient(160deg, rgba(224, 242, 254, 0.85), rgba(209, 250, 229, 0.75));
+        padding: 1.5rem;
+        box-shadow: 0 18px 42px rgba(15, 23, 42, 0.12);
+        display: grid;
+        gap: 0.75rem;
+      }
+      .roi-card h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: rgb(15, 23, 42);
+      }
+      .roi-metric {
+        font-size: 2rem;
+        font-weight: 800;
+        color: rgb(6, 182, 212);
+      }
+      .roi-bar {
+        position: relative;
+        height: 0.75rem;
+        border-radius: 9999px;
+        background: rgba(226, 232, 240, 0.7);
+        overflow: hidden;
+      }
+      .roi-bar span {
+        position: absolute;
+        inset: 0;
+        border-radius: 9999px;
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.9), rgba(6, 182, 212, 0.85));
+      }
+      .data-note {
+        font-size: 0.75rem;
+        color: rgb(100, 116, 139);
+        line-height: 1.6;
+      }
       .faq-question {
         text-align: left;
         font-size: 1.125rem;
@@ -1085,7 +1189,12 @@
           <a href="#pricing" class="hover:text-slate-900">料金</a>
           <a href="#contact" class="hover:text-slate-900">相談</a>
         </nav>
-        <a href="#consult-form" class="btn-secondary min-w-[44px]">無料経営診断を申し込む</a>
+        <div class="flex items-center gap-3">
+          <a href="tel:0922312920" class="text-xs font-semibold tracking-[0.18em] text-slate-600"
+            >TEL 092-231-2920（平日9:00-18:00）</a
+          >
+          <a href="#consult-form" class="btn-secondary min-w-[44px]">無料経営診断を申し込む</a>
+        </div>
       </div>
     </header>
     <main class="space-y-20 pb-24 pt-16 md:space-y-28 md:pt-24">
@@ -1107,14 +1216,13 @@
               Foster School of Businessの研究でも、人間が判断しAIが大量データを絞り込むことで意思決定の質とスピードが向上すると示されています。専門家がAI活用のルール設計から金融機関説明まで伴走するため、初めての導入でも安心して未来志向の計画を描けます。
             </p>
             <div class="flex flex-col gap-3 sm:flex-row">
-              <a href="#consult-form" class="btn-primary w-full sm:w-auto">無料経営診断を申し込む→</a>
-              <a href="#sample" class="btn-secondary w-full sm:w-auto" data-arrow="false">資料を受け取る</a>
-              <a href="tel:0300001234" class="btn-secondary w-full sm:w-auto" data-arrow="false">電話で相談する</a>
+              <a href="#consult-form" class="btn-primary w-full sm:w-auto">30分無料相談を予約</a>
+              <a href="#sample" class="btn-secondary w-full sm:w-auto" data-arrow="false">3分で分かる資料をダウンロード</a>
             </div>
             <div class="cta-options">
               <span>⚡ 3分AI診断で課題を棚卸し</span>
               <span>🗓️ 48時間以内に初回提案</span>
-              <span>📞 電話予約：03-0000-1234（平日9〜18時）</span>
+              <span>📞 電話予約：092-231-2920（平日9:00-18:00）</span>
             </div>
             <p class="text-xs text-slate-500">
               ※AIは意思決定を補助するツールであり、最終判断は経営者が行います。
@@ -1131,42 +1239,60 @@
                 <p class="text-sm text-slate-600">融資・投資の審査基準を踏まえたブラッシュアップと説明資料作成を支援。月次オンライン面談で進捗をレビューし、施策実行を伴走。</p>
               </article>
             </div>
+            <a href="#challenges" class="scroll-indicator" aria-label="スクロールして詳細を見る">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12.75 12 20.25 4.5 12.75M12 3.75v16.5" />
+              </svg>
+              <span>Scroll</span>
+            </a>
           </div>
-          <div class="challenge-panel">
-            <h2>経営者が直面する代表的な課題</h2>
-            <ul class="challenge-list">
-              <li>
-                <div class="challenge-icon">01</div>
-                <div>
-                  <p class="font-semibold text-slate-900">管理会計が現場任せで真の利益が見えない</p>
-                  <p>部門別の粗利や案件別の採算が集計されず、改善の優先順位が決められない。</p>
-                </div>
-              </li>
-              <li>
-                <div class="challenge-icon">02</div>
-                <div>
-                  <p class="font-semibold text-slate-900">資金繰り表が更新されず先のキャッシュが不透明</p>
-                  <p>売掛・支払予定のデータがばらばらで、金融機関への説明が後手に回る。</p>
-                </div>
-              </li>
-              <li>
-                <div class="challenge-icon">03</div>
-                <div>
-                  <p class="font-semibold text-slate-900">会議準備と資料作成に時間を奪われる</p>
-                  <p>指標更新に毎月40時間以上かかり、経営会議が資料説明で終わってしまう。</p>
-                </div>
-              </li>
-              <li>
-                <div class="challenge-icon">04</div>
-                <div>
-                  <p class="font-semibold text-slate-900">中長期シナリオが描けず一手先の判断に終始</p>
-                  <p>政策・市場の変化を織り込めず、既存計画が形骸化して投資判断が遅延。</p>
-                </div>
-              </li>
-            </ul>
-            <div class="mt-6 rounded-2xl bg-white/90 p-4 text-xs text-slate-600">
-              <p class="font-semibold text-slate-900">3分で課題を棚卸し</p>
-              <p class="mt-2">AIレポートが年間1,200時間の単純作業を削減した企業の診断テンプレートを活用できます。</p>
+          <div class="space-y-6">
+            <figure class="hero-visual">
+              <img
+                src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=960&q=80"
+                alt="生成AIレポートを確認しながら経営者が専門家と議論し、意思決定時間50％短縮・粗利率＋5pt・キャッシュ創出1.8倍を実現しているイメージ"
+                loading="lazy"
+              />
+              <figcaption>
+                生成AIが日次で更新する意思決定ダッシュボードと、診断士が磨き上げた稟議資料サマリー。会議準備時間▲1,200時間／年、融資審査通過率＋18％の成果を視覚化しています。
+              </figcaption>
+            </figure>
+            <div class="challenge-panel">
+              <h2>経営者が直面する代表的な課題</h2>
+              <ul class="challenge-list">
+                <li>
+                  <div class="challenge-icon">01</div>
+                  <div>
+                    <p class="font-semibold text-slate-900">管理会計が現場任せで真の利益が見えない</p>
+                    <p>部門別の粗利や案件別の採算が集計されず、改善の優先順位が決められない。</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="challenge-icon">02</div>
+                  <div>
+                    <p class="font-semibold text-slate-900">資金繰り表が更新されず先のキャッシュが不透明</p>
+                    <p>売掛・支払予定のデータがばらばらで、金融機関への説明が後手に回る。</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="challenge-icon">03</div>
+                  <div>
+                    <p class="font-semibold text-slate-900">会議準備と資料作成に時間を奪われる</p>
+                    <p>指標更新に毎月40時間以上かかり、経営会議が資料説明で終わってしまう。</p>
+                  </div>
+                </li>
+                <li>
+                  <div class="challenge-icon">04</div>
+                  <div>
+                    <p class="font-semibold text-slate-900">中長期シナリオが描けず一手先の判断に終始</p>
+                    <p>政策・市場の変化を織り込めず、既存計画が形骸化して投資判断が遅延。</p>
+                  </div>
+                </li>
+              </ul>
+              <div class="mt-6 rounded-2xl bg-white/90 p-4 text-xs text-slate-600">
+                <p class="font-semibold text-slate-900">3分で課題を棚卸し</p>
+                <p class="mt-2">AIレポートが年間1,200時間の単純作業を削減した企業の診断テンプレートを活用できます。</p>
+              </div>
             </div>
           </div>
         </div>
@@ -1454,7 +1580,7 @@
           <div class="space-y-4">
             <h2 class="section-title">成果とベネフィット</h2>
             <p class="section-subtitle">
-              AIが単純作業を削減して意思決定に充てる時間を創出し、リアルタイムな政策・市場変化を反映したシナリオを提示。診断士が磨き上げることで意思決定の速さと質、金融機関への説明力が同時に高まります。AI導入企業の80％が業務効率を向上させたというWorkastの調査や、AI研修で年間7週間の工数を削減したApp Advisory Plusの事例と同様に、現場の時間と成果の両立を実現します。
+              AIが単純作業を削減して意思決定に充てる時間を創出し、リアルタイムな政策・市場変化を反映したシナリオを提示。診断士が磨き上げることで意思決定の速さと質、金融機関への説明力が同時に高まります。<a href="https://blog.iil.com/how-artificial-intelligence-is-transforming-project-management/" class="text-sky-600 underline" target="_blank" rel="noopener">blog.iil.comによると</a>、AIは反復作業を削減し経営判断をデータで支援するため、現場の集中力を高められます。Workastの調査やApp Advisory Plusの事例と同様に、現場の時間と成果の両立を実現します。
             </p>
           </div>
           <div class="grid gap-4 md:grid-cols-4">
@@ -1690,6 +1816,26 @@
               </ul>
             </div>
           </div>
+          <div class="roi-grid">
+            <div class="roi-card">
+              <h3>キャッシュイン増加額（年間）</h3>
+              <div class="roi-metric">＋1,800万円</div>
+              <p class="text-sm text-slate-600">粗利改善と回収サイト短縮の組み合わせで創出した平均値。攻めの投資と人材採用に再配分できます。</p>
+              <div class="roi-bar" aria-hidden="true"><span style="width: 76%"></span></div>
+            </div>
+            <div class="roi-card">
+              <h3>会議準備時間の削減</h3>
+              <div class="roi-metric">▲1,200時間</div>
+              <p class="text-sm text-slate-600">AIレポートとテンプレ整備で、月40時間×30会議分の資料作成を削減した実績値です。</p>
+              <div class="roi-bar" aria-hidden="true"><span style="width: 90%"></span></div>
+            </div>
+            <div class="roi-card">
+              <h3>ROI試算（初年度）</h3>
+              <div class="roi-metric">3.2倍</div>
+              <p class="text-sm text-slate-600">初期費用18万円＋月額18万円×3ヶ月に対し、キャッシュ創出額5,760万円を想定したモデルケース。</p>
+              <div class="roi-bar" aria-hidden="true"><span style="width: 64%"></span></div>
+            </div>
+          </div>
           <div class="pricing-note">
             <p class="font-semibold text-slate-900">安心の条件</p>
             <ul class="mt-2 space-y-1">
@@ -1698,6 +1844,9 @@
               <li>・料金は企業規模や対象事業に応じてお見積もりします。分割・補助金活用の相談も可能です。</li>
             </ul>
           </div>
+          <p class="data-note">
+            ※ROIは粗利率＋5pt、回収サイト▲12日、会議準備時間▲1,200時間の実績値を基に算出。費用対効果は業種・施策規模により変動するため、詳細は無料相談時に個別試算します。
+          </p>
         </div>
       </section>
 
@@ -1751,7 +1900,7 @@
           </div>
           <div class="flex flex-wrap items-center gap-3 pt-2">
             <a href="#consult-form" class="btn-primary">専門家に相談する→</a>
-            <a href="tel:0300001234" class="btn-secondary" data-arrow="false">電話で予約（03-0000-1234）</a>
+            <a href="tel:0922312920" class="btn-secondary" data-arrow="false">電話で予約（092-231-2920）</a>
           </div>
         </div>
       </section>
@@ -1874,6 +2023,7 @@
       <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-5 text-center text-xs text-slate-500 md:flex-row md:justify-between md:text-left">
         <p>© 2024 Strategy AI Lab. All rights reserved.</p>
         <div class="flex flex-wrap items-center justify-center gap-4">
+          <a href="tel:0922312920" class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">TEL 092-231-2920｜平日9:00-18:00</a>
           <a href="#consult-form" class="btn-secondary text-xs" data-arrow="false">無料オンライン相談へ</a>
           <a href="#sample" class="btn-secondary text-xs" data-arrow="false">サンプルを見る</a>
         </div>
