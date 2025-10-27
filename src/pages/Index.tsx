@@ -42,7 +42,6 @@ import PlansSection from "@/components/PlansSection";
 
 import { submitContactForm } from "@/lib/contact-api";
 
-import aiDashboardShot from "@/assets/growth-chart.jpg";
 import featureIntelligenceShot from "@/assets/dashboard-preview.jpg";
 import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
 import expertSaitoPhoto from "@/assets/representative_.jpg";
@@ -143,6 +142,45 @@ const heroAllianceExperts = [
     role: "財務会計専門家 / 税理士",
     focus: "財務管理・補助金対策",
     photo: expertSaitoPhoto,
+  },
+];
+
+type HeroBlueprintStep = {
+  stage: string;
+  headline: string;
+  description: string;
+  metric: string;
+  badge: string;
+  icon: LucideIcon;
+};
+
+const heroBlueprint: HeroBlueprintStep[] = [
+  {
+    stage: "現状課題",
+    headline: "決裁待ちが週次会議に滞留",
+    description:
+      "属人的な資料の作り直しで判断が平均6週間遅延。政策・資金繰りの根拠が散在し、役員会での納得形成が進みません。",
+    metric: "会議準備に45時間/週を浪費",
+    badge: "課題のサイン",
+    icon: Workflow,
+  },
+  {
+    stage: "AI×専門家の介入",
+    headline: "AIが論点を先読みし診断士が金融審査レベルで監修",
+    description:
+      "議事録・財務・政策データをAIが統合し、優先課題・資金繰りと成長シナリオ・想定問答を48時間以内にドラフト。専門家が金融機関向けの説得材料まで磨き込みます。",
+    metric: "議題ごとに3つのシナリオ＋想定問答を提示",
+    badge: "打ち手",
+    icon: BrainCircuit,
+  },
+  {
+    stage: "得られる効果",
+    headline: "決裁48時間以内で稼働時間を価値創造へ",
+    description:
+      "リアルタイムダッシュボードと専門家レビューで役員会の納得形成を即完了。次の施策を先回りで提示し、経営者は創造的な意思決定に集中できます。",
+    metric: "意思決定リードタイム -52% / 粗利 +18%",
+    badge: "成果",
+    icon: TrendingUp,
   },
 ];
 
@@ -2051,6 +2089,30 @@ const Index = () => {
                 <li>専門家が生成AIの提案を金融・戦略の観点で精査し、意思決定の質とリスク管理を同時に強化。</li>
                 <li>意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍の実績を創出。</li>
               </ul>
+              <div className="hero-blueprint" role="list" data-animate>
+                {heroBlueprint.map((step, index) => {
+                  const StepIcon = step.icon;
+                  return (
+                    <div className="hero-blueprint__item" role="listitem" key={step.stage}>
+                      <div className="hero-blueprint__stage">
+                        <span className="hero-blueprint__step">STEP {String(index + 1).padStart(2, "0")}</span>
+                        <span className="hero-blueprint__badge">{step.badge}</span>
+                      </div>
+                      <div className="hero-blueprint__content">
+                        <span className="hero-blueprint__label">{step.stage}</span>
+                        <div className="hero-blueprint__headline">
+                          <span className="hero-blueprint__icon" aria-hidden="true">
+                            <StepIcon />
+                          </span>
+                          <h2>{step.headline}</h2>
+                        </div>
+                        <p>{step.description}</p>
+                        <strong>{step.metric}</strong>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
               <p className="hero-sub">
                 リアルタイムの外部データと社内指標を組み合わせ、専門家が根拠と倫理面を確認したうえで投資・資金繰りの判断材料を常に最新化します。
                 経営改善で鍛えた専門家 × 生成AIという二人三脚で、年商5,000万〜15億円の企業に必要な「先見性ある経営計画」を実現します。
@@ -2159,54 +2221,6 @@ const Index = () => {
                   })}
                 </ol>
               </div>
-              <ul className="trust-badges" aria-label="セキュリティ対策">
-                {securityBadges.map((badge) => {
-                  const BadgeIcon = badge.icon;
-                  return (
-                    <li key={badge.title}>
-                      <span className="trust-badge__icon" aria-hidden="true">
-                        <BadgeIcon />
-                      </span>
-                      <span className="trust-badge__label">{badge.badge}</span>
-                      <span className="trust-badge__title">{badge.title}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-              <ul className="hero-metrics" ref={metricsRef}>
-                {heroMetrics.map((metric, index) => (
-                  <li key={metric.label}>
-                    <strong>
-                      {metric.prefix}
-                      {metricValues[index].toLocaleString(undefined, {
-                        minimumFractionDigits: metric.decimals ?? 0,
-                        maximumFractionDigits: metric.decimals ?? 0,
-                      })}
-                      {metric.suffix}
-                    </strong>
-                    <span>{metric.label}</span>
-                    <small>
-                      {metric.note}
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button
-                            type="button"
-                            className="metric-detail-trigger"
-                            aria-label={`${metric.label}の測定方法`}
-                          >
-                            <Info aria-hidden="true" />
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent>{metric.detail}</TooltipContent>
-                      </Tooltip>
-                    </small>
-                  </li>
-                ))}
-              </ul>
-              <div className="scroll-cue" aria-hidden="true">
-                <span className="scroll-cue__icon" />
-                <span className="scroll-cue__label">スクロールして詳細を見る</span>
-              </div>
             </div>
             <div className="hero-visual">
               <figure
@@ -2215,12 +2229,12 @@ const Index = () => {
                 data-initial-visible="true"
               >
                 <img
-                  src={aiDashboardShot}
-                  alt="AIダッシュボードのスクリーンショット"
+                  src={featureIntelligenceShot}
+                  alt="生成AIが経営指標を俯瞰するインテリジェンスダッシュボード"
                   loading="lazy"
                 />
                 <figcaption>
-                  政策・市場データと財務指標を一画面で確認し、次の一手を即断する下地をつくります。
+                  政策・市場データと財務指標を一画面で重ね合わせ、判断の筋道と投資シナリオを即座に確認できます。
                 </figcaption>
               </figure>
               <div className="hero-demo" data-animate data-initial-visible="true">
@@ -2280,6 +2294,62 @@ const Index = () => {
                   経営者は重要な判断に集中し、資料の整合性はチームが担保します。
                 </p>
               </div>
+            </div>
+          </div>
+          <div className="container hero-bottom">
+            <ul className="trust-badges" aria-label="セキュリティ対策">
+              {securityBadges.map((badge) => {
+                const BadgeIcon = badge.icon;
+                return (
+                  <li key={badge.title}>
+                    <span className="trust-badge__icon" aria-hidden="true">
+                      <BadgeIcon />
+                    </span>
+                    <span className="trust-badge__label">{badge.badge}</span>
+                    <span className="trust-badge__title">{badge.title}</span>
+                  </li>
+                );
+              })}
+            </ul>
+            <div className="hero-metric-panel" data-animate>
+              <div className="hero-metric-panel__header">
+                <h2>導入企業が獲得した成果の実測値</h2>
+                <p>2023年7月〜2024年12月 / 従業員50〜300名の年商5,000万〜15億円企業20社</p>
+              </div>
+              <ul className="hero-metrics" ref={metricsRef}>
+                {heroMetrics.map((metric, index) => (
+                  <li key={metric.label}>
+                    <strong>
+                      {metric.prefix}
+                      {metricValues[index].toLocaleString(undefined, {
+                        minimumFractionDigits: metric.decimals ?? 0,
+                        maximumFractionDigits: metric.decimals ?? 0,
+                      })}
+                      {metric.suffix}
+                    </strong>
+                    <span>{metric.label}</span>
+                    <small>
+                      {metric.note}
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            className="metric-detail-trigger"
+                            aria-label={`${metric.label}の測定方法`}
+                          >
+                            <Info aria-hidden="true" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>{metric.detail}</TooltipContent>
+                      </Tooltip>
+                    </small>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="scroll-cue" aria-hidden="true">
+              <span className="scroll-cue__icon" />
+              <span className="scroll-cue__label">スクロールして詳細を見る</span>
             </div>
           </div>
         </section>
