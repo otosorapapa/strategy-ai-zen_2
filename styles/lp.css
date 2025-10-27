@@ -470,7 +470,7 @@ svg {
 }
 
 .header-nav {
-  display: flex;
+  display: none;
   flex: 1;
   justify-content: center;
 }

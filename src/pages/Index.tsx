@@ -1880,8 +1880,10 @@ const Index = () => {
             AI経営計画書ラボ
           </a>
           <nav
+            id="site-navigation"
             className={`header-nav ${isMobileNavOpen ? "is-open" : ""}`}
             aria-label="主要メニュー"
+            aria-hidden={!isMobileNavOpen}
           >
             <ul>
               {headerNavItems.map((item) => (
@@ -1906,6 +1908,7 @@ const Index = () => {
               className={`header-menu ${isMobileNavOpen ? "is-active" : ""}`}
               aria-label="メニューを開閉する"
               aria-expanded={isMobileNavOpen}
+              aria-controls="site-navigation"
               onClick={() => setIsMobileNavOpen((prev) => !prev)}
             >
               <span />
