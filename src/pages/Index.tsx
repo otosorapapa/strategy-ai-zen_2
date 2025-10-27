@@ -1244,6 +1244,65 @@ const resourceCards: ResourceCard[] = [
   },
 ];
 
+type FaqHighlight = {
+  title: string;
+  description: string;
+  metric: string;
+  supporting: string;
+  icon: LucideIcon;
+};
+
+const faqHighlights: FaqHighlight[] = [
+  {
+    title: "国内閉域環境と二重暗号化",
+    description:
+      "三菱UFJ信託銀行グループの閉域クラウド上で運用。社内データは経営者の承認プロセスを通過しないとAIに渡らず、アクセスログも四半期ごとに監査します。",
+    metric: "ISMAP準拠 96項目をクリア",
+    supporting: "SOC2 Type2取得パートナーと共同運用",
+    icon: ShieldCheck,
+  },
+  {
+    title: "四半期ごとの戦略・リスクレビュー",
+    description:
+      "元外資戦略コンサルと公認会計士が経営会議に同席し、AIが出す示唆の妥当性と法務・財務リスクを同時に点検。意思決定の議事録もAIで要約し、説明責任を残します。",
+    metric: "伴走セッション 180件/年",
+    supporting: "年商5,000万〜15億円の経営者に最適化",
+    icon: Workflow,
+  },
+  {
+    title: "ファクトベースのシミュレーション",
+    description:
+      "四半期ごとにPL/BS/CFのシナリオを3パターン生成し、AIが提案した打ち手のROI・回収期間・リスク感度を数値で提示。意思決定が属人化しません。",
+    metric: "意思決定リードタイム 52%短縮",
+    supporting: "導入企業20社平均（2024年実績）",
+    icon: LineChart,
+  },
+];
+
+type FaqTimelineStep = {
+  title: string;
+  description: string;
+  detail: string;
+};
+
+const faqTimeline: FaqTimelineStep[] = [
+  {
+    title: "Week 1 キックオフ",
+    description: "経営課題の棚卸とガバナンス要件の確認",
+    detail: "経営陣・部門長ヒアリング（90分）",
+  },
+  {
+    title: "Week 3 ドラフト提示",
+    description: "AIドラフト＋専門家レビューでリスクと打ち手を整理",
+    detail: "ROI・感度分析のレポート共有",
+  },
+  {
+    title: "Quarterly リニューアル",
+    description: "四半期ごとに指標と進捗を再検証し、戦略を再設計",
+    detail: "役員会・金融機関向け資料を同時に更新",
+  },
+];
+
 const faqItems = [
   {
     question: "AIに社内データを預けるのが不安です。",
@@ -3030,25 +3089,88 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
+              <span className="badge" aria-hidden="true">
+                Risk Governance
+              </span>
               <h2 id="faq-heading">よくあるご質問とリスク対策</h2>
               <ul className="section-intro">
                 <li>AI導入時の不安を端的に回答。</li>
                 <li>人とAIの分担でリスクを軽減。</li>
               </ul>
+              <p className="section-description">
+                年商5,000万円〜15億円規模の企業で蓄積したリスクコントロールの知見を、四半期ごとのレビューと定量指標で可視化しています。
+                資料請求前に想定しがちな懸念点と対処法をまとめました。
+              </p>
             </div>
-            <div className="faq-accordion" data-animate>
-              <Accordion type="multiple" className="faq-list">
-                {faqItems.map((item) => (
-                  <AccordionItem key={item.question} value={item.question}>
-                    <AccordionTrigger className="faq-question">
-                      {item.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="faq-answer">
-                      {item.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+            <div className="faq-grid">
+              <aside className="faq-aside" data-animate>
+                <h3 className="faq-aside__title">戦略と統制を両立させる設計図</h3>
+                <p className="faq-aside__lead">
+                  経営会議で使う資料に耐えるだけでなく、監査や金融機関説明にも活用できるガバナンスラインを敷いています。AIの提案を鵜呑みにせず、
+                  専門家がリスクシナリオを洗い出しながら意思決定を前進させます。
+                </p>
+                <ul className="faq-badges">
+                  <li>国内専用インフラ</li>
+                  <li>役員向け伴走レビュー</li>
+                  <li>金融機関提出テンプレート</li>
+                </ul>
+                <div className="faq-insights">
+                  {faqHighlights.map((highlight) => {
+                    const Icon = highlight.icon;
+                    return (
+                      <article className="faq-insight" key={highlight.title}>
+                        <span className="faq-insight__icon" aria-hidden="true">
+                          <Icon size={24} />
+                        </span>
+                        <div className="faq-insight__body">
+                          <h4>{highlight.title}</h4>
+                          <p>{highlight.description}</p>
+                          <span className="faq-insight__metric">{highlight.metric}</span>
+                          <span className="faq-insight__supporting">{highlight.supporting}</span>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+                <div className="faq-timeline" role="list">
+                  {faqTimeline.map((step, index) => (
+                    <div className="faq-timeline__item" role="listitem" key={step.title}>
+                      <span className="faq-timeline__index">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div className="faq-timeline__content">
+                        <p className="faq-timeline__title">{step.title}</p>
+                        <p className="faq-timeline__description">{step.description}</p>
+                        <span className="faq-timeline__detail">{step.detail}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="faq-aside__footer">
+                  <div className="faq-metric">
+                    <span className="faq-metric__value">継続率 92%</span>
+                    <span className="faq-metric__label">四半期更新プログラム</span>
+                  </div>
+                  <a className="btn btn-outline faq-aside__cta" href="#contact">
+                    まずは経営課題を相談する
+                  </a>
+                  <p className="faq-aside__note">24時間以内に経営チームからご連絡します。</p>
+                </div>
+              </aside>
+              <div className="faq-accordion" data-animate>
+                <Accordion type="multiple" className="faq-list">
+                  {faqItems.map((item) => (
+                    <AccordionItem key={item.question} value={item.question}>
+                      <AccordionTrigger className="faq-question">
+                        {item.question}
+                      </AccordionTrigger>
+                      <AccordionContent className="faq-answer">
+                        {item.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
