@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>経営改善で鍛えた専門家×生成AI = 意思決定の質・速さ・先見性を高める経営計画</title>
+    <title>経営改善のプロ×生成AIで、意思決定の質・スピード・先見性を高める経営計画</title>
     <meta
       name="description"
-      content="経営改善で鍛えた中小企業診断士のフレームワークと生成AIの高速分析を統合し、意思決定の質・速さ・先見性を高める経営計画を共創。リードタイム短縮や金融機関説明負担の軽減など、年商5,000万円〜15億円の経営者向けの伴走支援。"
+      content="経営改善のプロである中小企業診断士のフレームワークと生成AIの横断分析を統合し、意思決定の質・スピード・先見性を高める経営計画を共創。年商5,000万円〜15億円の製造・建設業経営者に向け、リードタイム52％短縮・計画作成工数80％削減を実現する伴走支援。"
     />
     <link
       rel="stylesheet"
@@ -23,14 +23,21 @@
     <style>
       :root {
         color-scheme: light;
+        --color-navy: #0f172a;
+        --color-sky: #0ea5e9;
+        --color-teal: #0d9488;
+        --color-accent: #f97316;
+        --color-cream: #fef3c7;
       }
       html {
         scroll-behavior: smooth;
       }
       body {
         font-family: 'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'ヒラギノ角ゴ ProN', 'Yu Gothic', sans-serif;
-        background: linear-gradient(180deg, #f3f6fb 0%, #ffffff 40%, #f7f9fc 100%);
-        color: #0f172a;
+        background: radial-gradient(circle at top left, rgba(224, 242, 254, 0.9), transparent 45%),
+          radial-gradient(circle at top right, rgba(209, 250, 229, 0.8), transparent 50%),
+          linear-gradient(180deg, #f3f8ff 0%, #ffffff 45%, #f5fbff 100%);
+        color: var(--color-navy);
         overflow-x: hidden;
       }
       .btn-primary {
@@ -38,37 +45,40 @@
         align-items: center;
         justify-content: center;
         border-radius: 9999px;
-        background-color: rgb(14 165 233);
+        background-image: linear-gradient(135deg, var(--color-sky), var(--color-teal));
         padding: 0.75rem 1.5rem;
         font-size: 1rem;
         font-weight: 600;
         color: #fff;
-        box-shadow: 0 10px 24px rgba(14, 165, 233, 0.25);
+        box-shadow: 0 12px 28px rgba(14, 165, 233, 0.32);
         transition: all 0.2s ease-out;
         min-height: 44px;
       }
       .btn-primary:hover,
       .btn-primary:focus-visible {
-        background-color: rgb(12 131 198);
-        box-shadow: 0 14px 32px rgba(14, 165, 233, 0.35);
+        background-image: linear-gradient(135deg, var(--color-teal), var(--color-accent));
+        box-shadow: 0 16px 36px rgba(15, 118, 110, 0.35);
       }
       .btn-secondary {
         display: inline-flex;
         align-items: center;
         justify-content: center;
         border-radius: 9999px;
-        border: 1px solid rgb(14 165 233);
+        border: 1px solid rgba(14, 165, 233, 0.6);
         padding: 0.75rem 1.25rem;
         font-size: 1rem;
         font-weight: 600;
-        color: rgb(14 165 233);
+        color: var(--color-sky);
         transition: all 0.2s ease-out;
         background-color: transparent;
         min-height: 44px;
       }
       .btn-secondary:hover,
       .btn-secondary:focus-visible {
-        background-color: rgba(14, 165, 233, 0.08);
+        background-color: rgba(14, 165, 233, 0.12);
+      }
+      .btn-secondary[data-arrow="false"] {
+        gap: 0.25rem;
       }
       .cta-options {
         display: flex;
@@ -83,8 +93,8 @@
         gap: 0.35rem;
         padding: 0.4rem 0.8rem;
         border-radius: 9999px;
-        background: rgba(14, 165, 233, 0.1);
-        color: rgb(14, 116, 144);
+        background: rgba(14, 165, 233, 0.12);
+        color: rgba(15, 118, 110, 0.9);
         font-weight: 600;
       }
       .card {
@@ -383,6 +393,48 @@
         padding: 1rem;
         box-shadow: 0 12px 24px rgba(15, 23, 42, 0.05);
       }
+      .infographic-grid {
+        display: grid;
+        gap: 1.25rem;
+      }
+      @media (min-width: 768px) {
+        .infographic-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+      .infographic-card {
+        position: relative;
+        border-radius: 1.75rem;
+        padding: 1.5rem;
+        background: linear-gradient(160deg, rgba(224, 242, 254, 0.85), rgba(209, 250, 229, 0.75));
+        border: 1px solid rgba(56, 189, 248, 0.4);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.1);
+        overflow: hidden;
+      }
+      .infographic-card::after {
+        content: '';
+        position: absolute;
+        inset: auto -40px -60px auto;
+        width: 160px;
+        height: 160px;
+        background: radial-gradient(circle, rgba(249, 115, 22, 0.18), transparent 70%);
+      }
+      .infographic-card h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--color-navy);
+      }
+      .infographic-value {
+        font-size: clamp(2.25rem, 2vw + 1rem, 2.75rem);
+        font-weight: 800;
+        color: var(--color-accent);
+        margin: 0.75rem 0 0.5rem;
+      }
+      .infographic-note {
+        font-size: 0.85rem;
+        color: rgb(71, 85, 105);
+        line-height: 1.6;
+      }
       [data-animate] {
         opacity: 0;
         transform: translateY(24px);
@@ -426,6 +478,39 @@
         background: linear-gradient(160deg, rgba(240, 249, 255, 0.95), rgba(224, 242, 254, 0.85));
         border: 1px solid rgba(56, 189, 248, 0.35);
         box-shadow: 0 18px 42px rgba(15, 23, 42, 0.1);
+      }
+      .form-progress {
+        display: flex;
+        gap: 0.75rem;
+        padding: 0;
+        margin: 1rem 0 1.5rem;
+        list-style: none;
+      }
+      .form-progress li {
+        flex: 1;
+        border-radius: 9999px;
+        background: rgba(148, 163, 184, 0.2);
+        color: rgba(15, 23, 42, 0.45);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-align: center;
+        padding: 0.6rem 0.5rem;
+      }
+      .form-progress li.is-active {
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(13, 148, 136, 0.3));
+        color: var(--color-teal);
+        box-shadow: inset 0 0 0 1px rgba(14, 165, 233, 0.35);
+      }
+      .form-step {
+        display: none;
+        gap: 1.25rem;
+      }
+      .form-step.is-active {
+        display: grid;
+      }
+      .form-note {
+        font-size: 0.75rem;
+        color: rgb(100, 116, 139);
       }
       .workflow-step::before {
         content: attr(data-step);
@@ -512,13 +597,29 @@
       .badge {
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.6rem;
         border-radius: 9999px;
-        background-color: rgb(241, 245, 249);
-        padding: 0.25rem 0.75rem;
+        padding: 0.55rem 1.1rem;
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.18), rgba(13, 148, 136, 0.18));
+        color: rgba(15, 118, 110, 0.95);
+        font-weight: 700;
+        font-size: 0.85rem;
+      }
+      .badge::before {
+        content: '🎯';
+      }
+      .accent-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.9rem;
+        border-radius: 9999px;
+        background: rgba(249, 115, 22, 0.12);
+        color: var(--color-accent);
+        font-weight: 600;
         font-size: 0.75rem;
-        font-weight: 500;
-        color: rgb(100, 116, 139);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
       .proof-grid {
         display: grid;
@@ -569,11 +670,35 @@
         font-size: 0.85rem;
         margin: 0;
       }
+      .back-to-top {
+        position: fixed;
+        right: 1.5rem;
+        bottom: 5.5rem;
+        border-radius: 9999px;
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.9), rgba(249, 115, 22, 0.9));
+        color: white;
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        box-shadow: 0 16px 32px rgba(15, 23, 42, 0.25);
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        z-index: 40;
+      }
+      .back-to-top svg {
+        width: 1rem;
+        height: 1rem;
+      }
       @media (max-width: 640px) {
         .sticky-cta > div {
           margin: 0 1rem;
           flex-direction: column;
           align-items: stretch;
+        }
+        .back-to-top {
+          right: 1rem;
+          bottom: 6rem;
         }
       }
     </style>
@@ -598,16 +723,23 @@
       <section id="hero" class="mx-auto w-full max-w-6xl px-5" data-animate>
         <div class="grid gap-10 rounded-3xl border border-slate-200 bg-white/90 p-8 shadow-lg md:grid-cols-[1.15fr,0.85fr] md:p-12">
           <div class="space-y-6">
-            <span class="badge">年商5,000万円〜15億円の経営チーム専用｜3ヶ月集中プログラム</span>
+            <span class="badge">年商5,000万円〜15億円の製造・建設業経営者向け｜3ヶ月集中プログラム</span>
+            <div class="flex flex-wrap gap-2">
+              <span class="accent-pill">利益とキャッシュを同時改善</span>
+              <span class="accent-pill">初めてのAI導入でも診断士が伴走</span>
+            </div>
             <h1 class="text-3xl font-bold leading-snug text-slate-900 md:text-4xl">
-              生成AIがシナリオを描き、診断士が金融機関に通る計画へ仕上げる
+              経営改善のプロ×生成AIで、意思決定の質・スピード・先見性を高める経営計画
             </h1>
             <p class="text-base leading-relaxed text-slate-700 md:text-lg">
-              政策・市場・自社データを統合したAIが複数の経営シナリオを24時間生成。中小企業診断士が審査基準と現場感を掛け合わせ、<strong>意思決定時間50％削減・会議準備時間70％短縮・粗利18％向上・キャッシュ1.8倍</strong>を実現します。
+              政策・市場・財務データを横断分析したAIが複数の経営シナリオを24時間生成し、中小企業診断士が金融機関レベルの計画書に磨き上げます。<strong>意思決定リードタイム52％短縮・計画作成工数80％削減・キャッシュ創出1.8倍</strong>の実績で投資判断を前倒し。
+            </p>
+            <p class="text-sm leading-relaxed text-slate-600 md:text-base">
+              3ヶ月集中で利益とキャッシュを同時改善。専門家がデータ連携からAI運用ルール、金融機関への説明まで伴走するため、初めてのAI導入でも安心して意思決定に集中できます。
             </p>
             <div class="flex flex-col gap-3 sm:flex-row">
-              <a href="#consult-form" class="btn-primary w-full sm:w-auto">無料相談を申し込む</a>
-              <a href="#process" class="btn-secondary w-full sm:w-auto">3ヶ月プログラムを見る</a>
+              <a href="#consult-form" class="btn-primary w-full sm:w-auto">無料相談を申し込む→</a>
+              <a href="#process" class="btn-secondary w-full sm:w-auto">3ヶ月プログラムを見る→</a>
             </div>
             <div class="cta-options">
               <span>📞 電話予約：03-0000-1234</span>
@@ -620,13 +752,13 @@
             <div class="grid gap-4 pt-4 sm:grid-cols-2">
               <article class="card space-y-2">
                 <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">AI</p>
-                <h2 class="text-lg font-semibold text-slate-900">政策・市場・自社データを統合</h2>
-                <p class="text-sm text-slate-600">需要予測・補助金・競合動向を同時に解析し、攻めと守りの複数シナリオを自動提示。</p>
+                <h2 class="text-lg font-semibold text-slate-900">政策・市場・財務データを統合</h2>
+                <p class="text-sm text-slate-600">需要予測・補助金・キャッシュフローを同時に解析し、攻めと守りの複数シナリオを自動提示。</p>
               </article>
               <article class="card space-y-2">
                 <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">EXPERT</p>
                 <h2 class="text-lg font-semibold text-slate-900">診断士が信用力ある計画へ磨き上げ</h2>
-                <p class="text-sm text-slate-600">融資・補助金実務を熟知した専門家がシナリオを評価し、金融機関向け根拠まで整備。</p>
+                <p class="text-sm text-slate-600">融資・補助金実務を熟知した専門家がシナリオを評価し、金融機関向け根拠とアクションプランまで整備。</p>
               </article>
             </div>
           </div>
@@ -880,31 +1012,31 @@
               <p class="text-sm text-slate-600">会議アジェンダ・融資資料・KPIダッシュボードをAIがテンプレ化し、属人化を排除。</p>
             </div>
           </div>
-          <div class="grid gap-4 md:grid-cols-4">
-            <div class="card space-y-2 text-center">
-              <p class="text-sm font-semibold text-sky-600">意思決定時間</p>
-              <p class="text-3xl font-bold text-slate-900">50%削減</p>
-              <p class="text-xs text-slate-600">会議前に比較資料が揃い、判断が2週間→1週間に短縮。</p>
+          <div class="infographic-grid">
+            <div class="infographic-card">
+              <h3>意思決定リードタイム</h3>
+              <p class="infographic-value">52%短縮</p>
+              <p class="infographic-note">AIが政策・市場の変化を検知し、診断士が優先度を48時間で整理。経営会議の判断が2週間→6日に。</p>
             </div>
-            <div class="card space-y-2 text-center">
-              <p class="text-sm font-semibold text-sky-600">会議準備工数</p>
-              <p class="text-3xl font-bold text-slate-900">70%削減</p>
-              <p class="text-xs text-slate-600">ダッシュボード自動更新により月40時間の作業を12時間へ圧縮。</p>
+            <div class="infographic-card">
+              <h3>計画書作成工数</h3>
+              <p class="infographic-value">80%削減</p>
+              <p class="infographic-note">シナリオ比較・稟議資料・補助金フォーマットを自動生成し、資料づくりの属人化を解消。</p>
             </div>
-            <div class="card space-y-2 text-center">
-              <p class="text-sm font-semibold text-sky-600">粗利改善</p>
-              <p class="text-3xl font-bold text-slate-900">＋18%</p>
-              <p class="text-xs text-slate-600">施策優先順位と原価シナリオを同時比較し、利益構造を最適化。</p>
+            <div class="infographic-card">
+              <h3>会議準備時間</h3>
+              <p class="infographic-value">66%短縮</p>
+              <p class="infographic-note">ダッシュボードの自動更新で月40時間かかっていた準備を13時間に圧縮し、議論は打ち手に集中。</p>
             </div>
-            <div class="card space-y-2 text-center">
-              <p class="text-sm font-semibold text-sky-600">キャッシュ創出</p>
-              <p class="text-3xl font-bold text-slate-900">1.8倍</p>
-              <p class="text-xs text-slate-600">資金繰りの山谷をAIが予測し、銀行交渉と在庫調整のタイミングを先手で実行。</p>
+            <div class="infographic-card">
+              <h3>キャッシュ創出</h3>
+              <p class="infographic-value">1.8倍</p>
+              <p class="infographic-note">資金繰りの山谷を先読みし、金融機関交渉と在庫調整のタイミングを最適化。</p>
             </div>
           </div>
           <div class="flex flex-wrap items-center justify-center gap-3">
-            <a href="#consult-form" class="btn-primary">成果を体験する無料相談へ</a>
-            <a href="#process" class="btn-secondary">導入ステップを見る</a>
+            <a href="#consult-form" class="btn-primary">成果を体験する無料相談へ→</a>
+            <a href="#process" class="btn-secondary">導入ステップを見る→</a>
           </div>
         </div>
       </section>
@@ -986,7 +1118,7 @@
             <div class="card space-y-3">
               <h3 class="text-lg font-semibold text-slate-900">経営計画ダッシュボード</h3>
               <p class="text-sm text-slate-600">PL・BS・CF・主要KPIを週次で更新。意思決定に必要な指標を一枚に集約したテンプレートを共有します。</p>
-              <a href="#consult-form" class="btn-secondary">ダイジェストPDFを見る</a>
+              <a href="#consult-form" class="btn-secondary">ダイジェストPDFを見る→</a>
             </div>
             <div class="card space-y-3">
               <h3 class="text-lg font-semibold text-slate-900">採択・融資実績</h3>
@@ -1027,8 +1159,8 @@
             <span class="security-badge">NDA SIGNED</span>
           </div>
           <div class="flex flex-wrap items-center gap-3 pt-2">
-            <a href="#consult-form" class="btn-primary">専門家に相談する</a>
-            <a href="tel:0300001234" class="btn-secondary">電話で予約（03-0000-1234）</a>
+            <a href="#consult-form" class="btn-primary">専門家に相談する→</a>
+            <a href="tel:0300001234" class="btn-secondary" data-arrow="false">電話で予約（03-0000-1234）</a>
           </div>
         </div>
       </section>
@@ -1081,64 +1213,66 @@
               method="post"
             >
               <h3 class="text-lg font-semibold text-slate-900">無料オンライン相談（30分）</h3>
-              <div class="space-y-3">
-                <label class="block text-sm font-medium text-slate-700" for="company">
-                  会社名
-                </label>
-                <input
-                  id="company"
-                  name="company"
-                  type="text"
-                  required
-                  class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
-                  placeholder="例：株式会社サンプル"
-                />
+              <ol class="form-progress" role="list">
+                <li class="is-active" data-progress="1">STEP 1 連絡先</li>
+                <li data-progress="2">STEP 2 会社情報</li>
+              </ol>
+              <div class="space-y-5">
+                <fieldset class="form-step is-active" data-step="1">
+                  <div class="space-y-3">
+                    <label class="block text-sm font-medium text-slate-700" for="name">ご担当者名</label>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      required
+                      class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                      placeholder="例：山田 太郎"
+                    />
+                  </div>
+                  <div class="space-y-3">
+                    <label class="block text-sm font-medium text-slate-700" for="email">メールアドレス</label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      required
+                      class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                      placeholder="example@company.jp"
+                    />
+                  </div>
+                  <button type="button" class="btn-primary w-full sm:w-auto" data-action="next">次へ進む→</button>
+                  <p class="form-note">入力された情報はSSLで保護され、目的外利用は行いません。</p>
+                </fieldset>
+                <fieldset class="form-step" data-step="2">
+                  <div class="space-y-3">
+                    <label class="block text-sm font-medium text-slate-700" for="company">会社名</label>
+                    <input
+                      id="company"
+                      name="company"
+                      type="text"
+                      required
+                      class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                      placeholder="例：株式会社サンプル"
+                    />
+                  </div>
+                  <div class="space-y-3">
+                    <label class="block text-sm font-medium text-slate-700" for="message">相談したいテーマ（任意）</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows="3"
+                      class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
+                      placeholder="例：新規設備投資の判断材料を整理したい"
+                    ></textarea>
+                  </div>
+                  <div class="flex flex-col gap-3 sm:flex-row">
+                    <button type="button" class="btn-secondary sm:w-auto" data-arrow="false" data-action="back">戻って修正</button>
+                    <button type="submit" class="btn-primary sm:w-auto">送信して日程調整→</button>
+                  </div>
+                  <p class="form-note">送信後24時間以内に専門家よりご連絡します。</p>
+                </fieldset>
               </div>
-              <div class="grid gap-4 md:grid-cols-2">
-                <div class="space-y-3">
-                  <label class="block text-sm font-medium text-slate-700" for="role">役職</label>
-                  <input
-                    id="role"
-                    name="role"
-                    type="text"
-                    required
-                    class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
-                    placeholder="例：代表取締役"
-                  />
-                </div>
-                <div class="space-y-3">
-                  <label class="block text-sm font-medium text-slate-700" for="email">メール</label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm focus:border-sky-500 focus:outline-none focus:ring-2 focus:ring-sky-200"
-                    placeholder="example@company.jp"
-                  />
-                </div>
-              </div>
-              <fieldset class="space-y-3">
-                <legend class="block text-sm font-medium text-slate-700">関心のある課題</legend>
-                <div class="grid gap-2">
-                  <label class="flex items-center gap-3 text-sm text-slate-700">
-                    <input type="checkbox" name="needs" value="plan-update" class="h-5 w-5 rounded border-slate-300 text-sky-600 focus:ring-sky-500" />
-                    経営計画のアップデート
-                  </label>
-                  <label class="flex items-center gap-3 text-sm text-slate-700">
-                    <input type="checkbox" name="needs" value="finance" class="h-5 w-5 rounded border-slate-300 text-sky-600 focus:ring-sky-500" />
-                    金融機関向け説明資料の整備
-                  </label>
-                  <label class="flex items-center gap-3 text-sm text-slate-700">
-                    <input type="checkbox" name="needs" value="monitoring" class="h-5 w-5 rounded border-slate-300 text-sky-600 focus:ring-sky-500" />
-                    KPIモニタリング体制の構築
-                  </label>
-                </div>
-              </fieldset>
-              <button type="submit" class="btn-primary w-full">送信して日程調整</button>
-              <p class="text-xs text-slate-500">
-                ※送信後に担当者から24時間以内にご連絡します。
-              </p>
             </form>
           </div>
         </div>
@@ -1149,17 +1283,23 @@
       <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-5 text-center text-xs text-slate-500 md:flex-row md:justify-between md:text-left">
         <p>© 2024 Strategy AI Lab. All rights reserved.</p>
         <div class="flex flex-wrap items-center justify-center gap-4">
-          <a href="#consult-form" class="btn-secondary text-xs">無料オンライン相談へ</a>
-          <a href="#sample" class="btn-secondary text-xs">サンプルを見る</a>
+          <a href="#consult-form" class="btn-secondary text-xs" data-arrow="false">無料オンライン相談へ</a>
+          <a href="#sample" class="btn-secondary text-xs" data-arrow="false">サンプルを見る</a>
         </div>
       </div>
     </footer>
     <div class="sticky-cta">
       <div>
         <p class="font-semibold">生成AI×診断士で意思決定を高速化しませんか？</p>
-        <a href="#consult-form" class="btn-primary">30分の無料相談を予約</a>
+        <a href="#consult-form" class="btn-primary">30分の無料相談を予約→</a>
       </div>
     </div>
+    <a href="#hero" class="back-to-top" aria-label="ページ上部へ戻る">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 19V6m0 0-5.25 5.25M12 6l5.25 5.25" />
+      </svg>
+      トップに戻る
+    </a>
     <script src="./b2b_lp_expert_ai.js" defer></script>
   </body>
 </html>

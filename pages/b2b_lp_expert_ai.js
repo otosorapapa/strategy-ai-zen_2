@@ -43,4 +43,46 @@
       button.style.transform = '';
     });
   });
+
+  const consultForm = document.getElementById('consult-form');
+  if (consultForm) {
+    const steps = Array.from(consultForm.querySelectorAll('.form-step'));
+    const progress = Array.from(consultForm.querySelectorAll('.form-progress li'));
+    let currentStep = 0;
+
+    const updateStep = (nextStep) => {
+      steps.forEach((step, index) => {
+        step.classList.toggle('is-active', index === nextStep);
+      });
+      progress.forEach((item, index) => {
+        item.classList.toggle('is-active', index === nextStep);
+      });
+      currentStep = nextStep;
+    };
+
+    consultForm.querySelectorAll('[data-action="next"]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const requiredFields = steps[currentStep].querySelectorAll('[required]');
+        const isValid = Array.from(requiredFields).every((field) => {
+          if (!field.reportValidity()) {
+            field.focus();
+            return false;
+          }
+          return true;
+        });
+        if (!isValid) return;
+        if (currentStep < steps.length - 1) {
+          updateStep(currentStep + 1);
+        }
+      });
+    });
+
+    consultForm.querySelectorAll('[data-action="back"]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (currentStep > 0) {
+          updateStep(currentStep - 1);
+        }
+      });
+    });
+  }
 })();
