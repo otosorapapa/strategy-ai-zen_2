@@ -97,6 +97,242 @@
         color: rgba(15, 118, 110, 0.9);
         font-weight: 600;
       }
+      .hero-grid {
+        position: relative;
+        display: grid;
+        gap: clamp(2rem, 4vw, 3rem);
+        border-radius: 2.5rem;
+        padding: clamp(2.5rem, 4vw, 3.5rem);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background:
+          radial-gradient(circle at top left, rgba(14, 165, 233, 0.18), transparent 55%),
+          radial-gradient(circle at top right, rgba(15, 118, 110, 0.18), transparent 60%),
+          rgba(255, 255, 255, 0.95);
+        box-shadow: 0 44px 88px rgba(15, 23, 42, 0.16);
+        overflow: hidden;
+      }
+      .hero-grid::after {
+        content: '';
+        position: absolute;
+        inset: auto -25% -40% auto;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.22), transparent 70%);
+        filter: blur(2px);
+        pointer-events: none;
+      }
+      @media (min-width: 1024px) {
+        .hero-grid {
+          grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+          align-items: stretch;
+        }
+      }
+      .hero-main {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+      }
+      .hero-badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        align-items: center;
+      }
+      .hero-trustmarks {
+        display: inline-flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(15, 23, 42, 0.6);
+      }
+      .hero-trustmarks span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.06);
+      }
+      .hero-title {
+        font-size: clamp(2.4rem, 1vw + 2.5rem, 3.3rem);
+        line-height: 1.15;
+        font-weight: 800;
+        color: rgb(15, 23, 42);
+        margin: 0;
+      }
+      .hero-copy {
+        font-size: clamp(1.05rem, 0.6vw + 1rem, 1.2rem);
+        line-height: 1.8;
+        color: rgb(51, 65, 85);
+        margin: 0;
+      }
+      .hero-proof {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        border-radius: 1.25rem;
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.12), rgba(13, 148, 136, 0.14));
+        border: 1px solid rgba(14, 165, 233, 0.3);
+        padding: 1rem 1.2rem;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: rgb(30, 41, 59);
+      }
+      .hero-proof span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.75rem;
+        background: rgba(14, 165, 233, 0.18);
+        color: rgba(14, 116, 144, 0.9);
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+      .hero-stats {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+      .hero-stat {
+        border-radius: 1.5rem;
+        padding: 1.25rem;
+        background: rgba(255, 255, 255, 0.86);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 12px 32px rgba(15, 23, 42, 0.12);
+        display: grid;
+        gap: 0.35rem;
+      }
+      .hero-stat strong {
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(15, 23, 42, 0.55);
+      }
+      .hero-stat span {
+        font-size: 1.9rem;
+        font-weight: 800;
+        color: rgb(15, 23, 42);
+        letter-spacing: -0.01em;
+      }
+      .hero-stat p {
+        font-size: 0.85rem;
+        line-height: 1.6;
+        color: rgb(71, 85, 105);
+        margin: 0;
+      }
+      .hero-insight-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      .hero-insight-card {
+        position: relative;
+        border-radius: 1.75rem;
+        padding: 1.5rem;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+        display: grid;
+        gap: 0.5rem;
+      }
+      .hero-insight-card small {
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: rgba(15, 23, 42, 0.55);
+      }
+      .hero-insight-card h2 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: rgb(15, 23, 42);
+        margin: 0;
+      }
+      .hero-insight-card p {
+        font-size: 0.88rem;
+        line-height: 1.6;
+        color: rgb(71, 85, 105);
+        margin: 0;
+      }
+      .hero-aside {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+      }
+      .hero-aside-panels {
+        display: grid;
+        gap: 1.5rem;
+      }
+      .hero-aside-card {
+        border-radius: 1.75rem;
+        padding: clamp(1.5rem, 3vw, 2rem);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: linear-gradient(155deg, rgba(15, 23, 42, 0.85), rgba(14, 116, 144, 0.75));
+        box-shadow: 0 24px 54px rgba(15, 23, 42, 0.18);
+        color: white;
+        display: grid;
+        gap: 1rem;
+      }
+      .hero-aside-card h3 {
+        font-size: 0.85rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: rgba(226, 232, 240, 0.9);
+        margin: 0;
+      }
+      .hero-aside-card p {
+        font-size: 0.9rem;
+        line-height: 1.7;
+        color: rgba(226, 232, 240, 0.92);
+        margin: 0;
+      }
+      .hero-aside-card--light {
+        background: rgba(255, 255, 255, 0.94);
+        color: rgb(15, 23, 42);
+        box-shadow: 0 22px 44px rgba(15, 23, 42, 0.12);
+      }
+      .hero-aside-card--light h3 {
+        color: rgba(15, 23, 42, 0.7);
+      }
+      .hero-aside-card--light p {
+        color: rgb(71, 85, 105);
+      }
+      .hero-metric-list {
+        display: grid;
+        gap: 1rem;
+      }
+      .hero-metric-list li {
+        display: grid;
+        gap: 0.15rem;
+      }
+      .hero-metric-label {
+        font-size: 0.85rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(226, 232, 240, 0.7);
+        font-weight: 600;
+      }
+      .hero-metric-value {
+        font-size: clamp(1.6rem, 1vw + 1.6rem, 2.2rem);
+        font-weight: 800;
+        letter-spacing: -0.015em;
+        color: white;
+      }
+      .hero-metric-note {
+        font-size: 0.78rem;
+        color: rgba(226, 232, 240, 0.75);
+      }
       .value-shell {
         position: relative;
         border-radius: 2.25rem;
@@ -513,28 +749,31 @@
         margin: 0;
       }
       .challenge-panel {
-        border-radius: 1.5rem;
+        border-radius: 1.75rem;
         border: 1px solid rgba(148, 163, 184, 0.35);
-        background: rgba(248, 250, 252, 0.92);
-        padding: clamp(1.5rem, 3vw, 2rem);
-        box-shadow: 0 22px 44px rgba(15, 23, 42, 0.12);
+        background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(226, 232, 240, 0.92));
+        padding: clamp(1.75rem, 3vw, 2.25rem);
+        box-shadow: 0 28px 56px rgba(15, 23, 42, 0.16);
+        display: grid;
+        gap: 1.25rem;
       }
       .challenge-panel h2 {
         font-size: 1.1rem;
         font-weight: 700;
         color: rgb(15, 23, 42);
-        margin-bottom: 1rem;
+        margin: 0;
       }
       .challenge-list {
         display: grid;
-        gap: 0.85rem;
+        gap: 1rem;
         font-size: 0.95rem;
         color: rgb(71, 85, 105);
       }
       .challenge-list li {
-        display: flex;
-        gap: 0.75rem;
-        align-items: flex-start;
+        display: grid;
+        gap: 0.4rem;
+        grid-template-columns: auto 1fr;
+        align-items: start;
       }
       .challenge-icon {
         display: inline-flex;
@@ -543,11 +782,38 @@
         height: 2.5rem;
         width: 2.5rem;
         border-radius: 0.75rem;
-        background: rgba(14, 165, 233, 0.15);
+        background: linear-gradient(145deg, rgba(14, 165, 233, 0.2), rgba(14, 116, 144, 0.2));
         color: rgb(14, 116, 144);
         font-weight: 700;
         font-size: 0.8rem;
         letter-spacing: 0.04em;
+      }
+      .challenge-list p {
+        margin: 0;
+        line-height: 1.6;
+      }
+      .challenge-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: rgb(15, 23, 42);
+        margin: 0;
+      }
+      .challenge-description {
+        font-size: 0.85rem;
+        color: rgb(71, 85, 105);
+        margin: 0;
+      }
+      .challenge-highlight {
+        border-radius: 1.25rem;
+        background: rgba(14, 165, 233, 0.1);
+        border: 1px solid rgba(14, 165, 233, 0.25);
+        padding: 1rem 1.25rem;
+        font-size: 0.8rem;
+        line-height: 1.6;
+        color: rgb(71, 85, 105);
+      }
+      .challenge-highlight strong {
+        color: rgb(15, 23, 42);
       }
       .section-title {
         font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
@@ -1423,22 +1689,48 @@
     </header>
     <main class="space-y-20 pb-24 pt-16 md:space-y-28 md:pt-24">
       <section id="hero" class="mx-auto w-full max-w-6xl px-5" data-animate>
-        <div class="grid gap-10 rounded-3xl border border-slate-200 bg-white/90 p-8 shadow-lg md:grid-cols-[1.15fr,0.85fr] md:p-12">
-          <div class="space-y-6">
-            <span class="badge">年商5,000万円〜15億円の製造・建設業経営者向け｜3ヶ月集中プログラム</span>
+        <div class="hero-grid">
+          <div class="hero-main">
+            <div class="hero-badge-row">
+              <span class="badge">年商5,000万円〜15億円の製造・建設業経営者向け｜3ヶ月集中プログラム</span>
+              <div class="hero-trustmarks">
+                <span>Certified SME Consultant</span>
+                <span>AI Strategy Studio</span>
+              </div>
+            </div>
             <div class="flex flex-wrap gap-2">
               <span class="accent-pill">利益とキャッシュを同時改善</span>
               <span class="accent-pill">初めてのAI導入でも診断士が伴走</span>
             </div>
-            <h1 class="text-3xl font-bold leading-snug text-slate-900 md:text-4xl">
+            <h1 class="hero-title">
               経営改善で鍛えた専門家×生成AI = 意思決定の質・速さ・先見性を高める経営計画
             </h1>
-            <p class="text-base leading-relaxed text-slate-700 md:text-lg">
+            <p class="hero-copy">
               政策・市場・財務データをAIが24時間統合し、中小企業診断士が経営判断の論点と資料を磨き上げます。<strong>意思決定時間50％削減・3ヶ月で粗利率＋5pt・キャッシュ創出1.8倍</strong>など、利益と資金繰りを同時に改善した事例が生まれています。
             </p>
-            <p class="text-sm leading-relaxed text-slate-600 md:text-base">
-              Foster School of Businessの研究でも、人間が判断しAIが大量データを絞り込むことで意思決定の質とスピードが向上すると示されています。専門家がAI活用のルール設計から金融機関説明まで伴走するため、初めての導入でも安心して未来志向の計画を描けます。
-            </p>
+            <div class="hero-proof">
+              <span>INS</span>
+              <p>
+                Foster School of Businessの研究でも、人間が判断しAIが大量データを絞り込むことで意思決定の質とスピードが向上すると示されています。専門家がAI活用のルール設計から金融機関説明まで伴走するため、初めての導入でも安心して未来志向の計画を描けます。
+              </p>
+            </div>
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <strong>意思決定時間</strong>
+                <span>▲50%</span>
+                <p>因果マップとリスクシグナルを24時間更新し、会議準備を半減。</p>
+              </div>
+              <div class="hero-stat">
+                <strong>粗利率</strong>
+                <span>＋5pt</span>
+                <p>攻めと守りのシナリオ比較で利益とキャッシュを同時に改善。</p>
+              </div>
+              <div class="hero-stat">
+                <strong>キャッシュ創出</strong>
+                <span>1.8倍</span>
+                <p>回収サイト短縮と資金繰り表の自動化で投資余力を確保。</p>
+              </div>
+            </div>
             <div class="flex flex-col gap-3 sm:flex-row">
               <a href="#consult-form" class="btn-primary w-full sm:w-auto">30分無料相談を予約</a>
               <a href="#sample" class="btn-secondary w-full sm:w-auto" data-arrow="false">3分で分かる資料をダウンロード</a>
@@ -1451,16 +1743,16 @@
             <p class="text-xs text-slate-500">
               ※AIは意思決定を補助するツールであり、最終判断は経営者が行います。
             </p>
-            <div class="grid gap-4 pt-4 sm:grid-cols-2">
-              <article class="card space-y-2">
-                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">AI</p>
-                <h2 class="text-lg font-semibold text-slate-900">政策・市場・財務データを統合</h2>
-                <p class="text-sm text-slate-600">政策変更・業界指標・PL/BS/CFを自動収集し、複数シナリオと想定問答、粗利/キャッシュ/在庫の週次図解レポートを提示。</p>
+            <div class="hero-insight-grid">
+              <article class="hero-insight-card">
+                <small>AI OPERATIONS</small>
+                <h2>政策・市場・財務データを24時間統合</h2>
+                <p>政策変更・業界指標・PL/BS/CFを自動収集し、粗利／キャッシュ／在庫の因果マップと想定問答を提示。</p>
               </article>
-              <article class="card space-y-2">
-                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">EXPERT</p>
-                <h2 class="text-lg font-semibold text-slate-900">診断士・財務会計専門家が信用力ある計画へ</h2>
-                <p class="text-sm text-slate-600">融資・投資の審査基準を踏まえたブラッシュアップと説明資料作成を支援。月次オンライン面談で進捗をレビューし、施策実行を伴走。</p>
+              <article class="hero-insight-card">
+                <small>EXPERT REVIEW</small>
+                <h2>診断士・財務専門家が信用力ある計画へ</h2>
+                <p>融資・補助金の審査基準を踏まえ、AIドラフトを根拠資料とストーリーで磨き込み、実行体制を伴走。</p>
               </article>
             </div>
             <a href="#challenges" class="scroll-indicator" aria-label="スクロールして詳細を見る">
@@ -1470,52 +1762,75 @@
               <span>Scroll</span>
             </a>
           </div>
-          <div class="space-y-6">
+          <div class="hero-aside">
             <figure class="hero-visual">
               <img
-                src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=960&q=80"
-                alt="生成AIレポートを確認しながら経営者が専門家と議論し、意思決定時間50％短縮・粗利率＋5pt・キャッシュ創出1.8倍を実現しているイメージ"
+                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1040&q=80"
+                alt="取締役会で生成AIが提示するダッシュボードと専門家のレビューに基づき戦略を再設計している様子"
                 loading="lazy"
               />
               <figcaption>
-                生成AIが日次で更新する意思決定ダッシュボードと、診断士が磨き上げた稟議資料サマリー。会議準備時間▲1,200時間／年、融資審査通過率＋18％の成果を視覚化しています。
+                生成AIが日次で更新する意思決定ダッシュボードと、診断士が磨き上げた稟議資料サマリー。会議準備時間▲1,200時間／年、融資審査通過率＋18ptの成果を視覚化しています。
               </figcaption>
             </figure>
-            <div class="challenge-panel">
-              <h2>経営者が直面する代表的な課題</h2>
-              <ul class="challenge-list">
-                <li>
-                  <div class="challenge-icon">01</div>
-                  <div>
-                    <p class="font-semibold text-slate-900">管理会計が現場任せで真の利益が見えない</p>
-                    <p>部門別の粗利や案件別の採算が集計されず、改善の優先順位が決められない。</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="challenge-icon">02</div>
-                  <div>
-                    <p class="font-semibold text-slate-900">資金繰り表が更新されず先のキャッシュが不透明</p>
-                    <p>売掛・支払予定のデータがばらばらで、金融機関への説明が後手に回る。</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="challenge-icon">03</div>
-                  <div>
-                    <p class="font-semibold text-slate-900">会議準備と資料作成に時間を奪われる</p>
-                    <p>指標更新に毎月40時間以上かかり、経営会議が資料説明で終わってしまう。</p>
-                  </div>
-                </li>
-                <li>
-                  <div class="challenge-icon">04</div>
-                  <div>
-                    <p class="font-semibold text-slate-900">中長期シナリオが描けず一手先の判断に終始</p>
-                    <p>政策・市場の変化を織り込めず、既存計画が形骸化して投資判断が遅延。</p>
-                  </div>
-                </li>
-              </ul>
-              <div class="mt-6 rounded-2xl bg-white/90 p-4 text-xs text-slate-600">
-                <p class="font-semibold text-slate-900">3分で課題を棚卸し</p>
-                <p class="mt-2">AIレポートが年間1,200時間の単純作業を削減した企業の診断テンプレートを活用できます。</p>
+            <div class="hero-aside-panels">
+              <div class="hero-aside-card">
+                <h3>Quarterly Strategy Scorecard</h3>
+                <p>四半期ごとに戦略と実行を再設計するエグゼクティブダッシュボード。因果マップとリスクヒートマップで投資判断を立体的に可視化します。</p>
+                <ul class="hero-metric-list">
+                  <li>
+                    <span class="hero-metric-label">リードタイム</span>
+                    <span class="hero-metric-value">▲52%</span>
+                    <span class="hero-metric-note">意思決定〜実行までの遅延を圧縮</span>
+                  </li>
+                  <li>
+                    <span class="hero-metric-label">審査通過率</span>
+                    <span class="hero-metric-value">＋18pt</span>
+                    <span class="hero-metric-note">金融機関・投資家向け資料を48時間で整備</span>
+                  </li>
+                  <li>
+                    <span class="hero-metric-label">会議準備時間</span>
+                    <span class="hero-metric-value">▲1,200h</span>
+                    <span class="hero-metric-note">ダッシュボード更新と資料作成を自動化</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="challenge-panel">
+                <h2>経営者が直面する代表的な課題</h2>
+                <ul class="challenge-list">
+                  <li>
+                    <div class="challenge-icon">01</div>
+                    <div>
+                      <p class="challenge-title">管理会計が現場任せで真の利益が見えない</p>
+                      <p class="challenge-description">部門別の粗利や案件別の採算が集計されず、改善の優先順位が決められない。</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="challenge-icon">02</div>
+                    <div>
+                      <p class="challenge-title">資金繰り表が更新されず先のキャッシュが不透明</p>
+                      <p class="challenge-description">売掛・支払予定のデータがばらばらで、金融機関への説明が後手に回る。</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="challenge-icon">03</div>
+                    <div>
+                      <p class="challenge-title">会議準備と資料作成に時間を奪われる</p>
+                      <p class="challenge-description">指標更新に毎月40時間以上かかり、経営会議が資料説明で終わってしまう。</p>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="challenge-icon">04</div>
+                    <div>
+                      <p class="challenge-title">中長期シナリオが描けず一手先の判断に終始</p>
+                      <p class="challenge-description">政策・市場の変化を織り込めず、既存計画が形骸化して投資判断が遅延。</p>
+                    </div>
+                  </li>
+                </ul>
+                <div class="challenge-highlight">
+                  <strong>3分で課題を棚卸し</strong>
+                  <p>AIレポートが年間1,200時間の単純作業を削減した企業の診断テンプレートを活用できます。</p>
+                </div>
               </div>
             </div>
           </div>
