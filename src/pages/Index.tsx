@@ -647,8 +647,12 @@ const velocityMax = Math.max(...velocitySeries.flatMap((series) => series.values
 const velocityGridLines = Array.from({ length: 5 }, (_, index) => index);
 
 type PainPoint = {
+  caseId: string;
+  caseLabel: string;
   title: string;
-  detail: string;
+  executiveAngle: string;
+  summary: string;
+  symptoms: string[];
   solution: string;
   aiAction: string;
   expertAction: string;
@@ -660,14 +664,21 @@ type PainPoint = {
 
 const painPoints: PainPoint[] = [
   {
+    caseId: "CASE 01",
+    caseLabel: "市場シグナルの先読み",
     title: "市場変化や政策変動を追う時間がない",
-    detail: "最新政策・補助金・競合動向を追う調査が経営者に集中し、戦略設計の時間が不足しています。",
+    executiveAngle: "政策・競合の変化を48時間以内に意思決定材料化",
+    summary:
+      "最新政策・補助金・競合動向を追う調査が経営者に集中し、戦略設計の時間が不足しています。",
+    symptoms: [
+      "補助金や政策アップデートが役員会議に届く頃には申請期限が迫っている",
+      "競合の値付け変更や需要の変化をPOS・受注データから逆算しており、対応が常に後手になる",
+    ],
     solution:
       "経営改善で鍛えた専門家 × 生成AIが政府・市場・自社データを常時計測し、優先課題と想定インパクトを数分で提示します。",
-    aiAction:
-      "AI: 政策・需給・財務データをクロールし、先読みシナリオとKPIアラートを自動生成。",
+    aiAction: "政策・需給・財務データをクロールし、先読みシナリオとKPIアラートを自動生成。",
     expertAction:
-      "専門家: 中小企業診断士が業界特性と政策適用条件を検証し、現場に合わせた打ち手へ整理。",
+      "中小企業診断士が業界特性と政策適用条件を検証し、現場に合わせた打ち手へ整理。",
     impact: "粗利 +18%",
     impactDetail:
       "furumachi-smec.lognowa.comが紹介する改善事例同様、利益ドライバーを可視化し粗利率を平均18pt押し上げました。",
@@ -675,15 +686,21 @@ const painPoints: PainPoint[] = [
     accent: "sky",
   },
   {
+    caseId: "CASE 02",
+    caseLabel: "会議と計画の高速化",
     title: "会議や計画作成に時間がかかり意思決定が遅い",
-    detail:
+    executiveAngle: "週次で判断できるドラフト体制を構築",
+    summary:
       "会議資料と経営計画のドラフトを作るたびに各部門からデータを集め直し、意思決定リードタイムが長期化しています。",
+    symptoms: [
+      "会議前に各部門へのデータ依頼が連鎖し、集計が会議直前まで終わらない",
+      "経営計画のドラフトを役員が深夜に修正しており、論点が擦り合わないまま議論が始まる",
+    ],
     solution:
       "経営改善で鍛えた専門家 × 生成AIが財務と実績データから複数シナリオとドラフト資料を揃え、経営陣は判断と説明に集中できます。",
-    aiAction:
-      "AI: 四半期ごとのシナリオ比較・財務予測・会議アジェンダを48時間以内に生成。",
+    aiAction: "四半期ごとのシナリオ比較・財務予測・会議アジェンダを48時間以内に生成。",
     expertAction:
-      "専門家: 診断士と財務会計専門家が論点整理と審査基準の観点でレビューし、決裁に必要な根拠を補強。",
+      "診断士と財務会計専門家が論点整理と審査基準の観点でレビューし、決裁に必要な根拠を補強。",
     impact: "意思決定リードタイム -52% / 計画作成工数 -80%",
     impactDetail:
       "blog.iil.comが強調するAI活用による迅速な意思決定を体現し、導入企業平均で意思決定リードタイム52%短縮・計画作成工数80%削減。",
@@ -691,15 +708,21 @@ const painPoints: PainPoint[] = [
     accent: "citrus",
   },
   {
+    caseId: "CASE 03",
+    caseLabel: "資金調達の信頼性強化",
     title: "資金調達時に金融機関から信頼される計画書が難しい",
-    detail:
+    executiveAngle: "審査基準に沿った経営計画を短期で提示",
+    summary:
       "融資や補助金の審査ポイントを押さえた計画書づくりが属人化し、提出スケジュールが後ろ倒しになります。",
+    symptoms: [
+      "金融機関への提出資料が部門ごとにフォーマットが異なり、説得力が分散する",
+      "返済計画や投資の前提条件を説明できるドキュメントが不足し、交渉のたびに補足が発生する",
+    ],
     solution:
       "経営改善で鍛えた専門家 × 生成AIが審査基準に沿った財務計画と想定問答を下書きし、金融機関から信頼される計画書へ磨き込みます。",
-    aiAction:
-      "AI: DSCR・CCCなど主要指標を自動計算し、複数の返済シナリオと資金繰りシートを作成。",
+    aiAction: "DSCR・CCCなど主要指標を自動計算し、複数の返済シナリオと資金繰りシートを作成。",
     expertAction:
-      "専門家: 資金調達スペシャリストが想定問答と裏付け資料を監修し、金融機関との対話を設計。",
+      "資金調達スペシャリストが想定問答と裏付け資料を監修し、金融機関との対話を設計。",
     impact: "キャッシュ創出 1.8倍",
     impactDetail:
       "AIドラフトと専門家のダブルチェックで資金調達の確度が向上し、導入後12か月の運転資金キャッシュフローは平均1.8倍に。",
@@ -2400,27 +2423,46 @@ const Index = () => {
                 const PainIcon = item.icon;
                 return (
                   <article key={item.title} className={`pain-card pain-card--${item.accent}`} data-animate>
-                    <div className={`pain-icon pain-icon--${item.accent}`} aria-hidden="true">
-                      <PainIcon />
-                    </div>
-                    <h3>{item.title}</h3>
-                    <p>{item.detail}</p>
-                    <div className="pain-chain" role="list">
-                      <div className="pain-chain__column" role="listitem">
-                        <span className="pain-chain__label">生成AIのアクション</span>
+                    <header className="pain-card__header">
+                      <div className="pain-card__heading">
+                        <div className="pain-card__meta">
+                          <span className="pain-card__case">{item.caseId}</span>
+                          <span className="pain-card__label">{item.caseLabel}</span>
+                        </div>
+                        <h3>{item.title}</h3>
+                        <p className="pain-card__angle">{item.executiveAngle}</p>
+                      </div>
+                      <div className={`pain-icon pain-icon--${item.accent}`} aria-hidden="true">
+                        <PainIcon />
+                      </div>
+                    </header>
+                    <p className="pain-card__summary">{item.summary}</p>
+                    <div className="pain-causality" role="list">
+                      <div className="pain-causality__item" role="listitem" data-stage="兆候">
+                        <ul>
+                          {item.symptoms.map((symptom) => (
+                            <li key={symptom}>{symptom}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="pain-causality__item" role="listitem" data-stage="生成AIのアクション">
                         <p>{item.aiAction}</p>
                       </div>
-                      <div className="pain-chain__divider" aria-hidden="true" />
-                      <div className="pain-chain__column" role="listitem">
-                        <span className="pain-chain__label">専門家のブラッシュアップ</span>
+                      <div className="pain-causality__item" role="listitem" data-stage="専門家の監修">
                         <p>{item.expertAction}</p>
                       </div>
                     </div>
-                    <div className="pain-impact">
-                      <span className="pain-impact__metric">{item.impact}</span>
-                      <p>{item.impactDetail}</p>
+                    <div className="pain-card__footer">
+                      <div className="pain-impact">
+                        <span className="pain-impact__label">得られる効果</span>
+                        <span className="pain-impact__metric">{item.impact}</span>
+                        <p>{item.impactDetail}</p>
+                      </div>
+                      <div className="pain-solution">
+                        <span className="pain-solution__label">意思決定に残る資産</span>
+                        <p>{item.solution}</p>
+                      </div>
                     </div>
-                    <div className="pain-solution">{item.solution}</div>
                   </article>
                 );
               })}
