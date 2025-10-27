@@ -377,6 +377,30 @@ const utilizationComparisons = [
   },
 ];
 
+const simulatorHighlights = [
+  {
+    label: "年商5〜15億円レンジで検証",
+    description: "導入20社の財務・会議ログからROI係数を逆算。",
+    icon: Database,
+  },
+  {
+    label: "専門家の審査目線を反映",
+    description: "元メガバンク審査部・会計士がパラメータを監修。",
+    icon: Shield,
+  },
+  {
+    label: "投資判断のストーリー化",
+    description: "資金繰り、成長、組織の3軸での説得材料を即提示。",
+    icon: BarChart3,
+  },
+];
+
+const simulatorChecklist = [
+  "社内データが揃っていなくても平均値で試算可能",
+  "専門家セッションで自社データに置き換えて精緻化",
+  "融資・投資家説明用のストーリーをそのまま活用",
+];
+
 const outcomeFootnotes = [
   "※1 導入企業20社（従業員50〜300名、2023年7月〜2024年12月）を対象に戦略AIレポートの利用状況を追跡。意思決定リードタイムと工数削減は会議議事録と業務ログから算出。",
   "※2 University of Cincinnati Online (2024) \"How Businesses Are Using Generative AI\" 調査（n=215）の結果をもとに、生成AI活用企業の戦略更新サイクル短縮を推計。",
@@ -2712,69 +2736,126 @@ const Index = () => {
           aria-labelledby="simulator-heading"
         >
           <div className="container">
-            <div className="section-header" data-animate>
-              <h2 id="simulator-heading">AI活用インパクトを即時シミュレート</h2>
-              <p>
-                入力値に合わせて<abbr title="投資利益率">ROI</abbr>を更新。
-                生産性の伸びを即時に表示。
-              </p>
-            </div>
-            <div className="simulator-guidance" data-animate>
-              <h3>使い方のポイント</h3>
-              <ol>
-                <li>初期費用・月額費用・意思決定工数を入力し、現在の投資負荷を把握。</li>
-                <li>優先領域を選ぶと、リアルタイム分析による短縮効果を確認できます。</li>
-                <li>試算値は保存されず、専門家との面談で自社データを反映できます。</li>
-              </ol>
-              <p>
-                数値は導入企業20社の平均値をもとに推計しています。リアルタイム分析の活用はItrex Groupの調査が示す通り、意思決定のスピードを高めます。
-              </p>
-            </div>
-            <div className="simulator-summary" data-animate>
-              <div className="simulator-summary__item">
-                <span>初期費用（目安）</span>
-                <strong>{numberFormatter.format(Math.round(simulator.initialCost))} 万円</strong>
+            <div className="simulator-shell">
+              <span className="simulator-shell__halo" aria-hidden="true" />
+              <div className="simulator-header">
+                <div className="section-header" data-animate>
+                  <h2 id="simulator-heading">AI活用インパクトを即時シミュレート</h2>
+                  <p>
+                    入力値に合わせて<abbr title="投資利益率">ROI</abbr>・キャッシュ創出・工数削減を同時に可視化。
+                    導入検討時の論拠をその場で把握できます。
+                  </p>
+                </div>
+                <div className="simulator-highlights" data-animate>
+                  {simulatorHighlights.map((item) => {
+                    const HighlightIcon = item.icon;
+                    return (
+                      <article key={item.label} className="simulator-highlight">
+                        <span className="simulator-highlight__icon" aria-hidden="true">
+                          <HighlightIcon />
+                        </span>
+                        <div className="simulator-highlight__body">
+                          <strong>{item.label}</strong>
+                          <p>{item.description}</p>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
               </div>
-              <div className="simulator-summary__item">
-                <span>月額費用（目安）</span>
-                <strong>{numberFormatter.format(Math.round(simulator.aiBudget))} 万円</strong>
+              <div className="simulator-content">
+                <div className="simulator-panel simulator-panel--guide" data-animate>
+                  <div className="simulator-guidance">
+                    <span className="simulator-guidance__eyebrow">使い方のポイント</span>
+                    <h3>3つの入力で投資判断の筋道を描く</h3>
+                    <ol>
+                      <li>初期費用・月額費用・意思決定工数を入れると、現状の投資負荷が数値化されます。</li>
+                      <li>優先したい領域を選ぶと、AIが短縮できるリードタイムと効果額を即時に反映します。</li>
+                      <li>試算値は保存されず、面談時に専門家が自社データへ置き換えて精緻化します。</li>
+                    </ol>
+                    <p>
+                      指標は導入企業20社の平均値から推計。Itrex Groupの調査が示すリアルタイム分析の効果を係数に反映しています。
+                    </p>
+                  </div>
+                  <ul className="simulator-checklist">
+                    {simulatorChecklist.map((item) => (
+                      <li key={item}>
+                        <CheckCircle2 aria-hidden="true" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="simulator-panel simulator-panel--results" data-animate>
+                  <div className="simulator-summary" role="group" aria-label="シミュレーション結果の要約">
+                    <div className="simulator-summary__item">
+                      <span>初期費用（目安）</span>
+                      <strong>{numberFormatter.format(Math.round(simulator.initialCost))} 万円</strong>
+                    </div>
+                    <div className="simulator-summary__item">
+                      <span>月額費用（目安）</span>
+                      <strong>{numberFormatter.format(Math.round(simulator.aiBudget))} 万円</strong>
+                    </div>
+                    <div className="simulator-summary__item">
+                      <span>期待ROI</span>
+                      <strong>{simulatorResult.roiPercent.toFixed(1)}%</strong>
+                    </div>
+                    <div className="simulator-summary__item">
+                      <span>投資回収目安</span>
+                      <strong>
+                        {simulatorResult.paybackMonths
+                          ? `${Math.ceil(simulatorResult.paybackMonths)} か月`
+                          : "-"}
+                      </strong>
+                    </div>
+                  </div>
+                  <p className="simulator-result-note">{simulatorResult.explanation}</p>
+                  <dl className="simulator-glance">
+                    <div className="simulator-glance__item">
+                      <dt>年間削減工数</dt>
+                      <dd>
+                        {numberFormatter.format(Math.round(simulatorResult.annualHoursSaved))} 時間
+                      </dd>
+                    </div>
+                    <div className="simulator-glance__item">
+                      <dt>年間価値創出</dt>
+                      <dd>
+                        {numberFormatter.format(Math.round(simulatorResult.annualCostSavings))} 万円
+                      </dd>
+                    </div>
+                    <div className="simulator-glance__item">
+                      <dt>生産性向上率</dt>
+                      <dd>+{simulatorResult.productivityGain.toFixed(1)}%</dd>
+                    </div>
+                  </dl>
+                  <div className="simulator-actions">
+                    <button
+                      type="button"
+                      className="link-button"
+                      onClick={() => setRoiModalOpen(true)}
+                    >
+                      ROI試算フォームを開く
+                    </button>
+                    <p className="simulator-actions__note">
+                      初期費用・月額費用・期待効果を入力して、自社の投資対効果を画面上で確認できます。
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="simulator-summary__item">
-                <span>期待ROI</span>
-                <strong>{simulatorResult.roiPercent.toFixed(1)}%</strong>
+              <div className="simulator-footer">
+                <div className="section-cta" data-animate>
+                  <a className="btn btn-cta" href="#contact">
+                    {primaryCtaLabel}
+                  </a>
+                  <button
+                    type="button"
+                    className="link-button"
+                    onClick={() => setPricingModalOpen(true)}
+                  >
+                    料金プランを表示
+                  </button>
+                </div>
               </div>
-              <div className="simulator-summary__item">
-                <span>投資回収目安</span>
-                <strong>
-                  {simulatorResult.paybackMonths
-                    ? `${Math.ceil(simulatorResult.paybackMonths)} か月`
-                    : "-"}
-                </strong>
-              </div>
-            </div>
-            <div className="simulator-actions" data-animate>
-              <button
-                type="button"
-                className="link-button"
-                onClick={() => setRoiModalOpen(true)}
-              >
-                ROI試算フォームを開く
-              </button>
-              <p className="simulator-actions__note">
-                初期費用・月額費用・期待効果を入力して、自社の投資対効果を画面上で確認できます。
-              </p>
-            </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
-                {primaryCtaLabel}
-              </a>
-              <button
-                type="button"
-                className="link-button"
-                onClick={() => setPricingModalOpen(true)}
-              >
-                料金プランを表示
-              </button>
             </div>
           </div>
         </section>
