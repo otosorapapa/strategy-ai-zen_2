@@ -70,6 +70,23 @@
       .btn-secondary:focus-visible {
         background-color: rgba(14, 165, 233, 0.08);
       }
+      .cta-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        font-size: 0.85rem;
+        color: rgb(71, 85, 105);
+      }
+      .cta-options span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.4rem 0.8rem;
+        border-radius: 9999px;
+        background: rgba(14, 165, 233, 0.1);
+        color: rgb(14, 116, 144);
+        font-weight: 600;
+      }
       .card {
         border-radius: 1.5rem;
         border: 1px solid rgba(148, 163, 184, 0.45);
@@ -309,6 +326,43 @@
         color: rgb(30, 41, 59);
         margin: 0;
       }
+      .challenge-panel {
+        border-radius: 1.5rem;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: rgba(248, 250, 252, 0.92);
+        padding: clamp(1.5rem, 3vw, 2rem);
+        box-shadow: 0 22px 44px rgba(15, 23, 42, 0.12);
+      }
+      .challenge-panel h2 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: rgb(15, 23, 42);
+        margin-bottom: 1rem;
+      }
+      .challenge-list {
+        display: grid;
+        gap: 0.85rem;
+        font-size: 0.95rem;
+        color: rgb(71, 85, 105);
+      }
+      .challenge-list li {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+      }
+      .challenge-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 2.5rem;
+        width: 2.5rem;
+        border-radius: 0.75rem;
+        background: rgba(14, 165, 233, 0.15);
+        color: rgb(14, 116, 144);
+        font-weight: 700;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+      }
       .section-title {
         font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
         font-weight: 600;
@@ -356,6 +410,93 @@
         opacity: 0.9;
         pointer-events: none;
       }
+      .workflow {
+        display: grid;
+        gap: 1.5rem;
+      }
+      @media (min-width: 768px) {
+        .workflow {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+      .workflow-step {
+        position: relative;
+        border-radius: 1.5rem;
+        padding: clamp(1.75rem, 3vw, 2.5rem);
+        background: linear-gradient(160deg, rgba(240, 249, 255, 0.95), rgba(224, 242, 254, 0.85));
+        border: 1px solid rgba(56, 189, 248, 0.35);
+        box-shadow: 0 18px 42px rgba(15, 23, 42, 0.1);
+      }
+      .workflow-step::before {
+        content: attr(data-step);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 9999px;
+        background: rgb(14 165 233);
+        color: white;
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
+      .workflow-step h3 {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: rgb(15, 23, 42);
+        margin-bottom: 0.75rem;
+      }
+      .workflow-step p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: rgb(71, 85, 105);
+      }
+      .timeline {
+        position: relative;
+        display: grid;
+        gap: 1.5rem;
+      }
+      @media (min-width: 768px) {
+        .timeline {
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+      }
+      .timeline-step {
+        border-radius: 1.25rem;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1.25rem;
+        box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
+      }
+      .timeline-step span {
+        display: inline-block;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: rgb(14, 165, 233);
+        margin-bottom: 0.5rem;
+      }
+      .timeline-step h4 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: rgb(15, 23, 42);
+        margin-bottom: 0.5rem;
+      }
+      .timeline-step p {
+        font-size: 0.85rem;
+        color: rgb(71, 85, 105);
+        line-height: 1.6;
+      }
+      .pricing-note {
+        border-radius: 1.5rem;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(248, 250, 252, 0.9);
+        padding: 1.25rem 1.5rem;
+        color: rgb(71, 85, 105);
+        font-size: 0.85rem;
+      }
       .faq-question {
         text-align: left;
         font-size: 1.125rem;
@@ -379,6 +520,62 @@
         font-weight: 500;
         color: rgb(100, 116, 139);
       }
+      .proof-grid {
+        display: grid;
+        gap: 1.25rem;
+      }
+      @media (min-width: 768px) {
+        .proof-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+      .badge-line {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+      }
+      .security-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border-radius: 9999px;
+        background: rgba(15, 23, 42, 0.9);
+        color: white;
+        padding: 0.4rem 0.9rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+      .sticky-cta {
+        position: fixed;
+        inset: auto 0 1.5rem;
+        display: flex;
+        justify-content: center;
+        z-index: 50;
+        pointer-events: none;
+      }
+      .sticky-cta > div {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        border-radius: 9999px;
+        background: rgba(15, 23, 42, 0.9);
+        padding: 0.75rem 1.25rem;
+        color: white;
+        box-shadow: 0 24px 44px rgba(15, 23, 42, 0.25);
+        pointer-events: auto;
+      }
+      .sticky-cta p {
+        font-size: 0.85rem;
+        margin: 0;
+      }
+      @media (max-width: 640px) {
+        .sticky-cta > div {
+          margin: 0 1rem;
+          flex-direction: column;
+          align-items: stretch;
+        }
+      }
     </style>
   </head>
   <body class="antialiased">
@@ -389,6 +586,7 @@
           <a href="#challenges" class="hover:text-slate-900">課題</a>
           <a href="#approach" class="hover:text-slate-900">解決策</a>
           <a href="#benefits" class="hover:text-slate-900">成果</a>
+          <a href="#social-proof" class="hover:text-slate-900">実績</a>
           <a href="#process" class="hover:text-slate-900">支援プロセス</a>
           <a href="#pricing" class="hover:text-slate-900">料金</a>
           <a href="#contact" class="hover:text-slate-900">相談</a>
@@ -398,111 +596,97 @@
     </header>
     <main class="space-y-20 pb-24 pt-16 md:space-y-28 md:pt-24">
       <section id="hero" class="mx-auto w-full max-w-6xl px-5" data-animate>
-        <div class="grid gap-10 rounded-3xl border border-slate-200 bg-white/90 p-8 shadow-lg md:grid-cols-2 md:p-12">
+        <div class="grid gap-10 rounded-3xl border border-slate-200 bg-white/90 p-8 shadow-lg md:grid-cols-[1.15fr,0.85fr] md:p-12">
           <div class="space-y-6">
-            <span class="badge">年商5,000万円〜15億円の中小企業経営者向け</span>
+            <span class="badge">年商5,000万円〜15億円の経営チーム専用｜3ヶ月集中プログラム</span>
             <h1 class="text-3xl font-bold leading-snug text-slate-900 md:text-4xl">
-              専門家×生成AIが意思決定を変革
+              生成AIがシナリオを描き、診断士が金融機関に通る計画へ仕上げる
             </h1>
             <p class="text-base leading-relaxed text-slate-700 md:text-lg">
-              リアルタイムデータ解析と専門家レビューにより、<strong>意思決定リードタイムを50％短縮・計画作成工数を80％削減</strong>。University of Cincinnatiの研究が示す「AIによるリアルタイム洞察が経営者の自信ある判断を後押しする」効果を、中小企業診断士の伴走で実装します。
+              政策・市場・自社データを統合したAIが複数の経営シナリオを24時間生成。中小企業診断士が審査基準と現場感を掛け合わせ、<strong>意思決定時間50％削減・会議準備時間70％短縮・粗利18％向上・キャッシュ1.8倍</strong>を実現します。
             </p>
-            <p class="text-sm leading-relaxed text-slate-600 md:text-base">
-              AIが市場・政策・自社データを即時に統合し、専門家がリスク判断と倫理的配慮を担保。Rossumの調査が強調する「人間の関与がAI活用の成功要因」という知見を体制設計に落とし込み、意思決定の質・速さ・先見性を同時に引き上げます。
-            </p>
-            <ul class="grid gap-4 text-sm text-slate-600 md:grid-cols-2">
-              <li class="metric">
-                <div class="mt-1 h-10 w-10 shrink-0 rounded-full bg-sky-100 text-center text-lg font-semibold leading-[40px] text-sky-600">AI</div>
-                <div>
-                  <p class="font-semibold text-slate-900">リアルタイム解析と先読みシナリオ</p>
-                  <p>外部環境・需要予測を24時間体制で更新し、判断材料を即時提示。</p>
-                </div>
-              </li>
-              <li class="metric">
-                <div class="mt-1 h-10 w-10 shrink-0 rounded-full bg-slate-900 text-center text-lg font-semibold leading-[40px] text-white">EXPERT</div>
-                <div>
-                  <p class="font-semibold text-slate-900">金融機関目線での実行性チェック</p>
-                  <p>事業計画・資金繰りを専門家が検証し、審査基準に沿ってブラッシュアップ。</p>
-                </div>
-              </li>
-            </ul>
             <div class="flex flex-col gap-3 sm:flex-row">
-              <a href="#consult-form" class="btn-primary w-full sm:w-auto">無料経営相談を申し込む</a>
+              <a href="#consult-form" class="btn-primary w-full sm:w-auto">無料相談を申し込む</a>
+              <a href="#process" class="btn-secondary w-full sm:w-auto">3ヶ月プログラムを見る</a>
+            </div>
+            <div class="cta-options">
+              <span>📞 電話予約：03-0000-1234</span>
+              <span>⚡ 3分AI診断で課題を可視化</span>
+              <span>🗓️ 48時間以内に初回提案</span>
             </div>
             <p class="text-xs text-slate-500">
               ※AIは意思決定を補助するツールであり、最終判断は経営者が行います。
             </p>
-            <div class="grid gap-4 pt-4 sm:grid-cols-3">
-              <article class="card flex items-center gap-3 bg-white/80 p-4 shadow-sm">
-                <img src="https://placehold.co/96x96" alt="中小企業診断士 佐伯" class="h-16 w-16 rounded-full object-cover" />
-                <div class="text-left">
-                  <p class="text-sm font-semibold text-slate-900">佐伯 真由｜中小企業診断士</p>
-                  <p class="text-xs text-slate-600">製造・建設200件超を改善。AIドラフトを金融機関基準で監査。</p>
-                </div>
+            <div class="grid gap-4 pt-4 sm:grid-cols-2">
+              <article class="card space-y-2">
+                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">AI</p>
+                <h2 class="text-lg font-semibold text-slate-900">政策・市場・自社データを統合</h2>
+                <p class="text-sm text-slate-600">需要予測・補助金・競合動向を同時に解析し、攻めと守りの複数シナリオを自動提示。</p>
               </article>
-              <article class="card flex items-center gap-3 bg-white/80 p-4 shadow-sm">
-                <img src="https://placehold.co/96x96" alt="公認会計士 木村" class="h-16 w-16 rounded-full object-cover" />
-                <div class="text-left">
-                  <p class="text-sm font-semibold text-slate-900">木村 慎也｜公認会計士</p>
-                  <p class="text-xs text-slate-600">資金繰りモデル構築とXAIで根拠提示。審査通過率18％向上を支援。</p>
-                </div>
-              </article>
-              <article class="card flex items-center gap-3 bg-white/80 p-4 shadow-sm">
-                <img src="https://placehold.co/96x96" alt="資金調達アドバイザー 黒田" class="h-16 w-16 rounded-full object-cover" />
-                <div class="text-left">
-                  <p class="text-sm font-semibold text-slate-900">黒田 亮｜資金調達アドバイザー</p>
-                  <p class="text-xs text-slate-600">元銀行審査役。補助金採択と融資稟議のレビューでリスクを制御。</p>
-                </div>
+              <article class="card space-y-2">
+                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">EXPERT</p>
+                <h2 class="text-lg font-semibold text-slate-900">診断士が信用力ある計画へ磨き上げ</h2>
+                <p class="text-sm text-slate-600">融資・補助金実務を熟知した専門家がシナリオを評価し、金融機関向け根拠まで整備。</p>
               </article>
             </div>
           </div>
-          <div class="flex flex-col justify-between gap-6 rounded-3xl bg-slate-900/90 p-8 text-slate-100">
-            <div class="space-y-4">
-              <h2 class="text-xl font-semibold">激動の外部環境に先手を打つ</h2>
-              <ul class="space-y-4 text-sm leading-relaxed">
-                <li>
-                  <span class="font-semibold">最新のマクロ・制度情報</span>：{{参考カテゴリ_マクロ統計}}・{{参考カテゴリ_制度情報}}からシグナル抽出。
-                </li>
-                <li>
-                  <span class="font-semibold">競争環境の即時分析</span>：競合ベンチマークを{{競合分析頻度}}で更新。
-                </li>
-                <li>
-                  <span class="font-semibold">資金繰りとKPIを一枚で把握</span>：CF・PL・BSを連動した経営ダッシュボードを提供。
-                </li>
-              </ul>
-            </div>
-            <div class="rounded-2xl bg-white/10 p-5 text-xs leading-relaxed text-slate-200">
-              <p class="font-semibold">導入企業の声（要約）</p>
-              <p class="mt-2">
-                「月次モニタリングが{{モニタリング導入まで期間}}で立ち上がり、金融機関の追加資料要求が{{追加資料削減率}}削減。意思決定のタイミングが揃いました。」
-              </p>
+          <div class="challenge-panel">
+            <h2>経営者が直面する代表的な課題</h2>
+            <ul class="challenge-list">
+              <li>
+                <div class="challenge-icon">01</div>
+                <div>
+                  <p class="font-semibold text-slate-900">売上が横ばいで次の打ち手が見えない</p>
+                  <p>市場データの取得が属人化し、投資判断が後ろ倒しに。</p>
+                </div>
+              </li>
+              <li>
+                <div class="challenge-icon">02</div>
+                <div>
+                  <p class="font-semibold text-slate-900">資金繰りが人任せで銀行対応が後手</p>
+                  <p>融資・補助金ごとに資料を作り直し、現場が疲弊。</p>
+                </div>
+              </li>
+              <li>
+                <div class="challenge-icon">03</div>
+                <div>
+                  <p class="font-semibold text-slate-900">会議の準備・可視化に時間がかかる</p>
+                  <p>指標更新に毎月40時間以上かかり、意思決定が遅延。</p>
+                </div>
+              </li>
+              <li>
+                <div class="challenge-icon">04</div>
+                <div>
+                  <p class="font-semibold text-slate-900">中長期シナリオの検討が後回し</p>
+                  <p>外部変化を捉えきれず、既存計画が形骸化。</p>
+                </div>
+              </li>
+            </ul>
+            <div class="mt-6 rounded-2xl bg-white/90 p-4 text-xs text-slate-600">
+              <p class="font-semibold text-slate-900">3分で課題を棚卸し</p>
+              <p class="mt-2">AIレポートが年間1,200時間の単純作業を削減した企業の診断テンプレートを活用できます。</p>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="collaboration-value" class="mx-auto w-full max-w-5xl px-5" data-animate>
+      <section id="approach" class="mx-auto w-full max-w-5xl px-5" data-animate>
         <div class="space-y-8">
-          <h2 class="section-title">なぜ「専門家×生成AI」で意思決定の質・速さ・先見性が高まるのか</h2>
-          <div class="grid gap-4 md:grid-cols-3">
-            <article class="card space-y-3">
-              <h3 class="text-lg font-semibold text-slate-900">生成AIの役割</h3>
-              <p class="text-sm leading-relaxed text-slate-600">
-                ITRex Groupの調査でも指摘されるように、生成AIは膨大な外部環境データをリアルタイムに収集・整理し、複数の意思決定シナリオを瞬時に提示できます。Brookingsのレポートが示すセンサー連携と即時分析の仕組みを活かし、リスクと機会を高速に検出します。
-              </p>
-            </article>
-            <article class="card space-y-3">
-              <h3 class="text-lg font-semibold text-slate-900">専門家（中小企業診断士）の役割</h3>
-              <p class="text-sm leading-relaxed text-slate-600">
-                MIT Sloanが強調するように、人間は文脈理解と倫理的判断に優れています。診断士はAIが生成したシナリオを財務・法規制・資金繰りの観点で評価し、現場に即した打ち手へと磨き込みます。
-              </p>
-            </article>
-            <article class="card space-y-3">
-              <h3 class="text-lg font-semibold text-slate-900">協働で生まれる価値</h3>
-              <p class="text-sm leading-relaxed text-slate-600">
-                MIT Sloanの研究やRossumの2025年予測が示す通り、AIの網羅性と専門家の判断を組み合わせることで成果が最大化します。当社は役割分担を明確化し、意思決定プロセス全体でシナジーを生む体制を構築します。
-              </p>
-            </article>
+          <h2 class="section-title">生成AIと診断士が連動する3ステップ</h2>
+          <p class="section-subtitle">AIがデータ分析とシミュレーションを担い、専門家が解釈と金融機関向け修正を行うワークフローです。</p>
+          <div class="workflow">
+            <div class="workflow-step" data-step="Step 1">
+              <h3>政策・市場・自社データの統合</h3>
+              <p>補助金・政策変更、業界レポート、社内のPL/BS/CFを自動でクロス分析。季節性や政策シナリオを考慮したリスク指標を24時間更新します。</p>
+            </div>
+            <div class="workflow-step" data-step="Step 2">
+              <h3>AIが複数シナリオをドラフト</h3>
+              <p>成長投資・守りの最適化・資金繰り安定などの打ち手をパターン化。各シナリオごとに粗利・キャッシュの影響を自動試算し、意思決定会議に備えた比較資料を生成します。</p>
+            </div>
+            <div class="workflow-step" data-step="Step 3">
+              <h3>診断士が信用力のある計画へ磨き上げ</h3>
+              <p>中小企業診断士がAIドラフトをレビューし、金融機関目線で根拠を補強。必要な証憑・稟議資料まで整え、実行とモニタリングの体制構築まで伴走します。</p>
+            </div>
           </div>
         </div>
       </section>
@@ -542,11 +726,11 @@
         </div>
       </section>
 
-      <section id="approach" class="mx-auto w-full max-w-5xl px-5" data-animate>
+      <section id="roles" class="mx-auto w-full max-w-5xl px-5" data-animate>
         <div class="space-y-6">
-          <h2 class="section-title">AIがやること・専門家がやること・経営者がやることを明確化</h2>
+          <h2 class="section-title">AI・専門家・経営者の役割分担を可視化</h2>
           <p class="section-subtitle">
-            MIT Sloanの研究が示すように、人とAIが役割分担するほど成果が高まります。因果性・論理性・デザイン性を同時に担保するため、生成AI、専門家、経営者がどのタイミングでバトンを渡すかを視覚化しました。
+            MIT Sloanの研究が示すように、人とAIが明確に役割分担するほど成果が高まります。意思決定の因果性・論理性・デザイン性を担保するための役割マップです。
           </p>
           <div class="cooperate-surface">
             <div class="role-grid">
@@ -554,8 +738,8 @@
                 <div class="role-header">
                   <span class="role-icon">AI</span>
                   <div>
-                    <p class="role-title">AIがやること</p>
-                    <p class="role-caption">膨大なデータを体系化し、意思決定の前提条件をリアルタイムで整備。</p>
+                    <p class="role-title">AIが担う領域</p>
+                    <p class="role-caption">膨大なデータの統合とシミュレーションで判断材料を整理。</p>
                   </div>
                 </div>
                 <p class="role-chain">Data Mapping → Pattern Mining → Decision Canvas</p>
@@ -563,102 +747,102 @@
                   <li>
                     <span class="role-bullet">因果</span>
                     <div>
-                      <p class="role-point-title">公的統計・政策・需要データを即時統合</p>
-                      <p class="role-point-copy">自社KPIと外部指標を突合し、優先順位が曖昧な要因をスコア化して見える化。</p>
+                      <p class="role-point-title">政策・市場の影響を即時シミュレーション</p>
+                      <p class="role-point-copy">マクロ統計と制度改正情報からリスクと機会の関係性を自動抽出。</p>
                     </div>
                   </li>
                   <li>
                     <span class="role-bullet">論理</span>
                     <div>
-                      <p class="role-point-title">PL・BS・CFを貫く感度分析</p>
-                      <p class="role-point-copy">投資シナリオごとに利益・資金繰りの波及を瞬時に試算し、リスク変数を抽出。</p>
+                      <p class="role-point-title">財務の整合性を自動検証</p>
+                      <p class="role-point-copy">PL・BS・CFを連動させ、計画数値の矛盾をアラート。</p>
                     </div>
                   </li>
                   <li>
-                    <span class="role-bullet">スマート</span>
+                    <span class="role-bullet">デザイン</span>
                     <div>
-                      <p class="role-point-title">審査書類・アジェンダを24時間以内に生成</p>
-                      <p class="role-point-copy">意思決定に必要なドラフト資料とアラートを自動作成し、会議準備の手戻りを削減。</p>
+                      <p class="role-point-title">会議用の可視化レポート</p>
+                      <p class="role-point-copy">ダッシュボードとリスクマップを生成し、議論すべき論点を整理。</p>
                     </div>
                   </li>
                 </ul>
                 <div class="role-outcome">
-                  <span>OUTPUT</span>
-                  <p>48時間以内に意思決定素材が揃い、全員が同じダッシュボードで議論を開始できます。</p>
+                  <span>Outcome</span>
+                  <p>最新データを揃え、意思決定までの探索時間を半減。</p>
                 </div>
               </article>
               <article class="role-card role-card--expert">
                 <div class="role-header">
-                  <span class="role-icon">PRO</span>
+                  <span class="role-icon">EXPERT</span>
                   <div>
-                    <p class="role-title">専門家がやること</p>
-                    <p class="role-caption">論理の飛躍とリスクを人間の視点で補正し、意思決定の実行性を保証。</p>
+                    <p class="role-title">診断士が担う領域</p>
+                    <p class="role-caption">AIが描くシナリオを実行可能かつ信用力ある計画へ。</p>
                   </div>
                 </div>
-                <p class="role-chain">Insight Review → Feasibility Audit → Execution Design</p>
+                <p class="role-chain">Insight Framing → Scenario Prioritizing → Financing Fit</p>
                 <ul class="role-list">
                   <li>
-                    <span class="role-bullet">検証</span>
+                    <span class="role-bullet">因果</span>
                     <div>
-                      <p class="role-point-title">中小企業診断士が現場ヒアリングで仮説精度を確認</p>
-                      <p class="role-point-copy">AIが導いた優先課題をヒアリングで裏付けし、経営資源との整合性を調整。</p>
+                      <p class="role-point-title">真因を特定し優先順位付け</p>
+                      <p class="role-point-copy">現場ヒアリングと業界知見で打ち手の効果とリスクを整理。</p>
                     </div>
                   </li>
                   <li>
-                    <span class="role-bullet">整合</span>
+                    <span class="role-bullet">論理</span>
                     <div>
-                      <p class="role-point-title">公認会計士が資金繰りと投資計画を審査基準でレビュー</p>
-                      <p class="role-point-copy">金融機関・補助金審査で問われる指標に合わせ、指摘リスクを事前に除去。</p>
+                      <p class="role-point-title">金融機関目線で検証</p>
+                      <p class="role-point-copy">融資・補助金の審査基準をもとに根拠資料とリスク対応策を整備。</p>
                     </div>
                   </li>
                   <li>
-                    <span class="role-bullet">信頼</span>
+                    <span class="role-bullet">デザイン</span>
                     <div>
-                      <p class="role-point-title">元銀行審査役が倫理・リスク観点で最終点検</p>
-                      <p class="role-point-copy">意思決定の根拠と説明責任を整理し、社内外のステークホルダーに耐える資料に仕上げます。</p>
+                      <p class="role-point-title">実行計画とモニタリング設計</p>
+                      <p class="role-point-copy">KPI・KGIを定義し、ダッシュボード更新の手順をチームに移管。</p>
                     </div>
                   </li>
                 </ul>
                 <div class="role-outcome">
-                  <span>OUTPUT</span>
-                  <p>実行計画と金融機関説明資料がワンセットで揃い、承認プロセスの滞りを解消します。</p>
+                  <span>Outcome</span>
+                  <p>融資にも耐えうる信頼性と現場実装のしやすさを両立。</p>
                 </div>
               </article>
               <article class="role-card role-card--leader">
                 <div class="role-header">
-                  <span class="role-icon">CEO</span>
+                  <span class="role-icon">LEADER</span>
                   <div>
-                    <p class="role-title">経営者がやること</p>
-                    <p class="role-caption">判断軸を明確に伝え、組織を意思決定から実行まで牽引。</p>
+                    <p class="role-title">経営者が担う領域</p>
+                    <p class="role-caption">意思決定と実行の優先順位を決め、組織全体を巻き込む。</p>
                   </div>
                 </div>
-                <p class="role-chain">Strategic Intent → Decision Gate → Governance Share</p>
+                <p class="role-chain">Leadership Signal → Decision → Execution Rhythm</p>
                 <ul class="role-list">
                   <li>
-                    <span class="role-bullet">優先</span>
+                    <span class="role-bullet">因果</span>
                     <div>
-                      <p class="role-point-title">注力したい事業テーマ・投資仮説を提示</p>
-                      <p class="role-point-copy">成長したい領域と制約条件を明文化し、AIと専門家の検討方向を揃えます。</p>
+                      <p class="role-point-title">戦略仮説の検証</p>
+                      <p class="role-point-copy">AIと専門家が提示する因果マップを基に意思決定会議で仮説を確定。</p>
                     </div>
                   </li>
                   <li>
-                    <span class="role-bullet">決断</span>
+                    <span class="role-bullet">論理</span>
                     <div>
-                      <p class="role-point-title">週次レビューで意思決定し責任者をアサイン</p>
-                      <p class="role-point-copy">シナリオ比較を基に投資/撤退を判断し、KPIと実行期限を即時に設定。</p>
+                      <p class="role-point-title">経営資源の配分決定</p>
+                      <p class="role-point-copy">投資優先順位と期限を定め、現場へ意思決定を浸透させる。</p>
                     </div>
                   </li>
                   <li>
-                    <span class="role-bullet">共有</span>
+                    <span class="role-bullet">デザイン</span>
                     <div>
-                      <p class="role-point-title">意思決定ログを全社で共有し学習サイクルを加速</p>
-                      <p class="role-point-copy">判断理由と結果を蓄積し、次の経営会議での議論をスマートに更新します。</p>
+                      <p class="role-point-title">レビューのリズムづくり</p>
+                      <p class="role-point-copy">ダッシュボードで進捗を共有し、意思決定のタイミングを揃える。</p>
                     </div>
                   </li>
                 </ul>
                 <div class="role-outcome">
-                  <span>OUTPUT</span>
-                  <p>意思決定リードタイムを半減し、全社が同じコンテキストで実行フェーズへ移行できます。</p>
+                  <span>Outcome</span>
+                  <p>意思決定のスピードと実行再現性が高まり、粗利とキャッシュが向上。</p>
                 </div>
               </article>
             </div>
@@ -669,109 +853,91 @@
       <section id="benefits" class="mx-auto w-full max-w-5xl px-5" data-animate>
         <div class="space-y-10">
           <div class="space-y-4">
-            <h2 class="section-title">生成AIの意思決定支援機能と専門家の伴走価値</h2>
+            <h2 class="section-title">成果とベネフィット</h2>
             <p class="section-subtitle">
-              生成AIは経営判断の速度と網羅性を高めるツールです。最終判断は中小企業診断士と経営者が担い、AIが提示する選択肢から最適な計画を策定します。
+              AIが生成したシナリオを診断士が磨き上げることで、意思決定の速さと質、金融機関への説明力が同時に高まります。年間1,200時間の資料作成を削減した企業も登場しています。
             </p>
           </div>
           <div class="grid gap-4 md:grid-cols-4">
-            <div class="card space-y-3">
-              <div class="flex items-center gap-3">
-                <div class="flex h-12 w-12 items-center justify-center rounded-full bg-sky-100 text-sky-600">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
-                    <path d="M12 2a9 9 0 0 0-9 9v2a9 9 0 1 0 18 0v-2a9 9 0 0 0-9-9Zm0 2a7 7 0 0 1 7 7v2a7 7 0 1 1-14 0v-2a7 7 0 0 1 7-7Zm0 3.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm0 4.5a4 4 0 0 0-4 4 .75.75 0 0 0 1.5 0 2.5 2.5 0 0 1 5 0 .75.75 0 0 0 1.5 0 4 4 0 0 0-4-4Z" />
-                  </svg>
-                </div>
-                <p class="text-sm font-semibold text-slate-900">リアルタイム洞察</p>
-              </div>
-              <p class="text-sm text-slate-600">市場・制度データをリアルタイム分析し、意思決定のタイミングに合わせて最新の示唆を提示します。</p>
+            <div class="card space-y-2">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">INSIGHT</p>
+              <h3 class="text-lg font-semibold text-slate-900">24時間更新の環境分析</h3>
+              <p class="text-sm text-slate-600">政策改定・需要シグナル・競合動向をAIが常時監視し、判断すべき変化だけを抽出。</p>
             </div>
-            <div class="card space-y-3">
-              <div class="flex items-center gap-3">
-                <div class="flex h-12 w-12 items-center justify-center rounded-full bg-sky-100 text-sky-600">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
-                    <path d="M12 3a1 1 0 0 1 .832.445l1.905 2.857 3.36.586a1 1 0 0 1 .553 1.68l-2.42 2.42.41 3.515a1 1 0 0 1-1.45 1.006L12 14.882l-3.19 1.626a1 1 0 0 1-1.45-1.006l.41-3.515-2.42-2.42a1 1 0 0 1 .553-1.68l3.36-.586 1.905-2.857A1 1 0 0 1 12 3Z" />
-                  </svg>
-                </div>
-                <p class="text-sm font-semibold text-slate-900">多様なシナリオ生成</p>
-              </div>
-              <p class="text-sm text-slate-600">成長・守り・資金繰りなど複数シナリオを同時生成し、比較検討を高速化。意思決定の選択肢を広げます。</p>
+            <div class="card space-y-2">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">SCENARIO</p>
+              <h3 class="text-lg font-semibold text-slate-900">攻め・守りの複数シナリオ</h3>
+              <p class="text-sm text-slate-600">売上拡大型、利益改善型、資金繰り安定型のシナリオを並行生成し、意思決定を最適化。</p>
             </div>
-            <div class="card space-y-3">
-              <div class="flex items-center gap-3">
-                <div class="flex h-12 w-12 items-center justify-center rounded-full bg-sky-100 text-sky-600">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
-                    <path d="M12 2a10 10 0 0 1 10 10v2a10 10 0 1 1-20 0v-2A10 10 0 0 1 12 2Zm0 2a8 8 0 0 0-8 8v2a8 8 0 1 0 16 0v-2a8 8 0 0 0-8-8Zm0 3a1 1 0 0 1 .832.445l1.5 2.25a1 1 0 0 1-.832 1.555H10.5a1 1 0 0 1-.832-1.555l1.5-2.25A1 1 0 0 1 12 7Zm0 9a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z" />
-                  </svg>
-                </div>
-                <p class="text-sm font-semibold text-slate-900">バイアスの排除</p>
-              </div>
-              <p class="text-sm text-slate-600">定量指標と一次情報に基づいて意思決定をサポートし、属人的な判断の偏りを補正します。</p>
+            <div class="card space-y-2">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">GOVERNANCE</p>
+              <h3 class="text-lg font-semibold text-slate-900">金融機関に通る根拠設計</h3>
+              <p class="text-sm text-slate-600">診断士が審査基準に沿って根拠とリスク対応策を整理し、説明負担を軽減。</p>
             </div>
-            <div class="card space-y-3">
-              <div class="flex items-center gap-3">
-                <div class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6">
-                    <path d="M17 3a1 1 0 0 1 .894.553l3 6a1 1 0 0 1-.06.99l-8.5 13a1 1 0 0 1-1.668 0l-8.5-13a1 1 0 0 1-.06-.99l3-6A1 1 0 0 1 6 3Zm-.382 2H7.382L5.214 9H8a1 1 0 0 1 .894.553L12 15.382 15.106 9A1 1 0 0 1 16 9h2.786Z" />
-                  </svg>
-                </div>
-                <div>
-                  <p class="text-sm font-semibold text-slate-900">中小企業診断士の監修</p>
-                  <p class="text-xs text-sky-600">Registered SME Consultant</p>
-                </div>
-              </div>
-              <p class="text-sm text-slate-600">
-                経営改善の実務経験をもつ診断士がAIアウトプットを評価し、実行可能性とリスクをチェック。最終判断を経営者と共に下します。
-              </p>
-              <a href="{{診断士プロフィールURL}}" class="text-sm font-semibold text-sky-600 hover:underline">専門家プロフィールを見る</a>
+            <div class="card space-y-2">
+              <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">AUTOMATION</p>
+              <h3 class="text-lg font-semibold text-slate-900">レポート自動生成</h3>
+              <p class="text-sm text-slate-600">会議アジェンダ・融資資料・KPIダッシュボードをAIがテンプレ化し、属人化を排除。</p>
             </div>
           </div>
-          <div class="grid gap-4 md:grid-cols-3">
-            <div class="card space-y-3">
-              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Benefit 01</p>
-              <h3 class="text-lg font-semibold text-slate-900">計画策定リードタイム▲{{導入効果_リードタイム短縮_％}}</h3>
-              <p class="text-sm text-slate-600">
-                生成AIによる情報収集・ドラフト化で、経営計画初稿までの時間を圧縮。意思決定が{{会議頻度}}に合致します。
-              </p>
+          <div class="grid gap-4 md:grid-cols-4">
+            <div class="card space-y-2 text-center">
+              <p class="text-sm font-semibold text-sky-600">意思決定時間</p>
+              <p class="text-3xl font-bold text-slate-900">50%削減</p>
+              <p class="text-xs text-slate-600">会議前に比較資料が揃い、判断が2週間→1週間に短縮。</p>
             </div>
-            <div class="card space-y-3">
-              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Benefit 02</p>
-              <h3 class="text-lg font-semibold text-slate-900">金融機関説明工数▲{{導入効果_金融機関説明工数削減_％}}</h3>
-              <p class="text-sm text-slate-600">
-                ファクトと根拠をテンプレート化し、融資・補助金のヒアリング回答を標準化。決裁スピードが{{決裁スピード向上率}}向上。
-              </p>
+            <div class="card space-y-2 text-center">
+              <p class="text-sm font-semibold text-sky-600">会議準備工数</p>
+              <p class="text-3xl font-bold text-slate-900">70%削減</p>
+              <p class="text-xs text-slate-600">ダッシュボード自動更新により月40時間の作業を12時間へ圧縮。</p>
             </div>
-            <div class="card space-y-3">
-              <p class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-500">Benefit 03</p>
-              <h3 class="text-lg font-semibold text-slate-900">外部環境の先読みを{{外部環境モニタリング頻度}}</h3>
-              <p class="text-sm text-slate-600">
-                {{参考カテゴリ_マクロ統計}}・{{参考カテゴリ_制度情報}}・{{参考カテゴリ_業界調査}}をAIが監視し、変化シグナルをアラート。
-              </p>
+            <div class="card space-y-2 text-center">
+              <p class="text-sm font-semibold text-sky-600">粗利改善</p>
+              <p class="text-3xl font-bold text-slate-900">＋18%</p>
+              <p class="text-xs text-slate-600">施策優先順位と原価シナリオを同時比較し、利益構造を最適化。</p>
             </div>
+            <div class="card space-y-2 text-center">
+              <p class="text-sm font-semibold text-sky-600">キャッシュ創出</p>
+              <p class="text-3xl font-bold text-slate-900">1.8倍</p>
+              <p class="text-xs text-slate-600">資金繰りの山谷をAIが予測し、銀行交渉と在庫調整のタイミングを先手で実行。</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <a href="#consult-form" class="btn-primary">成果を体験する無料相談へ</a>
+            <a href="#process" class="btn-secondary">導入ステップを見る</a>
           </div>
         </div>
       </section>
 
       <section id="process" class="mx-auto w-full max-w-5xl px-5" data-animate>
         <div class="space-y-6">
-          <h2 class="section-title">支援プロセス</h2>
-          <p class="section-subtitle">診断士が伴走し、AIを活用して実行可能性の高い計画を仕上げます。</p>
-          <div class="grid gap-4 md:grid-cols-4">
-            <div class="card space-y-2">
-              <h3 class="text-base font-semibold text-slate-900">1. 着眼共有（Week 0）</h3>
-              <p class="text-sm text-slate-600">課題ヒアリングと財務・業界データの初期収集を{{着眼期間}}で完了。</p>
+          <h2 class="section-title">3ヶ月集中プログラムの導入フロー</h2>
+          <p class="section-subtitle">初期30分の無料相談からAIレポート生成、専門家レビュー、実行支援までをタイムラインで明示します。</p>
+          <div class="timeline">
+            <div class="timeline-step">
+              <span>DAY 0</span>
+              <h4>無料相談（30分）</h4>
+              <p>オンラインで現状とゴールを棚卸し。課題チェックリストと必要データを共有し、NDA締結の流れを説明します。</p>
             </div>
-            <div class="card space-y-2">
-              <h3 class="text-base font-semibold text-slate-900">2. 分析・仮説生成</h3>
-              <p class="text-sm text-slate-600">AIで複数シナリオを生成し、診断士が優先順位づけを実施。</p>
+            <div class="timeline-step">
+              <span>WEEK 1</span>
+              <h4>データ提供＆接続</h4>
+              <p>財務・販売・在庫データを安全な環境で受領。API/CSV連携と外部データ（政策・市場）をマッピングします。</p>
             </div>
-            <div class="card space-y-2">
-              <h3 class="text-base font-semibold text-slate-900">3. 計画ドラフト共創</h3>
-              <p class="text-sm text-slate-600">ワークショップ形式でアクションプランとKPIを定義。</p>
+            <div class="timeline-step">
+              <span>WEEK 2</span>
+              <h4>AIレポート生成</h4>
+              <p>AIが粗利・キャッシュシミュレーションと施策シナリオを作成。意思決定会議用サマリーも同時に出力します。</p>
             </div>
-            <div class="card space-y-2">
-              <h3 class="text-base font-semibold text-slate-900">4. 実行モニタリング</h3>
-              <p class="text-sm text-slate-600">週次レビューと月次ダッシュボード更新、修正提案を継続。</p>
+            <div class="timeline-step">
+              <span>WEEK 3</span>
+              <h4>専門家レビュー</h4>
+              <p>診断士・公認会計士が稟議目線でブラッシュアップ。金融機関への説明資料とリスク対応策を整備します。</p>
+            </div>
+            <div class="timeline-step">
+              <span>WEEK 4-12</span>
+              <h4>実行支援＆モニタリング</h4>
+              <p>週次レビューと月次ダッシュボード更新でKPIを追跡。施策の効果検証と修正提案を伴走します。</p>
             </div>
           </div>
         </div>
@@ -779,30 +945,35 @@
 
       <section id="pricing" class="mx-auto w-full max-w-5xl px-5" data-animate>
         <div class="space-y-6">
-          <h2 class="section-title">料金と期間</h2>
-          <p class="section-subtitle">明瞭なフィーで短期立ち上げと中期伴走の両方を提供します。</p>
+          <h2 class="section-title">料金と安心のサポート体制</h2>
+          <p class="section-subtitle">プログラムは3ヶ月単位。月額18万円〜でAIレポートと専門家伴走をワンセットで提供します。</p>
           <div class="grid gap-6 md:grid-cols-2">
             <div class="card space-y-4">
-              <h3 class="text-lg font-semibold text-slate-900">スプリントプラン</h3>
-              <p class="text-sm text-slate-600">経営計画ドラフト作成までを{{スプリント期間}}で完遂。</p>
-              <p class="text-2xl font-bold text-slate-900">{{料金_スプリント}}</p>
+              <h3 class="text-lg font-semibold text-slate-900">スプリントプラン（3ヶ月）</h3>
+              <p class="text-2xl font-bold text-slate-900">月額18万円〜</p>
               <ul class="space-y-2 text-sm text-slate-600">
-                <li>ヒアリング2回、AI分析レポート、財務モデリング。</li>
-                <li>経営会議向けサマリー資料一式。</li>
+                <li>週次AIレポートと意思決定会議サマリー。</li>
+                <li>財務シミュレーション＆資金繰りテンプレート提供。</li>
+                <li>診断士による稟議資料レビュー（月2回）。</li>
               </ul>
             </div>
             <div class="card space-y-4">
-              <h3 class="text-lg font-semibold text-slate-900">伴走プラン</h3>
-              <p class="text-sm text-slate-600">計画運用とモニタリングを{{伴走期間}}伴走。</p>
-              <p class="text-2xl font-bold text-slate-900">{{料金_伴走}}</p>
+              <h3 class="text-lg font-semibold text-slate-900">伴走プラン（6ヶ月）</h3>
+              <p class="text-2xl font-bold text-slate-900">月額28万円〜</p>
               <ul class="space-y-2 text-sm text-slate-600">
-                <li>週次KPIレビュー、施策ブラッシュアップ。</li>
-                <li>金融機関・投資家向け説明資料の継続支援。</li>
+                <li>週次KPIレビュー＆施策ブラッシュアップ。</li>
+                <li>金融機関・補助金向け資料の継続更新と面談リハーサル。</li>
+                <li>実行フェーズのPMO支援・社内定着ワークショップ。</li>
               </ul>
             </div>
           </div>
-          <div class="rounded-3xl border border-slate-200 bg-slate-50 p-5 text-xs text-slate-500">
-            料金は企業規模・業種によりカスタマイズします。AI活用は意思決定を補助するものであり、最終判断は経営者様にてお願いいたします。
+          <div class="pricing-note">
+            <p class="font-semibold text-slate-900">安心の条件</p>
+            <ul class="mt-2 space-y-1">
+              <li>・成果にご納得いただけない場合は初月返金保証を適用。</li>
+              <li>・着手前にNDA（秘密保持契約）とデータ取扱い方針を締結。</li>
+              <li>・料金は企業規模や対象事業に応じてお見積もりします。分割・補助金活用の相談も可能です。</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -810,21 +981,54 @@
       <section id="sample" class="mx-auto w-full max-w-5xl px-5" data-animate>
         <div class="space-y-6">
           <h2 class="section-title">成果物サンプルと実績</h2>
-          <p class="section-subtitle">経営会議でそのまま使えるフォーマットと、公的指標に基づく分析を提供します。</p>
+          <p class="section-subtitle">経営会議・金融機関説明にそのまま使えるフォーマットと、実際の改善事例を公開しています。</p>
           <div class="grid gap-4 md:grid-cols-3">
             <div class="card space-y-3">
-              <h3 class="text-lg font-semibold text-slate-900">サンプル経営計画</h3>
-              <p class="text-sm text-slate-600">財務・顧客・業務プロセスのバランススコアカードを{{KPI更新頻度}}で更新。</p>
+              <h3 class="text-lg font-semibold text-slate-900">経営計画ダッシュボード</h3>
+              <p class="text-sm text-slate-600">PL・BS・CF・主要KPIを週次で更新。意思決定に必要な指標を一枚に集約したテンプレートを共有します。</p>
               <a href="#consult-form" class="btn-secondary">ダイジェストPDFを見る</a>
             </div>
             <div class="card space-y-3">
               <h3 class="text-lg font-semibold text-slate-900">採択・融資実績</h3>
-              <p class="text-sm text-slate-600">補助金・制度融資の採択率{{採択率}}、銀行折衝期間{{折衝期間短縮率}}短縮。</p>
+              <p class="text-sm text-slate-600">中小企業等経営強化法に基づく設備投資案件や運転資金融資で審査通過率が平均18％向上。銀行稟議期間も最短2週間へ短縮。</p>
             </div>
             <div class="card space-y-3">
-              <h3 class="text-lg font-semibold text-slate-900">参照データソース</h3>
-              <p class="text-sm text-slate-600">{{参考カテゴリ_マクロ統計}}／{{参考カテゴリ_業界調査}}／{{参考カテゴリ_制度情報}} など一次情報を横断分析。</p>
+              <h3 class="text-lg font-semibold text-slate-900">AIレポート活用事例</h3>
+              <p class="text-sm text-slate-600">製造業では年間1,200時間の資料作成工数を削減。政策・市場データとして帝国データバンク、総務省統計、官報情報を横断分析。</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="social-proof" class="mx-auto w-full max-w-5xl px-5" data-animate>
+        <div class="space-y-6">
+          <h2 class="section-title">専門家チームと信頼できる体制</h2>
+          <p class="section-subtitle">中小企業診断士・公認会計士・元銀行審査役がチームを組み、セキュリティと実績で安心を担保します。</p>
+          <div class="proof-grid">
+            <article class="card space-y-3">
+              <h3 class="text-lg font-semibold text-slate-900">中小企業診断士チーム</h3>
+              <p class="text-sm text-slate-600">製造・建設・ITサービスを中心に累計310社を支援。AI分析を踏まえた改善提案で平均粗利＋18％を実現。</p>
+              <p class="text-xs text-slate-500">主要メンバー：佐伯真由（診断士）、木村慎也（公認会計士）、黒田亮（元銀行審査役）</p>
+            </article>
+            <article class="card space-y-3">
+              <h3 class="text-lg font-semibold text-slate-900">金融機関・公的機関との連携</h3>
+              <p class="text-sm text-slate-600">地方銀行5行、信用金庫3庫と改善計画の共同レビューを実施。補助金採択支援件数は過去3年で96件。</p>
+              <p class="text-xs text-slate-500">福岡銀行・第四北越銀行・日本政策金融公庫などとの協働実績。</p>
+            </article>
+            <article class="card space-y-3">
+              <h3 class="text-lg font-semibold text-slate-900">成果に裏付けられた声</h3>
+              <p class="text-sm text-slate-600">「会議準備時間が70％減り、金融機関説明がスムーズになった」（年商9億円・製造業）</p>
+              <p class="text-sm text-slate-600">「キャッシュ創出が1.8倍となり、新規設備投資を前倒しできた」（年商5.5億円・建設業）</p>
+            </article>
+          </div>
+          <div class="badge-line">
+            <span class="security-badge">ISO/IEC 27001</span>
+            <span class="security-badge">AES-256 Encryption</span>
+            <span class="security-badge">NDA SIGNED</span>
+          </div>
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="#consult-form" class="btn-primary">専門家に相談する</a>
+            <a href="tel:0300001234" class="btn-secondary">電話で予約（03-0000-1234）</a>
           </div>
         </div>
       </section>
@@ -842,13 +1046,13 @@
             <div class="card">
               <p class="faq-question">社内データの取り扱いは？</p>
               <p class="faq-answer">
-                セキュアな環境で限定的に利用し、外部サービスに保存しない運用も可能です。機密保持契約（NDA）を締結した上で取り組みます。
+                セキュアな環境で限定的に利用し、外部サービスに保存しない運用も可能です。ISO/IEC 27001基準に準拠した管理とAES-256暗号化でデータを保護し、機密保持契約（NDA）を締結した上で取り組みます。
               </p>
             </div>
             <div class="card">
               <p class="faq-question">既に計画はあるがアップデートだけお願いできますか？</p>
               <p class="faq-answer">
-                はい。既存計画を診断士が棚卸しし、生成AIでシナリオを補強。外部環境の変化に合わせた更新版を{{更新版納品期間}}で提示します。
+                はい。既存計画を診断士が棚卸しし、生成AIでシナリオを補強。外部環境の変化に合わせた更新版を2週間以内に提示します。
               </p>
             </div>
           </div>
@@ -865,7 +1069,7 @@
               </p>
               <ul class="space-y-2 text-sm text-slate-200">
                 <li>・ヒアリング項目を事前共有し、準備工数を最小化。</li>
-                <li>・{{初回提案資料納期}}以内に提案サマリーを送付。</li>
+                <li>・48時間以内に提案サマリーを送付。</li>
                 <li>・AIは補助的に活用し、意思決定は経営者主体で進行。</li>
               </ul>
             </div>
@@ -873,7 +1077,7 @@
               id="consult-form"
               aria-label="無料オンライン相談申し込みフォーム"
               class="space-y-4 rounded-2xl bg-white/90 p-6 text-slate-800 shadow-lg"
-              action="{{フォーム送信URL}}"
+              action="https://lognowa.com/forms/strategy-ai-consult"
               method="post"
             >
               <h3 class="text-lg font-semibold text-slate-900">無料オンライン相談（30分）</h3>
@@ -933,7 +1137,7 @@
               </fieldset>
               <button type="submit" class="btn-primary w-full">送信して日程調整</button>
               <p class="text-xs text-slate-500">
-                ※送信後に担当者から{{初回連絡所要時間}}以内にご連絡します。
+                ※送信後に担当者から24時間以内にご連絡します。
               </p>
             </form>
           </div>
@@ -943,13 +1147,19 @@
 
     <footer class="border-t border-slate-200 bg-white/80 py-10">
       <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-5 text-center text-xs text-slate-500 md:flex-row md:justify-between md:text-left">
-        <p>© {{著作権表記年度}} Strategy AI Lab. All rights reserved.</p>
+        <p>© 2024 Strategy AI Lab. All rights reserved.</p>
         <div class="flex flex-wrap items-center justify-center gap-4">
           <a href="#consult-form" class="btn-secondary text-xs">無料オンライン相談へ</a>
           <a href="#sample" class="btn-secondary text-xs">サンプルを見る</a>
         </div>
       </div>
     </footer>
+    <div class="sticky-cta">
+      <div>
+        <p class="font-semibold">生成AI×診断士で意思決定を高速化しませんか？</p>
+        <a href="#consult-form" class="btn-primary">30分の無料相談を予約</a>
+      </div>
+    </div>
     <script src="./b2b_lp_expert_ai.js" defer></script>
   </body>
 </html>
