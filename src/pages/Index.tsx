@@ -126,7 +126,7 @@ const heroMetrics = [
 const heroAllianceExperts = [
   {
     name: "田中 圭",
-    role: "元メガバンク法人融資担当",
+    role: "資金調達スペシャリスト",
     focus: "資金繰り・融資交渉",
     photo: expertTanakaPhoto,
   },
@@ -138,7 +138,7 @@ const heroAllianceExperts = [
   },
   {
     name: "斎藤 美咲",
-    role: "公認会計士 / 税理士",
+    role: "財務会計専門家 / 税理士",
     focus: "財務管理・補助金対策",
     photo: expertSaitoPhoto,
   },
@@ -385,7 +385,7 @@ const simulatorHighlights = [
   },
   {
     label: "専門家の審査目線を反映",
-    description: "元メガバンク審査部・会計士がパラメータを監修。",
+    description: "資金調達に精通した財務会計専門家がパラメータを監修。",
     icon: Shield,
   },
   {
@@ -443,7 +443,7 @@ const responsibilityColumns: ResponsibilityColumn[] = [
     title: "専門家がやること",
     summary: "レビューと伴走支援で実行精度を担保。",
     detail:
-      "金融機関・コンサル経験者がAI出力をレビューし、融資や投資審査で求められる水準に仕上げ、実行フェーズも伴走します。",
+      "資金調達と戦略策定に精通した専門家がAI出力をレビューし、融資や投資審査で求められる水準に仕上げ、実行フェーズも伴走します。",
     points: ["レビューとチューニング", "金融機関連携・交渉支援", "四半期伴走ミーティング"],
     icon: Users2,
     accent: "sky",
@@ -613,7 +613,7 @@ const painPoints: PainPoint[] = [
     aiAction:
       "AI: 四半期ごとのシナリオ比較・財務予測・会議アジェンダを48時間以内に生成。",
     expertAction:
-      "専門家: 診断士と会計士が論点整理と審査基準の観点でレビューし、決裁に必要な根拠を補強。",
+      "専門家: 診断士と財務会計専門家が論点整理と審査基準の観点でレビューし、決裁に必要な根拠を補強。",
     impact: "意思決定リードタイム -52% / 計画作成工数 -80%",
     impactDetail:
       "blog.iil.comが強調するAI活用による迅速な意思決定を体現し、導入企業平均で意思決定リードタイム52%短縮・計画作成工数80%削減。",
@@ -629,7 +629,7 @@ const painPoints: PainPoint[] = [
     aiAction:
       "AI: DSCR・CCCなど主要指標を自動計算し、複数の返済シナリオと資金繰りシートを作成。",
     expertAction:
-      "専門家: 元メガバンク融資担当が想定問答と裏付け資料を監修し、金融機関との対話を設計。",
+      "専門家: 資金調達スペシャリストが想定問答と裏付け資料を監修し、金融機関との対話を設計。",
     impact: "キャッシュ創出 1.8倍",
     impactDetail:
       "AIドラフトと専門家のダブルチェックで資金調達の確度が向上し、導入後12か月の運転資金キャッシュフローは平均1.8倍に。",
@@ -677,7 +677,7 @@ const serviceFeatures: ServiceFeature[] = [
   },
   {
     title: "専門家レビューと倫理チェック",
-    description: "中小企業診断士・会計士がAIの弱点を補正。",
+    description: "中小企業診断士・財務会計専門家がAIの弱点を補正。",
     detail:
       "ハルシネーションや倫理リスクを洗い出し、エビデンスと政策情報を追記。AI提案を融資審査レベルに磨き上げ、透明な意思決定プロセスを担保します。",
     benefit: "審査通過率 +18pt",
@@ -739,7 +739,7 @@ const processSteps: ProcessStep[] = [
   },
   {
     title: "専門家との面談",
-    description: "診断士と会計士が内容を審査。金融機関が求める根拠を補強します。",
+    description: "診断士と財務会計専門家が内容を審査。金融機関が求める根拠を補強します。",
     aiRole: "フィードバックを反映しモデルと資料を更新",
     humanRole: "専門家が審査目線で修正し実行計画を調整",
     icon: ShieldCheck,
@@ -776,7 +776,7 @@ const processHighlights: ProcessHighlight[] = [
   {
     title: "専任チーム",
     value: "AI×専門家3名",
-    description: "診断士・会計士・AIストラテジストが担当",
+    description: "診断士・財務会計専門家・AIストラテジストが担当",
     icon: Users2,
   },
   {
@@ -950,7 +950,7 @@ const successStories: SuccessStory[] = [
     aiRole:
       "金融・受注・マクロ指標を統合し、資金繰りシミュレーションとリスクアラートをリアルタイム生成。",
     expertRole:
-      "元メガバンク担当者が調達シナリオを監修し、交渉資料と想定問答を準備。",
+      "資金調達スペシャリストが調達シナリオを監修し、交渉資料と想定問答を準備。",
     governance:
       "投資委員会向けにAIが前提条件と感度分析を自動更新。金融機関共有用ダイジェストも同時作成。",
     metrics: [
@@ -1163,7 +1163,7 @@ type ExpertCard = {
 const expertCards: ExpertCard[] = [
   {
     name: "田中 圭",
-    title: "元メガバンク法人融資担当",
+    title: "資金調達スペシャリスト",
     bio: "大型調達案件を多数支援。資本政策と金融機関交渉に精通。",
     photo: expertTanakaPhoto,
     credentials: [
@@ -1183,7 +1183,7 @@ const expertCards: ExpertCard[] = [
   },
   {
     name: "斎藤 美咲",
-    title: "公認会計士 / 税理士",
+    title: "財務会計専門家 / 税理士",
     bio: "補助金・助成金対応と財務モデリングの専門家。",
     photo: expertSaitoPhoto,
     credentials: [
@@ -1311,7 +1311,7 @@ const faqHighlights: FaqHighlight[] = [
   {
     title: "四半期ごとの戦略・リスクレビュー",
     description:
-      "元外資戦略コンサルと公認会計士が経営会議に同席し、AIが出す示唆の妥当性と法務・財務リスクを同時に点検。意思決定の議事録もAIで要約し、説明責任を残します。",
+      "元外資戦略コンサルと財務会計専門家が経営会議に同席し、AIが出す示唆の妥当性と法務・財務リスクを同時に点検。意思決定の議事録もAIで要約し、説明責任を残します。",
     metric: "伴走セッション 180件/年",
     supporting: "年商5,000万〜15億円の経営者に最適化",
     icon: Workflow,
@@ -1962,7 +1962,7 @@ const Index = () => {
                 <span>意思決定の質・速さ・先見性を高める経営計画</span>
               </h1>
               <p className="hero-lead">
-                経営改善で鍛えた診断士・会計士が生成AIを操り、経営者の意思決定を先回りで支援します。
+                経営改善で鍛えた診断士・財務会計専門家が生成AIを操り、経営者の意思決定を先回りで支援します。
                 政策・市場・自社データをAIが集約し、専門家が金融審査レベルまで磨き込むからこそ、意思決定の質・速さ・先見性を一気に引き上げます。
               </p>
               <ul className="hero-points">
@@ -2421,7 +2421,7 @@ const Index = () => {
               })}
             </div>
             <p className="features-note" data-animate>
-              すべてのアウトプットは中小企業診断士・会計士がレビューし、AIのハルシネーションを排除したうえで金融機関や取締役会へ提出できる形に整えます。
+              すべてのアウトプットは中小企業診断士・財務会計専門家がレビューし、AIのハルシネーションを排除したうえで金融機関や取締役会へ提出できる形に整えます。
             </p>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
