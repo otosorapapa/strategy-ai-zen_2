@@ -55,6 +55,22 @@ example when running the provided Node.js server locally on port 3001), set the 
 to the full endpoint URL before building or starting the frontend. Alternatively, define `VITE_CONTACT_API_BASE_URL` (e.g.
 `https://example.com`) to automatically append `/api/contact`.
 
+### Connecting to WordPress Contact Form 7
+
+To send submissions directly to a WordPress site that uses Contact Form 7, configure the following environment variables
+before building or starting the frontend:
+
+```sh
+VITE_CONTACT_API_ENDPOINT=wordpress
+VITE_WORDPRESS_CONTACT_ENDPOINT="https://your-site.example/wp-json/contact-form-7/v1/contact-forms/<ID>/feedback"
+# Uncomment if the WordPress endpoint is protected by HTTP Basic authentication
+# VITE_WORDPRESS_AUTH_USER=your-username
+# VITE_WORDPRESS_AUTH_PASSWORD=your-password
+```
+
+When `VITE_CONTACT_API_ENDPOINT` is set to `wordpress`, the frontend automatically switches to the Contact Form 7 submission
+flow, including support for optional Basic authentication headers when credentials are provided.
+
 **Edit a file directly in GitHub**
 
 - Navigate to the desired file(s).

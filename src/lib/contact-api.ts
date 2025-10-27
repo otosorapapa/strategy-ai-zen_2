@@ -19,6 +19,58 @@ export type ContactSubmissionResponse = {
 
 const DEFAULT_ENDPOINT = "/api/contact";
 
+type EndpointMode = "wordpress" | "default";
+
+function resolveEndpointMode(): EndpointMode {
+  const configured = (
+    import.meta.env.VITE_CONTACT_API_ENDPOINT as string | undefined
+  )
+    ?.trim()
+    .toLowerCase();
+
+  if (configured === "wordpress") {
+    return "wordpress";
+  }
+
+  return "default";
+}
+
+function getWordPressEndpoint(): string {
+  const endpoint = import.meta.env
+    .VITE_WORDPRESS_CONTACT_ENDPOINT as string | undefined;
+
+  if (endpoint && endpoint.trim().length > 0) {
+    const normalized = endpoint.trim();
+    return normalized.endsWith("/")
+      ? normalized.slice(0, -1)
+      : normalized;
+  }
+
+  console.error(
+    "WordPress contact endpoint is not configured. Please set VITE_WORDPRESS_CONTACT_ENDPOINT."
+  );
+  throw new Error("送信先が正しく設定されていません。サイト管理者にお問い合わせください。");
+}
+
+function getWordPressAuthHeader(): string | null {
+  const rawUser = import.meta.env
+    .VITE_WORDPRESS_AUTH_USER as string | undefined;
+  const password = import.meta.env
+    .VITE_WORDPRESS_AUTH_PASSWORD as string | undefined;
+
+  const username = rawUser?.trim();
+  if (!username) {
+    return null;
+  }
+
+  if (typeof btoa !== "function") {
+    return null;
+  }
+
+  const encoded = btoa(`${username}:${password ?? ""}`);
+  return `Basic ${encoded}`;
+}
+
 type ContactForm7FieldError = {
   message?: string;
 };
@@ -171,11 +223,18 @@ async function submitViaContactForm7(
 ): Promise<ContactSubmissionResponse> {
   let response: Response;
   try {
+    const headers: HeadersInit = {
+      Accept: "application/json",
+    };
+
+    const authHeader = getWordPressAuthHeader();
+    if (authHeader) {
+      headers.Authorization = authHeader;
+    }
+
     response = await fetch(endpoint, {
       method: "POST",
-      headers: {
-        Accept: "application/json",
-      },
+      headers,
       body: createContactForm7Body(payload),
     });
   } catch (error) {
@@ -228,7 +287,7 @@ async function submitViaContactForm7(
   };
 }
 
-function resolveEndpoint() {
+function resolveEndpoint(): string {
   const explicitEndpoint = import.meta.env.VITE_CONTACT_ENDPOINT as string | undefined;
   if (explicitEndpoint && explicitEndpoint.trim().length > 0) {
     const normalized = explicitEndpoint.trim();
@@ -238,6 +297,11 @@ function resolveEndpoint() {
     return normalized.endsWith("/")
       ? normalized.slice(0, -1)
       : normalized;
+  }
+
+  const mode = resolveEndpointMode();
+  if (mode === "wordpress") {
+    return getWordPressEndpoint();
   }
 
   const baseUrl = import.meta.env.VITE_CONTACT_API_BASE_URL as string | undefined;
