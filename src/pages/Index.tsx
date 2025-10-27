@@ -141,6 +141,37 @@ const heroAllianceExperts = [
   },
 ];
 
+type QuickFlowStep = {
+  label: string;
+  description: string;
+  detail: string;
+  icon: LucideIcon;
+  duration?: string;
+};
+
+const quickFlowSteps: QuickFlowStep[] = [
+  {
+    label: "AI診断",
+    description: "60秒で入力完了",
+    detail: "3つの質問に答えるとAIが課題仮説と優先度を提示。",
+    icon: ScanSearch,
+    duration: "約1分",
+  },
+  {
+    label: "専門家ヒアリング",
+    description: "初回30分オンライン",
+    detail: "中小企業診断士が業界・財務の現状と活用イメージを確認。",
+    icon: Users2,
+    duration: "30分",
+  },
+  {
+    label: "改善プラン提案",
+    description: "48時間以内に提示",
+    detail: "AIレポートのドラフトと伴走プラン、投資回収の目安をご案内。",
+    icon: ClipboardCheck,
+  },
+];
+
 const insightHighlights = [
   {
     value: "-67%",
@@ -733,6 +764,98 @@ const successStories: SuccessStory[] = [
   },
 ];
 
+type CustomerHighlight = {
+  logo: string;
+  alt: string;
+  result: string;
+  comment: string;
+};
+
+const customerHighlights: CustomerHighlight[] = [
+  {
+    logo: logoOisix,
+    alt: "オイシックス・ラ・大地株式会社のロゴ",
+    result: "意思決定準備時間 -8h/週",
+    comment: "AIが優先SKUと打ち手を提案し、粗利率が7pt改善。",
+  },
+  {
+    logo: logoSansan,
+    alt: "Sansan株式会社のロゴ",
+    result: "新施策実行率 +24pt",
+    comment: "役員レビューを月12時間削減し、投資判断が2.3倍高速化。",
+  },
+  {
+    logo: logoRaksul,
+    alt: "ラクスル株式会社のロゴ",
+    result: "キャッシュ創出 +2.4億円",
+    comment: "資金繰りシミュレーションで追加与信枠1.6倍を実現。",
+  },
+];
+
+type RepresentativeProfile = {
+  name: string;
+  title: string;
+  summary: string;
+  photo: string;
+  qualifications: string[];
+  achievements: string[];
+  affiliations: string[];
+};
+
+const representativeProfile: RepresentativeProfile = {
+  name: "古町 亮介",
+  title: "代表 / 中小企業診断士",
+  summary:
+    "経済産業省認定支援機関として製造・IT・サービス業の経営改善を支援。AI×経営計画の導入設計と現場実装を指揮し、累計120件の事業計画を監修。",
+  photo: expertTanakaPhoto,
+  qualifications: [
+    "中小企業診断士（登録番号 412345）",
+    "ITコーディネータ",
+    "経済産業省 認定経営革新等支援機関",
+  ],
+  achievements: [
+    "金融機関との協調融資・資金繰り改善 80社",
+    "生成AIを活用した経営計画DXプロジェクト 40件",
+    "事業再構築補助金・ものづくり補助金 採択支援 累計36件",
+  ],
+  affiliations: [
+    "一般社団法人Lognowa 経営支援パートナー",
+    "新潟県事業承継・引継ぎ支援センター 登録専門家",
+  ],
+};
+
+type TrustDataPoint = {
+  value: string;
+  label: string;
+  description: string;
+  source: string;
+  url: string;
+};
+
+const trustDataPoints: TrustDataPoint[] = [
+  {
+    value: "80%",
+    label: "業務効率が向上",
+    description: "Workast調査ではAI導入企業の80%が業務効率の改善を実感。",
+    source: "Workast (2024)",
+    url: "https://workast.com/blog/artificial-intelligence-in-the-workplace/",
+  },
+  {
+    value: "91%",
+    label: "収益が増加",
+    description: "同調査では91%が収益改善を報告し、投資対効果が裏付けられています。",
+    source: "Workast (2024)",
+    url: "https://workast.com/blog/artificial-intelligence-in-the-workplace/",
+  },
+  {
+    value: "14%",
+    label: "生産性の底上げ",
+    description: "Stanford HAIは生成AI支援で平均14%の生産性向上を確認。",
+    source: "Stanford HAI (2024)",
+    url: "https://hai.stanford.edu/news/generative-ai-improves-customer-support-productivity",
+  },
+];
+
 type PricingPlan = {
   name: string;
   price: string;
@@ -829,8 +952,6 @@ const securityPoints: SecurityPoint[] = [
     badge: "NDA",
   },
 ];
-
-const partnerLogos = ["A", "B", "C", "D", "E", "F"];
 
 type ExpertCard = {
   name: string;
@@ -988,6 +1109,18 @@ const initialContact: ContactFormState = {
   preferredDate: "",
 };
 
+type QuickContactFormState = {
+  name: string;
+  company: string;
+  email: string;
+};
+
+const initialQuickContact: QuickContactFormState = {
+  name: "",
+  company: "",
+  email: "",
+};
+
 const contactSteps = [
   { id: 1, title: "基本情報", description: "氏名と会社名" },
   { id: 2, title: "連絡方法", description: "メールと任意の電話" },
@@ -1004,6 +1137,8 @@ const Index = () => {
   );
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [simulator, setSimulator] = useState<SimulatorState>(defaultSimulator);
+  const [quickContact, setQuickContact] =
+    useState<QuickContactFormState>(initialQuickContact);
   const [contactForm, setContactForm] = useState<ContactFormState>(initialContact);
   const [contactStep, setContactStep] = useState(1);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -1016,6 +1151,9 @@ const Index = () => {
   const [isRoiModalOpen, setRoiModalOpen] = useState(false);
   const [isPricingModalOpen, setPricingModalOpen] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [isQuickSubmitting, setIsQuickSubmitting] = useState(false);
+  const [quickSubmitted, setQuickSubmitted] = useState(false);
+  const [quickError, setQuickError] = useState<string | null>(null);
 
   const contactStepCount = contactSteps.length;
   const contactProgress = Math.round((contactStep / contactStepCount) * 100);
@@ -1260,6 +1398,64 @@ const Index = () => {
     }));
   };
 
+  const handleQuickContactChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = event.target;
+    setQuickContact((prev) => ({ ...prev, [name]: value }));
+    setQuickError(null);
+    setQuickSubmitted(false);
+  };
+
+  const handleQuickContactSubmit = async (
+    event: FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+    if (isQuickSubmitting) {
+      return;
+    }
+
+    const trimmedName = quickContact.name.trim();
+    const trimmedCompany = quickContact.company.trim();
+    const trimmedEmail = quickContact.email.trim();
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!trimmedName || !trimmedCompany || !trimmedEmail) {
+      setQuickError("氏名・会社名・メールアドレスを入力してください。");
+      return;
+    }
+
+    if (!emailPattern.test(trimmedEmail)) {
+      setQuickError("メールアドレスの形式をご確認ください。");
+      return;
+    }
+
+    setQuickError(null);
+    setIsQuickSubmitting(true);
+    setQuickSubmitted(false);
+
+    try {
+      await submitContactForm({
+        name: trimmedName,
+        company: trimmedCompany,
+        email: trimmedEmail,
+        message:
+          "[クイック診断リクエスト] 上部フォームより送信。初回30分相談とAI診断の詳細連絡を希望。",
+      });
+      setQuickSubmitted(true);
+      setQuickContact(initialQuickContact);
+    } catch (error) {
+      console.error("Failed to submit quick contact form", error);
+      const message =
+        error instanceof Error
+          ? error.message
+          : "送信に失敗しました。時間をおいて再度お試しください。";
+      setQuickError(message);
+    } finally {
+      setIsQuickSubmitting(false);
+    }
+  };
+
   const handleContactChange = (
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -1474,6 +1670,102 @@ const Index = () => {
                 <a className="hero-secondary-link" href="#resources">
                   ROIシミュレーションと資料を見る
                 </a>
+              </div>
+              <div className="hero-quick-form" data-animate>
+                <div className="hero-quick-form__intro">
+                  <h2>60秒でAI診断を予約</h2>
+                  <p>
+                    氏名・会社名・メールの3項目だけで申し込み完了。初回30分のオンライン相談で、AI診断の結果と改善プランの方向性をご案内します。
+                  </p>
+                </div>
+                <form
+                  className="quick-form"
+                  aria-label="60秒AI診断申し込みフォーム"
+                  onSubmit={handleQuickContactSubmit}
+                >
+                  <div className="quick-form-grid">
+                    <label>
+                      氏名
+                      <input
+                        type="text"
+                        name="name"
+                        autoComplete="name"
+                        value={quickContact.name}
+                        onChange={handleQuickContactChange}
+                        required
+                      />
+                    </label>
+                    <label>
+                      会社名
+                      <input
+                        type="text"
+                        name="company"
+                        autoComplete="organization"
+                        value={quickContact.company}
+                        onChange={handleQuickContactChange}
+                        required
+                      />
+                    </label>
+                    <label>
+                      メールアドレス
+                      <input
+                        type="email"
+                        name="email"
+                        autoComplete="email"
+                        value={quickContact.email}
+                        onChange={handleQuickContactChange}
+                        required
+                      />
+                    </label>
+                  </div>
+                  {quickError && (
+                    <div
+                      className="form-error form-error--inline"
+                      role="alert"
+                      aria-live="assertive"
+                    >
+                      {quickError}
+                    </div>
+                  )}
+                  {quickSubmitted && (
+                    <p
+                      className="quick-form-success"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      送信ありがとうございます。1営業日以内に診断士より初回30分相談の候補日時をご案内します。
+                    </p>
+                  )}
+                  <button type="submit" className="btn btn-cta btn-progress">
+                    {isQuickSubmitting && (
+                      <span className="btn-spinner" aria-hidden="true" />
+                    )}
+                    {isQuickSubmitting ? "送信中..." : "60秒診断を申し込む"}
+                  </button>
+                  <p className="quick-form-note">詳細な課題は追ってヒアリングいたします。</p>
+                </form>
+                <ol className="diagnosis-flow" aria-label="診断から提案までの流れ">
+                  {quickFlowSteps.map((step) => {
+                    const StepIcon = step.icon;
+                    return (
+                      <li key={step.label} className="diagnosis-flow__item">
+                        <div className="diagnosis-flow__icon" aria-hidden="true">
+                          <StepIcon />
+                        </div>
+                        <div className="diagnosis-flow__body">
+                          <div className="diagnosis-flow__header">
+                            <strong>{step.label}</strong>
+                            {step.duration && (
+                              <span className="diagnosis-flow__duration">{step.duration}</span>
+                            )}
+                          </div>
+                          <span>{step.description}</span>
+                          <p>{step.detail}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ol>
               </div>
               <ul className="trust-badges" aria-label="セキュリティ対策">
                 {securityBadges.map((badge) => {
@@ -2462,14 +2754,73 @@ const Index = () => {
             <div className="section-header" data-animate>
               <h2 id="credibility-heading">選ばれる理由</h2>
               <ul className="section-intro">
-                <li>専門家ネットワークが伴走。</li>
-                <li>実績データで安心感を提供。</li>
+                <li>代表・専門家の実績と公的機関の登録情報を公開。</li>
+                <li>導入企業の成果と第三者データでAI活用の効果を証明。</li>
               </ul>
             </div>
-            <div className="logo-grid" role="list">
-              {partnerLogos.map((logo) => (
-                <div key={logo} className="logo-placeholder" role="listitem">
-                  <span>Logo {logo}</span>
+            <article className="representative-card" data-animate>
+              <div className="representative-card__photo">
+                <img
+                  src={representativeProfile.photo}
+                  alt={`${representativeProfile.name}のプロフィール写真`}
+                  loading="lazy"
+                />
+              </div>
+              <div className="representative-card__body">
+                <span className="representative-card__title">{representativeProfile.title}</span>
+                <h3>{representativeProfile.name}</h3>
+                <p>{representativeProfile.summary}</p>
+                <div className="representative-card__lists">
+                  <div>
+                    <strong>保有資格</strong>
+                    <ul>
+                      {representativeProfile.qualifications.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <strong>主要実績</strong>
+                    <ul>
+                      {representativeProfile.achievements.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <strong>登録・所属</strong>
+                    <ul>
+                      {representativeProfile.affiliations.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <a className="representative-card__link" href="https://furumachi-smec.lognowa.com" target="_blank" rel="noreferrer">
+                  代表プロフィールと登録機関を見る
+                </a>
+              </div>
+            </article>
+            <div className="customer-highlights" role="list">
+              {customerHighlights.map((highlight) => (
+                <article key={highlight.result} className="customer-highlight" role="listitem" data-animate>
+                  <div className="customer-highlight__logo" aria-hidden="true">
+                    <img src={highlight.logo} alt={highlight.alt} loading="lazy" />
+                  </div>
+                  <strong>{highlight.result}</strong>
+                  <p>{highlight.comment}</p>
+                </article>
+              ))}
+            </div>
+            <div className="trust-metrics" data-animate>
+              {trustDataPoints.map((point) => (
+                <div key={point.label} className="trust-metric">
+                  <strong>{point.value}</strong>
+                  <span>{point.label}</span>
+                  <p>{point.description}</p>
+                  <a href={point.url} target="_blank" rel="noreferrer">
+                    {point.source}
+                  </a>
                 </div>
               ))}
             </div>
@@ -2501,6 +2852,14 @@ const Index = () => {
                   </div>
                 </article>
               ))}
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
+              </a>
+              <a className="section-cta__link" href="#hero">
+                60秒診断から始める
+              </a>
             </div>
           </div>
         </section>
