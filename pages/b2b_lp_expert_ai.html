@@ -228,6 +228,52 @@
         color: rgb(71, 85, 105);
         margin: 0;
       }
+      .hero-evidence-lattice {
+        display: grid;
+        gap: 0.85rem;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        padding: 0.85rem;
+        border-radius: 1.5rem;
+        background: rgba(255, 255, 255, 0.75);
+        border: 1px solid rgba(148, 163, 184, 0.28);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 18px 38px rgba(15, 23, 42, 0.12);
+      }
+      .hero-evidence-item {
+        position: relative;
+        border-radius: 1.25rem;
+        padding: 1rem 1.1rem 1.1rem;
+        background: linear-gradient(150deg, rgba(14, 165, 233, 0.16), rgba(13, 148, 136, 0.12));
+        border: 1px solid rgba(14, 165, 233, 0.22);
+        display: grid;
+        gap: 0.45rem;
+        min-height: 100%;
+      }
+      .hero-evidence-item::after {
+        content: '';
+        position: absolute;
+        inset: auto 16px -24px 16px;
+        height: 32px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.18), transparent 70%);
+        opacity: 0.9;
+        pointer-events: none;
+      }
+      .hero-evidence-item strong {
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(15, 23, 42, 0.66);
+      }
+      .hero-evidence-item span {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: rgb(15, 23, 42);
+      }
+      .hero-evidence-item p {
+        margin: 0;
+        font-size: 0.82rem;
+        line-height: 1.55;
+        color: rgba(51, 65, 85, 0.95);
+      }
       .hero-insight-grid {
         display: grid;
         gap: 1rem;
@@ -383,6 +429,133 @@
         letter-spacing: 0.12em;
         text-transform: uppercase;
         padding: 0.45rem 1.1rem;
+      }
+      .value-system {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: clamp(1.5rem, 3vw, 2.4rem);
+      }
+      @media (min-width: 1024px) {
+        .value-system {
+          grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+          align-items: stretch;
+        }
+      }
+      .value-diagram {
+        position: relative;
+        border-radius: 1.9rem;
+        padding: clamp(1.8rem, 3vw, 2.6rem);
+        background: linear-gradient(155deg, rgba(15, 23, 42, 0.85), rgba(14, 116, 144, 0.75));
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        box-shadow: 0 26px 58px rgba(15, 23, 42, 0.22);
+        color: rgba(226, 232, 240, 0.96);
+        overflow: hidden;
+      }
+      .value-diagram::before,
+      .value-diagram::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        opacity: 0.45;
+      }
+      .value-diagram::before {
+        inset: -35% auto auto -20%;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.35), transparent 70%);
+        filter: blur(1px);
+      }
+      .value-diagram::after {
+        inset: auto -30% -45% auto;
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.28), transparent 70%);
+        filter: blur(0.5px);
+      }
+      .value-diagram h3 {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: white;
+      }
+      .value-diagram p {
+        position: relative;
+        z-index: 1;
+        font-size: 0.9rem;
+        line-height: 1.75;
+        color: rgba(226, 232, 240, 0.85);
+        margin-top: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+      .value-diagram-list {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 0.75rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .value-diagram-list li {
+        display: grid;
+        gap: 0.2rem;
+      }
+      .value-diagram-list strong {
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(226, 232, 240, 0.7);
+      }
+      .value-diagram-list span {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: rgba(241, 245, 249, 0.95);
+      }
+      .value-diagram-ring {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        width: clamp(220px, 32vw, 260px);
+        height: clamp(220px, 32vw, 260px);
+        margin: 0 auto clamp(1.5rem, 3vw, 2rem);
+        border-radius: 50%;
+        border: 1px solid rgba(148, 163, 184, 0.45);
+        background: radial-gradient(circle at center, rgba(15, 23, 42, 0.35), rgba(14, 116, 144, 0.4));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 18px 44px rgba(15, 23, 42, 0.28);
+        padding: clamp(1.25rem, 2.5vw, 1.8rem);
+      }
+      .value-diagram-ring::after {
+        content: '因・論・デ・ス・納';
+        position: absolute;
+        inset: 1.4rem;
+        border-radius: 50%;
+        border: 1px dashed rgba(148, 163, 184, 0.5);
+        display: grid;
+        place-items: center;
+        font-size: 0.75rem;
+        letter-spacing: 0.35em;
+        color: rgba(226, 232, 240, 0.65);
+      }
+      .value-diagram-ring span {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 72px;
+        height: 72px;
+        border-radius: 999px;
+        background: rgba(56, 189, 248, 0.22);
+        color: rgba(241, 245, 249, 0.98);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        box-shadow: 0 12px 28px rgba(14, 165, 233, 0.35);
       }
       .pillar-grid {
         position: relative;
@@ -1731,6 +1904,33 @@
                 <p>回収サイト短縮と資金繰り表の自動化で投資余力を確保。</p>
               </div>
             </div>
+            <div class="hero-evidence-lattice">
+              <div class="hero-evidence-item">
+                <strong>Causality</strong>
+                <span>因果性</span>
+                <p>粗利・キャッシュ・在庫の遅延関係をAIが数値化し、意思決定の根拠を即提示。</p>
+              </div>
+              <div class="hero-evidence-item">
+                <strong>Logic</strong>
+                <span>論理性</span>
+                <p>診断士が稟議ロジックと想定問答を整え、金融機関・投資家に説明できる骨子へ。</p>
+              </div>
+              <div class="hero-evidence-item">
+                <strong>Design</strong>
+                <span>デザイン性</span>
+                <p>立体的なダッシュボードUIで重要指標を階層化。「投資したくなる」体験を演出。</p>
+              </div>
+              <div class="hero-evidence-item">
+                <strong>Smartness</strong>
+                <span>スマート性</span>
+                <p>政策・市場データとSlack/Teamsアラートを連動し、判断タイミングを逃さない。</p>
+              </div>
+              <div class="hero-evidence-item">
+                <strong>Trust</strong>
+                <span>納得性</span>
+                <p>経営陣・現場・金融機関の視点を統合し、合意形成までのリードタイムを短縮。</p>
+              </div>
+            </div>
             <div class="flex flex-col gap-3 sm:flex-row">
               <a href="#consult-form" class="btn-primary w-full sm:w-auto">30分無料相談を予約</a>
               <a href="#sample" class="btn-secondary w-full sm:w-auto" data-arrow="false">3分で分かる資料をダウンロード</a>
@@ -1765,8 +1965,8 @@
           <div class="hero-aside">
             <figure class="hero-visual">
               <img
-                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1040&q=80"
-                alt="取締役会で生成AIが提示するダッシュボードと専門家のレビューに基づき戦略を再設計している様子"
+                src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1040&q=80"
+                alt="生成AIのダッシュボードを前に、役員と専門家が戦略の意思決定を行う取締役会の様子"
                 loading="lazy"
               />
               <figcaption>
@@ -1846,37 +2046,58 @@
               年商5,000万円〜15億円の企業が四半期ごとに戦略と実行を再設計できるよう、AIが広域データを統合し、診断士が論理を磨き、経営者が即断できるUI/UXを構築。各要素を明確に可視化することで、意思決定の納得度を高めます。
             </p>
           </div>
-          <div class="pillar-grid">
-            <article class="pillar-card">
-              <div class="pillar-icon">C</div>
-              <h3 class="pillar-title">因果性</h3>
-              <p class="pillar-copy">粗利・キャッシュ・在庫を結ぶ因果マップをAIが自動生成。指標間の遅延や連動度を定量化し、改善施策の優先順位を即座に判断できます。</p>
-              <span class="pillar-evidence">Lag-Impact可視化／24h更新</span>
-            </article>
-            <article class="pillar-card">
-              <div class="pillar-icon">L</div>
-              <h3 class="pillar-title">論理性</h3>
-              <p class="pillar-copy">診断士・財務会計専門家が金融機関の審査基準に沿ってストーリーを再構築。想定問答とリスク対応までセット化し、稟議スピードを加速します。</p>
-              <span class="pillar-evidence">審査ロジック×想定問答</span>
-            </article>
-            <article class="pillar-card">
-              <div class="pillar-icon">D</div>
-              <h3 class="pillar-title">デザイン性</h3>
-              <p class="pillar-copy">経営会議資料・ダッシュボードを立体感のあるUIで整理。重要指標は色と余白で階層化され、直感的に読み解ける「投資したくなる」世界観を演出。</p>
-              <span class="pillar-evidence">Executive Dashboard UI</span>
-            </article>
-            <article class="pillar-card">
-              <div class="pillar-icon">S</div>
-              <h3 class="pillar-title">スマート性</h3>
-              <p class="pillar-copy">政策・市場の速報値を自動取得し、週次でKPIを更新。Slack/Teamsへアラートを連動させ、判断タイミングを逃さない体制を実現します。</p>
-              <span class="pillar-evidence">自動アラート×週次レビュー</span>
-            </article>
-            <article class="pillar-card">
-              <div class="pillar-icon">T</div>
-              <h3 class="pillar-title">納得性</h3>
-              <p class="pillar-copy">経営陣・現場・金融機関の視点を統合した共通言語を整備。四半期の意思決定サイクルをフォーマット化し、ステークホルダーの合意形成を高速化。</p>
-              <span class="pillar-evidence">マルチステークホルダー合意</span>
-            </article>
+          <div class="value-system">
+            <div class="value-diagram">
+              <div class="value-diagram-ring"><span>CLDST</span></div>
+              <h3>Board Ready Evidence Loop</h3>
+              <p>因果性（Causality）から納得性（Trust）までを一気通貫で設計。AIがデータ同化→専門家が論点監査→経営者が意思決定UIで合意形成という循環を仕組み化しています。</p>
+              <ul class="value-diagram-list">
+                <li>
+                  <strong>24h DATA FUSION</strong>
+                  <span>政策・市場・財務を統合し、遅延要因や相関を定量化。因果マップが次の会議に直結。</span>
+                </li>
+                <li>
+                  <strong>EXPERT LOGIC REVIEW</strong>
+                  <span>診断士と財務専門家がストーリーと想定問答を監査。論理の飛躍を排除し、審査に耐える構成へ。</span>
+                </li>
+                <li>
+                  <strong>IMMERSIVE DECISION UI</strong>
+                  <span>立体的なUIとアラート設計で、役員・現場・金融機関が同じ景色を見ながら意思決定できる状態を維持。</span>
+                </li>
+              </ul>
+            </div>
+            <div class="pillar-grid">
+              <article class="pillar-card">
+                <div class="pillar-icon">C</div>
+                <h3 class="pillar-title">因果性</h3>
+                <p class="pillar-copy">粗利・キャッシュ・在庫を結ぶ因果マップをAIが自動生成。指標間の遅延や連動度を定量化し、改善施策の優先順位を即座に判断できます。</p>
+                <span class="pillar-evidence">Lag-Impact可視化／24h更新</span>
+              </article>
+              <article class="pillar-card">
+                <div class="pillar-icon">L</div>
+                <h3 class="pillar-title">論理性</h3>
+                <p class="pillar-copy">診断士・財務会計専門家が金融機関の審査基準に沿ってストーリーを再構築。想定問答とリスク対応までセット化し、稟議スピードを加速します。</p>
+                <span class="pillar-evidence">審査ロジック×想定問答</span>
+              </article>
+              <article class="pillar-card">
+                <div class="pillar-icon">D</div>
+                <h3 class="pillar-title">デザイン性</h3>
+                <p class="pillar-copy">経営会議資料・ダッシュボードを立体感のあるUIで整理。重要指標は色と余白で階層化され、直感的に読み解ける「投資したくなる」世界観を演出。</p>
+                <span class="pillar-evidence">Executive Dashboard UI</span>
+              </article>
+              <article class="pillar-card">
+                <div class="pillar-icon">S</div>
+                <h3 class="pillar-title">スマート性</h3>
+                <p class="pillar-copy">政策・市場の速報値を自動取得し、週次でKPIを更新。Slack/Teamsへアラートを連動させ、判断タイミングを逃さない体制を実現します。</p>
+                <span class="pillar-evidence">自動アラート×週次レビュー</span>
+              </article>
+              <article class="pillar-card">
+                <div class="pillar-icon">T</div>
+                <h3 class="pillar-title">納得性</h3>
+                <p class="pillar-copy">経営陣・現場・金融機関の視点を統合した共通言語を整備。四半期の意思決定サイクルをフォーマット化し、ステークホルダーの合意形成を高速化。</p>
+                <span class="pillar-evidence">マルチステークホルダー合意</span>
+              </article>
+            </div>
           </div>
         </div>
       </section>
