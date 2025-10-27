@@ -17,7 +17,7 @@ export type ContactSubmissionResponse = {
   submission: ContactSubmission;
 };
 
-const DEFAULT_ENDPOINT = "http://localhost:3001/api/contact";
+const DEFAULT_ENDPOINT = "/api/contact";
 
 type ContactForm7FieldError = {
   message?: string;
