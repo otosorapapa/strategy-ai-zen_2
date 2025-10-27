@@ -544,6 +544,42 @@ const quarterlyMetrics = [
   },
 ];
 
+type QuarterlyCausality = {
+  stage: string;
+  headline: string;
+  detail: string;
+  outcome: string;
+  icon: LucideIcon;
+  accent: "mint" | "navy" | "sky";
+};
+
+const quarterlyCausality: QuarterlyCausality[] = [
+  {
+    stage: "Signal / 外部環境",
+    headline: "政策・金融・市場の変化を24時間以内に集約",
+    detail: "政府発表・補助金・競合指標をクロールし、四半期レビューの論点を自動抽出。",
+    outcome: "最新データを根拠に優先課題を即決定",
+    icon: Compass,
+    accent: "sky",
+  },
+  {
+    stage: "Insight / 意思決定",
+    headline: "AIが因果ロジックツリーを生成",
+    detail: "利益ドライバーとリスクをスコアリングし、投資／守りの配分を論理的に提示。",
+    outcome: "役員会で判断に使う論点メモを48時間で準備",
+    icon: BrainCircuit,
+    accent: "mint",
+  },
+  {
+    stage: "Execution / 実行管理",
+    headline: "専門家が実行計画とKPIを監査",
+    detail: "財務・人材・オペレーションのKPIに連動した実行ロードマップを伴走サポート。",
+    outcome: "実行率＋27pt、投資回収5.8ヶ月へ短縮",
+    icon: Workflow,
+    accent: "navy",
+  },
+];
+
 const quarterlyMilestones = [
   {
     title: "Week 1-2",
@@ -577,6 +613,7 @@ const velocitySeries = [
 
 const velocityQuarters = ["2021Q4", "2022Q4", "2023Q4", "2024Q4"];
 const velocityMax = Math.max(...velocitySeries.flatMap((series) => series.values));
+const velocityGridLines = Array.from({ length: 5 }, (_, index) => index);
 
 type PainPoint = {
   title: string;
@@ -2942,6 +2979,32 @@ const Index = () => {
                     </div>
                   ))}
                 </div>
+                <div
+                  className="quarterly-causality"
+                  role="group"
+                  aria-label="AIと専門家による因果設計の流れ"
+                >
+                  {quarterlyCausality.map((item) => {
+                    const CausalityIcon = item.icon;
+                    return (
+                      <article
+                        key={item.stage}
+                        className="quarterly-causality__card"
+                        data-accent={item.accent}
+                      >
+                        <span className="quarterly-causality__icon" aria-hidden="true">
+                          <CausalityIcon />
+                        </span>
+                        <div className="quarterly-causality__body">
+                          <span className="quarterly-causality__stage">{item.stage}</span>
+                          <h4>{item.headline}</h4>
+                          <p>{item.detail}</p>
+                          <strong>{item.outcome}</strong>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
                 <div className="quarterly-loop">
                   <h3>因果で捉える重点アップデート</h3>
                   <ol>
@@ -2969,19 +3032,49 @@ const Index = () => {
                   </button>
                 </div>
               </div>
-              <div className="quarterly-visual" data-animate aria-hidden="true">
+              <div className="quarterly-visual" data-animate>
+                <span className="quarterly-visual__halo" aria-hidden="true" />
+                <div className="quarterly-visual__media" aria-hidden="true">
+                  <img src={featureIntelligenceShot} alt="" loading="lazy" />
+                </div>
                 <div className="quarterly-board">
                   <header className="quarterly-board__header">
-                    <div>
+                    <div className="quarterly-board__title">
                       <span>Quarterly Operating Loop</span>
                       <strong>外部環境 × AI更新指数</strong>
+                      <ul className="quarterly-board__pills">
+                        <li>政策データ24h更新</li>
+                        <li>専門家レビュー済</li>
+                        <li>感度分析自動化</li>
+                      </ul>
                     </div>
                     <div className="quarterly-board__confidence">
                       <Sparkles aria-hidden="true" />
                       <span>再現性 92%</span>
                     </div>
                   </header>
+                  <div
+                    className="quarterly-board__status"
+                    role="group"
+                    aria-label="AI更新と専門家レビューの頻度"
+                  >
+                    <div>
+                      <span>データ更新</span>
+                      <strong>24h以内</strong>
+                      <small>政策・市況・ファイナンスソース</small>
+                    </div>
+                    <div>
+                      <span>専門家レビュー</span>
+                      <strong>隔週</strong>
+                      <small>戦略・財務・資金調達の3領域</small>
+                    </div>
+                  </div>
                   <div className="quarterly-board__chart">
+                    <div className="quarterly-board__chart-grid" aria-hidden="true">
+                      {velocityGridLines.map((line) => (
+                        <span key={`grid-${line}`} />
+                      ))}
+                    </div>
                     <svg
                       viewBox="0 0 100 60"
                       role="img"
