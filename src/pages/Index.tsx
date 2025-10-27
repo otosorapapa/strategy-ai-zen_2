@@ -919,7 +919,7 @@ type ProcessFlowStage = {
   humanFocus: string;
   impact: string;
   evidence: string;
-  accent: "mint" | "sky" | "citrus" | "navy";
+  accent: "mint" | "sky" | "citrus" | "navy" | "violet" | "amber";
 };
 
 const processTimeline: ProcessFlowStage[] = [
@@ -942,6 +942,15 @@ const processTimeline: ProcessFlowStage[] = [
     accent: "sky",
   },
   {
+    stage: "AIレポート生成",
+    icon: BarChart4,
+    aiFocus: "AI: KPI感度分析と意思決定メモを自動作成",
+    humanFocus: "経営チーム: 仮説の優先度と投資閾値を設定",
+    impact: "粗利・キャッシュの複数シナリオを黄金比レイアウトで比較",
+    evidence: "シナリオ別のダッシュボードと会議用サマリーを即共有",
+    accent: "violet",
+  },
+  {
     stage: "専門家ブラッシュアップ",
     icon: ShieldCheck,
     aiFocus: "AI: 修正内容を反映し図表と想定問答を更新",
@@ -958,6 +967,15 @@ const processTimeline: ProcessFlowStage[] = [
     impact: "根拠付きロードマップで経営会議の決裁を高速化",
     evidence: "最終レポート、想定問答、投資判断指標をワンクリックで提示",
     accent: "citrus",
+  },
+  {
+    stage: "実行モニタリング",
+    icon: TrendingUp,
+    aiFocus: "AI: KPIとキャッシュの偏差をリアルタイム監視",
+    humanFocus: "経営者×専門家: 四半期レビューで改善サイクルを調整",
+    impact: "意思決定→実行→検証の循環を定着させROIを最大化",
+    evidence: "週次アラートと改善ログを残すデシジョンループダッシュボード",
+    accent: "amber",
   },
 ];
 
