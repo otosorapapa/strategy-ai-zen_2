@@ -920,6 +920,8 @@ type ProcessFlowStage = {
   impact: string;
   evidence: string;
   accent: "mint" | "sky" | "citrus" | "navy";
+  orientation: "left" | "right";
+  causalLink: string;
 };
 
 const processTimeline: ProcessFlowStage[] = [
@@ -931,6 +933,8 @@ const processTimeline: ProcessFlowStage[] = [
     impact: "因果仮説を30分で可視化し、意思決定の起点を構築",
     evidence: "AI生成の論点マップと経営者ヒアリングログで意思決定材料を共有",
     accent: "mint",
+    orientation: "left",
+    causalLink: "ヒアリング → AI要約 → 課題マップ化で意思決定論点を抽出",
   },
   {
     stage: "データ連携・AI分析",
@@ -940,6 +944,8 @@ const processTimeline: ProcessFlowStage[] = [
     impact: "市場・財務データを統合し、複数シナリオの期待値を定量化",
     evidence: "統計・API連携ログと財務シミュレーション出力をダッシュボードで可視化",
     accent: "sky",
+    orientation: "right",
+    causalLink: "データ棚卸し → 接続ログ → モデル検証で再現性を担保",
   },
   {
     stage: "専門家ブラッシュアップ",
@@ -949,6 +955,8 @@ const processTimeline: ProcessFlowStage[] = [
     impact: "金融・実務の観点で実行可能性とリスク耐性を補強",
     evidence: "診断士レビュー記録と修正履歴を可視化し、説明責任を確保",
     accent: "navy",
+    orientation: "left",
+    causalLink: "AIドラフト → 専門家レビュー → リスク補強の反復で納得感を醸成",
   },
   {
     stage: "意思決定",
@@ -958,6 +966,8 @@ const processTimeline: ProcessFlowStage[] = [
     impact: "根拠付きロードマップで経営会議の決裁を高速化",
     evidence: "最終レポート、想定問答、投資判断指標をワンクリックで提示",
     accent: "citrus",
+    orientation: "right",
+    causalLink: "最終資料 → KPIダッシュボード → 会議決裁と実行管理を接続",
   },
 ];
 
@@ -3035,38 +3045,47 @@ const Index = () => {
               {processTimeline.map((item, index) => {
                 const FlowIcon = item.icon;
                 return (
-                  <article
+                  <div
                     key={item.stage}
-                    className={`process-flow-card process-flow-card--${item.accent}`}
+                    className={`process-flowchart__item process-flowchart__item--${item.orientation}`}
                     role="listitem"
                   >
-                    <header className="process-flow-card__header">
-                      <div className="process-flow-card__step" aria-hidden="true">
-                        <span>STEP {index + 1}</span>
-                        <div className="process-flow-card__icon">
-                          <FlowIcon />
+                    <article className={`process-flow-card process-flow-card--${item.accent}`}>
+                      <header className="process-flow-card__header">
+                        <div className="process-flow-card__step" aria-hidden="true">
+                          <span>STEP {index + 1}</span>
+                          <div className="process-flow-card__icon">
+                            <FlowIcon />
+                          </div>
                         </div>
-                      </div>
-                      <div className="process-flow-card__headline">
-                        <h3>{item.stage}</h3>
+                        <div className="process-flow-card__headline">
+                          <h3>{item.stage}</h3>
+                        </div>
+                      </header>
+                      <div className="process-flow-card__impact">
+                        <span>成果インパクト</span>
                         <p>{item.impact}</p>
                       </div>
-                    </header>
-                    <dl className="process-flow-card__matrix">
-                      <div className="process-flow-card__matrix-item">
-                        <dt>AI</dt>
-                        <dd>{item.aiFocus}</dd>
+                      <div className="process-flow-card__causal">
+                        <span>因果設計</span>
+                        <p>{item.causalLink}</p>
                       </div>
-                      <div className="process-flow-card__matrix-item">
-                        <dt>専門家</dt>
-                        <dd>{item.humanFocus}</dd>
-                      </div>
-                    </dl>
-                    <footer className="process-flow-card__footer">
-                      <span>検証指標</span>
-                      <p>{item.evidence}</p>
-                    </footer>
-                  </article>
+                      <dl className="process-flow-card__matrix">
+                        <div className="process-flow-card__matrix-item">
+                          <dt>AI</dt>
+                          <dd>{item.aiFocus}</dd>
+                        </div>
+                        <div className="process-flow-card__matrix-item">
+                          <dt>専門家</dt>
+                          <dd>{item.humanFocus}</dd>
+                        </div>
+                      </dl>
+                      <footer className="process-flow-card__footer">
+                        <span>検証指標</span>
+                        <p>{item.evidence}</p>
+                      </footer>
+                    </article>
+                  </div>
                 );
               })}
             </div>
