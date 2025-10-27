@@ -751,6 +751,243 @@
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
+      .equation-shell {
+        position: relative;
+        border-radius: 2rem;
+        padding: clamp(2.25rem, 4vw, 3.25rem);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: radial-gradient(circle at top left, rgba(14, 165, 233, 0.16), transparent 65%),
+          radial-gradient(circle at top right, rgba(13, 148, 136, 0.14), transparent 65%),
+          rgba(255, 255, 255, 0.96);
+        box-shadow: 0 32px 68px rgba(15, 23, 42, 0.14);
+        overflow: hidden;
+      }
+      .equation-shell::after {
+        content: '';
+        position: absolute;
+        inset: auto -30% -45% auto;
+        width: 360px;
+        height: 360px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.28), transparent 70%);
+        filter: blur(4px);
+        pointer-events: none;
+      }
+      .equation-header {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 720px;
+      }
+      .equation-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        border-radius: 9999px;
+        padding: 0.5rem 1.1rem;
+        background: rgba(15, 23, 42, 0.08);
+        color: rgba(15, 23, 42, 0.7);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+      .equation-grid {
+        position: relative;
+        display: grid;
+        gap: clamp(1rem, 3vw, 1.75rem);
+        margin-top: clamp(2rem, 4vw, 3rem);
+      }
+      @media (min-width: 1024px) {
+        .equation-grid {
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+          align-items: stretch;
+        }
+      }
+      .equation-card {
+        position: relative;
+        border-radius: 1.75rem;
+        padding: clamp(1.75rem, 3vw, 2.25rem);
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(255, 255, 255, 0.92);
+        box-shadow: 0 22px 46px rgba(15, 23, 42, 0.12);
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        overflow: hidden;
+      }
+      .equation-card::before {
+        content: '';
+        position: absolute;
+        inset: -60% auto auto -20%;
+        width: 240px;
+        height: 240px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent 70%);
+        pointer-events: none;
+      }
+      .equation-card svg {
+        width: 48px;
+        height: 48px;
+        color: var(--color-sky);
+      }
+      .equation-card h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: rgb(15, 23, 42);
+      }
+      .equation-card p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: rgb(71, 85, 105);
+      }
+      .equation-card--ai {
+        border-color: rgba(14, 165, 233, 0.45);
+        background: linear-gradient(155deg, rgba(224, 242, 254, 0.96), rgba(240, 253, 250, 0.9));
+      }
+      .equation-card--expert {
+        border-color: rgba(59, 130, 246, 0.45);
+        background: linear-gradient(155deg, rgba(219, 234, 254, 0.96), rgba(224, 231, 255, 0.9));
+      }
+      .equation-card--leader {
+        border-color: rgba(15, 23, 42, 0.2);
+        background: linear-gradient(165deg, rgba(241, 245, 249, 0.96), rgba(226, 232, 240, 0.9));
+      }
+      .equation-symbol {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: clamp(1.5rem, 3vw, 2.5rem);
+        font-weight: 800;
+        color: rgba(15, 23, 42, 0.2);
+        border-radius: 1.5rem;
+        background: rgba(15, 23, 42, 0.04);
+        min-height: 6rem;
+      }
+      .equation-symbol::before {
+        content: '×';
+      }
+      .equation-symbol[data-symbol='=']::before {
+        content: '=';
+      }
+      @media (max-width: 1023px) {
+        .equation-symbol {
+          min-height: auto;
+          padding: 0.75rem 0;
+          margin: -0.5rem 0;
+        }
+      }
+      .equation-conclusion {
+        grid-column: 1 / -1;
+        border-radius: 1.75rem;
+        border: 1px solid rgba(14, 116, 144, 0.35);
+        background: linear-gradient(145deg, rgba(15, 118, 110, 0.12), rgba(14, 165, 233, 0.18));
+        padding: clamp(1.5rem, 3vw, 2.25rem);
+        display: grid;
+        gap: 0.75rem;
+        text-align: center;
+      }
+      .equation-conclusion h4 {
+        font-size: clamp(1.4rem, 2vw + 0.8rem, 1.9rem);
+        font-weight: 800;
+        color: rgb(15, 23, 42);
+      }
+      .equation-conclusion p {
+        font-size: 0.95rem;
+        color: rgb(71, 85, 105);
+        margin: 0 auto;
+        max-width: 680px;
+      }
+      .ladder-grid {
+        display: grid;
+        gap: 1.5rem;
+      }
+      @media (min-width: 1024px) {
+        .ladder-grid {
+          grid-template-columns: 0.85fr 1.15fr;
+          align-items: center;
+        }
+      }
+      .ladder-visual {
+        position: relative;
+        border-radius: 1.75rem;
+        padding: clamp(2rem, 4vw, 2.75rem);
+        background: linear-gradient(160deg, rgba(14, 165, 233, 0.14), rgba(15, 118, 110, 0.18));
+        border: 1px solid rgba(14, 165, 233, 0.35);
+        box-shadow: 0 24px 52px rgba(14, 116, 144, 0.18);
+        color: white;
+        overflow: hidden;
+      }
+      .ladder-visual::after {
+        content: '';
+        position: absolute;
+        inset: auto -30% -45% auto;
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.5), transparent 70%);
+      }
+      .ladder-axis {
+        position: relative;
+        display: grid;
+        gap: 1.5rem;
+        z-index: 1;
+      }
+      .ladder-axis::before {
+        content: '';
+        position: absolute;
+        inset: 0 0 auto 0.5rem;
+        width: 2px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.15));
+      }
+      .ladder-step {
+        position: relative;
+        display: grid;
+        gap: 0.35rem;
+        padding-left: 2.5rem;
+      }
+      .ladder-step::before {
+        content: attr(data-step);
+        position: absolute;
+        inset: 0 auto auto 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        background: rgba(255, 255, 255, 0.18);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+      .ladder-step strong {
+        font-size: 1rem;
+        letter-spacing: 0.04em;
+      }
+      .ladder-step span {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .ladder-facts {
+        display: grid;
+        gap: 1rem;
+      }
+      .ladder-fact {
+        border-radius: 1.5rem;
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        background: rgba(248, 250, 252, 0.95);
+        padding: 1.5rem;
+        box-shadow: 0 18px 42px rgba(15, 23, 42, 0.1);
+      }
+      .ladder-fact h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: rgb(15, 23, 42);
+        margin-bottom: 0.5rem;
+      }
+      .ladder-fact p {
+        font-size: 0.9rem;
+        color: rgb(71, 85, 105);
+        line-height: 1.7;
+      }
       .proof-grid {
         display: grid;
         gap: 1.25rem;
@@ -839,6 +1076,8 @@
         <a href="#hero" class="text-sm font-semibold tracking-[0.18em] text-slate-800">STRATEGY AI LAB</a>
         <nav class="hidden items-center gap-6 text-sm font-medium text-slate-700 md:flex">
           <a href="#challenges" class="hover:text-slate-900">課題</a>
+          <a href="#equation" class="hover:text-slate-900">価値設計</a>
+          <a href="#causality" class="hover:text-slate-900">因果設計</a>
           <a href="#approach" class="hover:text-slate-900">解決策</a>
           <a href="#benefits" class="hover:text-slate-900">成果</a>
           <a href="#social-proof" class="hover:text-slate-900">実績</a>
@@ -1122,6 +1361,94 @@
         </div>
       </section>
 
+      <section id="equation" class="mx-auto w-full max-w-6xl px-5" data-animate>
+        <div class="equation-shell">
+          <div class="equation-header">
+            <span class="equation-pill">因果性 × 論理性 × デザイン性 × スマート性</span>
+            <h2 class="section-title">生成AIと専門家、そして経営者の洞察を式にした「戦略同時通訳」</h2>
+            <p class="section-subtitle">
+              生成AIは政策・市場・自社データを統合し、数分で複数の経営シナリオと財務計画を生成します。さらに中小企業診断士や公認会計士が資金調達基準まで磨き上げることで、従来は数週間かかっていた計画作成が大幅に短縮されます。その成果を経営者が判断軸として取り込み、意思決定を“作業”から“決断”へとシフトします。
+            </p>
+          </div>
+          <div class="equation-grid">
+            <article class="equation-card equation-card--ai">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path
+                  d="M8 16h32M8 24h32M8 32h32M18 16v16M30 16v16"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <circle cx="18" cy="16" r="3" fill="currentColor" opacity="0.2" />
+                <circle cx="30" cy="24" r="3" fill="currentColor" opacity="0.2" />
+              </svg>
+              <div>
+                <h3>生成AI｜横断データの統合</h3>
+                <p>
+                  政策・業界統計・社内データを横断的に学習し、粗利・キャッシュ・在庫の因果関係を自動で抽出。仮説検証の材料を数分で提示します。
+                </p>
+              </div>
+            </article>
+            <div class="equation-symbol" aria-hidden="true"></div>
+            <article class="equation-card equation-card--expert">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path
+                  d="M12 36h24M12 12l6 6 6-6 6 6 6-6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M18 18v12M30 18v12"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  opacity="0.7"
+                />
+              </svg>
+              <div>
+                <h3>専門家｜審査に耐える論理構築</h3>
+                <p>
+                  中小企業診断士・公認会計士がAIの提案を金融機関視点で検証。リスク対策と実行計画まで言語化し、投資家・金融機関を納得させる資料に昇華します。
+                </p>
+              </div>
+            </article>
+            <div class="equation-symbol" data-symbol="=" aria-hidden="true"></div>
+            <article class="equation-card equation-card--leader">
+              <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path
+                  d="M24 30c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8Z"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path
+                  d="M10 38c2.667-4 8-6 14-6s11.333 2 14 6"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <path d="M24 10v4M32 12l-2 3M16 12l2 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              </svg>
+              <div>
+                <h3>経営者｜決断のスピードと先見性</h3>
+                <p>
+                  社長が意思決定に集中できるよう、論点・優先度・投資対効果がダッシュボード化。未来志向の意思決定をチーム全体へ即時共有できます。
+                </p>
+              </div>
+            </article>
+            <div class="equation-conclusion">
+              <h4>意思決定の質 × 速さ × 先見性 = 「攻めと守り」を同時に実現する経営計画</h4>
+              <p>
+                数週間かかっていた計画策定を数日に短縮しながら、金融機関の納得感と現場の実行力を両立。因果を可視化したロジックツリーが経営会議の議論を深め、再現性ある意思決定が生まれます。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="benefits" class="mx-auto w-full max-w-5xl px-5" data-animate>
         <div class="space-y-10">
           <div class="space-y-4">
@@ -1177,6 +1504,55 @@
           <div class="flex flex-wrap items-center justify-center gap-3">
             <a href="#consult-form" class="btn-primary">成果を体験する無料相談へ→</a>
             <a href="#process" class="btn-secondary">導入ステップを見る→</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="causality" class="mx-auto w-full max-w-6xl px-5" data-animate>
+        <div class="ladder-grid">
+          <div class="ladder-visual">
+            <div class="ladder-axis">
+              <div class="ladder-step" data-step="1">
+                <strong>データ統合の自動化</strong>
+                <span>会計・販売・政策・需要指標をAIがクレンジングし、意思決定の土台を整備。</span>
+              </div>
+              <div class="ladder-step" data-step="2">
+                <strong>因果マップと論点設計</strong>
+                <span>粗利・キャッシュ・在庫の因果を可視化し、優先すべき投資と撤退の論点を抽出。</span>
+              </div>
+              <div class="ladder-step" data-step="3">
+                <strong>金融機関も納得するロジック</strong>
+                <span>専門家がリスクコントロール案と想定問答を整理し、審査・投資家対応を先回り。</span>
+              </div>
+              <div class="ladder-step" data-step="4">
+                <strong>経営会議の意思決定シナリオ</strong>
+                <span>攻めと守りを比較できるシナリオを提示し、KPIに落ちるスコアリングで実行へ。</span>
+              </div>
+              <div class="ladder-step" data-step="5">
+                <strong>実行トラッキングと学習</strong>
+                <span>進捗データを週次で取り込み、仮説のアップデートとキャッシュ創出を継続。</span>
+              </div>
+            </div>
+          </div>
+          <div class="ladder-facts">
+            <div class="ladder-fact">
+              <h3>読者が直感的に理解できるデータストーリー</h3>
+              <p>
+                ダッシュボードは1カラムでスマートフォンでも読みやすい構成。経営指標の変動理由を図解し、意思決定プロセスをストーリーとして体験できます。
+              </p>
+            </div>
+            <div class="ladder-fact">
+              <h3>因果性と論理性を両立した伴走</h3>
+              <p>
+                AIが導き出した因果を、専門家が実務・金融・会計の視点で検証。経営者が納得感を持って決断できるよう、論理の飛躍をなくしたコミュニケーションを行います。
+              </p>
+            </div>
+            <div class="ladder-fact">
+              <h3>デザイン性とスマート性で「投資したくなる」体験</h3>
+              <p>
+                高彩度のグラデーションと立体的なカードデザインで、高額投資にふさわしいプレミアム感を演出。CTAはスクロールに追従し、離脱を防止します。
+              </p>
+            </div>
           </div>
         </div>
       </section>
