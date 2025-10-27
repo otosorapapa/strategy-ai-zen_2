@@ -177,6 +177,37 @@ const quickFlowSteps: QuickFlowStep[] = [
   },
 ];
 
+type QuickProofPoint = {
+  title: string;
+  description: string;
+  evidence: string;
+  icon: LucideIcon;
+};
+
+const quickProofPoints: QuickProofPoint[] = [
+  {
+    title: "意思決定の因果を可視化",
+    description:
+      "AIが会議体ごとのKPIと外部指標を相関分析し、判断を遅らせているボトルネックを提示。",
+    evidence: "導入企業20社の意思決定リードタイム52%短縮",
+    icon: BarChart4,
+  },
+  {
+    title: "財務×政策のシナリオを同時比較",
+    description:
+      "財務計画と政策アップデートを48時間以内に組み合わせ、投資回収と資金繰りの着地を複数提示。",
+    evidence: "改善プラン提示まで平均48時間 / 3案比較",
+    icon: Layers3,
+  },
+  {
+    title: "専門家によるリスク監査",
+    description:
+      "診断士・財務会計・税務の専門家がAIドラフトを審査し、投資判断の前提とリスク許容度を明文化。",
+    evidence: "資金繰り改善45時間創出 / 月 (平均)",
+    icon: ShieldCheck,
+  },
+];
+
 const insightHighlights = [
   {
     value: "-67%",
@@ -1547,6 +1578,7 @@ const Index = () => {
   const metricsRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const securityBadges = useMemo(() => securityPoints.slice(0, 3), []);
+  const [primarySecurity, secondarySecurity, tertiarySecurity] = securityPoints;
   const numberFormatter = useMemo(() => new Intl.NumberFormat("ja-JP"), []);
 
   const simulatorResult = useMemo(() => {
@@ -2070,94 +2102,156 @@ const Index = () => {
                     氏名・会社名・メールの3項目だけで申し込み完了。初回30分のオンライン相談で、AI診断の結果と改善プランの方向性をご案内します。
                   </p>
                 </div>
-                <form
-                  className="quick-form"
-                  aria-label="60秒AI診断申し込みフォーム"
-                  onSubmit={handleQuickContactSubmit}
-                >
-                  <div className="quick-form-grid">
-                    <label>
-                      氏名
-                      <input
-                        type="text"
-                        name="name"
-                        autoComplete="name"
-                        value={quickContact.name}
-                        onChange={handleQuickContactChange}
-                        required
-                      />
-                    </label>
-                    <label>
-                      会社名
-                      <input
-                        type="text"
-                        name="company"
-                        autoComplete="organization"
-                        value={quickContact.company}
-                        onChange={handleQuickContactChange}
-                        required
-                      />
-                    </label>
-                    <label>
-                      メールアドレス
-                      <input
-                        type="email"
-                        name="email"
-                        autoComplete="email"
-                        value={quickContact.email}
-                        onChange={handleQuickContactChange}
-                        required
-                      />
-                    </label>
-                  </div>
-                  {quickError && (
-                    <div
-                      className="form-error form-error--inline"
-                      role="alert"
-                      aria-live="assertive"
-                    >
-                      {quickError}
+                <div className="hero-quick-form__content">
+                  <form
+                    className="quick-form"
+                    aria-label="60秒AI診断申し込みフォーム"
+                    onSubmit={handleQuickContactSubmit}
+                  >
+                    <div className="quick-form-grid">
+                      <label>
+                        氏名
+                        <input
+                          type="text"
+                          name="name"
+                          autoComplete="name"
+                          value={quickContact.name}
+                          onChange={handleQuickContactChange}
+                          required
+                        />
+                      </label>
+                      <label>
+                        会社名
+                        <input
+                          type="text"
+                          name="company"
+                          autoComplete="organization"
+                          value={quickContact.company}
+                          onChange={handleQuickContactChange}
+                          required
+                        />
+                      </label>
+                      <label>
+                        メールアドレス
+                        <input
+                          type="email"
+                          name="email"
+                          autoComplete="email"
+                          value={quickContact.email}
+                          onChange={handleQuickContactChange}
+                          required
+                        />
+                      </label>
                     </div>
-                  )}
-                  {quickSubmitted && (
-                    <p
-                      className="quick-form-success"
-                      role="status"
-                      aria-live="polite"
-                    >
-                      送信ありがとうございます。1営業日以内に診断士より初回30分相談の候補日時をご案内します。
-                    </p>
-                  )}
-                  <button type="submit" className="btn btn-cta btn-progress">
-                    {isQuickSubmitting && (
-                      <span className="btn-spinner" aria-hidden="true" />
+                    {quickError && (
+                      <div
+                        className="form-error form-error--inline"
+                        role="alert"
+                        aria-live="assertive"
+                      >
+                        {quickError}
+                      </div>
                     )}
-                    {isQuickSubmitting ? "送信中..." : "60秒診断を申し込む"}
-                  </button>
-                  <p className="quick-form-note">詳細な課題は追ってヒアリングいたします。</p>
-                </form>
-                <ol className="diagnosis-flow" aria-label="診断から提案までの流れ">
-                  {quickFlowSteps.map((step) => {
-                    const StepIcon = step.icon;
-                    return (
-                      <li key={step.label} className="diagnosis-flow__item">
-                        <div className="diagnosis-flow__icon" aria-hidden="true">
-                          <StepIcon />
-                        </div>
-                        <div className="diagnosis-flow__body">
-                          <div className="diagnosis-flow__header">
-                            <strong>{step.label}</strong>
-                            {step.duration && (
-                              <span className="diagnosis-flow__duration">{step.duration}</span>
-                            )}
+                    {quickSubmitted && (
+                      <p
+                        className="quick-form-success"
+                        role="status"
+                        aria-live="polite"
+                      >
+                        送信ありがとうございます。1営業日以内に診断士より初回30分相談の候補日時をご案内します。
+                      </p>
+                    )}
+                    <button type="submit" className="btn btn-cta btn-progress">
+                      {isQuickSubmitting && (
+                        <span className="btn-spinner" aria-hidden="true" />
+                      )}
+                      {isQuickSubmitting ? "送信中..." : "60秒診断を申し込む"}
+                    </button>
+                    <p className="quick-form-note">詳細な課題は追ってヒアリングいたします。</p>
+                  </form>
+                  <aside className="hero-quick-proof" aria-label="AI診断が信頼される理由">
+                    <div className="hero-quick-proof__header">
+                      <span>意思決定を論理で支える3つの柱</span>
+                      <h3>AI診断で経営判断の速度と確信を両立</h3>
+                    </div>
+                    <ul className="hero-quick-proof__list">
+                      {quickProofPoints.map((point) => {
+                        const PointIcon = point.icon;
+                        return (
+                          <li key={point.title} className="hero-quick-proof__item">
+                            <span className="hero-quick-proof__icon" aria-hidden="true">
+                              <PointIcon />
+                            </span>
+                            <div>
+                              <strong>{point.title}</strong>
+                              <p>{point.description}</p>
+                              <small>{point.evidence}</small>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                    <div className="hero-quick-proof__experts">
+                      <div className="hero-quick-proof__avatars">
+                        {heroAllianceExperts.slice(0, 3).map((expert) => (
+                          <span key={expert.name} className="hero-quick-proof__avatar">
+                            <img
+                              src={expert.photo}
+                              alt={`${expert.name} (${expert.role})`}
+                              loading="lazy"
+                            />
+                          </span>
+                        ))}
+                      </div>
+                      <div className="hero-quick-proof__experts-copy">
+                        <strong>専門家がAI提案を審査</strong>
+                        <p>資金調達・戦略・財務会計の視点でリスクと投資対効果を精査します。</p>
+                      </div>
+                    </div>
+                    <p className="hero-quick-proof__note">初回相談で貴社の投資回収シミュレーションと次の一手を提示します。</p>
+                  </aside>
+                </div>
+                <div className="hero-quick-form__footer">
+                  <ol className="diagnosis-flow" aria-label="診断から提案までの流れ">
+                    {quickFlowSteps.map((step, index) => {
+                      const StepIcon = step.icon;
+                      return (
+                        <li key={step.label} className="diagnosis-flow__item">
+                          <span className="diagnosis-flow__step-index" aria-hidden="true">
+                            STEP {String(index + 1).padStart(2, "0")}
+                          </span>
+                          <div className="diagnosis-flow__icon" aria-hidden="true">
+                            <StepIcon />
                           </div>
-                          <span>{step.description}</span>
-                          <p>{step.detail}</p>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ol>
+                          <div className="diagnosis-flow__body">
+                            <div className="diagnosis-flow__header">
+                              <strong>{step.label}</strong>
+                              {step.duration && (
+                                <span className="diagnosis-flow__duration">{step.duration}</span>
+                              )}
+                            </div>
+                            <span>{step.description}</span>
+                            <p>{step.detail}</p>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ol>
+                  <div className="hero-quick-form__guarantee" role="note">
+                    <div className="hero-quick-form__guarantee-icon" aria-hidden="true">
+                      <Lock />
+                    </div>
+                    <div>
+                      <strong>経営データも安心して共有できます</strong>
+                      <p>
+                        {primarySecurity.title}・{secondarySecurity.title}・{tertiarySecurity.title}の体制で情報を保護します。
+                      </p>
+                      <small>
+                        {primarySecurity.description} {secondarySecurity.description}
+                      </small>
+                    </div>
+                  </div>
+                </div>
               </div>
               <ul className="trust-badges" aria-label="セキュリティ対策">
                 {securityBadges.map((badge) => {
