@@ -2340,16 +2340,36 @@ const Index = () => {
             </div>
             <div className="evidence-grid">
               {whyNowEvidence.map((item) => (
-                <article
-                  key={item.title}
-                  className="evidence-card"
-                  data-animate
-                  data-source={item.sourceNote}
-                >
-                  <div className="evidence-stat">{item.stat}</div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  <span className="evidence-source">{item.sourceLabel}</span>
+                <article key={item.title} className="evidence-card" data-animate>
+                  <div className="evidence-card__content">
+                    <span className="evidence-card__stat" aria-label="調査カテゴリ">
+                      {item.stat}
+                    </span>
+                    <div className="evidence-card__headline">
+                      <h3>{item.title}</h3>
+                    </div>
+                    <p className="evidence-card__description">{item.description}</p>
+                    <footer className="evidence-card__footer">
+                      <div className="evidence-card__source" aria-label="調査出典">
+                        <strong>{item.sourceLabel}</strong>
+                        <span>{item.sourceNote}</span>
+                      </div>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <a
+                            href={item.sourceUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="evidence-card__link"
+                          >
+                            原典を見る
+                            <ArrowUpRight aria-hidden="true" />
+                          </a>
+                        </TooltipTrigger>
+                        <TooltipContent side="top">調査詳細を新しいタブで開く</TooltipContent>
+                      </Tooltip>
+                    </footer>
+                  </div>
                 </article>
               ))}
             </div>
