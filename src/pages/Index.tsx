@@ -165,39 +165,59 @@ const insightHighlights = [
 
 type AiValuePoint = {
   title: string;
-  description: string;
-  example: string;
+  challenge: string;
+  mechanism: string;
+  impact: string;
+  executiveTakeaway: string;
   icon: LucideIcon;
+  accent: "navy" | "mint" | "sky" | "citrus";
+  evidence: string;
 };
 
 const aiValuePoints: AiValuePoint[] = [
   {
     title: "リアルタイム分析で判断を即断",
-    description:
-      "University of Cincinnati Online (2024) は、AIがリアルタイムのデータを提供し経営者の迅速で正確な意思決定を支援すると報告。ダッシュボードが政策・金融データを常に同期し、材料を即座に提示します。",
-    example: "最新の補助金更新と資金繰り感度を自動で突き合わせ、経営者は判断に集中できます。",
+    challenge: "政策や資金繰り情報の更新が遅れ、会議で判断材料が不足しがち。",
+    mechanism:
+      "University of Cincinnati Online (2024) は、AIがリアルタイムデータを統合し経営判断を支援すると報告。ダッシュボードが政策・金融・自社指標を常時同期し、根拠付きの状況把握を提供します。",
+    impact: "意思決定リードタイム -52%",
+    executiveTakeaway: "最新の補助金更新と資金繰り感度を自動で突き合わせ、判断のスピードを落としません。",
     icon: BarChart4,
+    accent: "navy",
+    evidence: "University of Cincinnati Online (2024)",
   },
   {
     title: "シナリオ比較と生成ドラフト",
-    description:
-      "JAGGAER (2024) は生成AIが膨大なデータを要約し、複数シナリオを短時間で評価できると指摘。生成AIが過去データから将来シナリオを複数生成し、計画書や想定問答を即座にドラフトします。",
-    example: "四半期計画書や想定問答集をAIが下書きし、専門家が数分でレビューします。",
+    challenge: "複数シナリオの検証に時間がかかり、意思決定の論点整理が後手に回る。",
+    mechanism:
+      "JAGGAER (2024) は生成AIが膨大なデータを要約し短時間で比較できると指摘。AIが財務・需給データをもとに複数シナリオと想定問答を下書きし、役員会の論点を事前可視化します。",
+    impact: "想定シナリオ数 4倍",
+    executiveTakeaway: "四半期計画書や想定問答集をAIが先に整え、専門家レビューで精度を一段引き上げます。",
     icon: Sparkles,
+    accent: "mint",
+    evidence: "JAGGAER (2024)",
   },
   {
     title: "バイアスを抑えたリスク検知",
-    description:
-      "University of Cincinnati Onlineのレポートは生成AIが客観的な提案でリスク管理を強化すると報告。AIが資金繰り悪化や市況変化の兆候を早期に警告し、人のバイアスを補正します。",
-    example: "資金繰りアラートと金融機関向け説明資料を自動作成し、経営者の不安を軽減します。",
+    challenge: "属人的な経験に頼った判断では、市況変化や資金繰り悪化の兆候を見落とす。",
+    mechanism:
+      "University of Cincinnati Onlineの調査は、生成AIが客観的な提案でリスク管理を強化すると報告。AIが信用・需給指数を監視し、閾値を超えたら警告と対策案を提示します。",
+    impact: "リスク検知リードタイム -10日",
+    executiveTakeaway: "資金繰りアラートと金融機関向け説明資料を自動生成し、交渉準備を先回りできます。",
     icon: ShieldCheck,
+    accent: "sky",
+    evidence: "University of Cincinnati Online (2024)",
   },
   {
     title: "人の判断力を拡張",
-    description:
-      "Rossum (2024) はAIが副操縦士となり、人の創造性と直感を引き出すと述べています。AIが意思決定材料を整え、専門家と経営者は本質的な議論に時間を使えます。",
-    example: "役員会議ではAIが論点を整理し、経営者は戦略の優先順位づけに集中できます。",
+    challenge: "経営者・役員の稼働が逼迫し、意思決定後の説明や納得づくりが後回しになる。",
+    mechanism:
+      "Rossum (2024) はAIが副操縦士となり創造性と直感を引き出すと言及。AIが決裁資料の比較と論点を整理し、専門家とともに合意形成のストーリーを組み立てます。",
+    impact: "経営者集中時間 +45h/月",
+    executiveTakeaway: "役員会ではAIが論点を整理し、経営者は優先順位づけと納得形成に専念できます。",
     icon: Users2,
+    accent: "citrus",
+    evidence: "Rossum (2024)",
   },
 ];
 
@@ -1611,7 +1631,7 @@ const Index = () => {
               </p>
             </div>
             <div className="roles-grid">
-              {responsibilityColumns.map((column) => {
+              {responsibilityColumns.map((column, index) => {
                 const RoleIcon = column.icon;
                 return (
                   <article
@@ -1620,18 +1640,29 @@ const Index = () => {
                     data-animate
                     tabIndex={0}
                   >
-                    <div className={`role-icon role-icon--${column.accent}`} aria-hidden="true">
-                      <RoleIcon />
+                    <span className="role-card__step" aria-hidden="true">
+                      STEP {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <div className="role-card__header">
+                      <div className={`role-icon role-icon--${column.accent}`} aria-hidden="true">
+                        <RoleIcon />
+                      </div>
+                      <div className="role-card__titles">
+                        <h3>{column.title}</h3>
+                        <p>{column.summary}</p>
+                      </div>
                     </div>
-                    <h3>{column.title}</h3>
-                    <p>{column.summary}</p>
-                    <ul>
-                      {column.points.map((point) => (
-                        <li key={point}>{point}</li>
-                      ))}
-                    </ul>
-                    <div className="role-detail" aria-hidden="true">
-                      {column.detail}
+                    <div className="role-card__body">
+                      <span className="role-card__label">フォーカスする役割</span>
+                      <ul>
+                        {column.points.map((point) => (
+                          <li key={point}>{point}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="role-detail">
+                      <span className="role-card__label">実行ポイント</span>
+                      <p>{column.detail}</p>
                     </div>
                   </article>
                 );
@@ -1641,13 +1672,37 @@ const Index = () => {
               {aiValuePoints.map((point) => {
                 const ValueIcon = point.icon;
                 return (
-                  <article key={point.title} className="ai-value-card">
-                    <div className="ai-value-card__icon" aria-hidden="true">
-                      <ValueIcon />
+                  <article
+                    key={point.title}
+                    className={`ai-value-card ai-value-card--${point.accent}`}
+                  >
+                    <header className="ai-value-card__header">
+                      <div
+                        className={`ai-value-card__icon ai-value-card__icon--${point.accent}`}
+                        aria-hidden="true"
+                      >
+                        <ValueIcon />
+                      </div>
+                      <div className="ai-value-card__meta">
+                        <span className="ai-value-card__evidence">{point.evidence}</span>
+                        <h3>{point.title}</h3>
+                      </div>
+                    </header>
+                    <div className="ai-value-card__content">
+                      <p className="ai-value-card__challenge">
+                        <strong>課題</strong>
+                        {point.challenge}
+                      </p>
+                      <p className="ai-value-card__mechanism">
+                        <strong>アプローチ</strong>
+                        {point.mechanism}
+                      </p>
                     </div>
-                    <h3>{point.title}</h3>
-                    <p>{point.description}</p>
-                    <span>{point.example}</span>
+                    <div className="ai-value-card__impact">
+                      <span>インパクト</span>
+                      <strong>{point.impact}</strong>
+                      <p>{point.executiveTakeaway}</p>
+                    </div>
                   </article>
                 );
               })}
