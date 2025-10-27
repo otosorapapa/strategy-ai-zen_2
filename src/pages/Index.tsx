@@ -640,6 +640,8 @@ type ProcessStep = {
   description: string;
   aiRole: string;
   humanRole: string;
+  duration: string;
+  deliverable: string;
   icon: LucideIcon;
   accent: "mint" | "sky" | "citrus" | "navy";
 };
@@ -652,6 +654,8 @@ const processSteps: ProcessStep[] = [
     humanRole: "経営者・専門家が優先順位とスコープを決定",
     icon: ClipboardCheck,
     accent: "mint",
+    duration: "1営業日以内",
+    deliverable: "診断レポートと優先課題マップ",
   },
   {
     title: "データ入力・連携",
@@ -660,6 +664,8 @@ const processSteps: ProcessStep[] = [
     humanRole: "専門家が連携ルールを整備しガバナンスを確認",
     icon: Database,
     accent: "sky",
+    duration: "1〜2週間",
+    deliverable: "データガバナンス設計と接続完了ログ",
   },
   {
     title: "AIレポート生成",
@@ -668,6 +674,8 @@ const processSteps: ProcessStep[] = [
     humanRole: "経営者が仮説をレビューし意思決定基準を設定",
     icon: BrainCircuit,
     accent: "navy",
+    duration: "3〜5営業日",
+    deliverable: "戦略別シナリオ比較レポート",
   },
   {
     title: "専門家との面談",
@@ -676,6 +684,8 @@ const processSteps: ProcessStep[] = [
     humanRole: "専門家が審査目線で修正し実行計画を調整",
     icon: ShieldCheck,
     accent: "mint",
+    duration: "オンライン60分",
+    deliverable: "審査対応メモと改善アクション",
   },
   {
     title: "計画書完成・実行",
@@ -684,6 +694,36 @@ const processSteps: ProcessStep[] = [
     humanRole: "経営者が説明責任を担い、専門家が伴走して定着化",
     icon: CheckCircle2,
     accent: "citrus",
+    duration: "最短4週間",
+    deliverable: "金融機関提出レベルの経営計画書",
+  },
+];
+
+type ProcessHighlight = {
+  title: string;
+  value: string;
+  description: string;
+  icon: LucideIcon;
+};
+
+const processHighlights: ProcessHighlight[] = [
+  {
+    title: "導入スピード",
+    value: "最短4週間",
+    description: "集中オンボーディングで意思決定まで伴走",
+    icon: Timer,
+  },
+  {
+    title: "専任チーム",
+    value: "AI×専門家3名",
+    description: "診断士・会計士・AIストラテジストが担当",
+    icon: Users2,
+  },
+  {
+    title: "再現性",
+    value: "KPI達成率92%",
+    description: "四半期レビューで改善を継続",
+    icon: Shield,
   },
 ];
 
@@ -2472,6 +2512,23 @@ const Index = () => {
                 <li>MIT Sloanの研究が示す「AIと人の協働に向けたプロセス再設計」を実装。</li>
               </ul>
             </div>
+            <div className="process-overview" data-animate>
+              {processHighlights.map((highlight) => {
+                const HighlightIcon = highlight.icon;
+                return (
+                  <article key={highlight.title} className="process-overview-card">
+                    <div className="process-overview-icon" aria-hidden="true">
+                      <HighlightIcon />
+                    </div>
+                    <div className="process-overview-body">
+                      <span>{highlight.title}</span>
+                      <strong>{highlight.value}</strong>
+                      <p>{highlight.description}</p>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
             <ol className="process-timeline">
               {processSteps.map((step, index) => {
                 const StepIcon = step.icon;
@@ -2482,16 +2539,28 @@ const Index = () => {
                       <StepIcon />
                     </div>
                     <div className="process-content">
-                      <h3>{step.title}</h3>
+                      <div className="process-content__header">
+                        <h3>{step.title}</h3>
+                        <div className="process-meta">
+                          <div className="process-meta__item">
+                            <span>期間</span>
+                            <strong>{step.duration}</strong>
+                          </div>
+                          <div className="process-meta__item">
+                            <span>アウトプット</span>
+                            <strong>{step.deliverable}</strong>
+                          </div>
+                        </div>
+                      </div>
                       <p>{step.description}</p>
                       <div className="process-roles">
-                        <div>
-                          <strong>AI</strong>
-                          <span>{step.aiRole}</span>
+                        <div className="process-roles__item">
+                          <span>AI</span>
+                          <p>{step.aiRole}</p>
                         </div>
-                        <div>
-                          <strong>人</strong>
-                          <span>{step.humanRole}</span>
+                        <div className="process-roles__item">
+                          <span>専門家</span>
+                          <p>{step.humanRole}</p>
                         </div>
                       </div>
                     </div>
@@ -2499,9 +2568,12 @@ const Index = () => {
                 );
               })}
             </ol>
-            <p className="process-note" data-animate>
-              MIT Sloan Management Reviewの研究（2023）は、AIと人の協働には業務プロセス全体の再設計が不可欠だと指摘しています。本プログラムではその知見を踏まえ、導入ステップ自体を差別化要素として設計しています。
-            </p>
+            <div className="process-note" data-animate>
+              <span>Research Insight</span>
+              <p>
+                MIT Sloan Management Reviewの研究（2023）は、AIと人の協働には業務プロセス全体の再設計が不可欠だと指摘しています。本プログラムではその知見を踏まえ、導入ステップ自体を差別化要素として設計しています。
+              </p>
+            </div>
             <div className="process-flowchart" data-animate>
               {processTimeline.map((item) => {
                 const FlowIcon = item.icon;
