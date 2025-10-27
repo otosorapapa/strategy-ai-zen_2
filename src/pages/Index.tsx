@@ -500,6 +500,42 @@ const quarterlySignals = [
   },
 ];
 
+const quarterlyMetrics = [
+  {
+    value: "90日",
+    label: "戦略・実行の再設計サイクル",
+    description: "四半期ごとに優先順位と資源配分を再定義。ロジックツリーで意思決定を可視化。",
+  },
+  {
+    value: "12領域",
+    label: "リアルタイム監視の経営指標",
+    description: "財務・市場・人材の3階層をAIが常時スキャンし、異常検知を通知。",
+  },
+  {
+    value: "168%",
+    label: "平均想定ROI",
+    description: "AIドラフトと専門家レビューで作成時間を短縮し、投資回収の確度を高めます。",
+  },
+];
+
+const quarterlyMilestones = [
+  {
+    title: "Week 1-2",
+    highlight: "経営課題マップ確定",
+    detail: "AI診断 × 経営会議ログで課題仮説を因果整理。",
+  },
+  {
+    title: "Week 5",
+    highlight: "リソース配分シナリオ提示",
+    detail: "12指標を基にベスト&ワーストケースを同時比較。",
+  },
+  {
+    title: "Week 9",
+    highlight: "実行レビュー & KPI補正",
+    detail: "成果の因果を検証し、翌四半期の打ち手に反映。",
+  },
+];
+
 const velocitySeries = [
   {
     label: "外部環境の変化指数",
@@ -2628,77 +2664,144 @@ const Index = () => {
           aria-labelledby="quarterly-heading"
         >
           <div className="container">
-            <div className="section-header" data-animate>
-              <h2 id="quarterly-heading">四半期ごとに戦略と実行を再設計</h2>
-              <ul className="section-intro">
-                <li>Dragonboatが説く90日アライン。</li>
-                <li>生成AIと専門家で更新を自動化。</li>
-              </ul>
-            </div>
-            <div className="quarterly-grid">
-              <div className="quarterly-insights" data-animate>
-                {quarterlySignals.map((signal) => (
-                  <article key={signal.title} className="quarterly-card">
-                    <h3>{signal.title}</h3>
-                    <p>{signal.description}</p>
-                    <span className="quarterly-link" aria-label="出典">
-                      {signal.sourceLabel}
-                    </span>
-                  </article>
-                ))}
+            <div className="quarterly-layout">
+              <div className="quarterly-narrative" data-animate>
+                <span className="quarterly-badge">90-DAY STRATEGY OPS</span>
+                <h2 id="quarterly-heading">四半期ごとに戦略と実行を再設計</h2>
+                <p className="quarterly-lead">
+                  市場が大きく揺れる四半期ごとに、AIが最新データを要約し専門家が意思決定の因果を補強。
+                  年商5,000万円〜15億円の経営チームが、確信をもって攻めと守りの配分を更新できます。
+                </p>
+                <div className="quarterly-metrics">
+                  {quarterlyMetrics.map((metric) => (
+                    <div key={metric.label} className="quarterly-metric">
+                      <span className="quarterly-metric__value">{metric.value}</span>
+                      <h3 className="quarterly-metric__label">
+                        {metric.label === "平均想定ROI" ? (
+                          <>
+                            平均想定
+                            <abbr title="投資利益率">ROI</abbr>
+                          </>
+                        ) : (
+                          metric.label
+                        )}
+                      </h3>
+                      <p>{metric.description}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="quarterly-loop">
+                  <h3>因果で捉える重点アップデート</h3>
+                  <ol>
+                    {quarterlySignals.map((signal) => (
+                      <li key={signal.title}>
+                        <div className="quarterly-loop__body">
+                          <strong>{signal.title}</strong>
+                          <p>{signal.description}</p>
+                        </div>
+                        <span className="quarterly-loop__source">{signal.sourceLabel}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+                <div className="quarterly-actions">
+                  <a className="btn btn-cta" href="#contact">
+                    {primaryCtaLabel}
+                  </a>
+                  <button
+                    type="button"
+                    className="btn btn-accent"
+                    onClick={() => setRoiModalOpen(true)}
+                  >
+                    <span>ROIシミュレーションを試す</span>
+                  </button>
+                </div>
               </div>
               <div className="quarterly-visual" data-animate aria-hidden="true">
-                <div className="velocity-chart">
-                  <svg viewBox="0 0 100 60" role="img" aria-label="外部環境と生成AIの変化速度">
-                    {velocitySeries.map((series, seriesIndex) => {
-                      const points = series.values
-                        .map((value, valueIndex) => {
-                          const x = (valueIndex / (series.values.length - 1 || 1)) * 100;
-                          const max = velocityMax || 1;
-                          const normalizedY = 55 - (value / max) * 45;
-                          return `${x},${normalizedY}`;
-                        })
-                        .join(" ");
-                      return (
-                        <polyline
-                          key={series.label}
-                          points={points}
-                          className={`velocity-line velocity-line-${seriesIndex}`}
-                          style={{ stroke: series.color }}
-                        />
-                      );
-                    })}
-                  </svg>
-                  <ul className="velocity-legend">
-                    {velocitySeries.map((series) => (
-                      <li key={series.label}>
-                        <span style={{ backgroundColor: series.color }} />
-                        {series.label}
+                <div className="quarterly-board">
+                  <header className="quarterly-board__header">
+                    <div>
+                      <span>Quarterly Operating Loop</span>
+                      <strong>外部環境 × AI更新指数</strong>
+                    </div>
+                    <div className="quarterly-board__confidence">
+                      <Sparkles aria-hidden="true" />
+                      <span>再現性 92%</span>
+                    </div>
+                  </header>
+                  <div className="quarterly-board__chart">
+                    <svg
+                      viewBox="0 0 100 60"
+                      role="img"
+                      aria-label="外部環境と生成AIの変化速度"
+                      className="quarterly-board__svg"
+                    >
+                      {velocitySeries.map((series, seriesIndex) => {
+                        const points = series.values
+                          .map((value, valueIndex) => {
+                            const x = (valueIndex / (series.values.length - 1 || 1)) * 100;
+                            const max = velocityMax || 1;
+                            const normalizedY = 55 - (value / max) * 45;
+                            return `${x},${normalizedY}`;
+                          })
+                          .join(" ");
+                        return (
+                          <polyline
+                            key={series.label}
+                            points={points}
+                            className={`quarterly-line quarterly-line-${seriesIndex}`}
+                            style={{ stroke: series.color }}
+                          />
+                        );
+                      })}
+                    </svg>
+                    <div className="quarterly-board__axis">
+                      {velocityQuarters.map((quarter) => (
+                        <span key={quarter}>{quarter}</span>
+                      ))}
+                    </div>
+                    <ul className="quarterly-board__legend">
+                      {velocitySeries.map((series) => (
+                        <li key={series.label}>
+                          <span style={{ backgroundColor: series.color }} />
+                          {series.label}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="quarterly-board__note">
+                      *指数は2021Q4を100とした当社推計。更新サイクルを可視化し、意思決定のスピード差を明示します。
+                    </p>
+                  </div>
+                  <div className="quarterly-board__insights">
+                    <div>
+                      <span>意思決定速度</span>
+                      <strong>3.4x</strong>
+                      <small>会議から決裁までの短縮率</small>
+                    </div>
+                    <div>
+                      <span>実行完了率</span>
+                      <strong>＋27pt</strong>
+                      <small>OKR達成度（導入20社平均）</small>
+                    </div>
+                    <div>
+                      <span>投資回収</span>
+                      <strong>5.8ヶ月</strong>
+                      <small>中央値のペイバック期間</small>
+                    </div>
+                  </div>
+                  <ul className="quarterly-roadmap">
+                    {quarterlyMilestones.map((milestone) => (
+                      <li key={milestone.title}>
+                        <span>{milestone.title}</span>
+                        <div>
+                          <strong>{milestone.highlight}</strong>
+                          <p>{milestone.detail}</p>
+                        </div>
                       </li>
                     ))}
                   </ul>
-                  <div className="velocity-axis">
-                    {velocityQuarters.map((quarter) => (
-                      <span key={quarter}>{quarter}</span>
-                    ))}
-                  </div>
-                  <p className="velocity-note">
-                    *指数は2021Q4を100とした当社推計。外部データ更新と生成AI技術の進化スピードを示します。
-                  </p>
                 </div>
               </div>
-            </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
-                {primaryCtaLabel}
-              </a>
-              <button
-                type="button"
-                className="link-button"
-                onClick={() => setRoiModalOpen(true)}
-              >
-                <abbr title="投資利益率">ROI</abbr>シミュレーションを試す
-              </button>
             </div>
           </div>
         </section>
