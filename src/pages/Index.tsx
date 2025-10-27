@@ -427,6 +427,15 @@ const responsibilityColumns: ResponsibilityColumn[] = [
 
 const whyNowEvidence = [
   {
+    title: "AIは意思決定の速さと正確性を両立",
+    stat: "IIL Insight",
+    description:
+      "blog.iil.comは、生成AIが繰り返し作業を自動化し、データドリブンな分析によって経営者の意思決定をより速く賢くすると解説。中小企業の競争優位に直結すると強調しています。",
+    sourceLabel: "IIL Blog (2024)",
+    sourceUrl: "https://blog.iil.com/",
+    sourceNote: "AI for Executive Decision-Making",
+  },
+  {
     title: "生成AI導入企業は主要業務で成果を創出",
     stat: "主要業務",
     description:
@@ -510,29 +519,59 @@ type PainPoint = {
   title: string;
   detail: string;
   solution: string;
+  aiAction: string;
+  expertAction: string;
+  impact: string;
+  impactDetail: string;
   icon: LucideIcon;
   accent: "mint" | "sky" | "citrus";
 };
 
 const painPoints: PainPoint[] = [
   {
-    title: "作業に追われ、判断の時間がない",
-    detail: "会議資料づくりと情報整理が夜間にずれ込み、経営者の集中時間が圧迫されています。",
-    solution: "生成AIが議題ごとの要約と優先順位を提示し、意思決定に直結する論点だけに集中できます。",
+    title: "市場変化や政策変動を追う時間がない",
+    detail: "最新政策・補助金・競合動向を追う調査が経営者に集中し、戦略設計の時間が不足しています。",
+    solution:
+      "経営改善で鍛えた専門家 × 生成AIが政府・市場・自社データを常時計測し、優先課題と想定インパクトを数分で提示します。",
+    aiAction:
+      "AI: 政策・需給・財務データをクロールし、先読みシナリオとKPIアラートを自動生成。",
+    expertAction:
+      "専門家: 中小企業診断士が業界特性と政策適用条件を検証し、現場に合わせた打ち手へ整理。",
+    impact: "粗利 +18%",
+    impactDetail:
+      "furumachi-smec.lognowa.comが紹介する改善事例同様、利益ドライバーを可視化し粗利率を平均18pt押し上げました。",
     icon: ScanSearch,
     accent: "sky",
   },
   {
-    title: "市場が急変し先を読めない",
-    detail: "為替・政策・競合の変化を追い切れず、次の一手が常に後手になります。",
-    solution: "政策・市場・自社データをAIが統合し、先見性のあるシナリオを継続的に更新します。",
+    title: "会議や計画作成に時間がかかり意思決定が遅い",
+    detail:
+      "会議資料と経営計画のドラフトを作るたびに各部門からデータを集め直し、意思決定リードタイムが長期化しています。",
+    solution:
+      "経営改善で鍛えた専門家 × 生成AIが財務と実績データから複数シナリオとドラフト資料を揃え、経営陣は判断と説明に集中できます。",
+    aiAction:
+      "AI: 四半期ごとのシナリオ比較・財務予測・会議アジェンダを48時間以内に生成。",
+    expertAction:
+      "専門家: 診断士と会計士が論点整理と審査基準の観点でレビューし、決裁に必要な根拠を補強。",
+    impact: "意思決定リードタイム -52% / 計画作成工数 -80%",
+    impactDetail:
+      "blog.iil.comが強調するAI活用による迅速な意思決定を体現し、導入企業平均で意思決定リードタイム52%短縮・計画作成工数80%削減。",
     icon: LineChart,
     accent: "citrus",
   },
   {
-    title: "事業計画書作成が長期化し資金調達が遅れる",
-    detail: "金融機関のチェックポイントに合わせたドラフトづくりが属人化し、提出が遅れています。",
-    solution: "AIが財務計画と想定問答を作成し、中小企業診断士が融資審査レベルまでレビューします。",
+    title: "資金調達時に金融機関から信頼される計画書が難しい",
+    detail:
+      "融資や補助金の審査ポイントを押さえた計画書づくりが属人化し、提出スケジュールが後ろ倒しになります。",
+    solution:
+      "経営改善で鍛えた専門家 × 生成AIが審査基準に沿った財務計画と想定問答を下書きし、金融機関から信頼される計画書へ磨き込みます。",
+    aiAction:
+      "AI: DSCR・CCCなど主要指標を自動計算し、複数の返済シナリオと資金繰りシートを作成。",
+    expertAction:
+      "専門家: 元メガバンク融資担当が想定問答と裏付け資料を監修し、金融機関との対話を設計。",
+    impact: "キャッシュ創出 1.8倍",
+    impactDetail:
+      "AIドラフトと専門家のダブルチェックで資金調達の確度が向上し、導入後12か月の運転資金キャッシュフローは平均1.8倍に。",
     icon: FileText,
     accent: "mint",
   },
@@ -1707,20 +1746,21 @@ const Index = () => {
             <div className="hero-copy" data-animate data-initial-visible="true">
               <span className="badge">年商5,000万〜15億円の経営者向け</span>
               <h1 id="hero-heading">
-                経営改善で鍛えた専門家 × 生成AI
+                経営改善で鍛えた専門家（中小企業診断士）×生成AI
                 <span>意思決定の質・速さ・先見性を高める経営計画</span>
               </h1>
               <p className="hero-lead">
-                経営改善で鍛えた専門家が生成AIを操り、限られた経営者の時間を守ります。
-                週1回のAIレポートと診断士のブラッシュアップで意思決定の質・速さ・先見性を平均52%向上させます。
+                経営改善で鍛えた診断士・会計士が生成AIを操り、経営者の意思決定を先回りで支援します。
+                政策・市場・自社データをAIが集約し、専門家が金融審査レベルまで磨き込むからこそ、意思決定の質・速さ・先見性を一気に引き上げます。
               </p>
               <ul className="hero-points">
-                <li>政策・市場・自社データを横断し、生成AIが複数シナリオを即時比較。</li>
-                <li>中小企業診断士・公認会計士がハルシネーションと倫理リスクをレビューし、金融審査レベルへ補強。</li>
-                <li>社長は優先施策の判断と説明に集中。会議準備と資料作成を50%以上削減し、先を読む時間を創出。</li>
+                <li>経営者の課題をAIが常時計測。政策更新と市場変化をシナリオ化し、判断材料を48時間以内に提示。</li>
+                <li>専門家が生成AIの提案を金融・戦略の観点で精査し、意思決定の質とリスク管理を同時に強化。</li>
+                <li>意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍の実績を創出。</li>
               </ul>
               <p className="hero-sub">
                 リアルタイムの外部データと社内指標を組み合わせ、専門家が根拠と倫理面を確認したうえで投資・資金繰りの判断材料を常に最新化します。
+                経営改善で鍛えた専門家 × 生成AIという二人三脚で、年商5,000万〜15億円の企業に必要な「先見性ある経営計画」を実現します。
               </p>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
@@ -1963,9 +2003,9 @@ const Index = () => {
           <div className="container">
             <div className="story-header" data-animate>
               <span className="story-eyebrow">STORY 01</span>
-              <h2 id="problem-heading">経営者の時間を奪う課題を可視化</h2>
+              <h2 id="problem-heading">経営改善で鍛えた専門家 × 生成AIが解消する経営者の3課題</h2>
               <p>
-                政策や市場情報が増えるほど判断材料は飽和し、意思決定の質・速さ・先見性が損なわれます。経営改善の現場で頻出する詰まりを3つの視点で整理しました。
+                市場や政策の変化が激しいほど、意思決定の質・速さ・先見性は落ちやすくなります。経営改善の現場で蓄積した知見をもとに、「課題 → AI×専門家の解決策 → 得られる効果」の因果関係を3つのケースで示します。
               </p>
             </div>
             <div className="pain-grid">
@@ -1978,14 +2018,32 @@ const Index = () => {
                     </div>
                     <h3>{item.title}</h3>
                     <p>{item.detail}</p>
+                    <div className="pain-chain" role="list">
+                      <div className="pain-chain__column" role="listitem">
+                        <span className="pain-chain__label">生成AIのアクション</span>
+                        <p>{item.aiAction}</p>
+                      </div>
+                      <div className="pain-chain__divider" aria-hidden="true" />
+                      <div className="pain-chain__column" role="listitem">
+                        <span className="pain-chain__label">専門家のブラッシュアップ</span>
+                        <p>{item.expertAction}</p>
+                      </div>
+                    </div>
+                    <div className="pain-impact">
+                      <span className="pain-impact__metric">{item.impact}</span>
+                      <p>{item.impactDetail}</p>
+                    </div>
                     <div className="pain-solution">{item.solution}</div>
                   </article>
                 );
               })}
             </div>
             <div className="story-subheader" data-animate>
-              <h3>データが示す「待ったなし」の背景</h3>
-              <p>信頼ソースをもとに、対策を先送りした場合の機会損失と競争環境の変化を確認できます。</p>
+              <h3>なぜ今「経営改善で鍛えた専門家 × 生成AI」なのか</h3>
+              <p>
+                blog.iil.comが指摘する通り、AIは繰り返し業務の自動化とデータ分析によって意思決定を迅速かつ正確にし、中小企業に競争優位をもたらします。
+                さらに信頼ソースの調査結果から、対策を先送りにするほど機会損失が拡大することが見えてきました。
+              </p>
             </div>
             <div className="evidence-grid">
               {whyNowEvidence.map((item) => (
@@ -2022,7 +2080,7 @@ const Index = () => {
               <span className="story-eyebrow">STORY 02</span>
               <h2 id="solution-heading">経営改善で鍛えた専門家 × 生成AIの協働で意思決定を加速</h2>
               <p>
-                生成AIが政策・市場・自社データを束ね、専門家と経営者がレビューと判断に集中します。blog.workday.comが紹介するリアルタイム分析のスピードと、note.comで語られるAI会議術の先見性を組み合わせ、意思決定リードタイムを短縮しつつ信頼性を担保します。
+                生成AIが政策・市場・自社データを束ね、専門家と経営者がレビューと判断に集中します。blog.workday.comが紹介するリアルタイム分析のスピードと、note.comで語られるAI会議術の先見性を組み合わせ、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果につなげます。
               </p>
             </div>
             <div className="roles-grid">
@@ -3080,7 +3138,7 @@ const Index = () => {
               <span className="final-cta__eyebrow">経営改善で鍛えた専門家 × 生成AI</span>
               <h2 id="final-cta-heading">意思決定の質・速さ・先見性を高める経営計画を今すぐ</h2>
               <p>
-                経営者の時間は有限です。専門家が生成AIの出力を精査し、料金と導入フローを透明にした伴走で意思決定リードタイムを短縮します。
+                経営者の時間は有限です。経営改善で鍛えた専門家が生成AIの出力を精査し、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果創出を後押しします。
                 相談予約と資料ダウンロードの2つの導線で、最適なスタートを選べます。
               </p>
               <div className="final-cta__actions">
