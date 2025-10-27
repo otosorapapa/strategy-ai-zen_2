@@ -9,12 +9,15 @@ import {
 } from "react";
 
 import {
+  ArrowDownRight,
+  ArrowUpRight,
   Award,
   BarChart3,
   BarChart4,
   BookOpen,
   Bot,
   BrainCircuit,
+  CalendarClock,
   CheckCircle2,
   ClipboardCheck,
   Compass,
@@ -29,6 +32,8 @@ import {
   Shield,
   ShieldCheck,
   Sparkles,
+  Timer,
+  TrendingUp,
   Users2,
   Workflow,
 } from "lucide-react";
@@ -139,27 +144,66 @@ const heroAllianceExperts = [
 const insightHighlights = [
   {
     value: "-67%",
-    label: "計画策定リードタイム",
-    description: "6週間→2週間への短縮",
+    label: "意思決定リードタイム",
+    description: "週次経営会議の準備〜決裁までを6週間から2週間へ短縮",
     detail:
       "AI導入企業20社の四半期計画更新に要した期間。導入前後のプロジェクトガントチャートを比較して算出 (2023年7月〜2024年12月)。",
-    accent: "sunrise",
+    accent: "sunrise" as const,
+    icon: Timer,
+    delta: "決裁スピード 3.4倍",
+    deltaTone: "down" as const,
+    source: "導入企業20社 平均 (2023-2024)",
   },
   {
     value: "-1,750h",
     label: "年間削減工数",
-    description: "AI自動化で創出した時間",
+    description: "AIレポートのドラフト化で管理部門の累計工数を削減",
     detail:
       "経営会議準備・レポート作成・データ収集に費やした時間の削減量。導入企業20社のワークログと専門家ヒアリングを集計。",
-    accent: "mint",
+    accent: "mint" as const,
+    icon: CalendarClock,
+    delta: "月あたり145時間削減",
+    deltaTone: "down" as const,
+    source: "Strategy AI Lab 内部統計",
   },
   {
     value: "92%",
     label: "政策アップデート反映率",
-    description: "速報をダッシュボードに即時反映",
+    description: "速報ベースの政策・補助金情報をダッシュボードに同期",
     detail:
       "政策・補助金・市場レポートの更新情報がダッシュボードに反映されるまでの割合。2024年Q1〜Q4の月次レビューから集計。",
-    accent: "citrus",
+    accent: "citrus" as const,
+    icon: TrendingUp,
+    delta: "即時反映 12h以内",
+    deltaTone: "up" as const,
+    source: "月次レビュー (2024年)",
+  },
+];
+
+const outcomeNarrative = [
+  {
+    stage: "現状課題",
+    headline: "会議準備が属人化し、判断が後ろ倒し",
+    metric: "資料作成に月145時間",
+    description:
+      "経営会議の議事録整理や政策リサーチが経営層と管理部門に集中。判断材料が出揃うまで平均6週間を要していました。",
+    evidence: "ヒアリング: 導入企業20社 (2024)",
+  },
+  {
+    stage: "導入アプローチ",
+    headline: "AIが一次ドラフトとシナリオ比較を自動生成",
+    metric: "論点整理までをAIが前倒し",
+    description:
+      "財務・市場データを横断で集約し、政策シナリオと想定問答をAIが先行作成。専門家チームが最終レビューを担当します。",
+    evidence: "運用ログ & レビュー体制",
+  },
+  {
+    stage: "定量インパクト",
+    headline: "意思決定リードタイムを3.4倍高速化",
+    metric: "決裁まで2週間",
+    description:
+      "経営層は議題ごとに根拠付きダッシュボードを確認し即日判断。政策の速報も12時間以内に反映され、修正計画を翌日に提示できるように。",
+    evidence: "成果レビュー: Q1-Q4 2024",
   },
 ];
 
@@ -1736,26 +1780,61 @@ const Index = () => {
               </ul>
             </div>
               <div className="insights-highlight-grid" data-animate>
-                {insightHighlights.map((highlight) => (
-                  <article
-                    key={highlight.label}
-                    className={`insight-highlight insight-highlight--${highlight.accent}`}
-                  >
-                    <span>{highlight.label}</span>
-                    <strong>{highlight.value}</strong>
-                    <p>{highlight.description}</p>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button
-                          type="button"
-                          className="insight-detail-trigger"
-                          aria-label={`${highlight.label}の算出方法`}
+                {insightHighlights.map((highlight) => {
+                  const HighlightIcon = highlight.icon;
+                  const DeltaIcon = highlight.deltaTone === "down" ? ArrowDownRight : ArrowUpRight;
+                  return (
+                    <article
+                      key={highlight.label}
+                      className={`insight-highlight insight-highlight--${highlight.accent}`}
+                    >
+                      <header className="insight-highlight__header">
+                        <span className={`insight-highlight__icon insight-highlight__icon--${highlight.accent}`}>
+                          <HighlightIcon aria-hidden="true" />
+                        </span>
+                        <div className="insight-highlight__value">
+                          <span>{highlight.label}</span>
+                          <strong>{highlight.value}</strong>
+                        </div>
+                        <div
+                          className={`insight-highlight__delta insight-highlight__delta--${highlight.deltaTone}`}
                         >
-                          <Info aria-hidden="true" />
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent>{highlight.detail}</TooltipContent>
-                    </Tooltip>
+                          <DeltaIcon aria-hidden="true" />
+                          <span>{highlight.delta}</span>
+                        </div>
+                      </header>
+                      <p className="insight-highlight__description">{highlight.description}</p>
+                      <footer className="insight-highlight__footer">
+                        <span className="insight-highlight__source">{highlight.source}</span>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button
+                              type="button"
+                              className="insight-detail-trigger"
+                              aria-label={`${highlight.label}の算出方法`}
+                            >
+                              <Info aria-hidden="true" />
+                              <span>根拠を見る</span>
+                            </button>
+                          </TooltipTrigger>
+                          <TooltipContent>{highlight.detail}</TooltipContent>
+                        </Tooltip>
+                      </footer>
+                    </article>
+                  );
+                })}
+              </div>
+              <div className="insights-narrative" data-animate>
+                {outcomeNarrative.map((item, index) => (
+                  <article key={item.stage} className="insights-narrative__item">
+                    <div className="insights-narrative__index">{`${index + 1}`.padStart(2, "0")}</div>
+                    <header>
+                      <span>{item.stage}</span>
+                      <h3>{item.headline}</h3>
+                    </header>
+                    <p className="insights-narrative__metric">{item.metric}</p>
+                    <p>{item.description}</p>
+                    <footer>{item.evidence}</footer>
                   </article>
                 ))}
               </div>
