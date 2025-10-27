@@ -5158,19 +5158,81 @@ svg {
 }
 
 .process-flowchart {
-  margin-top: 36px;
+  margin-top: 40px;
   position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px;
+  gap: 48px 64px;
+  align-items: stretch;
 }
 
 .process-flowchart__connector {
   position: absolute;
-  inset: 12px 50%;
+  inset: 0;
+  left: 50%;
   transform: translateX(-50%);
-  border-left: 2px dashed rgba(30, 64, 175, 0.18);
+  width: 0;
+  border-left: 3px dashed rgba(30, 64, 175, 0.16);
   z-index: 0;
+}
+
+.process-flowchart__item {
+  position: relative;
+  display: flex;
+  max-width: 520px;
+  z-index: 1;
+}
+
+.process-flowchart__item--left {
+  justify-content: flex-end;
+  margin-left: auto;
+  padding-right: 44px;
+}
+
+.process-flowchart__item--right {
+  justify-content: flex-start;
+  margin-right: auto;
+  padding-left: 44px;
+}
+
+.process-flowchart__item::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.95) 0%, rgba(148, 163, 184, 0.18) 90%);
+  box-shadow: 0 0 0 6px rgba(148, 163, 184, 0.18);
+}
+
+.process-flowchart__item::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 2px;
+  width: 56px;
+  background: linear-gradient(90deg, rgba(148, 163, 184, 0.05), rgba(59, 130, 246, 0.35));
+  z-index: 0;
+}
+
+.process-flowchart__item--left::before {
+  right: -10px;
+}
+
+.process-flowchart__item--left::after {
+  right: 10px;
+}
+
+.process-flowchart__item--right::before {
+  left: -10px;
+}
+
+.process-flowchart__item--right::after {
+  left: 10px;
+  background: linear-gradient(270deg, rgba(148, 163, 184, 0.05), rgba(59, 130, 246, 0.35));
 }
 
 .process-flow-card {
@@ -5222,11 +5284,35 @@ svg {
   color: var(--navy-800);
 }
 
-.process-flow-card__headline p {
+.process-flow-card__impact,
+.process-flow-card__causal {
+  display: grid;
+  gap: 6px;
+  border-radius: 18px;
+  padding: 16px 18px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: linear-gradient(135deg, rgba(226, 232, 255, 0.55), rgba(255, 255, 255, 0.95));
+}
+
+.process-flow-card__impact span,
+.process-flow-card__causal span {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--navy-500);
+}
+
+.process-flow-card__impact p,
+.process-flow-card__causal p {
   margin: 0;
-  color: var(--gray-600);
+  color: var(--navy-700);
   font-size: 0.92rem;
   line-height: 1.6;
+}
+
+.process-flow-card__causal {
+  background: linear-gradient(135deg, rgba(190, 242, 255, 0.55), rgba(224, 231, 255, 0.92));
+  border-color: rgba(96, 165, 250, 0.24);
 }
 
 .process-flow-card__matrix {
@@ -5288,6 +5374,11 @@ svg {
   background: rgba(61, 214, 181, 0.18);
 }
 
+.process-flow-card--mint .process-flow-card__impact {
+  border-color: rgba(16, 185, 129, 0.28);
+  background: linear-gradient(135deg, rgba(209, 250, 229, 0.7), rgba(255, 255, 255, 0.95));
+}
+
 .process-flow-card--sky {
   border-color: rgba(96, 165, 250, 0.28);
   background: linear-gradient(140deg, rgba(229, 241, 255, 0.78), rgba(255, 255, 255, 0.92));
@@ -5295,6 +5386,11 @@ svg {
 
 .process-flow-card--sky .process-flow-card__icon {
   background: rgba(96, 165, 250, 0.18);
+}
+
+.process-flow-card--sky .process-flow-card__impact {
+  border-color: rgba(56, 189, 248, 0.24);
+  background: linear-gradient(135deg, rgba(224, 242, 254, 0.7), rgba(255, 255, 255, 0.95));
 }
 
 .process-flow-card--navy {
@@ -5306,6 +5402,11 @@ svg {
   background: rgba(30, 64, 175, 0.18);
 }
 
+.process-flow-card--navy .process-flow-card__impact {
+  border-color: rgba(99, 102, 241, 0.24);
+  background: linear-gradient(135deg, rgba(224, 231, 255, 0.72), rgba(255, 255, 255, 0.95));
+}
+
 .process-flow-card--citrus {
   border-color: rgba(245, 134, 52, 0.28);
   background: linear-gradient(140deg, rgba(255, 242, 229, 0.78), rgba(255, 255, 255, 0.92));
@@ -5313,6 +5414,11 @@ svg {
 
 .process-flow-card--citrus .process-flow-card__icon {
   background: rgba(245, 134, 52, 0.18);
+}
+
+.process-flow-card--citrus .process-flow-card__impact {
+  border-color: rgba(249, 115, 22, 0.24);
+  background: linear-gradient(135deg, rgba(255, 237, 213, 0.72), rgba(255, 255, 255, 0.95));
 }
 
 .process-dataflow {
@@ -8000,7 +8106,22 @@ svg {
 
   .process-flowchart {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
+    gap: 32px 40px;
+  }
+
+  .process-flowchart__item--left,
+  .process-flowchart__item--right {
+    padding: 0 32px;
+  }
+
+  .process-flowchart__item::before {
+    width: 16px;
+    height: 16px;
+    box-shadow: 0 0 0 4px rgba(148, 163, 184, 0.18);
+  }
+
+  .process-flowchart__item::after {
+    width: 44px;
   }
 
   .pricing-table {
@@ -8197,6 +8318,22 @@ svg {
   }
 
   .process-flowchart__connector {
+    display: none;
+  }
+
+  .process-flowchart__item,
+  .process-flowchart__item--left,
+  .process-flowchart__item--right {
+    padding: 0;
+    margin: 0;
+    justify-content: stretch;
+  }
+
+  .process-flowchart__item::before {
+    display: none;
+  }
+
+  .process-flowchart__item::after {
     display: none;
   }
 
