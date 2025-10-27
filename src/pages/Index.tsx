@@ -825,6 +825,8 @@ type ProcessFlowStage = {
   icon: LucideIcon;
   aiFocus: string;
   humanFocus: string;
+  impact: string;
+  evidence: string;
   accent: "mint" | "sky" | "citrus" | "navy";
 };
 
@@ -834,6 +836,8 @@ const processTimeline: ProcessFlowStage[] = [
     icon: Layers3,
     aiFocus: "AI: 議事録の自動要約とアクション抽出",
     humanFocus: "経営者×診断士: 経営課題と制約条件を言語化",
+    impact: "因果仮説を30分で可視化し、意思決定の起点を構築",
+    evidence: "AI生成の論点マップと経営者ヒアリングログで意思決定材料を共有",
     accent: "mint",
   },
   {
@@ -841,6 +845,8 @@ const processTimeline: ProcessFlowStage[] = [
     icon: BrainCircuit,
     aiFocus: "AI: 外部データ取得・財務シミュレーション・リスク検証",
     humanFocus: "経営者: 取捨選択と優先度の設定",
+    impact: "市場・財務データを統合し、複数シナリオの期待値を定量化",
+    evidence: "統計・API連携ログと財務シミュレーション出力をダッシュボードで可視化",
     accent: "sky",
   },
   {
@@ -848,6 +854,8 @@ const processTimeline: ProcessFlowStage[] = [
     icon: ShieldCheck,
     aiFocus: "AI: 修正内容を反映し図表と想定問答を更新",
     humanFocus: "診断士: 金融機関目線と実行プランを整備",
+    impact: "金融・実務の観点で実行可能性とリスク耐性を補強",
+    evidence: "診断士レビュー記録と修正履歴を可視化し、説明責任を確保",
     accent: "navy",
   },
   {
@@ -855,6 +863,8 @@ const processTimeline: ProcessFlowStage[] = [
     icon: CheckCircle2,
     aiFocus: "AI: 最終資料と根拠データを整理",
     humanFocus: "経営者: 意思決定とステークホルダー説明",
+    impact: "根拠付きロードマップで経営会議の決裁を高速化",
+    evidence: "最終レポート、想定問答、投資判断指標をワンクリックで提示",
     accent: "citrus",
   },
 ];
@@ -2815,18 +2825,54 @@ const Index = () => {
                 MIT Sloan Management Reviewの研究（2023）は、AIと人の協働には業務プロセス全体の再設計が不可欠だと指摘しています。本プログラムではその知見を踏まえ、導入ステップ自体を差別化要素として設計しています。
               </p>
             </div>
-            <div className="process-flowchart" data-animate>
-              {processTimeline.map((item) => {
+            <div className="process-flow-legend" data-animate>
+              <div className="process-flow-legend__item">
+                <span className="process-flow-legend__label">AIが担う検証</span>
+                <p>シミュレーション・要約・リスク計測を自動化し、論点を定量化</p>
+              </div>
+              <div className="process-flow-legend__divider" aria-hidden="true" />
+              <div className="process-flow-legend__item">
+                <span className="process-flow-legend__label">専門家が担う判断</span>
+                <p>経営者の意思と金融目線で因果を補強し、意思決定を納得解に</p>
+              </div>
+            </div>
+            <div className="process-flowchart" data-animate role="list">
+              <div className="process-flowchart__connector" aria-hidden="true" />
+              {processTimeline.map((item, index) => {
                 const FlowIcon = item.icon;
                 return (
-                  <div key={item.stage} className={`process-flow-item process-flow-item--${item.accent}`}>
-                    <div className="process-flow-icon" aria-hidden="true">
-                      <FlowIcon />
-                    </div>
-                    <h3>{item.stage}</h3>
-                    <p>{item.aiFocus}</p>
-                    <p>{item.humanFocus}</p>
-                  </div>
+                  <article
+                    key={item.stage}
+                    className={`process-flow-card process-flow-card--${item.accent}`}
+                    role="listitem"
+                  >
+                    <header className="process-flow-card__header">
+                      <div className="process-flow-card__step" aria-hidden="true">
+                        <span>STEP {index + 1}</span>
+                        <div className="process-flow-card__icon">
+                          <FlowIcon />
+                        </div>
+                      </div>
+                      <div className="process-flow-card__headline">
+                        <h3>{item.stage}</h3>
+                        <p>{item.impact}</p>
+                      </div>
+                    </header>
+                    <dl className="process-flow-card__matrix">
+                      <div className="process-flow-card__matrix-item">
+                        <dt>AI</dt>
+                        <dd>{item.aiFocus}</dd>
+                      </div>
+                      <div className="process-flow-card__matrix-item">
+                        <dt>専門家</dt>
+                        <dd>{item.humanFocus}</dd>
+                      </div>
+                    </dl>
+                    <footer className="process-flow-card__footer">
+                      <span>検証指標</span>
+                      <p>{item.evidence}</p>
+                    </footer>
+                  </article>
                 );
               })}
             </div>
