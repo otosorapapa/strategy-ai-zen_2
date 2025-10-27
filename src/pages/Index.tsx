@@ -42,6 +42,7 @@ import {
 import { submitContactForm } from "@/lib/contact-api";
 
 import aiDashboardShot from "@/assets/growth-chart.jpg";
+import featureIntelligenceShot from "@/assets/dashboard-preview.jpg";
 import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
 import expertSaitoPhoto from "@/assets/representative_.jpg";
 import expertTanakaPhoto from "@/assets/representative.jpg";
@@ -692,6 +693,38 @@ const serviceFeatures: ServiceFeature[] = [
     benefit: "意思決定リードタイム -52%",
     icon: TrendingUp,
     accent: "rose",
+  },
+];
+
+type FeatureAssurance = {
+  title: string;
+  description: string;
+  metric: string;
+  icon: LucideIcon;
+  accent: "navy" | "mint" | "sky";
+};
+
+const featureAssurances: FeatureAssurance[] = [
+  {
+    title: "CFO視点の整合性",
+    description: "財務3表・KPI・資金繰りを99項目でクロスチェック",
+    metric: "整合性チェック 99項目",
+    icon: LineChart,
+    accent: "navy",
+  },
+  {
+    title: "審査通過クオリティ",
+    description: "診断士・公認会計士が金融機関提出フォーマットで監修",
+    metric: "金融機関提出率 100%",
+    icon: ShieldCheck,
+    accent: "sky",
+  },
+  {
+    title: "データ統合ガバナンス",
+    description: "外部統計・政策更新・社内データの自動同期を権限管理",
+    metric: "データ連携24hモニタリング",
+    icon: Database,
+    accent: "mint",
   },
 ];
 
@@ -2393,12 +2426,41 @@ const Index = () => {
           aria-labelledby="features-heading"
         >
           <div className="container">
-            <div className="section-header" data-animate>
-              <h2 id="features-heading">経営改善で鍛えた専門家 × 生成AIが支える5つの機能</h2>
-              <ul className="section-intro">
-                <li>政策・市場・自社データを統合し、意思決定の質・速さ・先見性を底上げ。</li>
-                <li>AIの出力は診断士がレビューし、料金と支援範囲を透明に開示します。</li>
-              </ul>
+            <div className="features__lead">
+              <div className="section-header" data-animate>
+                <span className="section-eyebrow">Decision Intelligence Suite</span>
+                <h2 id="features-heading">経営改善で鍛えた専門家 × 生成AIが支える5つの機能</h2>
+                <ul className="section-intro">
+                  <li>政策・市場・自社データを統合し、意思決定の質・速さ・先見性を底上げ。</li>
+                  <li>AIの出力は診断士がレビューし、経営者が納得して進められる論点整理を提供します。</li>
+                </ul>
+              </div>
+              <figure className="features__visual" data-animate>
+                <div className="features__visual-frame">
+                  <img src={featureIntelligenceShot} alt="意思決定を支援するAIダッシュボードの画面イメージ" loading="lazy" />
+                </div>
+                <figcaption>経営ダッシュボードのモックアップ。リスク指標とROI予測をひとつのビューに統合。</figcaption>
+              </figure>
+            </div>
+            <div className="feature-assurance-grid" data-animate>
+              {featureAssurances.map((assurance) => {
+                const AssuranceIcon = assurance.icon;
+                return (
+                  <article
+                    key={assurance.title}
+                    className={`assurance-card assurance-card--${assurance.accent}`}
+                  >
+                    <div className="assurance-card__icon" aria-hidden="true">
+                      <AssuranceIcon />
+                    </div>
+                    <div className="assurance-card__content">
+                      <span className="assurance-card__metric">{assurance.metric}</span>
+                      <h3>{assurance.title}</h3>
+                      <p>{assurance.description}</p>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
             <div className="feature-grid">
               {serviceFeatures.map((feature) => {
@@ -2409,13 +2471,23 @@ const Index = () => {
                     className={`feature-card feature-card--${feature.accent}`}
                     data-animate
                   >
-                    <div className={`feature-icon feature-icon--${feature.accent}`} aria-hidden="true">
-                      <FeatureIcon />
+                    <header className="feature-card__header">
+                      <div className={`feature-icon feature-icon--${feature.accent}`} aria-hidden="true">
+                        <FeatureIcon />
+                      </div>
+                      <div className="feature-card__titles">
+                        <span className="feature-card__eyebrow">{feature.description}</span>
+                        <h3>{feature.title}</h3>
+                      </div>
+                    </header>
+                    <div className="feature-card__body">
+                      <p className="feature-detail">{feature.detail}</p>
                     </div>
-                    <h3>{feature.title}</h3>
-                    <p className="feature-description">{feature.description}</p>
-                    <p className="feature-detail">{feature.detail}</p>
-                    <span className="feature-benefit">{feature.benefit}</span>
+                    <span className="feature-card__divider" aria-hidden="true" />
+                    <footer className="feature-card__footer">
+                      <span className="feature-card__footer-label">期待インパクト</span>
+                      <span className="feature-benefit">{feature.benefit}</span>
+                    </footer>
                   </article>
                 );
               })}
