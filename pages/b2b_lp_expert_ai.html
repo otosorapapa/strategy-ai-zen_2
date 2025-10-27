@@ -97,6 +97,124 @@
         color: rgba(15, 118, 110, 0.9);
         font-weight: 600;
       }
+      .value-shell {
+        position: relative;
+        border-radius: 2.25rem;
+        padding: clamp(2rem, 4vw, 3rem);
+        background: linear-gradient(140deg, rgba(226, 242, 255, 0.7), rgba(255, 255, 255, 0.95));
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        box-shadow: 0 32px 68px rgba(15, 23, 42, 0.12);
+        overflow: hidden;
+      }
+      .value-shell::before,
+      .value-shell::after {
+        content: '';
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(0.5px);
+        pointer-events: none;
+        opacity: 0.75;
+      }
+      .value-shell::before {
+        inset: -30% auto auto -10%;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.25), transparent 70%);
+      }
+      .value-shell::after {
+        inset: auto -25% -45% auto;
+        width: 360px;
+        height: 360px;
+        background: radial-gradient(circle, rgba(15, 118, 110, 0.22), transparent 70%);
+      }
+      .value-header {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 1rem;
+        max-width: 760px;
+        margin-bottom: clamp(2rem, 4vw, 3rem);
+      }
+      .value-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        border-radius: 9999px;
+        background: rgba(15, 23, 42, 0.08);
+        color: rgba(15, 23, 42, 0.75);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.45rem 1.1rem;
+      }
+      .pillar-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: clamp(1.25rem, 3vw, 1.75rem);
+      }
+      @media (min-width: 768px) {
+        .pillar-grid {
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+        }
+      }
+      .pillar-card {
+        position: relative;
+        border-radius: 1.75rem;
+        padding: clamp(1.5rem, 3vw, 1.9rem);
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(148, 163, 184, 0.3);
+        box-shadow: 0 22px 44px rgba(15, 23, 42, 0.1);
+        display: grid;
+        gap: 0.75rem;
+        min-height: 100%;
+        overflow: hidden;
+      }
+      .pillar-card::after {
+        content: '';
+        position: absolute;
+        inset: auto -40% -50% auto;
+        width: 220px;
+        height: 220px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.18), transparent 70%);
+        opacity: 0.8;
+      }
+      .pillar-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 1rem;
+        background: linear-gradient(145deg, rgba(14, 165, 233, 0.92), rgba(6, 182, 212, 0.92));
+        color: white;
+        font-weight: 700;
+        font-size: 0.85rem;
+        letter-spacing: 0.06em;
+        box-shadow: 0 14px 28px rgba(14, 165, 233, 0.25);
+      }
+      .pillar-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: rgb(15, 23, 42);
+        margin: 0;
+      }
+      .pillar-copy {
+        font-size: 0.85rem;
+        line-height: 1.65;
+        color: rgb(71, 85, 105);
+      }
+      .pillar-evidence {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(15, 23, 42, 0.65);
+      }
       .hero-visual {
         position: relative;
         border-radius: 1.75rem;
@@ -519,6 +637,110 @@
         background: radial-gradient(circle at top, rgba(56, 189, 248, 0.28), transparent 65%);
         opacity: 0.9;
         pointer-events: none;
+      }
+      .operating-shell {
+        border-radius: 2rem;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: linear-gradient(150deg, rgba(15, 23, 42, 0.92), rgba(15, 118, 110, 0.85));
+        color: white;
+        padding: clamp(2rem, 4vw, 3rem);
+        box-shadow: 0 36px 72px rgba(15, 23, 42, 0.22);
+        display: grid;
+        gap: clamp(1.75rem, 4vw, 2.5rem);
+      }
+      @media (min-width: 1024px) {
+        .operating-shell {
+          grid-template-columns: 1.05fr 1fr;
+          align-items: stretch;
+        }
+      }
+      .operating-header {
+        display: grid;
+        gap: 1.25rem;
+      }
+      .operating-header h2 {
+        font-size: clamp(1.75rem, 2vw + 1rem, 2.3rem);
+        font-weight: 700;
+        line-height: 1.4;
+      }
+      .operating-header p {
+        font-size: 0.95rem;
+        line-height: 1.8;
+        color: rgba(241, 245, 249, 0.9);
+      }
+      .operating-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+      .operating-badges span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        border-radius: 9999px;
+        background: rgba(148, 163, 184, 0.18);
+        padding: 0.45rem 0.9rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .operating-scoreboard {
+        position: relative;
+        border-radius: 1.75rem;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: rgba(15, 23, 42, 0.55);
+        padding: clamp(1.5rem, 3vw, 2rem);
+        display: grid;
+        gap: 1.25rem;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      }
+      .scoreboard-grid {
+        display: grid;
+        gap: 0.9rem;
+      }
+      @media (min-width: 768px) {
+        .scoreboard-grid {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+      }
+      .scoreboard-card {
+        border-radius: 1.25rem;
+        background: rgba(15, 23, 42, 0.82);
+        border: 1px solid rgba(148, 163, 184, 0.32);
+        padding: 1rem;
+        display: grid;
+        gap: 0.6rem;
+        min-height: 100%;
+      }
+      .scoreboard-card strong {
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(148, 163, 184, 0.9);
+      }
+      .scoreboard-card h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: white;
+        line-height: 1.5;
+      }
+      .scoreboard-card p {
+        font-size: 0.8rem;
+        line-height: 1.6;
+        color: rgba(226, 232, 240, 0.85);
+      }
+      .scoreboard-metric {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: rgba(96, 165, 250, 0.95);
+      }
+      .scoreboard-note {
+        font-size: 0.78rem;
+        line-height: 1.6;
+        color: rgba(226, 232, 240, 0.8);
       }
       .workflow {
         display: grid;
@@ -1180,10 +1402,12 @@
         <a href="#hero" class="text-sm font-semibold tracking-[0.18em] text-slate-800">STRATEGY AI LAB</a>
         <nav class="hidden items-center gap-6 text-sm font-medium text-slate-700 md:flex">
           <a href="#challenges" class="hover:text-slate-900">課題</a>
-          <a href="#equation" class="hover:text-slate-900">価値設計</a>
-          <a href="#causality" class="hover:text-slate-900">因果設計</a>
+          <a href="#pillars" class="hover:text-slate-900">価値基準</a>
           <a href="#approach" class="hover:text-slate-900">解決策</a>
+          <a href="#equation" class="hover:text-slate-900">価値設計</a>
           <a href="#benefits" class="hover:text-slate-900">成果</a>
+          <a href="#causality" class="hover:text-slate-900">因果設計</a>
+          <a href="#operating-system" class="hover:text-slate-900">四半期設計</a>
           <a href="#social-proof" class="hover:text-slate-900">実績</a>
           <a href="#process" class="hover:text-slate-900">支援プロセス</a>
           <a href="#pricing" class="hover:text-slate-900">料金</a>
@@ -1294,6 +1518,50 @@
                 <p class="mt-2">AIレポートが年間1,200時間の単純作業を削減した企業の診断テンプレートを活用できます。</p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="pillars" class="mx-auto w-full max-w-6xl px-5" data-animate>
+        <div class="value-shell">
+          <div class="value-header">
+            <span class="value-pill">BOARD-LEVEL VALUE ARCHITECTURE</span>
+            <h2 class="section-title">因果性・論理性・デザイン性・スマート性・納得性を同時に満たす統合設計</h2>
+            <p class="section-subtitle">
+              年商5,000万円〜15億円の企業が四半期ごとに戦略と実行を再設計できるよう、AIが広域データを統合し、診断士が論理を磨き、経営者が即断できるUI/UXを構築。各要素を明確に可視化することで、意思決定の納得度を高めます。
+            </p>
+          </div>
+          <div class="pillar-grid">
+            <article class="pillar-card">
+              <div class="pillar-icon">C</div>
+              <h3 class="pillar-title">因果性</h3>
+              <p class="pillar-copy">粗利・キャッシュ・在庫を結ぶ因果マップをAIが自動生成。指標間の遅延や連動度を定量化し、改善施策の優先順位を即座に判断できます。</p>
+              <span class="pillar-evidence">Lag-Impact可視化／24h更新</span>
+            </article>
+            <article class="pillar-card">
+              <div class="pillar-icon">L</div>
+              <h3 class="pillar-title">論理性</h3>
+              <p class="pillar-copy">診断士・会計士が金融機関の審査基準に沿ってストーリーを再構築。想定問答とリスク対応までセット化し、稟議スピードを加速します。</p>
+              <span class="pillar-evidence">審査ロジック×想定問答</span>
+            </article>
+            <article class="pillar-card">
+              <div class="pillar-icon">D</div>
+              <h3 class="pillar-title">デザイン性</h3>
+              <p class="pillar-copy">経営会議資料・ダッシュボードを立体感のあるUIで整理。重要指標は色と余白で階層化され、直感的に読み解ける「投資したくなる」世界観を演出。</p>
+              <span class="pillar-evidence">Executive Dashboard UI</span>
+            </article>
+            <article class="pillar-card">
+              <div class="pillar-icon">S</div>
+              <h3 class="pillar-title">スマート性</h3>
+              <p class="pillar-copy">政策・市場の速報値を自動取得し、週次でKPIを更新。Slack/Teamsへアラートを連動させ、判断タイミングを逃さない体制を実現します。</p>
+              <span class="pillar-evidence">自動アラート×週次レビュー</span>
+            </article>
+            <article class="pillar-card">
+              <div class="pillar-icon">T</div>
+              <h3 class="pillar-title">納得性</h3>
+              <p class="pillar-copy">経営陣・現場・金融機関の視点を統合した共通言語を整備。四半期の意思決定サイクルをフォーマット化し、ステークホルダーの合意形成を高速化。</p>
+              <span class="pillar-evidence">マルチステークホルダー合意</span>
+            </article>
           </div>
         </div>
       </section>
@@ -1679,6 +1947,54 @@
                 高彩度のグラデーションと立体的なカードデザインで、高額投資にふさわしいプレミアム感を演出。CTAはスクロールに追従し、離脱を防止します。
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="operating-system" class="mx-auto w-full max-w-6xl px-5" data-animate>
+        <div class="operating-shell">
+          <div class="operating-header">
+            <span class="value-pill">Quarterly Strategy &amp; Execution OS</span>
+            <h2>四半期ごとに「戦略再設計→実行→学習」を閉じる経営オペレーティングシステム</h2>
+            <p>
+              経営者が毎四半期に意思決定の質とスピードを検証できるよう、AIが最新データを取り込み、専門家が投資判断の論点を整理。取締役会・金融機関・現場が同じフォーマットで状況を把握し、納得度の高い合意形成を実現します。
+            </p>
+            <div class="operating-badges">
+              <span>QBR対応</span>
+              <span>月次レビュー45分</span>
+              <span>Slack/Teams連携</span>
+            </div>
+          </div>
+          <div class="operating-scoreboard">
+            <div class="scoreboard-grid">
+              <article class="scoreboard-card">
+                <strong>Quarter 1</strong>
+                <h3>外部環境×財務KPIのギャップ診断</h3>
+                <p>政策改定・需要シグナルと自社PL/CFのギャップをAIが抽出。専門家が優先課題を3テーマに圧縮します。</p>
+                <span class="scoreboard-metric">Lead Time ▲52%</span>
+              </article>
+              <article class="scoreboard-card">
+                <strong>Quarter 2</strong>
+                <h3>投資／撤退シナリオの意思決定会議</h3>
+                <p>攻め・守り・キャッシュ最適化の3シナリオを稟議化。金融機関視点の根拠資料と想定問答をセットで提供。</p>
+                <span class="scoreboard-metric">資金調達成功率＋18pt</span>
+              </article>
+              <article class="scoreboard-card">
+                <strong>Quarter 3</strong>
+                <h3>実行トラッキングと学習サイクル</h3>
+                <p>週次ダッシュボードでKPIを追跡し、遅延要因をAIがアラート。改善策をワークショップで即座にアップデート。</p>
+                <span class="scoreboard-metric">会議準備時間▲70%</span>
+              </article>
+              <article class="scoreboard-card">
+                <strong>Quarter 4</strong>
+                <h3>次年度の戦略再設計と金融機関説明</h3>
+                <p>成果と学習を統合して翌年度の戦略に反映。決算前の金融機関連携資料を自動生成し、資金繰りの納得感を高めます。</p>
+                <span class="scoreboard-metric">キャッシュ創出1.8倍</span>
+              </article>
+            </div>
+            <p class="scoreboard-note">
+              ※ScoreboardはダークテーマのUIで経営陣専用にデザイン。直感的な操作性と高彩度グラデーションで「投資価値が高い」体験を提供します。
+            </p>
           </div>
         </div>
       </section>
