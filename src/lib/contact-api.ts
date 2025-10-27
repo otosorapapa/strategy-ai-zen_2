@@ -151,17 +151,36 @@ function isContactForm7Response(data: unknown): data is ContactForm7Response {
   );
 }
 
+function createNetworkErrorMessage(error: unknown): string {
+  if (error instanceof Error) {
+    if (error.name === "AbortError") {
+      return "通信がタイムアウトしました。時間をおいて再度お試しください。";
+    }
+
+    if (error.message && error.message.trim().length > 0) {
+      return "サーバーとの通信に失敗しました。時間をおいて再度お試しください。";
+    }
+  }
+
+  return "サーバーとの通信に失敗しました。時間をおいて再度お試しください。";
+}
+
 async function submitViaContactForm7(
   endpoint: string,
   payload: ContactFormPayload
 ): Promise<ContactSubmissionResponse> {
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-    },
-    body: createContactForm7Body(payload),
-  });
+  let response: Response;
+  try {
+    response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+      },
+      body: createContactForm7Body(payload),
+    });
+  } catch (error) {
+    throw new Error(createNetworkErrorMessage(error));
+  }
 
   let parsed: ContactForm7Response | null = null;
   let rawBody: string | null = null;
@@ -253,13 +272,18 @@ export async function submitContactForm(
   if (isContactForm7Endpoint(endpoint)) {
     return submitViaContactForm7(endpoint, payload);
   }
-  const response = await fetch(endpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(payload),
-  });
+  let response: Response;
+  try {
+    response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+  } catch (error) {
+    throw new Error(createNetworkErrorMessage(error));
+  }
 
   if (!response.ok) {
     const message = await parseError(response);
