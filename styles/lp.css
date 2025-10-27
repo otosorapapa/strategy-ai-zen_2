@@ -14,6 +14,8 @@
   --mint-400: #27b08a;
   --mint-300: #5ed1ad;
   --mint-200: #bfe9d8;
+  --rose-500: #e95d8c;
+  --rose-200: #f9d5e2;
   --gray-900: #1f2937;
   --gray-700: #344258;
   --gray-600: #475569;
@@ -2392,6 +2394,210 @@ svg {
   margin: 0;
   color: var(--gray-600);
   line-height: 1.6;
+}
+
+/* ======================================================
+   Feature section
+   ====================================================== */
+.features {
+  background: linear-gradient(180deg, rgba(230, 242, 255, 0.35), rgba(255, 255, 255, 0.9));
+}
+
+.feature-grid {
+  display: grid;
+  gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin-top: 48px;
+}
+
+.feature-card {
+  position: relative;
+  background: var(--white);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(22, 58, 99, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.feature-card:hover,
+.feature-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.feature-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  color: var(--navy-800);
+}
+
+.feature-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.feature-card h3 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.feature-description {
+  margin: 0;
+  color: var(--gray-600);
+  font-weight: 600;
+}
+
+.feature-detail {
+  margin: 0;
+  color: var(--gray-700);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.feature-benefit {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.feature-card--navy .feature-icon {
+  background: rgba(22, 58, 99, 0.12);
+  color: var(--navy-800);
+}
+
+.feature-card--navy .feature-benefit {
+  background: rgba(22, 58, 99, 0.12);
+  color: var(--navy-800);
+}
+
+.feature-card--mint .feature-icon {
+  background: rgba(31, 157, 122, 0.12);
+  color: var(--mint-500);
+}
+
+.feature-card--mint .feature-benefit {
+  background: rgba(31, 157, 122, 0.12);
+  color: var(--mint-500);
+}
+
+.feature-card--citrus .feature-icon {
+  background: rgba(255, 122, 26, 0.14);
+  color: var(--citrus-500);
+}
+
+.feature-card--citrus .feature-benefit {
+  background: rgba(255, 122, 26, 0.14);
+  color: var(--citrus-500);
+}
+
+.feature-card--sky .feature-icon {
+  background: rgba(79, 163, 255, 0.18);
+  color: var(--sky-500);
+}
+
+.feature-card--sky .feature-benefit {
+  background: rgba(79, 163, 255, 0.18);
+  color: var(--sky-500);
+}
+
+.feature-card--rose .feature-icon {
+  background: rgba(233, 93, 140, 0.16);
+  color: var(--rose-500);
+}
+
+.feature-card--rose .feature-benefit {
+  background: rgba(233, 93, 140, 0.16);
+  color: var(--rose-500);
+}
+
+.features-note {
+  margin: 36px auto 0;
+  max-width: 720px;
+  text-align: center;
+  color: var(--gray-700);
+  font-size: 0.95rem;
+}
+
+/* ======================================================
+   Final CTA section
+   ====================================================== */
+.final-cta {
+  background: linear-gradient(135deg, rgba(255, 245, 235, 0.85), rgba(79, 163, 255, 0.15));
+  text-align: center;
+}
+
+.final-cta__content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.final-cta__eyebrow {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: rgba(22, 58, 99, 0.1);
+  color: var(--navy-700);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 18px;
+}
+
+.final-cta__content h2 {
+  margin-bottom: 16px;
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+}
+
+.final-cta__content p {
+  color: var(--gray-700);
+  margin: 0 auto 24px;
+  line-height: 1.8;
+}
+
+.final-cta__actions {
+  display: inline-flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.final-cta__actions .btn-outline {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(22, 58, 99, 0.24);
+}
+
+.final-cta__actions .btn-outline:hover,
+.final-cta__actions .btn-outline:focus-visible {
+  background: rgba(79, 163, 255, 0.18);
+}
+
+.final-cta__phone {
+  font-weight: 600;
+  color: var(--navy-700);
+}
+
+.final-cta__phone a {
+  color: var(--cta-600);
+  text-decoration: none;
+}
+
+.final-cta__phone span {
+  margin-left: 8px;
+  font-size: 0.9rem;
+  color: var(--gray-600);
 }
 
 .role-card {

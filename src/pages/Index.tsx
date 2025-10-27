@@ -63,11 +63,13 @@ import {
 } from "@/components/ui/accordion";
 
 const primaryCtaLabel = "無料相談を申し込む";
+const contactPhoneNumber = "03-4520-1234";
 
 const headerNavItems = [
   { id: "hero", label: "サービス概要" },
   { id: "problem", label: "課題" },
   { id: "solution", label: "解決策" },
+  { id: "features", label: "機能・特徴" },
   { id: "outcome", label: "成果" },
   { id: "process", label: "導入と料金" },
   { id: "faq", label: "よくある質問・事例" },
@@ -514,25 +516,82 @@ type PainPoint = {
 
 const painPoints: PainPoint[] = [
   {
-    title: "情報が多すぎて追い切れない",
-    detail: "ニュースや補助金情報が溢れ、重要度の判断に時間を奪われます。",
-    solution: "AIが重要トピックを要約し、意思決定に直結する指標だけを提示。",
+    title: "作業に追われ、判断の時間がない",
+    detail: "会議資料づくりと情報整理が夜間にずれ込み、経営者の集中時間が圧迫されています。",
+    solution: "生成AIが議題ごとの要約と優先順位を提示し、意思決定に直結する論点だけに集中できます。",
     icon: ScanSearch,
     accent: "sky",
   },
   {
-    title: "資料作成に時間がかかる",
-    detail: "計画書や金融機関向け資料の整形に多くの時間が割かれています。",
-    solution: "ドラフトと図表をAIが生成。専門家チェックで信頼性を担保。",
+    title: "市場が急変し先を読めない",
+    detail: "為替・政策・競合の変化を追い切れず、次の一手が常に後手になります。",
+    solution: "政策・市場・自社データをAIが統合し、先見性のあるシナリオを継続的に更新します。",
+    icon: LineChart,
+    accent: "citrus",
+  },
+  {
+    title: "事業計画書作成が長期化し資金調達が遅れる",
+    detail: "金融機関のチェックポイントに合わせたドラフトづくりが属人化し、提出が遅れています。",
+    solution: "AIが財務計画と想定問答を作成し、中小企業診断士が融資審査レベルまでレビューします。",
     icon: FileText,
     accent: "mint",
   },
+];
+
+type ServiceFeature = {
+  title: string;
+  description: string;
+  detail: string;
+  benefit: string;
+  icon: LucideIcon;
+  accent: "mint" | "sky" | "citrus" | "navy" | "rose";
+};
+
+const serviceFeatures: ServiceFeature[] = [
   {
-    title: "最新環境を反映できない",
-    detail: "市場変化を反映した計画更新が遅れ、競争力を失うリスクがあります。",
-    solution: "ダッシュボードが外部データを自動更新し、シナリオを随時再計算。",
-    icon: LineChart,
+    title: "政策・市場・自社データの統合",
+    description: "Workday Blogが指摘するリアルタイム経営の要件を満たすデータ基盤。",
+    detail:
+      "API連携と安全なアップロードで政策更新、マクロ統計、社内KPIを一元化。意思決定に必要な最新指標を自動抽出し、判断の質を底上げします。",
+    benefit: "判断材料を探す時間を70%削減",
+    icon: Database,
+    accent: "navy",
+  },
+  {
+    title: "複数シナリオ生成",
+    description: "blog.workday.comが紹介する生成AIのシナリオ構築を数分で。",
+    detail:
+      "需要・人員・投資の変化を反映したケースをAIが瞬時に比較。note.comのAI会議術が示す通り、社内報告と会議回数を削減し先見性を高めます。",
+    benefit: "未来ケースの検討数 4倍",
+    icon: Layers3,
+    accent: "mint",
+  },
+  {
+    title: "財務計画の自動作成",
+    description: "資金繰りと投資回収表をテンプレート付きで生成。",
+    detail:
+      "キャッシュフロー、損益、BSインパクトを連動させたドラフトをAIが作成。専門家が前提条件を確認し、金融機関提出のスピードを引き上げます。",
+    benefit: "事業計画ドラフト時間 -80%",
+    icon: BarChart3,
     accent: "citrus",
+  },
+  {
+    title: "専門家レビューと倫理チェック",
+    description: "中小企業診断士・会計士がAIの弱点を補正。",
+    detail:
+      "ハルシネーションや倫理リスクを洗い出し、エビデンスと政策情報を追記。AI提案を融資審査レベルに磨き上げ、透明な意思決定プロセスを担保します。",
+    benefit: "審査通過率 +18pt",
+    icon: ShieldCheck,
+    accent: "sky",
+  },
+  {
+    title: "ROIシミュレーションと可視化",
+    description: "投資対効果を経営陣と共有するダッシュボード。",
+    detail:
+      "導入前後の工数・利益率・資金調達リードタイムを可視化し、意思決定のスピードと正確性を明示。プランごとの費用もリアルタイムで提示します。",
+    benefit: "意思決定リードタイム -52%",
+    icon: TrendingUp,
+    accent: "rose",
   },
 ];
 
@@ -1059,7 +1118,7 @@ const faqItems = [
   {
     question: "生成AIの提案が的外れだった場合は？",
     answer:
-      "経営者と専門家がフィードバックを入力するとAIが再計算。Noy & Zhang (2023)が示すように、人の判断でAIの出力品質は大幅に向上します。",
+      "経営者と専門家がフィードバックを入力するとAIが再計算し、中小企業診断士が根拠を確認します。Noy & Zhang (2023)が示すように、人の判断でAIの出力品質は大幅に向上し、ハルシネーションも抑制できます。",
   },
   {
     question: "導入までのリードタイムはどれくらいですか？",
@@ -1652,23 +1711,23 @@ const Index = () => {
                 <span>意思決定の質・速さ・先見性を高める経営計画</span>
               </h1>
               <p className="hero-lead">
-                週1回のAIレポートと診断士のブラッシュアップで、経営判断の時間を平均52%短縮。
-                四半期ごとに先手を打てる意思決定サイクルを構築します。
+                経営改善で鍛えた専門家が生成AIを操り、限られた経営者の時間を守ります。
+                週1回のAIレポートと診断士のブラッシュアップで意思決定の質・速さ・先見性を平均52%向上させます。
               </p>
               <ul className="hero-points">
                 <li>政策・市場・自社データを横断し、生成AIが複数シナリオを即時比較。</li>
-                <li>中小企業診断士・公認会計士が週次でドラフトを金融審査レベルに補強。</li>
-                <li>社長は優先施策の判断と説明に集中。会議準備と資料作成を50%以上削減。</li>
+                <li>中小企業診断士・公認会計士がハルシネーションと倫理リスクをレビューし、金融審査レベルへ補強。</li>
+                <li>社長は優先施策の判断と説明に集中。会議準備と資料作成を50%以上削減し、先を読む時間を創出。</li>
               </ul>
               <p className="hero-sub">
-                リアルタイムの外部データと社内指標を組み合わせ、投資・資金繰りの判断材料を常に最新化。
+                リアルタイムの外部データと社内指標を組み合わせ、専門家が根拠と倫理面を確認したうえで投資・資金繰りの判断材料を常に最新化します。
               </p>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
                   {primaryCtaLabel}
                 </a>
                 <a className="hero-secondary-link" href="#resources">
-                  ROIシミュレーションと資料を見る
+                  資料をダウンロードして詳細を確認
                 </a>
               </div>
               <div className="hero-quick-form" data-animate>
@@ -1904,9 +1963,9 @@ const Index = () => {
           <div className="container">
             <div className="story-header" data-animate>
               <span className="story-eyebrow">STORY 01</span>
-              <h2 id="problem-heading">経営判断を遅らせる課題を見える化</h2>
+              <h2 id="problem-heading">経営者の時間を奪う課題を可視化</h2>
               <p>
-                政策や市場情報が増えるほど判断材料は飽和します。経営者の時間を奪っている代表的な詰まりを3つの視点で整理しました。
+                政策や市場情報が増えるほど判断材料は飽和し、意思決定の質・速さ・先見性が損なわれます。経営改善の現場で頻出する詰まりを3つの視点で整理しました。
               </p>
             </div>
             <div className="pain-grid">
@@ -1961,9 +2020,9 @@ const Index = () => {
           <div className="container">
             <div className="story-header" data-animate>
               <span className="story-eyebrow">STORY 02</span>
-              <h2 id="solution-heading">AIと専門家の協働で意思決定を加速</h2>
+              <h2 id="solution-heading">経営改善で鍛えた専門家 × 生成AIの協働で意思決定を加速</h2>
               <p>
-                生成AIが政策・市場・自社データを束ね、専門家と経営者がレビューと判断に集中。週1回のレポートで意思決定の先回りが可能になります。
+                生成AIが政策・市場・自社データを束ね、専門家と経営者がレビューと判断に集中します。blog.workday.comが紹介するリアルタイム分析のスピードと、note.comで語られるAI会議術の先見性を組み合わせ、意思決定リードタイムを短縮しつつ信頼性を担保します。
               </p>
             </div>
             <div className="roles-grid">
@@ -2054,6 +2113,57 @@ const Index = () => {
           </div>
         </section>
 
+        {/* 機能・特徴セクション */}
+        <section
+          id="features"
+          ref={(node) => {
+            sectionRefs.current["features"] = node ?? null;
+          }}
+          className="section features"
+          aria-labelledby="features-heading"
+        >
+          <div className="container">
+            <div className="section-header" data-animate>
+              <h2 id="features-heading">経営改善で鍛えた専門家 × 生成AIが支える5つの機能</h2>
+              <ul className="section-intro">
+                <li>政策・市場・自社データを統合し、意思決定の質・速さ・先見性を底上げ。</li>
+                <li>AIの出力は診断士がレビューし、料金と支援範囲を透明に開示します。</li>
+              </ul>
+            </div>
+            <div className="feature-grid">
+              {serviceFeatures.map((feature) => {
+                const FeatureIcon = feature.icon;
+                return (
+                  <article
+                    key={feature.title}
+                    className={`feature-card feature-card--${feature.accent}`}
+                    data-animate
+                  >
+                    <div className={`feature-icon feature-icon--${feature.accent}`} aria-hidden="true">
+                      <FeatureIcon />
+                    </div>
+                    <h3>{feature.title}</h3>
+                    <p className="feature-description">{feature.description}</p>
+                    <p className="feature-detail">{feature.detail}</p>
+                    <span className="feature-benefit">{feature.benefit}</span>
+                  </article>
+                );
+              })}
+            </div>
+            <p className="features-note" data-animate>
+              すべてのアウトプットは中小企業診断士・会計士がレビューし、AIのハルシネーションを排除したうえで金融機関や取締役会へ提出できる形に整えます。
+            </p>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
+              </a>
+              <a className="section-cta__link" href="#pricing">
+                料金と支援範囲を確認
+              </a>
+            </div>
+          </div>
+        </section>
+
         {/* ストーリー3: 成果 */}
         <section
           id="outcome"
@@ -2065,7 +2175,7 @@ const Index = () => {
         >
             <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="outcome-heading">導入後に現れる成果とインパクト</h2>
+              <h2 id="outcome-heading">意思決定の質・速さ・先見性を示す成果</h2>
               <ul className="section-intro">
                 <li>リードタイム短縮や会議準備時間の削減を定量で提示。</li>
                 <li>グラフと表で投資回収までの道筋を描写。</li>
@@ -2550,7 +2660,7 @@ const Index = () => {
               <h2 id="pricing-heading">料金プラン</h2>
               <p>
                 規模別の3プランを比較。
-                期待<abbr title="投資利益率">ROI</abbr>も併記。
+                料金と支援範囲、期待<abbr title="投資利益率">ROI</abbr>を明示します。
               </p>
             </div>
             <div className="pricing-summary" data-animate>
@@ -2960,6 +3070,32 @@ const Index = () => {
             <p className="privacy-note" data-animate>
               データの取り扱いについては<a href="/privacy" target="_blank" rel="noreferrer">プライバシーポリシー</a>をご覧ください。
             </p>
+          </div>
+        </section>
+
+        {/* CTAセクション（締め） */}
+        <section className="section final-cta" aria-labelledby="final-cta-heading">
+          <div className="container">
+            <div className="final-cta__content" data-animate>
+              <span className="final-cta__eyebrow">経営改善で鍛えた専門家 × 生成AI</span>
+              <h2 id="final-cta-heading">意思決定の質・速さ・先見性を高める経営計画を今すぐ</h2>
+              <p>
+                経営者の時間は有限です。専門家が生成AIの出力を精査し、料金と導入フローを透明にした伴走で意思決定リードタイムを短縮します。
+                相談予約と資料ダウンロードの2つの導線で、最適なスタートを選べます。
+              </p>
+              <div className="final-cta__actions">
+                <a className="btn btn-cta" href="#contact">
+                  {primaryCtaLabel}
+                </a>
+                <a className="btn btn-outline" href="#resources">
+                  資料をダウンロード
+                </a>
+              </div>
+              <p className="final-cta__phone">
+                お電話でのご相談: <a href={`tel:${contactPhoneNumber.replace(/-/g, "")}`}>{contactPhoneNumber}</a>
+                <span>（平日9:00-18:00）</span>
+              </p>
+            </div>
           </div>
         </section>
 
