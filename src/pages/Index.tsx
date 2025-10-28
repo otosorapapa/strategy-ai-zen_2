@@ -1060,28 +1060,40 @@ const successStories: SuccessStory[] = [
 type CustomerHighlight = {
   logo: string;
   alt: string;
+  category: string;
+  proof: string;
   result: string;
   comment: string;
+  detail: string;
 };
 
 const customerHighlights: CustomerHighlight[] = [
   {
     logo: logoOisix,
     alt: "オイシックス・ラ・大地株式会社のロゴ",
+    category: "因果×需要シグナル",
+    proof: "在庫・販促データの相関をAIが解析",
     result: "意思決定準備時間 -8h/週",
-    comment: "AIが優先SKUと打ち手を提案し、粗利率が7pt改善。",
+    comment: "週次のAIダッシュボードで優先SKUと打ち手を提示し、経営会議は意思決定に集中。",
+    detail: "粗利率+7pt / 在庫ロス-35%",
   },
   {
     logo: logoSansan,
     alt: "Sansan株式会社のロゴ",
+    category: "論理×投資判断",
+    proof: "事業別KPIをAIが因果分解",
     result: "新施策実行率 +24pt",
-    comment: "役員レビューを月12時間削減し、投資判断が2.3倍高速化。",
+    comment: "役員レビュー時間を月12時間削減し、投資判断の裏付け資料を即日生成。",
+    detail: "投資検証スピード2.3倍 / ROIメモ自動化",
   },
   {
     logo: logoRaksul,
     alt: "ラクスル株式会社のロゴ",
+    category: "デザイン×キャッシュ戦略",
+    proof: "金融・受注データをワンビュー化",
     result: "キャッシュ創出 +2.4億円",
-    comment: "資金繰りシミュレーションで追加与信枠1.6倍を実現。",
+    comment: "シナリオ別キャッシュフローを色分けし、投資と守りの判断軸を明確化。",
+    detail: "追加与信枠1.6倍 / 月次戦略サイクル4倍",
   },
 ];
 
@@ -1123,6 +1135,7 @@ type TrustDataPoint = {
   description: string;
   source: string;
   url: string;
+  signal: string;
 };
 
 const trustDataPoints: TrustDataPoint[] = [
@@ -1132,6 +1145,7 @@ const trustDataPoints: TrustDataPoint[] = [
     description: "Workast調査ではAI導入企業の80%が業務効率の改善を実感。",
     source: "Workast (2024)",
     url: "https://workast.com/blog/artificial-intelligence-in-the-workplace/",
+    signal: "業務プロセス×AI活用度",
   },
   {
     value: "91%",
@@ -1139,6 +1153,7 @@ const trustDataPoints: TrustDataPoint[] = [
     description: "同調査では91%が収益改善を報告し、投資対効果が裏付けられています。",
     source: "Workast (2024)",
     url: "https://workast.com/blog/artificial-intelligence-in-the-workplace/",
+    signal: "利益インパクト検証",
   },
   {
     value: "14%",
@@ -1146,6 +1161,7 @@ const trustDataPoints: TrustDataPoint[] = [
     description: "Stanford HAIは生成AI支援で平均14%の生産性向上を確認。",
     source: "Stanford HAI (2024)",
     url: "https://hai.stanford.edu/news/generative-ai-improves-customer-support-productivity",
+    signal: "Stanford×生成AI実証",
   },
 ];
 
@@ -3499,19 +3515,34 @@ const Index = () => {
             <div className="customer-highlights" role="list">
               {customerHighlights.map((highlight) => (
                 <article key={highlight.result} className="customer-highlight" role="listitem" data-animate>
-                  <div className="customer-highlight__logo" aria-hidden="true">
-                    <img src={highlight.logo} alt={highlight.alt} loading="lazy" />
-                  </div>
-                  <strong>{highlight.result}</strong>
-                  <p>{highlight.comment}</p>
+                  <header className="customer-highlight__header">
+                    <div className="customer-highlight__identity">
+                      <div className="customer-highlight__logo">
+                        <img src={highlight.logo} alt={highlight.alt} loading="lazy" />
+                      </div>
+                      <div className="customer-highlight__meta">
+                        <span className="customer-highlight__category">{highlight.category}</span>
+                        <p className="customer-highlight__proof">{highlight.proof}</p>
+                      </div>
+                    </div>
+                    <div className="customer-highlight__result" aria-label={`導入成果 ${highlight.result}`}>
+                      <span className="customer-highlight__result-label">導入成果</span>
+                      <strong>{highlight.result}</strong>
+                    </div>
+                  </header>
+                  <p className="customer-highlight__comment">{highlight.comment}</p>
+                  <p className="customer-highlight__detail">{highlight.detail}</p>
                 </article>
               ))}
             </div>
             <div className="trust-metrics" data-animate>
               {trustDataPoints.map((point) => (
                 <div key={point.label} className="trust-metric">
-                  <strong>{point.value}</strong>
-                  <span>{point.label}</span>
+                  <span className="trust-metric__signal">{point.signal}</span>
+                  <div className="trust-metric__value" aria-label={`${point.label} ${point.value}`}>
+                    <strong>{point.value}</strong>
+                    <span>{point.label}</span>
+                  </div>
                   <p>{point.description}</p>
                   <a href={point.url} target="_blank" rel="noreferrer">
                     {point.source}
