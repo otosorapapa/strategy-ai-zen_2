@@ -595,18 +595,53 @@ svg {
 }
 
 .hero-quick-form {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(230, 242, 255, 0.94));
-  border-radius: 28px;
-  padding: 28px;
-  box-shadow: 0 24px 48px rgba(22, 58, 99, 0.12);
-  border: 1px solid rgba(60, 128, 193, 0.16);
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+  padding: clamp(30px, 3vw, 42px);
+  background:
+    radial-gradient(160% 120% at 0% 100%, rgba(14, 165, 233, 0.18), rgba(14, 165, 233, 0)),
+    radial-gradient(140% 110% at 100% 0%, rgba(56, 189, 248, 0.16), rgba(56, 189, 248, 0)),
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(233, 246, 255, 0.92) 52%,
+      rgba(229, 250, 244, 0.9) 100%
+    );
+  border: 1px solid rgba(79, 163, 255, 0.24);
+  box-shadow: 0 32px 72px -28px rgba(15, 37, 71, 0.38);
   display: grid;
-  gap: 20px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(24px, 2.6vw, 32px);
+  backdrop-filter: blur(12px);
+}
+
+.hero-quick-form::after {
+  content: "";
+  position: absolute;
+  inset: 18% 45% -40% -10%;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.18), transparent 72%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.hero-quick-form__intro,
+.quick-form,
+.diagnosis-flow {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-quick-form__intro {
+  grid-column: 1 / span 6;
+  display: grid;
+  gap: 18px;
+  align-content: start;
 }
 
 .hero-quick-form__intro h2 {
-  margin: 0 0 6px;
-  font-size: 1.5rem;
+  margin: 0;
+  font-size: clamp(1.6rem, 0.8vw + 1.4rem, 1.9rem);
   color: var(--navy-700);
 }
 
@@ -614,47 +649,111 @@ svg {
   margin: 0;
   color: var(--gray-700);
   font-size: 0.98rem;
+  max-width: 38ch;
+}
+
+.hero-quick-form__highlights {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.hero-quick-form__highlights li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(79, 163, 255, 0.16);
+  box-shadow: 0 18px 30px -24px rgba(15, 37, 71, 0.42);
+  backdrop-filter: blur(6px);
+}
+
+.hero-quick-form__highlight-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14, 165, 233, 0.12);
+  color: var(--navy-700);
+  box-shadow: inset 0 0 0 1px rgba(14, 165, 233, 0.24);
+}
+
+.hero-quick-form__highlights strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--navy-700);
+}
+
+.hero-quick-form__highlights span {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  line-height: 1.55;
 }
 
 .quick-form {
+  grid-column: 7 / -1;
   display: grid;
-  gap: 16px;
+  gap: 18px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  border: 1px solid rgba(79, 163, 255, 0.2);
+  box-shadow: 0 26px 56px -32px rgba(15, 37, 71, 0.45);
+  padding: clamp(22px, 2vw, 26px);
+  align-content: start;
 }
 
 .quick-form-grid {
   display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
 }
 
 .quick-form-grid label {
   display: grid;
-  gap: 6px;
+  gap: 8px;
   font-weight: 600;
   color: var(--navy-600);
   font-size: 0.92rem;
 }
 
 .quick-form-grid input {
-  border-radius: 14px;
-  border: 1px solid rgba(79, 163, 255, 0.35);
+  border-radius: 16px;
+  border: 1px solid rgba(79, 163, 255, 0.38);
   padding: 12px 16px;
   font-size: 0.95rem;
-  background: rgba(255, 255, 255, 0.92);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(236, 244, 255, 0.92));
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
 }
 
 .quick-form-grid input:focus-visible {
   outline: none;
-  border-color: var(--mint-400);
-  box-shadow: 0 0 0 3px rgba(31, 157, 122, 0.2);
+  border-color: rgba(22, 163, 74, 0.6);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.18);
+  transform: translateY(-1px);
+}
+
+.quick-form button[type="submit"] {
+  width: 100%;
+  justify-content: center;
 }
 
 .quick-form-success {
   margin: 0;
-  padding: 12px 16px;
-  border-radius: 14px;
-  background: rgba(31, 157, 122, 0.12);
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(22, 163, 74, 0.12);
   color: var(--mint-500);
   font-weight: 600;
 }
@@ -666,47 +765,73 @@ svg {
 }
 
 .diagnosis-flow {
+  grid-column: 1 / -1;
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  counter-reset: flow-step;
 }
 
 .diagnosis-flow__item {
+  position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 14px;
-  padding: 16px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.9);
+  gap: 18px;
+  padding: 22px 22px 20px 24px;
+  border-radius: 24px;
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.92), rgba(229, 244, 255, 0.88));
   border: 1px solid rgba(79, 163, 255, 0.18);
-  box-shadow: 0 14px 28px rgba(15, 37, 71, 0.12);
+  box-shadow: 0 24px 52px -32px rgba(15, 37, 71, 0.4);
+  align-items: start;
+}
+
+.diagnosis-flow__item::before {
+  counter-increment: flow-step;
+  content: "STEP " counter(flow-step);
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(14, 165, 233, 0.8);
+}
+
+.diagnosis-flow__item::after {
+  content: "";
+  position: absolute;
+  inset: auto 18px 0 18px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(14, 165, 233, 0.28), transparent);
+  opacity: 0.4;
 }
 
 .diagnosis-flow__icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(79, 163, 255, 0.16);
+  background: rgba(14, 165, 233, 0.12);
   color: var(--navy-700);
-  box-shadow: inset 0 0 0 1px rgba(79, 163, 255, 0.24);
+  box-shadow: inset 0 0 0 1px rgba(14, 165, 233, 0.18);
 }
 
 .diagnosis-flow__icon svg {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
 }
 
 .diagnosis-flow__header {
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   align-items: baseline;
-  gap: 8px;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .diagnosis-flow__header strong {
@@ -715,12 +840,20 @@ svg {
 }
 
 .diagnosis-flow__duration {
-  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
   color: var(--mint-500);
-  background: rgba(31, 157, 122, 0.12);
+  background: rgba(22, 163, 74, 0.12);
   padding: 4px 10px;
-  border-radius: 999px;
+  border-radius: 9999px;
   font-weight: 600;
+}
+
+.diagnosis-flow__body {
+  display: grid;
+  gap: 6px;
 }
 
 .diagnosis-flow__body span {
@@ -730,9 +863,26 @@ svg {
 }
 
 .diagnosis-flow__body p {
-  margin: 6px 0 0;
-  font-size: 0.85rem;
+  margin: 0;
+  font-size: 0.86rem;
   color: var(--gray-600);
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .hero-quick-form {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .hero-quick-form__intro,
+  .quick-form,
+  .diagnosis-flow {
+    grid-column: 1 / -1;
+  }
+
+  .hero-quick-form__highlights {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
 }
 
 .hero-secondary-link {
@@ -5084,11 +5234,11 @@ svg {
   }
 
   .quick-form-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
 
   .diagnosis-flow {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
   .representative-card {
@@ -5169,7 +5319,20 @@ svg {
   }
 
   .hero-quick-form {
-    padding: 24px;
+    grid-template-columns: 1fr;
+    padding: clamp(24px, 6vw, 30px);
+  }
+
+  .hero-quick-form__intro p {
+    max-width: none;
+  }
+
+  .hero-quick-form__highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-form {
+    padding: 22px;
   }
 
   .quick-form-grid {
@@ -5181,7 +5344,8 @@ svg {
   }
 
   .diagnosis-flow__item {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto 1fr;
+    gap: 14px;
   }
 
   .diagnosis-flow__icon {
