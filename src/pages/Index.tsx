@@ -3540,67 +3540,84 @@ const Index = () => {
                 {successStories.map((story) => (
                   <article key={story.company} className="story-card">
                     <div className="story-card__content">
-                      <div className="story-meta">
-                        <img
-                          className="story-photo"
-                          src={story.photo}
-                          alt={`${story.company} ${story.title} ${story.name}の顔写真`}
-                          loading="lazy"
-                        />
-                        <div className="story-profile">
+                      <header className="story-card__header">
+                        <div className="story-identity">
                           <img
-                            className="story-logo"
-                            src={story.logo}
-                            alt={`${story.company}のロゴ`}
+                            className="story-photo"
+                            src={story.photo}
+                            alt={`${story.company} ${story.title} ${story.name}の顔写真`}
                             loading="lazy"
                           />
-                          <span className="story-company">{story.company}</span>
-                          <span className="story-role">{story.title} / {story.name}</span>
-                          <span className="story-industry">{story.industry}</span>
+                          <div className="story-identity__meta">
+                            <span className="story-badge">EXECUTIVE VOICE</span>
+                            <div className="story-company-block">
+                              <img
+                                className="story-logo"
+                                src={story.logo}
+                                alt={`${story.company}のロゴ`}
+                                loading="lazy"
+                              />
+                              <div className="story-profile">
+                                <span className="story-company">{story.company}</span>
+                                <span className="story-role">{story.title} / {story.name}</span>
+                                <span className="story-industry">{story.industry}</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                        <div className="story-overview">
+                          <span className="story-overview__label">成果サマリー</span>
+                          <p>{story.summary}</p>
+                        </div>
+                      </header>
                       <blockquote className="story-quote">
                         <span className="story-quote__icon" aria-hidden="true">“</span>
                         <p>{story.quote}</p>
                       </blockquote>
-                      <div className="story-structure" role="list">
-                        <div className="story-structure__item" role="listitem">
-                          <span className="story-structure__label">課題</span>
-                          <p>{story.challenge}</p>
-                        </div>
-                        <div className="story-structure__item" role="listitem">
-                          <span className="story-structure__label">AIの役割</span>
-                          <p>{story.aiRole}</p>
-                        </div>
-                        <div className="story-structure__item" role="listitem">
-                          <span className="story-structure__label">専門家の伴走</span>
-                          <p>{story.expertRole}</p>
-                        </div>
-                        <div className="story-structure__item" role="listitem">
-                          <span className="story-structure__label">意思決定プロセス</span>
-                          <p>{story.governance}</p>
-                        </div>
-                      </div>
-                      <p className="story-summary">{story.summary}</p>
-                      <ul className="story-metrics">
-                        {story.metrics.map((metric) => (
-                          <li key={metric.label}>
-                            <span className="story-metric__label">{metric.label}</span>
-                            <div className="story-metric__values">
-                              <span className="story-metric__before" aria-label="導入前の数値">
-                                {metric.before}
-                              </span>
-                              <span className="story-metric__arrow" aria-hidden="true">
-                                →
-                              </span>
-                              <span className="story-metric__after" aria-label="導入後の数値">
-                                {metric.after}
-                              </span>
+                      <div className="story-body">
+                        <div className="story-body__details">
+                          <div className="story-structure" role="list">
+                            <div className="story-structure__item" role="listitem">
+                              <span className="story-structure__label">課題</span>
+                              <p>{story.challenge}</p>
                             </div>
-                            <strong className="story-metric__impact">{metric.impact}</strong>
-                          </li>
-                        ))}
-                      </ul>
+                            <div className="story-structure__item" role="listitem">
+                              <span className="story-structure__label">AIの役割</span>
+                              <p>{story.aiRole}</p>
+                            </div>
+                            <div className="story-structure__item" role="listitem">
+                              <span className="story-structure__label">専門家の伴走</span>
+                              <p>{story.expertRole}</p>
+                            </div>
+                            <div className="story-structure__item" role="listitem">
+                              <span className="story-structure__label">意思決定プロセス</span>
+                              <p>{story.governance}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <aside className="story-metrics-panel">
+                          <span className="story-metrics-panel__label">定量インパクト</span>
+                          <ul className="story-metrics">
+                            {story.metrics.map((metric) => (
+                              <li key={metric.label}>
+                                <span className="story-metric__label">{metric.label}</span>
+                                <div className="story-metric__values">
+                                  <span className="story-metric__before" aria-label="導入前の数値">
+                                    {metric.before}
+                                  </span>
+                                  <span className="story-metric__arrow" aria-hidden="true">
+                                    →
+                                  </span>
+                                  <span className="story-metric__after" aria-label="導入後の数値">
+                                    {metric.after}
+                                  </span>
+                                </div>
+                                <strong className="story-metric__impact">{metric.impact}</strong>
+                              </li>
+                            ))}
+                          </ul>
+                        </aside>
+                      </div>
                     </div>
                   </article>
                 ))}
