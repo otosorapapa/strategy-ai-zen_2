@@ -2552,9 +2552,14 @@ const Index = () => {
                       className={`insight-highlight insight-highlight--${highlight.accent}`}
                     >
                       <header className="insight-highlight__header">
-                        <span className={`insight-highlight__icon insight-highlight__icon--${highlight.accent}`}>
-                          <HighlightIcon aria-hidden="true" />
-                        </span>
+                        <div className="insight-highlight__header-left">
+                          <span
+                            className={`insight-highlight__icon insight-highlight__icon--${highlight.accent}`}
+                          >
+                            <HighlightIcon aria-hidden="true" />
+                          </span>
+                          <span className="insight-highlight__badge">経営インパクト指標</span>
+                        </div>
                         <div
                           className={`insight-highlight__delta insight-highlight__delta--${highlight.deltaTone}`}
                         >
@@ -2562,26 +2567,45 @@ const Index = () => {
                           <span>{highlight.delta}</span>
                         </div>
                       </header>
-                      <div className="insight-highlight__value">
-                        <span>{highlight.label}</span>
-                        <strong>{highlight.value}</strong>
+                      <div className="insight-highlight__body">
+                        <div className="insight-highlight__value-group">
+                          <div className="insight-highlight__value">
+                            <span>{highlight.label}</span>
+                            <strong>{highlight.value}</strong>
+                          </div>
+                          <span className="insight-highlight__assurance">
+                            <ShieldCheck aria-hidden="true" />
+                            <span>専門家レビュー済</span>
+                          </span>
+                        </div>
+                        <div className="insight-highlight__context">
+                          <p className="insight-highlight__description">{highlight.description}</p>
+                          <div className="insight-highlight__logic">
+                            <div className="insight-highlight__logic-header">
+                              <span>因果ロジックと算出方法</span>
+                              <Tooltip>
+                                <TooltipTrigger asChild>
+                                  <button
+                                    type="button"
+                                    className="insight-detail-trigger"
+                                    aria-label={`${highlight.label}の算出方法`}
+                                  >
+                                    <Info aria-hidden="true" />
+                                    <span>詳細を確認</span>
+                                  </button>
+                                </TooltipTrigger>
+                                <TooltipContent>{highlight.detail}</TooltipContent>
+                              </Tooltip>
+                            </div>
+                            <p>{highlight.detail}</p>
+                          </div>
+                        </div>
                       </div>
-                      <p className="insight-highlight__description">{highlight.description}</p>
                       <footer className="insight-highlight__footer">
-                        <span className="insight-highlight__source">{highlight.source}</span>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <button
-                              type="button"
-                              className="insight-detail-trigger"
-                              aria-label={`${highlight.label}の算出方法`}
-                            >
-                              <Info aria-hidden="true" />
-                              <span>根拠を見る</span>
-                            </button>
-                          </TooltipTrigger>
-                          <TooltipContent>{highlight.detail}</TooltipContent>
-                        </Tooltip>
+                        <div className="insight-highlight__source">
+                          <span>データソース</span>
+                          <strong>{highlight.source}</strong>
+                        </div>
                       </footer>
                     </article>
                   );
