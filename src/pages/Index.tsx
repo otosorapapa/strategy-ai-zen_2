@@ -2351,10 +2351,6 @@ const Index = () => {
                         <span className={`insight-highlight__icon insight-highlight__icon--${highlight.accent}`}>
                           <HighlightIcon aria-hidden="true" />
                         </span>
-                        <div className="insight-highlight__value">
-                          <span>{highlight.label}</span>
-                          <strong>{highlight.value}</strong>
-                        </div>
                         <div
                           className={`insight-highlight__delta insight-highlight__delta--${highlight.deltaTone}`}
                         >
@@ -2362,6 +2358,10 @@ const Index = () => {
                           <span>{highlight.delta}</span>
                         </div>
                       </header>
+                      <div className="insight-highlight__value">
+                        <span>{highlight.label}</span>
+                        <strong>{highlight.value}</strong>
+                      </div>
                       <p className="insight-highlight__description">{highlight.description}</p>
                       <footer className="insight-highlight__footer">
                         <span className="insight-highlight__source">{highlight.source}</span>
