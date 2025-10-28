@@ -10,7 +10,8 @@ import {
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import growthChart from "@/assets/growth-chart.jpg";
+import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
+import { Line, LineChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
 import { useParallax } from "@/hooks/useParallax";
@@ -270,6 +271,27 @@ const ResultCard = ({ result, index }: { result: (typeof results)[number]; index
   );
 };
 
+const decisionTimeTrend = [
+  { quarter: "2023 Q1", manual: 265, assisted: 190 },
+  { quarter: "2023 Q2", manual: 250, assisted: 176 },
+  { quarter: "2023 Q3", manual: 238, assisted: 162 },
+  { quarter: "2023 Q4", manual: 221, assisted: 148 },
+  { quarter: "2024 Q1", manual: 208, assisted: 135 },
+  { quarter: "2024 Q2", manual: 197, assisted: 121 },
+  { quarter: "2024 Q3", manual: 181, assisted: 112 },
+];
+
+const chartConfig: ChartConfig = {
+  manual: {
+    label: "従来型の意思決定プロセス",
+    color: "hsl(215 16% 62%)",
+  },
+  assisted: {
+    label: "AIアシスト後の意思決定プロセス",
+    color: "hsl(173 80% 40%)",
+  },
+};
+
 const ResultsSection = () => {
   const { ref: chartRef, style: chartStyle } = useParallax<HTMLDivElement>({ intensity: 0.2, maxTranslate: 16 });
   const { ref: chartRevealRef, isVisible: chartVisible } = useRevealOnScroll<HTMLDivElement>({ threshold: 0.25 });
@@ -331,16 +353,82 @@ const ResultsSection = () => {
               生成AIが管理会計ダッシュボードと結びつき、論点抽出・利益インパクト・資金影響をワンビューで提示。判断材料が同じ土台
               にそろうことで、経営陣は意思決定の質を落とさずに判断までの時間を圧縮できます。
             </p>
-            <div className="rounded-2xl border border-white/80 bg-white/90 p-4">
-              <img
-                src={growthChart}
-                alt="意思決定時間の短縮チャート"
-                ref={chartRef}
-                style={chartStyle}
-                className="w-full rounded-xl object-cover"
-                loading="lazy"
-                decoding="async"
-              />
+            <div
+              ref={chartRef}
+              style={chartStyle}
+              className="rounded-3xl border border-primary/15 bg-gradient-to-br from-white via-sky-50 to-emerald-50/60 p-4 shadow-inner"
+            >
+              <ChartContainer
+                config={chartConfig}
+                className="aspect-auto h-[280px] w-full rounded-2xl border border-white/70 bg-white/90 p-4"
+              >
+                <LineChart data={decisionTimeTrend} margin={{ top: 16, right: 16, bottom: 8, left: 8 }}>
+                    <defs>
+                      <linearGradient id="manualGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="hsl(215 16% 62%)" stopOpacity={0.4} />
+                        <stop offset="95%" stopColor="hsl(215 16% 62%)" stopOpacity={0.05} />
+                      </linearGradient>
+                      <linearGradient id="assistedGradient" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="hsl(173 80% 40%)" stopOpacity={0.55} />
+                        <stop offset="95%" stopColor="hsl(173 80% 40%)" stopOpacity={0.1} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid vertical={false} strokeDasharray="3 6" stroke="hsl(214 32% 85%)" />
+                    <XAxis
+                      dataKey="quarter"
+                      tickLine={false}
+                      axisLine={false}
+                      tick={{ fill: "hsl(215 20% 35%)", fontSize: 12, fontWeight: 600 }}
+                      dy={8}
+                    />
+                    <YAxis
+                      tickLine={false}
+                      axisLine={false}
+                      tick={{ fill: "hsl(215 20% 35%)", fontSize: 12, fontWeight: 600 }}
+                      width={52}
+                      tickFormatter={(value) => `${value}分`}
+                    />
+                    <ChartTooltip
+                      cursor={{ stroke: "hsl(215 16% 72%)", strokeDasharray: "4 6" }}
+                      content={<ChartTooltipContent formatter={(value) => [`${value}分`, "意思決定時間"]} />}
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="manual"
+                      stroke="var(--color-manual)"
+                      strokeWidth={3}
+                      dot={{ r: 4, strokeWidth: 2, stroke: "white" }}
+                      activeDot={{ r: 6, strokeWidth: 0 }}
+                      fill="url(#manualGradient)"
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="assisted"
+                      stroke="var(--color-assisted)"
+                      strokeWidth={3.5}
+                      dot={{ r: 4.5, strokeWidth: 2, stroke: "white" }}
+                      activeDot={{ r: 7, strokeWidth: 0 }}
+                      fill="url(#assistedGradient)"
+                    />
+                  </LineChart>
+              </ChartContainer>
+              <div className="mt-4 grid gap-3 text-xs text-primary/80 md:grid-cols-3">
+                <div className="rounded-2xl border border-primary/20 bg-white/80 p-3 shadow-sm">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary/70">2023→2024</p>
+                  <p className="mt-1 text-lg font-bold text-primary">-84分</p>
+                  <p className="text-[11px] leading-relaxed text-primary/70">経営会議1回あたりの短縮時間</p>
+                </div>
+                <div className="rounded-2xl border border-primary/20 bg-white/80 p-3 shadow-sm">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary/70">DECISION RELIABILITY</p>
+                  <p className="mt-1 text-lg font-bold text-primary">+28pt</p>
+                  <p className="text-[11px] leading-relaxed text-primary/70">再現性チェックリストの合格率</p>
+                </div>
+                <div className="rounded-2xl border border-primary/20 bg-white/80 p-3 shadow-sm">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-primary/70">CONSENSUS SPEED</p>
+                  <p className="mt-1 text-lg font-bold text-primary">2.6x</p>
+                  <p className="text-[11px] leading-relaxed text-primary/70">役員合意形成までのスピード</p>
+                </div>
+              </div>
             </div>
           </div>
 
