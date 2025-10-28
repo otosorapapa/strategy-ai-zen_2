@@ -3660,13 +3660,120 @@ svg {
 }
 
 .velocity-chart {
-  background: var(--white);
-  border-radius: 20px;
-  padding: 28px;
-  box-shadow: var(--shadow-md);
+  position: relative;
+  background: linear-gradient(160deg, rgba(236, 244, 255, 0.78), rgba(229, 245, 242, 0.9));
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(28, 54, 88, 0.12);
   width: 100%;
   display: grid;
-  gap: 18px;
+  gap: 24px;
+  overflow: hidden;
+}
+
+.velocity-chart::before {
+  content: "";
+  position: absolute;
+  inset: -18% 40% auto -20%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(76, 153, 255, 0.18), transparent 70%);
+  pointer-events: none;
+}
+
+.velocity-chart > * {
+  position: relative;
+  z-index: 1;
+}
+
+.velocity-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.velocity-title {
+  display: grid;
+  gap: 12px;
+  max-width: 340px;
+}
+
+.velocity-title h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--navy-800);
+}
+
+.velocity-title p {
+  margin: 0;
+  color: rgba(22, 44, 82, 0.72);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.velocity-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(28, 54, 88, 0.12);
+  color: rgba(28, 54, 88, 0.75);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.velocity-insights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+.velocity-insight {
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(45, 92, 152, 0.16);
+  border-radius: 18px;
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.velocity-insight dt {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(21, 49, 92, 0.7);
+}
+
+.velocity-insight dd {
+  margin: 0;
+  display: grid;
+  gap: 4px;
+  color: var(--navy-700);
+}
+
+.velocity-insight dd strong {
+  font-size: 1.6rem;
+  line-height: 1.1;
+}
+
+.velocity-insight dd span {
+  font-size: 0.82rem;
+  color: rgba(33, 65, 105, 0.7);
+}
+
+.velocity-insight dd small {
+  font-size: 0.76rem;
+  color: rgba(33, 65, 105, 0.6);
 }
 
 .velocity-chart svg {
@@ -3681,64 +3788,87 @@ svg {
   stroke-linejoin: round;
 }
 
+.velocity-grid-line {
+  stroke: rgba(40, 78, 131, 0.18);
+  stroke-width: 0.4;
+  stroke-dasharray: 2 3;
+}
+
+.velocity-point {
+  stroke: #ffffff;
+  stroke-width: 0.8;
+  filter: drop-shadow(0 0 4px rgba(18, 56, 110, 0.25));
+}
+
 .velocity-legend {
   list-style: none;
   padding: 0;
-  margin: 20px 0 12px;
+  margin: 0;
   display: flex;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
-  font-size: 0.85rem;
-  color: var(--gray-600);
+}
+
+.velocity-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(28, 54, 88, 0.12);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(26, 52, 92, 0.76);
 }
 
 .velocity-legend span {
   display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 4px;
-  margin-right: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
 }
 
 .velocity-axis {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
-  font-size: 0.85rem;
-  color: var(--gray-600);
+  font-size: 0.82rem;
+  color: rgba(33, 65, 105, 0.7);
+  font-weight: 600;
 }
 
 .velocity-note {
   margin: 0;
-  font-size: 0.85rem;
-  color: var(--gray-500);
+  font-size: 0.83rem;
+  color: rgba(36, 68, 108, 0.6);
 }
 
 .velocity-metrics {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
 }
 
 .velocity-metric {
-  border-radius: 16px;
-  padding: 18px;
+  border-radius: 18px;
+  padding: 20px;
   display: grid;
   gap: 6px;
-  background: rgba(90, 118, 160, 0.08);
   text-align: left;
+  border: 1px solid rgba(28, 54, 88, 0.08);
 }
 
 .velocity-metric span {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(21, 49, 92, 0.75);
 }
 
 .velocity-metric strong {
-  font-size: 1.35rem;
+  font-size: 1.45rem;
   color: var(--navy-700);
 }
 
@@ -3748,15 +3878,95 @@ svg {
 }
 
 .velocity-metric--sky {
-  background: linear-gradient(145deg, rgba(76, 153, 255, 0.16), rgba(199, 229, 255, 0.4));
+  background: linear-gradient(145deg, rgba(76, 153, 255, 0.18), rgba(199, 229, 255, 0.46));
 }
 
 .velocity-metric--mint {
-  background: linear-gradient(145deg, rgba(45, 200, 193, 0.18), rgba(202, 243, 238, 0.45));
+  background: linear-gradient(145deg, rgba(45, 200, 193, 0.2), rgba(202, 243, 238, 0.5));
 }
 
 .velocity-metric--citrus {
-  background: linear-gradient(145deg, rgba(255, 193, 79, 0.22), rgba(255, 237, 196, 0.55));
+  background: linear-gradient(145deg, rgba(255, 193, 79, 0.25), rgba(255, 237, 196, 0.6));
+}
+
+.velocity-context {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+  gap: 22px;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(28, 54, 88, 0.12);
+  border-radius: 20px;
+  padding: 20px 24px;
+}
+
+.velocity-gap {
+  display: grid;
+  gap: 6px;
+}
+
+.velocity-gap span {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(21, 49, 92, 0.7);
+}
+
+.velocity-gap strong {
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--navy-800);
+}
+
+.velocity-gap small {
+  font-size: 0.78rem;
+  color: rgba(33, 65, 105, 0.6);
+}
+
+.velocity-context__copy {
+  margin: 0;
+  color: rgba(22, 44, 82, 0.72);
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 960px) {
+  .velocity-chart {
+    padding: 28px;
+  }
+
+  .velocity-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .velocity-title {
+    max-width: none;
+  }
+
+  .velocity-context {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .velocity-chart {
+    padding: 24px;
+    gap: 20px;
+  }
+
+  .velocity-insights {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .velocity-legend {
+    gap: 10px;
+  }
+
+  .velocity-context {
+    padding: 18px;
+  }
 }
 
 /* ======================================================
