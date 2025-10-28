@@ -1,6 +1,7 @@
 import {
   ChangeEvent,
   FormEvent,
+  KeyboardEvent,
   MouseEvent,
   useEffect,
   useMemo,
@@ -1974,6 +1975,22 @@ const Index = () => {
   const handleContactBack = () => {
     setStepError(null);
     setContactStep((prev) => Math.max(1, prev - 1));
+  };
+
+  const handleContactKeyDown = (event: KeyboardEvent<HTMLFormElement>) => {
+    if (event.isComposing || event.key !== "Enter") {
+      return;
+    }
+
+    const target = event.target as HTMLElement;
+    if (target instanceof HTMLTextAreaElement || target instanceof HTMLButtonElement) {
+      return;
+    }
+
+    if (contactStep < contactStepCount) {
+      event.preventDefault();
+      handleContactNext();
+    }
   };
 
   const handleContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -3988,7 +4005,11 @@ const Index = () => {
                 );
               })}
             </ul>
-            <form className="contact-form" onSubmit={handleContactSubmit}>
+            <form
+              className="contact-form"
+              onSubmit={handleContactSubmit}
+              onKeyDown={handleContactKeyDown}
+            >
               <div className="contact-progress" aria-hidden="true">
                 <div className="contact-progress__track">
                   <div
