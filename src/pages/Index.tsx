@@ -1255,7 +1255,7 @@ const Index = () => {
 
   const contactStepCount = contactSteps.length;
   const contactProgress = Math.round((contactStep / contactStepCount) * 100);
-  const metricsRef = useRef<HTMLUListElement | null>(null);
+  const metricsRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const securityBadges = useMemo(() => securityPoints.slice(0, 3), []);
   const numberFormatter = useMemo(() => new Intl.NumberFormat("ja-JP"), []);
@@ -1744,90 +1744,33 @@ const Index = () => {
           <div className="hero-overlay" />
           <div className="container hero-inner">
             <div className="hero-copy" data-animate data-initial-visible="true">
-              <div className="hero-copy__content">
-                <span className="badge">年商5,000万〜15億円の経営者向け</span>
-                <h1 id="hero-heading">
-                  経営改善で鍛えた専門家（中小企業診断士）×生成AI
-                  <span>意思決定の質・速さ・先見性を高める経営計画</span>
-                </h1>
-                <p className="hero-lead">
-                  経営改善で鍛えた診断士・会計士が生成AIを操り、経営者の意思決定を先回りで支援します。
-                  政策・市場・自社データをAIが集約し、専門家が金融審査レベルまで磨き込むからこそ、意思決定の質・速さ・先見性を一気に引き上げます。
-                </p>
-                <ul className="hero-points">
-                  <li>経営者の課題をAIが常時計測。政策更新と市場変化をシナリオ化し、判断材料を48時間以内に提示。</li>
-                  <li>専門家が生成AIの提案を金融・戦略の観点で精査し、意思決定の質とリスク管理を同時に強化。</li>
-                  <li>意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍の実績を創出。</li>
-                </ul>
-                <p className="hero-sub">
-                  リアルタイムの外部データと社内指標を組み合わせ、専門家が根拠と倫理面を確認したうえで投資・資金繰りの判断材料を常に最新化します。
-                  経営改善で鍛えた専門家 × 生成AIという二人三脚で、年商5,000万〜15億円の企業に必要な「先見性ある経営計画」を実現します。
-                </p>
-                <div className="hero-actions">
-                  <a className="btn btn-cta" href="#contact">
-                    {primaryCtaLabel}
-                  </a>
-                  <a className="hero-secondary-link" href="#resources">
-                    資料をダウンロードして詳細を確認
-                  </a>
-                </div>
-                <div className="hero-copy__meta">
-                  <ul className="trust-badges" aria-label="セキュリティ対策">
-                    {securityBadges.map((badge) => {
-                      const BadgeIcon = badge.icon;
-                      return (
-                        <li key={badge.title}>
-                          <span className="trust-badge__icon" aria-hidden="true">
-                            <BadgeIcon />
-                          </span>
-                          <span className="trust-badge__label">{badge.badge}</span>
-                          <span className="trust-badge__title">{badge.title}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                  <ul className="hero-metrics" ref={metricsRef}>
-                    {heroMetrics.map((metric, index) => (
-                      <li key={metric.label}>
-                        <strong>
-                          {metric.prefix}
-                          {metricValues[index].toLocaleString(undefined, {
-                            minimumFractionDigits: metric.decimals ?? 0,
-                            maximumFractionDigits: metric.decimals ?? 0,
-                          })}
-                          {metric.suffix}
-                        </strong>
-                        <span>{metric.label}</span>
-                        <small>
-                          {metric.note}
-                          <Tooltip>
-                            <TooltipTrigger asChild>
-                              <button
-                                type="button"
-                                className="metric-detail-trigger"
-                                aria-label={`${metric.label}の測定方法`}
-                              >
-                                <Info aria-hidden="true" />
-                              </button>
-                            </TooltipTrigger>
-                            <TooltipContent>{metric.detail}</TooltipContent>
-                          </Tooltip>
-                        </small>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="scroll-cue" aria-hidden="true">
-                  <span className="scroll-cue__icon" />
-                  <span className="scroll-cue__label">スクロールして詳細を見る</span>
-                </div>
+              <span className="badge">年商5,000万〜15億円の経営者向け</span>
+              <h1 id="hero-heading">
+                経営改善で鍛えた専門家（中小企業診断士）×生成AI
+                <span>意思決定の質・速さ・先見性を高める経営計画</span>
+              </h1>
+              <p className="hero-lead">
+                経営改善で鍛えた診断士・会計士が生成AIを操り、経営者の意思決定を先回りで支援します。
+                政策・市場・自社データをAIが集約し、専門家が金融審査レベルまで磨き込むからこそ、意思決定の質・速さ・先見性を一気に引き上げます。
+              </p>
+              <ul className="hero-points">
+                <li>経営者の課題をAIが常時計測。政策更新と市場変化をシナリオ化し、判断材料を48時間以内に提示。</li>
+                <li>専門家が生成AIの提案を金融・戦略の観点で精査し、意思決定の質とリスク管理を同時に強化。</li>
+                <li>意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍の実績を創出。</li>
+              </ul>
+              <p className="hero-sub">
+                リアルタイムの外部データと社内指標を組み合わせ、専門家が根拠と倫理面を確認したうえで投資・資金繰りの判断材料を常に最新化します。
+                経営改善で鍛えた専門家 × 生成AIという二人三脚で、年商5,000万〜15億円の企業に必要な「先見性ある経営計画」を実現します。
+              </p>
+              <div className="hero-actions">
+                <a className="btn btn-cta" href="#contact">
+                  {primaryCtaLabel}
+                </a>
+                <a className="hero-secondary-link" href="#resources">
+                  資料をダウンロードして詳細を確認
+                </a>
               </div>
-              <aside
-                className="hero-quick-form"
-                data-animate
-                aria-label="AI診断申し込みショートフォーム"
-              >
-                <span className="hero-quick-form__badge">最短1営業日で診断士がご連絡</span>
+              <div className="hero-quick-form" data-animate>
                 <div className="hero-quick-form__intro">
                   <h2>60秒でAI診断を予約</h2>
                   <p>
@@ -1922,7 +1865,55 @@ const Index = () => {
                     );
                   })}
                 </ol>
-              </aside>
+              </div>
+              <ul className="trust-badges" aria-label="セキュリティ対策">
+                {securityBadges.map((badge) => {
+                  const BadgeIcon = badge.icon;
+                  return (
+                    <li key={badge.title}>
+                      <span className="trust-badge__icon" aria-hidden="true">
+                        <BadgeIcon />
+                      </span>
+                      <span className="trust-badge__label">{badge.badge}</span>
+                      <span className="trust-badge__title">{badge.title}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+              <ul className="hero-metrics" ref={metricsRef}>
+                {heroMetrics.map((metric, index) => (
+                  <li key={metric.label}>
+                    <strong>
+                      {metric.prefix}
+                      {metricValues[index].toLocaleString(undefined, {
+                        minimumFractionDigits: metric.decimals ?? 0,
+                        maximumFractionDigits: metric.decimals ?? 0,
+                      })}
+                      {metric.suffix}
+                    </strong>
+                    <span>{metric.label}</span>
+                    <small>
+                      {metric.note}
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            className="metric-detail-trigger"
+                            aria-label={`${metric.label}の測定方法`}
+                          >
+                            <Info aria-hidden="true" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>{metric.detail}</TooltipContent>
+                      </Tooltip>
+                    </small>
+                  </li>
+                ))}
+              </ul>
+              <div className="scroll-cue" aria-hidden="true">
+                <span className="scroll-cue__icon" />
+                <span className="scroll-cue__label">スクロールして詳細を見る</span>
+              </div>
             </div>
             <div className="hero-visual">
               <figure
