@@ -860,6 +860,8 @@ const serviceFeatures: ServiceFeature[] = [
 
 type ProcessStep = {
   title: string;
+  pillar: string;
+  outcome: string;
   description: string;
   aiRole: string;
   humanRole: string;
@@ -870,6 +872,8 @@ type ProcessStep = {
 const processSteps: ProcessStep[] = [
   {
     title: "無料相談",
+    pillar: "因果仮説を定義",
+    outcome: "経営課題マップ＆優先KPIチャート",
     description: "現状の詰まりと達成したいKGIを整理。必要な関係者と進め方を決定します。",
     aiRole: "ヒアリング内容を要約し課題マップを自動生成",
     humanRole: "経営者・専門家が優先順位とスコープを決定",
@@ -878,6 +882,8 @@ const processSteps: ProcessStep[] = [
   },
   {
     title: "データ入力・連携",
+    pillar: "論理データ統制",
+    outcome: "データ連携ガバナンス＆リスクチェックリスト",
     description: "社内外データの棚卸しと連携を安全に実施。NDA締結後にアクセス権を設定します。",
     aiRole: "不足データのチェックリスト提示とフォーマット変換",
     humanRole: "専門家が連携ルールを整備しガバナンスを確認",
@@ -886,6 +892,8 @@ const processSteps: ProcessStep[] = [
   },
   {
     title: "AIレポート生成",
+    pillar: "スマートAIシナリオ",
+    outcome: "ケース別KPIシミュレーション＆感度分析レポート",
     description: "AIが財務・需要・人材シナリオを生成し、複数ケースのKPIを比較。",
     aiRole: "外部データ収集とシミュレーション、ドラフト作成",
     humanRole: "経営者が仮説をレビューし意思決定基準を設定",
@@ -894,6 +902,8 @@ const processSteps: ProcessStep[] = [
   },
   {
     title: "専門家との面談",
+    pillar: "納得性レビュー",
+    outcome: "専門家監修の実行計画＆リスク補強ドキュメント",
     description: "診断士と会計士が内容を審査。金融機関が求める根拠を補強します。",
     aiRole: "フィードバックを反映しモデルと資料を更新",
     humanRole: "専門家が審査目線で修正し実行計画を調整",
@@ -902,6 +912,8 @@ const processSteps: ProcessStep[] = [
   },
   {
     title: "計画書完成・実行",
+    pillar: "デザインされた実行ガバナンス",
+    outcome: "経営ダッシュボード＆定着化ロードマップ",
     description: "経営会議で最終判断を行い、ダッシュボードと四半期レビューに組み込みます。",
     aiRole: "最終資料を整形し、リアルタイムのアラート設定を実施",
     humanRole: "経営者が説明責任を担い、専門家が伴走して定着化",
@@ -992,6 +1004,40 @@ const processTimeline: ProcessFlowStage[] = [
       "進捗レポートと仮説検証ループを設定",
       "成長投資シナリオの判断ルールを明文化",
     ],
+  },
+];
+
+type ProcessAssurance = {
+  keyword: string;
+  description: string;
+  accent: "mint" | "sky" | "navy" | "citrus";
+};
+
+const processAssurances: ProcessAssurance[] = [
+  {
+    keyword: "因果性",
+    description: "AI議事録と業績データを突合し、原因と結果を証跡付きで提示。曖昧な感覚論ではなく、再現性ある課題仮説に落とし込みます。",
+    accent: "mint",
+  },
+  {
+    keyword: "論理性",
+    description: "財務・需要・人材の指標をロジックツリー化し、意思決定の前提条件を公開。経営会議で“なぜそう言えるのか”を即答できます。",
+    accent: "sky",
+  },
+  {
+    keyword: "デザイン性",
+    description: "投資家向けIR資料を意識したインタラクティブダッシュボードで、複雑なKPI比較を誰でも直感的に把握できるビジュアルへ整えます。",
+    accent: "citrus",
+  },
+  {
+    keyword: "スマート性",
+    description: "AIが24時間体制でシナリオを更新し、ボトルネック検知から次の打ち手提案までを自動化。経営陣は意思決定に集中できます。",
+    accent: "navy",
+  },
+  {
+    keyword: "納得性",
+    description: "中小企業診断士・会計士がエビデンスを補強し、銀行・株主・従業員へ説明可能なドキュメントに昇華。反論想定集まで提供します。",
+    accent: "mint",
   },
 ];
 
@@ -2936,32 +2982,60 @@ const Index = () => {
               {processSteps.map((step, index) => {
                 const StepIcon = step.icon;
                 return (
-                  <li key={step.title} className={`process-step process-step--${step.accent}`} data-animate>
-                    <div className={`process-marker process-marker--${step.accent}`} aria-hidden="true">
-                      <span>{index + 1}</span>
-                      <StepIcon />
-                    </div>
-                    <div className="process-content">
-                      <h3>{step.title}</h3>
-                      <p>{step.description}</p>
-                      <div className="process-roles">
-                        <div>
-                          <strong>AI</strong>
-                          <span>{step.aiRole}</span>
-                        </div>
-                        <div>
-                          <strong>人</strong>
-                          <span>{step.humanRole}</span>
-                        </div>
+                  <li
+                    key={step.title}
+                    className={`process-step process-step--${step.accent}`}
+                    data-animate
+                    aria-label={`STEP ${index + 1}: ${step.title}`}
+                  >
+                    <div className="process-step__timeline" aria-hidden="true">
+                      <span className="process-step__count">{String(index + 1).padStart(2, "0")}</span>
+                      <div className="process-step__icon">
+                        <StepIcon />
                       </div>
                     </div>
+                    <article className="process-card">
+                      <header className="process-card__header">
+                        <div className="process-card__title">
+                          <span className="process-card__step">STEP {String(index + 1).padStart(2, "0")}</span>
+                          <span className="process-card__eyebrow">{step.pillar}</span>
+                          <h3>{step.title}</h3>
+                        </div>
+                        <div className="process-card__outcome">
+                          <span>主要成果物</span>
+                          <strong>{step.outcome}</strong>
+                        </div>
+                      </header>
+                      <p className="process-card__description">{step.description}</p>
+                      <div className="process-card__roles">
+                        <div className="process-card__role">
+                          <span className="process-card__role-label">AIの役割</span>
+                          <p>{step.aiRole}</p>
+                        </div>
+                        <div className="process-card__role">
+                          <span className="process-card__role-label">人の役割</span>
+                          <p>{step.humanRole}</p>
+                        </div>
+                      </div>
+                    </article>
                   </li>
                 );
               })}
             </ol>
             <p className="process-note" data-animate>
-              MIT Sloan Management Reviewの研究（2023）は、AIと人の協働には業務プロセス全体の再設計が不可欠だと指摘しています。本プログラムではその知見を踏まえ、導入ステップ自体を差別化要素として設計しています。
+              MIT Sloan Management Reviewの研究（2023）は、AIと人の協働には業務プロセス全体の再設計が不可欠だと指摘しています。本プログラムではその知見を踏まえ、因果性・論理性・デザイン性・スマート性・納得性を一貫させる導入ステップを設計しています。
             </p>
+            <div className="process-assurances" data-animate>
+              {processAssurances.map((assurance) => (
+                <article
+                  key={assurance.keyword}
+                  className={`process-assurance process-assurance--${assurance.accent}`}
+                >
+                  <h3>{assurance.keyword}</h3>
+                  <p>{assurance.description}</p>
+                </article>
+              ))}
+            </div>
             <div className="process-flowchart" data-animate>
               {processTimeline.map((item, index) => {
                 const FlowIcon = item.icon;
