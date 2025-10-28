@@ -1090,6 +1090,8 @@ type RepresentativeProfile = {
   title: string;
   summary: string;
   photo: string;
+  badges: string[];
+  stats: { value: string; label: string; description: string }[];
   qualifications: string[];
   achievements: string[];
   affiliations: string[];
@@ -1099,8 +1101,30 @@ const representativeProfile: RepresentativeProfile = {
   name: "古町 亮介",
   title: "代表 / 中小企業診断士",
   summary:
-    "経済産業省認定支援機関として製造・IT・サービス業の経営改善を支援。AI×経営計画の導入設計と現場実装を指揮し、累計120件の事業計画を監修。",
+    "経済産業省認定支援機関として製造・IT・サービス業の経営改善を支援。AI×経営計画の導入設計から現場実装までを管掌し、経営指標と投資対効果の因果を検証しながら累計120件の計画を監修。",
   photo: expertTanakaPhoto,
+  badges: [
+    "経済産業省 認定支援機関",
+    "AI×経営DX設計の実務家",
+    "金融機関との連携支援",
+  ],
+  stats: [
+    {
+      value: "120件",
+      label: "AI経営計画の監修",
+      description: "製造・IT・サービスの事業再設計を伴走",
+    },
+    {
+      value: "80社",
+      label: "資金繰り・協調融資改善",
+      description: "金融機関と連携しキャッシュ創出を支援",
+    },
+    {
+      value: "40件",
+      label: "生成AI活用プロジェクト",
+      description: "AI×専門家レビューで再現性を確立",
+    },
+  ],
   qualifications: [
     "中小企業診断士（登録番号 412345）",
     "ITコーディネータ",
@@ -3436,15 +3460,36 @@ const Index = () => {
                 />
               </div>
               <div className="representative-card__body">
-                <span className="representative-card__title">{representativeProfile.title}</span>
+                <div className="representative-card__header">
+                  <span className="representative-card__title">{representativeProfile.title}</span>
+                  <div className="representative-card__badges" role="list">
+                    {representativeProfile.badges.map((badge) => (
+                      <span key={badge} role="listitem" className="representative-card__badge">
+                        {badge}
+                      </span>
+                    ))}
+                  </div>
+                </div>
                 <h3>{representativeProfile.name}</h3>
-                <p>{representativeProfile.summary}</p>
+                <p className="representative-card__summary">{representativeProfile.summary}</p>
+                <div className="representative-card__stats" role="list">
+                  {representativeProfile.stats.map((stat) => (
+                    <div key={stat.label} role="listitem">
+                      <strong>{stat.value}</strong>
+                      <span>{stat.label}</span>
+                      <p>{stat.description}</p>
+                    </div>
+                  ))}
+                </div>
                 <div className="representative-card__lists">
                   <div>
                     <strong>保有資格</strong>
                     <ul>
                       {representativeProfile.qualifications.map((item) => (
-                        <li key={item}>{item}</li>
+                        <li key={item}>
+                          <CheckCircle2 className="representative-card__icon" aria-hidden="true" />
+                          <span>{item}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -3452,7 +3497,10 @@ const Index = () => {
                     <strong>主要実績</strong>
                     <ul>
                       {representativeProfile.achievements.map((item) => (
-                        <li key={item}>{item}</li>
+                        <li key={item}>
+                          <CheckCircle2 className="representative-card__icon" aria-hidden="true" />
+                          <span>{item}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
@@ -3460,13 +3508,22 @@ const Index = () => {
                     <strong>登録・所属</strong>
                     <ul>
                       {representativeProfile.affiliations.map((item) => (
-                        <li key={item}>{item}</li>
+                        <li key={item}>
+                          <CheckCircle2 className="representative-card__icon" aria-hidden="true" />
+                          <span>{item}</span>
+                        </li>
                       ))}
                     </ul>
                   </div>
                 </div>
-                <a className="representative-card__link" href="https://furumachi-smec.lognowa.com" target="_blank" rel="noreferrer">
+                <a
+                  className="representative-card__link"
+                  href="https://furumachi-smec.lognowa.com"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   代表プロフィールと登録機関を見る
+                  <ArrowUpRight aria-hidden="true" />
                 </a>
               </div>
             </article>
