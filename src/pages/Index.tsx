@@ -1,7 +1,6 @@
 import {
   ChangeEvent,
   FormEvent,
-  KeyboardEvent,
   MouseEvent,
   useEffect,
   useMemo,
@@ -11,7 +10,6 @@ import {
 
 import {
   ArrowDownRight,
-  ArrowUp,
   ArrowUpRight,
   Award,
   BarChart3,
@@ -39,12 +37,10 @@ import {
   Users2,
   Workflow,
 } from "lucide-react";
-import PlansSection from "@/components/PlansSection";
 
 import { submitContactForm } from "@/lib/contact-api";
 
 import aiDashboardShot from "@/assets/growth-chart.jpg";
-import featureIntelligenceShot from "@/assets/dashboard-preview.jpg";
 import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
 import expertSaitoPhoto from "@/assets/representative_.jpg";
 import expertTanakaPhoto from "@/assets/representative.jpg";
@@ -129,7 +125,7 @@ const heroMetrics = [
 const heroAllianceExperts = [
   {
     name: "田中 圭",
-    role: "資金調達スペシャリスト",
+    role: "元メガバンク法人融資担当",
     focus: "資金繰り・融資交渉",
     photo: expertTanakaPhoto,
   },
@@ -141,7 +137,7 @@ const heroAllianceExperts = [
   },
   {
     name: "斎藤 美咲",
-    role: "財務会計専門家 / 税理士",
+    role: "公認会計士 / 税理士",
     focus: "財務管理・補助金対策",
     photo: expertSaitoPhoto,
   },
@@ -175,37 +171,6 @@ const quickFlowSteps: QuickFlowStep[] = [
     description: "48時間以内に提示",
     detail: "AIレポートのドラフトと伴走プラン、投資回収の目安をご案内。",
     icon: ClipboardCheck,
-  },
-];
-
-type QuickProofPoint = {
-  title: string;
-  description: string;
-  evidence: string;
-  icon: LucideIcon;
-};
-
-const quickProofPoints: QuickProofPoint[] = [
-  {
-    title: "意思決定の因果を可視化",
-    description:
-      "AIが会議体ごとのKPIと外部指標を相関分析し、判断を遅らせているボトルネックを提示。",
-    evidence: "導入企業20社の意思決定リードタイム52%短縮",
-    icon: BarChart4,
-  },
-  {
-    title: "財務×政策のシナリオを同時比較",
-    description:
-      "財務計画と政策アップデートを48時間以内に組み合わせ、投資回収と資金繰りの着地を複数提示。",
-    evidence: "改善プラン提示まで平均48時間 / 3案比較",
-    icon: Layers3,
-  },
-  {
-    title: "専門家によるリスク監査",
-    description:
-      "診断士・財務会計・税務の専門家がAIドラフトを審査し、投資判断の前提とリスク許容度を明文化。",
-    evidence: "資金繰り改善45時間創出 / 月 (平均)",
-    icon: ShieldCheck,
   },
 ];
 
@@ -411,30 +376,6 @@ const utilizationComparisons = [
   },
 ];
 
-const simulatorHighlights = [
-  {
-    label: "年商5〜15億円レンジで検証",
-    description: "導入20社の財務・会議ログからROI係数を逆算。",
-    icon: Database,
-  },
-  {
-    label: "専門家の審査目線を反映",
-    description: "資金調達に精通した財務会計専門家がパラメータを監修。",
-    icon: Shield,
-  },
-  {
-    label: "投資判断のストーリー化",
-    description: "資金繰り、成長、組織の3軸での説得材料を即提示。",
-    icon: BarChart3,
-  },
-];
-
-const simulatorChecklist = [
-  "社内データが揃っていなくても平均値で試算可能",
-  "専門家セッションで自社データに置き換えて精緻化",
-  "融資・投資家説明用のストーリーをそのまま活用",
-];
-
 const outcomeFootnotes = [
   "※1 導入企業20社（従業員50〜300名、2023年7月〜2024年12月）を対象に戦略AIレポートの利用状況を追跡。意思決定リードタイムと工数削減は会議議事録と業務ログから算出。",
   "※2 University of Cincinnati Online (2024) \"How Businesses Are Using Generative AI\" 調査（n=215）の結果をもとに、生成AI活用企業の戦略更新サイクル短縮を推計。",
@@ -477,7 +418,7 @@ const responsibilityColumns: ResponsibilityColumn[] = [
     title: "専門家がやること",
     summary: "レビューと伴走支援で実行精度を担保。",
     detail:
-      "資金調達と戦略策定に精通した専門家がAI出力をレビューし、融資や投資審査で求められる水準に仕上げ、実行フェーズも伴走します。",
+      "金融機関・コンサル経験者がAI出力をレビューし、融資や投資審査で求められる水準に仕上げ、実行フェーズも伴走します。",
     points: ["レビューとチューニング", "金融機関連携・交渉支援", "四半期伴走ミーティング"],
     icon: Users2,
     accent: "sky",
@@ -558,78 +499,6 @@ const quarterlySignals = [
   },
 ];
 
-const quarterlyMetrics = [
-  {
-    value: "90日",
-    label: "戦略・実行の再設計サイクル",
-    description: "四半期ごとに優先順位と資源配分を再定義。ロジックツリーで意思決定を可視化。",
-  },
-  {
-    value: "12領域",
-    label: "リアルタイム監視の経営指標",
-    description: "財務・市場・人材の3階層をAIが常時スキャンし、異常検知を通知。",
-  },
-  {
-    value: "168%",
-    label: "平均想定ROI",
-    description: "AIドラフトと専門家レビューで作成時間を短縮し、投資回収の確度を高めます。",
-  },
-];
-
-type QuarterlyCausality = {
-  stage: string;
-  headline: string;
-  detail: string;
-  outcome: string;
-  icon: LucideIcon;
-  accent: "mint" | "navy" | "sky";
-};
-
-const quarterlyCausality: QuarterlyCausality[] = [
-  {
-    stage: "Signal / 外部環境",
-    headline: "政策・金融・市場の変化を24時間以内に集約",
-    detail: "政府発表・補助金・競合指標をクロールし、四半期レビューの論点を自動抽出。",
-    outcome: "最新データを根拠に優先課題を即決定",
-    icon: Compass,
-    accent: "sky",
-  },
-  {
-    stage: "Insight / 意思決定",
-    headline: "AIが因果ロジックツリーを生成",
-    detail: "利益ドライバーとリスクをスコアリングし、投資／守りの配分を論理的に提示。",
-    outcome: "役員会で判断に使う論点メモを48時間で準備",
-    icon: BrainCircuit,
-    accent: "mint",
-  },
-  {
-    stage: "Execution / 実行管理",
-    headline: "専門家が実行計画とKPIを監査",
-    detail: "財務・人材・オペレーションのKPIに連動した実行ロードマップを伴走サポート。",
-    outcome: "実行率＋27pt、投資回収5.8ヶ月へ短縮",
-    icon: Workflow,
-    accent: "navy",
-  },
-];
-
-const quarterlyMilestones = [
-  {
-    title: "Week 1-2",
-    highlight: "経営課題マップ確定",
-    detail: "AI診断 × 経営会議ログで課題仮説を因果整理。",
-  },
-  {
-    title: "Week 5",
-    highlight: "リソース配分シナリオ提示",
-    detail: "12指標を基にベスト&ワーストケースを同時比較。",
-  },
-  {
-    title: "Week 9",
-    highlight: "実行レビュー & KPI補正",
-    detail: "成果の因果を検証し、翌四半期の打ち手に反映。",
-  },
-];
-
 const velocitySeries = [
   {
     label: "外部環境の変化指数",
@@ -647,12 +516,8 @@ const velocityQuarters = ["2021Q4", "2022Q4", "2023Q4", "2024Q4"];
 const velocityMax = Math.max(...velocitySeries.flatMap((series) => series.values));
 
 type PainPoint = {
-  caseId: string;
-  caseLabel: string;
   title: string;
-  executiveAngle: string;
-  summary: string;
-  symptoms: string[];
+  detail: string;
   solution: string;
   aiAction: string;
   expertAction: string;
@@ -664,21 +529,14 @@ type PainPoint = {
 
 const painPoints: PainPoint[] = [
   {
-    caseId: "CASE 01",
-    caseLabel: "市場シグナルの先読み",
     title: "市場変化や政策変動を追う時間がない",
-    executiveAngle: "政策・競合の変化を48時間以内に意思決定材料化",
-    summary:
-      "最新政策・補助金・競合動向を追う調査が経営者に集中し、戦略設計の時間が不足しています。",
-    symptoms: [
-      "補助金や政策アップデートが役員会議に届く頃には申請期限が迫っている",
-      "競合の値付け変更や需要の変化をPOS・受注データから逆算しており、対応が常に後手になる",
-    ],
+    detail: "最新政策・補助金・競合動向を追う調査が経営者に集中し、戦略設計の時間が不足しています。",
     solution:
       "経営改善で鍛えた専門家 × 生成AIが政府・市場・自社データを常時計測し、優先課題と想定インパクトを数分で提示します。",
-    aiAction: "政策・需給・財務データをクロールし、先読みシナリオとKPIアラートを自動生成。",
+    aiAction:
+      "AI: 政策・需給・財務データをクロールし、先読みシナリオとKPIアラートを自動生成。",
     expertAction:
-      "中小企業診断士が業界特性と政策適用条件を検証し、現場に合わせた打ち手へ整理。",
+      "専門家: 中小企業診断士が業界特性と政策適用条件を検証し、現場に合わせた打ち手へ整理。",
     impact: "粗利 +18%",
     impactDetail:
       "furumachi-smec.lognowa.comが紹介する改善事例同様、利益ドライバーを可視化し粗利率を平均18pt押し上げました。",
@@ -686,21 +544,15 @@ const painPoints: PainPoint[] = [
     accent: "sky",
   },
   {
-    caseId: "CASE 02",
-    caseLabel: "会議と計画の高速化",
     title: "会議や計画作成に時間がかかり意思決定が遅い",
-    executiveAngle: "週次で判断できるドラフト体制を構築",
-    summary:
+    detail:
       "会議資料と経営計画のドラフトを作るたびに各部門からデータを集め直し、意思決定リードタイムが長期化しています。",
-    symptoms: [
-      "会議前に各部門へのデータ依頼が連鎖し、集計が会議直前まで終わらない",
-      "経営計画のドラフトを役員が深夜に修正しており、論点が擦り合わないまま議論が始まる",
-    ],
     solution:
       "経営改善で鍛えた専門家 × 生成AIが財務と実績データから複数シナリオとドラフト資料を揃え、経営陣は判断と説明に集中できます。",
-    aiAction: "四半期ごとのシナリオ比較・財務予測・会議アジェンダを48時間以内に生成。",
+    aiAction:
+      "AI: 四半期ごとのシナリオ比較・財務予測・会議アジェンダを48時間以内に生成。",
     expertAction:
-      "診断士と財務会計専門家が論点整理と審査基準の観点でレビューし、決裁に必要な根拠を補強。",
+      "専門家: 診断士と会計士が論点整理と審査基準の観点でレビューし、決裁に必要な根拠を補強。",
     impact: "意思決定リードタイム -52% / 計画作成工数 -80%",
     impactDetail:
       "blog.iil.comが強調するAI活用による迅速な意思決定を体現し、導入企業平均で意思決定リードタイム52%短縮・計画作成工数80%削減。",
@@ -708,21 +560,15 @@ const painPoints: PainPoint[] = [
     accent: "citrus",
   },
   {
-    caseId: "CASE 03",
-    caseLabel: "資金調達の信頼性強化",
     title: "資金調達時に金融機関から信頼される計画書が難しい",
-    executiveAngle: "審査基準に沿った経営計画を短期で提示",
-    summary:
+    detail:
       "融資や補助金の審査ポイントを押さえた計画書づくりが属人化し、提出スケジュールが後ろ倒しになります。",
-    symptoms: [
-      "金融機関への提出資料が部門ごとにフォーマットが異なり、説得力が分散する",
-      "返済計画や投資の前提条件を説明できるドキュメントが不足し、交渉のたびに補足が発生する",
-    ],
     solution:
       "経営改善で鍛えた専門家 × 生成AIが審査基準に沿った財務計画と想定問答を下書きし、金融機関から信頼される計画書へ磨き込みます。",
-    aiAction: "DSCR・CCCなど主要指標を自動計算し、複数の返済シナリオと資金繰りシートを作成。",
+    aiAction:
+      "AI: DSCR・CCCなど主要指標を自動計算し、複数の返済シナリオと資金繰りシートを作成。",
     expertAction:
-      "資金調達スペシャリストが想定問答と裏付け資料を監修し、金融機関との対話を設計。",
+      "専門家: 元メガバンク融資担当が想定問答と裏付け資料を監修し、金融機関との対話を設計。",
     impact: "キャッシュ創出 1.8倍",
     impactDetail:
       "AIドラフトと専門家のダブルチェックで資金調達の確度が向上し、導入後12か月の運転資金キャッシュフローは平均1.8倍に。",
@@ -770,7 +616,7 @@ const serviceFeatures: ServiceFeature[] = [
   },
   {
     title: "専門家レビューと倫理チェック",
-    description: "中小企業診断士・財務会計専門家がAIの弱点を補正。",
+    description: "中小企業診断士・会計士がAIの弱点を補正。",
     detail:
       "ハルシネーションや倫理リスクを洗い出し、エビデンスと政策情報を追記。AI提案を融資審査レベルに磨き上げ、透明な意思決定プロセスを担保します。",
     benefit: "審査通過率 +18pt",
@@ -788,45 +634,11 @@ const serviceFeatures: ServiceFeature[] = [
   },
 ];
 
-type FeatureAssurance = {
-  title: string;
-  description: string;
-  metric: string;
-  icon: LucideIcon;
-  accent: "navy" | "mint" | "sky";
-};
-
-const featureAssurances: FeatureAssurance[] = [
-  {
-    title: "CFO視点の整合性",
-    description: "財務3表・KPI・資金繰りを99項目でクロスチェック",
-    metric: "整合性チェック 99項目",
-    icon: LineChart,
-    accent: "navy",
-  },
-  {
-    title: "審査通過クオリティ",
-    description: "診断士・公認会計士が金融機関提出フォーマットで監修",
-    metric: "金融機関提出率 100%",
-    icon: ShieldCheck,
-    accent: "sky",
-  },
-  {
-    title: "データ統合ガバナンス",
-    description: "外部統計・政策更新・社内データの自動同期を権限管理",
-    metric: "データ連携24hモニタリング",
-    icon: Database,
-    accent: "mint",
-  },
-];
-
 type ProcessStep = {
   title: string;
   description: string;
   aiRole: string;
   humanRole: string;
-  duration: string;
-  deliverable: string;
   icon: LucideIcon;
   accent: "mint" | "sky" | "citrus" | "navy";
 };
@@ -839,8 +651,6 @@ const processSteps: ProcessStep[] = [
     humanRole: "経営者・専門家が優先順位とスコープを決定",
     icon: ClipboardCheck,
     accent: "mint",
-    duration: "1営業日以内",
-    deliverable: "診断レポートと優先課題マップ",
   },
   {
     title: "データ入力・連携",
@@ -849,8 +659,6 @@ const processSteps: ProcessStep[] = [
     humanRole: "専門家が連携ルールを整備しガバナンスを確認",
     icon: Database,
     accent: "sky",
-    duration: "1〜2週間",
-    deliverable: "データガバナンス設計と接続完了ログ",
   },
   {
     title: "AIレポート生成",
@@ -859,18 +667,14 @@ const processSteps: ProcessStep[] = [
     humanRole: "経営者が仮説をレビューし意思決定基準を設定",
     icon: BrainCircuit,
     accent: "navy",
-    duration: "3〜5営業日",
-    deliverable: "戦略別シナリオ比較レポート",
   },
   {
     title: "専門家との面談",
-    description: "診断士と財務会計専門家が内容を審査。金融機関が求める根拠を補強します。",
+    description: "診断士と会計士が内容を審査。金融機関が求める根拠を補強します。",
     aiRole: "フィードバックを反映しモデルと資料を更新",
     humanRole: "専門家が審査目線で修正し実行計画を調整",
     icon: ShieldCheck,
     accent: "mint",
-    duration: "オンライン60分",
-    deliverable: "審査対応メモと改善アクション",
   },
   {
     title: "計画書完成・実行",
@@ -879,36 +683,6 @@ const processSteps: ProcessStep[] = [
     humanRole: "経営者が説明責任を担い、専門家が伴走して定着化",
     icon: CheckCircle2,
     accent: "citrus",
-    duration: "最短4週間",
-    deliverable: "金融機関提出レベルの経営計画書",
-  },
-];
-
-type ProcessHighlight = {
-  title: string;
-  value: string;
-  description: string;
-  icon: LucideIcon;
-};
-
-const processHighlights: ProcessHighlight[] = [
-  {
-    title: "導入スピード",
-    value: "最短4週間",
-    description: "集中オンボーディングで意思決定まで伴走",
-    icon: Timer,
-  },
-  {
-    title: "専任チーム",
-    value: "AI×専門家3名",
-    description: "診断士・財務会計専門家・AIストラテジストが担当",
-    icon: Users2,
-  },
-  {
-    title: "再現性",
-    value: "KPI達成率92%",
-    description: "四半期レビューで改善を継続",
-    icon: Shield,
   },
 ];
 
@@ -917,11 +691,7 @@ type ProcessFlowStage = {
   icon: LucideIcon;
   aiFocus: string;
   humanFocus: string;
-  impact: string;
-  evidence: string;
   accent: "mint" | "sky" | "citrus" | "navy";
-  orientation: "left" | "right";
-  causalLink: string;
 };
 
 const processTimeline: ProcessFlowStage[] = [
@@ -930,44 +700,28 @@ const processTimeline: ProcessFlowStage[] = [
     icon: Layers3,
     aiFocus: "AI: 議事録の自動要約とアクション抽出",
     humanFocus: "経営者×診断士: 経営課題と制約条件を言語化",
-    impact: "因果仮説を30分で可視化し、意思決定の起点を構築",
-    evidence: "AI生成の論点マップと経営者ヒアリングログで意思決定材料を共有",
     accent: "mint",
-    orientation: "left",
-    causalLink: "ヒアリング → AI要約 → 課題マップ化で意思決定論点を抽出",
   },
   {
     stage: "データ連携・AI分析",
     icon: BrainCircuit,
     aiFocus: "AI: 外部データ取得・財務シミュレーション・リスク検証",
     humanFocus: "経営者: 取捨選択と優先度の設定",
-    impact: "市場・財務データを統合し、複数シナリオの期待値を定量化",
-    evidence: "統計・API連携ログと財務シミュレーション出力をダッシュボードで可視化",
     accent: "sky",
-    orientation: "right",
-    causalLink: "データ棚卸し → 接続ログ → モデル検証で再現性を担保",
   },
   {
     stage: "専門家ブラッシュアップ",
     icon: ShieldCheck,
     aiFocus: "AI: 修正内容を反映し図表と想定問答を更新",
     humanFocus: "診断士: 金融機関目線と実行プランを整備",
-    impact: "金融・実務の観点で実行可能性とリスク耐性を補強",
-    evidence: "診断士レビュー記録と修正履歴を可視化し、説明責任を確保",
     accent: "navy",
-    orientation: "left",
-    causalLink: "AIドラフト → 専門家レビュー → リスク補強の反復で納得感を醸成",
   },
   {
     stage: "意思決定",
     icon: CheckCircle2,
     aiFocus: "AI: 最終資料と根拠データを整理",
     humanFocus: "経営者: 意思決定とステークホルダー説明",
-    impact: "根拠付きロードマップで経営会議の決裁を高速化",
-    evidence: "最終レポート、想定問答、投資判断指標をワンクリックで提示",
     accent: "citrus",
-    orientation: "right",
-    causalLink: "最終資料 → KPIダッシュボード → 会議決裁と実行管理を接続",
   },
 ];
 
@@ -1095,7 +849,7 @@ const successStories: SuccessStory[] = [
     aiRole:
       "金融・受注・マクロ指標を統合し、資金繰りシミュレーションとリスクアラートをリアルタイム生成。",
     expertRole:
-      "資金調達スペシャリストが調達シナリオを監修し、交渉資料と想定問答を準備。",
+      "元メガバンク担当者が調達シナリオを監修し、交渉資料と想定問答を準備。",
     governance:
       "投資委員会向けにAIが前提条件と感度分析を自動更新。金融機関共有用ダイジェストも同時作成。",
     metrics: [
@@ -1308,7 +1062,7 @@ type ExpertCard = {
 const expertCards: ExpertCard[] = [
   {
     name: "田中 圭",
-    title: "資金調達スペシャリスト",
+    title: "元メガバンク法人融資担当",
     bio: "大型調達案件を多数支援。資本政策と金融機関交渉に精通。",
     photo: expertTanakaPhoto,
     credentials: [
@@ -1328,7 +1082,7 @@ const expertCards: ExpertCard[] = [
   },
   {
     name: "斎藤 美咲",
-    title: "財務会計専門家 / 税理士",
+    title: "公認会計士 / 税理士",
     bio: "補助金・助成金対応と財務モデリングの専門家。",
     photo: expertSaitoPhoto,
     credentials: [
@@ -1345,8 +1099,6 @@ type ResourceCard = {
   cta: string;
   icon: LucideIcon;
   note: string;
-  proof: string;
-  causalFlow: { label: string; result: string }[];
 };
 
 const resourceCards: ResourceCard[] = [
@@ -1362,21 +1114,6 @@ const resourceCards: ResourceCard[] = [
     cta: "AIドラフトサンプル（PDF）を受け取る",
     icon: FileText,
     note: "フォーム送信直後にメールで自動送付します。",
-    proof: "AIドラフト×専門家レビューで意思決定資料を即戦力化",
-    causalFlow: [
-      {
-        label: "経営課題・KPI・会議ログを入力",
-        result: "AIが論点と優先順位、シナリオ比較を抽出",
-      },
-      {
-        label: "生成ドラフトを専門家が精査",
-        result: "融資審査レベルの根拠と数値整合を補強",
-      },
-      {
-        label: "テンプレを会議前に共有",
-        result: "意思決定のスピードと納得性を両立",
-      },
-    ],
   },
   {
     title: "四半期レビュー用チェックリスト",
@@ -1390,21 +1127,6 @@ const resourceCards: ResourceCard[] = [
     cta: "チェックリスト一式をダウンロード",
     icon: ClipboardCheck,
     note: "登録いただいたメールへ即時にPDFリンクを送信します。",
-    proof: "90日サイクルで因果と実行を結び直すレビュー設計",
-    causalFlow: [
-      {
-        label: "外部環境と資金繰りの変化をAIが集約",
-        result: "90日サイクルで脅威・機会を定量化",
-      },
-      {
-        label: "専門家がレビュー項目を精査",
-        result: "優先順位と責任者を明確化",
-      },
-      {
-        label: "チェックリストを会議運営に適用",
-        result: "実行状況と次アクションを同期",
-      },
-    ],
   },
   {
     title: "生成AI活用レポート（四半期版）",
@@ -1418,80 +1140,6 @@ const resourceCards: ResourceCard[] = [
     cta: "レポート（PDF）を入手する",
     icon: BarChart4,
     note: "毎四半期の最新号を自動でお届けします。",
-    proof: "国内15社のROIデータとリスク対策を網羅",
-    causalFlow: [
-      {
-        label: "生成AI活用企業の実績を収集",
-        result: "業種別ROIと導入シナリオを比較",
-      },
-      {
-        label: "AIがKPI推移をモデリング",
-        result: "投資対効果とキャッシュ創出を算定",
-      },
-      {
-        label: "専門家がリスク対策を整理",
-        result: "社内稟議と金融機関説明を加速",
-      },
-    ],
-  },
-];
-
-type FaqHighlight = {
-  title: string;
-  description: string;
-  metric: string;
-  supporting: string;
-  icon: LucideIcon;
-};
-
-const faqHighlights: FaqHighlight[] = [
-  {
-    title: "国内閉域環境と二重暗号化",
-    description:
-      "三菱UFJ信託銀行グループの閉域クラウド上で運用。社内データは経営者の承認プロセスを通過しないとAIに渡らず、アクセスログも四半期ごとに監査します。",
-    metric: "ISMAP準拠 96項目をクリア",
-    supporting: "SOC2 Type2取得パートナーと共同運用",
-    icon: ShieldCheck,
-  },
-  {
-    title: "四半期ごとの戦略・リスクレビュー",
-    description:
-      "元外資戦略コンサルと財務会計専門家が経営会議に同席し、AIが出す示唆の妥当性と法務・財務リスクを同時に点検。意思決定の議事録もAIで要約し、説明責任を残します。",
-    metric: "伴走セッション 180件/年",
-    supporting: "年商5,000万〜15億円の経営者に最適化",
-    icon: Workflow,
-  },
-  {
-    title: "ファクトベースのシミュレーション",
-    description:
-      "四半期ごとにPL/BS/CFのシナリオを3パターン生成し、AIが提案した打ち手のROI・回収期間・リスク感度を数値で提示。意思決定が属人化しません。",
-    metric: "意思決定リードタイム 52%短縮",
-    supporting: "導入企業20社平均（2024年実績）",
-    icon: LineChart,
-  },
-];
-
-type FaqTimelineStep = {
-  title: string;
-  description: string;
-  detail: string;
-};
-
-const faqTimeline: FaqTimelineStep[] = [
-  {
-    title: "Week 1 キックオフ",
-    description: "経営課題の棚卸とガバナンス要件の確認",
-    detail: "経営陣・部門長ヒアリング（90分）",
-  },
-  {
-    title: "Week 3 ドラフト提示",
-    description: "AIドラフト＋専門家レビューでリスクと打ち手を整理",
-    detail: "ROI・感度分析のレポート共有",
-  },
-  {
-    title: "Quarterly リニューアル",
-    description: "四半期ごとに指標と進捗を再検証し、戦略を再設計",
-    detail: "役員会・金融機関向け資料を同時に更新",
   },
 ];
 
@@ -1604,14 +1252,12 @@ const Index = () => {
   const [isQuickSubmitting, setIsQuickSubmitting] = useState(false);
   const [quickSubmitted, setQuickSubmitted] = useState(false);
   const [quickError, setQuickError] = useState<string | null>(null);
-  const [showBackToTop, setShowBackToTop] = useState(false);
 
   const contactStepCount = contactSteps.length;
   const contactProgress = Math.round((contactStep / contactStepCount) * 100);
   const metricsRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const securityBadges = useMemo(() => securityPoints.slice(0, 3), []);
-  const [primarySecurity, secondarySecurity, tertiarySecurity] = securityPoints;
   const numberFormatter = useMemo(() => new Intl.NumberFormat("ja-JP"), []);
 
   const simulatorResult = useMemo(() => {
@@ -1705,7 +1351,6 @@ const Index = () => {
       const y = window.scrollY;
       setIsScrolled(y > 32);
       setHeroParallax(y * 0.2);
-      setShowBackToTop(y > 400);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -1976,22 +1621,6 @@ const Index = () => {
     setContactStep((prev) => Math.max(1, prev - 1));
   };
 
-  const handleContactKeyDown = (event: KeyboardEvent<HTMLFormElement>) => {
-    if (event.isComposing || event.key !== "Enter") {
-      return;
-    }
-
-    const target = event.target as HTMLElement;
-    if (target instanceof HTMLTextAreaElement || target instanceof HTMLButtonElement) {
-      return;
-    }
-
-    if (contactStep < contactStepCount) {
-      event.preventDefault();
-      handleContactNext();
-    }
-  };
-
   const handleContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isSubmitting) return;
@@ -2042,10 +1671,8 @@ const Index = () => {
             AI経営計画書ラボ
           </a>
           <nav
-            id="site-navigation"
             className={`header-nav ${isMobileNavOpen ? "is-open" : ""}`}
             aria-label="主要メニュー"
-            aria-hidden={!isMobileNavOpen}
           >
             <ul>
               {headerNavItems.map((item) => (
@@ -2070,7 +1697,6 @@ const Index = () => {
               className={`header-menu ${isMobileNavOpen ? "is-active" : ""}`}
               aria-label="メニューを開閉する"
               aria-expanded={isMobileNavOpen}
-              aria-controls="site-navigation"
               onClick={() => setIsMobileNavOpen((prev) => !prev)}
             >
               <span />
@@ -2115,6 +1741,7 @@ const Index = () => {
           style={{ backgroundPositionY: `${heroParallax * 0.5}px` }}
           aria-labelledby="hero-heading"
         >
+          <div className="hero-overlay" />
           <div className="container hero-inner">
             <div className="hero-copy" data-animate data-initial-visible="true">
               <span className="badge">年商5,000万〜15億円の経営者向け</span>
@@ -2123,7 +1750,7 @@ const Index = () => {
                 <span>意思決定の質・速さ・先見性を高める経営計画</span>
               </h1>
               <p className="hero-lead">
-                経営改善で鍛えた診断士・財務会計専門家が生成AIを操り、経営者の意思決定を先回りで支援します。
+                経営改善で鍛えた診断士・会計士が生成AIを操り、経営者の意思決定を先回りで支援します。
                 政策・市場・自社データをAIが集約し、専門家が金融審査レベルまで磨き込むからこそ、意思決定の質・速さ・先見性を一気に引き上げます。
               </p>
               <ul className="hero-points">
@@ -2150,156 +1777,94 @@ const Index = () => {
                     氏名・会社名・メールの3項目だけで申し込み完了。初回30分のオンライン相談で、AI診断の結果と改善プランの方向性をご案内します。
                   </p>
                 </div>
-                <div className="hero-quick-form__content">
-                  <form
-                    className="quick-form"
-                    aria-label="60秒AI診断申し込みフォーム"
-                    onSubmit={handleQuickContactSubmit}
-                  >
-                    <div className="quick-form-grid">
-                      <label>
-                        氏名
-                        <input
-                          type="text"
-                          name="name"
-                          autoComplete="name"
-                          value={quickContact.name}
-                          onChange={handleQuickContactChange}
-                          required
-                        />
-                      </label>
-                      <label>
-                        会社名
-                        <input
-                          type="text"
-                          name="company"
-                          autoComplete="organization"
-                          value={quickContact.company}
-                          onChange={handleQuickContactChange}
-                          required
-                        />
-                      </label>
-                      <label>
-                        メールアドレス
-                        <input
-                          type="email"
-                          name="email"
-                          autoComplete="email"
-                          value={quickContact.email}
-                          onChange={handleQuickContactChange}
-                          required
-                        />
-                      </label>
-                    </div>
-                    {quickError && (
-                      <div
-                        className="form-error form-error--inline"
-                        role="alert"
-                        aria-live="assertive"
-                      >
-                        {quickError}
-                      </div>
-                    )}
-                    {quickSubmitted && (
-                      <p
-                        className="quick-form-success"
-                        role="status"
-                        aria-live="polite"
-                      >
-                        送信ありがとうございます。1営業日以内に診断士より初回30分相談の候補日時をご案内します。
-                      </p>
-                    )}
-                    <button type="submit" className="btn btn-cta btn-progress">
-                      {isQuickSubmitting && (
-                        <span className="btn-spinner" aria-hidden="true" />
-                      )}
-                      {isQuickSubmitting ? "送信中..." : "60秒診断を申し込む"}
-                    </button>
-                    <p className="quick-form-note">詳細な課題は追ってヒアリングいたします。</p>
-                  </form>
-                  <aside className="hero-quick-proof" aria-label="AI診断が信頼される理由">
-                    <div className="hero-quick-proof__header">
-                      <span>意思決定を論理で支える3つの柱</span>
-                      <h3>AI診断で経営判断の速度と確信を両立</h3>
-                    </div>
-                    <ul className="hero-quick-proof__list">
-                      {quickProofPoints.map((point) => {
-                        const PointIcon = point.icon;
-                        return (
-                          <li key={point.title} className="hero-quick-proof__item">
-                            <span className="hero-quick-proof__icon" aria-hidden="true">
-                              <PointIcon />
-                            </span>
-                            <div>
-                              <strong>{point.title}</strong>
-                              <p>{point.description}</p>
-                              <small>{point.evidence}</small>
-                            </div>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                    <div className="hero-quick-proof__experts">
-                      <div className="hero-quick-proof__avatars">
-                        {heroAllianceExperts.slice(0, 3).map((expert) => (
-                          <span key={expert.name} className="hero-quick-proof__avatar">
-                            <img
-                              src={expert.photo}
-                              alt={`${expert.name} (${expert.role})`}
-                              loading="lazy"
-                            />
-                          </span>
-                        ))}
-                      </div>
-                      <div className="hero-quick-proof__experts-copy">
-                        <strong>専門家がAI提案を審査</strong>
-                        <p>資金調達・戦略・財務会計の視点でリスクと投資対効果を精査します。</p>
-                      </div>
-                    </div>
-                    <p className="hero-quick-proof__note">初回相談で貴社の投資回収シミュレーションと次の一手を提示します。</p>
-                  </aside>
-                </div>
-                <div className="hero-quick-form__footer">
-                  <ol className="diagnosis-flow" aria-label="診断から提案までの流れ">
-                    {quickFlowSteps.map((step, index) => {
-                      const StepIcon = step.icon;
-                      return (
-                        <li key={step.label} className="diagnosis-flow__item">
-                          <span className="diagnosis-flow__step-index" aria-hidden="true">
-                            STEP {String(index + 1).padStart(2, "0")}
-                          </span>
-                          <div className="diagnosis-flow__icon" aria-hidden="true">
-                            <StepIcon />
-                          </div>
-                          <div className="diagnosis-flow__body">
-                            <div className="diagnosis-flow__header">
-                              <strong>{step.label}</strong>
-                              {step.duration && (
-                                <span className="diagnosis-flow__duration">{step.duration}</span>
-                              )}
-                            </div>
-                            <span>{step.description}</span>
-                            <p>{step.detail}</p>
-                          </div>
-                        </li>
-                      );
-                    })}
-                  </ol>
-                  <div className="hero-quick-form__guarantee" role="note">
-                    <div className="hero-quick-form__guarantee-icon" aria-hidden="true">
-                      <Lock />
-                    </div>
-                    <div>
-                      <strong>経営データも安心して共有できます</strong>
-                      <p>
-                        {primarySecurity.title}・{secondarySecurity.title}・{tertiarySecurity.title}の体制で情報を保護します。
-                      </p>
-                      <small>
-                        {primarySecurity.description} {secondarySecurity.description}
-                      </small>
-                    </div>
+                <form
+                  className="quick-form"
+                  aria-label="60秒AI診断申し込みフォーム"
+                  onSubmit={handleQuickContactSubmit}
+                >
+                  <div className="quick-form-grid">
+                    <label>
+                      氏名
+                      <input
+                        type="text"
+                        name="name"
+                        autoComplete="name"
+                        value={quickContact.name}
+                        onChange={handleQuickContactChange}
+                        required
+                      />
+                    </label>
+                    <label>
+                      会社名
+                      <input
+                        type="text"
+                        name="company"
+                        autoComplete="organization"
+                        value={quickContact.company}
+                        onChange={handleQuickContactChange}
+                        required
+                      />
+                    </label>
+                    <label>
+                      メールアドレス
+                      <input
+                        type="email"
+                        name="email"
+                        autoComplete="email"
+                        value={quickContact.email}
+                        onChange={handleQuickContactChange}
+                        required
+                      />
+                    </label>
                   </div>
-                </div>
+                  {quickError && (
+                    <div
+                      className="form-error form-error--inline"
+                      role="alert"
+                      aria-live="assertive"
+                    >
+                      {quickError}
+                    </div>
+                  )}
+                  {quickSubmitted && (
+                    <p
+                      className="quick-form-success"
+                      role="status"
+                      aria-live="polite"
+                    >
+                      送信ありがとうございます。1営業日以内に診断士より初回30分相談の候補日時をご案内します。
+                    </p>
+                  )}
+                  <button type="submit" className="btn btn-cta btn-progress">
+                    {isQuickSubmitting && (
+                      <span className="btn-spinner" aria-hidden="true" />
+                    )}
+                    {isQuickSubmitting ? "送信中..." : "60秒診断を申し込む"}
+                  </button>
+                  <p className="quick-form-note">詳細な課題は追ってヒアリングいたします。</p>
+                </form>
+                <ol className="diagnosis-flow" aria-label="診断から提案までの流れ">
+                  {quickFlowSteps.map((step) => {
+                    const StepIcon = step.icon;
+                    return (
+                      <li key={step.label} className="diagnosis-flow__item">
+                        <div className="diagnosis-flow__icon" aria-hidden="true">
+                          <StepIcon />
+                        </div>
+                        <div className="diagnosis-flow__body">
+                          <div className="diagnosis-flow__header">
+                            <strong>{step.label}</strong>
+                            {step.duration && (
+                              <span className="diagnosis-flow__duration">{step.duration}</span>
+                            )}
+                          </div>
+                          <span>{step.description}</span>
+                          <p>{step.detail}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ol>
               </div>
               <ul className="trust-badges" aria-label="セキュリティ対策">
                 {securityBadges.map((badge) => {
@@ -2448,46 +2013,27 @@ const Index = () => {
                 const PainIcon = item.icon;
                 return (
                   <article key={item.title} className={`pain-card pain-card--${item.accent}`} data-animate>
-                    <header className="pain-card__header">
-                      <div className="pain-card__heading">
-                        <div className="pain-card__meta">
-                          <span className="pain-card__case">{item.caseId}</span>
-                          <span className="pain-card__label">{item.caseLabel}</span>
-                        </div>
-                        <h3>{item.title}</h3>
-                        <p className="pain-card__angle">{item.executiveAngle}</p>
-                      </div>
-                      <div className={`pain-icon pain-icon--${item.accent}`} aria-hidden="true">
-                        <PainIcon />
-                      </div>
-                    </header>
-                    <p className="pain-card__summary">{item.summary}</p>
-                    <div className="pain-causality" role="list">
-                      <div className="pain-causality__item" role="listitem" data-stage="兆候">
-                        <ul>
-                          {item.symptoms.map((symptom) => (
-                            <li key={symptom}>{symptom}</li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="pain-causality__item" role="listitem" data-stage="生成AIのアクション">
+                    <div className={`pain-icon pain-icon--${item.accent}`} aria-hidden="true">
+                      <PainIcon />
+                    </div>
+                    <h3>{item.title}</h3>
+                    <p>{item.detail}</p>
+                    <div className="pain-chain" role="list">
+                      <div className="pain-chain__column" role="listitem">
+                        <span className="pain-chain__label">生成AIのアクション</span>
                         <p>{item.aiAction}</p>
                       </div>
-                      <div className="pain-causality__item" role="listitem" data-stage="専門家の監修">
+                      <div className="pain-chain__divider" aria-hidden="true" />
+                      <div className="pain-chain__column" role="listitem">
+                        <span className="pain-chain__label">専門家のブラッシュアップ</span>
                         <p>{item.expertAction}</p>
                       </div>
                     </div>
-                    <div className="pain-card__footer">
-                      <div className="pain-impact">
-                        <span className="pain-impact__label">得られる効果</span>
-                        <span className="pain-impact__metric">{item.impact}</span>
-                        <p>{item.impactDetail}</p>
-                      </div>
-                      <div className="pain-solution">
-                        <span className="pain-solution__label">意思決定に残る資産</span>
-                        <p>{item.solution}</p>
-                      </div>
+                    <div className="pain-impact">
+                      <span className="pain-impact__metric">{item.impact}</span>
+                      <p>{item.impactDetail}</p>
                     </div>
+                    <div className="pain-solution">{item.solution}</div>
                   </article>
                 );
               })}
@@ -2501,36 +2047,16 @@ const Index = () => {
             </div>
             <div className="evidence-grid">
               {whyNowEvidence.map((item) => (
-                <article key={item.title} className="evidence-card" data-animate>
-                  <div className="evidence-card__content">
-                    <span className="evidence-card__stat" aria-label="調査カテゴリ">
-                      {item.stat}
-                    </span>
-                    <div className="evidence-card__headline">
-                      <h3>{item.title}</h3>
-                    </div>
-                    <p className="evidence-card__description">{item.description}</p>
-                    <footer className="evidence-card__footer">
-                      <div className="evidence-card__source" aria-label="調査出典">
-                        <strong>{item.sourceLabel}</strong>
-                        <span>{item.sourceNote}</span>
-                      </div>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <a
-                            href={item.sourceUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="evidence-card__link"
-                          >
-                            原典を見る
-                            <ArrowUpRight aria-hidden="true" />
-                          </a>
-                        </TooltipTrigger>
-                        <TooltipContent side="top">調査詳細を新しいタブで開く</TooltipContent>
-                      </Tooltip>
-                    </footer>
-                  </div>
+                <article
+                  key={item.title}
+                  className="evidence-card"
+                  data-animate
+                  data-source={item.sourceNote}
+                >
+                  <div className="evidence-stat">{item.stat}</div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <span className="evidence-source">{item.sourceLabel}</span>
                 </article>
               ))}
             </div>
@@ -2655,41 +2181,12 @@ const Index = () => {
           aria-labelledby="features-heading"
         >
           <div className="container">
-            <div className="features__lead">
-              <div className="section-header" data-animate>
-                <span className="section-eyebrow">Decision Intelligence Suite</span>
-                <h2 id="features-heading">経営改善で鍛えた専門家 × 生成AIが支える5つの機能</h2>
-                <ul className="section-intro">
-                  <li>政策・市場・自社データを統合し、意思決定の質・速さ・先見性を底上げ。</li>
-                  <li>AIの出力は診断士がレビューし、経営者が納得して進められる論点整理を提供します。</li>
-                </ul>
-              </div>
-              <figure className="features__visual" data-animate>
-                <div className="features__visual-frame">
-                  <img src={featureIntelligenceShot} alt="意思決定を支援するAIダッシュボードの画面イメージ" loading="lazy" />
-                </div>
-                <figcaption>経営ダッシュボードのモックアップ。リスク指標とROI予測をひとつのビューに統合。</figcaption>
-              </figure>
-            </div>
-            <div className="feature-assurance-grid" data-animate>
-              {featureAssurances.map((assurance) => {
-                const AssuranceIcon = assurance.icon;
-                return (
-                  <article
-                    key={assurance.title}
-                    className={`assurance-card assurance-card--${assurance.accent}`}
-                  >
-                    <div className="assurance-card__icon" aria-hidden="true">
-                      <AssuranceIcon />
-                    </div>
-                    <div className="assurance-card__content">
-                      <span className="assurance-card__metric">{assurance.metric}</span>
-                      <h3>{assurance.title}</h3>
-                      <p>{assurance.description}</p>
-                    </div>
-                  </article>
-                );
-              })}
+            <div className="section-header" data-animate>
+              <h2 id="features-heading">経営改善で鍛えた専門家 × 生成AIが支える5つの機能</h2>
+              <ul className="section-intro">
+                <li>政策・市場・自社データを統合し、意思決定の質・速さ・先見性を底上げ。</li>
+                <li>AIの出力は診断士がレビューし、料金と支援範囲を透明に開示します。</li>
+              </ul>
             </div>
             <div className="feature-grid">
               {serviceFeatures.map((feature) => {
@@ -2700,29 +2197,19 @@ const Index = () => {
                     className={`feature-card feature-card--${feature.accent}`}
                     data-animate
                   >
-                    <header className="feature-card__header">
-                      <div className={`feature-icon feature-icon--${feature.accent}`} aria-hidden="true">
-                        <FeatureIcon />
-                      </div>
-                      <div className="feature-card__titles">
-                        <span className="feature-card__eyebrow">{feature.description}</span>
-                        <h3>{feature.title}</h3>
-                      </div>
-                    </header>
-                    <div className="feature-card__body">
-                      <p className="feature-detail">{feature.detail}</p>
+                    <div className={`feature-icon feature-icon--${feature.accent}`} aria-hidden="true">
+                      <FeatureIcon />
                     </div>
-                    <span className="feature-card__divider" aria-hidden="true" />
-                    <footer className="feature-card__footer">
-                      <span className="feature-card__footer-label">期待インパクト</span>
-                      <span className="feature-benefit">{feature.benefit}</span>
-                    </footer>
+                    <h3>{feature.title}</h3>
+                    <p className="feature-description">{feature.description}</p>
+                    <p className="feature-detail">{feature.detail}</p>
+                    <span className="feature-benefit">{feature.benefit}</span>
                   </article>
                 );
               })}
             </div>
             <p className="features-note" data-animate>
-              すべてのアウトプットは中小企業診断士・財務会計専門家がレビューし、AIのハルシネーションを排除したうえで金融機関や取締役会へ提出できる形に整えます。
+              すべてのアウトプットは中小企業診断士・会計士がレビューし、AIのハルシネーションを排除したうえで金融機関や取締役会へ提出できる形に整えます。
             </p>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
@@ -2982,23 +2469,6 @@ const Index = () => {
                 <li>MIT Sloanの研究が示す「AIと人の協働に向けたプロセス再設計」を実装。</li>
               </ul>
             </div>
-            <div className="process-overview" data-animate>
-              {processHighlights.map((highlight) => {
-                const HighlightIcon = highlight.icon;
-                return (
-                  <article key={highlight.title} className="process-overview-card">
-                    <div className="process-overview-icon" aria-hidden="true">
-                      <HighlightIcon />
-                    </div>
-                    <div className="process-overview-body">
-                      <span>{highlight.title}</span>
-                      <strong>{highlight.value}</strong>
-                      <p>{highlight.description}</p>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
             <ol className="process-timeline">
               {processSteps.map((step, index) => {
                 const StepIcon = step.icon;
@@ -3009,28 +2479,16 @@ const Index = () => {
                       <StepIcon />
                     </div>
                     <div className="process-content">
-                      <div className="process-content__header">
-                        <h3>{step.title}</h3>
-                        <div className="process-meta">
-                          <div className="process-meta__item">
-                            <span>期間</span>
-                            <strong>{step.duration}</strong>
-                          </div>
-                          <div className="process-meta__item">
-                            <span>アウトプット</span>
-                            <strong>{step.deliverable}</strong>
-                          </div>
-                        </div>
-                      </div>
+                      <h3>{step.title}</h3>
                       <p>{step.description}</p>
                       <div className="process-roles">
-                        <div className="process-roles__item">
-                          <span>AI</span>
-                          <p>{step.aiRole}</p>
+                        <div>
+                          <strong>AI</strong>
+                          <span>{step.aiRole}</span>
                         </div>
-                        <div className="process-roles__item">
-                          <span>専門家</span>
-                          <p>{step.humanRole}</p>
+                        <div>
+                          <strong>人</strong>
+                          <span>{step.humanRole}</span>
                         </div>
                       </div>
                     </div>
@@ -3038,67 +2496,20 @@ const Index = () => {
                 );
               })}
             </ol>
-            <div className="process-note" data-animate>
-              <span>Research Insight</span>
-              <p>
-                MIT Sloan Management Reviewの研究（2023）は、AIと人の協働には業務プロセス全体の再設計が不可欠だと指摘しています。本プログラムではその知見を踏まえ、導入ステップ自体を差別化要素として設計しています。
-              </p>
-            </div>
-            <div className="process-flow-legend" data-animate>
-              <div className="process-flow-legend__item">
-                <span className="process-flow-legend__label">AIが担う検証</span>
-                <p>シミュレーション・要約・リスク計測を自動化し、論点を定量化</p>
-              </div>
-              <div className="process-flow-legend__divider" aria-hidden="true" />
-              <div className="process-flow-legend__item">
-                <span className="process-flow-legend__label">専門家が担う判断</span>
-                <p>経営者の意思と金融目線で因果を補強し、意思決定を納得解に</p>
-              </div>
-            </div>
-            <div className="process-flowchart" data-animate role="list">
-              {processTimeline.map((item, index) => {
+            <p className="process-note" data-animate>
+              MIT Sloan Management Reviewの研究（2023）は、AIと人の協働には業務プロセス全体の再設計が不可欠だと指摘しています。本プログラムではその知見を踏まえ、導入ステップ自体を差別化要素として設計しています。
+            </p>
+            <div className="process-flowchart" data-animate>
+              {processTimeline.map((item) => {
                 const FlowIcon = item.icon;
                 return (
-                  <div
-                    key={item.stage}
-                    className={`process-flowchart__item process-flowchart__item--${item.orientation}`}
-                    role="listitem"
-                  >
-                    <article className={`process-flow-card process-flow-card--${item.accent}`}>
-                      <header className="process-flow-card__header">
-                        <div className="process-flow-card__step" aria-hidden="true">
-                          <span>STEP {index + 1}</span>
-                          <div className="process-flow-card__icon">
-                            <FlowIcon />
-                          </div>
-                        </div>
-                        <div className="process-flow-card__headline">
-                          <h3>{item.stage}</h3>
-                        </div>
-                      </header>
-                      <div className="process-flow-card__impact">
-                        <span>成果インパクト</span>
-                        <p>{item.impact}</p>
-                      </div>
-                      <div className="process-flow-card__causal">
-                        <span>因果設計</span>
-                        <p>{item.causalLink}</p>
-                      </div>
-                      <dl className="process-flow-card__matrix">
-                        <div className="process-flow-card__matrix-item">
-                          <dt>AI</dt>
-                          <dd>{item.aiFocus}</dd>
-                        </div>
-                        <div className="process-flow-card__matrix-item">
-                          <dt>専門家</dt>
-                          <dd>{item.humanFocus}</dd>
-                        </div>
-                      </dl>
-                      <footer className="process-flow-card__footer">
-                        <span>検証指標</span>
-                        <p>{item.evidence}</p>
-                      </footer>
-                    </article>
+                  <div key={item.stage} className={`process-flow-item process-flow-item--${item.accent}`}>
+                    <div className="process-flow-icon" aria-hidden="true">
+                      <FlowIcon />
+                    </div>
+                    <h3>{item.stage}</h3>
+                    <p>{item.aiFocus}</p>
+                    <p>{item.humanFocus}</p>
                   </div>
                 );
               })}
@@ -3142,194 +2553,77 @@ const Index = () => {
           aria-labelledby="quarterly-heading"
         >
           <div className="container">
-            <div className="quarterly-layout">
-              <div className="quarterly-narrative" data-animate>
-                <span className="quarterly-badge">90-DAY STRATEGY OPS</span>
-                <h2 id="quarterly-heading">四半期ごとに戦略と実行を再設計</h2>
-                <p className="quarterly-lead">
-                  市場が大きく揺れる四半期ごとに、AIが最新データを要約し専門家が意思決定の因果を補強。
-                  年商5,000万円〜15億円の経営チームが、確信をもって攻めと守りの配分を更新できます。
-                </p>
-                <div className="quarterly-metrics">
-                  {quarterlyMetrics.map((metric) => (
-                    <div key={metric.label} className="quarterly-metric">
-                      <span className="quarterly-metric__value">{metric.value}</span>
-                      <h3 className="quarterly-metric__label">
-                        {metric.label === "平均想定ROI" ? (
-                          <>
-                            平均想定
-                            <abbr title="投資利益率">ROI</abbr>
-                          </>
-                        ) : (
-                          metric.label
-                        )}
-                      </h3>
-                      <p>{metric.description}</p>
-                    </div>
-                  ))}
-                </div>
-                <div
-                  className="quarterly-causality"
-                  role="group"
-                  aria-label="AIと専門家による因果設計の流れ"
-                >
-                  {quarterlyCausality.map((item) => {
-                    const CausalityIcon = item.icon;
-                    return (
-                      <article
-                        key={item.stage}
-                        className="quarterly-causality__card"
-                        data-accent={item.accent}
-                      >
-                        <span className="quarterly-causality__icon" aria-hidden="true">
-                          <CausalityIcon />
-                        </span>
-                        <div className="quarterly-causality__body">
-                          <span className="quarterly-causality__stage">{item.stage}</span>
-                          <h4>{item.headline}</h4>
-                          <p>{item.detail}</p>
-                          <strong>{item.outcome}</strong>
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
-                <div className="quarterly-loop">
-                  <h3>因果で捉える重点アップデート</h3>
-                  <ol>
-                    {quarterlySignals.map((signal) => (
-                      <li key={signal.title}>
-                        <div className="quarterly-loop__body">
-                          <strong>{signal.title}</strong>
-                          <p>{signal.description}</p>
-                        </div>
-                        <span className="quarterly-loop__source">{signal.sourceLabel}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </div>
-                <div className="quarterly-actions">
-                  <a className="btn btn-cta" href="#contact">
-                    {primaryCtaLabel}
-                  </a>
-                  <button
-                    type="button"
-                    className="btn btn-accent"
-                    onClick={() => setRoiModalOpen(true)}
-                  >
-                    <span>ROIシミュレーションを試す</span>
-                  </button>
-                </div>
+            <div className="section-header" data-animate>
+              <h2 id="quarterly-heading">四半期ごとに戦略と実行を再設計</h2>
+              <ul className="section-intro">
+                <li>Dragonboatが説く90日アライン。</li>
+                <li>生成AIと専門家で更新を自動化。</li>
+              </ul>
+            </div>
+            <div className="quarterly-grid">
+              <div className="quarterly-insights" data-animate>
+                {quarterlySignals.map((signal) => (
+                  <article key={signal.title} className="quarterly-card">
+                    <h3>{signal.title}</h3>
+                    <p>{signal.description}</p>
+                    <span className="quarterly-link" aria-label="出典">
+                      {signal.sourceLabel}
+                    </span>
+                  </article>
+                ))}
               </div>
-              <div className="quarterly-visual" data-animate>
-                <div className="quarterly-visual__media" aria-hidden="true">
-                  <img src={featureIntelligenceShot} alt="" loading="lazy" />
-                </div>
-                <div className="quarterly-board">
-                  <header className="quarterly-board__header">
-                    <div className="quarterly-board__title">
-                      <span>Quarterly Operating Loop</span>
-                      <strong>外部環境 × AI更新指数</strong>
-                      <ul className="quarterly-board__pills">
-                        <li>政策データ24h更新</li>
-                        <li>専門家レビュー済</li>
-                        <li>感度分析自動化</li>
-                      </ul>
-                    </div>
-                    <div className="quarterly-board__confidence">
-                      <Sparkles aria-hidden="true" />
-                      <span>再現性 92%</span>
-                    </div>
-                  </header>
-                  <div
-                    className="quarterly-board__status"
-                    role="group"
-                    aria-label="AI更新と専門家レビューの頻度"
-                  >
-                    <div>
-                      <span>データ更新</span>
-                      <strong>24h以内</strong>
-                      <small>政策・市況・ファイナンスソース</small>
-                    </div>
-                    <div>
-                      <span>専門家レビュー</span>
-                      <strong>隔週</strong>
-                      <small>戦略・財務・資金調達の3領域</small>
-                    </div>
-                  </div>
-                  <div className="quarterly-board__chart">
-                    <svg
-                      viewBox="0 0 100 60"
-                      role="img"
-                      aria-label="外部環境と生成AIの変化速度"
-                      className="quarterly-board__svg"
-                    >
-                      {velocitySeries.map((series, seriesIndex) => {
-                        const points = series.values
-                          .map((value, valueIndex) => {
-                            const x = (valueIndex / (series.values.length - 1 || 1)) * 100;
-                            const max = velocityMax || 1;
-                            const normalizedY = 55 - (value / max) * 45;
-                            return `${x},${normalizedY}`;
-                          })
-                          .join(" ");
-                        return (
-                          <polyline
-                            key={series.label}
-                            points={points}
-                            className={`quarterly-line quarterly-line-${seriesIndex}`}
-                            style={{ stroke: series.color }}
-                          />
-                        );
-                      })}
-                    </svg>
-                    <div className="quarterly-board__axis">
-                      {velocityQuarters.map((quarter) => (
-                        <span key={quarter}>{quarter}</span>
-                      ))}
-                    </div>
-                    <ul className="quarterly-board__legend">
-                      {velocitySeries.map((series) => (
-                        <li key={series.label}>
-                          <span style={{ backgroundColor: series.color }} />
-                          {series.label}
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="quarterly-board__note">
-                      *指数は2021Q4を100とした当社推計。更新サイクルを可視化し、意思決定のスピード差を明示します。
-                    </p>
-                  </div>
-                  <div className="quarterly-board__insights">
-                    <div>
-                      <span>意思決定速度</span>
-                      <strong>3.4x</strong>
-                      <small>会議から決裁までの短縮率</small>
-                    </div>
-                    <div>
-                      <span>実行完了率</span>
-                      <strong>＋27pt</strong>
-                      <small>OKR達成度（導入20社平均）</small>
-                    </div>
-                    <div>
-                      <span>投資回収</span>
-                      <strong>5.8ヶ月</strong>
-                      <small>中央値のペイバック期間</small>
-                    </div>
-                  </div>
-                  <ul className="quarterly-roadmap">
-                    {quarterlyMilestones.map((milestone) => (
-                      <li key={milestone.title}>
-                        <span>{milestone.title}</span>
-                        <div>
-                          <strong>{milestone.highlight}</strong>
-                          <p>{milestone.detail}</p>
-                        </div>
+              <div className="quarterly-visual" data-animate aria-hidden="true">
+                <div className="velocity-chart">
+                  <svg viewBox="0 0 100 60" role="img" aria-label="外部環境と生成AIの変化速度">
+                    {velocitySeries.map((series, seriesIndex) => {
+                      const points = series.values
+                        .map((value, valueIndex) => {
+                          const x = (valueIndex / (series.values.length - 1 || 1)) * 100;
+                          const max = velocityMax || 1;
+                          const normalizedY = 55 - (value / max) * 45;
+                          return `${x},${normalizedY}`;
+                        })
+                        .join(" ");
+                      return (
+                        <polyline
+                          key={series.label}
+                          points={points}
+                          className={`velocity-line velocity-line-${seriesIndex}`}
+                          style={{ stroke: series.color }}
+                        />
+                      );
+                    })}
+                  </svg>
+                  <ul className="velocity-legend">
+                    {velocitySeries.map((series) => (
+                      <li key={series.label}>
+                        <span style={{ backgroundColor: series.color }} />
+                        {series.label}
                       </li>
                     ))}
                   </ul>
+                  <div className="velocity-axis">
+                    {velocityQuarters.map((quarter) => (
+                      <span key={quarter}>{quarter}</span>
+                    ))}
+                  </div>
+                  <p className="velocity-note">
+                    *指数は2021Q4を100とした当社推計。外部データ更新と生成AI技術の進化スピードを示します。
+                  </p>
                 </div>
               </div>
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
+              </a>
+              <button
+                type="button"
+                className="link-button"
+                onClick={() => setRoiModalOpen(true)}
+              >
+                <abbr title="投資利益率">ROI</abbr>シミュレーションを試す
+              </button>
             </div>
           </div>
         </section>
@@ -3343,137 +2637,128 @@ const Index = () => {
           aria-labelledby="simulator-heading"
         >
           <div className="container">
-            <div className="simulator-shell">
-              <span className="simulator-shell__halo" aria-hidden="true" />
-              <div className="simulator-header">
-                <div className="section-header" data-animate>
-                  <h2 id="simulator-heading">AI活用インパクトを即時シミュレート</h2>
-                  <p>
-                    入力値に合わせて<abbr title="投資利益率">ROI</abbr>・キャッシュ創出・工数削減を同時に可視化。
-                    導入検討時の論拠をその場で把握できます。
-                  </p>
-                </div>
-                <div className="simulator-highlights" data-animate>
-                  {simulatorHighlights.map((item) => {
-                    const HighlightIcon = item.icon;
-                    return (
-                      <article key={item.label} className="simulator-highlight">
-                        <span className="simulator-highlight__icon" aria-hidden="true">
-                          <HighlightIcon />
-                        </span>
-                        <div className="simulator-highlight__body">
-                          <strong>{item.label}</strong>
-                          <p>{item.description}</p>
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
+            <div className="section-header" data-animate>
+              <h2 id="simulator-heading">AI活用インパクトを即時シミュレート</h2>
+              <p>
+                入力値に合わせて<abbr title="投資利益率">ROI</abbr>を更新。
+                生産性の伸びを即時に表示。
+              </p>
+            </div>
+            <div className="simulator-guidance" data-animate>
+              <h3>使い方のポイント</h3>
+              <ol>
+                <li>初期費用・月額費用・意思決定工数を入力し、現在の投資負荷を把握。</li>
+                <li>優先領域を選ぶと、リアルタイム分析による短縮効果を確認できます。</li>
+                <li>試算値は保存されず、専門家との面談で自社データを反映できます。</li>
+              </ol>
+              <p>
+                数値は導入企業20社の平均値をもとに推計しています。リアルタイム分析の活用はItrex Groupの調査が示す通り、意思決定のスピードを高めます。
+              </p>
+            </div>
+            <div className="simulator-summary" data-animate>
+              <div className="simulator-summary__item">
+                <span>初期費用（目安）</span>
+                <strong>{numberFormatter.format(Math.round(simulator.initialCost))} 万円</strong>
               </div>
-              <div className="simulator-content">
-                <div className="simulator-panel simulator-panel--guide" data-animate>
-                  <div className="simulator-guidance">
-                    <span className="simulator-guidance__eyebrow">使い方のポイント</span>
-                    <h3>3つの入力で投資判断の筋道を描く</h3>
-                    <ol>
-                      <li>初期費用・月額費用・意思決定工数を入れると、現状の投資負荷が数値化されます。</li>
-                      <li>優先したい領域を選ぶと、AIが短縮できるリードタイムと効果額を即時に反映します。</li>
-                      <li>試算値は保存されず、面談時に専門家が自社データへ置き換えて精緻化します。</li>
-                    </ol>
-                    <p>
-                      指標は導入企業20社の平均値から推計。Itrex Groupの調査が示すリアルタイム分析の効果を係数に反映しています。
-                    </p>
-                  </div>
-                  <ul className="simulator-checklist">
-                    {simulatorChecklist.map((item) => (
-                      <li key={item}>
-                        <CheckCircle2 aria-hidden="true" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="simulator-panel simulator-panel--results" data-animate>
-                  <div className="simulator-summary" role="group" aria-label="シミュレーション結果の要約">
-                    <div className="simulator-summary__item">
-                      <span>初期費用（目安）</span>
-                      <strong>{numberFormatter.format(Math.round(simulator.initialCost))} 万円</strong>
-                    </div>
-                    <div className="simulator-summary__item">
-                      <span>月額費用（目安）</span>
-                      <strong>{numberFormatter.format(Math.round(simulator.aiBudget))} 万円</strong>
-                    </div>
-                    <div className="simulator-summary__item">
-                      <span>期待ROI</span>
-                      <strong>{simulatorResult.roiPercent.toFixed(1)}%</strong>
-                    </div>
-                    <div className="simulator-summary__item">
-                      <span>投資回収目安</span>
-                      <strong>
-                        {simulatorResult.paybackMonths
-                          ? `${Math.ceil(simulatorResult.paybackMonths)} か月`
-                          : "-"}
-                      </strong>
-                    </div>
-                  </div>
-                  <p className="simulator-result-note">{simulatorResult.explanation}</p>
-                  <dl className="simulator-glance">
-                    <div className="simulator-glance__item">
-                      <dt>年間削減工数</dt>
-                      <dd>
-                        {numberFormatter.format(Math.round(simulatorResult.annualHoursSaved))} 時間
-                      </dd>
-                    </div>
-                    <div className="simulator-glance__item">
-                      <dt>年間価値創出</dt>
-                      <dd>
-                        {numberFormatter.format(Math.round(simulatorResult.annualCostSavings))} 万円
-                      </dd>
-                    </div>
-                    <div className="simulator-glance__item">
-                      <dt>生産性向上率</dt>
-                      <dd>+{simulatorResult.productivityGain.toFixed(1)}%</dd>
-                    </div>
-                  </dl>
-                  <div className="simulator-actions">
-                    <button
-                      type="button"
-                      className="link-button"
-                      onClick={() => setRoiModalOpen(true)}
-                    >
-                      ROI試算フォームを開く
-                    </button>
-                    <p className="simulator-actions__note">
-                      初期費用・月額費用・期待効果を入力して、自社の投資対効果を画面上で確認できます。
-                    </p>
-                  </div>
-                </div>
+              <div className="simulator-summary__item">
+                <span>月額費用（目安）</span>
+                <strong>{numberFormatter.format(Math.round(simulator.aiBudget))} 万円</strong>
               </div>
-              <div className="simulator-footer">
-                <div className="section-cta" data-animate>
-                  <a className="btn btn-cta" href="#contact">
-                    {primaryCtaLabel}
-                  </a>
-                  <button
-                    type="button"
-                    className="link-button"
-                    onClick={() => setPricingModalOpen(true)}
-                  >
-                    料金プランを表示
-                  </button>
-                </div>
+              <div className="simulator-summary__item">
+                <span>期待ROI</span>
+                <strong>{simulatorResult.roiPercent.toFixed(1)}%</strong>
               </div>
+              <div className="simulator-summary__item">
+                <span>投資回収目安</span>
+                <strong>
+                  {simulatorResult.paybackMonths
+                    ? `${Math.ceil(simulatorResult.paybackMonths)} か月`
+                    : "-"}
+                </strong>
+              </div>
+            </div>
+            <div className="simulator-actions" data-animate>
+              <button
+                type="button"
+                className="link-button"
+                onClick={() => setRoiModalOpen(true)}
+              >
+                ROI試算フォームを開く
+              </button>
+              <p className="simulator-actions__note">
+                初期費用・月額費用・期待効果を入力して、自社の投資対効果を画面上で確認できます。
+              </p>
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
+              </a>
+              <button
+                type="button"
+                className="link-button"
+                onClick={() => setPricingModalOpen(true)}
+              >
+                料金プランを表示
+              </button>
             </div>
           </div>
         </section>
 
         {/* 料金プラン */}
-          <PlansSection
-            ref={(node) => {
-              sectionRefs.current["pricing"] = node ?? null;
-            }}
-            onOpenPricingModal={() => setPricingModalOpen(true)}
-          />
+        <section
+          id="pricing"
+          ref={(node) => {
+            sectionRefs.current["pricing"] = node ?? null;
+          }}
+          className="section pricing"
+          aria-labelledby="pricing-heading"
+        >
+          <div className="container">
+            <div className="section-header" data-animate>
+              <h2 id="pricing-heading">料金プラン</h2>
+              <p>
+                規模別の3プランを比較。
+                料金と支援範囲、期待<abbr title="投資利益率">ROI</abbr>を明示します。
+              </p>
+            </div>
+            <div className="pricing-summary" data-animate>
+              {pricingPlans.map((plan) => (
+                <article key={plan.name} className="pricing-summary__card">
+                  <h3>{plan.name}</h3>
+                  <p className="pricing-summary__price">{plan.price}</p>
+                  <p className="pricing-summary__note">{plan.priceNote}</p>
+                  <ul className="pricing-summary__list">
+                    {plan.services.slice(0, 2).map((service) => (
+                      <li key={service}>{service}</li>
+                    ))}
+                  </ul>
+                  <div className="pricing-summary__roi">
+                    <span>想定<abbr title="投資利益率">ROI</abbr></span>
+                    <strong>{plan.roi}</strong>
+                  </div>
+                  <span className="pricing-summary__guarantee">{plan.guarantee}</span>
+                </article>
+              ))}
+            </div>
+            <div className="pricing-actions" data-animate>
+              <button
+                type="button"
+                className="link-button"
+                onClick={() => setPricingModalOpen(true)}
+              >
+                詳細な料金表を開く
+              </button>
+              <p className="pricing-actions__note">
+                初期費用・月額費用・期待<abbr title="投資利益率">ROI</abbr>をモーダルで比較できます。
+              </p>
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-cta" href="#contact">
+                {primaryCtaLabel}
+              </a>
+            </div>
+          </div>
+        </section>
 
         {/* FAQセクション */}
         <section
@@ -3486,88 +2771,25 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <span className="badge" aria-hidden="true">
-                Risk Governance
-              </span>
               <h2 id="faq-heading">よくあるご質問とリスク対策</h2>
               <ul className="section-intro">
                 <li>AI導入時の不安を端的に回答。</li>
                 <li>人とAIの分担でリスクを軽減。</li>
               </ul>
-              <p className="section-description">
-                年商5,000万円〜15億円規模の企業で蓄積したリスクコントロールの知見を、四半期ごとのレビューと定量指標で可視化しています。
-                資料請求前に想定しがちな懸念点と対処法をまとめました。
-              </p>
             </div>
-            <div className="faq-grid">
-              <aside className="faq-aside" data-animate>
-                <h3 className="faq-aside__title">戦略と統制を両立させる設計図</h3>
-                <p className="faq-aside__lead">
-                  経営会議で使う資料に耐えるだけでなく、監査や金融機関説明にも活用できるガバナンスラインを敷いています。AIの提案を鵜呑みにせず、
-                  専門家がリスクシナリオを洗い出しながら意思決定を前進させます。
-                </p>
-                <ul className="faq-badges">
-                  <li>国内専用インフラ</li>
-                  <li>役員向け伴走レビュー</li>
-                  <li>金融機関提出テンプレート</li>
-                </ul>
-                <div className="faq-insights">
-                  {faqHighlights.map((highlight) => {
-                    const Icon = highlight.icon;
-                    return (
-                      <article className="faq-insight" key={highlight.title}>
-                        <span className="faq-insight__icon" aria-hidden="true">
-                          <Icon size={24} />
-                        </span>
-                        <div className="faq-insight__body">
-                          <h4>{highlight.title}</h4>
-                          <p>{highlight.description}</p>
-                          <span className="faq-insight__metric">{highlight.metric}</span>
-                          <span className="faq-insight__supporting">{highlight.supporting}</span>
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
-                <div className="faq-timeline" role="list">
-                  {faqTimeline.map((step, index) => (
-                    <div className="faq-timeline__item" role="listitem" key={step.title}>
-                      <span className="faq-timeline__index">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <div className="faq-timeline__content">
-                        <p className="faq-timeline__title">{step.title}</p>
-                        <p className="faq-timeline__description">{step.description}</p>
-                        <span className="faq-timeline__detail">{step.detail}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="faq-aside__footer">
-                  <div className="faq-metric">
-                    <span className="faq-metric__value">継続率 92%</span>
-                    <span className="faq-metric__label">四半期更新プログラム</span>
-                  </div>
-                  <a className="btn btn-outline faq-aside__cta" href="#contact">
-                    まずは経営課題を相談する
-                  </a>
-                  <p className="faq-aside__note">24時間以内に経営チームからご連絡します。</p>
-                </div>
-              </aside>
-              <div className="faq-accordion" data-animate>
-                <Accordion type="multiple" className="faq-list">
-                  {faqItems.map((item) => (
-                    <AccordionItem key={item.question} value={item.question}>
-                      <AccordionTrigger className="faq-question">
-                        {item.question}
-                      </AccordionTrigger>
-                      <AccordionContent className="faq-answer">
-                        {item.answer}
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </div>
+            <div className="faq-accordion" data-animate>
+              <Accordion type="multiple" className="faq-list">
+                {faqItems.map((item) => (
+                  <AccordionItem key={item.question} value={item.question}>
+                    <AccordionTrigger className="faq-question">
+                      {item.question}
+                    </AccordionTrigger>
+                    <AccordionContent className="faq-answer">
+                      {item.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
@@ -3821,12 +3043,10 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <p className="section-eyebrow">四半期ごとに戦略と実行を再設計</p>
               <h2 id="resources-heading">ヒト×AI×専門家の連携がわかる資料</h2>
               <ul className="section-intro">
-                <li>因果チェーンでAIと専門家の役割と成果が直感的に理解できます。</li>
-                <li>匿名サンプルで経営会議のアウトプット品質を事前に確認できます。</li>
-                <li>テンプレとチェックリストで即日からチームに展開できます。</li>
+                <li>匿名サンプルでアウトプットを確認。</li>
+                <li>テンプレとチェックリストを提供。</li>
               </ul>
             </div>
             <div className="resources-grid">
@@ -3834,48 +3054,20 @@ const Index = () => {
                 const ResourceIcon = resource.icon;
                 return (
                   <article key={resource.title} className="resource-card" data-animate>
-                    <span className="resource-card__halo" aria-hidden="true" />
-                    <header className="resource-card__header">
-                      <div className="resource-icon" aria-hidden="true">
-                        <ResourceIcon />
-                      </div>
-                      <div className="resource-card__titles">
-                        <span className="resource-card__proof">{resource.proof}</span>
-                        <h3>{resource.title}</h3>
-                        <p>{resource.description}</p>
-                      </div>
-                    </header>
-                    <div
-                      className="resource-card__causal"
-                      role="list"
-                      aria-label="資料で確認できる因果チェーン"
-                    >
-                      {resource.causalFlow.map((step, index) => (
-                        <div
-                          key={`${resource.title}-${step.label}`}
-                          className="resource-causal__item"
-                          role="listitem"
-                        >
-                          <span className="resource-causal__index">{index + 1}</span>
-                          <div className="resource-causal__body">
-                            <span className="resource-causal__label">{step.label}</span>
-                            <span className="resource-causal__result">{step.result}</span>
-                          </div>
-                        </div>
-                      ))}
+                    <div className="resource-icon" aria-hidden="true">
+                      <ResourceIcon />
                     </div>
-                    <div className="resource-card__divider" aria-hidden="true" />
+                    <h3>{resource.title}</h3>
+                    <p>{resource.description}</p>
                     <ul className="resource-highlights">
                       {resource.highlights.map((highlight) => (
                         <li key={highlight}>{highlight}</li>
                       ))}
                     </ul>
-                    <div className="resource-card__footer">
-                      <a className="resource-card__link" href="#contact">
-                        {resource.cta}
-                      </a>
-                      <p className="resource-note">{resource.note}</p>
-                    </div>
+                    <a className="resource-card__link" href="#contact">
+                      {resource.cta}
+                    </a>
+                    <p className="resource-note">{resource.note}</p>
                   </article>
                 );
               })}
@@ -3996,11 +3188,7 @@ const Index = () => {
                 );
               })}
             </ul>
-            <form
-              className="contact-form"
-              onSubmit={handleContactSubmit}
-              onKeyDown={handleContactKeyDown}
-            >
+            <form className="contact-form" onSubmit={handleContactSubmit}>
               <div className="contact-progress" aria-hidden="true">
                 <div className="contact-progress__track">
                   <div
@@ -4612,15 +3800,6 @@ const Index = () => {
           </button>
         </div>
       )}
-
-      <button
-        type="button"
-        className={`back-to-top ${showBackToTop ? "is-visible" : ""}`}
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        aria-label="ページの先頭へ戻る"
-      >
-        <ArrowUp aria-hidden="true" />
-      </button>
 
       <footer className="site-footer">
         <div className="container">
