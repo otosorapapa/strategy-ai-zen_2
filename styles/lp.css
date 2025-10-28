@@ -4505,10 +4505,77 @@ svg {
   color: rgba(30, 41, 59, 0.78);
 }
 
+.process-flow-item__meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  padding: 18px 20px;
+  border-radius: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.96),
+    var(--process-accent-layer, rgba(231, 245, 255, 0.92))
+  );
+  border: 1px solid var(--process-accent-soft, rgba(148, 163, 184, 0.2));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.65);
+}
+
+.process-flow-item__meta > div {
+  display: grid;
+  gap: 6px;
+}
+
+.process-flow-item__meta dt {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--process-accent-text, rgba(37, 99, 235, 0.78));
+}
+
+.process-flow-item__meta dd {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.6;
+  color: rgba(15, 23, 42, 0.88);
+}
+
 .process-flow-item__divider {
   width: 100%;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(147, 197, 253, 0.6), transparent);
+}
+
+.process-flow-item__checklist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.process-flow-item__checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(30, 41, 59, 0.78);
+}
+
+.process-flow-item__checklist li::before {
+  content: "";
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  margin-top: 6px;
+  border-radius: 999px;
+  background: var(--process-accent-text, rgba(37, 99, 235, 0.9));
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.9),
+    0 0 0 6px var(--process-accent-soft, rgba(148, 163, 184, 0.24));
 }
 
 .process-flow-item__roles {
@@ -4544,6 +4611,16 @@ svg {
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: none;
+}
+
+.process-flow-pill svg {
+  width: 16px;
+  height: 16px;
+}
+
+.process-flow-pill span {
+  font-size: 0.76rem;
+  letter-spacing: 0.24em;
 }
 
 .process-flow-pill--ai {
@@ -4602,6 +4679,10 @@ svg {
 
   .process-flow-item {
     padding: 32px;
+  }
+
+  .process-flow-item__meta {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .process-flow-item::after {
