@@ -41,7 +41,7 @@ import {
 import { submitContactForm } from "@/lib/contact-api";
 
 import aiDashboardShot from "@/assets/growth-chart.jpg";
-import simulatorGuidanceVisual from "@/assets/dashboard-preview.jpg";
+import simulatorGuidanceVisual from "@/assets/strategy-planning.jpg";
 import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
 import expertSaitoPhoto from "@/assets/representative_.jpg";
 import expertTanakaPhoto from "@/assets/representative.jpg";
@@ -3023,7 +3023,7 @@ const Index = () => {
                     <div className="simulator-guidance__visual-screenshot">
                       <img
                         src={simulatorGuidanceVisual}
-                        alt="ROIシミュレーターのダッシュボードで意思決定指標を確認する様子"
+                        alt="経営ダッシュボードのモックアップでROIと主要KPIを俯瞰する画面"
                         className="simulator-guidance__visual-image"
                       />
                     </div>
