@@ -115,6 +115,18 @@ function buildForm7Message(payload: ContactFormPayload): string {
   return details.join("\n");
 }
 
+function getWordPressPreferredDateFieldName(): string {
+  const fieldName = import.meta.env
+    .VITE_WORDPRESS_FIELD_PREFERRED_DATE as string | undefined;
+
+  const trimmed = fieldName?.trim();
+  if (trimmed && trimmed.length > 0) {
+    return trimmed;
+  }
+
+  return "preferred-date";
+}
+
 function createContactForm7Body(payload: ContactFormPayload): FormData {
   const formData = new FormData();
   const trimmedName = payload.name.trim();
@@ -143,7 +155,8 @@ function createContactForm7Body(payload: ContactFormPayload): FormData {
 
   const trimmedPreferredDate = payload.preferredDate?.trim();
   if (trimmedPreferredDate && trimmedPreferredDate.length > 0) {
-    formData.append("preferred-date", trimmedPreferredDate);
+    const preferredDateField = getWordPressPreferredDateFieldName();
+    formData.append(preferredDateField, trimmedPreferredDate);
   }
 
   return formData;
