@@ -1140,29 +1140,45 @@ const trustDataPoints: TrustDataPoint[] = [
 
 type PricingPlan = {
   name: string;
+  summary: string;
   price: string;
   priceNote: string;
+  valuePoints: { label: string; description: string }[];
   services: string[];
   support: string[];
   payment: string[];
   guarantee: string;
   roi: string;
   cta: string;
+  recommended?: boolean;
 };
 
 const pricingPlans: PricingPlan[] = [
   {
     name: "ライト",
+    summary: "小規模組織の経営会議をAIで効率化するスタータープラン",
     price: "月額15万円〜",
     priceNote: "従業員〜50名の方向け",
+    valuePoints: [
+      {
+        label: "導入スピード",
+        description: "キックオフから2週間で運用開始。初期設計はテンプレート化。",
+      },
+      {
+        label: "推奨フェーズ",
+        description: "年商5,000万〜3億円、まずはAI補助で経営数値を可視化。",
+      },
+    ],
     services: [
       "経営計画AIドラフト（月1回）",
       "指標ダッシュボード閲覧",
       "経営会議テンプレート共有",
+      "議事録サマリーの自動共有",
     ],
     support: [
       "メール・チャットサポート",
       "四半期オンラインレビュー",
+      "導入初月の個別オンボーディング",
     ],
     payment: ["月次サブスクリプション", "請求書払い（分割可）"],
     guarantee: "導入初月の返金保証付き",
@@ -1171,34 +1187,61 @@ const pricingPlans: PricingPlan[] = [
   },
   {
     name: "プロ",
+    summary: "意思決定プロセスを全社で回し、金融機関向け資料も自動生成",
     price: "月額35万円〜",
     priceNote: "年商10〜50億円規模向け",
+    valuePoints: [
+      {
+        label: "想定成果",
+        description: "利益計画の見直しと資金調達資料の作成を月次で高速化。",
+      },
+      {
+        label: "推奨フェーズ",
+        description: "年商10〜50億円、複数事業の収益管理を強化する企業。",
+      },
+    ],
     services: [
       "AIドラフト隔週更新",
       "戦略シナリオ自動比較",
       "金融機関向け資料生成",
+      "OKR・KPIダッシュボード連携",
     ],
     support: [
       "専任コンサル月2回同席",
       "想定問答・エビデンス補強",
+      "財務・法務の専門家レビュー",
     ],
     payment: ["月次サブスクリプション", "四半期ごとの分割払い"],
     guarantee: "60日間の成果保証オプション",
     roi: "5倍目標",
     cta: primaryCtaLabel,
+    recommended: true,
   },
   {
     name: "エンタープライズ",
+    summary: "グループ全体のガバナンスとデータ連携を一括で整備",
     price: "月額65万円〜",
     priceNote: "複数事業部・子会社をお持ちの方向け",
+    valuePoints: [
+      {
+        label: "想定成果",
+        description: "全社KPI統合、シナリオ比較と権限統制を同時に実現。",
+      },
+      {
+        label: "推奨フェーズ",
+        description: "年商50億〜150億円、複数子会社・海外拠点を持つ企業。",
+      },
+    ],
     services: [
       "グループ横断データ連携",
       "カスタムAIモデル構築",
       "権限管理・監査ログ",
+      "社内ポータル・BIとのAPI統合",
     ],
     support: [
       "専任チーム週次伴走",
       "現地ワークショップと研修",
+      "CxO向けエグゼクティブブリーフィング",
     ],
     payment: ["年次契約（分割請求可）", "導入費用の分割払い"],
     guarantee: "成果レビュー後の返金条項を個別設定",
@@ -3077,20 +3120,82 @@ const Index = () => {
             </div>
             <div className="pricing-summary" data-animate>
               {pricingPlans.map((plan) => (
-                <article key={plan.name} className="pricing-summary__card">
-                  <h3>{plan.name}</h3>
-                  <p className="pricing-summary__price">{plan.price}</p>
-                  <p className="pricing-summary__note">{plan.priceNote}</p>
-                  <ul className="pricing-summary__list">
-                    {plan.services.slice(0, 2).map((service) => (
-                      <li key={service}>{service}</li>
-                    ))}
-                  </ul>
-                  <div className="pricing-summary__roi">
-                    <span>想定<abbr title="投資利益率">ROI</abbr></span>
-                    <strong>{plan.roi}</strong>
+                <article
+                  key={plan.name}
+                  className={`pricing-summary__card ${
+                    plan.recommended ? "pricing-summary__card--recommended" : ""
+                  }`}
+                >
+                  <div className="pricing-summary__header">
+                    <div className="pricing-summary__title-group">
+                      <div className="pricing-summary__title-row">
+                        <h3>{plan.name}</h3>
+                        {plan.recommended && (
+                          <span className="pricing-summary__badge">人気No.1</span>
+                        )}
+                      </div>
+                      <p className="pricing-summary__summary">{plan.summary}</p>
+                    </div>
+                    <div className="pricing-summary__price-block">
+                      <p className="pricing-summary__price">{plan.price}</p>
+                      <p className="pricing-summary__note">{plan.priceNote}</p>
+                    </div>
                   </div>
-                  <span className="pricing-summary__guarantee">{plan.guarantee}</span>
+                  <div className="pricing-summary__value-grid">
+                    {plan.valuePoints.map((point) => (
+                      <div key={point.label} className="pricing-summary__value">
+                        <span className="pricing-summary__value-label">{point.label}</span>
+                        <p className="pricing-summary__value-text">{point.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="pricing-summary__groups">
+                    <div className="pricing-summary__group">
+                      <h4>提供内容</h4>
+                      <ul className="pricing-summary__list">
+                        {plan.services.map((service) => (
+                          <li key={service}>
+                            <CheckCircle2 aria-hidden className="pricing-summary__icon" />
+                            <span>{service}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="pricing-summary__group">
+                      <h4>伴走サポート</h4>
+                      <ul className="pricing-summary__list">
+                        {plan.support.map((item) => (
+                          <li key={item}>
+                            <CheckCircle2 aria-hidden className="pricing-summary__icon" />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="pricing-summary__group">
+                      <h4>支払い条件</h4>
+                      <ul className="pricing-summary__list">
+                        {plan.payment.map((option) => (
+                          <li key={option}>
+                            <CheckCircle2 aria-hidden className="pricing-summary__icon" />
+                            <span>{option}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="pricing-summary__footer">
+                    <div className="pricing-summary__assurance">
+                      <div className="pricing-summary__roi">
+                        <span>想定<abbr title="投資利益率">ROI</abbr></span>
+                        <strong>{plan.roi}</strong>
+                      </div>
+                      <span className="pricing-summary__guarantee">{plan.guarantee}</span>
+                    </div>
+                    <a className="btn btn-outline pricing-summary__cta" href="#contact">
+                      {plan.cta}
+                    </a>
+                  </div>
                 </article>
               ))}
             </div>
