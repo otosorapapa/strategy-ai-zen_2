@@ -2333,23 +2333,18 @@ const Index = () => {
                     </span>
                     <div className="role-card__header">
                       <div className={`role-icon role-icon--${column.accent}`} aria-hidden="true">
-                        <span className="role-icon__glow" aria-hidden="true" />
                         <RoleIcon />
                       </div>
                       <div className="role-card__titles">
                         <h3>{column.title}</h3>
-                        <p className="role-card__summary">{column.summary}</p>
+                        <p>{column.summary}</p>
                       </div>
                     </div>
-                    <div className="role-card__divider" aria-hidden="true" />
                     <div className="role-card__body">
-                      <span className="role-card__label role-card__label--filled">フォーカスする役割</span>
-                      <ul className="role-card__points">
+                      <span className="role-card__label">フォーカスする役割</span>
+                      <ul>
                         {column.points.map((point) => (
-                          <li key={point} className="role-card__point">
-                            <span className="role-card__point-indicator" aria-hidden="true" />
-                            <span>{point}</span>
-                          </li>
+                          <li key={point}>{point}</li>
                         ))}
                       </ul>
                     </div>
