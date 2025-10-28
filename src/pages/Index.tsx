@@ -1617,6 +1617,64 @@ const Index = () => {
     };
   }, [simulator]);
 
+  const simulatorSummaryMetrics = useMemo(
+    () => {
+      const formattedInitialCost = `${numberFormatter.format(
+        Math.round(simulator.initialCost)
+      )} 万円`;
+      const formattedMonthlyCost = `${numberFormatter.format(
+        Math.round(simulator.aiBudget)
+      )} 万円`;
+      const formattedRoi = `${simulatorResult.roiPercent.toFixed(1)} %`;
+      const formattedPayback =
+        simulatorResult.paybackMonths !== null
+          ? `${Math.ceil(simulatorResult.paybackMonths)} か月`
+          : "検証中";
+
+      return [
+        {
+          label: "初期費用（目安）",
+          value: formattedInitialCost,
+          helper: "データ統合・キックオフ設計までの初期投資レンジ",
+          badge: "導入準備",
+          icon: Layers3,
+          accent: "amber" as const,
+        },
+        {
+          label: "月額費用（目安）",
+          value: formattedMonthlyCost,
+          helper: "伴走支援とAI運用の平均レンジ（月次想定）",
+          badge: "運用・伴走",
+          icon: Workflow,
+          accent: "blue" as const,
+        },
+        {
+          label: "期待ROI",
+          value: formattedRoi,
+          helper: "年間価値創出と投資額から算出した投資利益率",
+          badge: "AI試算",
+          icon: TrendingUp,
+          accent: "emerald" as const,
+        },
+        {
+          label: "投資回収目安",
+          value: formattedPayback,
+          helper: "キャッシュフローがプラスに転じる推定タイミング",
+          badge: "スピード",
+          icon: CalendarClock,
+          accent: "indigo" as const,
+        },
+      ];
+    },
+    [
+      numberFormatter,
+      simulator.aiBudget,
+      simulator.initialCost,
+      simulatorResult.paybackMonths,
+      simulatorResult.roiPercent,
+    ]
+  );
+
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
@@ -3238,26 +3296,24 @@ const Index = () => {
               </div>
             </div>
             <div className="simulator-summary" data-animate>
-              <div className="simulator-summary__item">
-                <span>初期費用（目安）</span>
-                <strong>{numberFormatter.format(Math.round(simulator.initialCost))} 万円</strong>
-              </div>
-              <div className="simulator-summary__item">
-                <span>月額費用（目安）</span>
-                <strong>{numberFormatter.format(Math.round(simulator.aiBudget))} 万円</strong>
-              </div>
-              <div className="simulator-summary__item">
-                <span>期待ROI</span>
-                <strong>{simulatorResult.roiPercent.toFixed(1)}%</strong>
-              </div>
-              <div className="simulator-summary__item">
-                <span>投資回収目安</span>
-                <strong>
-                  {simulatorResult.paybackMonths
-                    ? `${Math.ceil(simulatorResult.paybackMonths)} か月`
-                    : "-"}
-                </strong>
-              </div>
+              {simulatorSummaryMetrics.map((metric) => (
+                <article
+                  key={metric.label}
+                  className={`simulator-summary__item simulator-summary__item--${metric.accent}`}
+                >
+                  <div className="simulator-summary__item-header">
+                    <div className="simulator-summary__item-icon" aria-hidden="true">
+                      <metric.icon />
+                    </div>
+                    <div className="simulator-summary__item-meta">
+                      <span>{metric.label}</span>
+                      <span className="simulator-summary__badge">{metric.badge}</span>
+                    </div>
+                  </div>
+                  <strong>{metric.value}</strong>
+                  <p className="simulator-summary__helper">{metric.helper}</p>
+                </article>
+              ))}
             </div>
             <div className="simulator-actions" data-animate>
               <button
