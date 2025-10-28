@@ -1044,138 +1044,206 @@
       }
       .timeline {
         position: relative;
+        z-index: 0;
         display: grid;
-        gap: 2rem;
-        margin-top: 2.5rem;
+        gap: clamp(2rem, 4vw, 3.25rem);
+        margin-top: 3rem;
+        padding: clamp(1.5rem, 3vw, 2.25rem);
+        border-radius: 2.5rem;
+        background:
+          radial-gradient(circle at 15% 20%, rgba(14, 165, 233, 0.18), transparent 55%),
+          radial-gradient(circle at 85% 15%, rgba(59, 130, 246, 0.14), transparent 60%),
+          rgba(248, 250, 252, 0.88);
+        box-shadow: inset 0 0 0 1px rgba(226, 232, 240, 0.6);
       }
       .timeline::before {
         content: '';
         position: absolute;
-        inset: 2.75rem 0 auto;
-        height: 2px;
+        top: clamp(2.5rem, 6vw, 3.75rem);
+        bottom: clamp(2.5rem, 6vw, 3.75rem);
+        left: clamp(2.5rem, 5vw, 3.5rem);
+        width: 2px;
         border-radius: 999px;
-        background: linear-gradient(90deg, rgba(14, 165, 233, 0.6), rgba(13, 148, 136, 0.35));
-        opacity: 0.2;
-        pointer-events: none;
+        background: linear-gradient(180deg, rgba(14, 165, 233, 0.65), rgba(13, 148, 136, 0.35));
+        opacity: 0.45;
+        z-index: 0;
       }
-      @media (max-width: 1023px) {
-        .timeline::before {
-          inset: 0 auto 0 1.25rem;
-          width: 2px;
-          height: 100%;
-          background: linear-gradient(180deg, rgba(14, 165, 233, 0.6), rgba(13, 148, 136, 0.35));
-        }
-      }
-      @media (min-width: 1024px) {
+      @media (max-width: 767px) {
         .timeline {
-          grid-template-columns: repeat(5, minmax(0, 1fr));
-          gap: 1.75rem;
+          padding: 1.75rem 1.25rem;
+        }
+        .timeline::before {
+          left: 1.4rem;
         }
       }
       .timeline-step {
         position: relative;
-        border-radius: 1.5rem;
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        background: linear-gradient(155deg, rgba(255, 255, 255, 0.98), rgba(241, 245, 249, 0.85));
-        padding: 1.5rem;
-        box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
-        backdrop-filter: blur(12px);
+        z-index: 1;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: clamp(1.2rem, 3vw, 1.75rem);
+        align-items: stretch;
+      }
+      .timeline-marker {
+        position: relative;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      @media (max-width: 1023px) {
-        .timeline-step {
-          margin-left: 3.5rem;
-        }
-        .timeline-step::before {
-          content: '';
-          position: absolute;
-          top: 1.4rem;
-          left: -2.75rem;
-          width: 1.75rem;
-          height: 1.75rem;
-          border-radius: 999px;
-          background: linear-gradient(135deg, rgba(14, 165, 233, 0.95), rgba(6, 182, 212, 0.9));
-          box-shadow: 0 12px 24px rgba(14, 165, 233, 0.45);
-        }
-      }
-      @media (min-width: 1024px) {
-        .timeline-step {
-          padding: 2rem 1.75rem 1.75rem;
-        }
-        .timeline-step::before {
-          content: '';
-          position: absolute;
-          top: -1.75rem;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 2.5rem;
-          height: 2.5rem;
-          border-radius: 999px;
-          background: linear-gradient(145deg, rgba(14, 165, 233, 0.95), rgba(6, 182, 212, 0.9));
-          box-shadow: 0 20px 40px rgba(14, 165, 233, 0.35);
-        }
-      }
-      .timeline-step:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 32px 70px rgba(15, 23, 42, 0.16);
-      }
-      .timeline-step-header {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 0.75rem;
-      }
-      .timeline-phase {
-        display: inline-flex;
         align-items: center;
-        gap: 0.4rem;
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: rgba(14, 116, 144, 0.95);
+        gap: 0.75rem;
+        min-width: clamp(3rem, 4vw, 3.4rem);
+        z-index: 1;
       }
       .timeline-index {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 3rem;
-        height: 3rem;
+        width: clamp(2.75rem, 4vw, 3.25rem);
+        height: clamp(2.75rem, 4vw, 3.25rem);
         border-radius: 1rem;
-        background: linear-gradient(145deg, rgba(14, 165, 233, 0.92), rgba(59, 130, 246, 0.92));
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.98), rgba(99, 102, 241, 0.9));
         color: #fff;
         font-weight: 700;
-        letter-spacing: 0.08em;
-        box-shadow: 0 16px 36px rgba(14, 165, 233, 0.42);
+        font-size: 0.95rem;
+        letter-spacing: 0.14em;
+        box-shadow: 0 18px 42px rgba(14, 165, 233, 0.4);
+      }
+      .timeline-rail {
+        flex: 1;
+        width: 2px;
+        background: linear-gradient(180deg, rgba(14, 165, 233, 0.6), rgba(16, 185, 129, 0.4));
+        border-radius: 999px;
+      }
+      .timeline-step:last-child .timeline-rail {
+        display: none;
+      }
+      .timeline-content {
+        position: relative;
+        border-radius: 1.75rem;
+        padding: clamp(1.6rem, 3vw, 2.25rem);
+        border: 1px solid rgba(148, 163, 184, 0.28);
+        background:
+          linear-gradient(140deg, rgba(255, 255, 255, 0.97), rgba(241, 245, 249, 0.92)),
+          rgba(255, 255, 255, 0.9);
+        box-shadow: 0 26px 65px rgba(15, 23, 42, 0.14);
+        backdrop-filter: blur(14px);
+        display: flex;
+        flex-direction: column;
+        gap: clamp(1rem, 2.5vw, 1.5rem);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .timeline-content::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+      }
+      .timeline-step:hover .timeline-content {
+        transform: translateY(-6px);
+        box-shadow: 0 36px 82px rgba(15, 23, 42, 0.18);
+      }
+      .timeline-step:hover .timeline-content::before {
+        opacity: 1;
+      }
+      .timeline-step-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .timeline-phase {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(15, 118, 110, 0.9);
       }
       .timeline-title {
-        font-size: 1.05rem;
+        margin-top: 0.4rem;
+        font-size: clamp(1.05rem, 2.2vw, 1.2rem);
         font-weight: 700;
         color: rgb(15, 23, 42);
       }
+      .timeline-duration {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.35rem;
+        font-size: 0.8rem;
+        color: rgba(30, 41, 59, 0.7);
+        text-align: right;
+      }
+      .timeline-duration span {
+        display: block;
+        font-weight: 600;
+      }
+      .timeline-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        border-radius: 999px;
+        padding: 0.3rem 0.8rem;
+        background: rgba(14, 165, 233, 0.12);
+        color: rgba(14, 116, 144, 0.95);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+      }
       .timeline-copy {
-        font-size: 0.9rem;
+        font-size: 0.92rem;
         color: rgb(71, 85, 105);
         line-height: 1.75;
       }
+      .timeline-assets {
+        display: grid;
+        gap: 1.25rem;
+      }
+      @media (min-width: 768px) {
+        .timeline-assets {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+          align-items: stretch;
+        }
+      }
       .timeline-deliverables {
+        position: relative;
+        border-radius: 1.2rem;
+        padding: 1rem 1.25rem 1.25rem;
+        background: rgba(241, 245, 249, 0.9);
+        border: 1px solid rgba(226, 232, 240, 0.6);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .timeline-deliverables-title {
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(30, 41, 59, 0.6);
+      }
+      .timeline-deliverables-list {
         margin: 0;
         padding: 0;
         list-style: none;
         display: grid;
-        gap: 0.6rem;
+        gap: 0.65rem;
       }
-      .timeline-deliverables li {
+      .timeline-deliverables-list li {
         position: relative;
         padding-left: 1.5rem;
         font-size: 0.85rem;
         color: rgb(51, 65, 85);
         line-height: 1.6;
       }
-      .timeline-deliverables li::before {
+      .timeline-deliverables-list li::before {
         content: '';
         position: absolute;
         left: 0;
@@ -1183,26 +1251,31 @@
         width: 0.55rem;
         height: 0.55rem;
         border-radius: 999px;
-        background: linear-gradient(135deg, rgba(14, 165, 233, 0.9), rgba(16, 185, 129, 0.9));
-        box-shadow: 0 6px 14px rgba(14, 165, 233, 0.35);
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.95), rgba(16, 185, 129, 0.95));
+        box-shadow: 0 6px 16px rgba(14, 165, 233, 0.35);
       }
       .timeline-metric {
-        margin-top: auto;
-        border-radius: 1rem;
+        border-radius: 1.2rem;
         border: 1px solid rgba(14, 165, 233, 0.25);
-        background: rgba(224, 242, 254, 0.55);
-        padding: 0.75rem 1rem;
-        font-size: 0.8rem;
+        background: linear-gradient(145deg, rgba(224, 242, 254, 0.75), rgba(191, 219, 254, 0.55));
+        padding: 1rem 1.25rem;
+        font-size: 0.82rem;
         color: rgb(15, 23, 42);
         box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6);
       }
       .timeline-metric span {
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
         font-weight: 700;
         letter-spacing: 0.08em;
         text-transform: uppercase;
         color: rgba(15, 23, 42, 0.65);
-        margin-bottom: 0.35rem;
+        margin-bottom: 0.45rem;
+      }
+      .timeline-metric span::before {
+        content: '▲';
+        font-size: 0.75rem;
       }
       .timeline-metric p {
         margin: 0;
@@ -2253,103 +2326,172 @@
           <p class="section-subtitle">初期30分の無料相談からAIレポート生成、専門家レビュー、実行支援までをタイムラインで明示します。</p>
           <div class="timeline">
             <article class="timeline-step">
-              <header class="timeline-step-header">
-                <div>
-                  <p class="timeline-phase">DAY 0 ｜ KICK OFF</p>
-                  <h4 class="timeline-title">無料相談（30分）</h4>
+              <div class="timeline-marker" aria-hidden="true">
+                <span class="timeline-index">01</span>
+                <span class="timeline-rail"></span>
+              </div>
+              <div class="timeline-content">
+                <header class="timeline-step-header">
+                  <div>
+                    <p class="timeline-phase">DAY 0 ｜ KICK OFF</p>
+                    <h4 class="timeline-title">無料相談（30分）</h4>
+                  </div>
+                  <div class="timeline-duration">
+                    <span>所要：30分</span>
+                    <span class="timeline-chip">投資判断の土台</span>
+                  </div>
+                </header>
+                <p class="timeline-copy">
+                  代表者と経営課題を棚卸しし、意思決定に必要な指標・成功条件を明文化。NDA・データ受け渡し手順、成果物サンプルを提示し、投資対効果の確認を行います。
+                </p>
+                <div class="timeline-assets">
+                  <div class="timeline-deliverables">
+                    <span class="timeline-deliverables-title">主要アウトプット</span>
+                    <ul class="timeline-deliverables-list">
+                      <li>診断士による課題ヒアリングと評価視点の提示</li>
+                      <li>投資判断ができる導入ロードマップと見積り条件</li>
+                    </ul>
+                  </div>
+                  <div class="timeline-metric">
+                    <span>Decision Impact</span>
+                    <p>経営者の意思決定に必要な論点を1枚のブリーフに集約し、導入是非を48時間以内に判断可能に。</p>
+                  </div>
                 </div>
-                <div class="timeline-index">01</div>
-              </header>
-              <p class="timeline-copy">
-                代表者と経営課題を棚卸しし、意思決定に必要な指標・成功条件を明文化。NDA・データ受け渡し手順、成果物サンプルを提示し、投資対効果の確認を行います。
-              </p>
-              <ul class="timeline-deliverables">
-                <li>診断士による課題ヒアリングと評価視点の提示</li>
-                <li>投資判断ができる導入ロードマップと見積り条件</li>
-              </ul>
-              <div class="timeline-metric">
-                <span>Decision Impact</span>
-                <p>経営者の意思決定に必要な論点を1枚のブリーフに集約し、導入是非を48時間以内に判断可能に。</p>
               </div>
             </article>
             <article class="timeline-step">
-              <header class="timeline-step-header">
-                <div>
-                  <p class="timeline-phase">WEEK 1 ｜ DATA INTEGRATION</p>
-                  <h4 class="timeline-title">データ提供＆接続</h4>
+              <div class="timeline-marker" aria-hidden="true">
+                <span class="timeline-index">02</span>
+                <span class="timeline-rail"></span>
+              </div>
+              <div class="timeline-content">
+                <header class="timeline-step-header">
+                  <div>
+                    <p class="timeline-phase">WEEK 1 ｜ DATA INTEGRATION</p>
+                    <h4 class="timeline-title">データ提供＆接続</h4>
+                  </div>
+                  <div class="timeline-duration">
+                    <span>リードタイム：1週間</span>
+                    <span class="timeline-chip">データ統合</span>
+                  </div>
+                </header>
+                <p class="timeline-copy">
+                  財務・販売・在庫データをセキュア環境に集約。API／CSVを統合し、政策・需要シグナルなど外部データをマッピングして初期のAI分析基盤を構築します。
+                </p>
+                <div class="timeline-assets">
+                  <div class="timeline-deliverables">
+                    <span class="timeline-deliverables-title">主要アウトプット</span>
+                    <ul class="timeline-deliverables-list">
+                      <li>ゼロトラスト設計のデータ受領プロトコル＆NDA締結</li>
+                      <li>主要KPIの定義合わせと異常値クリーニングレポート</li>
+                    </ul>
+                  </div>
+                  <div class="timeline-metric">
+                    <span>Outcome</span>
+                    <p>意思決定で使う重要指標が統一され、異常値検知により初月から信用できるダッシュボード基盤を確立。</p>
+                  </div>
                 </div>
-                <div class="timeline-index">02</div>
-              </header>
-              <p class="timeline-copy">
-                財務・販売・在庫データをセキュア環境に集約。API／CSVを統合し、政策・需要シグナルなど外部データをマッピングして初期のAI分析基盤を構築します。
-              </p>
-              <ul class="timeline-deliverables">
-                <li>ゼロトラスト設計のデータ受領プロトコル＆NDA締結</li>
-                <li>主要KPIの定義合わせと異常値クリーニングレポート</li>
-              </ul>
-              <div class="timeline-metric">
-                <span>Outcome</span>
-                <p>意思決定で使う重要指標が統一され、異常値検知により初月から信用できるダッシュボード基盤を確立。</p>
               </div>
             </article>
             <article class="timeline-step">
-              <header class="timeline-step-header">
-                <div>
-                  <p class="timeline-phase">WEEK 2 ｜ AI INTELLIGENCE</p>
-                  <h4 class="timeline-title">AIレポート生成</h4>
+              <div class="timeline-marker" aria-hidden="true">
+                <span class="timeline-index">03</span>
+                <span class="timeline-rail"></span>
+              </div>
+              <div class="timeline-content">
+                <header class="timeline-step-header">
+                  <div>
+                    <p class="timeline-phase">WEEK 2 ｜ AI INTELLIGENCE</p>
+                    <h4 class="timeline-title">AIレポート生成</h4>
+                  </div>
+                  <div class="timeline-duration">
+                    <span>リードタイム：3営業日</span>
+                    <span class="timeline-chip">意思決定シナリオ</span>
+                  </div>
+                </header>
+                <p class="timeline-copy">
+                  生成AIが粗利・キャッシュのドライバー分析と複数の経営シナリオを作成。意思決定会議のためのエグゼクティブサマリーとリスクヒートマップを併せて出力します。
+                </p>
+                <div class="timeline-assets">
+                  <div class="timeline-deliverables">
+                    <span class="timeline-deliverables-title">主要アウトプット</span>
+                    <ul class="timeline-deliverables-list">
+                      <li>3パターンの攻守シナリオとKPIシミュレーション</li>
+                      <li>主要ボトルネックと改善優先度を可視化したAIレポート</li>
+                    </ul>
+                  </div>
+                  <div class="timeline-metric">
+                    <span>Value</span>
+                    <p>リードタイムを52％短縮し、次回経営会議で即断できるアウトプット（A3サマリー＋リスク一覧）を提供。</p>
+                  </div>
                 </div>
-                <div class="timeline-index">03</div>
-              </header>
-              <p class="timeline-copy">
-                生成AIが粗利・キャッシュのドライバー分析と複数の経営シナリオを作成。意思決定会議のためのエグゼクティブサマリーとリスクヒートマップを併せて出力します。
-              </p>
-              <ul class="timeline-deliverables">
-                <li>3パターンの攻守シナリオとKPIシミュレーション</li>
-                <li>主要ボトルネックと改善優先度を可視化したAIレポート</li>
-              </ul>
-              <div class="timeline-metric">
-                <span>Value</span>
-                <p>リードタイムを52％短縮し、次回経営会議で即断できるアウトプット（A3サマリー＋リスク一覧）を提供。</p>
               </div>
             </article>
             <article class="timeline-step">
-              <header class="timeline-step-header">
-                <div>
-                  <p class="timeline-phase">WEEK 3 ｜ EXPERT REVIEW</p>
-                  <h4 class="timeline-title">専門家レビュー</h4>
+              <div class="timeline-marker" aria-hidden="true">
+                <span class="timeline-index">04</span>
+                <span class="timeline-rail"></span>
+              </div>
+              <div class="timeline-content">
+                <header class="timeline-step-header">
+                  <div>
+                    <p class="timeline-phase">WEEK 3 ｜ EXPERT REVIEW</p>
+                    <h4 class="timeline-title">専門家レビュー</h4>
+                  </div>
+                  <div class="timeline-duration">
+                    <span>所要：1〜2営業日</span>
+                    <span class="timeline-chip">金融・会計検証</span>
+                  </div>
+                </header>
+                <p class="timeline-copy">
+                  中小企業診断士・公認会計士・元銀行審査役が稟議目線でブラッシュアップ。金融機関や取締役会の審査基準に沿って根拠と対策を補強し、説得力を高めます。
+                </p>
+                <div class="timeline-assets">
+                  <div class="timeline-deliverables">
+                    <span class="timeline-deliverables-title">主要アウトプット</span>
+                    <ul class="timeline-deliverables-list">
+                      <li>金融機関に提出可能な稟議資料・質疑応答想定集</li>
+                      <li>リスク別アクションプランと実行体制のロードマップ</li>
+                    </ul>
+                  </div>
+                  <div class="timeline-metric">
+                    <span>Credibility</span>
+                    <p>金融機関・株主への説明負担を70％削減。意思決定の妥当性を裏付ける論拠と実行体制が揃います。</p>
+                  </div>
                 </div>
-                <div class="timeline-index">04</div>
-              </header>
-              <p class="timeline-copy">
-                中小企業診断士・公認会計士・元銀行審査役が稟議目線でブラッシュアップ。金融機関や取締役会の審査基準に沿って根拠と対策を補強し、説得力を高めます。
-              </p>
-              <ul class="timeline-deliverables">
-                <li>金融機関に提出可能な稟議資料・質疑応答想定集</li>
-                <li>リスク別アクションプランと実行体制のロードマップ</li>
-              </ul>
-              <div class="timeline-metric">
-                <span>Credibility</span>
-                <p>金融機関・株主への説明負担を70％削減。意思決定の妥当性を裏付ける論拠と実行体制が揃います。</p>
               </div>
             </article>
             <article class="timeline-step">
-              <header class="timeline-step-header">
-                <div>
-                  <p class="timeline-phase">WEEK 4-12 ｜ EXECUTION</p>
-                  <h4 class="timeline-title">実行支援＆モニタリング</h4>
+              <div class="timeline-marker" aria-hidden="true">
+                <span class="timeline-index">05</span>
+              </div>
+              <div class="timeline-content">
+                <header class="timeline-step-header">
+                  <div>
+                    <p class="timeline-phase">WEEK 4-12 ｜ EXECUTION</p>
+                    <h4 class="timeline-title">実行支援＆モニタリング</h4>
+                  </div>
+                  <div class="timeline-duration">
+                    <span>サイクル：4〜12週</span>
+                    <span class="timeline-chip">実行・改善</span>
+                  </div>
+                </header>
+                <p class="timeline-copy">
+                  週次レビューと月次ダッシュボード更新で施策進捗とKPIを追跡。シミュレーションと現場実績のギャップを定量化し、迅速な手当と意思決定を促します。
+                </p>
+                <div class="timeline-assets">
+                  <div class="timeline-deliverables">
+                    <span class="timeline-deliverables-title">主要アウトプット</span>
+                    <ul class="timeline-deliverables-list">
+                      <li>意思決定ダッシュボードとアクションプランのアップデート</li>
+                      <li>経営会議・銀行面談に向けたエグゼクティブブリーフの継続提供</li>
+                    </ul>
+                  </div>
+                  <div class="timeline-metric">
+                    <span>ROI</span>
+                    <p>粗利＋5pt・キャッシュフロー▲12日の改善を狙う実行KPIを伴走管理。成果が可視化され投資対効果を証明。</p>
+                  </div>
                 </div>
-                <div class="timeline-index">05</div>
-              </header>
-              <p class="timeline-copy">
-                週次レビューと月次ダッシュボード更新で施策進捗とKPIを追跡。シミュレーションと現場実績のギャップを定量化し、迅速な手当と意思決定を促します。
-              </p>
-              <ul class="timeline-deliverables">
-                <li>意思決定ダッシュボードとアクションプランのアップデート</li>
-                <li>経営会議・銀行面談に向けたエグゼクティブブリーフの継続提供</li>
-              </ul>
-              <div class="timeline-metric">
-                <span>ROI</span>
-                <p>粗利＋5pt・キャッシュフロー▲12日の改善を狙う実行KPIを伴走管理。成果が可視化され投資対効果を証明。</p>
               </div>
             </article>
           </div>
