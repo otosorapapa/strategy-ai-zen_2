@@ -600,6 +600,7 @@ type QuarterlySignal = {
   statLabel?: string;
   focus: string;
   icon: LucideIcon;
+  highlights?: string[];
 };
 
 const quarterlySignals: QuarterlySignal[] = [
@@ -612,6 +613,11 @@ const quarterlySignals: QuarterlySignal[] = [
     statLabel: "アライン周期",
     focus: "Strategy Reset",
     icon: Compass,
+    highlights: [
+      "経営計画と資金繰りダッシュボードを同一指標で統合",
+      "90日スプリントごとにAIが因果ループを自動提案",
+      "役員レビュー用の判断メモを48時間以内に生成",
+    ],
   },
   {
     title: "市場の変化を90日で捉え直す",
@@ -621,6 +627,11 @@ const quarterlySignals: QuarterlySignal[] = [
     statLabel: "外部指標アラート/月",
     focus: "Signal Intelligence",
     icon: Workflow,
+    highlights: [
+      "国内外120指標を常時ウォッチしシナリオを再評価",
+      "与信・仕入れ・投資判断の閾値をベイズ更新",
+      "リスクシグナルはSlack・Teamsへ即時共有",
+    ],
   },
   {
     title: "専門家伴走で実行を後押し",
@@ -630,6 +641,11 @@ const quarterlySignals: QuarterlySignal[] = [
     statLabel: "レビューSLA",
     focus: "Expert Assurance",
     icon: ShieldCheck,
+    highlights: [
+      "資金調達・補助金ドキュメントを専任チームが監修",
+      "月次・四半期レビューの実行会議に同席",
+      "NDA・BCP・監査証憑の整備までワンストップ",
+    ],
   },
 ];
 
@@ -3074,7 +3090,14 @@ const Index = () => {
                           </div>
                         ) : null}
                       </div>
-                      <p>{signal.description}</p>
+                      <p className="quarterly-card__description">{signal.description}</p>
+                      {signal.highlights ? (
+                        <ul className="quarterly-card__highlights">
+                          {signal.highlights.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      ) : null}
                       <div className="quarterly-card__source">
                         {signal.sourceUrl ? (
                           <a href={signal.sourceUrl} target="_blank" rel="noreferrer">

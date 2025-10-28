@@ -3550,15 +3550,30 @@ svg {
   box-shadow: 0 0 0 4px rgba(69, 214, 200, 0.18);
 }
 
+
 .quarterly-card {
-  background: var(--white);
-  border-radius: 20px;
-  padding: 28px;
-  border: 1px solid rgba(60, 128, 193, 0.12);
-  box-shadow: 0 22px 44px rgba(31, 78, 125, 0.16);
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(155deg, rgba(246, 250, 255, 0.98), rgba(231, 245, 255, 0.94));
+  border-radius: 24px;
+  padding: 32px;
+  border: 1px solid rgba(56, 122, 198, 0.24);
+  box-shadow:
+    0 26px 48px rgba(19, 52, 94, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
   display: grid;
-  gap: 16px;
+  gap: 18px;
   text-align: left;
+  overflow: hidden;
+}
+
+.quarterly-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 80% at 0% 0%, rgba(82, 189, 236, 0.18), transparent 55%),
+    radial-gradient(120% 80% at 100% 0%, rgba(86, 232, 206, 0.16), transparent 58%);
+  z-index: -1;
 }
 
 .quarterly-card__meta {
@@ -3569,32 +3584,41 @@ svg {
 }
 
 .quarterly-card__icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
   display: grid;
   place-items: center;
-  background: linear-gradient(135deg, rgba(64, 140, 255, 0.12), rgba(45, 200, 193, 0.18));
-  color: var(--navy-600);
+  background: linear-gradient(135deg, rgba(38, 143, 255, 0.22), rgba(45, 200, 193, 0.22));
+  color: var(--navy-700);
+  box-shadow: 0 10px 20px rgba(43, 110, 179, 0.22);
 }
 
 .quarterly-card__icon svg {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
 }
 
 .quarterly-card__heading h3 {
-  margin: 6px 0 0;
-  font-size: 1.2rem;
-  color: var(--navy-700);
+  margin: 8px 0 0;
+  font-size: 1.28rem;
+  line-height: 1.4;
+  color: rgba(12, 42, 92, 0.92);
 }
 
 .quarterly-card__focus {
-  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--sky-600);
+  color: var(--navy-700);
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(82, 189, 236, 0.25), rgba(36, 207, 188, 0.25));
+  box-shadow: inset 0 0 0 1px rgba(52, 142, 204, 0.35);
 }
 
 .quarterly-card__stat {
@@ -3602,24 +3626,57 @@ svg {
   justify-items: end;
   gap: 4px;
   text-align: right;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: rgba(17, 48, 94, 0.04);
+  box-shadow: inset 0 0 0 1px rgba(70, 144, 212, 0.18);
 }
 
 .quarterly-card__stat strong {
-  font-size: 1.4rem;
-  color: var(--navy-700);
+  font-size: 1.55rem;
+  color: rgba(10, 40, 90, 0.96);
 }
 
 .quarterly-card__stat span {
-  font-size: 0.8rem;
-  color: var(--gray-500);
+  font-size: 0.78rem;
+  color: rgba(33, 64, 112, 0.65);
   font-weight: 600;
 }
 
-.quarterly-card p {
+.quarterly-card__description {
   margin: 0;
-  color: var(--gray-600);
-  font-size: 0.97rem;
-  line-height: 1.7;
+  color: rgba(18, 48, 94, 0.72);
+  font-size: 0.98rem;
+  line-height: 1.75;
+}
+
+.quarterly-card__highlights {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.quarterly-card__highlights li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(9, 38, 88, 0.78);
+  line-height: 1.6;
+}
+
+.quarterly-card__highlights li::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(63, 164, 255, 0.9), rgba(34, 212, 195, 0.9));
+  box-shadow: 0 0 0 3px rgba(76, 173, 240, 0.2);
 }
 
 .quarterly-card__source {
@@ -3638,6 +3695,8 @@ svg {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  padding: 6px 0;
+  transition: color 0.2s ease;
 }
 
 .quarterly-card__source span {
@@ -3651,6 +3710,10 @@ svg {
   height: 8px;
   border-radius: 999px;
   background: currentColor;
+}
+
+.quarterly-card__source a:hover {
+  color: rgba(26, 106, 196, 0.95);
 }
 
 .quarterly-visual {
