@@ -480,22 +480,72 @@ const whyNowEvidence = [
   },
 ];
 
-const quarterlySignals = [
+type QuarterlySignal = {
+  title: string;
+  description: string;
+  sourceLabel: string;
+  sourceUrl?: string;
+  stat?: string;
+  statLabel?: string;
+  focus: string;
+  icon: LucideIcon;
+};
+
+const quarterlySignals: QuarterlySignal[] = [
   {
     title: "四半期ごとに再アライン",
-    description: "四半期計画は長期と短期の橋渡し。AIと人で継続アラインを実践。",
+    description: "経営・事業・ファイナンスの意図を90日で同期。ドラゴンボートのフレームを日本の中小企業向けに再構成しました。",
     sourceLabel: "Dragonboat (2024)",
     sourceUrl: "https://dragonboat.io/blog/quarterly-planning-guide",
+    stat: "90日",
+    statLabel: "アライン周期",
+    focus: "Strategy Reset",
+    icon: Compass,
   },
   {
     title: "市場の変化を90日で捉え直す",
-    description: "市場・政策・金融の変化を90日で再確認。外部データをAIが自動集約。",
+    description: "金融・政策・需要の指標をAIが自動収集。変化率がしきい値を超えると経営者へアラートを送信します。",
     sourceLabel: "Strategy AI Lab 推計",
+    stat: "+42件",
+    statLabel: "外部指標アラート/月",
+    focus: "Signal Intelligence",
+    icon: Workflow,
   },
   {
     title: "専門家伴走で実行を後押し",
-    description: "診断士と金融OBがレビューを担当。AI案を金融目線で補強。",
+    description: "元メガバンク法人担当と公認会計士が実行レビューを実施。AI提案に資金繰り・リスクの観点を接続します。",
     sourceLabel: "伴走支援チーム",
+    stat: "72h",
+    statLabel: "レビューSLA",
+    focus: "Expert Assurance",
+    icon: ShieldCheck,
+  },
+];
+
+const quarterlySummaryPoints = [
+  "経営計画・資金繰り・事業KPIを同じ指標系で可視化",
+  "生成AIドラフト → 専門家レビュー → 経営会議承認のリズムを標準化",
+  "未達要因を因果ループで分析し、次の90日施策へ連結",
+];
+
+const velocityNarratives = [
+  {
+    label: "環境変化指数",
+    value: "+105",
+    caption: "2021→2024の変化幅",
+    tone: "sky" as const,
+  },
+  {
+    label: "生成AI更新頻度",
+    value: "+168",
+    caption: "主要モデルアップデート",
+    tone: "mint" as const,
+  },
+  {
+    label: "意思決定速度",
+    value: "2.6×",
+    caption: "導入企業20社平均",
+    tone: "citrus" as const,
   },
 ];
 
@@ -2562,15 +2612,51 @@ const Index = () => {
             </div>
             <div className="quarterly-grid">
               <div className="quarterly-insights" data-animate>
-                {quarterlySignals.map((signal) => (
-                  <article key={signal.title} className="quarterly-card">
-                    <h3>{signal.title}</h3>
-                    <p>{signal.description}</p>
-                    <span className="quarterly-link" aria-label="出典">
-                      {signal.sourceLabel}
-                    </span>
-                  </article>
-                ))}
+                <article className="quarterly-summary">
+                  <span className="quarterly-summary__eyebrow">Quarterly Operating System</span>
+                  <h3>90日ごとに戦略・資金・実行を同期し、意思決定を加速</h3>
+                  <p>
+                    Dragonboatの90日アラインに、当社の生成AIオペレーションと専門家レビューを組み合わせた経営OSです。
+                    因果仮説→実行→リスケジュールのサイクルを一気通貫で仕組み化します。
+                  </p>
+                  <ul>
+                    {quarterlySummaryPoints.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </article>
+                {quarterlySignals.map((signal) => {
+                  const SignalIcon = signal.icon;
+                  return (
+                    <article key={signal.title} className="quarterly-card">
+                      <div className="quarterly-card__meta">
+                        <div className="quarterly-card__icon" aria-hidden="true">
+                          <SignalIcon />
+                        </div>
+                        <div className="quarterly-card__heading">
+                          <span className="quarterly-card__focus">{signal.focus}</span>
+                          <h3>{signal.title}</h3>
+                        </div>
+                        {signal.stat ? (
+                          <div className="quarterly-card__stat">
+                            <strong>{signal.stat}</strong>
+                            <span>{signal.statLabel}</span>
+                          </div>
+                        ) : null}
+                      </div>
+                      <p>{signal.description}</p>
+                      <div className="quarterly-card__source">
+                        {signal.sourceUrl ? (
+                          <a href={signal.sourceUrl} target="_blank" rel="noreferrer">
+                            {signal.sourceLabel}
+                          </a>
+                        ) : (
+                          <span>{signal.sourceLabel}</span>
+                        )}
+                      </div>
+                    </article>
+                  );
+                })}
               </div>
               <div className="quarterly-visual" data-animate aria-hidden="true">
                 <div className="velocity-chart">
@@ -2610,6 +2696,15 @@ const Index = () => {
                   <p className="velocity-note">
                     *指数は2021Q4を100とした当社推計。外部データ更新と生成AI技術の進化スピードを示します。
                   </p>
+                  <div className="velocity-metrics">
+                    {velocityNarratives.map((item) => (
+                      <div key={item.label} className={`velocity-metric velocity-metric--${item.tone}`}>
+                        <span>{item.label}</span>
+                        <strong>{item.value}</strong>
+                        <small>{item.caption}</small>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
