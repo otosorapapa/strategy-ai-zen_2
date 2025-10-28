@@ -174,18 +174,34 @@ const quickFlowSteps: QuickFlowStep[] = [
   },
 ];
 
-const insightHighlights = [
+type InsightHighlight = {
+  value: string;
+  label: string;
+  description: string;
+  detail: string;
+  accent: "sunrise" | "mint" | "citrus";
+  icon: LucideIcon;
+  delta: string;
+  deltaTone: "down" | "up";
+  source: string;
+  driver: string;
+  confidence: string;
+};
+
+const insightHighlights: InsightHighlight[] = [
   {
     value: "-67%",
     label: "意思決定リードタイム",
     description: "週次経営会議の準備〜決裁までを6週間から2週間へ短縮",
     detail:
       "AI導入企業20社の四半期計画更新に要した期間。導入前後のプロジェクトガントチャートを比較して算出 (2023年7月〜2024年12月)。",
-    accent: "sunrise" as const,
+    accent: "sunrise",
     icon: Timer,
     delta: "決裁スピード 3.4倍",
-    deltaTone: "down" as const,
+    deltaTone: "down",
     source: "導入企業20社 平均 (2023-2024)",
+    driver: "AIが議題別の論点と財務シナリオを先回収し、専門家が意思決定の論拠を整備",
+    confidence: "95%信頼区間：±6%",
   },
   {
     value: "-1,750h",
@@ -193,11 +209,13 @@ const insightHighlights = [
     description: "AIレポートのドラフト化で管理部門の累計工数を削減",
     detail:
       "経営会議準備・レポート作成・データ収集に費やした時間の削減量。導入企業20社のワークログと専門家ヒアリングを集計。",
-    accent: "mint" as const,
+    accent: "mint",
     icon: CalendarClock,
     delta: "月あたり145時間削減",
-    deltaTone: "down" as const,
+    deltaTone: "down",
     source: "Strategy AI Lab 内部統計",
+    driver: "データ収集・レポート整形・配布フローをAIが自動ドラフト化し、承認のみ人が対応",
+    confidence: "95%信頼区間：±180h",
   },
   {
     value: "92%",
@@ -205,11 +223,13 @@ const insightHighlights = [
     description: "速報ベースの政策・補助金情報をダッシュボードに同期",
     detail:
       "政策・補助金・市場レポートの更新情報がダッシュボードに反映されるまでの割合。2024年Q1〜Q4の月次レビューから集計。",
-    accent: "citrus" as const,
+    accent: "citrus",
     icon: TrendingUp,
     delta: "即時反映 12h以内",
-    deltaTone: "up" as const,
+    deltaTone: "up",
     source: "月次レビュー (2024年)",
+    driver: "政策APIと専門家チームの注視ワードをAIがクロスチェックし、自動で最新施策へ更新",
+    confidence: "95%信頼区間：±4pt",
   },
 ];
 
@@ -2249,12 +2269,18 @@ const Index = () => {
                       className={`insight-highlight insight-highlight--${highlight.accent}`}
                     >
                       <header className="insight-highlight__header">
-                        <span className={`insight-highlight__icon insight-highlight__icon--${highlight.accent}`}>
-                          <HighlightIcon aria-hidden="true" />
+                        <span
+                          className={`insight-highlight__icon insight-highlight__icon--${highlight.accent}`}
+                          aria-hidden="true"
+                        >
+                          <HighlightIcon />
                         </span>
-                        <div className="insight-highlight__value">
-                          <span>{highlight.label}</span>
-                          <strong>{highlight.value}</strong>
+                        <div className="insight-highlight__meta">
+                          <span className="insight-highlight__badge">実績データ</span>
+                          <div className="insight-highlight__value">
+                            <span>{highlight.label}</span>
+                            <strong>{highlight.value}</strong>
+                          </div>
                         </div>
                         <div
                           className={`insight-highlight__delta insight-highlight__delta--${highlight.deltaTone}`}
@@ -2263,7 +2289,22 @@ const Index = () => {
                           <span>{highlight.delta}</span>
                         </div>
                       </header>
-                      <p className="insight-highlight__description">{highlight.description}</p>
+                      <div className="insight-highlight__body">
+                        <div className="insight-highlight__causal">
+                          <div className="insight-highlight__cause">
+                            <span>施策ドライバー</span>
+                            <p>{highlight.driver}</p>
+                          </div>
+                          <div className="insight-highlight__effect">
+                            <span>定量インパクト</span>
+                            <p>{highlight.description}</p>
+                          </div>
+                        </div>
+                        <div className="insight-highlight__confidence">
+                          <span>信頼レンジ</span>
+                          <strong>{highlight.confidence}</strong>
+                        </div>
+                      </div>
                       <footer className="insight-highlight__footer">
                         <span className="insight-highlight__source">{highlight.source}</span>
                         <Tooltip>
