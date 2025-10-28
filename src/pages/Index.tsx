@@ -151,6 +151,12 @@ type QuickFlowStep = {
   duration?: string;
 };
 
+type QuickFormHighlight = {
+  title: string;
+  caption: string;
+  icon: LucideIcon;
+};
+
 const quickFlowSteps: QuickFlowStep[] = [
   {
     label: "AI診断",
@@ -171,6 +177,24 @@ const quickFlowSteps: QuickFlowStep[] = [
     description: "48時間以内に提示",
     detail: "AIレポートのドラフトと伴走プラン、投資回収の目安をご案内。",
     icon: ClipboardCheck,
+  },
+];
+
+const quickFormHighlights: QuickFormHighlight[] = [
+  {
+    title: "平均4.6時間で一次回答",
+    caption: "緊急課題は当日中に課題仮説と次アクションを共有",
+    icon: Timer,
+  },
+  {
+    title: "秘密厳守・金融機関準拠",
+    caption: "NDA・暗号化通信で財務情報を安全に取り扱い",
+    icon: ShieldCheck,
+  },
+  {
+    title: "投資判断まで逆算",
+    caption: "粗利・資金繰りシナリオをAIと専門家が同時提示",
+    icon: LineChart,
   },
 ];
 
@@ -1776,6 +1800,22 @@ const Index = () => {
                   <p>
                     氏名・会社名・メールの3項目だけで申し込み完了。初回30分のオンライン相談で、AI診断の結果と改善プランの方向性をご案内します。
                   </p>
+                  <ul className="hero-quick-form__highlights" aria-label="申し込み後に得られる価値">
+                    {quickFormHighlights.map((item) => {
+                      const HighlightIcon = item.icon;
+                      return (
+                        <li key={item.title}>
+                          <span className="hero-quick-form__highlight-icon" aria-hidden="true">
+                            <HighlightIcon />
+                          </span>
+                          <div>
+                            <strong>{item.title}</strong>
+                            <span>{item.caption}</span>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 </div>
                 <form
                   className="quick-form"
