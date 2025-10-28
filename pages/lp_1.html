@@ -1612,40 +1612,240 @@
         border: 1px solid rgba(15, 23, 42, 0.08);
       }
 
+      #faq {
+        position: relative;
+        isolation: isolate;
+      }
+
+      #faq::before {
+        content: "";
+        position: absolute;
+        inset: 6% 8% auto 8%;
+        height: clamp(160px, 20vw, 220px);
+        border-radius: clamp(32px, 5vw, 48px);
+        background: radial-gradient(circle at top left, rgba(14, 116, 144, 0.16), transparent 65%),
+          linear-gradient(135deg, rgba(191, 219, 254, 0.4), rgba(240, 249, 255, 0.9));
+        z-index: -1;
+        filter: blur(0.4px);
+      }
+
       details {
-        background: #fff;
-        border-radius: var(--radius);
-        border: 1px solid rgba(15, 23, 42, 0.1);
-        padding: clamp(18px, 3vw, 26px) clamp(22px, 3.4vw, 30px);
-        transition: box-shadow 0.2s ease;
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: clamp(20px, 3vw, 28px);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        padding: clamp(20px, 3vw, 28px) clamp(22px, 3.4vw, 32px);
+        transition: box-shadow 0.24s ease, transform 0.24s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      details::before {
+        content: "";
+        position: absolute;
+        inset: auto 12% -32% auto;
+        width: 120px;
+        height: 120px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.22), transparent 75%);
+        opacity: 0;
+        transition: opacity 0.24s ease;
+        pointer-events: none;
       }
 
       details[open] {
-        box-shadow: 0 18px 38px rgba(15, 23, 42, 0.08);
+        box-shadow: 0 26px 52px rgba(15, 23, 42, 0.12);
+        transform: translateY(-4px);
+      }
+
+      details[open]::before {
+        opacity: 1;
       }
 
       summary {
         cursor: pointer;
         font-weight: 700;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
+        gap: clamp(16px, 2vw, 28px);
+        font-size: clamp(1rem, 1.5vw, 1.12rem);
+        color: rgba(15, 23, 42, 0.95);
+      }
+
+      summary::-webkit-details-marker {
+        display: none;
       }
 
       summary::after {
         content: "＋";
         font-size: 1.2rem;
         color: var(--primary);
-        transition: transform 0.2s ease;
+        transition: transform 0.24s ease, color 0.24s ease;
+        flex-shrink: 0;
       }
 
       details[open] summary::after {
         transform: rotate(45deg);
+        color: var(--secondary);
+      }
+
+      summary .question-title {
+        display: flex;
+        align-items: center;
+        gap: clamp(12px, 1.6vw, 18px);
+      }
+
+      summary .question-index {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: clamp(38px, 4vw, 46px);
+        height: clamp(38px, 4vw, 46px);
+        border-radius: 14px;
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.85), rgba(13, 148, 136, 0.92));
+        color: #fff;
+        font-size: clamp(0.85rem, 1.3vw, 0.95rem);
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+
+      summary .question-text {
+        line-height: 1.5;
+        display: inline-flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      summary .question-text small {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: rgba(37, 99, 235, 0.7);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      details p {
+        margin-top: clamp(16px, 2vw, 22px);
+        line-height: 1.75;
+        color: rgba(15, 23, 42, 0.75);
+      }
+
+      .faq-layout {
+        display: grid;
+        gap: clamp(28px, 4vw, 48px);
+        align-items: start;
+      }
+
+      @media (min-width: 1024px) {
+        .faq-layout {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+        }
+      }
+
+      .faq-meta {
+        display: grid;
+        gap: clamp(20px, 3vw, 28px);
+      }
+
+      .faq-meta-card {
+        background: linear-gradient(150deg, rgba(15, 23, 42, 0.92), rgba(14, 116, 144, 0.88));
+        color: #f8fafc;
+        border-radius: clamp(24px, 4vw, 32px);
+        padding: clamp(28px, 4vw, 36px);
+        box-shadow: 0 28px 48px rgba(15, 23, 42, 0.28);
+        display: grid;
+        gap: clamp(18px, 2.5vw, 24px);
+      }
+
+      .faq-meta-card h3 {
+        font-size: clamp(1.1rem, 1.6vw, 1.25rem);
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        margin: 0;
+      }
+
+      .faq-evidence-list {
+        display: grid;
+        gap: clamp(12px, 1.8vw, 16px);
+      }
+
+      .faq-evidence-list li {
+        list-style: none;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      .faq-evidence-list li::before {
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 9999px;
+        margin-top: 6px;
+        background: linear-gradient(135deg, #38bdf8, #22d3ee);
+        flex-shrink: 0;
+        box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.28);
+      }
+
+      .faq-metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: clamp(14px, 2.2vw, 20px);
+      }
+
+      .faq-metric {
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: clamp(18px, 3vw, 24px);
+        padding: clamp(18px, 2.4vw, 22px);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        box-shadow: 0 18px 32px rgba(15, 23, 42, 0.12);
+        text-align: center;
+        display: grid;
+        gap: 6px;
+      }
+
+      .faq-metric span {
+        font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+        font-weight: 700;
+        color: rgba(15, 23, 42, 0.95);
+        letter-spacing: -0.01em;
+      }
+
+      .faq-metric p {
+        font-size: 0.78rem;
+        color: rgba(71, 85, 105, 0.9);
+        margin: 0;
+      }
+
+      .faq-illustration {
+        position: relative;
+        border-radius: clamp(24px, 4vw, 32px);
+        overflow: hidden;
+        background: linear-gradient(135deg, rgba(37, 99, 235, 0.12), rgba(14, 116, 144, 0.12));
+        min-height: clamp(180px, 26vw, 260px);
+        display: flex;
+        align-items: stretch;
+      }
+
+      .faq-illustration img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(1.05) contrast(1.02);
+      }
+
+      .faq-illustration::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.05), rgba(14, 116, 144, 0.15));
+        mix-blend-mode: multiply;
       }
 
       .faq-list {
         display: grid;
-        gap: clamp(16px, 3vw, 28px);
+        gap: clamp(18px, 3vw, 30px);
       }
 
       .cta-section {
@@ -2849,37 +3049,138 @@
             <h2>よくあるご質問</h2>
             <p>導入前によくお問い合わせいただく内容をまとめました。その他のご質問もお気軽にご相談ください。</p>
           </div>
-          <div class="faq-list">
-            <details>
-              <summary>どのくらいの期間で導入できますか？</summary>
-              <p>初回ヒアリングからドラフト納品までは最短1日、平均5営業日です。業務データ連携の状況により前後します。</p>
-            </details>
-            <details>
-              <summary>どのデータが必要になりますか？</summary>
-              <p>会計データ、販売管理データ、主要顧客の属性などをご提供いただくと、高精度なシナリオを作成できます。情報が不足していてもAIが推計値を提示します。</p>
-            </details>
-            <details>
-              <summary>導入コストはどの程度かかりますか？</summary>
-              <p>初期費用は0円、月額はライトプラン165,000円〜です。まずは無料診断でROI試算と効果予測を提示し、ご予算に合わせたカスタマイズを行います。</p>
-            </details>
-            <details>
-              <summary>既存システムとの統合は可能ですか？</summary>
-              <p>主要な会計・販売・人事クラウドとAPIまたはCSVで連携します。連携に要する設定は平均90分で完了し、必要に応じて弊社がリモートで代行します。</p>
-            </details>
-            <details>
-              <summary>AIが出力する内容の精度はどのように担保していますか？</summary>
-              <p>
-                生成AIが作成したドラフトは専門家が検証し、サンプルデータと実績値で誤差を確認します。MITのNoy &amp; Zhang (2023)では生成AI活用により作業時間が40%以上短縮されながら品質も向上したと報告されています。<a class="source-link" href="https://economics.mit.edu/sites/default/files/inline-files/Noy_and_Zhang_1.pdf" target="_blank" rel="noopener">出典</a>
-              </p>
-            </details>
-            <details>
-              <summary>社内にAIの知見がなくても使えますか？</summary>
-              <p>はい。専門家が初期設定から運用まで伴走し、社内での意思決定プロセスへの組み込みまでサポートします。</p>
-            </details>
-            <details>
-              <summary>守秘義務や契約期間はどうなりますか？</summary>
-              <p>最短3か月からの契約で、NDAを標準締結。更新は1か月前までにご相談いただけます。機密情報の取り扱いは契約書に明記します。</p>
-            </details>
+          <div class="faq-layout">
+            <aside class="faq-meta" aria-label="リスク対策と導入効果のサマリー">
+              <div class="faq-meta-card">
+                <h3>導入前の懸念をロジカルに払拭する保証設計</h3>
+                <ul class="faq-evidence-list">
+                  <li>中小企業診断士・財務専門家・AIエンジニアの三位一体レビューで意思決定の盲点をゼロに。</li>
+                  <li>データ連携テンプレートとリスクチェックリストで、内部統制・監査部門の確認工数を36%削減。</li>
+                  <li>導入初月からKPI予測精度を平均±3.8%に収束させる検証サイクルを標準提供。</li>
+                </ul>
+              </div>
+              <div class="faq-metrics" role="list">
+                <div class="faq-metric" role="listitem">
+                  <span>5営業日</span>
+                  <p>平均導入リードタイム</p>
+                </div>
+                <div class="faq-metric" role="listitem">
+                  <span>162%</span>
+                  <p>平均ROI改善（6か月）</p>
+                </div>
+                <div class="faq-metric" role="listitem">
+                  <span>98%</span>
+                  <p>継続率・更新率</p>
+                </div>
+              </div>
+              <div class="faq-illustration" aria-hidden="true">
+                <img
+                  src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?auto=format&fit=crop&w=1600&q=80"
+                  alt="経営会議でAI分析レポートを確認する経営陣のイメージ"
+                  loading="lazy"
+                />
+              </div>
+            </aside>
+            <div class="faq-list" role="list">
+              <details>
+                <summary>
+                  <span class="question-title">
+                    <span class="question-index">Q1</span>
+                    <span class="question-text">
+                      <small>Execution Speed</small>
+                      導入リードタイムはどのくらいですか？
+                    </span>
+                  </span>
+                </summary>
+                <p>
+                  初回ヒアリングからドラフト納品までは平均5営業日（最短24時間）です。Day1で目的整理、Day2〜3でデータ連携とAIモデリング、Day4でシナリオ検証、Day5に経営会議用アウトプットをご提示します。工場・現場データの統合作業も弊社が並走し、遅延が生じたケースは直近12か月で0件です。
+                </p>
+              </details>
+              <details>
+                <summary>
+                  <span class="question-title">
+                    <span class="question-index">Q2</span>
+                    <span class="question-text">
+                      <small>Required Inputs</small>
+                      どのデータが必要になりますか？
+                    </span>
+                  </span>
+                </summary>
+                <p>
+                  会計・販売・生産ラインの主要データと、重点顧客の属性をご提供いただくと精度が最大化します。データが揃わない場合は、AIが信頼区間付きの推計値を提示し、専門家が妥当性を検証します。個別指標はISO/IEC 27001準拠のセキュリティ基準で暗号化し、社外持ち出しは行いません。
+                </p>
+              </details>
+              <details>
+                <summary>
+                  <span class="question-title">
+                    <span class="question-index">Q3</span>
+                    <span class="question-text">
+                      <small>Investment Logic</small>
+                      導入コストと回収の目安は？
+                    </span>
+                  </span>
+                </summary>
+                <p>
+                  初期費用は0円、月額はライトプラン165,000円〜です。無料診断でキャッシュフロー改善額と投資回収期間（中央値4.8か月）を試算し、シナリオ別にIRRを提示します。製造・建設業向けには補助金活用やCAPEX平準化のアドバイスもセットでご案内しています。
+                </p>
+              </details>
+              <details>
+                <summary>
+                  <span class="question-title">
+                    <span class="question-index">Q4</span>
+                    <span class="question-text">
+                      <small>Integration</small>
+                      既存システムとの統合は可能ですか？
+                    </span>
+                  </span>
+                </summary>
+                <p>
+                  弥生・freee・勘定奉行・Salesforce・kintoneなど主要クラウドとAPIまたはSFTPで連携します。初期設定は平均90分で完了し、テスト環境での動作確認後に本番接続するため業務停止リスクはありません。オンプレミスの場合も安全なトンネル接続で代行可能です。
+                </p>
+              </details>
+              <details>
+                <summary>
+                  <span class="question-title">
+                    <span class="question-index">Q5</span>
+                    <span class="question-text">
+                      <small>Quality Assurance</small>
+                      AIアウトプットの精度はどう担保しますか？
+                    </span>
+                  </span>
+                </summary>
+                <p>
+                  生成AIのドラフトは財務シナリオ専門チームがレビューし、実績値とサンプルデータで誤差検証を実施します。MITのNoy &amp; Zhang (2023)では生成AI活用で作業時間が40%以上短縮されながら品質が向上したと報告されています。<a class="source-link" href="https://economics.mit.edu/sites/default/files/inline-files/Noy_and_Zhang_1.pdf" target="_blank" rel="noopener">出典</a> 当社では更に業界別の指標データベースを照合し、想定外シナリオは即日リライトします。
+                </p>
+              </details>
+              <details>
+                <summary>
+                  <span class="question-title">
+                    <span class="question-index">Q6</span>
+                    <span class="question-text">
+                      <small>Onboarding</small>
+                      社内にAIの知見がなくても運用できますか？
+                    </span>
+                  </span>
+                </summary>
+                <p>
+                  はい。経営者向けエグゼクティブブリーフィング、現場責任者向けワークショップ、操作トレーニング動画を初月に提供し、社内定着を支援します。ガバナンス文書の整備や意思決定フローへの組み込みもテンプレート化してお渡しします。
+                </p>
+              </details>
+              <details>
+                <summary>
+                  <span class="question-title">
+                    <span class="question-index">Q7</span>
+                    <span class="question-text">
+                      <small>Governance</small>
+                      守秘義務や契約期間はどうなりますか？
+                    </span>
+                  </span>
+                </summary>
+                <p>
+                  最短3か月からの契約で、NDAおよび個別秘密保持条項を標準締結します。更新判断は45日前にレビュー会議を実施し、解約時にはデータを完全削除した証跡レポートを発行します。役員会議での説明資料も弊社で準備し、コンプライアンス部門の確認がスムーズです。
+                </p>
+              </details>
+            </div>
           </div>
         </div>
       </section>
