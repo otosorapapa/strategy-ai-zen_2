@@ -41,6 +41,7 @@ import {
 import { submitContactForm } from "@/lib/contact-api";
 
 import aiDashboardShot from "@/assets/growth-chart.jpg";
+import simulatorGuidanceVisual from "@/assets/dashboard-preview.jpg";
 import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
 import expertSaitoPhoto from "@/assets/representative_.jpg";
 import expertTanakaPhoto from "@/assets/representative.jpg";
@@ -157,6 +158,25 @@ type QuickFormHighlight = {
   icon: LucideIcon;
 };
 
+type SimulatorGuideStep = {
+  title: string;
+  description: string;
+  detail: string;
+  icon: LucideIcon;
+};
+
+type SimulatorGuideNote = {
+  label: string;
+  description: string;
+  icon: LucideIcon;
+};
+
+type SimulatorVisualHighlight = {
+  label: string;
+  description: string;
+  icon: LucideIcon;
+};
+
 const quickFlowSteps: QuickFlowStep[] = [
   {
     label: "AI診断",
@@ -195,6 +215,66 @@ const quickFormHighlights: QuickFormHighlight[] = [
     title: "投資判断まで逆算",
     caption: "粗利・資金繰りシナリオをAIと専門家が同時提示",
     icon: LineChart,
+  },
+];
+
+const simulatorGuideSteps: SimulatorGuideStep[] = [
+  {
+    title: "現状の投資負荷を3分で整理",
+    description:
+      "初期費用・月額費用・意思決定工数を入力し、投資負荷を数値化。",
+    detail:
+      "キャッシュアウトと経営陣の稼働コストを見える化し、経営会議で使える指標に整えます。",
+    icon: ClipboardCheck,
+  },
+  {
+    title: "優先指標を選んでシナリオ比較",
+    description:
+      "伸ばしたい指標を選択するとリアルタイム分析による短縮効果が即時に反映。",
+    detail:
+      "売上・粗利・受注残など50種類のKPIテンプレートを切り替え、最適なAI投資シナリオを検証。",
+    icon: BarChart3,
+  },
+  {
+    title: "専門家面談で自社条件をフィット",
+    description:
+      "試算値は保存されず、面談時に専門家が貴社固有のデータと照合。",
+    detail:
+      "税理士・戦略コンサルと連携し、資金調達や設備投資まで含めた投資回収計画を提示します。",
+    icon: ShieldCheck,
+  },
+];
+
+const simulatorGuideNotes: SimulatorGuideNote[] = [
+  {
+    label: "算出根拠",
+    description:
+      "数値は導入企業20社の平均値をもとに推計し、業種・規模に応じた補正係数を適用しています。",
+    icon: Info,
+  },
+  {
+    label: "意思決定スピード",
+    description:
+      "リアルタイム分析の活用はItrex Groupの調査でも、意思決定のリードタイム短縮に有効と示されています。",
+    icon: Sparkles,
+  },
+];
+
+const simulatorGuidanceVisualHighlights: SimulatorVisualHighlight[] = [
+  {
+    label: "リアルタイム再計算",
+    description: "入力と同時にROIと回収期間が数秒で更新。",
+    icon: Timer,
+  },
+  {
+    label: "KPIテンプレート50種",
+    description: "財務・営業指標の粒度を合わせた比較が可能。",
+    icon: Layers3,
+  },
+  {
+    label: "専門家伴走",
+    description: "面談で自社データを取り込み、導入判断まで伴走。",
+    icon: Users2,
   },
 ];
 
@@ -2857,15 +2937,77 @@ const Index = () => {
               </p>
             </div>
             <div className="simulator-guidance" data-animate>
-              <h3>使い方のポイント</h3>
-              <ol>
-                <li>初期費用・月額費用・意思決定工数を入力し、現在の投資負荷を把握。</li>
-                <li>優先領域を選ぶと、リアルタイム分析による短縮効果を確認できます。</li>
-                <li>試算値は保存されず、専門家との面談で自社データを反映できます。</li>
-              </ol>
-              <p>
-                数値は導入企業20社の平均値をもとに推計しています。リアルタイム分析の活用はItrex Groupの調査が示す通り、意思決定のスピードを高めます。
-              </p>
+              <div className="simulator-guidance__grid">
+                <div className="simulator-guidance__content">
+                  <div className="simulator-guidance__intro">
+                    <span className="simulator-guidance__eyebrow">Executive simulator guide</span>
+                    <h3>使い方のポイント</h3>
+                    <p>
+                      AI投資のリターンを最大化するために、経営者の意思決定プロセスに沿って設計した3ステップです。
+                      直感的な操作と専門家の伴走で、投資判断までのリードタイムを短縮します。
+                    </p>
+                  </div>
+                  <ol className="simulator-guidance__steps">
+                    {simulatorGuideSteps.map((step, index) => (
+                      <li key={step.title}>
+                        <div className="simulator-guidance__step-header">
+                          <div className="simulator-guidance__step-icon">
+                            <step.icon aria-hidden="true" />
+                          </div>
+                          <div>
+                            <span className="simulator-guidance__step-index">STEP {index + 1}</span>
+                            <h4>{step.title}</h4>
+                          </div>
+                        </div>
+                        <p className="simulator-guidance__step-description">{step.description}</p>
+                        <p className="simulator-guidance__step-detail">{step.detail}</p>
+                      </li>
+                    ))}
+                  </ol>
+                  <div className="simulator-guidance__notes">
+                    {simulatorGuideNotes.map((note) => (
+                      <div key={note.label} className="simulator-guidance__note">
+                        <note.icon aria-hidden="true" />
+                        <div>
+                          <strong>{note.label}</strong>
+                          <p>{note.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="simulator-guidance__visual">
+                  <figure className="simulator-guidance__visual-frame">
+                    <div className="simulator-guidance__visual-screenshot">
+                      <img
+                        src={simulatorGuidanceVisual}
+                        alt="ROIシミュレーターのダッシュボードで意思決定指標を確認する様子"
+                        className="simulator-guidance__visual-image"
+                      />
+                    </div>
+                    <figcaption className="simulator-guidance__visual-caption">
+                      <strong>エグゼクティブの意思決定を加速</strong>
+                      <p>重視する経営指標だけを抽出し、ボードミーティングで即共有できるレポート形式で表示します。</p>
+                    </figcaption>
+                    <div className="simulator-guidance__visual-highlights">
+                      {simulatorGuidanceVisualHighlights.map((highlight) => (
+                        <div
+                          key={highlight.label}
+                          className="simulator-guidance__visual-highlight"
+                        >
+                          <div className="simulator-guidance__visual-highlight-icon">
+                            <highlight.icon aria-hidden="true" />
+                          </div>
+                          <div>
+                            <span>{highlight.label}</span>
+                            <p>{highlight.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </figure>
+                </div>
+              </div>
             </div>
             <div className="simulator-summary" data-animate>
               <div className="simulator-summary__item">
