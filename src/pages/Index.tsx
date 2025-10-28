@@ -3703,8 +3703,22 @@ const Index = () => {
                       <strong>{highlight.result}</strong>
                     </div>
                   </header>
-                  <p className="customer-highlight__comment">{highlight.comment}</p>
-                  <p className="customer-highlight__detail">{highlight.detail}</p>
+                  <div className="customer-highlight__insights">
+                    <div className="customer-highlight__comment" aria-label="戦略インサイト">
+                      <span className="customer-highlight__comment-label">意思決定の質</span>
+                      <p>{highlight.comment}</p>
+                    </div>
+                    <ul className="customer-highlight__metrics" aria-label="成果の内訳">
+                      {highlight.detail.split(" / ").map((metric) => {
+                        const value = metric.trim();
+                        return (
+                          <li key={value}>
+                            <span>{value}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
                 </article>
               ))}
             </div>
