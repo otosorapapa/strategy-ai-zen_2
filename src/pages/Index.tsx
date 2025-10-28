@@ -2426,24 +2426,30 @@ const Index = () => {
                         <ValueIcon />
                       </div>
                       <div className="ai-value-card__meta">
+                        <span className="ai-value-card__signal">CAUSAL BLUEPRINT</span>
                         <span className="ai-value-card__evidence">{point.evidence}</span>
                         <h3>{point.title}</h3>
                       </div>
+                      <div className="ai-value-card__stat" aria-label="インパクト">
+                        <span>Impact</span>
+                        <strong>{point.impact}</strong>
+                      </div>
                     </header>
-                    <div className="ai-value-card__content">
-                      <p className="ai-value-card__challenge">
-                        <strong>課題</strong>
-                        {point.challenge}
-                      </p>
-                      <p className="ai-value-card__mechanism">
-                        <strong>アプローチ</strong>
-                        {point.mechanism}
-                      </p>
-                    </div>
-                    <div className="ai-value-card__impact">
-                      <span>インパクト</span>
-                      <strong>{point.impact}</strong>
-                      <p>{point.executiveTakeaway}</p>
+                    <div className="ai-value-card__body">
+                      <div className="ai-value-card__stream" aria-label="課題からアプローチへの因果">
+                        <div className="ai-value-card__stream-item">
+                          <span className="ai-value-card__label">課題の背景</span>
+                          <p>{point.challenge}</p>
+                        </div>
+                        <div className="ai-value-card__stream-item">
+                          <span className="ai-value-card__label">AIの打ち手</span>
+                          <p>{point.mechanism}</p>
+                        </div>
+                      </div>
+                      <div className="ai-value-card__takeaway">
+                        <span>エグゼクティブへの示唆</span>
+                        <p>{point.executiveTakeaway}</p>
+                      </div>
                     </div>
                   </article>
                 );
