@@ -453,6 +453,7 @@ const whyNowEvidence = [
   {
     title: "AIは意思決定の速さと正確性を両立",
     stat: "IIL Insight",
+    statLabel: "Executive Insight",
     description:
       "blog.iil.comは、生成AIが繰り返し作業を自動化し、データドリブンな分析によって経営者の意思決定をより速く賢くすると解説。中小企業の競争優位に直結すると強調しています。",
     sourceLabel: "IIL Blog (2024)",
@@ -462,6 +463,7 @@ const whyNowEvidence = [
   {
     title: "生成AI導入企業は主要業務で成果を創出",
     stat: "主要業務",
+    statLabel: "導入企業の成果",
     description:
       "University of Cincinnati Onlineの研究では、生成AIを導入した企業が顧客対応や主要業務で成果を創出していると報告。意思決定プロセスへの適用が加速しています。",
     sourceLabel: "University of Cincinnati Online (2024)",
@@ -471,6 +473,7 @@ const whyNowEvidence = [
   {
     title: "リアルタイム分析で意思決定速度が向上",
     stat: "Real-time",
+    statLabel: "リアルタイム分析",
     description:
       "Itrex Groupはリアルタイム分析が競合よりも速い意思決定を可能にすると指摘。AIダッシュボードが経営判断を後押しします。",
     sourceLabel: "Itrex Group (2024)",
@@ -480,6 +483,7 @@ const whyNowEvidence = [
   {
     title: "2030年に1.8兆ドル規模のAI市場",
     stat: "1.8兆$",
+    statLabel: "2030年予測",
     description:
       "生成AI市場は2030年までに約1.8兆ドルへ拡大と予測。今のうちに活用体制を整えることが中長期の競争力に直結します。",
     sourceLabel: "Switch Software (2024)",
@@ -489,6 +493,7 @@ const whyNowEvidence = [
   {
     title: "AI支援でコンタクトセンターの生産性+14%",
     stat: "+14%",
+    statLabel: "生産性向上",
     description: "Stanford HAIは生成AI支援で平均14%の生産性向上と報告。新人ほど伸び幅が大きい。",
     sourceLabel: "Stanford HAI (2024)",
     sourceUrl: "https://hai.stanford.edu/news/generative-ai-improves-customer-support-productivity",
@@ -497,6 +502,7 @@ const whyNowEvidence = [
   {
     title: "金融業界では分析とレポート作成を効率化",
     stat: "金融×AI",
+    statLabel: "金融の変革",
     description: "OECDは金融業で生成AIが分析とレポートを効率化と指摘。経営計画にも展開可能。",
     sourceLabel: "OECD (2024)",
     sourceUrl: "https://www.oecd.org/finance/ai-in-financial-markets.htm",
@@ -2146,21 +2152,38 @@ const Index = () => {
             </div>
             <div className="evidence-grid">
               {whyNowEvidence.map((item) => (
-                <article
-                  key={item.title}
-                  className="evidence-card"
-                  data-animate
-                  data-source={item.sourceNote}
-                >
-                  <div className="evidence-stat">{item.stat}</div>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                  <span className="evidence-source">{item.sourceLabel}</span>
+                <article key={item.title} className="evidence-card" data-animate>
+                  <div className="evidence-card__overlay" aria-hidden="true" />
+                  <header className="evidence-card__header">
+                    <div className="evidence-card__metrics">
+                      <span className="evidence-card__badge">{item.statLabel ?? "Key Insight"}</span>
+                      {item.stat ? (
+                        <span className="evidence-stat" aria-label={`${item.statLabel ?? "Insight"}の数値`}>
+                          {item.stat}
+                        </span>
+                      ) : null}
+                    </div>
+                    <div className="evidence-card__source">
+                      <span className="evidence-card__source-label">{item.sourceLabel}</span>
+                      <span className="evidence-card__source-note">{item.sourceNote}</span>
+                    </div>
+                  </header>
+                  <div className="evidence-card__body">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                  </div>
+                  {item.sourceUrl ? (
+                    <footer className="evidence-card__footer">
+                      <a className="evidence-card__link" href={item.sourceUrl} target="_blank" rel="noopener noreferrer">
+                        一次情報を確認する
+                      </a>
+                    </footer>
+                  ) : null}
                 </article>
               ))}
             </div>
             <p className="footnote" data-animate>
-              ※ 各数値の詳細はカードをホバー/タップすると表示されます。
+              ※ 参考元リンクから一次情報を確認いただけます。
             </p>
           </div>
         </section>
