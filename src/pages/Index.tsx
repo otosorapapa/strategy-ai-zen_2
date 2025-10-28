@@ -676,6 +676,29 @@ const velocitySeries = [
 const velocityQuarters = ["2021Q4", "2022Q4", "2023Q4", "2024Q4"];
 const velocityMax = Math.max(...velocitySeries.flatMap((series) => series.values));
 
+const velocityInsights = velocitySeries.map((series) => {
+  const start = series.values[0] ?? 0;
+  const latest = series.values[series.values.length - 1] ?? start;
+  const delta = latest - start;
+  return {
+    label: series.label,
+    start,
+    latest,
+    delta,
+  };
+});
+
+const velocityBaseQuarter = velocityQuarters[0] ?? "";
+const velocityLatestQuarter = velocityQuarters[velocityQuarters.length - 1] ?? "";
+const velocityGapDelta =
+  (velocityInsights[1]?.delta ?? 0) - (velocityInsights[0]?.delta ?? 0);
+
+const formatSigned = (value: number, suffix = "") => {
+  if (value > 0) return `+${value}${suffix}`;
+  if (value < 0) return `${value}${suffix}`;
+  return `±0${suffix}`;
+};
+
 type PainPoint = {
   title: string;
   detail: string;
@@ -2993,23 +3016,75 @@ const Index = () => {
               </div>
               <div className="quarterly-visual" data-animate aria-hidden="true">
                 <div className="velocity-chart">
+                  <div className="velocity-header">
+                    <div className="velocity-title">
+                      <span className="velocity-eyebrow">Executive signal intelligence</span>
+                      <h3>外部環境と生成AIの変化速度</h3>
+                      <p>
+                        {velocityBaseQuarter}を100とした指数で、経営判断に直結する環境変化と
+                        技術進化のギャップを可視化します。
+                      </p>
+                    </div>
+                    <dl className="velocity-insights">
+                      {velocityInsights.map((insight) => (
+                        <div key={insight.label} className="velocity-insight">
+                          <dt>{insight.label}</dt>
+                          <dd>
+                            <strong>{insight.latest}</strong>
+                            <span>{velocityLatestQuarter}</span>
+                            <small>
+                              {formatSigned(insight.delta, "pt")} vs {velocityBaseQuarter}
+                            </small>
+                          </dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </div>
                   <svg viewBox="0 0 100 60" role="img" aria-label="外部環境と生成AIの変化速度">
+                    {Array.from({ length: 5 }).map((_, index) => {
+                      const y = 55 - (index / 4) * 45;
+                      return (
+                        <line
+                          key={`grid-${index}`}
+                          x1={0}
+                          y1={y}
+                          x2={100}
+                          y2={y}
+                          className="velocity-grid-line"
+                        />
+                      );
+                    })}
                     {velocitySeries.map((series, seriesIndex) => {
-                      const points = series.values
-                        .map((value, valueIndex) => {
-                          const x = (valueIndex / (series.values.length - 1 || 1)) * 100;
-                          const max = velocityMax || 1;
-                          const normalizedY = 55 - (value / max) * 45;
-                          return `${x},${normalizedY}`;
-                        })
+                      const points = series.values.map((value, valueIndex) => {
+                        const x = (valueIndex / (series.values.length - 1 || 1)) * 100;
+                        const max = velocityMax || 1;
+                        const normalizedY = 55 - (value / max) * 45;
+                        const quarter = velocityQuarters[valueIndex] ?? "";
+                        return { x, y: normalizedY, quarter, value };
+                      });
+                      const pointString = points
+                        .map((point) => `${point.x},${point.y}`)
                         .join(" ");
                       return (
-                        <polyline
-                          key={series.label}
-                          points={points}
-                          className={`velocity-line velocity-line-${seriesIndex}`}
-                          style={{ stroke: series.color }}
-                        />
+                        <g key={series.label}>
+                          <polyline
+                            points={pointString}
+                            className={`velocity-line velocity-line-${seriesIndex}`}
+                            style={{ stroke: series.color }}
+                          />
+                          {points.map((point) => (
+                            <circle
+                              key={`${series.label}-${point.quarter}`}
+                              cx={point.x}
+                              cy={point.y}
+                              r={1.7}
+                              className="velocity-point"
+                              style={{ fill: series.color }}
+                            >
+                              <title>{`${series.label} ${point.quarter}: ${point.value}`}</title>
+                            </circle>
+                          ))}
+                        </g>
                       );
                     })}
                   </svg>
@@ -3037,6 +3112,23 @@ const Index = () => {
                         <small>{item.caption}</small>
                       </div>
                     ))}
+                  </div>
+                  <div className="velocity-context">
+                    <div className="velocity-gap">
+                      <span>生成AIアップデート速度ギャップ</span>
+                      <strong>{formatSigned(velocityGapDelta, "pt")}</strong>
+                      <small>
+                        {velocityLatestQuarter}時点 / {velocityInsights[0]?.label}
+                      </small>
+                    </div>
+                    <p className="velocity-context__copy">
+                      {velocityLatestQuarter}時点で
+                      {velocityInsights[1]?.label ?? "生成AIアップデート指数"}
+                      は{formatSigned(velocityGapDelta, "pt")}
+                      {velocityInsights[0]?.label ?? "外部環境の変化指数"}を上回る伸長。
+                      意思決定が四半期遅れるだけで投資判断の機会損失が拡大するため、
+                      90日サイクルの指標レビューと専門家伴走でギャップを捉え続けます。
+                    </p>
                   </div>
                 </div>
               </div>
