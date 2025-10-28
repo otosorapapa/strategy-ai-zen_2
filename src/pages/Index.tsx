@@ -870,6 +870,8 @@ const processSteps: ProcessStep[] = [
   },
 ];
 
+const processStepSchedules = ["DAY 0-5", "WEEK 1", "WEEK 2", "WEEK 3", "WEEK 4"];
+
 type ProcessFlowStage = {
   stage: string;
   icon: LucideIcon;
@@ -2716,9 +2718,69 @@ const Index = () => {
                 <li>MIT Sloanの研究が示す「AIと人の協働に向けたプロセス再設計」を実装。</li>
               </ul>
             </div>
+            <div className="process-overview" data-animate>
+              <article className="process-overview__card">
+                <span className="process-overview__eyebrow">Onboarding Blueprint</span>
+                <h3>4週間で意思決定可能な経営計画を共創</h3>
+                <p>
+                  事業データの整備から金融機関提出レベルの根拠作成まで、因果関係と意思決定基準を一気通貫で設計。
+                  各週で「インプット→AI解析→専門家検証→意思決定準備」が閉じるように逆算したロードマップです。
+                </p>
+                <ol className="process-overview__phases">
+                  <li>
+                    <strong>Week 0（Day 0-5）</strong>
+                    <span>課題仮説と成功指標を定義し、AIが議事録とタスクを自動生成。</span>
+                  </li>
+                  <li>
+                    <strong>Week 1-2</strong>
+                    <span>データ連携とAIシナリオ生成。専門家が統制要件と前提をレビュー。</span>
+                  </li>
+                  <li>
+                    <strong>Week 3-4</strong>
+                    <span>リスク補強・ROI可視化・意思決定ドキュメントを完成させ経営会議に提出。</span>
+                  </li>
+                </ol>
+              </article>
+              <article className="process-overview__card process-overview__card--metrics">
+                <h3>ガバナンスと成果の指標</h3>
+                <dl className="process-overview__metrics">
+                  <div>
+                    <dt>AI自動化比率</dt>
+                    <dd>72%</dd>
+                    <span>要約・シナリオ比較・ドキュメント整形を自動化</span>
+                  </div>
+                  <div>
+                    <dt>専門家レビュー</dt>
+                    <dd>3回</dd>
+                    <span>診断士・会計士がリスクと根拠を補強</span>
+                  </div>
+                  <div>
+                    <dt>意思決定スピード</dt>
+                    <dd>1/2</dd>
+                    <span>役員合意形成を伴走し、会議回数を半減</span>
+                  </div>
+                </dl>
+                <div className="process-overview__badge">
+                  <span>証跡</span>
+                  <p>ROI試算、根拠データ、想定問答をテンプレート化し、説明責任を標準化します。</p>
+                </div>
+              </article>
+            </div>
+            <div className="process-legend" data-animate>
+              <div>
+                <span className="process-legend__dot process-legend__dot--ai" />AIが自動化
+              </div>
+              <div>
+                <span className="process-legend__dot process-legend__dot--human" />専門家・経営者が意思決定
+              </div>
+              <div>
+                <span className="process-legend__dot process-legend__dot--evidence" />証拠と説明責任をセットで納品
+              </div>
+            </div>
             <ol className="process-timeline">
               {processSteps.map((step, index) => {
                 const StepIcon = step.icon;
+                const schedule = processStepSchedules[index] ?? `WEEK ${index + 1}`;
                 return (
                   <li key={step.title} className={`process-step process-step--${step.accent}`} data-animate>
                     <div className={`process-marker process-marker--${step.accent}`} aria-hidden="true">
@@ -2726,16 +2788,19 @@ const Index = () => {
                       <StepIcon />
                     </div>
                     <div className="process-content">
-                      <h3>{step.title}</h3>
+                      <div className="process-step__header">
+                        <span>{schedule}</span>
+                        <h3>{step.title}</h3>
+                      </div>
                       <p>{step.description}</p>
                       <div className="process-roles">
                         <div>
-                          <strong>AI</strong>
-                          <span>{step.aiRole}</span>
+                          <span className="process-role-label process-role-label--ai">AI</span>
+                          <p>{step.aiRole}</p>
                         </div>
                         <div>
-                          <strong>人</strong>
-                          <span>{step.humanRole}</span>
+                          <span className="process-role-label">専門家・人</span>
+                          <p>{step.humanRole}</p>
                         </div>
                       </div>
                     </div>
@@ -2743,20 +2808,43 @@ const Index = () => {
                 );
               })}
             </ol>
-            <p className="process-note" data-animate>
-              MIT Sloan Management Reviewの研究（2023）は、AIと人の協働には業務プロセス全体の再設計が不可欠だと指摘しています。本プログラムではその知見を踏まえ、導入ステップ自体を差別化要素として設計しています。
-            </p>
+            <aside className="process-evidence" data-animate>
+              <h3>MIT Sloanの研究に基づく因果設計</h3>
+              <p>
+                2023年のMIT Sloan Management Reviewは、AIの価値を最大化するために「業務フロー全体の再設計」と「説明責任の仕組み化」が必要と指摘しています。
+              </p>
+              <ul>
+                <li>各ステップで仮説→検証→意思決定が閉じるよう、データと役割を同期。</li>
+                <li>AIが作成する成果物ごとに、専門家が因果関係と倫理リスクをレビュー。</li>
+                <li>意思決定資料・ROI試算・想定問答をパッケージ化し、金融機関や取締役会で即利用可能。</li>
+              </ul>
+            </aside>
             <div className="process-flowchart" data-animate>
-              {processTimeline.map((item) => {
+              {processTimeline.map((item, index) => {
                 const FlowIcon = item.icon;
+                const aiDescription = item.aiFocus.replace(/^AI:\s*/, "");
+                const humanParts = item.humanFocus.split(":");
+                const humanLabel = humanParts.shift()?.trim() ?? "人";
+                const humanDescription = humanParts.join(":").trim();
                 return (
                   <div key={item.stage} className={`process-flow-item process-flow-item--${item.accent}`}>
                     <div className="process-flow-icon" aria-hidden="true">
                       <FlowIcon />
                     </div>
-                    <h3>{item.stage}</h3>
-                    <p>{item.aiFocus}</p>
-                    <p>{item.humanFocus}</p>
+                    <header className="process-flow-item__header">
+                      <span>Phase {index + 1}</span>
+                      <h3>{item.stage}</h3>
+                    </header>
+                    <div className="process-flow-item__roles">
+                      <div className="process-flow-item__role">
+                        <span className="process-flow-item__role-label process-flow-item__role-label--ai">AI</span>
+                        <p>{aiDescription}</p>
+                      </div>
+                      <div className="process-flow-item__role">
+                        <span className="process-flow-item__role-label">{humanLabel}</span>
+                        <p>{humanDescription}</p>
+                      </div>
+                    </div>
                   </div>
                 );
               })}
@@ -2770,10 +2858,15 @@ const Index = () => {
                       <DataIcon />
                     </div>
                     <div className="dataflow-card__body">
-                      <span>STEP {index + 1}</span>
-                      <h3>{stage.label}</h3>
+                      <div className="dataflow-card__meta">
+                        <span>STEP {index + 1}</span>
+                        <h3>{stage.label}</h3>
+                      </div>
                       <p>{stage.description}</p>
-                      <strong>{stage.result}</strong>
+                      <div className="dataflow-card__result">
+                        <span>アウトプット</span>
+                        <strong>{stage.result}</strong>
+                      </div>
                     </div>
                   </div>
                 );
