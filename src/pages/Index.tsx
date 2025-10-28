@@ -877,6 +877,8 @@ type ProcessFlowStage = {
   aiFocus: string;
   humanFocus: string;
   accent: "mint" | "sky" | "citrus" | "navy";
+  badge: string;
+  summary: string;
 };
 
 const processTimeline: ProcessFlowStage[] = [
@@ -886,6 +888,8 @@ const processTimeline: ProcessFlowStage[] = [
     aiFocus: "AI: 議事録の自動要約とアクション抽出",
     humanFocus: "経営者×診断士: 経営課題と制約条件を言語化",
     accent: "mint",
+    badge: "因果性",
+    summary: "課題の発生源と成果指標を一枚に整理し、投資判断の前提を揃えます。",
   },
   {
     stage: "データ連携・AI分析",
@@ -893,6 +897,8 @@ const processTimeline: ProcessFlowStage[] = [
     aiFocus: "AI: 外部データ取得・財務シミュレーション・リスク検証",
     humanFocus: "経営者: 取捨選択と優先度の設定",
     accent: "sky",
+    badge: "論理性",
+    summary: "財務・需要シナリオを多角的に比較し、優先すべき打ち手とリスクを定量化します。",
   },
   {
     stage: "専門家ブラッシュアップ",
@@ -900,6 +906,8 @@ const processTimeline: ProcessFlowStage[] = [
     aiFocus: "AI: 修正内容を反映し図表と想定問答を更新",
     humanFocus: "診断士: 金融機関目線と実行プランを整備",
     accent: "navy",
+    badge: "納得性",
+    summary: "専門家が審査基準で根拠を補強し、現場と金融の双方が納得する品質へ仕上げます。",
   },
   {
     stage: "意思決定",
@@ -907,6 +915,8 @@ const processTimeline: ProcessFlowStage[] = [
     aiFocus: "AI: 最終資料と根拠データを整理",
     humanFocus: "経営者: 意思決定とステークホルダー説明",
     accent: "citrus",
+    badge: "スマート実行",
+    summary: "意思決定ストーリーを行動計画と同期し、四半期レビューまでの管理をスマート化します。",
   },
 ];
 
@@ -2827,17 +2837,32 @@ const Index = () => {
               MIT Sloan Management Reviewの研究（2023）は、AIと人の協働には業務プロセス全体の再設計が不可欠だと指摘しています。本プログラムではその知見を踏まえ、導入ステップ自体を差別化要素として設計しています。
             </p>
             <div className="process-flowchart" data-animate>
-              {processTimeline.map((item) => {
+              {processTimeline.map((item, index) => {
                 const FlowIcon = item.icon;
+                const stepNumber = String(index + 1).padStart(2, "0");
                 return (
-                  <div key={item.stage} className={`process-flow-item process-flow-item--${item.accent}`}>
-                    <div className="process-flow-icon" aria-hidden="true">
-                      <FlowIcon />
-                    </div>
+                  <article key={item.stage} className={`process-flow-item process-flow-item--${item.accent}`}>
+                    <header className="process-flow-item__header">
+                      <span className="process-flow-item__step">STEP {stepNumber}</span>
+                      <div className="process-flow-icon" aria-hidden="true">
+                        <FlowIcon />
+                      </div>
+                    </header>
+                    <span className="process-flow-item__badge">{item.badge}</span>
                     <h3>{item.stage}</h3>
-                    <p>{item.aiFocus}</p>
-                    <p>{item.humanFocus}</p>
-                  </div>
+                    <p className="process-flow-item__summary">{item.summary}</p>
+                    <div className="process-flow-item__divider" aria-hidden="true" />
+                    <div className="process-flow-item__roles" role="list">
+                      <div role="listitem">
+                        <span className="process-flow-pill process-flow-pill--ai">AI</span>
+                        <p>{item.aiFocus}</p>
+                      </div>
+                      <div role="listitem">
+                        <span className="process-flow-pill process-flow-pill--human">人</span>
+                        <p>{item.humanFocus}</p>
+                      </div>
+                    </div>
+                  </article>
                 );
               })}
             </div>
