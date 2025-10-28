@@ -7194,6 +7194,38 @@ svg {
   background: linear-gradient(180deg, rgba(226, 235, 246, 0.25), rgba(255, 255, 255, 0));
 }
 
+@media (max-width: 1500px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .hero-visual {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .hero-quick-form__content {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-quick-form__footer {
+    flex-direction: column;
+  }
+
+  .hero-quick-form__guarantee {
+    width: 100%;
+  }
+
+  .quick-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .diagnosis-flow {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+
 @media (max-width: 1080px) {
   .faq-grid {
     grid-template-columns: 1fr;
