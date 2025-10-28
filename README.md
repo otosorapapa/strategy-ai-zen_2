@@ -63,6 +63,8 @@ before building or starting the frontend:
 ```sh
 VITE_CONTACT_API_ENDPOINT=wordpress
 VITE_WORDPRESS_CONTACT_ENDPOINT="https://your-site.example/wp-json/contact-form-7/v1/contact-forms/<ID>/feedback"
+# Optional: override the field name for the preferred date input if your form uses a custom name
+# VITE_WORDPRESS_FIELD_PREFERRED_DATE=preferred-date
 # Uncomment if the WordPress endpoint is protected by HTTP Basic authentication
 # VITE_WORDPRESS_AUTH_USER=your-username
 # VITE_WORDPRESS_AUTH_PASSWORD=your-password
@@ -70,6 +72,10 @@ VITE_WORDPRESS_CONTACT_ENDPOINT="https://your-site.example/wp-json/contact-form-
 
 When `VITE_CONTACT_API_ENDPOINT` is set to `wordpress`, the frontend automatically switches to the Contact Form 7 submission
 flow, including support for optional Basic authentication headers when credentials are provided.
+
+If your Contact Form 7 instance uses different field names, you can override specific mappings with environment variables.
+For example, when the desired field for "ご希望の日時" is configured as `your-message` instead of `preferred-date`, set
+`VITE_WORDPRESS_FIELD_PREFERRED_DATE=your-message` before building the site.
 
 **Edit a file directly in GitHub**
 
