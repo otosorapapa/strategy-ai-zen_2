@@ -45,7 +45,7 @@ import simulatorGuidanceVisual from "@/assets/strategy-planning.jpg";
 import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
 import expertSaitoPhoto from "@/assets/representative_.jpg";
 import expertTanakaPhoto from "@/assets/representative.jpg";
-import aiAnalysisVisual from "@/assets/ai-analysis.jpg";
+import decisionIntelligenceVisual from "@/assets/financial-analysis.jpg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -918,6 +918,10 @@ type ProcessFlowStage = {
   accent: "mint" | "sky" | "citrus" | "navy";
   badge: string;
   summary: string;
+  deliverable: string;
+  decisionWindow: string;
+  proofPoint: string;
+  checklist: string[];
 };
 
 const processTimeline: ProcessFlowStage[] = [
@@ -929,6 +933,14 @@ const processTimeline: ProcessFlowStage[] = [
     accent: "mint",
     badge: "因果性",
     summary: "課題の発生源と成果指標を一枚に整理し、投資判断の前提を揃えます。",
+    deliverable: "経営課題マップ＆優先KPIサマリー",
+    decisionWindow: "48時間以内に次アクションを提示",
+    proofPoint: "AI議事録×診断士レビューで仮説を整合",
+    checklist: [
+      "現状KGIと阻害要因を定量整理",
+      "投資判断の制約条件を棚卸し",
+      "経営陣と共有する次回アジェンダを確定",
+    ],
   },
   {
     stage: "データ連携・AI分析",
@@ -938,15 +950,31 @@ const processTimeline: ProcessFlowStage[] = [
     accent: "sky",
     badge: "論理性",
     summary: "財務・需要シナリオを多角的に比較し、優先すべき打ち手とリスクを定量化します。",
+    deliverable: "データ接続設計書とリスク一覧表",
+    decisionWindow: "1週間で安全なデータ連携を完了",
+    proofPoint: "APIログと監査証跡でガバナンスを担保",
+    checklist: [
+      "不足データと取得ソースを特定",
+      "権限・暗号化ポリシーを合意",
+      "AI分析の前提条件を文書化",
+    ],
   },
   {
-    stage: "専門家ブラッシュアップ",
+    stage: "専門家レビュー",
     icon: ShieldCheck,
     aiFocus: "AI: 修正内容を反映し図表と想定問答を更新",
     humanFocus: "診断士: 金融機関目線と実行プランを整備",
     accent: "navy",
     badge: "納得性",
     summary: "専門家が審査基準で根拠を補強し、現場と金融の双方が納得する品質へ仕上げます。",
+    deliverable: "融資・補助金想定の査問リストと改善案",
+    decisionWindow: "面談当日に改善案と確証資料を提示",
+    proofPoint: "専門家レビューで倫理・法務リスクを補正",
+    checklist: [
+      "金融機関視点の質問に回答準備",
+      "法令・倫理リスクを洗い出し補正",
+      "実行ロードマップと担当を確定",
+    ],
   },
   {
     stage: "意思決定",
@@ -956,6 +984,14 @@ const processTimeline: ProcessFlowStage[] = [
     accent: "citrus",
     badge: "スマート実行",
     summary: "意思決定ストーリーを行動計画と同期し、四半期レビューまでの管理をスマート化します。",
+    deliverable: "経営計画書＆ダッシュボード運用ガイド",
+    decisionWindow: "四半期レビューと週次モニタリングを開始",
+    proofPoint: "KPIモニターとリスクアラートを自動化",
+    checklist: [
+      "経営会議資料と根拠データを紐付け",
+      "進捗レポートと仮説検証ループを設定",
+      "成長投資シナリオの判断ルールを明文化",
+    ],
   },
 ];
 
@@ -2941,14 +2977,39 @@ const Index = () => {
                     <span className="process-flow-item__badge">{item.badge}</span>
                     <h3>{item.stage}</h3>
                     <p className="process-flow-item__summary">{item.summary}</p>
+                    <dl className="process-flow-item__meta">
+                      <div>
+                        <dt>主要成果物</dt>
+                        <dd>{item.deliverable}</dd>
+                      </div>
+                      <div>
+                        <dt>意思決定の期限</dt>
+                        <dd>{item.decisionWindow}</dd>
+                      </div>
+                      <div>
+                        <dt>検証アプローチ</dt>
+                        <dd>{item.proofPoint}</dd>
+                      </div>
+                    </dl>
+                    <ul className="process-flow-item__checklist">
+                      {item.checklist.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
                     <div className="process-flow-item__divider" aria-hidden="true" />
                     <div className="process-flow-item__roles" role="list">
                       <div role="listitem">
-                        <span className="process-flow-pill process-flow-pill--ai">AI</span>
+                        <span className="process-flow-pill process-flow-pill--ai">
+                          <Sparkles aria-hidden="true" />
+                          <span>AI</span>
+                        </span>
                         <p>{item.aiFocus}</p>
                       </div>
                       <div role="listitem">
-                        <span className="process-flow-pill process-flow-pill--human">人</span>
+                        <span className="process-flow-pill process-flow-pill--human">
+                          <Users2 aria-hidden="true" />
+                          <span>人</span>
+                        </span>
                         <p>{item.humanFocus}</p>
                       </div>
                     </div>
@@ -2970,7 +3031,10 @@ const Index = () => {
                   <li>専門家の補強で金融機関や投資家にも説明可能な納得性を確保。</li>
                 </ul>
                 <figure className="dataflow-brief__visual">
-                  <img src={aiAnalysisVisual} alt="AI分析ダッシュボードと専門家レビューの連携イメージ" />
+                  <img
+                    src={decisionIntelligenceVisual}
+                    alt="AIダッシュボードと専門家レビューで意思決定材料を統合する様子"
+                  />
                   <figcaption>AI可視化レポートで判断材料を一画面に統合</figcaption>
                 </figure>
               </article>
