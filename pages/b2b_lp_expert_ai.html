@@ -250,30 +250,39 @@
       }
       .insight-chart {
         position: relative;
-        border-radius: 1.75rem;
-        background: linear-gradient(165deg, rgba(15, 118, 110, 0.22), rgba(14, 165, 233, 0.18), rgba(14, 165, 233, 0.12));
-        padding: 1.75rem;
-        border: 1px solid rgba(125, 211, 252, 0.35);
-        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 32px 64px rgba(15, 23, 42, 0.2);
+        display: grid;
+        gap: 1.5rem;
+        border-radius: 1.9rem;
+        background:
+          radial-gradient(circle at 14% 12%, rgba(59, 130, 246, 0.32), transparent 58%),
+          radial-gradient(circle at 82% 8%, rgba(56, 189, 248, 0.28), transparent 62%),
+          linear-gradient(170deg, rgba(15, 23, 42, 0.92), rgba(12, 74, 110, 0.85));
+        padding: 1.9rem;
+        border: 1px solid rgba(148, 197, 253, 0.35);
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+          0 38px 68px rgba(15, 23, 42, 0.28);
         overflow: hidden;
+        isolation: isolate;
       }
       .insight-chart::before {
         content: '';
         position: absolute;
-        inset: -28% 45% auto -12%;
+        inset: -18% 35% auto -20%;
+        width: 420px;
         height: 320px;
-        background: radial-gradient(circle, rgba(14, 116, 144, 0.28), transparent 70%);
-        opacity: 0.9;
+        background: radial-gradient(circle, rgba(14, 116, 144, 0.38), transparent 72%);
+        opacity: 0.85;
         pointer-events: none;
       }
       .insight-chart::after {
         content: '';
         position: absolute;
-        inset: auto -20% -35% 40%;
-        width: 280px;
-        height: 280px;
-        background: radial-gradient(circle, rgba(56, 189, 248, 0.38), transparent 75%);
-        opacity: 0.8;
+        inset: auto -16% -32% 48%;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.42), transparent 78%);
+        opacity: 0.82;
         pointer-events: none;
       }
       .insight-chart-head {
@@ -352,6 +361,10 @@
         position: relative;
         z-index: 1;
         display: grid;
+        gap: 1.1rem;
+      }
+      .insight-chart-visual {
+        display: grid;
         gap: 0.85rem;
       }
       .insight-chart svg {
@@ -376,13 +389,67 @@
         flex: 1 1 auto;
         text-align: center;
       }
+      .insight-chart-caption {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+        font-size: 0.82rem;
+        line-height: 1.5;
+        color: rgba(241, 245, 249, 0.85);
+      }
+      .insight-chart-caption span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.75rem;
+        height: 1.75rem;
+        border-radius: 9999px;
+        background: rgba(59, 130, 246, 0.25);
+        color: rgba(224, 242, 254, 0.95);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+      }
+      .insight-highlights {
+        display: grid;
+        gap: 0.9rem;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+      .insight-highlight {
+        border-radius: 1.15rem;
+        padding: 1rem 1.1rem;
+        background: rgba(15, 23, 42, 0.42);
+        border: 1px solid rgba(148, 197, 253, 0.35);
+        box-shadow: 0 18px 32px rgba(15, 23, 42, 0.25);
+        display: grid;
+        gap: 0.45rem;
+      }
+      .insight-highlight span {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: rgba(148, 197, 253, 0.9);
+        font-weight: 700;
+      }
+      .insight-highlight h5 {
+        margin: 0;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: rgba(241, 245, 249, 0.95);
+      }
+      .insight-highlight p {
+        margin: 0;
+        font-size: 0.78rem;
+        line-height: 1.55;
+        color: rgba(226, 232, 240, 0.85);
+      }
       .insight-stats {
         position: relative;
         z-index: 1;
         margin-top: 1.5rem;
         display: grid;
         gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       }
       .insight-stat {
         border-radius: 1.25rem;
@@ -412,46 +479,77 @@
         line-height: 1.55;
         color: rgba(226, 232, 240, 0.85);
       }
-      .insight-meta {
+      .insight-meta-grid {
         display: grid;
-        gap: 0.9rem;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       }
-      .insight-meta li {
-        list-style: none;
+      .insight-meta-card {
+        position: relative;
+        border-radius: 1.4rem;
+        padding: 1.1rem 1.2rem 1.25rem;
+        background:
+          linear-gradient(160deg, rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.32));
+        border: 1px solid rgba(148, 163, 184, 0.32);
+        box-shadow: 0 20px 36px rgba(15, 23, 42, 0.22);
         display: grid;
-        gap: 0.35rem;
-        padding: 0.9rem 1rem;
-        border-radius: 1rem;
-        background: rgba(15, 23, 42, 0.22);
-        border: 1px solid rgba(148, 163, 184, 0.25);
-        box-shadow: 0 12px 22px rgba(15, 23, 42, 0.18);
+        grid-template-columns: auto 1fr;
+        gap: 0.75rem;
+        align-items: start;
       }
-      .insight-meta span {
-        font-size: 0.75rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: rgba(125, 211, 252, 0.9);
-        font-weight: 700;
+      .insight-meta-card::after {
+        content: '';
+        position: absolute;
+        inset: -18% auto auto 55%;
+        width: 160px;
+        height: 160px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.22), transparent 68%);
+        pointer-events: none;
       }
-      .insight-meta p {
-        font-size: 0.85rem;
-        line-height: 1.6;
-        color: rgba(226, 232, 240, 0.9);
-        margin: 0;
-      }
-      .insight-meta strong {
+      .insight-meta-icon {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.6rem;
+        height: 2.6rem;
+        border-radius: 0.85rem;
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(56, 189, 248, 0.45));
+        border: 1px solid rgba(148, 197, 253, 0.4);
         color: rgba(224, 242, 254, 0.95);
         font-weight: 700;
+        font-size: 0.75rem;
+        letter-spacing: 0.16em;
       }
-      @media (min-width: 768px) {
-        .insight-meta {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
+      .insight-meta-content {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 0.35rem;
+      }
+      .insight-meta-content h5 {
+        margin: 0;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: rgba(241, 245, 249, 0.95);
+        letter-spacing: 0.01em;
+      }
+      .insight-meta-content p {
+        margin: 0;
+        font-size: 0.82rem;
+        line-height: 1.6;
+        color: rgba(226, 232, 240, 0.88);
+      }
+      .insight-meta-content strong {
+        color: rgba(224, 242, 254, 0.95);
+        font-weight: 700;
       }
       .insight-confidence {
         display: flex;
         flex-wrap: wrap;
         gap: 0.65rem;
+        justify-content: flex-start;
       }
       .insight-confidence span {
         display: inline-flex;
@@ -476,7 +574,10 @@
           justify-content: flex-start;
         }
         .insight-chart {
-          padding: 1.5rem;
+          padding: 1.6rem;
+        }
+        .insight-chart-caption {
+          align-items: center;
         }
       }
       @media (min-width: 768px) {
@@ -1579,100 +1680,141 @@
                   </div>
                 </div>
                 <div class="insight-chart-body">
-                  <svg viewBox="0 0 360 220" role="presentation" focusable="false">
-                    <defs>
-                      <linearGradient id="insightBarGradient" x1="0" x2="0" y1="1" y2="0">
-                        <stop offset="0%" stop-color="rgba(14,165,233,0.2)" />
-                        <stop offset="50%" stop-color="rgba(56,189,248,0.65)" />
-                        <stop offset="100%" stop-color="rgba(125,211,252,0.95)" />
-                      </linearGradient>
-                      <linearGradient id="insightLineGradient" x1="0" x2="1" y1="0" y2="0">
-                        <stop offset="0%" stop-color="rgba(129,140,248,0.4)" />
-                        <stop offset="100%" stop-color="rgba(192,132,252,0.85)" />
-                      </linearGradient>
-                      <linearGradient id="insightAreaGradient" x1="0" x2="0" y1="0" y2="1">
-                        <stop offset="0%" stop-color="rgba(129,140,248,0.35)" />
-                        <stop offset="100%" stop-color="rgba(129,140,248,0)" />
-                      </linearGradient>
-                    </defs>
-                    <g stroke="rgba(226, 232, 240, 0.22)" stroke-width="1">
-                      <line x1="56" y1="50" x2="330" y2="50" />
-                      <line x1="56" y1="90" x2="330" y2="90" />
-                      <line x1="56" y1="130" x2="330" y2="130" />
-                      <line x1="56" y1="170" x2="330" y2="170" />
-                    </g>
-                    <g>
-                      <path
-                        d="M 60 150 C 96 130 124 112 152 104 C 182 96 210 78 238 72 C 266 66 294 54 320 46 L 320 200 L 60 200 Z"
-                        fill="url(#insightAreaGradient)"
-                        opacity="0.55"
-                      />
-                      <rect x="60" y="110" width="32" height="90" rx="8" fill="url(#insightBarGradient)" />
-                      <rect x="118" y="86" width="32" height="114" rx="8" fill="url(#insightBarGradient)" opacity="0.85" />
-                      <rect x="176" y="62" width="32" height="138" rx="8" fill="url(#insightBarGradient)" opacity="0.92" />
-                      <rect x="234" y="48" width="32" height="152" rx="8" fill="url(#insightBarGradient)" opacity="0.95" />
-                      <rect x="292" y="36" width="32" height="164" rx="8" fill="url(#insightBarGradient)" />
-                      <path
-                        d="M 60 150 C 96 130 124 112 152 104 C 182 96 210 78 238 72 C 266 66 294 54 320 46"
-                        fill="none"
-                        stroke="url(#insightLineGradient)"
-                        stroke-width="5"
-                        stroke-linecap="round"
-                      />
-                      <circle cx="118" cy="124" r="6" fill="rgba(192,132,252,0.95)" />
-                      <circle cx="176" cy="98" r="6" fill="rgba(192,132,252,0.95)" />
-                      <circle cx="234" cy="86" r="6" fill="rgba(192,132,252,0.95)" />
-                      <circle cx="292" cy="74" r="6" fill="rgba(192,132,252,0.95)" />
-                    </g>
-                  </svg>
-                  <ul class="insight-axis" aria-hidden="true">
-                    <li>2023 Q4</li>
-                    <li>2024 Q1</li>
-                    <li>2024 Q2</li>
-                    <li>2024 Q3</li>
-                    <li>2024 Q4</li>
-                  </ul>
+                  <div class="insight-chart-visual">
+                    <svg viewBox="0 0 360 220" role="presentation" focusable="false">
+                      <defs>
+                        <linearGradient id="insightBarGradient" x1="0" x2="0" y1="1" y2="0">
+                          <stop offset="0%" stop-color="rgba(14,165,233,0.2)" />
+                          <stop offset="50%" stop-color="rgba(56,189,248,0.65)" />
+                          <stop offset="100%" stop-color="rgba(125,211,252,0.95)" />
+                        </linearGradient>
+                        <linearGradient id="insightLineGradient" x1="0" x2="1" y1="0" y2="0">
+                          <stop offset="0%" stop-color="rgba(129,140,248,0.4)" />
+                          <stop offset="100%" stop-color="rgba(192,132,252,0.85)" />
+                        </linearGradient>
+                        <linearGradient id="insightAreaGradient" x1="0" x2="0" y1="0" y2="1">
+                          <stop offset="0%" stop-color="rgba(129,140,248,0.35)" />
+                          <stop offset="100%" stop-color="rgba(129,140,248,0)" />
+                        </linearGradient>
+                      </defs>
+                      <g stroke="rgba(226, 232, 240, 0.22)" stroke-width="1">
+                        <line x1="56" y1="50" x2="330" y2="50" />
+                        <line x1="56" y1="90" x2="330" y2="90" />
+                        <line x1="56" y1="130" x2="330" y2="130" />
+                        <line x1="56" y1="170" x2="330" y2="170" />
+                      </g>
+                      <g>
+                        <path
+                          d="M 60 150 C 96 130 124 112 152 104 C 182 96 210 78 238 72 C 266 66 294 54 320 46 L 320 200 L 60 200 Z"
+                          fill="url(#insightAreaGradient)"
+                          opacity="0.55"
+                        />
+                        <rect x="60" y="110" width="32" height="90" rx="8" fill="url(#insightBarGradient)" />
+                        <rect x="118" y="86" width="32" height="114" rx="8" fill="url(#insightBarGradient)" opacity="0.85" />
+                        <rect x="176" y="62" width="32" height="138" rx="8" fill="url(#insightBarGradient)" opacity="0.92" />
+                        <rect x="234" y="48" width="32" height="152" rx="8" fill="url(#insightBarGradient)" opacity="0.95" />
+                        <rect x="292" y="36" width="32" height="164" rx="8" fill="url(#insightBarGradient)" />
+                        <path
+                          d="M 60 150 C 96 130 124 112 152 104 C 182 96 210 78 238 72 C 266 66 294 54 320 46"
+                          fill="none"
+                          stroke="url(#insightLineGradient)"
+                          stroke-width="5"
+                          stroke-linecap="round"
+                        />
+                        <circle cx="118" cy="124" r="6" fill="rgba(192,132,252,0.95)" />
+                        <circle cx="176" cy="98" r="6" fill="rgba(192,132,252,0.95)" />
+                        <circle cx="234" cy="86" r="6" fill="rgba(192,132,252,0.95)" />
+                        <circle cx="292" cy="74" r="6" fill="rgba(192,132,252,0.95)" />
+                      </g>
+                    </svg>
+                    <ul class="insight-axis" aria-hidden="true">
+                      <li>2023 Q4</li>
+                      <li>2024 Q1</li>
+                      <li>2024 Q2</li>
+                      <li>2024 Q3</li>
+                      <li>2024 Q4</li>
+                    </ul>
+                  </div>
+                  <div class="insight-chart-caption">
+                    <span>KPI</span>
+                    <p>
+                      外部環境吸収指数は政策・需給シグナルを1時間単位で再計算し、施策インパクト期待値と同一スケールで比較。
+                      因果ストーリーと財務影響を一枚で読み解けるように構成しています。
+                    </p>
+                  </div>
+                  <div class="insight-highlights" aria-label="注目ポイント">
+                    <article class="insight-highlight">
+                      <span>因果パターン</span>
+                      <h5>政策ショックの吸収余地を+32％確保</h5>
+                      <p>需給指数と粗利ドライバーのズレを検知し、投資タイミングと原価対策の最適順序を提案します。</p>
+                    </article>
+                    <article class="insight-highlight">
+                      <span>意思決定サイクル</span>
+                      <h5>週次で差分アラートを配信</h5>
+                      <p>現場データと市況データのギャップをAIが分類し、経営会議の論点メモと想定問答を自動生成します。</p>
+                    </article>
+                    <article class="insight-highlight">
+                      <span>デザインレイヤー</span>
+                      <h5>役員説明用にそのまま転用可能</h5>
+                      <p>グラフとコピーは金融機関・取締役会向けテンプレートに沿っており、納得感のあるプレゼン資料へ即変換。</p>
+                    </article>
+                  </div>
                 </div>
               </div>
               <div class="insight-stats">
                 <article class="insight-stat">
                   <span>意思決定まで</span>
                   <strong>48H</strong>
-                  <p>政策変更・市況データの取り込みから経営会議用シナリオ提示まで最長48時間で完了。</p>
+                  <p>政策変更・市況データを自動集約し、粗利・CFインパクトを48時間以内に提示。経営会議の論点と推奨アクションを即共有。</p>
                 </article>
                 <article class="insight-stat">
                   <span>根拠の数値化</span>
                   <strong>26指標</strong>
-                  <p>財務・需要・生産性を横断する26指標を自動で再計算し、論点と影響度を見える化。</p>
+                  <p>PL・BS・CFを横断する26指標を同時に再計算し、金融機関や取締役会に耐える根拠資料をデザイン済みで納品。</p>
                 </article>
                 <article class="insight-stat">
                   <span>再現シナリオ</span>
                   <strong>3案/週</strong>
-                  <p>最適・挑戦・安全の3案をAIが提案し、診断士が業界基準と照合して仕上げます。</p>
+                  <p>最適・挑戦・安全の3案をAIが算出し、診断士が業界KPIと照合。実行計画とリスクヘッジを同梱します。</p>
                 </article>
               </div>
-              <ul class="insight-meta">
-                <li>
-                  <span>因果性</span>
-                  <p><strong>政策×需要×収益</strong>の連動を週次で再計算し、投資判断の根拠をログ化。</p>
-                </li>
-                <li>
-                  <span>論理性</span>
-                  <p>PL・BS・CFの整合性をAIが検証し、専門家が審査基準でチューニング。</p>
-                </li>
-                <li>
-                  <span>デザイン性</span>
-                  <p>光源とレイヤーを意識したダッシュボードが論点を整理し、意思決定を直感で理解。</p>
-                </li>
-                <li>
-                  <span>スマート性</span>
-                  <p>AIが異常値検出と影響シミュレーションを自動化。専門家が最重要論点に集約。</p>
-                </li>
-                <li>
-                  <span>納得性</span>
-                  <p>根拠ドキュメントと想定問答を添付し、取締役・金融機関の説明責任まで支援。</p>
-                </li>
-              </ul>
+              <div class="insight-meta-grid" aria-label="提供価値のフレーム">
+                <article class="insight-meta-card">
+                  <div class="insight-meta-icon">因</div>
+                  <div class="insight-meta-content">
+                    <h5>因果性</h5>
+                    <p><strong>政策×需要×収益</strong>の相互作用を連続シミュレーションし、投資判断の根拠をトレース可能なログで残します。</p>
+                  </div>
+                </article>
+                <article class="insight-meta-card">
+                  <div class="insight-meta-icon">論</div>
+                  <div class="insight-meta-content">
+                    <h5>論理性</h5>
+                    <p>PL・BS・CFの整合性をAIが検証し、中小企業診断士が金融機関基準でレビュー。意思決定のロジックを破綻なく構築。</p>
+                  </div>
+                </article>
+                <article class="insight-meta-card">
+                  <div class="insight-meta-icon">デ</div>
+                  <div class="insight-meta-content">
+                    <h5>デザイン性</h5>
+                    <p>光源と奥行きを意識した情報設計で、取締役・幹部が瞬時に優先順位を共有できるダッシュボードを提供します。</p>
+                  </div>
+                </article>
+                <article class="insight-meta-card">
+                  <div class="insight-meta-icon">智</div>
+                  <div class="insight-meta-content">
+                    <h5>スマート性</h5>
+                    <p>異常値検出と影響シミュレーションを自動化し、決裁に必要な論点のみを厳選。現場と経営の認識ズレを最小化。</p>
+                  </div>
+                </article>
+                <article class="insight-meta-card">
+                  <div class="insight-meta-icon">証</div>
+                  <div class="insight-meta-content">
+                    <h5>納得性</h5>
+                    <p>根拠ドキュメントと想定問答を同梱し、金融機関・株主への説明責任に耐えるストーリーを体系化します。</p>
+                  </div>
+                </article>
+              </div>
               <div class="insight-confidence">
                 <span>📈 根拠トレーサビリティ付き</span>
                 <span>🧠 診断士レビュー済み</span>
