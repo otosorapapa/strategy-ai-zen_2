@@ -645,7 +645,6 @@ const velocitySeries = [
 
 const velocityQuarters = ["2021Q4", "2022Q4", "2023Q4", "2024Q4"];
 const velocityMax = Math.max(...velocitySeries.flatMap((series) => series.values));
-const velocityGridLines = Array.from({ length: 5 }, (_, index) => index);
 
 type PainPoint = {
   caseId: string;
@@ -2116,7 +2115,6 @@ const Index = () => {
           style={{ backgroundPositionY: `${heroParallax * 0.5}px` }}
           aria-labelledby="hero-heading"
         >
-          <div className="hero-overlay" />
           <div className="container hero-inner">
             <div className="hero-copy" data-animate data-initial-visible="true">
               <span className="badge">年商5,000万〜15億円の経営者向け</span>
@@ -3058,7 +3056,6 @@ const Index = () => {
               </div>
             </div>
             <div className="process-flowchart" data-animate role="list">
-              <div className="process-flowchart__connector" aria-hidden="true" />
               {processTimeline.map((item, index) => {
                 const FlowIcon = item.icon;
                 return (
@@ -3225,7 +3222,6 @@ const Index = () => {
                 </div>
               </div>
               <div className="quarterly-visual" data-animate>
-                <span className="quarterly-visual__halo" aria-hidden="true" />
                 <div className="quarterly-visual__media" aria-hidden="true">
                   <img src={featureIntelligenceShot} alt="" loading="lazy" />
                 </div>
@@ -3262,11 +3258,6 @@ const Index = () => {
                     </div>
                   </div>
                   <div className="quarterly-board__chart">
-                    <div className="quarterly-board__chart-grid" aria-hidden="true">
-                      {velocityGridLines.map((line) => (
-                        <span key={`grid-${line}`} />
-                      ))}
-                    </div>
                     <svg
                       viewBox="0 0 100 60"
                       role="img"
