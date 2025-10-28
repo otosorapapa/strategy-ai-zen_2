@@ -4913,33 +4913,294 @@ svg {
 }
 
 .simulator-guidance {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(79, 163, 255, 0.18);
-  box-shadow: 0 12px 24px rgba(15, 37, 71, 0.08);
-  border-radius: 20px;
-  padding: 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(231, 244, 255, 0.96));
+  border: 1px solid rgba(79, 163, 255, 0.22);
+  box-shadow: 0 24px 48px rgba(15, 37, 71, 0.08);
+  border-radius: 28px;
+  padding: clamp(24px, 4vw, 40px);
   margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.simulator-guidance::after {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  border-radius: 22px;
+  border: 1px solid rgba(148, 197, 255, 0.18);
+  pointer-events: none;
+}
+
+.simulator-guidance__grid {
+  position: relative;
+  display: grid;
+  gap: clamp(24px, 3vw, 36px);
+  z-index: 1;
+}
+
+.simulator-guidance__content {
+  display: grid;
+  gap: clamp(20px, 2vw, 28px);
+}
+
+.simulator-guidance__intro {
+  display: grid;
+  gap: 12px;
+}
+
+.simulator-guidance__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(79, 163, 255, 0.12);
+  color: var(--navy-700);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 .simulator-guidance h3 {
-  margin: 0 0 12px;
-  font-size: 1.1rem;
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
   color: var(--navy-700);
 }
 
-.simulator-guidance ol {
-  margin: 0 0 12px 1.2em;
-  padding: 0;
-  color: var(--gray-700);
-  display: grid;
-  gap: 6px;
+.simulator-guidance__intro p {
+  margin: 0;
   font-size: 0.95rem;
+  color: var(--gray-600);
+  line-height: 1.7;
 }
 
-.simulator-guidance p {
+.simulator-guidance__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(16px, 2vw, 20px);
+}
+
+.simulator-guidance__steps li {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 20px;
+  padding: clamp(18px, 2vw, 22px);
+  box-shadow: 0 12px 24px rgba(15, 37, 71, 0.08);
+  display: grid;
+  gap: 10px;
+}
+
+.simulator-guidance__step-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.simulator-guidance__step-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: linear-gradient(140deg, rgba(79, 163, 255, 0.18), rgba(15, 37, 71, 0.12));
+  color: var(--navy-700);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.simulator-guidance__step-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.simulator-guidance__step-index {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--navy-600);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.simulator-guidance__steps h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--gray-900);
+}
+
+.simulator-guidance__step-description {
+  margin: 0;
+  color: var(--gray-700);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.simulator-guidance__step-detail {
+  margin: 0;
+  color: var(--gray-600);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.simulator-guidance__notes {
+  display: grid;
+  gap: 12px;
+}
+
+.simulator-guidance__note {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(79, 163, 255, 0.1);
+  color: var(--navy-700);
+}
+
+.simulator-guidance__note svg {
+  width: 22px;
+  height: 22px;
+}
+
+.simulator-guidance__note strong {
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.simulator-guidance__note p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--gray-700);
+  line-height: 1.6;
+}
+
+.simulator-guidance__visual {
+  display: flex;
+  align-items: stretch;
+}
+
+.simulator-guidance__visual-frame {
+  margin: 0;
+  border-radius: 24px;
+  border: 1px solid rgba(79, 163, 255, 0.28);
+  background: linear-gradient(180deg, rgba(13, 41, 71, 0.92), rgba(13, 41, 71, 0.78));
+  box-shadow: 0 24px 48px rgba(13, 41, 71, 0.4);
+  padding: clamp(20px, 2.5vw, 28px);
+  display: grid;
+  gap: clamp(18px, 2vw, 24px);
+  color: rgba(255, 255, 255, 0.92);
+  width: 100%;
+}
+
+.simulator-guidance__visual-screenshot {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+.simulator-guidance__visual-image {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.simulator-guidance__visual-caption {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+}
+
+.simulator-guidance__visual-caption strong {
+  font-size: 1rem;
+  color: #f5faff;
+}
+
+.simulator-guidance__visual-caption p {
   margin: 0;
   font-size: 0.9rem;
-  color: var(--gray-600);
+  color: rgba(223, 235, 255, 0.85);
+  line-height: 1.6;
+}
+
+.simulator-guidance__visual-highlights {
+  display: grid;
+  gap: 12px;
+}
+
+.simulator-guidance__visual-highlight {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+}
+
+.simulator-guidance__visual-highlight-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.12);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #f5faff;
+}
+
+.simulator-guidance__visual-highlight-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.simulator-guidance__visual-highlight span {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(223, 235, 255, 0.95);
+  margin-bottom: 2px;
+}
+
+.simulator-guidance__visual-highlight p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(223, 235, 255, 0.8);
+  line-height: 1.5;
+}
+
+@media (min-width: 900px) {
+  .simulator-guidance__grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: stretch;
+  }
+
+  .simulator-guidance__notes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .simulator-guidance__visual-highlights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1200px) {
+  .simulator-guidance__visual-highlights {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .simulator-summary {
