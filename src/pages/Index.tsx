@@ -2053,29 +2053,6 @@ const Index = () => {
       </header>
 
       <main>
-        <nav
-          className={`section-nav ${isScrolled ? "is-floating" : ""}`}
-          aria-label="ページ内ナビゲーション"
-        >
-          <div className="container">
-            <ul className="section-nav__list">
-              {sectionNavItems.map((section) => (
-                <li key={section.id}>
-                  <a
-                    className={`section-nav__link ${
-                      activeSection === section.id ? "is-active" : ""
-                    }`}
-                    href={`#${section.id}`}
-                    onClick={(event) => handleNavClick(event, section.id)}
-                    aria-current={activeSection === section.id ? "page" : undefined}
-                  >
-                    {section.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </nav>
         {/* ヒーローセクション: 価値訴求とアニメーション */}
         <section
           id="hero"
