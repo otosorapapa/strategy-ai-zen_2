@@ -249,41 +249,182 @@
         margin: 0;
       }
       .insight-chart {
-        border-radius: 1.5rem;
-        background: linear-gradient(160deg, rgba(15, 118, 110, 0.28), rgba(14, 165, 233, 0.25));
-        padding: 1.25rem;
         position: relative;
+        border-radius: 1.75rem;
+        background: linear-gradient(165deg, rgba(15, 118, 110, 0.22), rgba(14, 165, 233, 0.18), rgba(14, 165, 233, 0.12));
+        padding: 1.75rem;
+        border: 1px solid rgba(125, 211, 252, 0.35);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06), 0 32px 64px rgba(15, 23, 42, 0.2);
         overflow: hidden;
+      }
+      .insight-chart::before {
+        content: '';
+        position: absolute;
+        inset: -28% 45% auto -12%;
+        height: 320px;
+        background: radial-gradient(circle, rgba(14, 116, 144, 0.28), transparent 70%);
+        opacity: 0.9;
+        pointer-events: none;
       }
       .insight-chart::after {
         content: '';
         position: absolute;
-        inset: -10% -35% auto auto;
-        width: 220px;
-        height: 220px;
-        background: radial-gradient(circle, rgba(56, 189, 248, 0.35), transparent 65%);
-        filter: blur(0);
-        opacity: 0.7;
+        inset: auto -20% -35% 40%;
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(circle, rgba(56, 189, 248, 0.38), transparent 75%);
+        opacity: 0.8;
+        pointer-events: none;
+      }
+      .insight-chart-head {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+      .insight-chart-title {
+        display: grid;
+        gap: 0.4rem;
+      }
+      .insight-chart-title .chart-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        border-radius: 9999px;
+        padding: 0.35rem 0.9rem;
+        background: rgba(14, 165, 233, 0.18);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(226, 232, 240, 0.9);
+        border: 1px solid rgba(125, 211, 252, 0.35);
+        box-shadow: 0 10px 18px rgba(14, 165, 233, 0.24);
+      }
+      .insight-chart-title h4 {
+        margin: 0;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: rgba(226, 232, 240, 0.95);
+        letter-spacing: 0.01em;
+      }
+      .insight-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      .insight-legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.35rem 0.75rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: rgba(15, 23, 42, 0.28);
+        font-size: 0.75rem;
+        color: rgba(226, 232, 240, 0.9);
+        backdrop-filter: blur(6px);
+      }
+      .insight-legend-item strong {
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+      .insight-dot {
+        display: inline-block;
+        width: 0.75rem;
+        height: 0.75rem;
+        border-radius: 9999px;
+        box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.25);
+      }
+      .insight-dot--primary {
+        background: linear-gradient(135deg, rgba(56, 189, 248, 0.9), rgba(14, 165, 233, 0.95));
+      }
+      .insight-dot--secondary {
+        background: linear-gradient(135deg, rgba(129, 140, 248, 0.85), rgba(192, 132, 252, 0.85));
+      }
+      .insight-chart-body {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 0.85rem;
       }
       .insight-chart svg {
         width: 100%;
         height: auto;
         display: block;
+        filter: drop-shadow(0 18px 28px rgba(15, 23, 42, 0.35));
+      }
+      .insight-axis {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 0 0.25rem;
+        list-style: none;
+        margin: 0;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: rgba(226, 232, 240, 0.75);
+      }
+      .insight-axis li {
+        flex: 1 1 auto;
+        text-align: center;
+      }
+      .insight-stats {
+        position: relative;
+        z-index: 1;
+        margin-top: 1.5rem;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      }
+      .insight-stat {
+        border-radius: 1.25rem;
+        padding: 1rem 1.1rem;
+        border: 1px solid rgba(125, 211, 252, 0.35);
+        background: linear-gradient(150deg, rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.35));
+        box-shadow: 0 16px 30px rgba(15, 23, 42, 0.22);
+        display: grid;
+        gap: 0.4rem;
+      }
+      .insight-stat span {
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: rgba(148, 197, 253, 0.9);
+        font-weight: 700;
+      }
+      .insight-stat strong {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: rgba(224, 242, 254, 0.95);
+        letter-spacing: -0.01em;
+      }
+      .insight-stat p {
+        margin: 0;
+        font-size: 0.8rem;
+        line-height: 1.55;
+        color: rgba(226, 232, 240, 0.85);
       }
       .insight-meta {
         display: grid;
-        gap: 0.75rem;
+        gap: 0.9rem;
       }
       .insight-meta li {
         list-style: none;
         display: grid;
-        gap: 0.25rem;
-        padding-bottom: 0.75rem;
-        border-bottom: 1px solid rgba(148, 163, 184, 0.25);
-      }
-      .insight-meta li:last-child {
-        border-bottom: none;
-        padding-bottom: 0;
+        gap: 0.35rem;
+        padding: 0.9rem 1rem;
+        border-radius: 1rem;
+        background: rgba(15, 23, 42, 0.22);
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        box-shadow: 0 12px 22px rgba(15, 23, 42, 0.18);
       }
       .insight-meta span {
         font-size: 0.75rem;
@@ -302,6 +443,11 @@
         color: rgba(224, 242, 254, 0.95);
         font-weight: 700;
       }
+      @media (min-width: 768px) {
+        .insight-meta {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
       .insight-confidence {
         display: flex;
         flex-wrap: wrap;
@@ -313,10 +459,25 @@
         gap: 0.4rem;
         padding: 0.35rem 0.8rem;
         border-radius: 9999px;
-        background: rgba(15, 118, 110, 0.32);
+        background: linear-gradient(135deg, rgba(15, 118, 110, 0.42), rgba(14, 165, 233, 0.35));
+        border: 1px solid rgba(125, 211, 252, 0.35);
         font-size: 0.75rem;
         font-weight: 600;
         letter-spacing: 0.05em;
+        color: rgba(226, 232, 240, 0.92);
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18);
+      }
+      @media (max-width: 640px) {
+        .insight-chart-head {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        .insight-legend {
+          justify-content: flex-start;
+        }
+        .insight-chart {
+          padding: 1.5rem;
+        }
       }
       @media (min-width: 768px) {
         .hero-surface {
@@ -1400,31 +1561,95 @@
                   <p>AIが政策・市場・財務の相関を解析し、診断士が意思決定の筋道と説明資料を仕上げます。</p>
                 </div>
               </div>
-              <div class="insight-chart" aria-hidden="true">
-                <svg viewBox="0 0 320 180" role="presentation">
-                  <defs>
-                    <linearGradient id="barGradient" x1="0" x2="0" y1="1" y2="0">
-                      <stop offset="0%" stop-color="rgba(14,165,233,0.25)" />
-                      <stop offset="100%" stop-color="rgba(56,189,248,0.85)" />
-                    </linearGradient>
-                    <linearGradient id="lineGradient" x1="0" x2="1" y1="0" y2="0">
-                      <stop offset="0%" stop-color="rgba(125,211,252,0.4)" />
-                      <stop offset="100%" stop-color="rgba(255,255,255,0.9)" />
-                    </linearGradient>
-                  </defs>
-                  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="28" y="90" width="32" height="70" rx="6" fill="url(#barGradient)" />
-                    <rect x="84" y="64" width="32" height="96" rx="6" fill="url(#barGradient)" opacity="0.8" />
-                    <rect x="140" y="40" width="32" height="120" rx="6" fill="url(#barGradient)" opacity="0.95" />
-                    <rect x="196" y="58" width="32" height="102" rx="6" fill="url(#barGradient)" opacity="0.7" />
-                    <rect x="252" y="30" width="32" height="130" rx="6" fill="url(#barGradient)" opacity="1" />
-                    <path d="M 28 140 C 68 120 92 88 124 78 C 156 68 200 92 232 60 C 256 36 288 28 308 40" stroke="url(#lineGradient)" stroke-width="4" />
-                    <circle cx="84" cy="104" r="5" fill="rgba(125,211,252,0.95)" />
-                    <circle cx="140" cy="78" r="5" fill="rgba(125,211,252,0.95)" />
-                    <circle cx="196" cy="92" r="5" fill="rgba(125,211,252,0.95)" />
-                    <circle cx="252" cy="70" r="5" fill="rgba(125,211,252,0.95)" />
-                  </g>
-                </svg>
+              <div class="insight-chart" role="group" aria-labelledby="insight-chart-title">
+                <div class="insight-chart-head">
+                  <div class="insight-chart-title">
+                    <span class="chart-badge">週次アップデート</span>
+                    <h4 id="insight-chart-title">経営KPIの先読みシミュレーション</h4>
+                  </div>
+                  <div class="insight-legend" aria-hidden="true">
+                    <span class="insight-legend-item">
+                      <span class="insight-dot insight-dot--primary"></span>
+                      <strong>外部環境吸収指数</strong>
+                    </span>
+                    <span class="insight-legend-item">
+                      <span class="insight-dot insight-dot--secondary"></span>
+                      <strong>施策インパクト期待値</strong>
+                    </span>
+                  </div>
+                </div>
+                <div class="insight-chart-body">
+                  <svg viewBox="0 0 360 220" role="presentation" focusable="false">
+                    <defs>
+                      <linearGradient id="insightBarGradient" x1="0" x2="0" y1="1" y2="0">
+                        <stop offset="0%" stop-color="rgba(14,165,233,0.2)" />
+                        <stop offset="50%" stop-color="rgba(56,189,248,0.65)" />
+                        <stop offset="100%" stop-color="rgba(125,211,252,0.95)" />
+                      </linearGradient>
+                      <linearGradient id="insightLineGradient" x1="0" x2="1" y1="0" y2="0">
+                        <stop offset="0%" stop-color="rgba(129,140,248,0.4)" />
+                        <stop offset="100%" stop-color="rgba(192,132,252,0.85)" />
+                      </linearGradient>
+                      <linearGradient id="insightAreaGradient" x1="0" x2="0" y1="0" y2="1">
+                        <stop offset="0%" stop-color="rgba(129,140,248,0.35)" />
+                        <stop offset="100%" stop-color="rgba(129,140,248,0)" />
+                      </linearGradient>
+                    </defs>
+                    <g stroke="rgba(226, 232, 240, 0.22)" stroke-width="1">
+                      <line x1="56" y1="50" x2="330" y2="50" />
+                      <line x1="56" y1="90" x2="330" y2="90" />
+                      <line x1="56" y1="130" x2="330" y2="130" />
+                      <line x1="56" y1="170" x2="330" y2="170" />
+                    </g>
+                    <g>
+                      <path
+                        d="M 60 150 C 96 130 124 112 152 104 C 182 96 210 78 238 72 C 266 66 294 54 320 46 L 320 200 L 60 200 Z"
+                        fill="url(#insightAreaGradient)"
+                        opacity="0.55"
+                      />
+                      <rect x="60" y="110" width="32" height="90" rx="8" fill="url(#insightBarGradient)" />
+                      <rect x="118" y="86" width="32" height="114" rx="8" fill="url(#insightBarGradient)" opacity="0.85" />
+                      <rect x="176" y="62" width="32" height="138" rx="8" fill="url(#insightBarGradient)" opacity="0.92" />
+                      <rect x="234" y="48" width="32" height="152" rx="8" fill="url(#insightBarGradient)" opacity="0.95" />
+                      <rect x="292" y="36" width="32" height="164" rx="8" fill="url(#insightBarGradient)" />
+                      <path
+                        d="M 60 150 C 96 130 124 112 152 104 C 182 96 210 78 238 72 C 266 66 294 54 320 46"
+                        fill="none"
+                        stroke="url(#insightLineGradient)"
+                        stroke-width="5"
+                        stroke-linecap="round"
+                      />
+                      <circle cx="118" cy="124" r="6" fill="rgba(192,132,252,0.95)" />
+                      <circle cx="176" cy="98" r="6" fill="rgba(192,132,252,0.95)" />
+                      <circle cx="234" cy="86" r="6" fill="rgba(192,132,252,0.95)" />
+                      <circle cx="292" cy="74" r="6" fill="rgba(192,132,252,0.95)" />
+                    </g>
+                  </svg>
+                  <ul class="insight-axis" aria-hidden="true">
+                    <li>2023 Q4</li>
+                    <li>2024 Q1</li>
+                    <li>2024 Q2</li>
+                    <li>2024 Q3</li>
+                    <li>2024 Q4</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="insight-stats">
+                <article class="insight-stat">
+                  <span>意思決定まで</span>
+                  <strong>48H</strong>
+                  <p>政策変更・市況データの取り込みから経営会議用シナリオ提示まで最長48時間で完了。</p>
+                </article>
+                <article class="insight-stat">
+                  <span>根拠の数値化</span>
+                  <strong>26指標</strong>
+                  <p>財務・需要・生産性を横断する26指標を自動で再計算し、論点と影響度を見える化。</p>
+                </article>
+                <article class="insight-stat">
+                  <span>再現シナリオ</span>
+                  <strong>3案/週</strong>
+                  <p>最適・挑戦・安全の3案をAIが提案し、診断士が業界基準と照合して仕上げます。</p>
+                </article>
               </div>
               <ul class="insight-meta">
                 <li>
@@ -1437,12 +1662,21 @@
                 </li>
                 <li>
                   <span>デザイン性</span>
-                  <p>可視化されたダッシュボードと想定問答を用意し、経営会議で即議論できます。</p>
+                  <p>光源とレイヤーを意識したダッシュボードが論点を整理し、意思決定を直感で理解。</p>
+                </li>
+                <li>
+                  <span>スマート性</span>
+                  <p>AIが異常値検出と影響シミュレーションを自動化。専門家が最重要論点に集約。</p>
+                </li>
+                <li>
+                  <span>納得性</span>
+                  <p>根拠ドキュメントと想定問答を添付し、取締役・金融機関の説明責任まで支援。</p>
                 </li>
               </ul>
               <div class="insight-confidence">
                 <span>📈 根拠トレーサビリティ付き</span>
                 <span>🧠 診断士レビュー済み</span>
+                <span>🛡️ 機密保持・監査ログ対応</span>
               </div>
             </div>
             <div class="challenge-panel">
