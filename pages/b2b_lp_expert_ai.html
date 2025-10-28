@@ -97,625 +97,11 @@
         color: rgba(15, 118, 110, 0.9);
         font-weight: 600;
       }
-      .hero-grid {
-        position: relative;
-        display: grid;
-        gap: clamp(2rem, 4vw, 3rem);
-        border-radius: 2.5rem;
-        padding: clamp(2.5rem, 4vw, 3.5rem);
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        background:
-          radial-gradient(circle at top left, rgba(14, 165, 233, 0.18), transparent 55%),
-          radial-gradient(circle at top right, rgba(15, 118, 110, 0.18), transparent 60%),
-          rgba(255, 255, 255, 0.95);
-        box-shadow: 0 44px 88px rgba(15, 23, 42, 0.16);
-        overflow: hidden;
-      }
-      .hero-grid::after {
-        content: '';
-        position: absolute;
-        inset: auto -25% -40% auto;
-        width: 420px;
-        height: 420px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(14, 165, 233, 0.22), transparent 70%);
-        filter: blur(2px);
-        pointer-events: none;
-      }
-      @media (min-width: 1024px) {
-        .hero-grid {
-          grid-template-columns: minmax(0, 1.24fr) minmax(0, 0.94fr);
-          align-items: stretch;
-        }
-      }
-      @media (min-width: 1280px) {
-        .hero-grid {
-          grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-          padding: clamp(3rem, 3.2vw, 3.75rem);
-        }
-      }
-      .hero-main {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 1.75rem;
-      }
-      .hero-badge-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.75rem;
-        align-items: center;
-      }
-      .hero-trustmarks {
-        display: inline-flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        font-size: 0.75rem;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: rgba(15, 23, 42, 0.6);
-      }
-      .hero-trustmarks span {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        padding: 0.35rem 0.75rem;
-        border-radius: 999px;
-        background: rgba(15, 23, 42, 0.06);
-      }
-      .hero-title {
-        font-size: clamp(2.4rem, 1vw + 2.5rem, 3.3rem);
-        line-height: 1.15;
-        font-weight: 800;
-        color: rgb(15, 23, 42);
-        margin: 0;
-      }
-      .hero-copy {
-        font-size: clamp(1.05rem, 0.6vw + 1rem, 1.2rem);
-        line-height: 1.8;
-        color: rgb(51, 65, 85);
-        margin: 0;
-      }
-      .hero-proof {
-        display: flex;
-        gap: 0.75rem;
-        align-items: flex-start;
-        border-radius: 1.25rem;
-        background: linear-gradient(135deg, rgba(14, 165, 233, 0.12), rgba(13, 148, 136, 0.14));
-        border: 1px solid rgba(14, 165, 233, 0.3);
-        padding: 1rem 1.2rem;
-        font-size: 0.95rem;
-        line-height: 1.7;
-        color: rgb(30, 41, 59);
-      }
-      .hero-proof span {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 2rem;
-        height: 2rem;
-        border-radius: 0.75rem;
-        background: rgba(14, 165, 233, 0.18);
-        color: rgba(14, 116, 144, 0.9);
-        font-weight: 700;
-        font-size: 0.9rem;
-      }
-      .hero-stats {
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      }
-      .hero-stat {
-        border-radius: 1.5rem;
-        padding: 1.25rem;
-        background: rgba(255, 255, 255, 0.86);
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 12px 32px rgba(15, 23, 42, 0.12);
-        display: grid;
-        gap: 0.35rem;
-      }
-      .hero-stat strong {
-        font-size: 0.75rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: rgba(15, 23, 42, 0.55);
-      }
-      .hero-stat span {
-        font-size: 1.9rem;
-        font-weight: 800;
-        color: rgb(15, 23, 42);
-        letter-spacing: -0.01em;
-      }
-      .hero-stat p {
-        font-size: 0.85rem;
-        line-height: 1.6;
-        color: rgb(71, 85, 105);
-        margin: 0;
-      }
-      .hero-evidence-lattice {
-        display: grid;
-        gap: 0.85rem;
-        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-        padding: 0.85rem;
-        border-radius: 1.5rem;
-        background: rgba(255, 255, 255, 0.75);
-        border: 1px solid rgba(148, 163, 184, 0.28);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 18px 38px rgba(15, 23, 42, 0.12);
-      }
-      .hero-evidence-item {
-        position: relative;
-        border-radius: 1.25rem;
-        padding: 1rem 1.1rem 1.1rem;
-        background: linear-gradient(150deg, rgba(14, 165, 233, 0.16), rgba(13, 148, 136, 0.12));
-        border: 1px solid rgba(14, 165, 233, 0.22);
-        display: grid;
-        gap: 0.45rem;
-        min-height: 100%;
-      }
-      .hero-evidence-item::after {
-        content: '';
-        position: absolute;
-        inset: auto 16px -24px 16px;
-        height: 32px;
-        background: radial-gradient(circle, rgba(14, 165, 233, 0.18), transparent 70%);
-        opacity: 0.9;
-        pointer-events: none;
-      }
-      .hero-evidence-item strong {
-        font-size: 0.82rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: rgba(15, 23, 42, 0.66);
-      }
-      .hero-evidence-item span {
-        font-size: 1.05rem;
-        font-weight: 700;
-        color: rgb(15, 23, 42);
-      }
-      .hero-evidence-item p {
-        margin: 0;
-        font-size: 0.82rem;
-        line-height: 1.55;
-        color: rgba(51, 65, 85, 0.95);
-      }
-      .hero-insight-grid {
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
-      .hero-insight-card {
-        position: relative;
-        border-radius: 1.75rem;
-        padding: 1.5rem;
-        border: 1px solid rgba(148, 163, 184, 0.3);
-        background: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
-        display: grid;
-        gap: 0.5rem;
-      }
-      .hero-insight-card small {
-        font-size: 0.7rem;
-        letter-spacing: 0.12em;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: rgba(15, 23, 42, 0.55);
-      }
-      .hero-insight-card h2 {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: rgb(15, 23, 42);
-        margin: 0;
-      }
-      .hero-insight-card p {
-        font-size: 0.88rem;
-        line-height: 1.6;
-        color: rgb(71, 85, 105);
-        margin: 0;
-      }
-      .hero-aside {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 1.75rem;
-      }
-      .hero-aside-panels {
-        display: grid;
-        gap: clamp(1.5rem, 2vw, 2rem);
-      }
-      @media (min-width: 1280px) {
-        .hero-aside-panels {
-          grid-template-columns: minmax(0, 0.618fr) minmax(0, 1fr);
-          align-items: stretch;
-        }
-      }
-      .hero-aside-card {
-        border-radius: 1.75rem;
-        padding: clamp(1.5rem, 3vw, 2rem);
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        background: linear-gradient(155deg, rgba(15, 23, 42, 0.85), rgba(14, 116, 144, 0.75));
-        box-shadow: 0 24px 54px rgba(15, 23, 42, 0.18);
-        color: white;
-        display: grid;
-        gap: 1rem;
-      }
-      .hero-aside-card h3 {
-        font-size: 0.85rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        font-weight: 700;
-        color: rgba(226, 232, 240, 0.9);
-        margin: 0;
-      }
-      .hero-aside-card p {
-        font-size: 0.9rem;
-        line-height: 1.7;
-        color: rgba(226, 232, 240, 0.92);
-        margin: 0;
-      }
-      .hero-aside-card--light {
-        background: rgba(255, 255, 255, 0.94);
-        color: rgb(15, 23, 42);
-        box-shadow: 0 22px 44px rgba(15, 23, 42, 0.12);
-      }
-      .hero-aside-card--light h3 {
-        color: rgba(15, 23, 42, 0.7);
-      }
-      .hero-aside-card--light p {
-        color: rgb(71, 85, 105);
-      }
-      .hero-metric-list {
-        display: grid;
-        gap: 1.1rem;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      }
-      .hero-metric-list li {
-        display: grid;
-        gap: 0.15rem;
-      }
-      .hero-metric-label {
-        font-size: 0.85rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: rgba(226, 232, 240, 0.7);
-        font-weight: 600;
-      }
-      .hero-metric-value {
-        font-size: clamp(1.6rem, 1vw + 1.6rem, 2.2rem);
-        font-weight: 800;
-        letter-spacing: -0.015em;
-        color: white;
-      }
-      .hero-metric-note {
-        font-size: 0.78rem;
-        color: rgba(226, 232, 240, 0.75);
-      }
-      .value-shell {
-        position: relative;
-        border-radius: 2.25rem;
-        padding: clamp(2rem, 4vw, 3rem);
-        background: linear-gradient(140deg, rgba(226, 242, 255, 0.7), rgba(255, 255, 255, 0.95));
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        box-shadow: 0 32px 68px rgba(15, 23, 42, 0.12);
-        overflow: hidden;
-      }
-      .value-shell::before,
-      .value-shell::after {
-        content: '';
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(0.5px);
-        pointer-events: none;
-        opacity: 0.75;
-      }
-      .value-shell::before {
-        inset: -30% auto auto -10%;
-        width: 320px;
-        height: 320px;
-        background: radial-gradient(circle, rgba(14, 165, 233, 0.25), transparent 70%);
-      }
-      .value-shell::after {
-        inset: auto -25% -45% auto;
-        width: 360px;
-        height: 360px;
-        background: radial-gradient(circle, rgba(15, 118, 110, 0.22), transparent 70%);
-      }
-      .value-header {
-        position: relative;
-        z-index: 1;
-        display: grid;
-        gap: 1rem;
-        max-width: 760px;
-        margin-bottom: clamp(2rem, 4vw, 3rem);
-      }
-      .value-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.6rem;
-        border-radius: 9999px;
-        background: rgba(15, 23, 42, 0.08);
-        color: rgba(15, 23, 42, 0.75);
-        font-size: 0.78rem;
-        font-weight: 700;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        padding: 0.45rem 1.1rem;
-      }
-      .value-system {
-        position: relative;
-        z-index: 1;
-        display: grid;
-        gap: clamp(1.5rem, 3vw, 2.4rem);
-      }
-      @media (min-width: 1024px) {
-        .value-system {
-          grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-          align-items: stretch;
-        }
-      }
-      .value-diagram {
-        position: relative;
-        border-radius: 1.9rem;
-        padding: clamp(1.8rem, 3vw, 2.6rem);
-        background: linear-gradient(155deg, rgba(15, 23, 42, 0.85), rgba(14, 116, 144, 0.75));
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        box-shadow: 0 26px 58px rgba(15, 23, 42, 0.22);
-        color: rgba(226, 232, 240, 0.96);
-        overflow: hidden;
-      }
-      .value-diagram::before,
-      .value-diagram::after {
-        content: '';
-        position: absolute;
-        border-radius: 50%;
-        pointer-events: none;
-        opacity: 0.45;
-      }
-      .value-diagram::before {
-        inset: -35% auto auto -20%;
-        width: 320px;
-        height: 320px;
-        background: radial-gradient(circle, rgba(56, 189, 248, 0.35), transparent 70%);
-        filter: blur(1px);
-      }
-      .value-diagram::after {
-        inset: auto -30% -45% auto;
-        width: 280px;
-        height: 280px;
-        background: radial-gradient(circle, rgba(14, 165, 233, 0.28), transparent 70%);
-        filter: blur(0.5px);
-      }
-      .value-diagram h3 {
-        position: relative;
-        z-index: 1;
-        margin: 0;
-        font-size: 1.2rem;
-        font-weight: 700;
-        letter-spacing: -0.01em;
-        color: white;
-      }
-      .value-diagram p {
-        position: relative;
-        z-index: 1;
-        font-size: 0.9rem;
-        line-height: 1.75;
-        color: rgba(226, 232, 240, 0.85);
-        margin-top: 0.75rem;
-        margin-bottom: 1.25rem;
-      }
-      .value-diagram-list {
-        position: relative;
-        z-index: 1;
-        display: grid;
-        gap: 0.75rem;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-      .value-diagram-list li {
-        display: grid;
-        gap: 0.2rem;
-      }
-      .value-diagram-list strong {
-        font-size: 0.78rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: rgba(226, 232, 240, 0.7);
-      }
-      .value-diagram-list span {
-        font-size: 0.9rem;
-        line-height: 1.6;
-        color: rgba(241, 245, 249, 0.95);
-      }
-      .value-diagram-ring {
-        position: relative;
-        z-index: 1;
-        display: grid;
-        place-items: center;
-        width: clamp(220px, 32vw, 260px);
-        height: clamp(220px, 32vw, 260px);
-        margin: 0 auto clamp(1.5rem, 3vw, 2rem);
-        border-radius: 50%;
-        border: 1px solid rgba(148, 163, 184, 0.45);
-        background: radial-gradient(circle at center, rgba(15, 23, 42, 0.35), rgba(14, 116, 144, 0.4));
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 18px 44px rgba(15, 23, 42, 0.28);
-        padding: clamp(1.25rem, 2.5vw, 1.8rem);
-      }
-      .value-diagram-ring::after {
-        content: '因・論・デ・ス・納';
-        position: absolute;
-        inset: 1.4rem;
-        border-radius: 50%;
-        border: 1px dashed rgba(148, 163, 184, 0.5);
-        display: grid;
-        place-items: center;
-        font-size: 0.75rem;
-        letter-spacing: 0.35em;
-        color: rgba(226, 232, 240, 0.65);
-      }
-      .value-diagram-ring span {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 72px;
-        height: 72px;
-        border-radius: 999px;
-        background: rgba(56, 189, 248, 0.22);
-        color: rgba(241, 245, 249, 0.98);
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        box-shadow: 0 12px 28px rgba(14, 165, 233, 0.35);
-      }
-      .pillar-grid {
-        position: relative;
-        z-index: 1;
-        display: grid;
-        gap: clamp(1rem, 2.5vw, 1.5rem);
-      }
-      @media (min-width: 768px) {
-        .pillar-grid {
-          grid-template-columns: repeat(5, minmax(0, 1fr));
-        }
-      }
-      .pillar-card {
-        position: relative;
-        border-radius: 1.75rem;
-        padding: clamp(1.35rem, 2.6vw, 1.75rem);
-        background: rgba(255, 255, 255, 0.95);
-        border: 1px solid rgba(148, 163, 184, 0.3);
-        box-shadow: 0 22px 44px rgba(15, 23, 42, 0.1);
-        display: grid;
-        gap: 0.65rem;
-        min-height: 100%;
-        overflow: hidden;
-      }
-      .pillar-card::after {
-        content: '';
-        position: absolute;
-        inset: auto -40% -50% auto;
-        width: 220px;
-        height: 220px;
-        background: radial-gradient(circle, rgba(14, 165, 233, 0.18), transparent 70%);
-        opacity: 0.8;
-      }
-      .pillar-icon {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 2.75rem;
-        height: 2.75rem;
-        border-radius: 1rem;
-        background: linear-gradient(145deg, rgba(14, 165, 233, 0.92), rgba(6, 182, 212, 0.92));
-        color: white;
-        font-weight: 700;
-        font-size: 0.85rem;
-        letter-spacing: 0.06em;
-        box-shadow: 0 14px 28px rgba(14, 165, 233, 0.25);
-      }
-      .pillar-title {
-        font-size: 1rem;
-        font-weight: 700;
-        color: rgb(15, 23, 42);
-        margin: 0;
-      }
-      .pillar-copy {
-        font-size: 0.85rem;
-        line-height: 1.65;
-        color: rgb(71, 85, 105);
-      }
-      .pillar-evidence {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        font-size: 0.7rem;
-        font-weight: 700;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: rgba(15, 23, 42, 0.65);
-      }
-      .hero-visual {
-        position: relative;
-        border-radius: 1.75rem;
-        overflow: hidden;
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        background: linear-gradient(160deg, rgba(14, 165, 233, 0.16), rgba(13, 148, 136, 0.12));
-        box-shadow: 0 24px 48px rgba(15, 23, 42, 0.12);
-      }
-      .hero-visual::before {
-        content: '';
-        position: absolute;
-        inset: auto -20% -35% auto;
-        width: 280px;
-        height: 280px;
-        background: radial-gradient(circle, rgba(14, 165, 233, 0.45), transparent 70%);
-        pointer-events: none;
-      }
-      .hero-visual::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(180deg, rgba(15, 23, 42, 0) 40%, rgba(15, 23, 42, 0.78) 92%);
-        pointer-events: none;
-      }
-      .hero-visual img {
-        width: 100%;
-        height: auto;
-        display: block;
-      }
-      .hero-visual figcaption {
-        position: absolute;
-        inset: auto 1.5rem 1.5rem 1.5rem;
-        padding: 1rem 1.25rem;
-        border-radius: 1.25rem;
-        background: rgba(15, 23, 42, 0.82);
-        color: white;
-        font-size: 0.8rem;
-        line-height: 1.6;
-        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.32);
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        backdrop-filter: blur(12px);
-        z-index: 1;
-      }
-      @media (max-width: 767px) {
-        .hero-visual figcaption {
-          position: static;
-          margin: 1.25rem 1.25rem 1.5rem;
-        }
-      }
-      .scroll-indicator {
-        display: inline-flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.4rem;
-        font-size: 0.75rem;
-        color: rgba(15, 23, 42, 0.65);
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        margin-top: 1.5rem;
-        animation: float 2.6s ease-in-out infinite;
-      }
-      .scroll-indicator svg {
-        width: 1.1rem;
-        height: 1.1rem;
-      }
-      @keyframes float {
-        0%,
-        100% {
-          transform: translateY(0px);
-        }
-        50% {
-          transform: translateY(6px);
-        }
-      }
       .card {
         border-radius: 1.5rem;
         border: 1px solid rgba(148, 163, 184, 0.45);
         background-color: rgba(255, 255, 255, 0.92);
-        padding: clamp(1.1rem, 2vw, 1.4rem);
+        padding: 1.5rem;
         box-shadow: 0 16px 36px rgba(15, 23, 42, 0.08);
         backdrop-filter: blur(6px);
       }
@@ -760,7 +146,7 @@
       .role-card {
         position: relative;
         border-radius: 1.75rem;
-        padding: clamp(1.5rem, 2.5vw, 2rem);
+        padding: clamp(1.75rem, 3vw, 2.25rem);
         border: 1px solid rgba(148, 163, 184, 0.35);
         background: rgba(255, 255, 255, 0.92);
         box-shadow: 0 18px 42px rgba(15, 23, 42, 0.12);
@@ -867,21 +253,10 @@
         color: rgb(15, 23, 42);
       }
       .role-list {
-        display: grid;
-        gap: 0.9rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
         margin-bottom: 1.5rem;
-      }
-      @media (min-width: 640px) {
-        .role-list {
-          gap: 1rem;
-        }
-      }
-      @media (min-width: 1024px) {
-        .role-list {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          column-gap: 1.25rem;
-          row-gap: 1rem;
-        }
       }
       .role-list li {
         display: flex;
@@ -962,36 +337,28 @@
         margin: 0;
       }
       .challenge-panel {
-        border-radius: 1.75rem;
+        border-radius: 1.5rem;
         border: 1px solid rgba(148, 163, 184, 0.35);
-        background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(226, 232, 240, 0.92));
-        padding: clamp(1.75rem, 3vw, 2.25rem);
-        box-shadow: 0 28px 56px rgba(15, 23, 42, 0.16);
-        display: grid;
-        gap: 1.25rem;
+        background: rgba(248, 250, 252, 0.92);
+        padding: clamp(1.5rem, 3vw, 2rem);
+        box-shadow: 0 22px 44px rgba(15, 23, 42, 0.12);
       }
       .challenge-panel h2 {
         font-size: 1.1rem;
         font-weight: 700;
         color: rgb(15, 23, 42);
-        margin: 0;
+        margin-bottom: 1rem;
       }
       .challenge-list {
         display: grid;
-        gap: 1rem;
+        gap: 0.85rem;
         font-size: 0.95rem;
         color: rgb(71, 85, 105);
       }
       .challenge-list li {
-        display: grid;
-        gap: 0.4rem;
-        grid-template-columns: minmax(0, 0.382fr) minmax(0, 0.618fr);
-        align-items: start;
-      }
-      @media (max-width: 1023px) {
-        .challenge-list li {
-          grid-template-columns: auto 1fr;
-        }
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
       }
       .challenge-icon {
         display: inline-flex;
@@ -1000,38 +367,11 @@
         height: 2.5rem;
         width: 2.5rem;
         border-radius: 0.75rem;
-        background: linear-gradient(145deg, rgba(14, 165, 233, 0.2), rgba(14, 116, 144, 0.2));
+        background: rgba(14, 165, 233, 0.15);
         color: rgb(14, 116, 144);
         font-weight: 700;
         font-size: 0.8rem;
         letter-spacing: 0.04em;
-      }
-      .challenge-list p {
-        margin: 0;
-        line-height: 1.6;
-      }
-      .challenge-title {
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: rgb(15, 23, 42);
-        margin: 0;
-      }
-      .challenge-description {
-        font-size: 0.85rem;
-        color: rgb(71, 85, 105);
-        margin: 0;
-      }
-      .challenge-highlight {
-        border-radius: 1.25rem;
-        background: rgba(14, 165, 233, 0.1);
-        border: 1px solid rgba(14, 165, 233, 0.25);
-        padding: 1rem 1.25rem;
-        font-size: 0.8rem;
-        line-height: 1.6;
-        color: rgb(71, 85, 105);
-      }
-      .challenge-highlight strong {
-        color: rgb(15, 23, 42);
       }
       .section-title {
         font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
@@ -1122,119 +462,19 @@
         opacity: 0.9;
         pointer-events: none;
       }
-      .operating-shell {
-        border-radius: 2rem;
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        background: linear-gradient(150deg, rgba(15, 23, 42, 0.92), rgba(15, 118, 110, 0.85));
-        color: white;
-        padding: clamp(2rem, 4vw, 3rem);
-        box-shadow: 0 36px 72px rgba(15, 23, 42, 0.22);
-        display: grid;
-        gap: clamp(1.75rem, 4vw, 2.5rem);
-      }
-      @media (min-width: 1024px) {
-        .operating-shell {
-          grid-template-columns: 1.05fr 1fr;
-          align-items: stretch;
-        }
-      }
-      .operating-header {
-        display: grid;
-        gap: 1.25rem;
-      }
-      .operating-header h2 {
-        font-size: clamp(1.75rem, 2vw + 1rem, 2.3rem);
-        font-weight: 700;
-        line-height: 1.4;
-      }
-      .operating-header p {
-        font-size: 0.95rem;
-        line-height: 1.8;
-        color: rgba(241, 245, 249, 0.9);
-      }
-      .operating-badges {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.6rem;
-      }
-      .operating-badges span {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        border-radius: 9999px;
-        background: rgba(148, 163, 184, 0.18);
-        padding: 0.45rem 0.9rem;
-        font-size: 0.75rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-      .operating-scoreboard {
-        position: relative;
-        border-radius: 1.75rem;
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        background: rgba(15, 23, 42, 0.55);
-        padding: clamp(1.5rem, 3vw, 2rem);
-        display: grid;
-        gap: 1.25rem;
-        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-      }
-      .scoreboard-grid {
-        display: grid;
-        gap: 0.9rem;
-      }
-      @media (min-width: 768px) {
-        .scoreboard-grid {
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-        }
-      }
-      .scoreboard-card {
-        border-radius: 1.25rem;
-        background: rgba(15, 23, 42, 0.82);
-        border: 1px solid rgba(148, 163, 184, 0.32);
-        padding: 1rem;
-        display: grid;
-        gap: 0.6rem;
-        min-height: 100%;
-      }
-      .scoreboard-card strong {
-        font-size: 0.78rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: rgba(148, 163, 184, 0.9);
-      }
-      .scoreboard-card h3 {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: white;
-        line-height: 1.5;
-      }
-      .scoreboard-card p {
-        font-size: 0.8rem;
-        line-height: 1.6;
-        color: rgba(226, 232, 240, 0.85);
-      }
-      .scoreboard-metric {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.4rem;
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: rgba(96, 165, 250, 0.95);
-      }
-      .scoreboard-note {
-        font-size: 0.78rem;
-        line-height: 1.6;
-        color: rgba(226, 232, 240, 0.8);
-      }
       .workflow {
         display: grid;
-        gap: clamp(1.1rem, 2vw, 1.5rem);
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+      }
+      @media (min-width: 768px) {
+        .workflow {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
       }
       .workflow-step {
         position: relative;
         border-radius: 1.5rem;
-        padding: clamp(1.5rem, 2.5vw, 2.15rem);
+        padding: clamp(1.75rem, 3vw, 2.5rem);
         background: linear-gradient(160deg, rgba(240, 249, 255, 0.95), rgba(224, 242, 254, 0.85));
         border: 1px solid rgba(56, 189, 248, 0.35);
         box-shadow: 0 18px 42px rgba(15, 23, 42, 0.1);
@@ -1332,12 +572,12 @@
         border-radius: 1.5rem;
         border: 1px solid rgba(148, 163, 184, 0.35);
         background: linear-gradient(155deg, rgba(255, 255, 255, 0.98), rgba(241, 245, 249, 0.85));
-        padding: 1.35rem;
+        padding: 1.5rem;
         box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
         backdrop-filter: blur(12px);
         display: flex;
         flex-direction: column;
-        gap: 0.95rem;
+        gap: 1rem;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
       @media (max-width: 1023px) {
@@ -1358,7 +598,7 @@
       }
       @media (min-width: 1024px) {
         .timeline-step {
-          padding: 1.85rem 1.6rem 1.6rem;
+          padding: 2rem 1.75rem 1.75rem;
         }
         .timeline-step::before {
           content: '';
@@ -1471,52 +711,6 @@
         padding: 1.25rem 1.5rem;
         color: rgb(71, 85, 105);
         font-size: 0.85rem;
-      }
-      .roi-grid {
-        display: grid;
-        gap: 1.25rem;
-      }
-      @media (min-width: 768px) {
-        .roi-grid {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-      }
-      .roi-card {
-        border-radius: 1.5rem;
-        border: 1px solid rgba(14, 165, 233, 0.35);
-        background: linear-gradient(160deg, rgba(224, 242, 254, 0.85), rgba(209, 250, 229, 0.75));
-        padding: 1.5rem;
-        box-shadow: 0 18px 42px rgba(15, 23, 42, 0.12);
-        display: grid;
-        gap: 0.75rem;
-      }
-      .roi-card h3 {
-        font-size: 1rem;
-        font-weight: 700;
-        color: rgb(15, 23, 42);
-      }
-      .roi-metric {
-        font-size: 2rem;
-        font-weight: 800;
-        color: rgb(6, 182, 212);
-      }
-      .roi-bar {
-        position: relative;
-        height: 0.75rem;
-        border-radius: 9999px;
-        background: rgba(226, 232, 240, 0.7);
-        overflow: hidden;
-      }
-      .roi-bar span {
-        position: absolute;
-        inset: 0;
-        border-radius: 9999px;
-        background: linear-gradient(135deg, rgba(14, 165, 233, 0.9), rgba(6, 182, 212, 0.85));
-      }
-      .data-note {
-        font-size: 0.75rem;
-        color: rgb(100, 116, 139);
-        line-height: 1.6;
       }
       .faq-question {
         text-align: left;
@@ -1882,262 +1076,97 @@
         <a href="#hero" class="text-sm font-semibold tracking-[0.18em] text-slate-800">STRATEGY AI LAB</a>
         <nav class="hidden items-center gap-6 text-sm font-medium text-slate-700 md:flex">
           <a href="#challenges" class="hover:text-slate-900">課題</a>
-          <a href="#pillars" class="hover:text-slate-900">価値基準</a>
-          <a href="#approach" class="hover:text-slate-900">解決策</a>
           <a href="#equation" class="hover:text-slate-900">価値設計</a>
-          <a href="#benefits" class="hover:text-slate-900">成果</a>
           <a href="#causality" class="hover:text-slate-900">因果設計</a>
-          <a href="#operating-system" class="hover:text-slate-900">四半期設計</a>
+          <a href="#approach" class="hover:text-slate-900">解決策</a>
+          <a href="#benefits" class="hover:text-slate-900">成果</a>
           <a href="#social-proof" class="hover:text-slate-900">実績</a>
           <a href="#process" class="hover:text-slate-900">支援プロセス</a>
           <a href="#pricing" class="hover:text-slate-900">料金</a>
           <a href="#contact" class="hover:text-slate-900">相談</a>
         </nav>
-        <div class="flex items-center gap-3">
-          <a href="tel:0922312920" class="text-xs font-semibold tracking-[0.18em] text-slate-600"
-            >TEL 092-231-2920（平日9:00-18:00）</a
-          >
-          <a href="#consult-form" class="btn-secondary min-w-[44px]">無料経営診断を申し込む</a>
-        </div>
+        <a href="#consult-form" class="btn-secondary min-w-[44px]">無料経営診断を申し込む</a>
       </div>
     </header>
     <main class="space-y-20 pb-24 pt-16 md:space-y-28 md:pt-24">
       <section id="hero" class="mx-auto w-full max-w-6xl px-5" data-animate>
-        <div class="hero-grid">
-          <div class="hero-main">
-            <div class="hero-badge-row">
-              <span class="badge">年商5,000万円〜15億円の製造・建設業経営者向け｜3ヶ月集中プログラム</span>
-              <div class="hero-trustmarks">
-                <span>Certified SME Consultant</span>
-                <span>AI Strategy Studio</span>
-              </div>
-            </div>
+        <div class="grid gap-10 rounded-3xl border border-slate-200 bg-white/90 p-8 shadow-lg md:grid-cols-[1.15fr,0.85fr] md:p-12">
+          <div class="space-y-6">
+            <span class="badge">年商5,000万円〜15億円の製造・建設業経営者向け｜3ヶ月集中プログラム</span>
             <div class="flex flex-wrap gap-2">
               <span class="accent-pill">利益とキャッシュを同時改善</span>
               <span class="accent-pill">初めてのAI導入でも診断士が伴走</span>
             </div>
-            <h1 class="hero-title">
+            <h1 class="text-3xl font-bold leading-snug text-slate-900 md:text-4xl">
               経営改善で鍛えた専門家×生成AI = 意思決定の質・速さ・先見性を高める経営計画
             </h1>
-            <p class="hero-copy">
+            <p class="text-base leading-relaxed text-slate-700 md:text-lg">
               政策・市場・財務データをAIが24時間統合し、中小企業診断士が経営判断の論点と資料を磨き上げます。<strong>意思決定時間50％削減・3ヶ月で粗利率＋5pt・キャッシュ創出1.8倍</strong>など、利益と資金繰りを同時に改善した事例が生まれています。
             </p>
-            <div class="hero-proof">
-              <span>INS</span>
-              <p>
-                Foster School of Businessの研究でも、人間が判断しAIが大量データを絞り込むことで意思決定の質とスピードが向上すると示されています。専門家がAI活用のルール設計から金融機関説明まで伴走するため、初めての導入でも安心して未来志向の計画を描けます。
-              </p>
-            </div>
-            <div class="hero-stats">
-              <div class="hero-stat">
-                <strong>意思決定時間</strong>
-                <span>▲50%</span>
-                <p>因果マップとリスクシグナルを24時間更新し、会議準備を半減。</p>
-              </div>
-              <div class="hero-stat">
-                <strong>粗利率</strong>
-                <span>＋5pt</span>
-                <p>攻めと守りのシナリオ比較で利益とキャッシュを同時に改善。</p>
-              </div>
-              <div class="hero-stat">
-                <strong>キャッシュ創出</strong>
-                <span>1.8倍</span>
-                <p>回収サイト短縮と資金繰り表の自動化で投資余力を確保。</p>
-              </div>
-            </div>
-            <div class="hero-evidence-lattice">
-              <div class="hero-evidence-item">
-                <strong>Causality</strong>
-                <span>因果性</span>
-                <p>粗利・キャッシュ・在庫の遅延関係をAIが数値化し、意思決定の根拠を即提示。</p>
-              </div>
-              <div class="hero-evidence-item">
-                <strong>Logic</strong>
-                <span>論理性</span>
-                <p>診断士が稟議ロジックと想定問答を整え、金融機関・投資家に説明できる骨子へ。</p>
-              </div>
-              <div class="hero-evidence-item">
-                <strong>Design</strong>
-                <span>デザイン性</span>
-                <p>立体的なダッシュボードUIで重要指標を階層化。「投資したくなる」体験を演出。</p>
-              </div>
-              <div class="hero-evidence-item">
-                <strong>Smartness</strong>
-                <span>スマート性</span>
-                <p>政策・市場データとSlack/Teamsアラートを連動し、判断タイミングを逃さない。</p>
-              </div>
-              <div class="hero-evidence-item">
-                <strong>Trust</strong>
-                <span>納得性</span>
-                <p>経営陣・現場・金融機関の視点を統合し、合意形成までのリードタイムを短縮。</p>
-              </div>
-            </div>
+            <p class="text-sm leading-relaxed text-slate-600 md:text-base">
+              Foster School of Businessの研究でも、人間が判断しAIが大量データを絞り込むことで意思決定の質とスピードが向上すると示されています。専門家がAI活用のルール設計から金融機関説明まで伴走するため、初めての導入でも安心して未来志向の計画を描けます。
+            </p>
             <div class="flex flex-col gap-3 sm:flex-row">
-              <a href="#consult-form" class="btn-primary w-full sm:w-auto">30分無料相談を予約</a>
-              <a href="#sample" class="btn-secondary w-full sm:w-auto" data-arrow="false">3分で分かる資料をダウンロード</a>
+              <a href="#consult-form" class="btn-primary w-full sm:w-auto">無料経営診断を申し込む→</a>
+              <a href="#sample" class="btn-secondary w-full sm:w-auto" data-arrow="false">資料を受け取る</a>
+              <a href="tel:0300001234" class="btn-secondary w-full sm:w-auto" data-arrow="false">電話で相談する</a>
             </div>
             <div class="cta-options">
               <span>⚡ 3分AI診断で課題を棚卸し</span>
               <span>🗓️ 48時間以内に初回提案</span>
-              <span>📞 電話予約：092-231-2920（平日9:00-18:00）</span>
+              <span>📞 電話予約：03-0000-1234（平日9〜18時）</span>
             </div>
             <p class="text-xs text-slate-500">
               ※AIは意思決定を補助するツールであり、最終判断は経営者が行います。
             </p>
-            <div class="hero-insight-grid">
-              <article class="hero-insight-card">
-                <small>AI OPERATIONS</small>
-                <h2>政策・市場・財務データを24時間統合</h2>
-                <p>政策変更・業界指標・PL/BS/CFを自動収集し、粗利／キャッシュ／在庫の因果マップと想定問答を提示。</p>
+            <div class="grid gap-4 pt-4 sm:grid-cols-2">
+              <article class="card space-y-2">
+                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">AI</p>
+                <h2 class="text-lg font-semibold text-slate-900">政策・市場・財務データを統合</h2>
+                <p class="text-sm text-slate-600">政策変更・業界指標・PL/BS/CFを自動収集し、複数シナリオと想定問答、粗利/キャッシュ/在庫の週次図解レポートを提示。</p>
               </article>
-              <article class="hero-insight-card">
-                <small>EXPERT REVIEW</small>
-                <h2>診断士・財務専門家が信用力ある計画へ</h2>
-                <p>融資・補助金の審査基準を踏まえ、AIドラフトを根拠資料とストーリーで磨き込み、実行体制を伴走。</p>
+              <article class="card space-y-2">
+                <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">EXPERT</p>
+                <h2 class="text-lg font-semibold text-slate-900">診断士・会計士が信用力ある計画へ</h2>
+                <p class="text-sm text-slate-600">融資・投資の審査基準を踏まえたブラッシュアップと説明資料作成を支援。月次オンライン面談で進捗をレビューし、施策実行を伴走。</p>
               </article>
             </div>
-            <a href="#challenges" class="scroll-indicator" aria-label="スクロールして詳細を見る">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.6" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12.75 12 20.25 4.5 12.75M12 3.75v16.5" />
-              </svg>
-              <span>Scroll</span>
-            </a>
           </div>
-          <div class="hero-aside">
-            <figure class="hero-visual">
-              <img
-                src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1200&q=80"
-                alt="生成AIのダッシュボードを前に、役員と専門家が戦略の意思決定を行う取締役会の様子"
-                loading="lazy"
-              />
-              <figcaption>
-                生成AIが日次で更新する意思決定ダッシュボードと、診断士が磨き上げた稟議資料サマリー。会議準備時間▲1,200時間／年、融資審査通過率＋18ptの成果を視覚化しています。
-              </figcaption>
-            </figure>
-            <div class="hero-aside-panels">
-              <div class="hero-aside-card">
-                <h3>Quarterly Strategy Scorecard</h3>
-                <p>四半期ごとに戦略と実行を再設計するエグゼクティブダッシュボード。因果マップとリスクヒートマップで投資判断を立体的に可視化します。</p>
-                <ul class="hero-metric-list">
-                  <li>
-                    <span class="hero-metric-label">リードタイム</span>
-                    <span class="hero-metric-value">▲52%</span>
-                    <span class="hero-metric-note">意思決定〜実行までの遅延を圧縮</span>
-                  </li>
-                  <li>
-                    <span class="hero-metric-label">審査通過率</span>
-                    <span class="hero-metric-value">＋18pt</span>
-                    <span class="hero-metric-note">金融機関・投資家向け資料を48時間で整備</span>
-                  </li>
-                  <li>
-                    <span class="hero-metric-label">会議準備時間</span>
-                    <span class="hero-metric-value">▲1,200h</span>
-                    <span class="hero-metric-note">ダッシュボード更新と資料作成を自動化</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="challenge-panel">
-                <h2>経営者が直面する代表的な課題</h2>
-                <ul class="challenge-list">
-                  <li>
-                    <div class="challenge-icon">01</div>
-                    <div>
-                      <p class="challenge-title">管理会計が現場任せで真の利益が見えない</p>
-                      <p class="challenge-description">部門別の粗利や案件別の採算が集計されず、改善の優先順位が決められない。</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="challenge-icon">02</div>
-                    <div>
-                      <p class="challenge-title">資金繰り表が更新されず先のキャッシュが不透明</p>
-                      <p class="challenge-description">売掛・支払予定のデータがばらばらで、金融機関への説明が後手に回る。</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="challenge-icon">03</div>
-                    <div>
-                      <p class="challenge-title">会議準備と資料作成に時間を奪われる</p>
-                      <p class="challenge-description">指標更新に毎月40時間以上かかり、経営会議が資料説明で終わってしまう。</p>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="challenge-icon">04</div>
-                    <div>
-                      <p class="challenge-title">中長期シナリオが描けず一手先の判断に終始</p>
-                      <p class="challenge-description">政策・市場の変化を織り込めず、既存計画が形骸化して投資判断が遅延。</p>
-                    </div>
-                  </li>
-                </ul>
-                <div class="challenge-highlight">
-                  <strong>3分で課題を棚卸し</strong>
-                  <p>AIレポートが年間1,200時間の単純作業を削減した企業の診断テンプレートを活用できます。</p>
+          <div class="challenge-panel">
+            <h2>経営者が直面する代表的な課題</h2>
+            <ul class="challenge-list">
+              <li>
+                <div class="challenge-icon">01</div>
+                <div>
+                  <p class="font-semibold text-slate-900">管理会計が現場任せで真の利益が見えない</p>
+                  <p>部門別の粗利や案件別の採算が集計されず、改善の優先順位が決められない。</p>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="pillars" class="mx-auto w-full max-w-6xl px-5" data-animate>
-        <div class="value-shell">
-          <div class="value-header">
-            <span class="value-pill">BOARD-LEVEL VALUE ARCHITECTURE</span>
-            <h2 class="section-title">因果性・論理性・デザイン性・スマート性・納得性を同時に満たす統合設計</h2>
-            <p class="section-subtitle">
-              年商5,000万円〜15億円の企業が四半期ごとに戦略と実行を再設計できるよう、AIが広域データを統合し、診断士が論理を磨き、経営者が即断できるUI/UXを構築。各要素を明確に可視化することで、意思決定の納得度を高めます。
-            </p>
-          </div>
-          <div class="value-system">
-            <div class="value-diagram">
-              <div class="value-diagram-ring"><span>CLDST</span></div>
-              <h3>Board Ready Evidence Loop</h3>
-              <p>因果性（Causality）から納得性（Trust）までを一気通貫で設計。AIがデータ同化→専門家が論点監査→経営者が意思決定UIで合意形成という循環を仕組み化しています。</p>
-              <ul class="value-diagram-list">
-                <li>
-                  <strong>24h DATA FUSION</strong>
-                  <span>政策・市場・財務を統合し、遅延要因や相関を定量化。因果マップが次の会議に直結。</span>
-                </li>
-                <li>
-                  <strong>EXPERT LOGIC REVIEW</strong>
-                  <span>診断士と財務専門家がストーリーと想定問答を監査。論理の飛躍を排除し、審査に耐える構成へ。</span>
-                </li>
-                <li>
-                  <strong>IMMERSIVE DECISION UI</strong>
-                  <span>立体的なUIとアラート設計で、役員・現場・金融機関が同じ景色を見ながら意思決定できる状態を維持。</span>
-                </li>
-              </ul>
-            </div>
-            <div class="pillar-grid">
-              <article class="pillar-card">
-                <div class="pillar-icon">C</div>
-                <h3 class="pillar-title">因果性</h3>
-                <p class="pillar-copy">粗利・キャッシュ・在庫を結ぶ因果マップをAIが自動生成。指標間の遅延や連動度を定量化し、改善施策の優先順位を即座に判断できます。</p>
-                <span class="pillar-evidence">Lag-Impact可視化／24h更新</span>
-              </article>
-              <article class="pillar-card">
-                <div class="pillar-icon">L</div>
-                <h3 class="pillar-title">論理性</h3>
-                <p class="pillar-copy">診断士・財務会計専門家が金融機関の審査基準に沿ってストーリーを再構築。想定問答とリスク対応までセット化し、稟議スピードを加速します。</p>
-                <span class="pillar-evidence">審査ロジック×想定問答</span>
-              </article>
-              <article class="pillar-card">
-                <div class="pillar-icon">D</div>
-                <h3 class="pillar-title">デザイン性</h3>
-                <p class="pillar-copy">経営会議資料・ダッシュボードを立体感のあるUIで整理。重要指標は色と余白で階層化され、直感的に読み解ける「投資したくなる」世界観を演出。</p>
-                <span class="pillar-evidence">Executive Dashboard UI</span>
-              </article>
-              <article class="pillar-card">
-                <div class="pillar-icon">S</div>
-                <h3 class="pillar-title">スマート性</h3>
-                <p class="pillar-copy">政策・市場の速報値を自動取得し、週次でKPIを更新。Slack/Teamsへアラートを連動させ、判断タイミングを逃さない体制を実現します。</p>
-                <span class="pillar-evidence">自動アラート×週次レビュー</span>
-              </article>
-              <article class="pillar-card">
-                <div class="pillar-icon">T</div>
-                <h3 class="pillar-title">納得性</h3>
-                <p class="pillar-copy">経営陣・現場・金融機関の視点を統合した共通言語を整備。四半期の意思決定サイクルをフォーマット化し、ステークホルダーの合意形成を高速化。</p>
-                <span class="pillar-evidence">マルチステークホルダー合意</span>
-              </article>
+              </li>
+              <li>
+                <div class="challenge-icon">02</div>
+                <div>
+                  <p class="font-semibold text-slate-900">資金繰り表が更新されず先のキャッシュが不透明</p>
+                  <p>売掛・支払予定のデータがばらばらで、金融機関への説明が後手に回る。</p>
+                </div>
+              </li>
+              <li>
+                <div class="challenge-icon">03</div>
+                <div>
+                  <p class="font-semibold text-slate-900">会議準備と資料作成に時間を奪われる</p>
+                  <p>指標更新に毎月40時間以上かかり、経営会議が資料説明で終わってしまう。</p>
+                </div>
+              </li>
+              <li>
+                <div class="challenge-icon">04</div>
+                <div>
+                  <p class="font-semibold text-slate-900">中長期シナリオが描けず一手先の判断に終始</p>
+                  <p>政策・市場の変化を織り込めず、既存計画が形骸化して投資判断が遅延。</p>
+                </div>
+              </li>
+            </ul>
+            <div class="mt-6 rounded-2xl bg-white/90 p-4 text-xs text-slate-600">
+              <p class="font-semibold text-slate-900">3分で課題を棚卸し</p>
+              <p class="mt-2">AIレポートが年間1,200時間の単純作業を削減した企業の診断テンプレートを活用できます。</p>
             </div>
           </div>
         </div>
@@ -2164,7 +1193,7 @@
             </div>
             <div class="workflow-step" data-step="Step 4">
               <h3>専門家が計画と実行体制を磨き上げ</h3>
-              <p>中小企業診断士・財務会計専門家がAIドラフトを審査目線でレビューし、根拠資料とリスク対応策を補強。稟議資料・会議アジェンダを仕上げ、実行モニタリングまで伴走します。</p>
+              <p>中小企業診断士・会計士がAIドラフトを審査目線でレビューし、根拠資料とリスク対応策を補強。稟議資料・会議アジェンダを仕上げ、実行モニタリングまで伴走します。</p>
             </div>
           </div>
         </div>
@@ -2338,7 +1367,7 @@
             <span class="equation-pill">因果性 × 論理性 × デザイン性 × スマート性</span>
             <h2 class="section-title">生成AIと専門家、そして経営者の洞察を式にした「戦略同時通訳」</h2>
             <p class="section-subtitle">
-              生成AIは政策・市場・自社データを統合し、数分で複数の経営シナリオと財務計画を生成します。さらに中小企業診断士や財務会計専門家が資金調達基準まで磨き上げることで、従来は数週間かかっていた計画作成が大幅に短縮されます。その成果を経営者が判断軸として取り込み、意思決定を“作業”から“決断”へとシフトします。
+              生成AIは政策・市場・自社データを統合し、数分で複数の経営シナリオと財務計画を生成します。さらに中小企業診断士や公認会計士が資金調達基準まで磨き上げることで、従来は数週間かかっていた計画作成が大幅に短縮されます。その成果を経営者が判断軸として取り込み、意思決定を“作業”から“決断”へとシフトします。
             </p>
           </div>
           <div class="equation-grid">
@@ -2383,7 +1412,7 @@
               <div>
                 <h3>専門家｜審査に耐える論理構築</h3>
                 <p>
-                  中小企業診断士・財務会計専門家がAIの提案を金融機関視点で検証。リスク対策と実行計画まで言語化し、投資家・金融機関を納得させる資料に昇華します。
+                  中小企業診断士・公認会計士がAIの提案を金融機関視点で検証。リスク対策と実行計画まで言語化し、投資家・金融機関を納得させる資料に昇華します。
                 </p>
               </div>
             </article>
@@ -2425,7 +1454,7 @@
           <div class="space-y-4">
             <h2 class="section-title">成果とベネフィット</h2>
             <p class="section-subtitle">
-              AIが単純作業を削減して意思決定に充てる時間を創出し、リアルタイムな政策・市場変化を反映したシナリオを提示。診断士が磨き上げることで意思決定の速さと質、金融機関への説明力が同時に高まります。<a href="https://blog.iil.com/how-artificial-intelligence-is-transforming-project-management/" class="text-sky-600 underline" target="_blank" rel="noopener">blog.iil.comによると</a>、AIは反復作業を削減し経営判断をデータで支援するため、現場の集中力を高められます。Workastの調査やApp Advisory Plusの事例と同様に、現場の時間と成果の両立を実現します。
+              AIが単純作業を削減して意思決定に充てる時間を創出し、リアルタイムな政策・市場変化を反映したシナリオを提示。診断士が磨き上げることで意思決定の速さと質、金融機関への説明力が同時に高まります。AI導入企業の80％が業務効率を向上させたというWorkastの調査や、AI研修で年間7週間の工数を削減したApp Advisory Plusの事例と同様に、現場の時間と成果の両立を実現します。
             </p>
           </div>
           <div class="grid gap-4 md:grid-cols-4">
@@ -2528,54 +1557,6 @@
         </div>
       </section>
 
-      <section id="operating-system" class="mx-auto w-full max-w-6xl px-5" data-animate>
-        <div class="operating-shell">
-          <div class="operating-header">
-            <span class="value-pill">Quarterly Strategy &amp; Execution OS</span>
-            <h2>四半期ごとに「戦略再設計→実行→学習」を閉じる経営オペレーティングシステム</h2>
-            <p>
-              経営者が毎四半期に意思決定の質とスピードを検証できるよう、AIが最新データを取り込み、専門家が投資判断の論点を整理。取締役会・金融機関・現場が同じフォーマットで状況を把握し、納得度の高い合意形成を実現します。
-            </p>
-            <div class="operating-badges">
-              <span>QBR対応</span>
-              <span>月次レビュー45分</span>
-              <span>Slack/Teams連携</span>
-            </div>
-          </div>
-          <div class="operating-scoreboard">
-            <div class="scoreboard-grid">
-              <article class="scoreboard-card">
-                <strong>Quarter 1</strong>
-                <h3>外部環境×財務KPIのギャップ診断</h3>
-                <p>政策改定・需要シグナルと自社PL/CFのギャップをAIが抽出。専門家が優先課題を3テーマに圧縮します。</p>
-                <span class="scoreboard-metric">Lead Time ▲52%</span>
-              </article>
-              <article class="scoreboard-card">
-                <strong>Quarter 2</strong>
-                <h3>投資／撤退シナリオの意思決定会議</h3>
-                <p>攻め・守り・キャッシュ最適化の3シナリオを稟議化。金融機関視点の根拠資料と想定問答をセットで提供。</p>
-                <span class="scoreboard-metric">資金調達成功率＋18pt</span>
-              </article>
-              <article class="scoreboard-card">
-                <strong>Quarter 3</strong>
-                <h3>実行トラッキングと学習サイクル</h3>
-                <p>週次ダッシュボードでKPIを追跡し、遅延要因をAIがアラート。改善策をワークショップで即座にアップデート。</p>
-                <span class="scoreboard-metric">会議準備時間▲70%</span>
-              </article>
-              <article class="scoreboard-card">
-                <strong>Quarter 4</strong>
-                <h3>次年度の戦略再設計と金融機関説明</h3>
-                <p>成果と学習を統合して翌年度の戦略に反映。決算前の金融機関連携資料を自動生成し、資金繰りの納得感を高めます。</p>
-                <span class="scoreboard-metric">キャッシュ創出1.8倍</span>
-              </article>
-            </div>
-            <p class="scoreboard-note">
-              ※ScoreboardはダークテーマのUIで経営陣専用にデザイン。直感的な操作性と高彩度グラデーションで「投資価値が高い」体験を提供します。
-            </p>
-          </div>
-        </div>
-      </section>
-
       <section id="process" class="mx-auto w-full max-w-5xl px-5" data-animate>
         <div class="space-y-6">
           <h2 class="section-title">3ヶ月集中プログラムの導入フロー</h2>
@@ -2650,7 +1631,7 @@
                 <div class="timeline-index">04</div>
               </header>
               <p class="timeline-copy">
-                中小企業診断士・財務会計専門家が稟議目線でブラッシュアップ。金融機関や取締役会の審査基準に沿って根拠と対策を補強し、説得力を高めます。
+                中小企業診断士・公認会計士・元銀行審査役が稟議目線でブラッシュアップ。金融機関や取締役会の審査基準に沿って根拠と対策を補強し、説得力を高めます。
               </p>
               <ul class="timeline-deliverables">
                 <li>金融機関に提出可能な稟議資料・質疑応答想定集</li>
@@ -2709,26 +1690,6 @@
               </ul>
             </div>
           </div>
-          <div class="roi-grid">
-            <div class="roi-card">
-              <h3>キャッシュイン増加額（年間）</h3>
-              <div class="roi-metric">＋1,800万円</div>
-              <p class="text-sm text-slate-600">粗利改善と回収サイト短縮の組み合わせで創出した平均値。攻めの投資と人材採用に再配分できます。</p>
-              <div class="roi-bar" aria-hidden="true"><span style="width: 76%"></span></div>
-            </div>
-            <div class="roi-card">
-              <h3>会議準備時間の削減</h3>
-              <div class="roi-metric">▲1,200時間</div>
-              <p class="text-sm text-slate-600">AIレポートとテンプレ整備で、月40時間×30会議分の資料作成を削減した実績値です。</p>
-              <div class="roi-bar" aria-hidden="true"><span style="width: 90%"></span></div>
-            </div>
-            <div class="roi-card">
-              <h3>ROI試算（初年度）</h3>
-              <div class="roi-metric">3.2倍</div>
-              <p class="text-sm text-slate-600">初期費用18万円＋月額18万円×3ヶ月に対し、キャッシュ創出額5,760万円を想定したモデルケース。</p>
-              <div class="roi-bar" aria-hidden="true"><span style="width: 64%"></span></div>
-            </div>
-          </div>
           <div class="pricing-note">
             <p class="font-semibold text-slate-900">安心の条件</p>
             <ul class="mt-2 space-y-1">
@@ -2737,9 +1698,6 @@
               <li>・料金は企業規模や対象事業に応じてお見積もりします。分割・補助金活用の相談も可能です。</li>
             </ul>
           </div>
-          <p class="data-note">
-            ※ROIは粗利率＋5pt、回収サイト▲12日、会議準備時間▲1,200時間の実績値を基に算出。費用対効果は業種・施策規模により変動するため、詳細は無料相談時に個別試算します。
-          </p>
         </div>
       </section>
 
@@ -2768,12 +1726,12 @@
       <section id="social-proof" class="mx-auto w-full max-w-5xl px-5" data-animate>
         <div class="space-y-6">
           <h2 class="section-title">専門家チームと信頼できる体制</h2>
-          <p class="section-subtitle">中小企業診断士・財務会計専門家がチームを組み、セキュリティと実績で安心を担保します。</p>
+          <p class="section-subtitle">中小企業診断士・公認会計士・元銀行審査役がチームを組み、セキュリティと実績で安心を担保します。</p>
           <div class="proof-grid">
             <article class="card space-y-3">
               <h3 class="text-lg font-semibold text-slate-900">中小企業診断士チーム</h3>
               <p class="text-sm text-slate-600">製造・建設・ITサービスを中心に累計310社を支援。AI分析を踏まえた改善提案で平均粗利＋18％を実現。</p>
-              <p class="text-xs text-slate-500">主要メンバー：佐伯真由（診断士）、木村慎也（財務会計専門家）、黒田亮（資金調達支援コンサルタント）</p>
+              <p class="text-xs text-slate-500">主要メンバー：佐伯真由（診断士）、木村慎也（公認会計士）、黒田亮（元銀行審査役）</p>
             </article>
             <article class="card space-y-3">
               <h3 class="text-lg font-semibold text-slate-900">金融機関・公的機関との連携</h3>
@@ -2793,7 +1751,7 @@
           </div>
           <div class="flex flex-wrap items-center gap-3 pt-2">
             <a href="#consult-form" class="btn-primary">専門家に相談する→</a>
-            <a href="tel:0922312920" class="btn-secondary" data-arrow="false">電話で予約（092-231-2920）</a>
+            <a href="tel:0300001234" class="btn-secondary" data-arrow="false">電話で予約（03-0000-1234）</a>
           </div>
         </div>
       </section>
@@ -2916,7 +1874,6 @@
       <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-5 text-center text-xs text-slate-500 md:flex-row md:justify-between md:text-left">
         <p>© 2024 Strategy AI Lab. All rights reserved.</p>
         <div class="flex flex-wrap items-center justify-center gap-4">
-          <a href="tel:0922312920" class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-600">TEL 092-231-2920｜平日9:00-18:00</a>
           <a href="#consult-form" class="btn-secondary text-xs" data-arrow="false">無料オンライン相談へ</a>
           <a href="#sample" class="btn-secondary text-xs" data-arrow="false">サンプルを見る</a>
         </div>

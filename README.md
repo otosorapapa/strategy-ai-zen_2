@@ -50,32 +50,9 @@ npm run server
 npm run dev
 ```
 
-By default the frontend posts submissions to the same origin at `/api/contact`. If your API lives on a different host (for
-example when running the provided Node.js server locally on port 3001), set the `VITE_CONTACT_ENDPOINT` environment variable
-to the full endpoint URL before building or starting the frontend. Alternatively, define `VITE_CONTACT_API_BASE_URL` (e.g.
-`https://example.com`) to automatically append `/api/contact`.
-
-### Connecting to WordPress Contact Form 7
-
-To send submissions directly to a WordPress site that uses Contact Form 7, configure the following environment variables
-before building or starting the frontend:
-
-```sh
-VITE_CONTACT_API_ENDPOINT=wordpress
-VITE_WORDPRESS_CONTACT_ENDPOINT="https://your-site.example/wp-json/contact-form-7/v1/contact-forms/<ID>/feedback"
-# Optional: override the field name for the preferred date input if your form uses a custom name
-# VITE_WORDPRESS_FIELD_PREFERRED_DATE=preferred-date
-# Uncomment if the WordPress endpoint is protected by HTTP Basic authentication
-# VITE_WORDPRESS_AUTH_USER=your-username
-# VITE_WORDPRESS_AUTH_PASSWORD=your-password
-```
-
-When `VITE_CONTACT_API_ENDPOINT` is set to `wordpress`, the frontend automatically switches to the Contact Form 7 submission
-flow, including support for optional Basic authentication headers when credentials are provided.
-
-If your Contact Form 7 instance uses different field names, you can override specific mappings with environment variables.
-For example, when the desired field for "ご希望の日時" is configured as `your-message` instead of `preferred-date`, set
-`VITE_WORDPRESS_FIELD_PREFERRED_DATE=your-message` before building the site.
+By default the frontend posts submissions to `http://localhost:3001/api/contact`. If you deploy the API elsewhere, set the
+`VITE_CONTACT_ENDPOINT` environment variable to the full endpoint URL before building or starting the frontend. Alternatively,
+define `VITE_CONTACT_API_BASE_URL` (e.g. `https://example.com`) to automatically append `/api/contact`.
 
 **Edit a file directly in GitHub**
 
