@@ -493,6 +493,9 @@ type ResponsibilityColumn = {
   summary: string;
   detail: string;
   points: string[];
+  metricLabel: string;
+  metricValue: string;
+  metricDescription: string;
   icon: LucideIcon;
   accent: "mint" | "sky" | "citrus";
 };
@@ -505,6 +508,9 @@ const responsibilityColumns: ResponsibilityColumn[] = [
     detail:
       "最新の政策動向・市場統計・競合指標をクロールし、財務シミュレーションと想定問答、ドラフト資料を数分で提示します。",
     points: ["外部データの自動収集", "複数シナリオの財務予測", "想定問答と資料ドラフト"],
+    metricLabel: "意思決定リードタイム",
+    metricValue: "52%短縮",
+    metricDescription: "速報ダッシュボードで会議前に意思決定案を準備。",
     icon: Bot,
     accent: "mint",
   },
@@ -515,6 +521,9 @@ const responsibilityColumns: ResponsibilityColumn[] = [
     detail:
       "AIの提案を精査し、自社のリスク許容度とビジョンに合わせて意思決定。社内外ステークホルダーへの説明と合意形成を行います。",
     points: ["重点施策の取捨選択", "リスクと投資配分の決定", "意思決定の説明責任"],
+    metricLabel: "投資判断の確度",
+    metricValue: "+34%向上",
+    metricDescription: "シナリオ比較で納得感ある優先順位を決定。",
     icon: Compass,
     accent: "citrus",
   },
@@ -525,6 +534,9 @@ const responsibilityColumns: ResponsibilityColumn[] = [
     detail:
       "金融機関・コンサル経験者がAI出力をレビューし、融資や投資審査で求められる水準に仕上げ、実行フェーズも伴走します。",
     points: ["レビューとチューニング", "金融機関連携・交渉支援", "四半期伴走ミーティング"],
+    metricLabel: "実行計画の完遂率",
+    metricValue: "93%維持",
+    metricDescription: "専門家レビューでPMI/融資審査水準へ適合。",
     icon: Users2,
     accent: "sky",
   },
@@ -2382,9 +2394,16 @@ const Index = () => {
                     data-animate
                     tabIndex={0}
                   >
-                    <span className="role-card__step" aria-hidden="true">
-                      STEP {String(index + 1).padStart(2, "0")}
-                    </span>
+                    <div className="role-card__meta">
+                      <span className="role-card__step" aria-hidden="true">
+                        STEP {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <div className={`role-card__metric role-card__metric--${column.accent}`}>
+                        <span className="role-card__metric-value">{column.metricValue}</span>
+                        <span className="role-card__metric-label">{column.metricLabel}</span>
+                        <p>{column.metricDescription}</p>
+                      </div>
+                    </div>
                     <div className="role-card__header">
                       <div className={`role-icon role-icon--${column.accent}`} aria-hidden="true">
                         <RoleIcon />
@@ -2398,7 +2417,9 @@ const Index = () => {
                       <span className="role-card__label">フォーカスする役割</span>
                       <ul>
                         {column.points.map((point) => (
-                          <li key={point}>{point}</li>
+                          <li key={point} className="role-card__point">
+                            <span>{point}</span>
+                          </li>
                         ))}
                       </ul>
                     </div>
