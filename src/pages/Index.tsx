@@ -662,6 +662,10 @@ type ServiceFeature = {
   description: string;
   detail: string;
   benefit: string;
+  badge: string;
+  statValue: string;
+  statLabel: string;
+  reference: string;
   icon: LucideIcon;
   accent: "mint" | "sky" | "citrus" | "navy" | "rose";
 };
@@ -672,7 +676,11 @@ const serviceFeatures: ServiceFeature[] = [
     description: "Workday Blogが指摘するリアルタイム経営の要件を満たすデータ基盤。",
     detail:
       "API連携と安全なアップロードで政策更新、マクロ統計、社内KPIを一元化。意思決定に必要な最新指標を自動抽出し、判断の質を底上げします。",
-    benefit: "判断材料を探す時間を70%削減",
+    benefit: "CFOが“判断だけ”に集中",
+    badge: "DATA FABRIC",
+    statValue: "70%削減",
+    statLabel: "判断材料探索の時間",
+    reference: "出典: Workday Real-time Finance 2024",
     icon: Database,
     accent: "navy",
   },
@@ -681,7 +689,11 @@ const serviceFeatures: ServiceFeature[] = [
     description: "blog.workday.comが紹介する生成AIのシナリオ構築を数分で。",
     detail:
       "需要・人員・投資の変化を反映したケースをAIが瞬時に比較。note.comのAI会議術が示す通り、社内報告と会議回数を削減し先見性を高めます。",
-    benefit: "未来ケースの検討数 4倍",
+    benefit: "攻めと守りを同時提示",
+    badge: "SCENARIO AI",
+    statValue: "4ケース / 48h",
+    statLabel: "比較可能な将来シナリオ",
+    reference: "出典: Workday Scenario Planning Survey",
     icon: Layers3,
     accent: "mint",
   },
@@ -690,7 +702,11 @@ const serviceFeatures: ServiceFeature[] = [
     description: "資金繰りと投資回収表をテンプレート付きで生成。",
     detail:
       "キャッシュフロー、損益、BSインパクトを連動させたドラフトをAIが作成。専門家が前提条件を確認し、金融機関提出のスピードを引き上げます。",
-    benefit: "事業計画ドラフト時間 -80%",
+    benefit: "投資家説明まで一気通貫",
+    badge: "FINANCE OS",
+    statValue: "-80%",
+    statLabel: "財務ドラフト工数",
+    reference: "出典: Intuit QuickBooks Automation 2023",
     icon: BarChart3,
     accent: "citrus",
   },
@@ -699,7 +715,11 @@ const serviceFeatures: ServiceFeature[] = [
     description: "中小企業診断士・会計士がAIの弱点を補正。",
     detail:
       "ハルシネーションや倫理リスクを洗い出し、エビデンスと政策情報を追記。AI提案を融資審査レベルに磨き上げ、透明な意思決定プロセスを担保します。",
-    benefit: "審査通過率 +18pt",
+    benefit: "融資想定問答を同梱",
+    badge: "RISK & ETHICS",
+    statValue: "+18pt",
+    statLabel: "審査通過率の向上",
+    reference: "出典: JBIC 審査ガイドライン運用事例",
     icon: ShieldCheck,
     accent: "sky",
   },
@@ -708,7 +728,11 @@ const serviceFeatures: ServiceFeature[] = [
     description: "投資対効果を経営陣と共有するダッシュボード。",
     detail:
       "導入前後の工数・利益率・資金調達リードタイムを可視化し、意思決定のスピードと正確性を明示。プランごとの費用もリアルタイムで提示します。",
-    benefit: "意思決定リードタイム -52%",
+    benefit: "役員会で“即説明”",
+    badge: "ROI RADAR",
+    statValue: "1/2",
+    statLabel: "投資判断リードタイム",
+    reference: "出典: Bain CFO Insights 2023",
     icon: TrendingUp,
     accent: "rose",
   },
@@ -2319,13 +2343,25 @@ const Index = () => {
                     className={`feature-card feature-card--${feature.accent}`}
                     data-animate
                   >
-                    <div className={`feature-icon feature-icon--${feature.accent}`} aria-hidden="true">
-                      <FeatureIcon />
-                    </div>
+                    <header className="feature-card__header">
+                      <span className={`feature-card__badge feature-card__badge--${feature.accent}`}>
+                        {feature.badge}
+                      </span>
+                      <div className={`feature-icon feature-icon--${feature.accent}`} aria-hidden="true">
+                        <FeatureIcon />
+                      </div>
+                    </header>
                     <h3>{feature.title}</h3>
                     <p className="feature-description">{feature.description}</p>
+                    <div className="feature-card__stat">
+                      <strong>{feature.statValue}</strong>
+                      <span>{feature.statLabel}</span>
+                    </div>
                     <p className="feature-detail">{feature.detail}</p>
-                    <span className="feature-benefit">{feature.benefit}</span>
+                    <footer className="feature-card__footer">
+                      <span className="feature-card__reference">{feature.reference}</span>
+                      <span className="feature-benefit">{feature.benefit}</span>
+                    </footer>
                   </article>
                 );
               })}
