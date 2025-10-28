@@ -3833,6 +3833,10 @@ svg {
   font-size: 1.22rem;
   margin: 0;
   letter-spacing: 0.01em;
+  writing-mode: horizontal-tb;
+  text-orientation: mixed;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .pain-card p {
