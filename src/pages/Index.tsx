@@ -1151,9 +1151,11 @@ const trustDataPoints: TrustDataPoint[] = [
 
 type PricingPlan = {
   name: string;
+  segment: string;
   summary: string;
   price: string;
   priceNote: string;
+  metrics: { label: string; value: string }[];
   valuePoints: { label: string; description: string }[];
   services: string[];
   support: string[];
@@ -1167,17 +1169,27 @@ type PricingPlan = {
 const pricingPlans: PricingPlan[] = [
   {
     name: "ライト",
-    summary: "小規模組織の経営会議をAIで効率化するスタータープラン",
+    segment: "スモールチーム向けスターターパック",
+    summary: "小規模組織の経営会議をAIで標準化し、意思決定スピードを底上げ",
     price: "月額15万円〜",
     priceNote: "従業員〜50名の方向け",
+    metrics: [
+      { label: "導入リードタイム", value: "14営業日〜" },
+      { label: "伴走チーム", value: "専任アナリスト1名" },
+      { label: "推奨活用領域", value: "財務・経営会議の可視化" },
+    ],
     valuePoints: [
       {
         label: "導入スピード",
-        description: "キックオフから2週間で運用開始。初期設計はテンプレート化。",
+        description: "キックオフから14営業日で運用開始。初期データ移行はテンプレート化。",
       },
       {
         label: "推奨フェーズ",
-        description: "年商5,000万〜3億円、まずはAI補助で経営数値を可視化。",
+        description: "年商5,000万〜3億円、役員会の意思決定プロセスを標準化。",
+      },
+      {
+        label: "ROI想定",
+        description: "週次会議1回あたり平均8.5時間削減。6か月以内の投資回収を想定。",
       },
     ],
     services: [
@@ -1192,29 +1204,39 @@ const pricingPlans: PricingPlan[] = [
       "導入初月の個別オンボーディング",
     ],
     payment: ["月次サブスクリプション", "請求書払い（分割可）"],
-    guarantee: "導入初月の返金保証付き",
-    roi: "3倍目標",
+    guarantee: "初月レビューで未達なら全額返金",
+    roi: "3倍目標（6か月以内）",
     cta: primaryCtaLabel,
   },
   {
     name: "プロ",
-    summary: "意思決定プロセスを全社で回し、金融機関向け資料も自動生成",
+    segment: "成長投資フェーズ / マルチ事業向け",
+    summary: "意思決定プロセスを全社で循環させ、金融機関対応も自動化",
     price: "月額35万円〜",
     priceNote: "年商10〜50億円規模向け",
+    metrics: [
+      { label: "導入リードタイム", value: "4〜6週間" },
+      { label: "伴走チーム", value: "戦略コンサル＋アナリスト2名" },
+      { label: "推奨活用領域", value: "複数事業の収益管理 / 金融機関報告" },
+    ],
     valuePoints: [
       {
-        label: "想定成果",
-        description: "利益計画の見直しと資金調達資料の作成を月次で高速化。",
+        label: "意思決定品質",
+        description: "AIドラフトを隔週更新し、全社KPIと連動した精度検証を自動化。",
       },
       {
         label: "推奨フェーズ",
-        description: "年商10〜50億円、複数事業の収益管理を強化する企業。",
+        description: "年商10〜50億円、複数事業の収益管理と金融機関報告を高速化。",
+      },
+      {
+        label: "ROI想定",
+        description: "月次改善額の中央値1,280万円。IRR 58%の投資対効果を想定。",
       },
     ],
     services: [
-      "AIドラフト隔週更新",
+      "AIドラフト隔週アップデート",
       "戦略シナリオ自動比較",
-      "金融機関向け資料生成",
+      "金融機関・投資家向け資料生成",
       "OKR・KPIダッシュボード連携",
     ],
     support: [
@@ -1223,24 +1245,34 @@ const pricingPlans: PricingPlan[] = [
       "財務・法務の専門家レビュー",
     ],
     payment: ["月次サブスクリプション", "四半期ごとの分割払い"],
-    guarantee: "60日間の成果保証オプション",
-    roi: "5倍目標",
+    guarantee: "60日成果保証＋金融機関連携レビュー",
+    roi: "5倍目標（12か月内）",
     cta: primaryCtaLabel,
     recommended: true,
   },
   {
     name: "エンタープライズ",
-    summary: "グループ全体のガバナンスとデータ連携を一括で整備",
+    segment: "ホールディングス・多拠点統制向け",
+    summary: "グループ全体のガバナンスとデータ連携を一括で高度化",
     price: "月額65万円〜",
     priceNote: "複数事業部・子会社をお持ちの方向け",
+    metrics: [
+      { label: "導入リードタイム", value: "8〜10週間" },
+      { label: "伴走チーム", value: "データアーキテクト含む専任4名" },
+      { label: "推奨活用領域", value: "グループ経営・海外拠点の統合ガバナンス" },
+    ],
     valuePoints: [
       {
-        label: "想定成果",
-        description: "全社KPI統合、シナリオ比較と権限統制を同時に実現。",
+        label: "ガバナンス",
+        description: "全社KPI統合と権限統制を同時に設計。監査ログも自動生成。",
       },
       {
         label: "推奨フェーズ",
-        description: "年商50億〜150億円、複数子会社・海外拠点を持つ企業。",
+        description: "年商50〜150億円、複数子会社・海外拠点を持つ企業。",
+      },
+      {
+        label: "ROI想定",
+        description: "四半期あたりのキャッシュ創出額中央値4,600万円。IRR 72%。",
       },
     ],
     services: [
@@ -1255,8 +1287,8 @@ const pricingPlans: PricingPlan[] = [
       "CxO向けエグゼクティブブリーフィング",
     ],
     payment: ["年次契約（分割請求可）", "導入費用の分割払い"],
-    guarantee: "成果レビュー後の返金条項を個別設定",
-    roi: "7倍目標",
+    guarantee: "成果レビュー後の返金条項を個別設計",
+    roi: "7倍目標（18か月内）",
     cta: primaryCtaLabel,
   },
 ];
@@ -3156,8 +3188,8 @@ const Index = () => {
             <div className="section-header" data-animate>
               <h2 id="pricing-heading">料金プラン</h2>
               <p>
-                規模別の3プランを比較。
-                料金と支援範囲、期待<abbr title="投資利益率">ROI</abbr>を明示します。
+                年商5,000万〜150億円規模の企業様に合わせて厳選した3プラン。
+                投資回収シミュレーションと伴走体制を、導入前から明確に提示します。
               </p>
             </div>
             <div className="pricing-summary" data-animate>
@@ -3170,6 +3202,7 @@ const Index = () => {
                 >
                   <div className="pricing-summary__header">
                     <div className="pricing-summary__title-group">
+                      <span className="pricing-summary__segment">{plan.segment}</span>
                       <div className="pricing-summary__title-row">
                         <h3>{plan.name}</h3>
                         {plan.recommended && (
@@ -3179,9 +3212,18 @@ const Index = () => {
                       <p className="pricing-summary__summary">{plan.summary}</p>
                     </div>
                     <div className="pricing-summary__price-block">
+                      <span className="pricing-summary__price-label">月額費用</span>
                       <p className="pricing-summary__price">{plan.price}</p>
                       <p className="pricing-summary__note">{plan.priceNote}</p>
                     </div>
+                  </div>
+                  <div className="pricing-summary__metrics">
+                    {plan.metrics.map((metric) => (
+                      <div key={`${plan.name}-${metric.label}`} className="pricing-summary__metric">
+                        <span className="pricing-summary__metric-label">{metric.label}</span>
+                        <span className="pricing-summary__metric-value">{metric.value}</span>
+                      </div>
+                    ))}
                   </div>
                   <div className="pricing-summary__value-grid">
                     {plan.valuePoints.map((point) => (
