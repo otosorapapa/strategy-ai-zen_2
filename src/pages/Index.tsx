@@ -45,6 +45,7 @@ import simulatorGuidanceVisual from "@/assets/dashboard-preview.jpg";
 import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
 import expertSaitoPhoto from "@/assets/representative_.jpg";
 import expertTanakaPhoto from "@/assets/representative.jpg";
+import aiAnalysisVisual from "@/assets/ai-analysis.jpg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -912,6 +913,8 @@ const processTimeline: ProcessFlowStage[] = [
 type DataFlowStage = {
   label: string;
   description: string;
+  signal: string;
+  kpi?: string;
   icon: LucideIcon;
   result: string;
   accent: "mint" | "sky" | "citrus" | "navy";
@@ -921,6 +924,8 @@ const dataFlowStages: DataFlowStage[] = [
   {
     label: "外部・社内データの取り込み",
     description: "政策更新、統計、金融機関レポート、社内実績を安全に連携",
+    signal: "因果: 外部統計と社内KPIを統合し、意思決定の根拠をひとつに集約。",
+    kpi: "データ鮮度 24h更新",
     icon: Database,
     result: "信頼できるデータレイク",
     accent: "mint",
@@ -928,6 +933,8 @@ const dataFlowStages: DataFlowStage[] = [
   {
     label: "AI解析とシナリオ生成",
     description: "Sparkエンジンで数百パターンのシミュレーションを高速計算",
+    signal: "論理: AIがシナリオごとの資金・人員インパクトをスコアリング。",
+    kpi: "検証パターン 300+",
     icon: Sparkles,
     result: "最適な戦略候補",
     accent: "sky",
@@ -935,6 +942,8 @@ const dataFlowStages: DataFlowStage[] = [
   {
     label: "専門家レビュー",
     description: "融資・投資審査基準に沿ってエビデンスとリスクを補強",
+    signal: "納得性: 元金融機関審査官がリスク補強と想定問答を整備。",
+    kpi: "審査リスク網羅 97%",
     icon: ShieldCheck,
     result: "審査に耐える計画書",
     accent: "navy",
@@ -942,6 +951,8 @@ const dataFlowStages: DataFlowStage[] = [
   {
     label: "意思決定と実行",
     description: "経営会議で決定し、実行ロードマップとKPI（重要指標）を共有",
+    signal: "スマート性: ダッシュボードとワークフローに直結し進捗を自動配信。",
+    kpi: "意思決定スピード 52%短縮",
     icon: Workflow,
     result: "実行フェーズへの移行",
     accent: "citrus",
@@ -2762,22 +2773,53 @@ const Index = () => {
               })}
             </div>
             <div className="process-dataflow" data-animate>
-              {dataFlowStages.map((stage, index) => {
-                const DataIcon = stage.icon;
-                return (
-                  <div key={stage.label} className={`dataflow-card dataflow-card--${stage.accent}`}>
-                    <div className="dataflow-card__icon" aria-hidden="true">
-                      <DataIcon />
-                    </div>
-                    <div className="dataflow-card__body">
-                      <span>STEP {index + 1}</span>
-                      <h3>{stage.label}</h3>
-                      <p>{stage.description}</p>
-                      <strong>{stage.result}</strong>
-                    </div>
-                  </div>
-                );
-              })}
+              <article className="dataflow-brief">
+                <span className="dataflow-brief__eyebrow">Data Confidence Loop</span>
+                <h3>AIが集め、専門家が磨き、経営者が決断する情報循環</h3>
+                <p>
+                  因果関係を追跡するデータと、論理性を担保するAI分析、納得性を生む専門家レビューをひとつのフローに統合しました。
+                  経営判断までのプロセスを可視化し、ボトルネックを24時間以内に特定できる仕組みです。
+                </p>
+                <ul className="dataflow-brief__points">
+                  <li>外部環境・社内実績・資金繰りを一貫して把握。</li>
+                  <li>AIの因果検証結果をスコアリングして意思決定会議へ。</li>
+                  <li>専門家の補強で金融機関や投資家にも説明可能な納得性を確保。</li>
+                </ul>
+                <figure className="dataflow-brief__visual">
+                  <img src={aiAnalysisVisual} alt="AI分析ダッシュボードと専門家レビューの連携イメージ" />
+                  <figcaption>AI可視化レポートで判断材料を一画面に統合</figcaption>
+                </figure>
+              </article>
+              <div className="dataflow-grid">
+                {dataFlowStages.map((stage, index) => {
+                  const DataIcon = stage.icon;
+                  return (
+                    <article key={stage.label} className={`dataflow-card dataflow-card--${stage.accent}`}>
+                      <div className="dataflow-card__header">
+                        <div className="dataflow-card__icon" aria-hidden="true">
+                          <DataIcon />
+                        </div>
+                        <div className="dataflow-card__titles">
+                          <span className="dataflow-card__step">STEP {index + 1}</span>
+                          <h3>{stage.label}</h3>
+                          <p>{stage.description}</p>
+                        </div>
+                      </div>
+                      <div className="dataflow-card__signal">
+                        <strong>注目ポイント</strong>
+                        <p>{stage.signal}</p>
+                      </div>
+                      <div className="dataflow-card__footer">
+                        <div className="dataflow-card__result">
+                          <span>アウトプット</span>
+                          <strong>{stage.result}</strong>
+                        </div>
+                        {stage.kpi ? <span className="dataflow-card__kpi">{stage.kpi}</span> : null}
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
