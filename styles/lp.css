@@ -3125,62 +3125,171 @@ svg {
 
 .evidence-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
+  gap: clamp(20px, 3vw, 28px);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: stretch;
 }
 
 .evidence-card {
   position: relative;
-  background: var(--white);
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: var(--shadow-sm);
-  min-height: 240px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  padding: clamp(22px, 2.2vw, 28px);
+  border-radius: 24px;
+  background: radial-gradient(circle at -12% -20%, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0))
+      no-repeat,
+    linear-gradient(135deg, rgba(233, 244, 255, 0.92), rgba(216, 237, 255, 0.72));
+  border: 1px solid rgba(63, 120, 198, 0.18);
+  box-shadow: 0 22px 36px rgba(24, 54, 108, 0.16);
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
-.evidence-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-md);
+.evidence-card > *:not(.evidence-card__overlay) {
+  position: relative;
+  z-index: 1;
 }
 
-.evidence-card::after {
-  content: attr(data-source);
+.evidence-card:hover,
+.evidence-card:focus-within {
+  transform: translateY(-10px);
+  box-shadow: 0 26px 52px rgba(18, 48, 98, 0.22);
+}
+
+.evidence-card__overlay {
   position: absolute;
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  padding: 10px 14px;
-  font-size: 0.85rem;
-  color: var(--gray-900);
-  background: rgba(147, 197, 253, 0.25);
-  border-radius: 10px;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  inset: -40% -40% auto auto;
+  width: 200px;
+  height: 200px;
+  background: conic-gradient(from 160deg, rgba(63, 120, 198, 0.25), rgba(69, 214, 200, 0.1), rgba(255, 255, 255, 0));
+  filter: blur(0px);
+  opacity: 0.75;
   pointer-events: none;
+  transform: rotate(16deg);
+  z-index: 0;
 }
 
-.evidence-card:hover::after,
-.evidence-card:focus-within::after {
-  opacity: 1;
-  transform: translateY(0);
+.evidence-card__header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.evidence-card__metrics {
+  display: grid;
+  gap: 8px;
+}
+
+.evidence-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy-600);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 0 0 1px rgba(63, 120, 198, 0.2);
 }
 
 .evidence-stat {
-  font-size: 2rem;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  line-height: 1.05;
   font-weight: 800;
-  color: var(--navy-600);
-  margin-bottom: 12px;
+  color: var(--navy-700);
+  text-shadow: 0 6px 18px rgba(63, 120, 198, 0.25);
 }
 
-.evidence-source {
+.evidence-card__source {
+  display: grid;
+  gap: 4px;
+  text-align: right;
+  font-size: 0.82rem;
+  color: var(--gray-600);
+}
+
+.evidence-card__source-label {
+  font-weight: 700;
+  color: var(--navy-600);
+}
+
+.evidence-card__source-note {
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.evidence-card__body {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  color: var(--gray-800);
+}
+
+.evidence-card__body h3 {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  color: var(--navy-800);
+}
+
+.evidence-card__body p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.evidence-card__footer {
+  margin-top: auto;
+}
+
+.evidence-card__link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: var(--navy-600);
-  font-weight: 600;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--navy-700);
+  text-decoration: none;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(63, 120, 198, 0.35);
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.evidence-card__link::after {
+  content: "→";
   font-size: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+.evidence-card__link:hover,
+.evidence-card__link:focus {
+  color: var(--navy-900);
+  gap: 10px;
+}
+
+.evidence-card__link:hover::after,
+.evidence-card__link:focus::after {
+  transform: translateX(2px);
+}
+
+@media (max-width: 768px) {
+  .evidence-card {
+    padding: 22px;
+  }
+
+  .evidence-card__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .evidence-card__source {
+    text-align: left;
+  }
 }
 
 .footnote {
