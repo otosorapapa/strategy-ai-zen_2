@@ -2487,20 +2487,22 @@ const Index = () => {
                     data-animate
                   >
                     <header className="feature-card__header">
-                      <span className={`feature-card__badge feature-card__badge--${feature.accent}`}>
-                        {feature.badge}
-                      </span>
-                      <div className={`feature-icon feature-icon--${feature.accent}`} aria-hidden="true">
+                      <div className="feature-card__badge-group">
+                        <span className="feature-card__badge">{feature.badge}</span>
+                      </div>
+                      <div className="feature-icon" aria-hidden="true">
                         <FeatureIcon />
                       </div>
                     </header>
-                    <h3>{feature.title}</h3>
-                    <p className="feature-description">{feature.description}</p>
-                    <div className="feature-card__stat">
-                      <strong>{feature.statValue}</strong>
-                      <span>{feature.statLabel}</span>
+                    <div className="feature-card__content">
+                      <h3>{feature.title}</h3>
+                      <p className="feature-description">{feature.description}</p>
+                      <div className="feature-card__stat">
+                        <strong>{feature.statValue}</strong>
+                        <span>{feature.statLabel}</span>
+                      </div>
+                      <p className="feature-detail">{feature.detail}</p>
                     </div>
-                    <p className="feature-detail">{feature.detail}</p>
                     <footer className="feature-card__footer">
                       <span className="feature-card__reference">{feature.reference}</span>
                       <span className="feature-benefit">{feature.benefit}</span>
