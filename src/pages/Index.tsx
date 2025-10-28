@@ -2144,49 +2144,23 @@ const Index = () => {
                 さらに信頼ソースの調査結果から、対策を先送りにするほど機会損失が拡大することが見えてきました。
               </p>
             </div>
-            <div className="evidence-grid" role="list">
-              {whyNowEvidence.map((item, index) => (
-                <article key={item.title} className="evidence-card" data-animate role="listitem">
-                  <header className="evidence-card__header">
-                    <span className="evidence-card__index" aria-hidden="true">
-                      0{index + 1}
-                    </span>
-                    <div className="evidence-card__source-group">
-                      <span className="evidence-card__source-label">{item.sourceLabel}</span>
-                      {item.sourceNote ? (
-                        <span className="evidence-card__source-note">{item.sourceNote}</span>
-                      ) : null}
-                    </div>
-                  </header>
-                  <div className="evidence-card__body">
-                    {item.stat ? (
-                      <div className="evidence-card__stat" aria-label="主要指標">
-                        <span>{item.stat}</span>
-                      </div>
-                    ) : null}
-                    <div className="evidence-card__content">
-                      <h3>{item.title}</h3>
-                      <p>{item.description}</p>
-                    </div>
-                  </div>
-                  {item.sourceUrl ? (
-                    <footer className="evidence-card__footer">
-                      <a
-                        className="evidence-card__link"
-                        href={item.sourceUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        元データを確認する
-                        <ArrowUpRight aria-hidden="true" />
-                      </a>
-                    </footer>
-                  ) : null}
+            <div className="evidence-grid">
+              {whyNowEvidence.map((item) => (
+                <article
+                  key={item.title}
+                  className="evidence-card"
+                  data-animate
+                  data-source={item.sourceNote}
+                >
+                  <div className="evidence-stat">{item.stat}</div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                  <span className="evidence-source">{item.sourceLabel}</span>
                 </article>
               ))}
             </div>
             <p className="footnote" data-animate>
-              ※ 各カードの「元データを確認する」から公開ソースをご覧いただけます。
+              ※ 各数値の詳細はカードをホバー/タップすると表示されます。
             </p>
           </div>
         </section>
