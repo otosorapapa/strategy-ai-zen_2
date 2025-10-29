@@ -68,13 +68,13 @@ const primaryCtaLabel = "無料相談を申し込む";
 const contactPhoneNumber = "03-4520-1234";
 
 const headerNavItems = [
-  { id: "hero", label: "サービス概要" },
-  { id: "problem", label: "課題" },
-  { id: "solution", label: "解決策" },
-  { id: "features", label: "機能・特徴" },
-  { id: "outcome", label: "成果" },
-  { id: "process", label: "導入と料金" },
-  { id: "faq", label: "よくある質問・事例" },
+  { id: "hero", label: "Hero" },
+  { id: "problem", label: "Why（環境）" },
+  { id: "solution", label: "What（約束）" },
+  { id: "features", label: "価値アセット" },
+  { id: "outcome", label: "成果指標" },
+  { id: "process", label: "How（仕組み）" },
+  { id: "faq", label: "FAQ・事例" },
 ];
 
 const sectionNavItems = [...headerNavItems, { id: "contact", label: "無料相談" }];
@@ -143,6 +143,36 @@ const heroAllianceExperts = [
     focus: "財務管理・補助金対策",
     photo: expertSaitoPhoto,
   },
+];
+
+const landingStructureSummary = [
+  "Hero：専門家×生成AIの全体像で意思決定の質・速さ・先見性を訴求",
+  "Why：需給・金利・制度・テック・競争の変化が迫る判断スピードの理由",
+  "問題定義：意思決定が滞る典型的な3ケースと機会損失",
+  "What：専門家×生成AIで実現する成果とコアアセット",
+  "How：現状診断→仮説設計→生成AI分析→経営計画→実行管理→検証改善",
+  "事例：匿名の業種・年商・効果で蓋然性を提示",
+  "オファー：無料相談／仮診断／資料ダウンロードの三段CTA",
+  "FAQ：費用・期間・体制・データ・AI精度・補助金への回答",
+  "最終CTA：1か月トライアルと守秘・データ保全体制で後押し",
+];
+
+const heroHeadlineOptions = [
+  "変化を制す経営司令塔へ",
+  "先読みで守る資金意思軸",
+  "迷わず決める経営対話室",
+];
+
+const heroSubheadingOptions = [
+  "週1AIレポートで意思決定リードタイム-52%（例）",
+  "粗利率+6pt・在庫回転+24%を48時間で提示（例）",
+  "翌営業日に外部環境の警戒指標と次の一手を共有（例）",
+];
+
+const heroValuePropositions = [
+  "生成AIが情報を圧縮し専門家が判断筋道を整えることで、経営者の集中時間を毎月45時間創出（例）。",
+  "金融機関準拠の管理会計と資金計画を整備し、意思決定の質と説明責任を両立。",
+  "週次の意思決定ボードと月次レビューで、計画-実行-モニタリングのサイクルを高速化。",
 ];
 
 type QuickFlowStep = {
@@ -2163,14 +2193,30 @@ const Index = () => {
           <div className="container hero-inner">
             <div className="hero-copy" data-animate data-initial-visible="true">
               <span className="badge">株式会社創和経営コンサルティング（福岡）</span>
+              <ul className="hero-outline" aria-label="本ページの構成">
+                {landingStructureSummary.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
               <h1 id="hero-heading">
-                激変市場に備える意思軸
-                <span>専門家×生成AIで意思決定の質・速さ・先見性を底上げ</span>
+                {heroHeadlineOptions.map((line) => (
+                  <span key={line}>{line}</span>
+                ))}
               </h1>
+              <div className="hero-subheadings" aria-label="ヒーローサブ見出し案">
+                {heroSubheadingOptions.map((item) => (
+                  <p key={item}>{item}</p>
+                ))}
+              </div>
               <p className="hero-lead">
-                金利・為替の揺れ、補助金制度の更新、供給制約、生成AIの急進展、競合の投資加速——環境変化が同時多発する今、判断が遅れるほどキャッシュと成長機会は失われます。
-                中小企業診断士・古町聖文が率いる当社は、専門家の洞察と生成AIのリアルタイム分析を組み合わせ、経営者が先に動ける体制を整えます。
+                金利上昇と需給の偏り、補助金制度の短期化、生成AIの進化スピード、競合の先行投資が重なる環境では、判断が1週遅れるだけで資金繰りと成長機会の損失が拡大します。
+                中小企業診断士・古町聖文が率いる当社は、専門家の洞察と生成AIのリアルタイム分析で意思決定の質・速さ・先見性を同時に高めます。
               </p>
+              <ul className="hero-uvp" aria-label="価値提案">
+                {heroValuePropositions.map((value) => (
+                  <li key={value}>{value}</li>
+                ))}
+              </ul>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
                   {primaryCtaLabel}
@@ -2427,10 +2473,10 @@ const Index = () => {
         >
           <div className="container">
             <div className="story-header" data-animate>
-              <span className="story-eyebrow">STORY 01</span>
-              <h2 id="problem-heading">経営改善で鍛えた専門家 × 生成AIが解消する経営者の3課題</h2>
+              <span className="story-eyebrow">WHY</span>
+              <h2 id="problem-heading">なぜ今、意思決定の質・速さ・先見性が生命線なのか</h2>
               <p>
-                市場や政策の変化が激しいほど、意思決定の質・速さ・先見性は落ちやすくなります。経営改善の現場で蓄積した知見をもとに、「課題 → AI×専門家の解決策 → 得られる効果」の因果関係を3つのケースで示します。
+                需給・金利・制度・テック・競争の5つの波が同時に押し寄せると、経営者が判断に充てられる時間は激減します。当社は経営計画策定支援で蓄積した現場データをもとに、危機と機会の両方を数値で示しながら、AIと専門家が連携する解決策を提示します。
               </p>
             </div>
             <div className="pain-grid">
@@ -2443,7 +2489,7 @@ const Index = () => {
                         <PainIcon />
                       </div>
                       <div className="pain-card__titles">
-                        <span className="pain-card__eyebrow">経営課題</span>
+                        <span className="pain-card__eyebrow">問題定義</span>
                         <h3>{item.title}</h3>
                       </div>
                       <div className="pain-card__metric" aria-label="主要インパクト指標">
@@ -2482,10 +2528,10 @@ const Index = () => {
               })}
             </div>
             <div className="story-subheader" data-animate>
-              <h3>なぜ今「経営改善で鍛えた専門家 × 生成AI」なのか</h3>
+              <h3>危機と機会を見極める5つのシグナル</h3>
               <p>
-                blog.iil.comが指摘する通り、AIは繰り返し業務の自動化とデータ分析によって意思決定を迅速かつ正確にし、中小企業に競争優位をもたらします。
-                さらに信頼ソースの調査結果から、対策を先送りにするほど機会損失が拡大することが見えてきました。
+                金利・需給のボラティリティは粗利と資金繰りを圧迫する一方、生成AIや補助金の更新スピードを味方につければ成長投資のタイミングを先取りできます。
+                国内外の調査と当社の伴走実績から、今すぐ押さえるべきシグナルを抽出しました。
               </p>
             </div>
             <div className="evidence-grid">
@@ -2537,10 +2583,11 @@ const Index = () => {
         >
           <div className="container">
             <div className="story-header" data-animate>
-              <span className="story-eyebrow">STORY 02</span>
-              <h2 id="solution-heading">経営改善で鍛えた専門家 × 生成AIの協働で意思決定を加速</h2>
+              <span className="story-eyebrow">WHAT</span>
+              <h2 id="solution-heading">専門家×生成AIが約束する成果と価値</h2>
               <p>
-                生成AIが政策・市場・自社データを束ね、専門家と経営者がレビューと判断に集中します。blog.workday.comが紹介するリアルタイム分析のスピードと、note.comで語られるAI会議術の先見性を組み合わせ、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果につなげます。
+                週1回のAI経営レポートと専門家レビューで、意思決定リードタイム-52%（例）・計画作成工数-80%（例）・粗利率+6pt（例）・在庫回転+24%（例）を実現する設計です。
+                情報の要約とシナリオ比較をAIが担い、専門家が判断筋道と説明責任を磨き上げ、経営者は意思決定に専念できます。
               </p>
             </div>
             <div className="roles-grid">
@@ -2642,10 +2689,10 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="features-heading">経営改善で鍛えた専門家 × 生成AIが支える5つの機能</h2>
+              <h2 id="features-heading">What：成果を生む5つのコアアセット</h2>
               <ul className="section-intro">
-                <li>政策・市場・自社データを統合し、意思決定の質・速さ・先見性を底上げ。</li>
-                <li>AIの出力は診断士がレビューし、料金と支援範囲を透明に開示します。</li>
+                <li>価値（意思決定の質・速さ・先見性）を先に定義し、対応する機能とエビデンスを明示。</li>
+                <li>専門家レビューでAI出力の透明性と説明責任を担保します。</li>
               </ul>
             </div>
             <div className="feature-grid">
@@ -2961,10 +3008,10 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="process-heading">導入の流れ（最短4週間）</h2>
+              <h2 id="process-heading">How：6ステップで意思決定を高速化</h2>
               <ul className="section-intro">
-                <li>無料相談→データ連携→AIレポート→専門家面談→計画書完成を明確化。</li>
-                <li>MIT Sloanの研究が示す「AIと人の協働に向けたプロセス再設計」を実装。</li>
+                <li>①現状診断 → ②仮説設計 → ③生成AI分析 → ④経営計画（数値・施策）→ ⑤実行管理（KPI/会議体）→ ⑥検証・改善を最短4週間で実装。</li>
+                <li>MIT Sloanの研究が示す「AIと人の協働に向けたプロセス再設計」を組み込み、成果物と責任分担を明文化。</li>
               </ul>
             </div>
             <ol className="process-timeline">
@@ -4022,8 +4069,8 @@ const Index = () => {
               <span className="final-cta__eyebrow">経営改善で鍛えた専門家 × 生成AI</span>
               <h2 id="final-cta-heading">意思決定の質・速さ・先見性を高める経営計画を今すぐ</h2>
               <p>
-                経営者の時間は有限です。経営改善で鍛えた専門家が生成AIの出力を精査し、意思決定リードタイム52%短縮・計画作成工数78%削減・粗利益率＋6pt・キャッシュ創出＋2.1億円（すべて例）の実現を後押しします。
-                無料相談・仮診断・資料ダウンロードの3つの導線から、最適なスタートを選べます。
+                経営者の時間は有限です。専門家が生成AIの出力を精査し、意思決定リードタイム-52%・計画作成工数-80%・粗利率+6pt・キャッシュ創出+2.1億円（すべて例）の再現を目指します。
+                無料相談・7日仮診断・資料ダウンロードに加え、1か月トライアルで小さく試してから本導入を判断できます。
               </p>
               <div className="final-cta__actions">
                 <a className="btn btn-cta" href="#contact">
