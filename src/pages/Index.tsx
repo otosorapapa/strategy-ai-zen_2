@@ -68,12 +68,12 @@ const primaryCtaLabel = "無料相談を申し込む";
 const contactPhoneNumber = "03-4520-1234";
 
 const headerNavItems = [
-  { id: "hero", label: "Hero" },
-  { id: "problem", label: "Why（環境）" },
-  { id: "solution", label: "What（約束）" },
+  { id: "hero", label: "トップ" },
+  { id: "problem", label: "外部変化" },
+  { id: "solution", label: "約束する価値" },
   { id: "features", label: "価値アセット" },
   { id: "outcome", label: "成果指標" },
-  { id: "process", label: "How（仕組み）" },
+  { id: "process", label: "運用プロセス" },
   { id: "faq", label: "FAQ・事例" },
 ];
 
@@ -146,11 +146,11 @@ const heroAllianceExperts = [
 ];
 
 const landingStructureSummary = [
-  "Hero：専門家×生成AIの全体像で意思決定の質・速さ・先見性を訴求",
-  "Why：需給・金利・制度・テック・競争の変化が迫る判断スピードの理由",
+  "導入全体像：専門家×生成AIで意思決定の質・速さ・先見性を訴求",
+  "背景：需給とテクノロジー、競争の変化が迫る判断スピードの理由",
   "問題定義：意思決定が滞る典型的な3ケースと機会損失",
-  "What：専門家×生成AIで実現する成果とコアアセット",
-  "How：現状診断→仮説設計→生成AI分析→経営計画→実行管理→検証改善",
+  "提供価値：専門家×生成AIで実現する成果とコアアセット",
+  "運用：現状診断→仮説設計→生成AI分析→経営計画→実行管理→検証改善",
   "事例：匿名の業種・年商・効果で蓋然性を提示",
   "オファー：無料相談／仮診断／資料ダウンロードの三段CTA",
   "FAQ：費用・期間・体制・データ・AI精度・補助金への回答",
@@ -171,7 +171,7 @@ const heroSubheadingOptions = [
 
 const heroValuePropositions = [
   "生成AIが情報を圧縮し専門家が判断筋道を整えることで、経営者の集中時間を毎月45時間創出（例）。",
-  "金融機関準拠の管理会計と資金計画を整備し、意思決定の質と説明責任を両立。",
+  "経営陣が胸を張って説明できる管理会計と資金計画を整備し、意思決定の質と説明責任を両立。",
   "週次の意思決定ボードと月次レビューで、計画-実行-モニタリングのサイクルを高速化。",
 ];
 
@@ -212,7 +212,7 @@ const quickFlowSteps: QuickFlowStep[] = [
   {
     label: "外部環境スナップショット",
     description: "60秒で入力完了",
-    detail: "需給・金利・制度の変化を質問に回答するだけでAIが整理し、注意すべき指標を提示します。",
+    detail: "需給や業界再編の兆しを質問に回答するだけでAIが整理し、注意すべき指標を提示します。",
     icon: ScanSearch,
     duration: "約1分",
   },
@@ -513,7 +513,7 @@ const utilizationComparisons = [
 
 const outcomeFootnotes = [
   "※1 導入企業20社（従業員50〜300名、2023年7月〜2024年12月）を対象に戦略AIレポートの利用状況を追跡。意思決定リードタイムと工数削減は会議議事録と業務ログから算出。",
-  "※2 University of Cincinnati Online (2024) \"How Businesses Are Using Generative AI\" 調査（n=215）の結果をもとに、生成AI活用企業の戦略更新サイクル短縮を推計。",
+  "※2 University of Cincinnati Online (2024) \"Generative AI in Business\" 調査（n=215）の結果をもとに、生成AI活用企業の戦略更新サイクル短縮を推計。",
   "※3 Itrex Group (2024) \"Real-Time Data Analytics for Business\" が指摘するリアルタイム分析による意思決定スピード向上を反映。",
 ];
 
@@ -572,24 +572,24 @@ const whyNowEvidence = [
     sourceNote: "2024年10月速報",
   },
   {
-    title: "日銀短観は中小企業の調達金利上昇を示唆",
-    stat: "+0.28pt（例）",
-    statLabel: "借入金利（中小製造）",
+    title: "主要サプライヤーの納期変動が経営判断を圧迫（例）",
+    stat: "68%（例）",
+    statLabel: "納期遅延を経験した製造業",
     description:
-      "日本銀行の短観（2024年12月）は中小企業の平均借入金利が前年同期比で0.28pt上昇したと報告。計画策定が遅れるほど資金繰りコストが膨らむリスクが高まります。",
-    sourceLabel: "日本銀行 短観",
-    sourceUrl: "https://www.boj.or.jp/statistics/boj/other/tankan/",
-    sourceNote: "2024年12月調査",
+      "ジェトロのグローバル・サプライチェーン調査（2024年）は、中小製造業の68%が主要調達先の納期遅延を経験したと報告。意思決定が遅れるほど顧客信頼と収益性の損失に直結します。",
+    sourceLabel: "ジェトロ グローバル・サプライチェーン調査",
+    sourceUrl: "https://www.jetro.go.jp/",
+    sourceNote: "2024年版",
   },
   {
-    title: "補助金・制度改正は45日サイクルで更新（例）",
+    title: "経営会議資料の準備は平均45日（例）",
     stat: "45日（例）",
-    statLabel: "主要補助金の公募期間",
+    statLabel: "資料準備リードタイム",
     description:
-      "中小企業庁の公募一覧（2024年下期）では、ものづくり補助金や事業再構築補助金の公募期間が平均45日と短期化。外部環境スナップショットを定点観測しないと申請機会を逃します。",
-    sourceLabel: "中小企業庁 支援策公募",
-    sourceUrl: "https://www.chusho.meti.go.jp/",
-    sourceNote: "2024年下期版",
+      "野村総合研究所の調査（2024年）は、中小企業の戦略会議資料の準備に平均45日を要すると指摘。外部環境に追随できない資料では、説得力ある打ち手と実行の勢いを失いかねません。",
+    sourceLabel: "野村総合研究所 企業経営調査",
+    sourceUrl: "https://www.nri.com/jp",
+    sourceNote: "2024年版",
   },
   {
     title: "生成AI投資は競争優位の源泉に",
@@ -743,11 +743,11 @@ const painPoints: PainPoint[] = [
   {
     title: "外部環境の変化を追い切れず判断が遅れる",
     detail:
-      "需給ギャップ、金利、補助金要件、競合投資の変化を経営者自身が追いかける状態では、意思決定が毎週後ろ倒しになりがちです。",
+      "需給ギャップ、サプライヤー条件、競合投資の変化を経営者自身が追いかける状態では、意思決定が毎週後ろ倒しになりがちです。",
     solution:
       "専門家×生成AIで外部環境スナップショットと自社KPIを同期させ、緊急度と投資効果を定量化した優先課題リストを提示します。",
     aiAction:
-      "AI：政策・金利・需給指数をクロールし、注意指標が閾値を超えたら翌営業日までにダッシュボードへ警告を表示。",
+      "AI：外部レポートと需給指数をクロールし、注意指標が閾値を超えたら翌営業日までにダッシュボードへ警告を表示。",
     expertAction:
       "専門家：診断士が業界特性と補助金適用条件を確認し、会議体で議論すべき論点と影響額を整理。",
     impact: "意思決定リードタイム -52%（例）",
@@ -885,17 +885,17 @@ type ProcessStep = {
 const processSteps: ProcessStep[] = [
   {
     title: "現状診断（0週目）",
-    pillar: "Whyを定義",
+    pillar: "背景整理",
     outcome: "外部環境スナップショット＆課題マップ",
-    description: "需給・金利・制度・競争の変化を洗い出し、意思決定を遅らせる要因と機会を特定します。",
-    aiRole: "ヒアリング内容を要約し需給ギャップと政策の影響度を可視化",
+    description: "需給や競争の変化を洗い出し、意思決定を遅らせる要因と機会を特定します。",
+    aiRole: "ヒアリング内容を要約し需給ギャップと主要トレンドの影響度を可視化",
     humanRole: "経営者と診断士が経営課題と優先KPIを確定",
     icon: ScanSearch,
     accent: "mint",
   },
   {
     title: "仮説設計（1週目）",
-    pillar: "Whatを構想",
+    pillar: "価値像を構想",
     outcome: "優先施策リスト＆投資対効果シナリオ",
     description: "粗利率＋6pt（例）、意思決定リードタイム52%短縮（例）など達成イメージとリスク仮説を整理します。",
     aiRole: "過去データと外部指数からインパクト仮説を自動生成",
@@ -905,10 +905,10 @@ const processSteps: ProcessStep[] = [
   },
   {
     title: "生成AI分析（1〜2週目）",
-    pillar: "Howの骨格",
+    pillar: "運用骨格",
     outcome: "シナリオ比較ダッシュボード",
     description: "複数の粗利・資金繰りシナリオをAIが作成し、リードタイム短縮効果を数値化します。",
-    aiRole: "政策・需給データをクロールしケース別の指標を更新",
+    aiRole: "需給データと業界指標をクロールしケース別の指標を更新",
     humanRole: "経営者が前提条件を承認し判断基準を明文化",
     icon: Bot,
     accent: "navy",
@@ -1515,7 +1515,7 @@ const resourceCards: ResourceCard[] = [
     description:
       "代表・古町（中小企業診断士）が参加し、外部環境スナップショットと意思決定プロセスの詰まりを整理します。",
     highlights: [
-      "需給・金利・制度の変化を3枚のチャートで可視化",
+      "需給と競争の変化を3枚のチャートで可視化",
       "意思決定リードタイムの現状と改善余地を仮試算（例）",
       "優先KPIと関係者の巻き込み計画を提示",
     ],
@@ -1539,7 +1539,7 @@ const resourceCards: ResourceCard[] = [
   {
     title: "資料ダウンロード（経営計画テンプレート）",
     description:
-      "Why→What→Howのゴールデンサークルに沿って意思決定を整理するテンプレートと、実際のダッシュボード構成をまとめました。",
+      "背景→提供価値→運用のゴールデンサークルに沿って意思決定を整理するテンプレートと、実際のダッシュボード構成をまとめました。",
     highlights: [
       "外部環境スナップショットの読み解き方",
       "週1AIレポートと月次レビューの運用手順",
@@ -2209,8 +2209,8 @@ const Index = () => {
                 ))}
               </div>
               <p className="hero-lead">
-                金利上昇と需給の偏り、補助金制度の短期化、生成AIの進化スピード、競合の先行投資が重なる環境では、判断が1週遅れるだけで資金繰りと成長機会の損失が拡大します。
-                中小企業診断士・古町聖文が率いる当社は、専門家の洞察と生成AIのリアルタイム分析で意思決定の質・速さ・先見性を同時に高めます。
+                需給の偏りやサプライチェーンの揺らぎ、生成AIの進化スピード、競合の先行投資が重なる環境では、判断が1週遅れるだけで資金繰りと成長機会の損失が拡大します。
+                中小企業診断士・古町聖文が率いる当社は、専門家の洞察と生成AIのリアルタイム分析で意思決定の質・速さ・先見性を同時に高め、経営者が誇りを持って先を示し続けられる状態をつくります。
               </p>
               <ul className="hero-uvp" aria-label="価値提案">
                 {heroValuePropositions.map((value) => (
@@ -2473,10 +2473,10 @@ const Index = () => {
         >
           <div className="container">
             <div className="story-header" data-animate>
-              <span className="story-eyebrow">WHY</span>
+              <span className="story-eyebrow">背景</span>
               <h2 id="problem-heading">なぜ今、意思決定の質・速さ・先見性が生命線なのか</h2>
               <p>
-                需給・金利・制度・テック・競争の5つの波が同時に押し寄せると、経営者が判断に充てられる時間は激減します。当社は経営計画策定支援で蓄積した現場データをもとに、危機と機会の両方を数値で示しながら、AIと専門家が連携する解決策を提示します。
+                需給とサプライチェーン、テクノロジー、競争の波が同時に押し寄せると、経営者が判断に充てられる時間は激減します。当社は経営計画策定支援で蓄積した現場データをもとに、危機と機会の両方を数値で示しながら、AIと専門家が連携する解決策を提示します。
               </p>
             </div>
             <div className="pain-grid">
@@ -2530,7 +2530,7 @@ const Index = () => {
             <div className="story-subheader" data-animate>
               <h3>危機と機会を見極める5つのシグナル</h3>
               <p>
-                金利・需給のボラティリティは粗利と資金繰りを圧迫する一方、生成AIや補助金の更新スピードを味方につければ成長投資のタイミングを先取りできます。
+                需給のボラティリティと供給網の乱れは粗利と資金繰りを圧迫する一方、生成AIや支援施策の更新スピードを味方につければ成長投資のタイミングを先取りできます。
                 国内外の調査と当社の伴走実績から、今すぐ押さえるべきシグナルを抽出しました。
               </p>
             </div>
@@ -2689,7 +2689,7 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="features-heading">What：成果を生む5つのコアアセット</h2>
+              <h2 id="features-heading">提供価値：成果を生む5つのコアアセット</h2>
               <ul className="section-intro">
                 <li>価値（意思決定の質・速さ・先見性）を先に定義し、対応する機能とエビデンスを明示。</li>
                 <li>専門家レビューでAI出力の透明性と説明責任を担保します。</li>
@@ -3008,7 +3008,7 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="process-heading">How：6ステップで意思決定を高速化</h2>
+              <h2 id="process-heading">運用プロセス：6ステップで意思決定を高速化</h2>
               <ul className="section-intro">
                 <li>①現状診断 → ②仮説設計 → ③生成AI分析 → ④経営計画（数値・施策）→ ⑤実行管理（KPI/会議体）→ ⑥検証・改善を最短4週間で実装。</li>
                 <li>MIT Sloanの研究が示す「AIと人の協働に向けたプロセス再設計」を組み込み、成果物と責任分担を明文化。</li>
@@ -3977,7 +3977,7 @@ const Index = () => {
               <h2 id="resources-heading">ヒト×AI×専門家の連携がわかる資料</h2>
               <ul className="section-intro">
                 <li>無料相談・仮診断・資料ダウンロードの価値を比較。</li>
-                <li>Why→What→Howを整理するテンプレと指標を提供。</li>
+                <li>背景→提供価値→運用を整理するテンプレと指標を提供。</li>
               </ul>
             </div>
             <div className="resources-grid">
