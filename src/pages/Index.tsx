@@ -146,21 +146,21 @@ const heroAllianceExperts = [
 ];
 
 const heroHeadlineOptions = [
-  "先読み意思決定を標準化",
-  "経営判断の迷いを断ち切る",
-  "判断スピードを設計する",
+  "激変市場に備える意思軸",
+  "先見経営を常態化する力",
+  "意思決定の迷いを断つ伴走",
 ];
 
 const heroSubheadlineOptions = [
   "週1AIレポートで意思決定リードタイム52%短縮（例）",
-  "生成AIと診断士レビューで粗利率＋6pt・先見性を確保（例）",
-  "外部環境スナップショットで政策変動への初動24h以内（例）",
+  "粗利率＋6ptと在庫回転＋24%を専門家×AIで同時達成（例）",
+  "政策更新12h以内反映で判断遅延を▲52%に抑制（例）",
 ];
 
 const heroUvpOptions = [
-  "生成AIが全社データと外部指数を即時統合し、診断士が金融機関連携レベルに精査することで、経営者の判断時間を取り戻します。",
-  "週次の意思決定ボードと四半期レビューが標準化され、計画‐実行‐検証のサイクルを途切れさせません。",
-  "AIの素案に専門家が補助金・資金調達の条件を上書きし、リスクシナリオまで備えた経営計画を短期間で提示します。",
+  "生成AIが外部指数と社内KPIを統合し、診断士が妥当性を審査することで経営者の集中時間を月45時間創出します（例）。",
+  "週1AIレポートと月次レビューで計画‐実行‐検証サイクルを標準化し、意思決定リードタイムを半減させます（例）。",
+  "金融機関・補助金要件を踏まえた経営計画と意思決定ボードを6ステップで整備し、先見的な打ち手を提示します。",
 ];
 
 type QuickFlowStep = {
@@ -2182,27 +2182,29 @@ const Index = () => {
             <div className="hero-copy" data-animate data-initial-visible="true">
               <span className="badge">株式会社創和経営コンサルティング（福岡）</span>
               <h1 id="hero-heading">
-                先読み意思決定を標準化
-                <span>専門家×生成AIで経営計画と実行を同期させる</span>
+                激変市場に備える意思軸
+                <span>専門家×生成AIで意思決定の質・速さ・先見性を底上げ</span>
               </h1>
               <p className="hero-lead">
-                需給の振れ幅、金利の上昇圧力、補助金要件の月次更新、生成AIの技術進化、競合の投資判断の加速——外部環境が一変する今、意思決定の質・速さ・先見性を備えた企業だけが資金と成長機会を守れます。
-                中小企業診断士である代表・古町聖文が率いる当社は、専門家と生成AIの二層体制で経営判断を前倒しします。
+                金利・為替の揺れ、補助金制度の更新、供給制約、生成AIの急進展、競合の投資加速——環境変化が同時多発する今、判断が遅れるほどキャッシュと成長機会は失われます。
+                中小企業診断士・古町聖文が率いる当社は、専門家の洞察と生成AIのリアルタイム分析を組み合わせ、経営者が先に動ける体制を整えます。
               </p>
-              <ul className="hero-points">
-                <li><strong>Hero：</strong> 専門家×生成AIで意思決定リードタイム52%短縮（例）というゴールを明示。</li>
-                <li><strong>Why：</strong> 需給・金利・制度・テクノロジー・競争の変化と危機／機会を提示。</li>
-                <li><strong>問題定義：</strong> 経営者の時間不足・判断精度・先見性の欠落を定量化。</li>
-                <li><strong>What：</strong> 粗利率＋6pt（例）など成果イメージとダッシュボード等の価値資産を約束。</li>
-                <li><strong>How：</strong> 現状診断→仮説設計→生成AI分析→経営計画→実行管理→検証改善の6ステップで説明。</li>
-                <li><strong>事例：</strong> 業種×年商×成果を開示した匿名事例で蓋然性を担保。</li>
-                <li><strong>オファー：</strong> 無料相談／仮診断／資料ダウンロードの3段階CTAを設計。</li>
-                <li><strong>FAQ：</strong> 費用・期間・社内体制・データ・AI精度・補助金対応に回答し、1か月トライアル（例）でリスクを抑制。</li>
-                <li><strong>最終CTA：</strong> 中小企業診断士の準拠性・守秘義務・データ保全方針で信頼を担保。</li>
-              </ul>
+              <div aria-label="本ページの構成要約">
+                <h2>本ページの構成要約（Why→What→How）</h2>
+                <ul className="hero-points">
+                  <li><strong>Hero</strong>：専門家×生成AIで意思決定リードタイム▲52%（例）、粗利率＋6pt（例）を目指す理由を提示。</li>
+                  <li><strong>Why</strong>：需給・金利・制度・テック・競争の5変化が生む危機と機会を定量的に解説。</li>
+                  <li><strong>問題定義</strong>：意思決定が遅れる3要因（時間・根拠・先見性）と定量ギャップを明示。</li>
+                  <li><strong>What</strong>：専門家レビュー付きAIダッシュボード／意思決定ボード／政策スナップショットを成果軸で約束。</li>
+                  <li><strong>How</strong>：現状診断→仮説設計→生成AI分析→経営計画→実行管理→検証改善の6工程で仕組み化。</li>
+                  <li><strong>事例</strong>：食品製造・SaaS・物流の匿名事例で効果と運用を紹介。</li>
+                  <li><strong>オファー</strong>：無料相談／7日仮診断／資料DLの3CTAで意思決定を後押し。</li>
+                  <li><strong>FAQ＆信頼</strong>：費用・期間・体制・データ保全・AI精度・補助金を説明し、1か月トライアル（例）でリスクを最小化。</li>
+                </ul>
+              </div>
               <div className="hero-copy-options">
                 <div className="hero-copy-options__column">
-                  <h2>ヒーロー見出し案（11〜15字）</h2>
+                  <h2>ヒーロー見出し（11〜15字の3タイプ）</h2>
                   <ul>
                     {heroHeadlineOptions.map((headline) => (
                       <li key={headline}>{headline}</li>
@@ -2210,7 +2212,7 @@ const Index = () => {
                   </ul>
                 </div>
                 <div className="hero-copy-options__column">
-                  <h2>サブ見出し案（25〜38字）</h2>
+                  <h2>サブ見出し（25〜38字の3タイプ）</h2>
                   <ul>
                     {heroSubheadlineOptions.map((subheadline) => (
                       <li key={subheadline}>{subheadline}</li>
@@ -2218,7 +2220,7 @@ const Index = () => {
                   </ul>
                 </div>
                 <div className="hero-copy-options__column">
-                  <h2>価値提案（UVP）案</h2>
+                  <h2>価値提案（UVP）</h2>
                   <ul>
                     {heroUvpOptions.map((uvp) => (
                       <li key={uvp}>{uvp}</li>
@@ -2227,8 +2229,8 @@ const Index = () => {
                 </div>
               </div>
               <p className="hero-sub">
-                Whyで突き止めた外部変化を、Whatの成果指標（例：意思決定リードタイム52%短縮・粗利率＋6pt・在庫回転＋24%）に結び付け、Howの6ステップで継続的に検証する仕組みを提供します。
-                経営者は判断と説明責任に専念し、専門家チームが生成AIの出力を倫理・金融・会計の観点から磨き上げます。
+                Whyで捉えた外部変化を、Whatで示す成果指標（例：意思決定リードタイム▲52%、粗利率＋6pt、在庫回転＋24%）に結び付け、Howの6ステップで運用することで、経営者は判断と合意形成に集中できます。
+                専門家チームが生成AIの提案を倫理・金融・会計の観点から検証し、意思決定の速さと質、先見性を一体で引き上げます。
               </p>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
