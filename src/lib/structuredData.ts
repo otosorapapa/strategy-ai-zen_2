@@ -49,8 +49,9 @@ export const localBusinessSchema = {
 export const productSchema = {
   "@context": "https://schema.org",
   "@type": "Product",
-  name: "伴走型AI経営顧問サービス",
-  description: "AIが経営数字を先読みし、意思決定時間を平均50%削減する月額制の伴走型AI経営顧問プラン",
+  name: "専門家×生成AI 経営計画・実行支援",
+  description:
+    "専門家と生成AIが外部環境と自社データを統合し、粗利率＋2〜4pt（例）と意思決定リードタイム▲35％（例）を目指す経営計画・実行支援プラン",
   brand: { "@type": "Brand", name: "株式会社創和経営コンサルティング" },
   offers: {
     "@type": "Offer",
@@ -72,11 +73,11 @@ export const productSchema = {
 export const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "伴走型AI経営顧問",
-  serviceType: "AI経営支援",
+  name: "専門家×生成AI 経営計画伴走",
+  serviceType: "経営計画・実行支援",
   url: "https://furumachi-smec.lognowa.com/public/lp_1",
   description:
-    "週1回のAIレポートと管理会計・資金繰り支援で、決断までの時間を50%削減し、3ヶ月で利益とキャッシュの同時改善を実現する伴走型サービス",
+    "週1回のAIレポートと専門家レビューで意思決定の質・速さ・先見性を高め、粗利率＋2〜4pt（例）と意思決定リードタイム▲35％（例）を目指す伴走型サービス",
   provider: {
     "@type": "Organization",
     name: "株式会社創和経営コンサルティング",
@@ -98,22 +99,22 @@ export const serviceSchema = {
   },
   hasOfferCatalog: {
     "@type": "OfferCatalog",
-    name: "AI経営顧問プログラム",
+    name: "専門家×生成AI 経営計画プログラム",
     itemListElement: [
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "AIレポーティング・ダッシュボード",
-          description: "AIが粗利とキャッシュの変動要因を可視化し、週次で意思決定資料を生成",
+          name: "外部環境スナップショット",
+          description: "生成AIが政策・需給・競争データを集約し、週次で先読みインサイトを提供",
         },
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "管理会計・資金繰り伴走",
-          description: "管理会計指標とキャッシュフロー計画を整備し、投資判断を支援",
+          name: "意思決定ボードと週次レビュー",
+          description: "粗利・資金・KPIを統合し、専門家が優先アクションと担当を明確化",
         },
       },
     ],
@@ -179,17 +180,17 @@ export const breadcrumbSchema = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "ホーム", item: "https://furumachi-smec.lognowa.com/" },
-    { "@type": "ListItem", position: 2, name: "AI経営顧問", item: "https://furumachi-smec.lognowa.com/public/lp_1" },
+    { "@type": "ListItem", position: 2, name: "専門家×生成AI 経営計画伴走", item: "https://furumachi-smec.lognowa.com/public/lp_1" },
   ],
 };
 
 export const webPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "福岡のAI経営顧問",
+  name: "専門家×生成AIによる経営計画伴走",
   url: "https://furumachi-smec.lognowa.com/public/lp_1",
   description:
-    "AIが経営数字を先読みし、社長は意思決定だけに集中できるようにする福岡発の伴走型AI経営顧問サービス",
+    "専門家と生成AIが意思決定の質・速さ・先見性を高め、粗利率＋2〜4pt（例）と意思決定リードタイム▲35％（例）を目指す経営計画・実行支援",
   inLanguage: "ja-JP",
   isPartOf: {
     "@type": "WebSite",
