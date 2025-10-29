@@ -5401,23 +5401,24 @@ svg {
 .story-carousel {
   position: relative;
   overflow: hidden;
-  padding: clamp(24px, 5vw, 40px);
+  padding: clamp(28px, 6vw, 52px);
   border-radius: 32px;
-  background: linear-gradient(145deg, rgba(18, 49, 92, 0.9), rgba(32, 76, 128, 0.88));
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 40px 80px rgba(6, 20, 40, 0.45);
+  background:
+    radial-gradient(circle at 12% 12%, rgba(79, 163, 255, 0.22), transparent 55%),
+    radial-gradient(circle at 86% 18%, rgba(31, 157, 122, 0.18), transparent 60%),
+    linear-gradient(160deg, rgba(7, 24, 46, 0.96), rgba(16, 38, 70, 0.92));
+  border: 1px solid rgba(148, 197, 253, 0.28);
+  box-shadow: 0 32px 64px rgba(5, 18, 40, 0.42);
   isolation: isolate;
 }
 
 .story-carousel::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 16% 20%, rgba(96, 165, 250, 0.25), transparent 58%),
-    radial-gradient(circle at 82% 28%, rgba(61, 214, 181, 0.24), transparent 62%),
-    radial-gradient(circle at 50% 110%, rgba(255, 255, 255, 0.1), transparent 70%);
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 65%);
   pointer-events: none;
-  mix-blend-mode: screen;
 }
 
 .story-slider {
@@ -5437,15 +5438,16 @@ svg {
 
 .story-card__content {
   position: relative;
-  width: min(960px, 100%);
-  border-radius: 28px;
-  padding: clamp(24px, 4vw, 44px);
+  width: min(980px, 100%);
+  border-radius: 30px;
+  padding: clamp(28px, 4.5vw, 48px);
   display: grid;
-  gap: clamp(20px, 3vw, 30px);
-  background: linear-gradient(160deg, rgba(4, 21, 42, 0.8), rgba(9, 30, 56, 0.75));
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 24px 54px rgba(5, 12, 28, 0.45);
-  backdrop-filter: blur(16px);
+  gap: clamp(24px, 3vw, 36px);
+  background:
+    linear-gradient(160deg, rgba(6, 22, 45, 0.9), rgba(12, 34, 63, 0.82));
+  border: 1px solid rgba(148, 197, 253, 0.22);
+  box-shadow: 0 26px 60px rgba(4, 14, 32, 0.5);
+  backdrop-filter: blur(18px);
 }
 
 .story-card__content::before {
@@ -5453,53 +5455,86 @@ svg {
   position: absolute;
   inset: 1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, rgba(61, 214, 181, 0.18), rgba(96, 165, 250, 0.12));
+  background: linear-gradient(135deg, rgba(79, 163, 255, 0.18), rgba(31, 157, 122, 0.18));
   opacity: 0.65;
-  filter: blur(0.5px);
+  filter: blur(0.6px);
   z-index: -1;
 }
 
-.story-meta {
-  display: flex;
-  gap: clamp(16px, 2.5vw, 32px);
+.story-card__header {
+  display: grid;
+  grid-template-columns: minmax(0, 340px) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 40px);
+  align-items: center;
+}
+
+.story-identity {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(18px, 2.8vw, 28px);
   align-items: center;
 }
 
 .story-photo {
-  width: 72px;
-  height: 72px;
-  border-radius: 20px;
+  width: clamp(72px, 8vw, 92px);
+  height: clamp(72px, 8vw, 92px);
+  border-radius: 24px;
   object-fit: cover;
-  box-shadow: 0 16px 32px rgba(10, 28, 54, 0.35);
-  border: 2px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 22px 44px rgba(8, 24, 52, 0.45);
+  border: 2px solid rgba(224, 242, 254, 0.4);
+}
+
+.story-identity__meta {
+  display: grid;
+  gap: 16px;
+}
+
+.story-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 18px;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 197, 253, 0.45);
+  color: rgba(226, 240, 255, 0.85);
+  background: rgba(12, 51, 94, 0.35);
+}
+
+.story-company-block {
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
 .story-profile {
   display: grid;
   gap: 6px;
+  min-width: 0;
 }
 
 .story-logo {
-  width: 104px;
+  width: clamp(96px, 11vw, 128px);
   height: auto;
-  margin-bottom: 4px;
-  border-radius: 12px;
-  box-shadow: 0 12px 26px rgba(10, 26, 52, 0.35);
-  background: rgba(255, 255, 255, 0.95);
-  padding: 6px 10px;
+  border-radius: 14px;
+  box-shadow: 0 16px 28px rgba(8, 24, 52, 0.32);
+  background: rgba(255, 255, 255, 0.96);
+  padding: 8px 12px;
 }
 
 .story-company {
   font-weight: 700;
   display: block;
-  color: rgba(255, 255, 255, 0.95);
-  font-size: 1.05rem;
+  color: rgba(239, 246, 255, 0.96);
+  font-size: clamp(1rem, 1.2vw + 0.6rem, 1.18rem);
 }
 
 .story-role {
   display: block;
-  font-size: 0.88rem;
-  opacity: 0.82;
+  font-size: 0.9rem;
+  color: rgba(208, 223, 255, 0.86);
 }
 
 .story-industry {
@@ -5507,9 +5542,37 @@ svg {
   align-items: center;
   gap: 6px;
   font-size: 0.78rem;
-  color: rgba(200, 221, 255, 0.85);
-  letter-spacing: 0.05em;
+  color: rgba(180, 208, 255, 0.85);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.story-overview {
+  padding: clamp(18px, 3vw, 28px);
+  border-radius: 22px;
+  border: 1px solid rgba(148, 197, 253, 0.28);
+  background: rgba(13, 39, 74, 0.55);
+  box-shadow: inset 0 0 0 1px rgba(79, 163, 255, 0.18);
+  display: grid;
+  gap: 12px;
+}
+
+.story-overview__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(148, 197, 253, 0.88);
+  font-weight: 700;
+}
+
+.story-overview p {
+  margin: 0;
+  font-size: clamp(0.95rem, 1vw + 0.65rem, 1.02rem);
+  line-height: 1.7;
+  color: rgba(224, 235, 255, 0.92);
 }
 
 .story-quote {
@@ -5558,20 +5621,39 @@ svg {
 
 .story-structure__item p {
   margin: 0;
-  font-size: 0.92rem;
-  line-height: 1.6;
-  color: rgba(226, 236, 255, 0.9);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: rgba(226, 236, 255, 0.92);
 }
 
-.story-summary {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: rgba(230, 240, 255, 0.92);
-  padding: 18px 22px;
-  border-radius: 18px;
-  background: linear-gradient(120deg, rgba(96, 165, 250, 0.18), rgba(255, 255, 255, 0.04));
-  border: 1px solid rgba(120, 184, 255, 0.18);
+.story-body {
+  display: grid;
+  gap: clamp(20px, 3vw, 36px);
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  align-items: start;
+}
+
+.story-body__details {
+  display: grid;
+  gap: 18px;
+}
+
+.story-metrics-panel {
+  display: grid;
+  gap: 16px;
+  padding: 22px 24px;
+  border-radius: 22px;
+  border: 1px solid rgba(148, 197, 253, 0.28);
+  background: linear-gradient(160deg, rgba(10, 32, 60, 0.78), rgba(11, 28, 52, 0.82));
+  box-shadow: inset 0 0 0 1px rgba(79, 163, 255, 0.14);
+}
+
+.story-metrics-panel__label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(148, 197, 253, 0.88);
+  font-weight: 700;
 }
 
 .story-metrics {
@@ -5579,31 +5661,32 @@ svg {
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 14px;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
 }
 
 .story-metrics li {
-  background: linear-gradient(140deg, rgba(255, 255, 255, 0.14), rgba(61, 214, 181, 0.12));
-  border-radius: 18px;
-  padding: 14px 18px;
+  border-radius: 16px;
+  padding: 14px 16px 16px;
   display: grid;
   gap: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.12), rgba(79, 163, 255, 0.1));
+  border: 1px solid rgba(148, 197, 253, 0.2);
+  box-shadow: 0 14px 28px rgba(5, 18, 40, 0.32);
 }
 
 .story-metric__label {
   font-size: 0.85rem;
-  color: rgba(217, 229, 255, 0.88);
-  letter-spacing: 0.04em;
+  color: rgba(217, 229, 255, 0.9);
+  letter-spacing: 0.05em;
 }
 
 .story-metric__values {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.85);
+  gap: 10px;
+  font-size: 0.92rem;
+  color: rgba(245, 248, 255, 0.9);
   font-variant-numeric: tabular-nums;
 }
 
@@ -5617,24 +5700,15 @@ svg {
 }
 
 .story-metric__impact {
-  font-size: 1.12rem;
-  color: rgba(61, 214, 181, 0.92);
+  font-size: 1.08rem;
+  color: rgba(120, 227, 199, 0.95);
   font-weight: 700;
 }
 
 @media (max-width: 680px) {
-  .story-meta {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .story-photo {
     width: 64px;
     height: 64px;
-  }
-
-  .story-logo {
-    width: 92px;
   }
 
   .story-structure__item {
@@ -5654,7 +5728,41 @@ svg {
   }
 
   .story-card__content {
-    gap: 32px;
+    gap: 36px;
+  }
+
+  .story-metrics {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1024px) {
+  .story-card__header {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .story-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .story-metrics {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 540px) {
+  .story-identity {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .story-company-block {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .story-badge {
+    justify-content: flex-start;
   }
 }
 
