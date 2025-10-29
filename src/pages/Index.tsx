@@ -40,7 +40,7 @@ import {
 
 import { submitContactForm } from "@/lib/contact-api";
 
-import aiDashboardShot from "@/assets/growth-chart.jpg";
+import aiDashboardShot from "@/assets/dashboard-preview.jpg";
 import simulatorGuidanceVisual from "@/assets/strategy-planning.jpg";
 import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
 import expertSaitoPhoto from "@/assets/representative_.jpg";
@@ -173,6 +173,48 @@ const heroValuePropositions = [
   "生成AIが情報を圧縮し専門家が判断筋道を整えることで、経営者の集中時間を毎月45時間創出（例）。",
   "経営陣が胸を張って説明できる管理会計と資金計画を整備し、意思決定の質と説明責任を両立。",
   "週次の意思決定ボードと月次レビューで、計画-実行-モニタリングのサイクルを高速化。",
+];
+
+type HeroAssuranceAccent = "cause" | "logic" | "design" | "smart" | "trust";
+
+type HeroAssurance = {
+  label: string;
+  description: string;
+  icon: LucideIcon;
+  accent: HeroAssuranceAccent;
+};
+
+const heroAssurances: HeroAssurance[] = [
+  {
+    label: "因果性",
+    description: "AIが外部統計と社内データの因果を可視化し、判断理由を定量で裏付け。",
+    icon: LineChart,
+    accent: "cause",
+  },
+  {
+    label: "論理性",
+    description: "意思決定のロジックツリーと検証条件を公開し、経営会議での説明を容易に。",
+    icon: Layers3,
+    accent: "logic",
+  },
+  {
+    label: "デザイン性",
+    description: "投資家視点のビジュアルで複雑な指標を直感的に読み解けるよう整理。",
+    icon: Sparkles,
+    accent: "design",
+  },
+  {
+    label: "スマート性",
+    description: "日次で更新されるシナリオとアラートで、次の一手が自動で提示される状態に。",
+    icon: Workflow,
+    accent: "smart",
+  },
+  {
+    label: "納得性",
+    description: "金融・会計・戦略の専門家がレビューし、第三者にも通用する根拠を装備。",
+    icon: ShieldCheck,
+    accent: "trust",
+  },
 ];
 
 type QuickFlowStep = {
@@ -2198,6 +2240,13 @@ const Index = () => {
                   <li key={item}>{item}</li>
                 ))}
               </ul>
+              <div className="hero-target" role="note" aria-label="想定している企業規模">
+                <span className="hero-target__label">対象企業</span>
+                <div className="hero-target__body">
+                  <strong>年商5,000万〜15億円の経営陣専用プログラム</strong>
+                  <span>意思決定の司令塔機能を共同構築し、資金と成長を守り抜く</span>
+                </div>
+              </div>
               <h1 id="hero-heading">
                 {heroHeadlineOptions.map((line) => (
                   <span key={line}>{line}</span>
@@ -2225,6 +2274,25 @@ const Index = () => {
                   資料をダウンロードして詳細を確認
                 </a>
               </div>
+              <ul className="hero-assurances" aria-label="意思決定を支える5つの品質基準">
+                {heroAssurances.map((assurance) => {
+                  const AssuranceIcon = assurance.icon;
+                  return (
+                    <li
+                      key={assurance.label}
+                      className={`hero-assurance hero-assurance--${assurance.accent}`}
+                    >
+                      <span className="hero-assurance__icon" aria-hidden="true">
+                        <AssuranceIcon />
+                      </span>
+                      <div className="hero-assurance__body">
+                        <strong>{assurance.label}</strong>
+                        <span>{assurance.description}</span>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
               <div className="hero-quick-form" data-animate>
                 <div className="hero-quick-form__intro">
                   <h2>60秒でAI診断を予約</h2>
@@ -2394,11 +2462,11 @@ const Index = () => {
               >
                 <img
                   src={aiDashboardShot}
-                  alt="AIダッシュボードのスクリーンショット"
+                  alt="経営ダッシュボードのスクリーンショット"
                   loading="lazy"
                 />
                 <figcaption>
-                  政策・市場データと財務指標を一画面で確認し、次の一手を即断する下地をつくります。
+                  政策・市場・社内指標の360°ビューで、因果のつながりと優先課題が一目でわかるエグゼクティブ向けレイアウト。
                 </figcaption>
               </figure>
               <div className="hero-demo" data-animate data-initial-visible="true">
