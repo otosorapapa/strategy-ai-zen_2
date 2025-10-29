@@ -2780,15 +2780,21 @@ const Index = () => {
                         <FeatureIcon />
                       </div>
                     </header>
-                    <div className="feature-card__content">
-                      <h3>{feature.title}</h3>
-                      <p className="feature-description">{feature.description}</p>
-                      <div className="feature-card__stat">
-                        <strong>{feature.statValue}</strong>
-                        <span>{feature.statLabel}</span>
+                    <div className="feature-card__body">
+                      <div className="feature-card__summary">
+                        <h3>{feature.title}</h3>
+                        <p className="feature-description">{feature.description}</p>
                       </div>
-                      <p className="feature-detail">{feature.detail}</p>
+                      <div
+                        className="feature-card__stat"
+                        role="group"
+                        aria-label={`${feature.statLabel}の実績`}
+                      >
+                        <span className="feature-card__stat-label">{feature.statLabel}</span>
+                        <strong>{feature.statValue}</strong>
+                      </div>
                     </div>
+                    <p className="feature-detail">{feature.detail}</p>
                     <footer className="feature-card__footer">
                       <span className="feature-card__reference">{feature.reference}</span>
                       <span className="feature-benefit">{feature.benefit}</span>
