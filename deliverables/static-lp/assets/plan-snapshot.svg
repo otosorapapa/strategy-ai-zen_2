@@ -1,0 +1,48 @@
+<svg width="640" height="320" viewBox="0 0 640 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="12" y="12" width="616" height="296" rx="28" fill="url(#bgGradient)" />
+  <g filter="url(#shadow)">
+    <rect x="56" y="72" width="160" height="176" rx="20" fill="white" fill-opacity="0.92"/>
+    <text x="136" y="108" text-anchor="middle" fill="#1F3A5F" font-family="'Noto Sans JP',sans-serif" font-size="18" font-weight="700">ライト</text>
+    <text x="136" y="134" text-anchor="middle" fill="#0F8C5A" font-family="'Noto Sans JP',sans-serif" font-size="16" font-weight="600">¥120,000</text>
+    <text x="136" y="164" text-anchor="middle" fill="#6B7785" font-family="'Noto Sans JP',sans-serif" font-size="12">月次レポート / チャット48h</text>
+    <rect x="96" y="210" width="80" height="6" rx="3" fill="#D7E3F3"/>
+  </g>
+  <g filter="url(#shadowStrong)">
+    <rect x="240" y="48" width="192" height="224" rx="24" fill="#1F3A5F" />
+    <text x="336" y="94" text-anchor="middle" fill="#F9FAFB" font-family="'Noto Sans JP',sans-serif" font-size="18" font-weight="700">プロ（推奨）</text>
+    <text x="336" y="124" text-anchor="middle" fill="#68E1B8" font-family="'Noto Sans JP',sans-serif" font-size="24" font-weight="700">¥180,000</text>
+    <text x="336" y="154" text-anchor="middle" fill="#D1D8E5" font-family="'Noto Sans JP',sans-serif" font-size="12">AIシナリオ / 会議同席 / 粗利+3pt</text>
+    <rect x="272" y="188" width="128" height="10" rx="5" fill="#68E1B8"/>
+    <text x="336" y="224" text-anchor="middle" fill="#F9FAFB" font-family="'Noto Sans JP',sans-serif" font-size="12">導入スピード ★★★★★</text>
+    <text x="336" y="246" text-anchor="middle" fill="#F9FAFB" font-family="'Noto Sans JP',sans-serif" font-size="12">ROI確度 ★★★★☆</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="456" y="72" width="160" height="176" rx="20" fill="white" fill-opacity="0.92"/>
+    <text x="536" y="108" text-anchor="middle" fill="#1F3A5F" font-family="'Noto Sans JP',sans-serif" font-size="18" font-weight="700">エンタープライズ</text>
+    <text x="536" y="134" text-anchor="middle" fill="#0F8C5A" font-family="'Noto Sans JP',sans-serif" font-size="16" font-weight="600">¥280,000〜</text>
+    <text x="536" y="164" text-anchor="middle" fill="#6B7785" font-family="'Noto Sans JP',sans-serif" font-size="12">週次レビュー / 金融連携</text>
+    <rect x="496" y="210" width="80" height="6" rx="3" fill="#D7E3F3"/>
+  </g>
+  <defs>
+    <linearGradient id="bgGradient" x1="12" y1="12" x2="628" y2="308" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F0F4FF"/>
+      <stop offset="1" stop-color="#E6F6F0"/>
+    </linearGradient>
+    <filter id="shadow" x="32" y="52" width="592" height="224" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12"/>
+      <feOffset dy="12"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.13 0 0 0 0 0.2 0 0 0 0 0.33 0 0 0 0.12 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <filter id="shadowStrong" x="216" y="28" width="240" height="272" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="14"/>
+      <feOffset dy="16"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.07 0 0 0 0 0.15 0 0 0 0 0.24 0 0 0 0.25 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+  </defs>
+</svg>
