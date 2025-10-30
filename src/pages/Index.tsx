@@ -50,6 +50,7 @@ import decisionIntelligenceVisual from "@/assets/financial-analysis.jpg";
 import featureFlywheelVisual from "@/assets/dashboard-preview.jpg";
 import aiAnalysisVisual from "@/assets/ai-analysis.jpg";
 import growthChartVisual from "@/assets/growth-chart.jpg";
+import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -598,6 +599,81 @@ const responsibilityColumns: ResponsibilityColumn[] = [
     points: ["レビューとチューニング", "金融機関連携・交渉支援", "四半期伴走ミーティング"],
     icon: Users2,
     accent: "sky",
+  },
+];
+
+type CollaborationHighlight = {
+  label: string;
+  value: string;
+  description: string;
+  evidence: string;
+  accent: "mint" | "sky" | "citrus";
+};
+
+const collaborationHighlights: CollaborationHighlight[] = [
+  {
+    label: "シグナル検知の速さ",
+    value: "外部アラート +42/月",
+    description: "国内外120指標をAIが12時間以内に同期し、変化の因果を整理。",
+    evidence: "Signal Intelligence トラッキング",
+    accent: "mint",
+  },
+  {
+    label: "レビュー品質",
+    value: "専門家SLA 72h",
+    description: "金融・会計・戦略のトリプルチェックで、投資家・金融機関基準を担保。",
+    evidence: "Expert Assurance 監査ログ",
+    accent: "sky",
+  },
+  {
+    label: "意思決定速度",
+    value: "決裁リードタイム -52%",
+    description: "AIドラフトと合意形成テンプレートで、決裁会議の迷いを削減。",
+    evidence: "導入20社 実測中央値",
+    accent: "citrus",
+  },
+];
+
+type SolutionLogicStep = {
+  id: string;
+  stage: string;
+  title: string;
+  description: string;
+  metric: string;
+  metricLabel: string;
+  accent: "mint" | "sky" | "citrus";
+};
+
+const solutionLogicSteps: SolutionLogicStep[] = [
+  {
+    id: "sense",
+    stage: "Sense",
+    title: "市場と自社の兆しを一本化",
+    description:
+      "AIが市場ニュース・金融指数・社内KPIをクロス解析し、変化率と影響領域を定量化。見落としや主観の偏りを排除します。",
+    metric: "+42件/月",
+    metricLabel: "リスク&機会アラート",
+    accent: "mint",
+  },
+  {
+    id: "shape",
+    stage: "Shape",
+    title: "専門家と論点を磨き上げ",
+    description:
+      "財務・会計・戦略の専門家がAIドラフトをレビューし、金融審査目線の裏付けと実行順序を設計。意思決定材料を合意水準に整えます。",
+    metric: "72h",
+    metricLabel: "レビューSLA",
+    accent: "sky",
+  },
+  {
+    id: "decide",
+    stage: "Decide",
+    title: "経営陣が確信を持って決断",
+    description:
+      "経営者は優先順位と資源配分に集中し、意思決定後の説明資料も同時に揃うため、社内外の納得形成が速く進みます。",
+    metric: "-52%",
+    metricLabel: "意思決定リードタイム",
+    accent: "citrus",
   },
 ];
 
@@ -2663,6 +2739,39 @@ const Index = () => {
                 生成AIが市場・外部・自社データを束ね、専門家と経営者がレビューと判断に集中します。blog.workday.comが紹介するリアルタイム分析のスピードと、note.comで語られるAI会議術の先見性を組み合わせ、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果につなげ、決裁の場で確信を持てる状態を生み出します。
               </p>
             </div>
+            <div className="solution-synergy" data-animate>
+              <figure className="solution-synergy__visual">
+                <img
+                  src={solutionSynergyVisual}
+                  alt="AI・専門家・経営者の因果ループを示す共創フレームワーク"
+                  loading="lazy"
+                />
+                <figcaption>
+                  「検知→検証→決断」を循環させる共創ダイアグラム。各役割が担うアウトプットとタイムラインを明示しています。
+                </figcaption>
+              </figure>
+              <div className="solution-synergy__insights">
+                <span className="solution-synergy__eyebrow">CAUSAL FRAMEWORK</span>
+                <h3>因果で裏付けた共創設計で、意思決定に論理と納得を同時実現</h3>
+                <p>
+                  AIが兆候を集め、専門家がレビューし、経営陣が決断するまでを一枚で把握できるように設計。各工程を定量管理することで、
+                  「論理が通り、納得感のある判断材料が揃う」体験を再現性高く提供します。
+                </p>
+                <ul className="solution-synergy__highlights">
+                  {collaborationHighlights.map((item) => (
+                    <li
+                      key={item.label}
+                      className={`solution-synergy__item solution-synergy__item--${item.accent}`}
+                    >
+                      <span className="solution-synergy__value">{item.value}</span>
+                      <span className="solution-synergy__label">{item.label}</span>
+                      <p>{item.description}</p>
+                      <small>{item.evidence}</small>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
             <div className="roles-grid">
               {responsibilityColumns.map((column, index) => {
                 const RoleIcon = column.icon;
@@ -2700,6 +2809,34 @@ const Index = () => {
                   </article>
                 );
               })}
+            </div>
+            <div className="solution-logic" data-animate>
+              <div className="solution-logic__header">
+                <h3>検知→検証→決断を回す「因・論・果」オペレーティングモデル</h3>
+                <p>
+                  3つのステップが連動することで、数字の裏付けとストーリーが同期。AIが因（Cause）を提示し、専門家が論（Logic）を整え、
+                  経営陣が果（Impact）を確信を持って示せるようになります。
+                </p>
+              </div>
+              <ol className="solution-logic__steps" role="list">
+                {solutionLogicSteps.map((step, index) => (
+                  <li
+                    key={step.id}
+                    className={`solution-logic__step solution-logic__step--${step.accent}`}
+                  >
+                    <span className="solution-logic__index">{String(index + 1).padStart(2, "0")}</span>
+                    <div className="solution-logic__body">
+                      <span className="solution-logic__stage">{step.stage}</span>
+                      <h4>{step.title}</h4>
+                      <p>{step.description}</p>
+                      <div className="solution-logic__metric">
+                        <strong>{step.metric}</strong>
+                        <span>{step.metricLabel}</span>
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
             <div className="ai-value-grid" data-animate>
               {aiValuePoints.map((point) => {
