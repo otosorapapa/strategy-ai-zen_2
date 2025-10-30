@@ -51,6 +51,10 @@ import featureFlywheelVisual from "@/assets/dashboard-preview.jpg";
 import aiAnalysisVisual from "@/assets/ai-analysis.jpg";
 import growthChartVisual from "@/assets/growth-chart.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
+import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
+import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
+import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
+import aiValueAugmentationVisual from "@/assets/ai-value-augmentation.svg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -421,11 +425,15 @@ type AiValuePoint = {
   title: string;
   challenge: string;
   mechanism: string;
-  impact: string;
+  impactLabel: string;
+  impactValue: string;
+  impactContext: string;
   executiveTakeaway: string;
   icon: LucideIcon;
   accent: "navy" | "mint" | "sky" | "citrus";
   evidence: string;
+  visual: string;
+  visualAlt: string;
 };
 
 const aiValuePoints: AiValuePoint[] = [
@@ -434,44 +442,60 @@ const aiValuePoints: AiValuePoint[] = [
     challenge: "外部環境や資金繰りの更新が遅れ、会議で判断材料が不足しがち。",
     mechanism:
       "University of Cincinnati Online (2024) は、AIがリアルタイムデータを統合し経営判断を支援すると報告。ダッシュボードが市場・金融・自社指標を常時同期し、根拠付きの状況把握を提供します。",
-    impact: "意思決定リードタイム -52%",
+    impactLabel: "意思決定リードタイム",
+    impactValue: "-52%",
+    impactContext: "導入企業20社の会議ログ (2024)",
     executiveTakeaway: "最新の市場更新と資金繰り感度を自動で突き合わせ、判断のスピードを落としません。",
     icon: BarChart4,
     accent: "navy",
     evidence: "University of Cincinnati Online (2024)",
+    visual: aiValueRealtimeVisual,
+    visualAlt: "リアルタイムデータ同期を示すダッシュボードの概念図",
   },
   {
     title: "シナリオ比較と生成ドラフト",
     challenge: "複数シナリオの検証に時間がかかり、意思決定の論点整理が後手に回る。",
     mechanism:
       "JAGGAER (2024) は生成AIが膨大なデータを要約し短時間で比較できると指摘。AIが財務・需給データをもとに複数シナリオと想定問答を下書きし、役員会の論点を事前可視化します。",
-    impact: "想定シナリオ数 4倍",
+    impactLabel: "想定シナリオ数",
+    impactValue: "4倍",
+    impactContext: "AIドラフト比較ログ (2024Q2)",
     executiveTakeaway: "四半期計画書や想定問答集をAIが先に整え、専門家レビューで精度を一段引き上げます。",
     icon: Sparkles,
     accent: "mint",
     evidence: "JAGGAER (2024)",
+    visual: aiValueScenarioVisual,
+    visualAlt: "複数シナリオ比較と評価を示すフロー図",
   },
   {
     title: "バイアスを抑えたリスク検知",
     challenge: "属人的な経験に頼った判断では、市況変化や資金繰り悪化の兆候を見落とす。",
     mechanism:
       "University of Cincinnati Onlineの調査は、生成AIが客観的な提案でリスク管理を強化すると報告。AIが信用・需給指数を監視し、閾値を超えたら警告と対策案を提示します。",
-    impact: "リスク検知リードタイム -10日",
+    impactLabel: "リスク検知リードタイム",
+    impactValue: "-10日",
+    impactContext: "資金繰りアラートの閾値運用 (2024)",
     executiveTakeaway: "資金繰りアラートと金融機関向け説明資料を自動生成し、交渉準備を先回りできます。",
     icon: ShieldCheck,
     accent: "sky",
     evidence: "University of Cincinnati Online (2024)",
+    visual: aiValueRiskVisual,
+    visualAlt: "リスク指標の早期検知を可視化した図",
   },
   {
     title: "人の判断力を拡張",
     challenge: "経営者・役員の稼働が逼迫し、意思決定後の説明や納得づくりが後回しになる。",
     mechanism:
       "Rossum (2024) はAIが副操縦士となり創造性と直感を引き出すと言及。AIが決裁資料の比較と論点を整理し、専門家とともに合意形成のストーリーを組み立てます。",
-    impact: "経営者集中時間 +45h/月",
+    impactLabel: "経営者集中時間",
+    impactValue: "+45h/月",
+    impactContext: "エグゼクティブヒアリング (n=12)",
     executiveTakeaway: "役員会ではAIが論点を整理し、経営者は優先順位づけと納得形成に専念できます。",
     icon: Users2,
     accent: "citrus",
     evidence: "Rossum (2024)",
+    visual: aiValueAugmentationVisual,
+    visualAlt: "AIと専門家が経営者を支援する概念イラスト",
   },
 ];
 
@@ -2796,32 +2820,45 @@ const Index = () => {
                     key={point.title}
                     className={`ai-value-card ai-value-card--${point.accent}`}
                   >
-                    <header className="ai-value-card__header">
-                      <div
-                        className={`ai-value-card__icon ai-value-card__icon--${point.accent}`}
-                        aria-hidden="true"
-                      >
-                        <ValueIcon />
+                    <div className="ai-value-card__surface">
+                      <header className="ai-value-card__header">
+                        <div className="ai-value-card__identity">
+                          <div
+                            className={`ai-value-card__icon ai-value-card__icon--${point.accent}`}
+                            aria-hidden="true"
+                          >
+                            <ValueIcon />
+                          </div>
+                          <div className="ai-value-card__meta">
+                            <span className="ai-value-card__evidence">{point.evidence}</span>
+                            <h3>{point.title}</h3>
+                          </div>
+                        </div>
+                        <figure className="ai-value-card__visual">
+                          <img src={point.visual} alt={point.visualAlt} loading="lazy" />
+                        </figure>
+                      </header>
+                      <div className="ai-value-card__body">
+                        <dl className="ai-value-card__narrative">
+                          <div className="ai-value-card__row">
+                            <dt>課題</dt>
+                            <dd>{point.challenge}</dd>
+                          </div>
+                          <div className="ai-value-card__row">
+                            <dt>解決</dt>
+                            <dd>{point.mechanism}</dd>
+                          </div>
+                        </dl>
+                        <aside
+                          className="ai-value-card__metric"
+                          aria-label={`${point.impactLabel}の成果値`}
+                        >
+                          <span className="ai-value-card__metric-label">{point.impactLabel}</span>
+                          <strong>{point.impactValue}</strong>
+                          <p>{point.executiveTakeaway}</p>
+                          <small>{point.impactContext}</small>
+                        </aside>
                       </div>
-                      <div className="ai-value-card__meta">
-                        <span className="ai-value-card__evidence">{point.evidence}</span>
-                        <h3>{point.title}</h3>
-                      </div>
-                    </header>
-                    <div className="ai-value-card__content">
-                      <p className="ai-value-card__challenge">
-                        <strong>課題</strong>
-                        {point.challenge}
-                      </p>
-                      <p className="ai-value-card__mechanism">
-                        <strong>アプローチ</strong>
-                        {point.mechanism}
-                      </p>
-                    </div>
-                    <div className="ai-value-card__impact">
-                      <span>インパクト</span>
-                      <strong>{point.impact}</strong>
-                      <p>{point.executiveTakeaway}</p>
                     </div>
                   </article>
                 );
