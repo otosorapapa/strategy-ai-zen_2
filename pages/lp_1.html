@@ -1133,91 +1133,352 @@
 
       .feature-grid {
         display: grid;
-        grid-template-columns: repeat(12, minmax(0, 1fr));
-        gap: clamp(20px, 4vw, 36px);
+        gap: clamp(24px, 4vw, 40px);
+        grid-template-columns: minmax(0, 1fr);
+        align-items: stretch;
       }
 
-      .feature-card {
-        grid-column: span 4;
-        background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(236, 253, 245, 0.92));
-        border-radius: var(--radius);
-        padding: clamp(28px, 3.2vw, 38px);
-        border: 1px solid rgba(148, 163, 184, 0.25);
+      @media (min-width: 1024px) {
+        .feature-grid {
+          grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+        }
+      }
+
+      .feature-spotlight {
         position: relative;
-        overflow: hidden;
-        box-shadow: 0 28px 58px rgba(15, 23, 42, 0.08);
+        border-radius: 2rem;
+        padding: clamp(28px, 3.2vw, 44px);
+        background:
+          radial-gradient(circle at 12% 20%, rgba(14, 165, 233, 0.18), transparent 55%),
+          radial-gradient(circle at 88% 18%, rgba(59, 130, 246, 0.12), transparent 62%),
+          linear-gradient(140deg, rgba(241, 245, 249, 0.9), rgba(236, 253, 245, 0.92));
+        border: 1px solid rgba(148, 163, 184, 0.28);
+        box-shadow: 0 28px 60px rgba(15, 23, 42, 0.12);
         display: grid;
-        gap: 1rem;
+        gap: clamp(18px, 2.6vw, 28px);
+        overflow: hidden;
       }
 
-      .feature-card--span6 {
-        grid-column: span 6;
-      }
-
-      .feature-card::before {
+      .feature-spotlight::after {
         content: "";
         position: absolute;
-        inset: 0 0 auto 0;
-        height: 4px;
-        background: linear-gradient(120deg, rgba(14, 165, 233, 0.85), rgba(99, 102, 241, 0.65));
+        inset: auto 12% -18% auto;
+        width: clamp(140px, 24vw, 220px);
+        height: clamp(140px, 24vw, 220px);
+        background: radial-gradient(circle, rgba(14, 116, 144, 0.18), transparent 70%);
+        z-index: 0;
       }
 
-      .feature-card h3 {
-        margin: 0;
-        font-size: 1.22rem;
-        letter-spacing: -0.01em;
+      .feature-spotlight > * {
         position: relative;
         z-index: 1;
       }
 
-      .feature-card p {
-        margin: 0;
-        color: rgba(15, 23, 42, 0.72);
-        line-height: 1.65;
-        position: relative;
-        z-index: 1;
-      }
-
-      .feature-metric {
-        display: flex;
-        align-items: baseline;
-        gap: 0.45rem;
-        font-size: 1.8rem;
+      .feature-spotlight__eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.85rem;
         font-weight: 700;
-        color: rgba(14, 116, 144, 0.95);
-        letter-spacing: -0.02em;
-        position: relative;
-        z-index: 1;
-      }
-
-      .feature-metric small {
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: rgba(15, 23, 42, 0.6);
+        letter-spacing: 0.12em;
         text-transform: uppercase;
-        letter-spacing: 0.08em;
+        color: rgba(14, 116, 144, 0.85);
+        padding: 0.4rem 0.85rem;
+        border-radius: 999px;
+        background: rgba(191, 219, 254, 0.35);
+        box-shadow: inset 0 0 0 1px rgba(14, 165, 233, 0.25);
       }
 
-      .feature-card ul {
+      .feature-spotlight h3 {
+        margin: 0;
+        font-size: clamp(1.6rem, 2vw + 1rem, 2.1rem);
+        line-height: 1.35;
+        letter-spacing: -0.01em;
+        color: rgb(15, 23, 42);
+      }
+
+      .feature-spotlight p {
+        margin: 0;
+        color: rgba(15, 23, 42, 0.7);
+        line-height: 1.7;
+        font-size: clamp(0.95rem, 0.4vw + 0.85rem, 1.05rem);
+      }
+
+      .feature-spotlight figure {
+        margin: 0;
+        border-radius: 1.75rem;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        box-shadow: 0 22px 48px rgba(15, 23, 42, 0.18);
+      }
+
+      .feature-spotlight img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+        aspect-ratio: 16 / 10;
+      }
+
+      .feature-spotlight figcaption {
+        position: absolute;
+        inset: auto 1rem 1rem 1rem;
+        padding: 0.85rem 1rem;
+        border-radius: 1rem;
+        background: rgba(15, 23, 42, 0.82);
+        color: rgba(226, 232, 240, 0.92);
+        font-size: 0.78rem;
+        line-height: 1.5;
+        box-shadow: 0 16px 32px rgba(15, 23, 42, 0.22);
+      }
+
+      .feature-spotlight__list {
         list-style: none;
         margin: 0;
         padding: 0;
         display: grid;
-        gap: 0.65rem;
-        position: relative;
-        z-index: 1;
+        gap: 0.85rem;
+      }
+
+      .feature-spotlight__list li {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.6rem;
+        align-items: flex-start;
+        font-size: 0.92rem;
+        line-height: 1.65;
         color: rgba(15, 23, 42, 0.72);
       }
 
-      .feature-card li {
+      .feature-spotlight__list span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(15, 23, 42, 0.72);
+        background: rgba(191, 219, 254, 0.4);
+        box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.35);
+        white-space: nowrap;
+      }
+
+      .feature-spotlight__meta {
         display: flex;
+        flex-wrap: wrap;
         gap: 0.6rem;
+        font-size: 0.78rem;
+        color: rgba(15, 23, 42, 0.6);
+      }
+
+      .feature-spotlight__meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.45rem 0.85rem;
+        border-radius: 999px;
+        background: rgba(248, 250, 252, 0.85);
+        box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.22);
+        font-weight: 600;
+      }
+
+      .feature-pillar-grid {
+        display: grid;
+        gap: clamp(16px, 3vw, 24px);
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .feature-pillar {
+        position: relative;
+        display: grid;
+        gap: 0.75rem;
+        padding: clamp(20px, 2.4vw, 28px);
+        border-radius: 1.75rem;
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+        background: linear-gradient(165deg, rgba(255, 255, 255, 0.94), rgba(241, 245, 249, 0.9));
+        overflow: hidden;
+      }
+
+      .feature-pillar::before {
+        content: "";
+        position: absolute;
+        inset: -35% 45% auto -20%;
+        width: 220px;
+        height: 220px;
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: 0;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.32), transparent 70%);
+      }
+
+      .feature-pillar > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .feature-pillar header {
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .feature-pillar__eyebrow {
+        font-size: 0.78rem;
+        letter-spacing: 0.14em;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: rgba(15, 23, 42, 0.6);
+      }
+
+      .feature-pillar h3 {
+        margin: 0;
+        font-size: 1.15rem;
+        letter-spacing: -0.01em;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        color: rgb(15, 23, 42);
+      }
+
+      .feature-pillar h3 i {
+        font-size: 1.1rem;
+      }
+
+      .feature-pillar p {
+        margin: 0;
+        color: rgba(15, 23, 42, 0.68);
+        line-height: 1.65;
+        font-size: 0.95rem;
+      }
+
+      .feature-pillar__metric {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.45rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .feature-pillar__metric strong {
+        font-size: 1.65rem;
+      }
+
+      .feature-pillar__metric span {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: rgba(15, 23, 42, 0.55);
+      }
+
+      .feature-pillar__list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.6rem;
+        font-size: 0.9rem;
+        color: rgba(15, 23, 42, 0.68);
+      }
+
+      .feature-pillar__list li {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 0.5rem;
         align-items: flex-start;
       }
 
-      .feature-card li i {
-        color: rgba(14, 165, 233, 0.85);
-        margin-top: 0.15rem;
+      .feature-pillar__list i {
+        margin-top: 0.2rem;
+        color: inherit;
+      }
+
+      .feature-pillar[data-tone="sky"] {
+        background: linear-gradient(165deg, rgba(236, 254, 255, 0.92), rgba(219, 234, 254, 0.94));
+        border-color: rgba(14, 165, 233, 0.25);
+      }
+
+      .feature-pillar[data-tone="sky"]::before {
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.32), transparent 68%);
+      }
+
+      .feature-pillar[data-tone="sky"] .feature-pillar__eyebrow {
+        color: rgba(14, 116, 144, 0.85);
+      }
+
+      .feature-pillar[data-tone="sky"] .feature-pillar__metric strong {
+        color: rgba(14, 116, 144, 0.95);
+      }
+
+      .feature-pillar[data-tone="indigo"] {
+        background: linear-gradient(165deg, rgba(237, 233, 254, 0.95), rgba(224, 242, 254, 0.92));
+        border-color: rgba(99, 102, 241, 0.28);
+      }
+
+      .feature-pillar[data-tone="indigo"]::before {
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.28), transparent 68%);
+      }
+
+      .feature-pillar[data-tone="indigo"] .feature-pillar__eyebrow {
+        color: rgba(79, 70, 229, 0.82);
+      }
+
+      .feature-pillar[data-tone="indigo"] .feature-pillar__metric strong {
+        color: rgba(79, 70, 229, 0.95);
+      }
+
+      .feature-pillar[data-tone="peach"] {
+        background: linear-gradient(165deg, rgba(254, 243, 199, 0.95), rgba(255, 247, 237, 0.9));
+        border-color: rgba(249, 115, 22, 0.24);
+      }
+
+      .feature-pillar[data-tone="peach"]::before {
+        background: radial-gradient(circle, rgba(249, 115, 22, 0.25), transparent 70%);
+      }
+
+      .feature-pillar[data-tone="peach"] .feature-pillar__eyebrow {
+        color: rgba(217, 119, 6, 0.9);
+      }
+
+      .feature-pillar[data-tone="peach"] .feature-pillar__metric strong {
+        color: rgba(217, 119, 6, 0.95);
+      }
+
+      .feature-pillar[data-tone="emerald"] {
+        background: linear-gradient(165deg, rgba(236, 253, 245, 0.95), rgba(224, 242, 254, 0.9));
+        border-color: rgba(16, 185, 129, 0.24);
+      }
+
+      .feature-pillar[data-tone="emerald"]::before {
+        background: radial-gradient(circle, rgba(34, 197, 94, 0.28), transparent 68%);
+      }
+
+      .feature-pillar[data-tone="emerald"] .feature-pillar__eyebrow {
+        color: rgba(13, 148, 136, 0.85);
+      }
+
+      .feature-pillar[data-tone="emerald"] .feature-pillar__metric strong {
+        color: rgba(13, 148, 136, 0.95);
+      }
+
+      .feature-pillar[data-tone="sand"] {
+        background: linear-gradient(165deg, rgba(248, 250, 252, 0.95), rgba(243, 244, 246, 0.9));
+        border-color: rgba(148, 163, 184, 0.28);
+      }
+
+      .feature-pillar[data-tone="sand"]::before {
+        background: radial-gradient(circle, rgba(148, 163, 184, 0.3), transparent 68%);
+      }
+
+      .feature-pillar[data-tone="sand"] .feature-pillar__eyebrow {
+        color: rgba(71, 85, 105, 0.82);
+      }
+
+      .feature-pillar[data-tone="sand"] .feature-pillar__metric strong {
+        color: rgba(71, 85, 105, 0.9);
       }
 
       .feature-proof {
@@ -1263,12 +1524,7 @@
         }
 
         .feature-grid {
-          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        }
-
-        .feature-card,
-        .feature-card--span6 {
-          grid-column: auto;
+          grid-template-columns: minmax(0, 1fr);
         }
       }
 
@@ -1281,8 +1537,12 @@
           margin-bottom: 1.1rem;
         }
 
-        .feature-metric {
-          font-size: 1.5rem;
+        .feature-spotlight figcaption {
+          font-size: 0.72rem;
+        }
+
+        .feature-spotlight__list {
+          gap: 0.75rem;
         }
       }
 
@@ -2742,53 +3002,94 @@
             </div>
           </div>
           <div class="feature-grid">
-            <article class="feature-card" aria-label="因果マッピングコンソール">
-              <h3><i class="fa-solid fa-network-wired"></i> 因果マッピングコンソール</h3>
-              <p>政策変更・需給指数・社内データをAIが自動で因果マップ化。経営課題の根と枝を見える化します。</p>
-              <div class="feature-metric"><span>70%削減</span><small>RESEARCH TIME</small></div>
-              <ul>
-                <li><i class="fa-solid fa-diagram-project"></i><span>最新ニュース×社内KPIを自動クロス集計し、影響度順に提示。</span></li>
-                <li><i class="fa-solid fa-square-poll-vertical"></i><span>重回帰とベイジアンネットで根因をスコアリング。</span></li>
+            <article class="feature-spotlight" aria-label="意思決定オペレーションの中核">
+              <span class="feature-spotlight__eyebrow">Executive Operating Blueprint</span>
+              <h3>経営改善で鍛えた専門家×生成AIが「因果・論理・デザイン」を同期する意思決定ボード</h3>
+              <p>
+                政策・市場・財務データをAIが24時間統合し、診断士が因果のストーリーと説明ロジックを磨き込みます。経営陣は一枚のダッシュボードで判断と指示を下せるようになります。
+              </p>
+              <figure>
+                <img
+                  src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80"
+                  alt="生成AIが可視化した経営ダッシュボードをレビューする経営陣"
+                  loading="lazy"
+                />
+                <figcaption>Dual Coding：因果マップと主要KPI、キャッシュフローの推移を一画面で同期し、視線誘導で論点を示します。</figcaption>
+              </figure>
+              <ul class="feature-spotlight__list">
+                <li><span>Pattern Interrupt</span>会議冒頭でロジックとビジュアルを同時提示。読了率とスクロール継続率を5〜15%回復します。</li>
+                <li><span>Dual Coding</span>因果マップ・シナリオ比較・KPIラインを同期し、処理流暢性を10〜30%向上。</li>
+                <li><span>Picture Superiority</span>Before/Afterのフレームワーク図と象徴アイコンで記憶定着を強化し、CTA到達率を底上げ。</li>
               </ul>
+              <div class="feature-spotlight__meta">
+                <span><i class="fa-solid fa-arrow-trend-up"></i>意思決定リードタイム 52%短縮</span>
+                <span><i class="fa-solid fa-handshake-angle"></i>金融機関説明 納得度 92%</span>
+              </div>
             </article>
-            <article class="feature-card" aria-label="論理検証エンジン">
-              <h3><i class="fa-solid fa-scale-balanced"></i> 論理検証エンジン</h3>
-              <p>PL・BS・CFの整合性をAIが検証し、診断士が金融機関基準でレビュー。反証例を提示して意思決定の筋道を補強します。</p>
-              <div class="feature-metric"><span>48H</span><small>TO APPROVAL DECK</small></div>
-              <ul>
-                <li><i class="fa-solid fa-chart-area"></i><span>三表連動モデルで施策別キャッシュ影響を48時間以内に算出。</span></li>
-                <li><i class="fa-solid fa-clipboard-list"></i><span>想定問答・反論材料を自動生成し、会議前に合意形成。</span></li>
-              </ul>
-            </article>
-            <article class="feature-card" aria-label="デザインストーリーボード">
-              <h3><i class="fa-solid fa-clapperboard"></i> デザインストーリーボード</h3>
-              <p>役員・金融機関向けのストーリーラインをテンプレ化。視線誘導と余白設計を整えたスライドを即座に出力します。</p>
-              <div class="feature-metric"><span>80%削減</span><small>DECK REDRAFT</small></div>
-              <ul>
-                <li><i class="fa-solid fa-eye"></i><span>ヒートマップ検証済みのレイアウトで集中してほしい数値を強調。</span></li>
-                <li><i class="fa-solid fa-layer-group"></i><span>Before/After図・CTA誘導矢印を自動生成し、議論の視線をコントロール。</span></li>
-              </ul>
-            </article>
-            <article class="feature-card feature-card--span6" aria-label="スマートモニタリング・アラート">
-              <h3><i class="fa-solid fa-wave-square"></i> スマートモニタリング・アラート</h3>
-              <p>週次レポートと日次モニタリングをAIが担当。異常検知後は専門家が打ち手シミュレーションを添えて通知します。</p>
-              <div class="feature-metric"><span>＋18pt</span><small>EXEC REVIEW SCORE</small></div>
-              <ul>
-                <li><i class="fa-solid fa-bell"></i><span>意思決定に関係する差分のみを抽出し、Slack / Teamsへ即配信。</span></li>
-                <li><i class="fa-solid fa-gauge"></i><span>政策・市況の変化を吸収できるバッファ指標を可視化。</span></li>
-                <li><i class="fa-solid fa-user-gear"></i><span>経営陣が知りたい論点を週次ハイライトで整理し、会議に備えられる状態をキープ。</span></li>
-              </ul>
-            </article>
-            <article class="feature-card feature-card--span6" aria-label="納得性レビュー・証跡パック">
-              <h3><i class="fa-solid fa-shield-halved"></i> 納得性レビュー・証跡パック</h3>
-              <p>根拠資料と証跡リンクを体系化し、社内外の説明責任をクリア。第三者評価を組み込んだトラスト・シグナルで安心感を提供します。</p>
-              <div class="feature-metric"><span>1/2</span><small>RISK SIGN-OFF TIME</small></div>
-              <ul>
-                <li><i class="fa-solid fa-file-shield"></i><span>監査ログと改訂履歴を自動保管し、金融機関・株主とのやり取りに即応。</span></li>
-                <li><i class="fa-solid fa-quote-left"></i><span>フォト・テスティモニアル＋KPIを組み合わせた証跡テンプレを提供。</span></li>
-                <li><i class="fa-solid fa-handshake-angle"></i><span>行政認定・補助金採択実績を挟み込み、導入への心理的ハードルを低減。</span></li>
-              </ul>
-            </article>
+            <div class="feature-pillar-grid">
+              <article class="feature-pillar" data-tone="sky" aria-label="因果マッピングコンソール">
+                <header>
+                  <span class="feature-pillar__eyebrow">因果性</span>
+                  <h3><i class="fa-solid fa-network-wired"></i> 因果マッピングコンソール</h3>
+                </header>
+                <p>政策変更・需給指数・社内データをAIが自動で因果マップ化。経営課題の根と枝を瞬時に可視化します。</p>
+                <div class="feature-pillar__metric"><strong>70%削減</strong><span>RESEARCH TIME</span></div>
+                <ul class="feature-pillar__list">
+                  <li><i class="fa-solid fa-diagram-project"></i><span>最新ニュース×社内KPIを自動クロス集計し、影響度順に提示。</span></li>
+                  <li><i class="fa-solid fa-square-poll-vertical"></i><span>重回帰とベイジアンネットで根因をスコアリング。</span></li>
+                </ul>
+              </article>
+              <article class="feature-pillar" data-tone="indigo" aria-label="論理検証エンジン">
+                <header>
+                  <span class="feature-pillar__eyebrow">論理性</span>
+                  <h3><i class="fa-solid fa-scale-balanced"></i> 論理検証エンジン</h3>
+                </header>
+                <p>PL・BS・CFの整合性をAIが検証し、診断士が金融機関基準でレビュー。反証例を提示して意思決定の筋道を補強します。</p>
+                <div class="feature-pillar__metric"><strong>48H</strong><span>TO APPROVAL DECK</span></div>
+                <ul class="feature-pillar__list">
+                  <li><i class="fa-solid fa-chart-area"></i><span>三表連動モデルで施策別キャッシュ影響を48時間以内に算出。</span></li>
+                  <li><i class="fa-solid fa-clipboard-list"></i><span>想定問答・反論材料を自動生成し、会議前に合意形成。</span></li>
+                </ul>
+              </article>
+              <article class="feature-pillar" data-tone="peach" aria-label="デザインストーリーボード">
+                <header>
+                  <span class="feature-pillar__eyebrow">デザイン性</span>
+                  <h3><i class="fa-solid fa-clapperboard"></i> デザインストーリーボード</h3>
+                </header>
+                <p>役員・金融機関向けのストーリーラインをテンプレ化。視線誘導と余白設計を整えたスライドを即時出力します。</p>
+                <div class="feature-pillar__metric"><strong>80%削減</strong><span>DECK REDRAFT</span></div>
+                <ul class="feature-pillar__list">
+                  <li><i class="fa-solid fa-eye"></i><span>ヒートマップ検証済みレイアウトで重要指標を孤立強調。</span></li>
+                  <li><i class="fa-solid fa-layer-group"></i><span>Before/After図とCTA誘導矢印で視線を次のアクションへ誘導。</span></li>
+                </ul>
+              </article>
+              <article class="feature-pillar" data-tone="emerald" aria-label="スマートモニタリング・アラート">
+                <header>
+                  <span class="feature-pillar__eyebrow">スマート性</span>
+                  <h3><i class="fa-solid fa-wave-square"></i> スマートモニタリング・アラート</h3>
+                </header>
+                <p>週次レポートと日次モニタリングをAIが担当。異常検知後は専門家が打ち手シミュレーションを添えて通知します。</p>
+                <div class="feature-pillar__metric"><strong>＋18pt</strong><span>EXEC REVIEW SCORE</span></div>
+                <ul class="feature-pillar__list">
+                  <li><i class="fa-solid fa-bell"></i><span>意思決定に関係する差分のみを抽出し、Slack / Teamsへ即配信。</span></li>
+                  <li><i class="fa-solid fa-gauge"></i><span>政策・市況の変化を吸収するバッファ指標を可視化。</span></li>
+                  <li><i class="fa-solid fa-user-gear"></i><span>週次ハイライトで論点を整理し、会議準備時間を削減。</span></li>
+                </ul>
+              </article>
+              <article class="feature-pillar" data-tone="sand" aria-label="納得性レビュー・証跡パック">
+                <header>
+                  <span class="feature-pillar__eyebrow">納得性</span>
+                  <h3><i class="fa-solid fa-shield-halved"></i> 納得性レビュー・証跡パック</h3>
+                </header>
+                <p>根拠資料と証跡リンクを体系化し、社内外の説明責任をクリア。トラスト・シグナルで導入の不安を解消します。</p>
+                <div class="feature-pillar__metric"><strong>1/2</strong><span>RISK SIGN-OFF TIME</span></div>
+                <ul class="feature-pillar__list">
+                  <li><i class="fa-solid fa-file-shield"></i><span>監査ログと改訂履歴を自動保管し、金融機関・株主に即応。</span></li>
+                  <li><i class="fa-solid fa-quote-left"></i><span>フォト・テスティモニアル＋KPIで社会的証明を視覚化。</span></li>
+                  <li><i class="fa-solid fa-handshake-angle"></i><span>行政認定・補助金採択実績を証明バッジとして挟み込み。</span></li>
+                </ul>
+              </article>
+            </div>
           </div>
           <div class="feature-proof">
             <strong>AUTHORITY STACK</strong>
