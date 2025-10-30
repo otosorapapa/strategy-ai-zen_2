@@ -1712,76 +1712,356 @@
         flex: 1;
       }
 
-      .case-stats {
+      .case-suite {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: clamp(24px, 4vw, 40px);
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+        gap: clamp(28px, 4vw, 40px);
+        align-items: stretch;
       }
 
-      .case-highlights {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: clamp(24px, 4vw, 36px);
-        margin-bottom: clamp(40px, 5vw, 60px);
+      @media (max-width: 1100px) {
+        .case-suite {
+          grid-template-columns: 1fr;
+        }
       }
 
-      .case-highlights figure {
+      .case-spotlight {
+        position: relative;
+        border-radius: 28px;
+        padding: clamp(28px, 3.6vw, 44px);
+        background:
+          radial-gradient(circle at 12% 20%, rgba(14, 165, 233, 0.18), transparent 62%),
+          radial-gradient(circle at 82% 12%, rgba(56, 189, 248, 0.16), transparent 65%),
+          linear-gradient(160deg, rgba(15, 23, 42, 0.95), rgba(30, 64, 175, 0.88));
+        color: rgba(241, 245, 249, 0.96);
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        box-shadow: 0 38px 68px rgba(15, 23, 42, 0.28);
+        display: grid;
+        gap: clamp(22px, 3.5vw, 36px);
+        overflow: hidden;
+      }
+
+      .case-spotlight::after {
+        content: "";
+        position: absolute;
+        inset: auto -18% -38% 48%;
+        width: 360px;
+        height: 360px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.22), transparent 72%);
+        opacity: 0.85;
+        pointer-events: none;
+      }
+
+      .case-spotlight-header {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: clamp(12px, 2vw, 18px);
+      }
+
+      .case-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        border-radius: 999px;
+        background: linear-gradient(135deg, rgba(148, 197, 253, 0.36), rgba(56, 189, 248, 0.28));
+        border: 1px solid rgba(148, 197, 253, 0.48);
+        color: rgba(15, 23, 42, 0.86);
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        box-shadow: 0 12px 18px rgba(30, 64, 175, 0.16);
+      }
+
+      .case-spotlight-header h3 {
         margin: 0;
+        font-size: clamp(1.4rem, 2vw, 1.8rem);
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .case-spotlight-header p {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: rgba(226, 232, 240, 0.88);
+      }
+
+      .case-spotlight-content {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+        gap: clamp(20px, 3vw, 32px);
+        align-items: stretch;
+      }
+
+      @media (max-width: 860px) {
+        .case-spotlight-content {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .case-spotlight-visual {
+        margin: 0;
+        border-radius: 24px;
+        overflow: hidden;
+        background: rgba(15, 23, 42, 0.4);
+        display: grid;
+        gap: 12px;
+        border: 1px solid rgba(148, 197, 253, 0.32);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+      }
+
+      .case-spotlight-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        aspect-ratio: 4 / 3;
+        display: block;
+      }
+
+      .case-spotlight-visual figcaption {
+        padding: 12px 16px 16px;
+        font-size: 0.82rem;
+        line-height: 1.5;
+        color: rgba(226, 232, 240, 0.78);
+      }
+
+      .case-spotlight-metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: clamp(16px, 2.8vw, 22px);
+        background: rgba(15, 23, 42, 0.35);
+        border-radius: 24px;
+        padding: clamp(18px, 2.6vw, 26px);
+        border: 1px solid rgba(148, 197, 253, 0.22);
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+          0 18px 36px rgba(15, 23, 42, 0.18);
+      }
+
+      .case-spotlight-metrics div {
+        display: grid;
+        gap: 6px;
+      }
+
+      .case-spotlight-metrics span {
+        font-size: 0.7rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(148, 197, 253, 0.82);
+        font-weight: 600;
+      }
+
+      .case-spotlight-metrics strong {
+        font-size: 1.05rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        color: rgba(244, 248, 255, 0.96);
+      }
+
+      .case-spotlight-metrics p {
+        margin: 0;
+        font-size: 0.78rem;
+        line-height: 1.55;
+        color: rgba(226, 232, 240, 0.72);
+      }
+
+      .case-spotlight-quote {
+        position: relative;
+        z-index: 1;
+        border-radius: 24px;
+        background: rgba(15, 23, 42, 0.4);
+        border: 1px solid rgba(148, 197, 253, 0.22);
+        padding: clamp(18px, 2.6vw, 26px);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+      }
+
+      .case-spotlight-quote blockquote {
+        margin: 0 0 12px;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: rgba(241, 245, 249, 0.9);
+      }
+
+      .case-spotlight-quote cite {
+        display: block;
+        font-style: normal;
+        font-size: 0.82rem;
+        color: rgba(148, 197, 253, 0.78);
+      }
+
+      .case-spotlight-flags {
+        position: relative;
+        z-index: 1;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: clamp(12px, 2.4vw, 18px);
+      }
+
+      .case-spotlight-flags li {
+        background: rgba(15, 23, 42, 0.38);
+        border-radius: 18px;
+        padding: 14px 16px;
+        border: 1px solid rgba(148, 197, 253, 0.18);
+        font-size: 0.78rem;
+        line-height: 1.55;
+        color: rgba(226, 232, 240, 0.78);
+        display: grid;
+        gap: 4px;
+      }
+
+      .case-spotlight-flags li span {
+        font-size: 0.75rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(148, 197, 253, 0.9);
+        font-weight: 700;
+      }
+
+      .case-spotlight-flags li p {
+        margin: 0;
+      }
+
+      .case-stack {
+        display: grid;
+        gap: clamp(20px, 3.2vw, 28px);
+      }
+
+      .case-tile {
         background: rgba(255, 255, 255, 0.96);
-        border: 1px solid rgba(148, 163, 184, 0.18);
-        border-radius: 22px;
-        padding: clamp(24px, 3vw, 32px);
-        box-shadow: 0 18px 32px rgba(15, 23, 42, 0.08);
-        display: flex;
-        flex-direction: column;
+        border-radius: 24px;
+        padding: clamp(24px, 3vw, 30px);
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        box-shadow: 0 24px 44px rgba(15, 23, 42, 0.12);
+        display: grid;
+        gap: clamp(16px, 2.4vw, 22px);
+      }
+
+      .case-tile-visual {
+        margin: -6px;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 18px 28px rgba(15, 23, 42, 0.16);
+      }
+
+      .case-tile-visual img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        aspect-ratio: 5 / 3;
+      }
+
+      .case-tile header {
+        display: grid;
+        gap: 8px;
+      }
+
+      .case-tile header h3 {
+        margin: 0;
+        font-size: 1.15rem;
+        color: var(--secondary);
+      }
+
+      .case-tile p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: rgba(17, 24, 39, 0.72);
+      }
+
+      .case-tile-note {
+        margin-top: 4px;
+        font-size: 0.8rem;
+        color: rgba(17, 24, 39, 0.56);
+      }
+
+      .case-tile-metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
         gap: 14px;
       }
 
-      .case-highlights blockquote {
-        margin: 0;
-        font-size: 1rem;
-        line-height: 1.7;
-        color: rgba(17, 24, 39, 0.74);
+      .case-tile-metrics div {
+        background: rgba(37, 99, 235, 0.08);
+        border-radius: 16px;
+        padding: 12px 14px;
+        display: grid;
+        gap: 4px;
       }
 
-      .case-highlight-metric {
+      .case-tile-metrics span {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--primary-dark);
+      }
+
+      .case-tile-metrics strong {
+        font-size: 1rem;
+        color: var(--secondary);
+      }
+
+      .case-tile-quote {
+        display: grid;
+        gap: 10px;
+      }
+
+      .case-tile-quote blockquote {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: rgba(17, 24, 39, 0.78);
+      }
+
+      .case-tile-quote cite {
+        font-style: normal;
+        font-size: 0.82rem;
+        color: rgba(30, 64, 175, 0.78);
+      }
+
+      .case-proof {
+        background: rgba(15, 23, 42, 0.88);
+        color: rgba(241, 245, 249, 0.92);
+        border-radius: 24px;
+        padding: clamp(22px, 3vw, 30px);
+        border: 1px solid rgba(148, 197, 253, 0.26);
+        display: grid;
+        gap: 18px;
+        box-shadow: 0 24px 44px rgba(15, 23, 42, 0.24);
+      }
+
+      .case-proof h4 {
+        margin: 0;
+        font-size: 1.05rem;
+        letter-spacing: 0.02em;
+      }
+
+      .case-proof p {
+        margin: 0;
+        font-size: 0.85rem;
+        line-height: 1.6;
+        color: rgba(226, 232, 240, 0.78);
+      }
+
+      .case-proof-logos {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
       }
 
-      .case-highlight-metric span {
-        background: rgba(37, 99, 235, 0.08);
+      .case-proof-logos span {
         border-radius: 999px;
+        border: 1px solid rgba(148, 197, 253, 0.32);
         padding: 6px 14px;
+        font-size: 0.78rem;
         font-weight: 600;
-        color: var(--primary-dark);
-        font-size: 0.85rem;
-      }
-
-      .case-highlights cite {
-        font-style: normal;
-        font-size: 0.9rem;
-        color: rgba(17, 24, 39, 0.6);
-      }
-
-      .case-card {
-        background: var(--surface);
-        border-radius: var(--radius);
-        padding: clamp(28px, 3.2vw, 36px);
-        border: 1px solid var(--border);
-        box-shadow: 0 22px 34px rgba(15, 23, 42, 0.06);
-      }
-
-      .case-card h3 {
-        margin-top: 0;
-      }
-
-      .case-metrics {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: clamp(16px, 3vw, 24px);
-        margin: clamp(20px, 2.8vw, 32px) 0;
+        letter-spacing: 0.08em;
       }
 
       .pricing-table {
@@ -3187,105 +3467,163 @@
             <h2>導入企業の声と成果</h2>
             <p>製造業・ITサービス・地域密着ビジネスなど、さまざまな業種で意思決定のスピードと成果が向上しています。</p>
           </div>
-          <div class="case-highlights">
-            <figure>
-              <div class="case-highlight-metric">
-                <span>意思決定リードタイム52%短縮</span>
-                <span>資料工数80%削減</span>
+          <div class="case-suite">
+            <article class="case-spotlight">
+              <div class="case-spotlight-header">
+                <span class="case-pill">製造業｜年商18億円 / 精密加工</span>
+                <h3>AI×診断士のダブルレビューで意思決定リードタイム52%短縮</h3>
+                <p>
+                  グループ投資の稟議が各部門で分断され、根拠確認に30日以上を要していた精密加工メーカー。生成AIがPL・BS・CFの差異要因をクロス分析し、
+                  診断士が金融機関基準でロジックを監査することで、役員会は戦略議論に時間を振り向けられるようになりました。
+                </p>
               </div>
-              <blockquote>
-                「グループ全体の投資意思決定が遅れていたのですが、AIが根拠データを揃え、中小企業診断士のレビューで資料の説得力が桁違いになりました。
-                役員会では議論の7割を戦略に充てられるようになっています。」
-              </blockquote>
-              <cite>九州精密工業株式会社（福岡証券取引所Q-Board上場グループ）代表取締役社長 佐藤宏樹 様</cite>
-            </figure>
-            <figure>
-              <div class="case-highlight-metric">
-                <span>ローリング運用定着率94%</span>
-                <span>融資審査同席1,200件</span>
-              </div>
-              <blockquote>
-                「生成AIが集めたデータを専門家が監査することで、金融機関からの追加質問が明確になります。経営者は判断に集中し、私たち診断士は根拠と実行体制の裏付けを担保する――その役割分担が成果に直結しています。」
-              </blockquote>
-              <cite>中小企業診断士 田中祐介（株式会社創和経営コンサルティング）</cite>
-            </figure>
-          </div>
-          <div class="case-stats">
-            <article class="case-card">
-              <h3>製造業（年商18億円）</h3>
-              <div class="case-metrics">
-                <div>
-                  <span>Before</span>
-                  <strong>作成30日</strong>
-                </div>
-                <div>
-                  <span>After</span>
-                  <strong>12日</strong>
-                </div>
-                <div>
-                  <span>資金調達</span>
-                  <strong>2.5億円</strong>
-                </div>
-                <div>
-                  <span>成功率</span>
-                  <strong>1.8倍</strong>
+              <div class="case-spotlight-content">
+                <figure class="case-spotlight-visual">
+                  <img
+                    src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=960&q=80"
+                    alt="経営チームが因果マップとダッシュボードを確認している様子"
+                    loading="lazy"
+                  />
+                  <figcaption>因果マップと投資対効果ダッシュボードを一枚化し、優先施策のストーリーを視覚的に比較。</figcaption>
+                </figure>
+                <div class="case-spotlight-metrics">
+                  <div>
+                    <span>意思決定リードタイム</span>
+                    <strong>52%短縮（30日→12日）</strong>
+                    <p>AIが部門ごとに散在した根拠データを統合し、会議準備の滞留を解消。</p>
+                  </div>
+                  <div>
+                    <span>資料作成工数</span>
+                    <strong>80%削減</strong>
+                    <p>診断士レビュー済みのテンプレートを自動更新し、意思決定に集中。</p>
+                  </div>
+                  <div>
+                    <span>資金調達</span>
+                    <strong>2.5億円獲得</strong>
+                    <p>金融機関の想定問答を事前準備し、審査通過率1.8倍を実現。</p>
+                  </div>
+                  <div>
+                    <span>ローリング運用</span>
+                    <strong>定着率94%</strong>
+                    <p>週次のリスクアラートとKPIレビューで、議題時間を40%短縮。</p>
+                  </div>
                 </div>
               </div>
-              <p>
-                「需要変動が激しい中、AIが為替・原材料のシナリオを作ってくれたおかげで、銀行交渉も先手で進められました。経営会議の準備時間が半分以下になり、意思決定の議論に集中できています。」
-              </p>
-              <p style="font-size: 0.9rem; color: rgba(17, 24, 39, 0.6);">代表取締役／機械部品メーカー</p>
+              <div class="case-spotlight-quote">
+                <blockquote>
+                  「AIが根拠データを揃え、診断士のレビューで資料の説得力が桁違いになりました。役員会では議論の7割を戦略に充てられるようになっています。」
+                </blockquote>
+                <cite>九州精密工業株式会社（福岡証券取引所Q-Board上場グループ）代表取締役社長 佐藤宏樹 様</cite>
+              </div>
+              <ul class="case-spotlight-flags">
+                <li>
+                  <span>因果性</span>
+                  <p>PL・BS・CF・需要指標をクロス分析し、「なぜその投資か」を一目で把握。</p>
+                </li>
+                <li>
+                  <span>論理性</span>
+                  <p>診断士が金融機関基準で根拠とリスク対策を構造化し、説明責任に耐える資料へ。</p>
+                </li>
+                <li>
+                  <span>デザイン性</span>
+                  <p>光と奥行きを活かしたレイアウトで、役員の視線を次アクションへ誘導。</p>
+                </li>
+                <li>
+                  <span>スマート性</span>
+                  <p>アラートと自動集計で更新を自走化。現場・経営の意思決定リズムが揃う。</p>
+                </li>
+                <li>
+                  <span>納得性</span>
+                  <p>想定問答と証跡リンクを添付し、社内外のステークホルダーが共通理解を持てる状態に。</p>
+                </li>
+              </ul>
             </article>
-            <article class="case-card">
-              <h3>SaaS（年商4.2億円）</h3>
-              <div class="case-metrics">
-                <div>
-                  <span>Before</span>
-                  <strong>ARR成長率 18%</strong>
+            <aside class="case-stack">
+              <article class="case-tile">
+                <figure class="case-tile-visual">
+                  <img
+                    src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=960&q=80"
+                    alt="SaaS企業の経営陣がダッシュボードを囲んで議論する様子"
+                    loading="lazy"
+                  />
+                </figure>
+                <header>
+                  <span class="case-pill">SaaS｜年商4.2億円</span>
+                  <h3>ARR成長率を18%→36%に倍増</h3>
+                </header>
+                <p>
+                  顧客セグメント別の伸びしろをAIが分析し、投資家が求めるKPIを網羅したピッチデッキを48時間で自動生成。質疑応答の想定も合わせて準備し、調達額は計画比130%。
+                </p>
+                <div class="case-tile-metrics">
+                  <div>
+                    <span>資料準備</span>
+                    <strong>3週→5日</strong>
+                  </div>
+                  <div>
+                    <span>投資獲得</span>
+                    <strong>シリーズB成功</strong>
+                  </div>
+                  <div>
+                    <span>意思決定</span>
+                    <strong>役員会議題 40%削減</strong>
+                  </div>
                 </div>
-                <div>
-                  <span>After</span>
-                  <strong>36%</strong>
+                <p class="case-tile-note">CEO／クラウドサービス企業</p>
+              </article>
+              <article class="case-tile">
+                <figure class="case-tile-visual">
+                  <img
+                    src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=960&q=80"
+                    alt="地域サービス企業のマネジャーが店舗計画を議論する様子"
+                    loading="lazy"
+                  />
+                </figure>
+                <header>
+                  <span class="case-pill">地域密着サービス｜年商7.5億円</span>
+                  <h3>月次ローリングで現場が先読みできる体制に</h3>
+                </header>
+                <p>
+                  外部環境に応じた「次の手」をAIが提示し、専門家が実行シナリオとKPIを整備。社内説明資料も自動で整い、出店判断が迷いなく進むようになりました。
+                </p>
+                <div class="case-tile-metrics">
+                  <div>
+                    <span>更新頻度</span>
+                    <strong>年1回→月次</strong>
+                  </div>
+                  <div>
+                    <span>議題時間</span>
+                    <strong>40%短縮</strong>
+                  </div>
+                  <div>
+                    <span>新規店舗</span>
+                    <strong>6か月で2店</strong>
+                  </div>
                 </div>
-                <div>
-                  <span>資料準備</span>
-                  <strong>3週→5日</strong>
+                <p class="case-tile-note">代表／地域チェーン事業</p>
+              </article>
+              <article class="case-tile">
+                <div class="case-tile-quote">
+                  <header>
+                    <span class="case-pill">伴走チームの声</span>
+                    <h3>金融機関同席1,200件の専門家ネットワーク</h3>
+                  </header>
+                  <blockquote>
+                    「生成AIが集めたデータを専門家が監査することで、金融機関からの追加質問が明確になります。経営者は判断に集中し、私たち診断士は根拠と実行体制の裏付けを担保する――その役割分担が成果に直結しています。」
+                  </blockquote>
+                  <cite>中小企業診断士 田中祐介（株式会社創和経営コンサルティング）</cite>
                 </div>
-                <div>
-                  <span>投資獲得</span>
-                  <strong>シリーズB成功</strong>
+              </article>
+              <article class="case-proof">
+                <h4>行政・金融機関と連携したトラスト・シグナル</h4>
+                <div class="case-proof-logos">
+                  <span>福岡銀行</span>
+                  <span>第四北越銀行</span>
+                  <span>日本政策金融公庫</span>
+                  <span>九州経済産業局採択</span>
                 </div>
-              </div>
-              <p>
-                「AIが顧客セグメント別の伸びしろを可視化し、投資家が求めるKPIを含んだ計画書を自動で整えてくれました。資金調達の質疑にも事前に備えられ、調達額は計画の130％を達成。」
-              </p>
-              <p style="font-size: 0.9rem; color: rgba(17, 24, 39, 0.6);">CEO／クラウドサービス企業</p>
-            </article>
-            <article class="case-card">
-              <h3>地域密着サービス（年商7.5億円）</h3>
-              <div class="case-metrics">
-                <div>
-                  <span>Before</span>
-                  <strong>更新頻度 年1回</strong>
-                </div>
-                <div>
-                  <span>After</span>
-                  <strong>月次ローリング</strong>
-                </div>
-                <div>
-                  <span>意思決定</span>
-                  <strong>議題時間 40%短縮</strong>
-                </div>
-                <div>
-                  <span>新規店舗</span>
-                  <strong>6か月で2店</strong>
-                </div>
-              </div>
-              <p>
-                「外部環境に応じた“次の手”をAIが示してくれるので、出店判断が迷いなく進みます。社内説明資料も自動で整うため、現場が動きやすくなりました。」
-              </p>
-              <p style="font-size: 0.9rem; color: rgba(17, 24, 39, 0.6);">代表／地域チェーン事業</p>
-            </article>
+                <p>融資審査同席1,200件／補助金採択96件の実績をCTA周辺で可視化し、リスク逆転を提示します。</p>
+              </article>
+            </aside>
           </div>
         </div>
       </section>
