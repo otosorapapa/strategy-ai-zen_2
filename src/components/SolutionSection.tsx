@@ -1,6 +1,16 @@
 import { useMemo, useState } from "react";
-import { BrainCircuit, LineChart, PiggyBank, Sparkle, Workflow } from "lucide-react";
-import solutionImage from "@/assets/solution-illustration.jpg";
+import type { LucideIcon } from "lucide-react";
+import {
+  ArrowUpRight,
+  BrainCircuit,
+  CheckCircle2,
+  LineChart,
+  PiggyBank,
+  ShieldCheck,
+  Sparkle,
+  Workflow,
+} from "lucide-react";
+import solutionImage from "@/assets/financial-analysis.jpg";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
 import { useParallax } from "@/hooks/useParallax";
@@ -60,34 +70,153 @@ const readinessOptions = [
   },
 ];
 
-const services = [
+type ServiceMetric = {
+  value: string;
+  label: string;
+  caption?: string;
+};
+
+type ServiceImpact = {
+  value: string;
+  label: string;
+  detail: string;
+};
+
+type ServiceDefinition = {
+  icon: LucideIcon;
+  title: string;
+  tag: string;
+  primaryMetric: ServiceMetric;
+  description: string;
+  impact: ServiceImpact[];
+  trust: string[];
+  outputs: string[];
+};
+
+const services: ServiceDefinition[] = [
   {
     icon: Workflow,
     title: "伴走型経営PMO",
+    tag: "BOARD PMO",
+    primaryMetric: {
+      value: "48h",
+      label: "意思決定リードタイム",
+      caption: "週次レビューから48時間以内に経営判断を収束",
+    },
     description:
       "経営課題の優先度を整理し、生成AIが提示するシナリオを経営判断に組み込むPMO機能。経営会議の設計、意思決定の根拠整理、指標管理まで一貫して支援します。",
-    outputs: ["週次レビュー/経営会議ファシリテーション", "AI連動タスクボード運用", "KPI・キャッシュ進捗サマリーの共有"],
+    impact: [
+      {
+        value: "▲35%",
+        label: "会議準備工数",
+        detail: "経営陣・管理部・現場の論点を一枚のレビューシートに集約",
+      },
+      {
+        value: "+2.3pt",
+        label: "粗利率改善余地",
+        detail: "KPIとキャッシュの相関をAIで補足し、打ち手の優先度を明確化",
+      },
+    ],
+    trust: ["製造/IT/物流で導入", "経営会議のファシリ10年以上"],
+    outputs: [
+      "週次レビュー/経営会議ファシリテーション",
+      "AI連動タスクボード運用",
+      "KPI・キャッシュ進捗サマリーの共有",
+      "投資判断メモとリスク整理テンプレート",
+    ],
   },
   {
     icon: BrainCircuit,
     title: "AI導入・活用設計",
+    tag: "AI OPS DESIGN",
+    primaryMetric: {
+      value: "90日",
+      label: "PoC〜現場定着",
+      caption: "需要予測/営業/サポートでROI試算まで到達",
+    },
     description:
       "生成AI・需要予測AI・ワークフロー自動化を業務にフィットさせ、PoCで検証しながら現場に定着させます。",
-    outputs: ["ユースケース設計とROI試算", "プロンプト/テンプレートの社内標準化", "Slack/Teams連携による運用支援"],
+    impact: [
+      {
+        value: "+18%",
+        label: "案件成約率",
+        detail: "スコアリングAI×営業現場ノウハウで確度の高いフォローを支援",
+      },
+      {
+        value: "▲40%",
+        label: "問い合わせ応答時間",
+        detail: "プロンプト/フローを標準化し、一次回答を自動化",
+      },
+    ],
+    trust: ["Slack/Teams公式連携実績", "生成AI専門家資格パートナー"],
+    outputs: [
+      "ユースケース設計とROI試算",
+      "プロンプト/テンプレートの社内標準化",
+      "Slack/Teams連携による運用支援",
+      "運用SOPと教育シナリオ",
+    ],
   },
   {
     icon: LineChart,
     title: "管理会計・KPI設計",
+    tag: "MANAGEMENT ACCOUNTING",
+    primaryMetric: {
+      value: "14日",
+      label: "月次決算速報化",
+      caption: "部門別粗利を2週間以内に可視化",
+    },
     description:
       "部門別/案件別の収益構造を可視化し、粗利率・回転率・受注単価を改善するための指標体系を構築します。",
-    outputs: ["ダッシュボード・帳票テンプレート", "KPIレビュー手順書", "意思決定のための感度分析シナリオ"],
+    impact: [
+      {
+        value: "+1.8x",
+        label: "利益シナリオ数",
+        detail: "感度分析で赤字リスクと投資余力を同時に把握",
+      },
+      {
+        value: "▲25%",
+        label: "レポート作成時間",
+        detail: "ダッシュボード自動化で属人的な集計を解消",
+      },
+    ],
+    trust: ["会計士/税理士ネットワーク連携", "上場準備企業の管理会計支援"],
+    outputs: [
+      "ダッシュボード・帳票テンプレート",
+      "KPIレビュー手順書",
+      "意思決定のための感度分析シナリオ",
+      "モニタリング用プレイブック",
+    ],
   },
   {
     icon: PiggyBank,
     title: "資金繰り最適化と金融機関連携",
+    tag: "CASH MANAGEMENT",
+    primaryMetric: {
+      value: "6ヶ月",
+      label: "キャッシュ視認性",
+      caption: "最悪/標準/成長シナリオを半年先まで可視化",
+    },
     description:
       "資金繰り表とキャッシュフローモデルを自動化し、金融機関との面談で共有すべき論点を整理。必要に応じて面談資料や議事メモの型化を支援します。",
-    outputs: ["キャッシュフロー予測テンプレート", "金融機関面談サマリーとTODO管理ボード", "金融機関向け説明ポイントの整理"],
+    impact: [
+      {
+        value: "+3.5pt",
+        label: "与信確度",
+        detail: "金融機関との面談資料を統一フォーマットで提示",
+      },
+      {
+        value: "▲45%",
+        label: "資金繰りシミュレーション時間",
+        detail: "キャッシュフロー自動更新と警戒シグナル通知",
+      },
+    ],
+    trust: ["メガバンク/信金連携実績", "資本政策の伴走支援"],
+    outputs: [
+      "キャッシュフロー予測テンプレート",
+      "金融機関面談サマリーとTODO管理ボード",
+      "金融機関向け説明ポイントの整理",
+      "リスク逆転のための保証/返金条件設計",
+    ],
   },
 ];
 
@@ -156,26 +285,76 @@ const ServiceCard = ({ service, index }: { service: Service; index: number }) =>
     <article
       ref={ref}
       className={cn(
-        "flex h-full flex-col gap-5 rounded-[28px] border border-primary/15 bg-white p-8 shadow-card transition-all duration-700 ease-out",
+        "group relative flex h-full flex-col gap-6 rounded-[28px] border border-primary/15 bg-gradient-to-br from-white via-white to-primary/5 p-8 shadow-card transition-all duration-700 ease-out",
         isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
       )}
       style={{ transitionDelay: `${index * 70}ms` }}
     >
-      <div className="flex items-center gap-4">
-        <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-accent/15 text-accent">
-          <Icon className="h-7 w-7" aria-hidden="true" />
-        </span>
-        <h3 className="text-2xl font-bold text-foreground">{service.title}</h3>
+      <span
+        className="pointer-events-none absolute inset-x-8 top-0 h-1 rounded-b-full bg-gradient-to-r from-primary/60 via-accent/40 to-secondary/60 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        aria-hidden="true"
+      />
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+          <div className="flex items-start gap-4">
+            <span className="relative inline-flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary shadow-inner shadow-primary/10">
+              <Icon className="h-7 w-7" aria-hidden="true" />
+            </span>
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-primary/70">{service.tag}</p>
+              <h3 className="mt-1 text-2xl font-bold text-foreground md:text-[28px]">{service.title}</h3>
+            </div>
+          </div>
+          <div className="rounded-2xl border border-dashed border-primary/40 bg-white/80 px-4 py-3 text-right shadow-sm">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-primary/60">KEY KPI</p>
+            <div className="mt-1 flex items-baseline justify-end gap-1 text-primary">
+              <span className="text-2xl font-black leading-none md:text-3xl">{service.primaryMetric.value}</span>
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </div>
+            <p className="text-xs font-semibold text-primary/80">{service.primaryMetric.label}</p>
+            {service.primaryMetric.caption && (
+              <p className="mt-1 text-[11px] text-muted-foreground">{service.primaryMetric.caption}</p>
+            )}
+          </div>
+        </div>
+        <p className="text-base leading-relaxed text-muted-foreground">{service.description}</p>
       </div>
-      <p className="text-base leading-relaxed text-muted-foreground">{service.description}</p>
-      <ul className="space-y-3">
-        {service.outputs.map((output) => (
-          <li key={output} className="flex items-start gap-3 text-base text-muted-foreground">
-            <span aria-hidden="true" className="mt-1.5 inline-block h-2.5 w-2.5 rounded-full bg-accent flex-shrink-0" />
-            {output}
-          </li>
+      <div className="grid gap-3 sm:grid-cols-2">
+        {service.impact.map((item) => (
+          <div
+            key={`${service.title}-${item.label}`}
+            className="rounded-2xl border border-muted/20 bg-white/80 px-4 py-4 shadow-sm"
+          >
+            <p className="text-2xl font-bold text-foreground md:text-[28px]">{item.value}</p>
+            <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-muted-foreground/80">
+              {item.label}
+            </p>
+            <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{item.detail}</p>
+          </div>
         ))}
-      </ul>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        {service.trust.map((badge) => (
+          <span
+            key={`${service.title}-${badge}`}
+            className="inline-flex items-center gap-2 rounded-full border border-muted/20 bg-white/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-muted-foreground"
+          >
+            <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+            {badge}
+          </span>
+        ))}
+      </div>
+      <div className="rounded-2xl border border-secondary/30 bg-secondary/10 p-5">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-secondary-foreground/80">納品物</p>
+        <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+          {service.outputs.map((output) => (
+            <li key={output} className="flex items-start gap-2 text-sm leading-relaxed text-secondary-foreground">
+              <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-secondary" aria-hidden="true" />
+              {output}
+            </li>
+          ))}
+        </ul>
+      </div>
     </article>
   );
 };
