@@ -603,55 +603,55 @@ const responsibilityColumns: ResponsibilityColumn[] = [
 
 const whyNowEvidence = [
   {
-    title: "AIは意思決定の速さと確信を両立",
-    statLabel: "Executive Insight",
+    title: "生成AIが決断の速さと確信を同時に高める",
+    statLabel: "専門誌レポート",
     description:
-      "blog.iil.comは、生成AIが繰り返し作業を自動化し、データドリブンな分析によって経営者の意思決定をより速く賢くすると解説。中小企業の競争優位に直結すると強調しています。",
+      "IIL Blog (2024) は、生成AIが繰り返し作業を肩代わりし、意思決定のスピードと精度を同時に押し上げると解説。経営者が胸を張って判断理由を語れる土台になると評価しています。",
     sourceLabel: "IIL Blog (2024)",
     sourceUrl: "https://blog.iil.com/",
     sourceNote: "AI活用による経営判断",
   },
   {
-    title: "生成AI導入企業は主要業務で成果を創出",
-    statLabel: "導入企業の成果",
+    title: "主要業務での成果創出が広がる",
+    statLabel: "導入企業の実績",
     description:
-      "University of Cincinnati Onlineの研究では、生成AIを導入した企業が顧客対応や主要業務で成果を創出していると報告。意思決定プロセスへの適用が加速しています。",
+      "University of Cincinnati Online (2024) は、生成AI導入企業が顧客対応や基幹業務で成果を積み上げていると報告。現場での成功体験がリーダーの決断を後押ししています。",
     sourceLabel: "University of Cincinnati Online (2024)",
     sourceUrl: "https://online.uc.edu/news-stories/generative-ai-in-business/",
     sourceNote: "生成AI活用企業の実態調査",
   },
   {
-    title: "リアルタイム分析で意思決定速度が向上",
-    statLabel: "リアルタイム分析",
+    title: "リアルタイム分析が迷いを素早く解消",
+    statLabel: "データ活用動向",
     description:
-      "Itrex Groupはリアルタイム分析が競合よりも速い意思決定を可能にすると指摘。AIダッシュボードが経営判断を後押しします。",
+      "Itrex Group (2024) は、リアルタイム分析が競合より速い意思決定を可能にすると紹介。常に更新されるダッシュボードが、先を読む行動を支えます。",
     sourceLabel: "Itrex Group (2024)",
     sourceUrl: "https://itrexgroup.com/blog/real-time-data-analytics-for-business/",
     sourceNote: "リアルタイム分析で意思決定を強化",
   },
   {
-    title: "生成AI市場は継続拡大が見込まれる",
-    statLabel: "2030年展望",
+    title: "生成AI市場の拡大が先読みを求める",
+    statLabel: "市場トレンド",
     description:
-      "Switch Softwareは生成AI市場が長期的に拡大し続けると予測。今のうちに活用体制を整えることが中長期の競争力に直結します。",
+      "Switch Software (2024) は、生成AI市場が継続的に拡大すると予測。変化に先んじて体制を整える企業ほど、未来像を語る力が磨かれるとしています。",
     sourceLabel: "Switch Software (2024)",
     sourceUrl: "https://switchsoftware.io/blog/generative-ai-market-outlook",
     sourceNote: "2030年までのAI市場展望",
   },
   {
-    title: "AI支援でコンタクトセンターの質が向上",
-    statLabel: "生産性向上",
+    title: "AI支援が現場の自律性を高める",
+    statLabel: "現場改革",
     description:
-      "Stanford HAIは生成AI支援が現場の生産性を押し上げ、特に新人オペレーターの習熟を後押しすると報告しています。",
+      "Stanford HAI (2024) は、生成AI支援が現場の生産性と習熟スピードを底上げすると報告。一人ひとりが自信を保ったまま提案できる環境づくりに寄与しています。",
     sourceLabel: "Stanford HAI (2024)",
     sourceUrl: "https://hai.stanford.edu/news/generative-ai-improves-customer-support-productivity",
     sourceNote: "生成AIによるコンタクトセンター改革",
   },
   {
-    title: "金融業界では分析とレポート作成を効率化",
-    statLabel: "金融の変革",
+    title: "厳格な分野でも信頼獲得が進む",
+    statLabel: "国際機関レポート",
     description:
-      "OECDは金融業で生成AIが分析とレポートを効率化すると指摘。厳格な審査が求められる分野でも信頼性が高まっていることを示唆します。",
+      "OECD (2024) は、金融領域で生成AIが分析とレポートの効率化に貢献し、厳しい審査を要する現場でも信頼が高まっていると整理。説得力ある資料づくりの基盤が整いつつあります。",
     sourceLabel: "OECD (2024)",
     sourceUrl: "https://www.oecd.org/finance/ai-in-financial-markets.htm",
     sourceNote: "金融分野でのAI活用",
@@ -2602,10 +2602,10 @@ const Index = () => {
               })}
             </div>
             <div className="story-subheader" data-animate>
-              <h3>判断を先送りしないための根拠</h3>
+              <h3>迷いを断ち切る裏付け</h3>
               <p>
-                blog.iil.comが指摘する通り、AIは繰り返し業務の自動化とデータ分析によって意思決定を迅速かつ正確にし、中小企業に競争優位をもたらします。
-                信頼ソースの調査結果も、対策を先送りにするほど機会損失が拡大する事実を裏付けています。
+                生成AIと専門家が組み合わさった意思決定支援は、世界の調査で質と速さ、先を読む力を高めると報告されています。
+                信頼できる証拠が揃っている今こそ、胸を張って未来像を語れる準備を整える局面です。
               </p>
             </div>
             <div className="evidence-grid">
