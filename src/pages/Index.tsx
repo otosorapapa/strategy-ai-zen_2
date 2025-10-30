@@ -50,6 +50,7 @@ import decisionIntelligenceVisual from "@/assets/financial-analysis.jpg";
 import featureFlywheelVisual from "@/assets/dashboard-preview.jpg";
 import aiAnalysisVisual from "@/assets/ai-analysis.jpg";
 import growthChartVisual from "@/assets/growth-chart.jpg";
+import assurancePatternVisual from "@/assets/solution-illustration.jpg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -601,60 +602,111 @@ const responsibilityColumns: ResponsibilityColumn[] = [
   },
 ];
 
-const whyNowEvidence = [
+type AssurancePillar = {
+  id: string;
+  badge: string;
+  title: string;
+  description: string;
+  statLabel: string;
+  stat: string;
+  bullets: string[];
+  sourceLabel: string;
+  sourceNote: string;
+  sourceUrl?: string;
+  icon: LucideIcon;
+  accent: "mint" | "sky" | "citrus" | "navy" | "rose";
+};
+
+const assurancePillars: AssurancePillar[] = [
   {
-    title: "生成AIが決断の速さと確信を同時に高める",
-    statLabel: "専門誌レポート",
+    id: "causality",
+    badge: "因果性",
+    title: "政策・市場と社内指標を同一タイムラインで同期",
     description:
-      "IIL Blog (2024) は、生成AIが繰り返し作業を肩代わりし、意思決定のスピードと精度を同時に押し上げると解説。経営者が胸を張って判断理由を語れる土台になると評価しています。",
+      "IIL Blog (2024) は、生成AIが繰り返し作業を肩代わりし意思決定のスピードと精度を押し上げると報告。外部シグナル反映率92%の観測網で、原因と結果の連鎖を迷わず追えます。",
+    statLabel: "外部指標反映率",
+    stat: "92%",
+    bullets: [
+      "政策・需要指数をAIが因果ループに自動マッピング",
+      "異常値を検出すると経営会議用の確認プロンプトを即生成",
+    ],
     sourceLabel: "IIL Blog (2024)",
-    sourceUrl: "https://blog.iil.com/",
     sourceNote: "AI活用による経営判断",
+    sourceUrl: "https://blog.iil.com/",
+    icon: BrainCircuit,
+    accent: "mint",
   },
   {
-    title: "主要業務での成果創出が広がる",
-    statLabel: "導入企業の実績",
+    id: "logic",
+    badge: "論理性",
+    title: "PL・BS・CFの整合性をワンクリック検証",
     description:
-      "University of Cincinnati Online (2024) は、生成AI導入企業が顧客対応や基幹業務で成果を積み上げていると報告。現場での成功体験がリーダーの決断を後押ししています。",
+      "University of Cincinnati Online (2024) の調査では、生成AI導入企業が基幹業務で成果を積み上げていると言及。12件のシナリオを48時間以内に比較し、筋道の通った提案に磨き上げます。",
+    statLabel: "検証済みシナリオ",
+    stat: "12件",
+    bullets: [
+      "PL/BS/CFを連結したクロスチェックで矛盾を排除",
+      "反証ケースと質疑応答集を並走生成し論理を補強",
+    ],
     sourceLabel: "University of Cincinnati Online (2024)",
+    sourceNote: "Generative AI Adoption Study",
     sourceUrl: "https://online.uc.edu/news-stories/generative-ai-in-business/",
-    sourceNote: "生成AI活用企業の実態調査",
+    icon: Layers3,
+    accent: "sky",
   },
   {
-    title: "リアルタイム分析が迷いを素早く解消",
-    statLabel: "データ活用動向",
+    id: "design",
+    badge: "デザイン性",
+    title: "視線誘導とデザイン原則を標準装備",
     description:
-      "Itrex Group (2024) は、リアルタイム分析が競合より速い意思決定を可能にすると紹介。常に更新されるダッシュボードが、先を読む行動を支えます。",
-    sourceLabel: "Itrex Group (2024)",
-    sourceUrl: "https://itrexgroup.com/blog/real-time-data-analytics-for-business/",
-    sourceNote: "リアルタイム分析で意思決定を強化",
-  },
-  {
-    title: "生成AI市場の拡大が先読みを求める",
-    statLabel: "市場トレンド",
-    description:
-      "Switch Software (2024) は、生成AI市場が継続的に拡大すると予測。変化に先んじて体制を整える企業ほど、未来像を語る力が磨かれるとしています。",
+      "Switch Software (2024) は生成AI市場の拡大を予測し、可視化とストーリーテリングが差別化要因になると強調。48時間でレビュー可能なストーリーボードが決裁率を押し上げます。",
+    statLabel: "レビュー完了時間",
+    stat: "48h",
+    bullets: [
+      "Z型視線を意識したスライド配置と孤立強調をテンプレ化",
+      "Before/After図とCTA矢印で次のアクションへ自然誘導",
+    ],
     sourceLabel: "Switch Software (2024)",
-    sourceUrl: "https://switchsoftware.io/blog/generative-ai-market-outlook",
     sourceNote: "2030年までのAI市場展望",
+    sourceUrl: "https://switchsoftware.io/blog/generative-ai-market-outlook",
+    icon: Sparkles,
+    accent: "citrus",
   },
   {
-    title: "AI支援が現場の自律性を高める",
-    statLabel: "現場改革",
+    id: "smart",
+    badge: "スマート性",
+    title: "日次アラートと伴走レビューで変化を先読み",
     description:
-      "Stanford HAI (2024) は、生成AI支援が現場の生産性と習熟スピードを底上げすると報告。一人ひとりが自信を保ったまま提案できる環境づくりに寄与しています。",
+      "Stanford HAI (2024) は、生成AI支援が現場の生産性と習熟スピードを底上げすると報告。月42件の外部指標アラートで、判断が必要な差分だけを経営チームへ届けます。",
+    statLabel: "外部指標アラート/月",
+    stat: "+42件",
+    bullets: [
+      "Slack・Teamsへ送る要点サマリーと推奨アクション",
+      "優先度別の色分けでレビュー会議の焦点を共有",
+    ],
     sourceLabel: "Stanford HAI (2024)",
+    sourceNote: "生成AIによるCS改革",
     sourceUrl: "https://hai.stanford.edu/news/generative-ai-improves-customer-support-productivity",
-    sourceNote: "生成AIによるコンタクトセンター改革",
+    icon: Workflow,
+    accent: "navy",
   },
   {
-    title: "厳格な分野でも信頼獲得が進む",
-    statLabel: "国際機関レポート",
+    id: "trust",
+    badge: "納得性",
+    title: "証跡リンクと権威バッジで信頼を担保",
     description:
-      "OECD (2024) は、金融領域で生成AIが分析とレポートの効率化に貢献し、厳しい審査を要する現場でも信頼が高まっていると整理。説得力ある資料づくりの基盤が整いつつあります。",
+      "OECD (2024) は、金融領域で生成AIがレポート効率化と信頼向上に寄与すると整理。リスク承認までのリードタイムを半減し、納得性を裏付けるトラスト・シグナルを整備します。",
+    statLabel: "リスク承認リードタイム",
+    stat: "1/2",
+    bullets: [
+      "行政認定・採択実績を証跡リンク付きで管理",
+      "フォト・テスティモニアルと効果数値を組み合わせ表示",
+    ],
     sourceLabel: "OECD (2024)",
-    sourceUrl: "https://www.oecd.org/finance/ai-in-financial-markets.htm",
     sourceNote: "金融分野でのAI活用",
+    sourceUrl: "https://www.oecd.org/finance/ai-in-financial-markets.htm",
+    icon: ShieldCheck,
+    accent: "rose",
   },
 ];
 
@@ -2602,43 +2654,91 @@ const Index = () => {
               })}
             </div>
             <div className="story-subheader" data-animate>
-              <h3>迷いを断ち切る裏付け</h3>
+              <h3>迷わず導くための5つの保証ピラー</h3>
               <p>
-                生成AIと専門家が組み合わさった意思決定支援は、世界の調査で質と速さ、先を読む力を高めると報告されています。
-                信頼できる証拠が揃っている今こそ、胸を張って未来像を語れる準備を整える局面です。
+                因果性・論理性・デザイン性・スマート性・納得性をそれぞれ専用ワークフローに落とし込み、経営者が一目で判断根拠を
+                共有できる状態を整えました。中堅企業の決裁プロセスで求められる裏付けを、AIと専門家の伴走で体系化しています。
               </p>
             </div>
-            <div className="evidence-grid">
-              {whyNowEvidence.map((item) => (
-                <article key={item.title} className="evidence-card" data-animate>
-                  <div className="evidence-card__overlay" aria-hidden="true" />
-                  <header className="evidence-card__header">
-                    <div className="evidence-card__metrics">
-                      <span className="evidence-card__badge">{item.statLabel ?? "Key Insight"}</span>
-                      {item.stat ? (
-                        <span className="evidence-stat" aria-label={`${item.statLabel ?? "Insight"}の数値`}>
-                          {item.stat}
-                        </span>
+            <div className="assurance-intro" data-animate>
+              <div className="assurance-intro__copy">
+                <p>
+                  Pattern Interruptで読了率を引き戻し、Dual Codingで因果と根拠を同期させ、Trust Signalで意思決定者の納得度を高めます。
+                  5000万円〜15億円規模の経営者が求める「筋の通った安心感」を、このセクションに凝縮しました。
+                </p>
+                <ul className="assurance-intro__highlights" aria-label="セクションで採用しているUXテクニック">
+                  <li className="assurance-intro__pill">
+                    <span className="assurance-intro__pill-label">Pattern Interrupt</span>
+                    <span className="assurance-intro__pill-text">見出し直後に図解を差し込みスクロール継続率を回復</span>
+                  </li>
+                  <li className="assurance-intro__pill">
+                    <span className="assurance-intro__pill-label">Dual Coding</span>
+                    <span className="assurance-intro__pill-text">因果フローとキーメトリクスを同時表示し即理解</span>
+                  </li>
+                  <li className="assurance-intro__pill">
+                    <span className="assurance-intro__pill-label">Trust Signal</span>
+                    <span className="assurance-intro__pill-text">一次情報リンクと証跡で納得性を補強</span>
+                  </li>
+                </ul>
+              </div>
+              <figure className="assurance-intro__visual">
+                <img src={assurancePatternVisual} alt="AIと専門家の共創フローを図解したインフォグラフィック" loading="lazy" />
+                <figcaption>Dual Coding：AI×専門家×経営者の因果フローを1枚で提示</figcaption>
+              </figure>
+            </div>
+            <div className="assurance-grid">
+              {assurancePillars.map((pillar) => {
+                const PillarIcon = pillar.icon;
+                return (
+                  <article
+                    key={pillar.id}
+                    className={`assurance-card assurance-card--${pillar.accent}`}
+                    data-animate
+                    aria-labelledby={`${pillar.id}-title`}
+                  >
+                    <header className="assurance-card__header">
+                      <span className="assurance-card__badge">{pillar.badge}</span>
+                      <div className="assurance-card__stat" aria-label={pillar.statLabel}>
+                        <span className="assurance-card__stat-label">{pillar.statLabel}</span>
+                        <strong>{pillar.stat}</strong>
+                      </div>
+                    </header>
+                    <div className="assurance-card__body">
+                      <div className="assurance-card__icon" aria-hidden="true">
+                        <PillarIcon />
+                      </div>
+                      <div className="assurance-card__text">
+                        <h3 id={`${pillar.id}-title`}>{pillar.title}</h3>
+                        <p>{pillar.description}</p>
+                      </div>
+                    </div>
+                    <ul className="assurance-card__list" aria-label={`${pillar.badge}を支える取り組み`}>
+                      {pillar.bullets.map((bullet) => (
+                        <li key={bullet}>
+                          <CheckCircle2 aria-hidden="true" className="assurance-card__check" />
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <footer className="assurance-card__footer">
+                      <div className="assurance-card__source">
+                        <span className="assurance-card__source-label">{pillar.sourceLabel}</span>
+                        <span className="assurance-card__source-note">{pillar.sourceNote}</span>
+                      </div>
+                      {pillar.sourceUrl ? (
+                        <a
+                          className="assurance-card__link"
+                          href={pillar.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          一次情報を確認
+                        </a>
                       ) : null}
-                    </div>
-                    <div className="evidence-card__source">
-                      <span className="evidence-card__source-label">{item.sourceLabel}</span>
-                      <span className="evidence-card__source-note">{item.sourceNote}</span>
-                    </div>
-                  </header>
-                  <div className="evidence-card__body">
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </div>
-                  {item.sourceUrl ? (
-                    <footer className="evidence-card__footer">
-                      <a className="evidence-card__link" href={item.sourceUrl} target="_blank" rel="noopener noreferrer">
-                        一次情報を確認する
-                      </a>
                     </footer>
-                  ) : null}
-                </article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
             <p className="footnote" data-animate>
               ※ 参考元リンクから一次情報を確認いただけます。
