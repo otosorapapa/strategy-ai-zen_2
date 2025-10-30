@@ -43,6 +43,8 @@ import { submitContactForm } from "@/lib/contact-api";
 
 import aiDashboardShot from "@/assets/dashboard-preview.jpg";
 import simulatorGuidanceVisual from "@/assets/strategy-planning.jpg";
+import causalityWorkshopVisual from "@/assets/solution-illustration.jpg";
+import aiScenarioVisual from "@/assets/ai-illustration.jpg";
 import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
 import expertSaitoPhoto from "@/assets/representative_.jpg";
 import expertTanakaPhoto from "@/assets/representative.jpg";
@@ -985,6 +987,20 @@ type ProcessStep = {
   visual?: string;
   visualAlt?: string;
   visualCaption?: string;
+  logicNote?: string;
+  highlights?: StepHighlight[];
+  duration?: StepDuration;
+};
+
+type StepHighlight = {
+  label: string;
+  detail: string;
+};
+
+type StepDuration = {
+  label: string;
+  value: string;
+  note?: string;
 };
 
 const processSteps: ProcessStep[] = [
@@ -995,9 +1011,30 @@ const processSteps: ProcessStep[] = [
     description: "現状の詰まりと達成したいKGIを整理。必要な関係者と進め方を決定します。",
     icon: ClipboardCheck,
     accent: "mint",
-    visual: expertKobayashiPhoto,
-    visualAlt: "専門家が経営者とオンラインで課題整理を行う様子",
-    visualCaption: "30分で課題とKPIを一枚に",
+    visual: causalityWorkshopVisual,
+    visualAlt: "経営課題の因果マップをホワイトボードで整理している様子",
+    visualCaption: "30分で論点とKPIを一枚に",
+    logicNote:
+      "KGI・外部環境・内部制約の関係性をツリー化し、投資判断につながる論点を先に定義します。",
+    highlights: [
+      {
+        label: "因果仮説",
+        detail: "財務・顧客・人材のドライバーを洗い出し、成果への影響度を可視化。",
+      },
+      {
+        label: "現状診断",
+        detail: "ヒアリングと既存資料から詰まりの根本原因を特定し優先順位を決定。",
+      },
+      {
+        label: "合意形成",
+        detail: "ステークホルダー別の期待値と意思決定プロセスを整え、次のアクションを合意。",
+      },
+    ],
+    duration: {
+      label: "所要時間",
+      value: "オンライン30分",
+      note: "議題に合わせたアジェンダを事前共有",
+    },
   },
   {
     title: "データ入力・連携",
@@ -1009,6 +1046,27 @@ const processSteps: ProcessStep[] = [
     visual: aiAnalysisVisual,
     visualAlt: "AIが経営データと外部情報を自動収集するダッシュボード",
     visualCaption: "連携と監査ログを自動化",
+    logicNote:
+      "経営判断で使う重要指標だけを定義し、収集から検証までの整合性フローを確立します。",
+    highlights: [
+      {
+        label: "データ棚卸し",
+        detail: "財務・販売・人員データを分類し、粒度と更新頻度を統一。",
+      },
+      {
+        label: "連携設計",
+        detail: "API・バッチ連携と権限設計を標準化し、移行リスクを抑制。",
+      },
+      {
+        label: "リスク制御",
+        detail: "監査ログと改変履歴を記録し、信頼できるデータラインを構築。",
+      },
+    ],
+    duration: {
+      label: "整備目安",
+      value: "3〜7営業日",
+      note: "現行システムの接続手順書を併走作成",
+    },
   },
   {
     title: "AIレポート生成",
@@ -1017,9 +1075,30 @@ const processSteps: ProcessStep[] = [
     description: "AIが財務・需要・人材シナリオを生成し、複数ケースのKPIを比較。",
     icon: BrainCircuit,
     accent: "navy",
-    visual: simulatorGuidanceVisual,
+    visual: aiScenarioVisual,
     visualAlt: "生成AIが複数シナリオを比較する戦略シミュレーター画面",
     visualCaption: "48時間で比較ケースを整備",
+    logicNote:
+      "経営仮説をパラメータ化し、需要・コスト・人員の揺らぎを一括で試算。判断の根拠となる比較軸を揃えます。",
+    highlights: [
+      {
+        label: "ケース生成",
+        detail: "前提条件を入力するだけで攻めと守りの複数案を自動ドラフト。",
+      },
+      {
+        label: "KPI比較",
+        detail: "BS/PL/CFを連動させた指標で意思決定インパクトを一目で確認。",
+      },
+      {
+        label: "感度分析",
+        detail: "価格・数量・投資水準の感度を可視化し、判断の許容幅を提示。",
+      },
+    ],
+    duration: {
+      label: "生成リードタイム",
+      value: "最短48時間",
+      note: "追加ケースもチャット指示で即再計算",
+    },
   },
   {
     title: "専門家との面談",
@@ -1031,6 +1110,27 @@ const processSteps: ProcessStep[] = [
     visual: decisionIntelligenceVisual,
     visualAlt: "専門家が金融機関向けの根拠資料をレビューしている画面",
     visualCaption: "審査目線で根拠を補強",
+    logicNote:
+      "財務・事業・組織の専門家がAI出力を監査し、説明責任を果たせるロジックとエビデンスを整備します。",
+    highlights: [
+      {
+        label: "レビュー観点",
+        detail: "金融機関・出資者が重視する合格ポイントをチェックリスト化。",
+      },
+      {
+        label: "想定問答",
+        detail: "ヒアリングで想定される質疑を事前に整理し、回答資料を補強。",
+      },
+      {
+        label: "リスク補強",
+        detail: "規制・コンプラ・内部統制のリスクを洗い出し、対応策を添付。",
+      },
+    ],
+    duration: {
+      label: "レビュー期間",
+      value: "1〜2営業日",
+      note: "必要に応じ外部専門家もアサイン",
+    },
   },
   {
     title: "計画書完成・実行",
@@ -1042,6 +1142,27 @@ const processSteps: ProcessStep[] = [
     visual: growthChartVisual,
     visualAlt: "経営ダッシュボードで成長指標を確認しているグラフ",
     visualCaption: "実行管理と成長KPIを同期",
+    logicNote:
+      "実行計画とモニタリング指標を連動させ、意思決定→実行→振り返りのサイクルを固定化します。",
+    highlights: [
+      {
+        label: "指標同期",
+        detail: "優先KPI・財務指標・アクションオーナーを一枚に統合。",
+      },
+      {
+        label: "会議運用",
+        detail: "経営会議で使うダッシュボードと議事テンプレートを提供。",
+      },
+      {
+        label: "改善サイクル",
+        detail: "四半期レビューと月次アラートで進捗・リスクを即共有。",
+      },
+    ],
+    duration: {
+      label: "運用開始",
+      value: "導入4週間〜",
+      note: "伴走レビューと改善提案を継続提供",
+    },
   },
 ];
 
@@ -3235,8 +3356,33 @@ const Index = () => {
                       <div className="process-card__outcome">
                         <span>主要成果物</span>
                         <strong>{step.outcome}</strong>
+                        {step.duration ? (
+                          <dl className="process-card__duration">
+                            <dt>{step.duration.label}</dt>
+                            <dd>{step.duration.value}</dd>
+                            {step.duration.note ? (
+                              <dd className="process-card__duration-note">{step.duration.note}</dd>
+                            ) : null}
+                          </dl>
+                        ) : null}
                       </div>
                     </header>
+                    {step.logicNote ? (
+                      <div className="process-card__logic">
+                        <span className="process-card__logic-label">因果の捉え方</span>
+                        <p>{step.logicNote}</p>
+                      </div>
+                    ) : null}
+                    {step.highlights?.length ? (
+                      <ul className="process-card__highlights">
+                        {step.highlights.map((item) => (
+                          <li key={item.label}>
+                            <span>{item.label}</span>
+                            <p>{item.detail}</p>
+                          </li>
+                        ))}
+                      </ul>
+                    ) : null}
                     {step.visual ? (
                       <figure className="process-card__visual">
                         <img
