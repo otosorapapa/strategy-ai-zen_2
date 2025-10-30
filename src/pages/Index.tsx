@@ -113,45 +113,47 @@ type HeroCausality = {
 
 const heroCausality: HeroCausality[] = [
   {
-    title: "外部シグナル→財務インパクトを同期",
-    subtitle: "因果性 × スマート性｜250種の外部データを1時間単位でスコアリング",
-    cause: "政策・市況・需給指数をAIが常時クロールし、異常値と相関指標を抽出。",
+    title: "兆候を即座に読み解く",
+    subtitle: "変化の観測網｜250種の外部データを毎時スコアリング",
+    cause:
+      "AIが政策・需給・競合指数を常時クロールし、異常値と関連ドライバーを抽出。",
     logic:
-      "診断士が財務ドライバーにマッピングし、影響度を優先順位付きで整列。",
+      "製造・IT・サービス160件の案件を支援してきた診断士が財務ドライバーへ紐づけ、優先度を明確に整理。",
     impactMetric: "意思決定リードタイム -52%",
-    impactDetail: "兆候検知から48時間以内に経営会議へ論点を引き渡し。",
-    trustLabel: "TRUST",
+    impactDetail: "兆候検知から48時間以内に経営会議へ論点を届け、判断の迷いを削減。",
+    trustLabel: "EVIDENCE",
     trustCopy:
-      "専門家ヒアリング48社分の意思決定パターンで解釈と対策をテンプレ化。",
-    highlights: ["因果性", "スマート性", "納得性"],
+      "過去プロジェクトのレビュー記録を元に、胸を張って示せる根拠集をテンプレート化。",
+    highlights: ["変化対応", "先見性", "確信"],
     icon: ScanSearch,
   },
   {
-    title: "論点とストーリーを設計",
-    subtitle: "論理性 × デザイン性｜シナリオと想定問答を可視化",
-    cause: "AIが会議資料・シナリオ比較・想定問答をドラフトし構造化。",
+    title: "論点と筋道を描く",
+    subtitle: "決断の土台｜シナリオと想定問答を可視化",
+    cause:
+      "AIが会議資料・シナリオ比較・想定問答をドラフトし、意思決定で使う論点を構造化。",
     logic:
-      "中小企業診断士・会計士が金融審査視点で整合性と打ち手の優先順位を補正。",
+      "元コンサルと会計士が金融審査と実行計画の観点で整合性を補正し、堂々と説明できるストーリーに磨き上げ。",
     impactMetric: "計画作成工数 -80%",
-    impactDetail: "議題ごとの骨子とビジュアル資料を自動整形し準備時間を短縮。",
-    trustLabel: "GOVERNANCE",
+    impactDetail: "議題ごとの骨子とビジュアル資料を自動整形し、準備時間を大幅圧縮。",
+    trustLabel: "QUALITY",
     trustCopy:
-      "融資・補助金審査経験者がリスクチェックリストで判断根拠を担保。",
-    highlights: ["論理性", "デザイン性", "納得性"],
+      "融資・投資面談で使われた回答集を蓄積し、判断の筋道をすぐ取り出せる状態に管理。",
+    highlights: ["論理性", "整合性", "説得力"],
     icon: ClipboardCheck,
   },
   {
-    title: "納得性と実行を両立",
-    subtitle: "スマート性 × 納得性｜ダッシュボードで証跡と意思決定を連動",
-    cause: "AIレポートが打ち手別のKPI推移とキャッシュ見通しを更新。",
+    title: "実行と成果をつなぐ",
+    subtitle: "先読みダッシュボード｜証跡とアクションを連動",
+    cause: "AIレポートが打ち手別のKPI推移とキャッシュ見通しを更新し続ける。",
     logic:
-      "専門家がステークホルダー別の説明資料とリスクヘッジを監修。",
-    impactMetric: "資金創出インパクト 1.8倍",
-    impactDetail: "意思決定の根拠と成果をダッシュボードで共有し実行率を向上。",
-    trustLabel: "PROOF",
+      "金融機関レビュー経験者がステークホルダー別の説明資料とリスクヘッジを監修。",
+    impactMetric: "キャッシュ創出インパクト 1.8倍",
+    impactDetail: "意思決定の根拠と成果を共有し、組織全体が自信を持って実行に踏み出せる環境を整備。",
+    trustLabel: "ASSURANCE",
     trustCopy:
-      "金融機関・投資家向けレビューで第三者納得性と監査トレーサビリティを確保。",
-    highlights: ["納得性", "因果性", "デザイン性"],
+      "第三者レビューの記録と監査トレーサビリティを整え、説得材料を蓄積。",
+    highlights: ["実行力", "透明性", "信頼"],
     icon: TrendingUp,
   },
 ];
@@ -189,20 +191,20 @@ const heroMetrics = [
 const heroAllianceExperts = [
   {
     name: "田中 圭",
-    role: "元メガバンク法人融資担当",
-    focus: "資金繰り・融資交渉",
+    role: "製造・卸の大型融資220件を担当",
+    focus: "資金戦略と与信交渉の設計",
     photo: expertTanakaPhoto,
   },
   {
     name: "小林 真",
-    role: "元戦略コンサルティングファーム",
-    focus: "戦略再設計・DX",
+    role: "戦略・DX再構築プロジェクト80件を統括",
+    focus: "成長ストーリーと実行ロードマップ",
     photo: expertKobayashiPhoto,
   },
   {
     name: "斎藤 美咲",
-    role: "財務会計・管理会計専門家",
-    focus: "財務管理・補助金対策",
+    role: "管理会計改革とIPO準備を支援",
+    focus: "KPI設計とガバナンス整備",
     photo: expertSaitoPhoto,
   },
 ];
@@ -545,7 +547,7 @@ const utilizationComparisons = [
 
 const outcomeFootnotes = [
   "※1 導入企業20社（従業員50〜300名、2023年7月〜2024年12月）を対象に戦略AIレポートの利用状況を追跡。意思決定リードタイムと工数削減は会議議事録と業務ログから算出。",
-  "※2 University of Cincinnati Online (2024) \"How Businesses Are Using Generative AI\" 調査（n=215）の結果をもとに、生成AI活用企業の戦略更新サイクル短縮を推計。",
+  "※2 University of Cincinnati Online (2024) \"Generative AI Adoption Study\" 調査（n=215）の結果をもとに、生成AI活用企業の戦略更新サイクル短縮を推計。",
   "※3 Itrex Group (2024) \"Real-Time Data Analytics for Business\" が指摘するリアルタイム分析による意思決定スピード向上を反映。",
 ];
 
@@ -601,7 +603,7 @@ const whyNowEvidence = [
       "blog.iil.comは、生成AIが繰り返し作業を自動化し、データドリブンな分析によって経営者の意思決定をより速く賢くすると解説。中小企業の競争優位に直結すると強調しています。",
     sourceLabel: "IIL Blog (2024)",
     sourceUrl: "https://blog.iil.com/",
-    sourceNote: "AI for Executive Decision-Making",
+    sourceNote: "AI活用による経営判断",
   },
   {
     title: "生成AI導入企業は主要業務で成果を創出",
@@ -611,7 +613,7 @@ const whyNowEvidence = [
       "University of Cincinnati Onlineの研究では、生成AIを導入した企業が顧客対応や主要業務で成果を創出していると報告。意思決定プロセスへの適用が加速しています。",
     sourceLabel: "University of Cincinnati Online (2024)",
     sourceUrl: "https://online.uc.edu/news-stories/generative-ai-in-business/",
-    sourceNote: "How Businesses Are Using Generative AI",
+    sourceNote: "生成AI活用企業の実態調査",
   },
   {
     title: "リアルタイム分析で意思決定速度が向上",
@@ -621,7 +623,7 @@ const whyNowEvidence = [
       "Itrex Groupはリアルタイム分析が競合よりも速い意思決定を可能にすると指摘。AIダッシュボードが経営判断を後押しします。",
     sourceLabel: "Itrex Group (2024)",
     sourceUrl: "https://itrexgroup.com/blog/real-time-data-analytics-for-business/",
-    sourceNote: "Real-Time Data Analytics for Business",
+    sourceNote: "リアルタイム分析で意思決定を強化",
   },
   {
     title: "2030年に1.8兆ドル規模のAI市場",
@@ -631,7 +633,7 @@ const whyNowEvidence = [
       "生成AI市場は2030年までに約1.8兆ドルへ拡大と予測。今のうちに活用体制を整えることが中長期の競争力に直結します。",
     sourceLabel: "Switch Software (2024)",
     sourceUrl: "https://switchsoftware.io/blog/generative-ai-market-outlook",
-    sourceNote: "AI Market Outlook to 2030",
+    sourceNote: "2030年までのAI市場展望",
   },
   {
     title: "AI支援でコンタクトセンターの生産性+14%",
@@ -640,7 +642,7 @@ const whyNowEvidence = [
     description: "Stanford HAIは生成AI支援で平均14%の生産性向上と報告。新人ほど伸び幅が大きい。",
     sourceLabel: "Stanford HAI (2024)",
     sourceUrl: "https://hai.stanford.edu/news/generative-ai-improves-customer-support-productivity",
-    sourceNote: "Generative AI in Contact Centers",
+    sourceNote: "生成AIによるコンタクトセンター改革",
   },
   {
     title: "金融業界では分析とレポート作成を効率化",
@@ -649,7 +651,7 @@ const whyNowEvidence = [
     description: "OECDは金融業で生成AIが分析とレポートを効率化と指摘。経営計画にも展開可能。",
     sourceLabel: "OECD (2024)",
     sourceUrl: "https://www.oecd.org/finance/ai-in-financial-markets.htm",
-    sourceNote: "AI in Financial Markets",
+    sourceNote: "金融分野でのAI活用",
   },
 ];
 
@@ -791,17 +793,18 @@ type PainPoint = {
 
 const painPoints: PainPoint[] = [
   {
-    title: "市場変化や政策変動を追う時間がない",
-    detail: "最新政策・補助金・競合動向を追う調査が経営者に集中し、戦略設計の時間が不足しています。",
+    title: "外部の変化を追い切れず判断が後手に回る",
+    detail:
+      "市場シグナルや競合の一手を追う調査が経営者に集中し、戦略を描く時間が削られています。",
     solution:
-      "経営改善で鍛えた専門家 × 生成AIが政府・市場・自社データを常時計測し、優先課題と想定インパクトを数分で提示します。",
+      "累計160件の再生・成長案件で培った専門家と生成AIが政府・市場・自社データを常時計測し、数分で優先課題と想定インパクトを提示します。",
     aiAction:
       "AI: 政策・需給・財務データをクロールし、先読みシナリオとKPIアラートを自動生成。",
     expertAction:
-      "専門家: 中小企業診断士が業界特性と政策適用条件を検証し、現場に合わせた打ち手へ整理。",
+      "専門家: 各業界の意思決定ログをもとに根拠を補強し、現場が迷わず動ける打ち手に整理。",
     impact: "粗利 +18%",
     impactDetail:
-      "furumachi-smec.lognowa.comが紹介する改善事例同様、利益ドライバーを可視化し粗利率を平均18pt押し上げました。",
+      "利益ドライバーを可視化し粗利率を平均18pt押し上げ、判断の場で胸を張れる説明材料を確保。",
     icon: ScanSearch,
     accent: "sky",
   },
@@ -810,27 +813,27 @@ const painPoints: PainPoint[] = [
     detail:
       "会議資料と経営計画のドラフトを作るたびに各部門からデータを集め直し、意思決定リードタイムが長期化しています。",
     solution:
-      "経営改善で鍛えた専門家 × 生成AIが財務と実績データから複数シナリオとドラフト資料を揃え、経営陣は判断と説明に集中できます。",
+      "専門家と生成AIが財務と実績データから複数シナリオとドラフト資料を揃え、経営陣は判断と説明に集中できます。",
     aiAction:
       "AI: 四半期ごとのシナリオ比較・財務予測・会議アジェンダを48時間以内に生成。",
     expertAction:
-      "専門家: 診断士と財務会計・管理会計専門家が論点整理と審査基準の観点でレビューし、決裁に必要な根拠を補強。",
+      "専門家: 戦略コンサルと会計士が論点整理と審査基準の観点でレビューし、決裁に必要な根拠を補強。",
     impact: "意思決定リードタイム -52% / 計画作成工数 -80%",
     impactDetail:
-      "blog.iil.comが強調するAI活用による迅速な意思決定を体現し、導入企業平均で意思決定リードタイム52%短縮・計画作成工数80%削減。",
+      "AI活用による迅速な意思決定を体現し、判断の迷いを減らして自信を持って決裁できる状態を実現。",
     icon: LineChart,
     accent: "citrus",
   },
   {
     title: "資金調達時に金融機関から信頼される計画書が難しい",
     detail:
-      "融資や補助金の審査ポイントを押さえた計画書づくりが属人化し、提出スケジュールが後ろ倒しになります。",
+      "融資や投資の審査ポイントを押さえた計画書づくりが属人化し、提出スケジュールが後ろ倒しになります。",
     solution:
-      "経営改善で鍛えた専門家 × 生成AIが審査基準に沿った財務計画と想定問答を下書きし、金融機関から信頼される計画書へ磨き込みます。",
+      "専門家と生成AIが審査基準に沿った財務計画と想定問答を下書きし、金融機関から信頼される計画書へ磨き込みます。",
     aiAction:
       "AI: DSCR・CCCなど主要指標を自動計算し、複数の返済シナリオと資金繰りシートを作成。",
     expertAction:
-      "専門家: 元メガバンク融資担当が想定問答と裏付け資料を監修し、金融機関との対話を設計。",
+      "専門家: 元メガバンク融資担当が想定問答と裏付け資料を監修し、胸を張って語れる交渉シナリオを設計。",
     impact: "キャッシュ創出 1.8倍",
     impactDetail:
       "AIドラフトと専門家のダブルチェックで資金調達の確度が向上し、導入後12か月の運転資金キャッシュフローは平均1.8倍に。",
@@ -2215,12 +2218,12 @@ const Index = () => {
             <div className="hero-copy" data-animate data-initial-visible="true">
               <span className="badge">年商5,000万〜15億円の経営者向け</span>
               <h1 id="hero-heading">
-                経営改善で鍛えた専門家（中小企業診断士）×生成AI
-                <span>意思決定の質・速さ・先見性を高める経営計画</span>
+                決断に胸を張れる経営計画を、専門家と生成AIが共創
+                <span>意思決定の質・速さ・先見性を磨き上げる伴走サービス</span>
               </h1>
               <p className="hero-lead">
-                経営改善で鍛えた診断士と財務会計・管理会計の専門家が生成AIを操り、経営者の意思決定を先回りで支援します。
-                政策・市場・自社データをAIが集約し、専門家が金融審査レベルまで磨き込むからこそ、意思決定の質・速さ・先見性を一気に引き上げます。
+                累計160件の再生・成長プロジェクトを率いた診断士と財務・会計の専門家が生成AIを操り、経営会議の論点を先回りで準備します。
+                AIが集約した政策・市場・自社データを専門家が金融審査レベルまで整え、社長が迷いなく決められる土台をつくります。
               </p>
               <div className="hero-causality" aria-label="因果とロジックの整理" data-animate>
                 {heroCausality.map((item, index) => {
@@ -2279,13 +2282,13 @@ const Index = () => {
                 })}
               </div>
               <ul className="hero-points">
-                <li>経営者の課題をAIが常時計測。政策更新と市場変化をシナリオ化し、判断材料を48時間以内に提示。</li>
-                <li>専門家が生成AIの提案を金融・戦略の観点で精査し、意思決定の質とリスク管理を同時に強化。</li>
-                <li>意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍の実績を創出。</li>
+                <li>AIが外部の兆候と自社データを常時計測し、48時間以内に経営会議で使える論点として整理。</li>
+                <li>専門家が金融・戦略・組織の観点で提案を精査し、堂々と示せる判断材料にブラッシュアップ。</li>
+                <li>意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍の実績で、決断の場に自信と速さを両立。</li>
               </ul>
               <p className="hero-sub">
-                リアルタイムの外部データと社内指標を組み合わせ、専門家が根拠と倫理面を確認したうえで投資・資金繰りの判断材料を常に最新化します。
-                経営改善で鍛えた専門家 × 生成AIという二人三脚で、年商5,000万〜15億円の企業に必要な「先見性ある経営計画」を実現します。
+                リアルタイムの外部データと社内指標を統合し、専門家が根拠と倫理面を確認したうえで投資・資金繰りの材料を更新し続けます。
+                専門家と生成AIの協働で、年商5,000万〜15億円の企業に「先見性と説得力のある経営計画」を届けます。
               </p>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
@@ -2544,9 +2547,9 @@ const Index = () => {
           <div className="container">
             <div className="story-header" data-animate>
               <span className="story-eyebrow">STORY 01</span>
-              <h2 id="problem-heading">経営改善で鍛えた専門家 × 生成AIが解消する経営者の3課題</h2>
+              <h2 id="problem-heading">専門家×生成AIで解きほぐす経営者の3つの迷い</h2>
               <p>
-                市場や政策の変化が激しいほど、意思決定の質・速さ・先見性は落ちやすくなります。経営改善の現場で蓄積した知見をもとに、「課題 → AI×専門家の解決策 → 得られる効果」の因果関係を3つのケースで示します。
+                市場や組織の変化が激しいほど、意思決定の質・速さ・先読み力は落ちやすくなります。160件の案件で蓄積した知見をもとに、「課題 → AI×専門家の解決策 → 得られる効果」の因果関係を3つのケースで示します。
               </p>
             </div>
             <div className="pain-grid">
@@ -2598,10 +2601,10 @@ const Index = () => {
               })}
             </div>
             <div className="story-subheader" data-animate>
-              <h3>なぜ今「経営改善で鍛えた専門家 × 生成AI」なのか</h3>
+              <h3>判断を先送りしないための根拠</h3>
               <p>
                 blog.iil.comが指摘する通り、AIは繰り返し業務の自動化とデータ分析によって意思決定を迅速かつ正確にし、中小企業に競争優位をもたらします。
-                さらに信頼ソースの調査結果から、対策を先送りにするほど機会損失が拡大することが見えてきました。
+                信頼ソースの調査結果も、対策を先送りにするほど機会損失が拡大する事実を裏付けています。
               </p>
             </div>
             <div className="evidence-grid">
@@ -2654,9 +2657,9 @@ const Index = () => {
           <div className="container">
             <div className="story-header" data-animate>
               <span className="story-eyebrow">STORY 02</span>
-              <h2 id="solution-heading">経営改善で鍛えた専門家 × 生成AIの協働で意思決定を加速</h2>
+              <h2 id="solution-heading">専門家と生成AIの共創で意思決定を加速</h2>
               <p>
-                生成AIが政策・市場・自社データを束ね、専門家と経営者がレビューと判断に集中します。blog.workday.comが紹介するリアルタイム分析のスピードと、note.comで語られるAI会議術の先見性を組み合わせ、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果につなげます。
+                生成AIが政策・市場・自社データを束ね、専門家と経営者がレビューと判断に集中します。blog.workday.comが紹介するリアルタイム分析のスピードと、note.comで語られるAI会議術の先見性を組み合わせ、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果につなげ、決裁の場で確信を持てる状態を生み出します。
               </p>
             </div>
             <div className="roles-grid">
@@ -2758,7 +2761,7 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="features-heading">経営改善で鍛えた専門家 × 生成AIが支える5つの機能</h2>
+              <h2 id="features-heading">専門家×生成AIが支える5つの機能</h2>
               <ul className="section-intro">
                 <li>政策・市場・自社データを統合し、意思決定の質・速さ・先見性を底上げ。</li>
                 <li>AIの出力は診断士がレビューし、料金と支援範囲を透明に開示します。</li>
@@ -2769,7 +2772,7 @@ const Index = () => {
                 <span className="features-visual__badge">DECISION FLYWHEEL</span>
                 <h3>意思決定を加速する「データ→AI→専門家」の三層構造</h3>
                 <p>
-                  政策・市場・自社データを繋ぎ、AIがドラフトを作成。経営改善で鍛えた専門家が論点と信頼性を磨き込み、経営陣は判断と実行に集中できます。
+                  政策・市場・自社データを繋ぎ、AIがドラフトを作成。160件の案件で磨いた専門家チームが論点と信頼性を磨き込み、経営陣は判断と実行に集中できます。
                 </p>
                 <figure className="features-visual__figure">
                   <img
@@ -4144,11 +4147,11 @@ const Index = () => {
         <section className="section final-cta" aria-labelledby="final-cta-heading">
           <div className="container">
             <div className="final-cta__content" data-animate>
-              <span className="final-cta__eyebrow">経営改善で鍛えた専門家 × 生成AI</span>
+              <span className="final-cta__eyebrow">専門家×生成AIの伴走</span>
               <h2 id="final-cta-heading">意思決定の質・速さ・先見性を高める経営計画を今すぐ</h2>
               <p>
-                経営者の時間は有限です。経営改善で鍛えた専門家が生成AIの出力を精査し、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果創出を後押しします。
-                相談予約と資料ダウンロードの2つの導線で、最適なスタートを選べます。
+                経営者の時間は有限です。160件の案件で磨いた専門家が生成AIの出力を精査し、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果創出を後押しします。
+                相談予約と資料ダウンロードの2つの導線で、組織が胸を張って前進できるスタートを選べます。
               </p>
               <div className="final-cta__actions">
                 <a className="btn btn-cta" href="#contact">
