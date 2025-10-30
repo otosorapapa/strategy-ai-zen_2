@@ -10,6 +10,7 @@ import {
 
 import {
   ArrowDownRight,
+  ArrowRight,
   ArrowUpRight,
   Award,
   BarChart3,
@@ -97,32 +98,58 @@ const heroEvidence = [
 
 type HeroCausality = {
   title: string;
+  subtitle: string;
   cause: string;
   logic: string;
-  impact: string;
+  impactMetric: string;
+  impactDetail: string;
+  trustLabel: string;
+  trustCopy: string;
+  highlights: string[];
   icon: LucideIcon;
 };
 
 const heroCausality: HeroCausality[] = [
   {
-    title: "政策・市場の先読み",
-    cause: "生成AIが政策・市場速報を常時計測",
-    logic: "診断士が自社条件で優先順位を補正し判断材料を整流化",
-    impact: "意思決定リードタイム -52%",
+    title: "外部シグナル→財務インパクトを同期",
+    subtitle: "因果性 × スマート性｜250種の外部データを1時間単位でスコアリング",
+    cause: "政策・市況・需給指数をAIが常時クロールし、異常値と相関指標を抽出。",
+    logic:
+      "診断士が財務ドライバーにマッピングし、影響度を優先順位付きで整列。",
+    impactMetric: "意思決定リードタイム -52%",
+    impactDetail: "兆候検知から48時間以内に経営会議へ論点を引き渡し。",
+    trustLabel: "TRUST",
+    trustCopy:
+      "専門家ヒアリング48社分の意思決定パターンで解釈と対策をテンプレ化。",
+    highlights: ["因果性", "スマート性", "納得性"],
     icon: ScanSearch,
   },
   {
-    title: "意思決定の論点設計",
-    cause: "会議前にAIがシナリオと想定問答をドラフト",
-    logic: "専門家が金融・戦略の観点で裏付けを補強",
-    impact: "計画作成工数 -80%",
+    title: "論点とストーリーを設計",
+    subtitle: "論理性 × デザイン性｜シナリオと想定問答を可視化",
+    cause: "AIが会議資料・シナリオ比較・想定問答をドラフトし構造化。",
+    logic:
+      "中小企業診断士・会計士が金融審査視点で整合性と打ち手の優先順位を補正。",
+    impactMetric: "計画作成工数 -80%",
+    impactDetail: "議題ごとの骨子とビジュアル資料を自動整形し準備時間を短縮。",
+    trustLabel: "GOVERNANCE",
+    trustCopy:
+      "融資・補助金審査経験者がリスクチェックリストで判断根拠を担保。",
+    highlights: ["論理性", "デザイン性", "納得性"],
     icon: ClipboardCheck,
   },
   {
-    title: "納得性の高い提案",
-    cause: "AIレポートが証拠付きダッシュボードを提示",
-    logic: "元金融機関出身者が説明責任の視点でレビュー",
-    impact: "資金創出インパクト 1.8倍",
+    title: "納得性と実行を両立",
+    subtitle: "スマート性 × 納得性｜ダッシュボードで証跡と意思決定を連動",
+    cause: "AIレポートが打ち手別のKPI推移とキャッシュ見通しを更新。",
+    logic:
+      "専門家がステークホルダー別の説明資料とリスクヘッジを監修。",
+    impactMetric: "資金創出インパクト 1.8倍",
+    impactDetail: "意思決定の根拠と成果をダッシュボードで共有し実行率を向上。",
+    trustLabel: "PROOF",
+    trustCopy:
+      "金融機関・投資家向けレビューで第三者納得性と監査トレーサビリティを確保。",
+    highlights: ["納得性", "因果性", "デザイン性"],
     icon: TrendingUp,
   },
 ];
@@ -2287,25 +2314,53 @@ const Index = () => {
                   const ItemIcon = item.icon;
                   return (
                     <article key={item.title} className="hero-causality__card">
-                      <span className="hero-causality__step">STEP {index + 1}</span>
-                      <div className="hero-causality__icon" aria-hidden="true">
-                        <ItemIcon />
+                      <header className="hero-causality__header">
+                        <div className="hero-causality__icon" aria-hidden="true">
+                          <ItemIcon />
+                        </div>
+                        <div className="hero-causality__heading">
+                          <span className="hero-causality__step">STEP {index + 1}</span>
+                          <h2>{item.title}</h2>
+                          <p className="hero-causality__subtitle">{item.subtitle}</p>
+                        </div>
+                      </header>
+                      <div className="hero-causality__flow" role="list">
+                        <div className="hero-causality__flow-item" role="listitem">
+                          <span className="hero-causality__pill hero-causality__pill--cause">因</span>
+                          <p>{item.cause}</p>
+                        </div>
+                        <span className="hero-causality__arrow" aria-hidden="true">
+                          <ArrowRight />
+                        </span>
+                        <div className="hero-causality__flow-item" role="listitem">
+                          <span className="hero-causality__pill hero-causality__pill--logic">論</span>
+                          <p>{item.logic}</p>
+                        </div>
+                        <span className="hero-causality__arrow" aria-hidden="true">
+                          <ArrowRight />
+                        </span>
+                        <div
+                          className="hero-causality__flow-item hero-causality__flow-item--impact"
+                          role="listitem"
+                        >
+                          <span className="hero-causality__pill hero-causality__pill--impact">果</span>
+                          <div>
+                            <strong>{item.impactMetric}</strong>
+                            <p>{item.impactDetail}</p>
+                          </div>
+                        </div>
                       </div>
-                      <div className="hero-causality__body">
-                        <h2>{item.title}</h2>
-                        <p>
-                          <span className="hero-causality__label">因</span>
-                          {item.cause}
-                        </p>
-                        <p>
-                          <span className="hero-causality__label">論</span>
-                          {item.logic}
-                        </p>
-                        <p className="hero-causality__impact">
-                          <span className="hero-causality__label hero-causality__label--impact">果</span>
-                          {item.impact}
-                        </p>
-                      </div>
+                      <footer className="hero-causality__footer">
+                        <div className="hero-causality__trust">
+                          <span className="hero-causality__trust-label">{item.trustLabel}</span>
+                          <p>{item.trustCopy}</p>
+                        </div>
+                        <ul className="hero-causality__qualities" aria-label="強調する価値">
+                          {item.highlights.map((quality) => (
+                            <li key={quality}>{quality}</li>
+                          ))}
+                        </ul>
+                      </footer>
                     </article>
                   );
                 })}
