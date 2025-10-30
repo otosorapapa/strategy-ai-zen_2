@@ -10,15 +10,41 @@
   <body>
     <!-- NOTE: This static HTML mirrors the React版の構造。主要セクションとCTAのみ抜粋 -->
     <header class="hero">
-      <p class="badge">福岡・九州の中小企業特化</p>
-      <h1>AI×管理会計×資金繰りで、中小企業の“売上とキャッシュ”を同時に伸ばす。福岡発・伴走型の経営顧問。</h1>
-      <p class="hero-sub">3ヶ月で“見える化×打ち手”を定着、6ヶ月で粗利率・回転率を改善。初回相談は無料、オンライン可。</p>
-      <div class="cta-group">
-        <button class="btn-primary" data-cta="consult">無料で相談する</button>
-        <button class="btn-outline" data-cta="asset">3分で資料を見る</button>
+      <div class="hero-surface">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="badge">福岡・九州の中小企業特化</p>
+            <h1>AI×管理会計×資金繰りで、“意思決定の質・速さ・先見性”を底上げする経営オペレーティングシステム。</h1>
+            <p class="hero-sub">
+              3ヶ月で未来収支の見える化と意思決定シナリオを整備、6ヶ月で粗利率・回転率・キャッシュを同時改善。初回相談は無料、オンライン可。
+            </p>
+            <ul class="hero-metrics">
+              <li><strong>-67%</strong><span>意思決定準備にかかる時間</span></li>
+              <li><strong>+1.75ヵ月</strong><span>手元資金の平均改善幅</span></li>
+              <li><strong>92%</strong><span>経営会議満足度（役員アンケート）</span></li>
+            </ul>
+            <div class="cta-group">
+              <button class="btn-primary" data-cta="consult">無料で相談する</button>
+              <button class="btn-outline" data-cta="asset">3分で資料を見る</button>
+            </div>
+            <p class="microcopy">初回相談は無料｜所要30分｜オンライン可</p>
+            <div class="trust-stack" aria-label="メディア掲載と認定実績">
+              <span>九州経済産業局パートナー</span>
+              <span>日経BizGate掲載</span>
+              <span>JBA DX認証</span>
+            </div>
+          </div>
+          <figure class="hero-visual">
+            <img src="./assets/decision-dashboard.svg" alt="経営ダッシュボードのモックアップ" loading="lazy" />
+          </figure>
+        </div>
       </div>
-      <p class="microcopy">初回相談は無料｜所要30分｜オンライン可</p>
     </header>
+
+    <figure class="pattern-break" aria-labelledby="pattern-caption">
+      <figcaption id="pattern-caption">意思決定フローのビフォー／アフター</figcaption>
+      <img src="./assets/before-after-flow.svg" alt="従来と導入後の意思決定プロセス比較" loading="lazy" />
+    </figure>
 
     <main>
       <section class="pain-section" id="pain">
@@ -35,6 +61,39 @@
           <article>
             <h3>変化を捉えきれない</h3>
             <p>販売・在庫・財務データが散在し、異常値や兆候を会議のたびに手作業で確認せざるを得ない。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="insight-section" id="insights">
+        <h2>論点→因果→意思決定を一貫させるコアモジュール</h2>
+        <p class="section-lead">
+          因果仮説を先に固め、指標の異常検知から打ち手の優先度までを一つの画面に集約。経営者が「何を決めれば良いか」を瞬時に掴める情報設計です。
+        </p>
+        <div class="insight-grid">
+          <article>
+            <h3>01. コンディションレポート</h3>
+            <p>収益性・安全性・成長性をマルチインジケーターでスコア化。視線誘導ラインで次に読むべき項目を提示します。</p>
+            <ul>
+              <li>最新の政策・市況データと自社データをオーバーレイ</li>
+              <li>リスク閾値は取締役会で合意した基準を設定</li>
+            </ul>
+          </article>
+          <article>
+            <h3>02. シナリオファブリック</h3>
+            <p>AIが複数の資金シナリオを生成し、専門家が実行可能性と副作用を添削。メリット・デメリットが色面で対比されます。</p>
+            <ul>
+              <li>粗利とキャッシュの同時最適化をガイド</li>
+              <li>意思決定に必要な追加情報を自動抽出</li>
+            </ul>
+          </article>
+          <article>
+            <h3>03. アクションスプリント</h3>
+            <p>部門別の優先アクションを2週間スプリントに整理。担当者・達成指標・期待インパクトが一目で把握できます。</p>
+            <ul>
+              <li>Slack/Teams連携で進捗を自動収集</li>
+              <li>成果サマリーが次回会議資料に即反映</li>
+            </ul>
           </article>
         </div>
       </section>
@@ -94,40 +153,94 @@
         </div>
       </section>
 
-      <section class="results">
+      <section class="results" id="results">
         <h2>成果指標とビフォー/アフター</h2>
-        <article>
-          <h3>K.M.社（建材卸）</h3>
-          <p>粗利率 19% → 26% / 重点商品単価 +14%</p>
-        </article>
-        <article>
-          <h3>T.F.社（食品製造）</h3>
-          <p>在庫回転率 1.1倍 → 2.1倍 / 廃棄コスト -55%</p>
-        </article>
-        <article>
-          <h3>S.K.社（建設業）</h3>
-          <p>原価乖離率 18% → 6% / 資料作成工数 -70%</p>
-        </article>
-        <article>
-          <h3>M.L.社（物流サービス）</h3>
-          <p>定時納品率 62% → 90% / 残業時間 -45%</p>
-        </article>
-        <article>
-          <h3>H.N.社（アパレルEC）</h3>
-          <p>広告ROI 1.4倍 → 2.6倍 / 在庫過多商品 -30%</p>
-        </article>
-        <article>
-          <h3>B.S.社（精密部品製造）</h3>
-          <p>在庫回転日数 78日 → 42日 / 緊急対応コスト -31%</p>
-        </article>
-        <article>
-          <h3>R.A.社（不動産管理）</h3>
-          <p>空室率 18% → 8% / 平均入居期間 +8ヶ月</p>
-        </article>
-        <article>
-          <h3>O.K.社（医療・ヘルスケア）</h3>
-          <p>フォロー完了率 52% → 88% / 解約率 -40%</p>
-        </article>
+        <div class="results-grid">
+          <article>
+            <header>
+              <h3>K.M.社（建材卸）</h3>
+              <span class="result-badge">粗利率 +7pt</span>
+            </header>
+            <p>粗利率 19% → 26% / 重点商品単価 +14%</p>
+            <p class="result-meta">導入3ヶ月で営業会議の議題決定を自動化。</p>
+          </article>
+          <article>
+            <header>
+              <h3>T.F.社（食品製造）</h3>
+              <span class="result-badge">在庫回転 2.1倍</span>
+            </header>
+            <p>在庫回転率 1.1倍 → 2.1倍 / 廃棄コスト -55%</p>
+            <p class="result-meta">需要予測と製造ラインの稼働率を可視化。</p>
+          </article>
+          <article>
+            <header>
+              <h3>S.K.社（建設業）</h3>
+              <span class="result-badge">工数▲70%</span>
+            </header>
+            <p>原価乖離率 18% → 6% / 資料作成工数 -70%</p>
+            <p class="result-meta">現場日報と原価計算をAIで自動突合。</p>
+          </article>
+          <article>
+            <header>
+              <h3>M.L.社（物流サービス）</h3>
+              <span class="result-badge">定時納品率 90%</span>
+            </header>
+            <p>定時納品率 62% → 90% / 残業時間 -45%</p>
+            <p class="result-meta">遅延要因をヒートマップで可視化し是正。</p>
+          </article>
+          <article>
+            <header>
+              <h3>H.N.社（アパレルEC）</h3>
+              <span class="result-badge">広告ROI 2.6倍</span>
+            </header>
+            <p>広告ROI 1.4倍 → 2.6倍 / 在庫過多商品 -30%</p>
+            <p class="result-meta">在庫/広告の因果関係を共通KPIで整理。</p>
+          </article>
+          <article>
+            <header>
+              <h3>B.S.社（精密部品製造）</h3>
+              <span class="result-badge">回転日数▲46日</span>
+            </header>
+            <p>在庫回転日数 78日 → 42日 / 緊急対応コスト -31%</p>
+            <p class="result-meta">サプライヤ別の交渉材料をAIが提示。</p>
+          </article>
+          <article>
+            <header>
+              <h3>R.A.社（不動産管理）</h3>
+              <span class="result-badge">空室率▲10pt</span>
+            </header>
+            <p>空室率 18% → 8% / 平均入居期間 +8ヶ月</p>
+            <p class="result-meta">意思決定ダッシュボードで家賃改定を最適化。</p>
+          </article>
+          <article>
+            <header>
+              <h3>O.K.社（医療・ヘルスケア）</h3>
+              <span class="result-badge">解約率▲40%</span>
+            </header>
+            <p>フォロー完了率 52% → 88% / 解約率 -40%</p>
+            <p class="result-meta">患者フォローシナリオをAIが推薦し自動配信。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="testimonial" aria-labelledby="testimonial-title">
+        <div class="testimonial-card">
+          <figure class="testimonial-figure">
+            <img src="./assets/testimonial-executive.svg" alt="導入企業の経営者" loading="lazy" />
+          </figure>
+          <div class="testimonial-copy">
+            <h2 id="testimonial-title">導入経営者の声</h2>
+            <blockquote>
+              <p>
+                「毎週の経営会議は“勘と経験”から“データとシナリオ”へ。経営陣が同じダッシュボードで議論できるので、意思決定に要する時間が半分になり、投資判断も迷いがなくなりました。」
+              </p>
+              <footer>
+                <cite>株式会社北九州マテリアルズ 代表取締役 河村 雅彦 様</cite>
+                <span>粗利率 +6.8pt / キャッシュフロー +1.9ヶ月</span>
+              </footer>
+            </blockquote>
+          </div>
+        </div>
       </section>
 
       <section class="steps" id="steps">
