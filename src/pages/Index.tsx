@@ -113,10 +113,10 @@ type HeroCausality = {
 
 const heroCausality: HeroCausality[] = [
   {
-    title: "兆候を即座に読み解く",
-    subtitle: "変化の観測網｜250種の外部データを毎時スコアリング",
+    title: "迷いなく決められる土台をつくる",
+    subtitle: "経営者の誇りを支える観測網",
     cause:
-      "AIが政策・需給・競合指数を常時クロールし、異常値と関連ドライバーを抽出。",
+      "AIが市場・需給・競合指数を常時クロールし、異常値と関連ドライバーを抽出。",
     logic:
       "製造・IT・サービス160件の案件を支援してきた診断士が財務ドライバーへ紐づけ、優先度を明確に整理。",
     impactMetric: "意思決定リードタイム -52%",
@@ -128,26 +128,26 @@ const heroCausality: HeroCausality[] = [
     icon: ScanSearch,
   },
   {
-    title: "論点と筋道を描く",
-    subtitle: "決断の土台｜シナリオと想定問答を可視化",
+    title: "届ける価値を一枚で描く",
+    subtitle: "決断の焦点を揃えるシナリオ設計",
     cause:
       "AIが会議資料・シナリオ比較・想定問答をドラフトし、意思決定で使う論点を構造化。",
     logic:
-      "元コンサルと会計士が金融審査と実行計画の観点で整合性を補正し、堂々と説明できるストーリーに磨き上げ。",
+      "元コンサルと会計士が審査や実行計画の観点で整合性を補正し、堂々と説明できるストーリーに磨き上げ。",
     impactMetric: "計画作成工数 -80%",
     impactDetail: "議題ごとの骨子とビジュアル資料を自動整形し、準備時間を大幅圧縮。",
     trustLabel: "QUALITY",
     trustCopy:
-      "融資・投資面談で使われた回答集を蓄積し、判断の筋道をすぐ取り出せる状態に管理。",
+      "面談で使われた回答集を蓄積し、判断の筋道をすぐ取り出せる状態に管理。",
     highlights: ["論理性", "整合性", "説得力"],
     icon: ClipboardCheck,
   },
   {
-    title: "実行と成果をつなぐ",
-    subtitle: "先読みダッシュボード｜証跡とアクションを連動",
+    title: "実行と成果を連続させる",
+    subtitle: "先読みダッシュボードと伴走体制",
     cause: "AIレポートが打ち手別のKPI推移とキャッシュ見通しを更新し続ける。",
     logic:
-      "金融機関レビュー経験者がステークホルダー別の説明資料とリスクヘッジを監修。",
+      "レビュー経験者がステークホルダー別の説明資料とリスクヘッジを監修。",
     impactMetric: "キャッシュ創出インパクト 1.8倍",
     impactDetail: "意思決定の根拠と成果を共有し、組織全体が自信を持って実行に踏み出せる環境を整備。",
     trustLabel: "ASSURANCE",
@@ -370,10 +370,10 @@ const insightHighlights = [
   },
   {
     value: "92%",
-    label: "政策アップデート反映率",
-    description: "速報ベースの政策・補助金情報をダッシュボードに同期",
+    label: "外部シグナル反映率",
+    description: "速報ベースの市場・競合・需要データをダッシュボードに同期",
     detail:
-      "政策・補助金・市場レポートの更新情報がダッシュボードに反映されるまでの割合。2024年Q1〜Q4の月次レビューから集計。",
+      "市場レポート・競合ニュース・需給統計の更新情報がダッシュボードに反映されるまでの割合。2024年Q1〜Q4の月次レビューから集計。",
     accent: "citrus" as const,
     icon: TrendingUp,
     delta: "即時反映 12h以内",
@@ -388,7 +388,7 @@ const outcomeNarrative = [
     headline: "会議準備が属人化し、判断が後ろ倒し",
     metric: "資料作成に月145時間",
     description:
-      "経営会議の議事録整理や政策リサーチが経営層と管理部門に集中。判断材料が出揃うまで平均6週間を要していました。",
+      "経営会議の議事録整理や外部環境リサーチが経営層と管理部門に集中。判断材料が出揃うまで平均6週間を要していました。",
     evidence: "ヒアリング: 導入企業20社 (2024)",
   },
   {
@@ -396,7 +396,7 @@ const outcomeNarrative = [
     headline: "AIが一次ドラフトとシナリオ比較を自動生成",
     metric: "論点整理までをAIが前倒し",
     description:
-      "財務・市場データを横断で集約し、政策シナリオと想定問答をAIが先行作成。専門家チームが最終レビューを担当します。",
+      "財務・市場データを横断で集約し、想定シナリオと想定問答をAIが先行作成。専門家チームが最終レビューを担当します。",
     evidence: "運用ログ & レビュー体制",
   },
   {
@@ -404,7 +404,7 @@ const outcomeNarrative = [
     headline: "意思決定リードタイムを3.4倍高速化",
     metric: "決裁まで2週間",
     description:
-      "経営層は議題ごとに根拠付きダッシュボードを確認し即日判断。政策の速報も12時間以内に反映され、修正計画を翌日に提示できるように。",
+      "経営層は議題ごとに根拠付きダッシュボードを確認し即日判断。外部ニュースも12時間以内に反映され、修正計画を翌日に提示できるように。",
     evidence: "成果レビュー: Q1-Q4 2024",
   },
 ];
@@ -423,11 +423,11 @@ type AiValuePoint = {
 const aiValuePoints: AiValuePoint[] = [
   {
     title: "リアルタイム分析で判断を即断",
-    challenge: "政策や資金繰り情報の更新が遅れ、会議で判断材料が不足しがち。",
+    challenge: "外部環境や資金繰りの更新が遅れ、会議で判断材料が不足しがち。",
     mechanism:
-      "University of Cincinnati Online (2024) は、AIがリアルタイムデータを統合し経営判断を支援すると報告。ダッシュボードが政策・金融・自社指標を常時同期し、根拠付きの状況把握を提供します。",
+      "University of Cincinnati Online (2024) は、AIがリアルタイムデータを統合し経営判断を支援すると報告。ダッシュボードが市場・金融・自社指標を常時同期し、根拠付きの状況把握を提供します。",
     impact: "意思決定リードタイム -52%",
-    executiveTakeaway: "最新の補助金更新と資金繰り感度を自動で突き合わせ、判断のスピードを落としません。",
+    executiveTakeaway: "最新の市場更新と資金繰り感度を自動で突き合わせ、判断のスピードを落としません。",
     icon: BarChart4,
     accent: "navy",
     evidence: "University of Cincinnati Online (2024)",
@@ -523,11 +523,11 @@ const roiSummaryMax = Math.max(...roiSummaryMetrics.map((item) => item.scale));
 
 const utilizationComparisons = [
   {
-    label: "政策アップデート反映率",
+    label: "外部シグナル反映率",
     manual: 48,
     ai: 92,
     unit: "%",
-    description: "AIが速報を自動集約し、重要な変更をダッシュボードへ即時反映。",
+    description: "AIが市場ニュースや需要の変化を自動集約し、重要な変化をダッシュボードへ即時反映。",
   },
   {
     label: "財務シナリオ検証数",
@@ -565,9 +565,9 @@ const responsibilityColumns: ResponsibilityColumn[] = [
   {
     id: "ai",
     title: "AIがやること",
-    summary: "政策・市場データを収集し、シミュレーションと資料ドラフトを生成。",
+    summary: "市場・競合データを収集し、シミュレーションと資料ドラフトを生成。",
     detail:
-      "最新の政策動向・市場統計・競合指標をクロールし、財務シミュレーションと想定問答、ドラフト資料を数分で提示します。",
+      "最新の市場動向・需要統計・競合指標をクロールし、財務シミュレーションと想定問答、ドラフト資料を数分で提示します。",
     points: ["外部データの自動収集", "複数シナリオの財務予測", "想定問答と資料ドラフト"],
     icon: Bot,
     accent: "mint",
@@ -685,7 +685,7 @@ const quarterlySignals: QuarterlySignal[] = [
   },
   {
     title: "市場の変化を90日で捉え直す",
-    description: "金融・政策・需要の指標をAIが自動収集。変化率がしきい値を超えると経営者へアラートを送信します。",
+    description: "金融・市場・需要の指標をAIが自動収集。変化率がしきい値を超えると経営者へアラートを送信します。",
     sourceLabel: "Strategy AI Lab 推計",
     stat: "+42件",
     statLabel: "外部指標アラート/月",
@@ -706,7 +706,7 @@ const quarterlySignals: QuarterlySignal[] = [
     focus: "Expert Assurance",
     icon: ShieldCheck,
     highlights: [
-      "資金調達・補助金ドキュメントを専任チームが監修",
+      "資金調達・投資ドキュメントを専任チームが監修",
       "月次・四半期レビューの実行会議に同席",
       "NDA・BCP・監査証憑の整備までワンストップ",
     ],
@@ -797,9 +797,9 @@ const painPoints: PainPoint[] = [
     detail:
       "市場シグナルや競合の一手を追う調査が経営者に集中し、戦略を描く時間が削られています。",
     solution:
-      "累計160件の再生・成長案件で培った専門家と生成AIが政府・市場・自社データを常時計測し、数分で優先課題と想定インパクトを提示します。",
+      "累計160件の再生・成長案件で培った専門家と生成AIが外部指標と自社データを常時計測し、数分で優先課題と想定インパクトを提示します。",
     aiAction:
-      "AI: 政策・需給・財務データをクロールし、先読みシナリオとKPIアラートを自動生成。",
+      "AI: 市場・需給・財務データをクロールし、先読みシナリオとKPIアラートを自動生成。",
     expertAction:
       "専門家: 各業界の意思決定ログをもとに根拠を補強し、現場が迷わず動ける打ち手に整理。",
     impact: "粗利 +18%",
@@ -856,8 +856,8 @@ type ServiceFeature = {
 
 const serviceFeatures: ServiceFeature[] = [
   {
-    title: "政策・市場・自社データの統合",
-    description: "政策更新と自社KPIをひとつのデータ基盤へ同期。",
+    title: "外部シグナルと自社データの統合",
+    description: "市場更新と自社KPIをひとつのデータ基盤へ同期。",
     highlights: [
       "API連携とアップロードをまとめ、毎日の更新を自動化。",
       "役員会に必要な指標だけをダッシュボードへ抽出。",
@@ -959,7 +959,7 @@ const processSteps: ProcessStep[] = [
     icon: Database,
     accent: "sky",
     visual: aiAnalysisVisual,
-    visualAlt: "AIが経営データと政策情報を自動収集するダッシュボード",
+    visualAlt: "AIが経営データと外部情報を自動収集するダッシュボード",
     visualCaption: "連携と監査ログを自動化",
   },
   {
@@ -1106,7 +1106,7 @@ type DataFlowStage = {
 const dataFlowStages: DataFlowStage[] = [
   {
     label: "外部・社内データの取り込み",
-    description: "政策更新、統計、金融機関レポート、社内実績を安全に連携",
+    description: "市場動向、統計、金融機関レポート、社内実績を安全に連携",
     signal: "因果: 外部統計と社内KPIを統合し、意思決定の根拠をひとつに集約。",
     kpi: "データ鮮度 24h更新",
     icon: Database,
@@ -1304,7 +1304,7 @@ const representativeProfile: RepresentativeProfile = {
   achievements: [
     "金融機関との協調融資・資金繰り改善 80社",
     "生成AIを活用した経営計画DXプロジェクト 40件",
-    "事業再構築補助金・ものづくり補助金 採択支援 累計36件",
+    "成長投資支援プロジェクト 累計36件",
   ],
   affiliations: [
     "一般社団法人Lognowa 経営支援パートナー",
@@ -1376,7 +1376,7 @@ const pricingPlans: PricingPlan[] = [
       },
       {
         label: "推奨フェーズ",
-        description: "年商5,000万〜3億円、まずはAI補助で経営数値を可視化。",
+        description: "年商5,000万〜3億円、まずはAIサポートで経営数値を可視化。",
       },
     ],
     services: [
@@ -1500,7 +1500,7 @@ const expertCards: ExpertCard[] = [
   {
     name: "田中 圭",
     title: "元メガバンク法人融資担当",
-    bio: "大型調達案件を多数支援。資本政策と金融機関交渉に精通。",
+    bio: "大型調達案件を多数支援。資金戦略と金融機関交渉に精通。",
     photo: expertTanakaPhoto,
     credentials: [
       { icon: ShieldCheck, label: "融資審査1,200件サポート" },
@@ -1520,11 +1520,11 @@ const expertCards: ExpertCard[] = [
   {
     name: "斎藤 美咲",
     title: "財務会計・管理会計専門家",
-    bio: "補助金・助成金対応と財務モデリングの専門家。",
+    bio: "成長投資支援と財務モデリングの専門家。",
     photo: expertSaitoPhoto,
     credentials: [
       { icon: Award, label: "認定支援機関 10年" },
-      { icon: FileText, label: "補助金採択率 86%" },
+      { icon: FileText, label: "資金計画成功率 86%" },
     ],
   },
 ];
@@ -1557,7 +1557,7 @@ const resourceCards: ResourceCard[] = [
     description:
       "外部環境・資金繰り・組織の3領域を90日ごとに見直すためのフレームワークをまとめました。",
     highlights: [
-      "政策・補助金アップデートの確認項目",
+      "外部アップデートの確認項目",
       "キャッシュフロー感応度分析テンプレ",
       "レビュー会議の進行サンプルアジェンダ",
     ],
@@ -2223,7 +2223,7 @@ const Index = () => {
               </h1>
               <p className="hero-lead">
                 累計160件の再生・成長プロジェクトを率いた診断士と財務・会計の専門家が生成AIを操り、経営会議の論点を先回りで準備します。
-                AIが集約した政策・市場・自社データを専門家が金融審査レベルまで整え、社長が迷いなく決められる土台をつくります。
+                AIが集約した市場・競合・自社データを専門家が金融審査レベルまで整え、社長が迷いなく決められる土台をつくります。
               </p>
               <div className="hero-causality" aria-label="因果とロジックの整理" data-animate>
                 {heroCausality.map((item, index) => {
@@ -2359,7 +2359,7 @@ const Index = () => {
                   loading="lazy"
                 />
                 <figcaption>
-                  政策・市場データと財務指標を一画面で確認し、次の一手を即断する下地をつくります。
+                  市場・外部データと財務指標を一画面で確認し、次の一手を即断する下地をつくります。
                 </figcaption>
               </figure>
               <div className="hero-quick-form" data-animate>
@@ -2479,7 +2479,7 @@ const Index = () => {
                   <div className="hero-collab__panel hero-collab__panel--ai">
                     <span className="hero-collab__label">生成AI</span>
                     <p>
-                      政策・市場・自社データをクロス分析し、資金繰りと成長の複数シナリオを毎週ドラフト。
+                      市場・外部・自社データをクロス分析し、資金繰りと成長の複数シナリオを毎週ドラフト。
                       JAGGAER (2024) が示すように、膨大なデータから最適解を素早く抽出します。
                     </p>
                   </div>
@@ -2659,7 +2659,7 @@ const Index = () => {
               <span className="story-eyebrow">STORY 02</span>
               <h2 id="solution-heading">専門家と生成AIの共創で意思決定を加速</h2>
               <p>
-                生成AIが政策・市場・自社データを束ね、専門家と経営者がレビューと判断に集中します。blog.workday.comが紹介するリアルタイム分析のスピードと、note.comで語られるAI会議術の先見性を組み合わせ、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果につなげ、決裁の場で確信を持てる状態を生み出します。
+                生成AIが市場・外部・自社データを束ね、専門家と経営者がレビューと判断に集中します。blog.workday.comが紹介するリアルタイム分析のスピードと、note.comで語られるAI会議術の先見性を組み合わせ、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果につなげ、決裁の場で確信を持てる状態を生み出します。
               </p>
             </div>
             <div className="roles-grid">
@@ -2763,7 +2763,7 @@ const Index = () => {
             <div className="section-header" data-animate>
               <h2 id="features-heading">専門家×生成AIが支える5つの機能</h2>
               <ul className="section-intro">
-                <li>政策・市場・自社データを統合し、意思決定の質・速さ・先見性を底上げ。</li>
+                <li>市場・外部・自社データを統合し、意思決定の質・速さ・先見性を底上げ。</li>
                 <li>AIの出力は診断士がレビューし、料金と支援範囲を透明に開示します。</li>
               </ul>
             </div>
@@ -2772,7 +2772,7 @@ const Index = () => {
                 <span className="features-visual__badge">DECISION FLYWHEEL</span>
                 <h3>意思決定を加速する「データ→AI→専門家」の三層構造</h3>
                 <p>
-                  政策・市場・自社データを繋ぎ、AIがドラフトを作成。160件の案件で磨いた専門家チームが論点と信頼性を磨き込み、経営陣は判断と実行に集中できます。
+                  市場・外部・自社データを繋ぎ、AIがドラフトを作成。160件の案件で磨いた専門家チームが論点と信頼性を磨き込み、経営陣は判断と実行に集中できます。
                 </p>
                 <figure className="features-visual__figure">
                   <img
@@ -2781,7 +2781,7 @@ const Index = () => {
                     loading="lazy"
                   />
                   <figcaption>
-                    政策更新・市場指数・社内KPIをレイヤーで可視化し、意思決定の因果をワンビューで共有。
+                    外部更新・市場指数・社内KPIをレイヤーで可視化し、意思決定の因果をワンビューで共有。
                   </figcaption>
                 </figure>
                 <ul className="features-visual__legend">
