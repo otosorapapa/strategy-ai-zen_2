@@ -1001,8 +1001,6 @@ type ProcessStep = {
   pillar: string;
   outcome: string;
   description: string;
-  aiRole: string;
-  humanRole: string;
   icon: LucideIcon;
   accent: "mint" | "sky" | "citrus" | "navy";
   visual?: string;
@@ -1016,8 +1014,6 @@ const processSteps: ProcessStep[] = [
     pillar: "因果仮説を定義",
     outcome: "経営課題マップ＆優先KPIチャート",
     description: "現状の詰まりと達成したいKGIを整理。必要な関係者と進め方を決定します。",
-    aiRole: "ヒアリング内容を要約し課題マップを自動生成",
-    humanRole: "経営者・専門家が優先順位とスコープを決定",
     icon: ClipboardCheck,
     accent: "mint",
     visual: expertKobayashiPhoto,
@@ -1029,8 +1025,6 @@ const processSteps: ProcessStep[] = [
     pillar: "論理データ統制",
     outcome: "データ連携ガバナンス＆リスクチェックリスト",
     description: "社内外データの棚卸しと連携を安全に実施。NDA締結後にアクセス権を設定します。",
-    aiRole: "不足データのチェックリスト提示とフォーマット変換",
-    humanRole: "専門家が連携ルールを整備しガバナンスを確認",
     icon: Database,
     accent: "sky",
     visual: aiAnalysisVisual,
@@ -1042,8 +1036,6 @@ const processSteps: ProcessStep[] = [
     pillar: "スマートAIシナリオ",
     outcome: "ケース別KPIシミュレーション＆感度分析レポート",
     description: "AIが財務・需要・人材シナリオを生成し、複数ケースのKPIを比較。",
-    aiRole: "外部データ収集とシミュレーション、ドラフト作成",
-    humanRole: "経営者が仮説をレビューし意思決定基準を設定",
     icon: BrainCircuit,
     accent: "navy",
     visual: simulatorGuidanceVisual,
@@ -1055,8 +1047,6 @@ const processSteps: ProcessStep[] = [
     pillar: "納得性レビュー",
     outcome: "専門家監修の実行計画＆リスク補強ドキュメント",
     description: "診断士と財務会計・管理会計専門家が内容を審査。金融機関が求める根拠を補強します。",
-    aiRole: "フィードバックを反映しモデルと資料を更新",
-    humanRole: "専門家が審査目線で修正し実行計画を調整",
     icon: ShieldCheck,
     accent: "mint",
     visual: decisionIntelligenceVisual,
@@ -1068,8 +1058,6 @@ const processSteps: ProcessStep[] = [
     pillar: "デザインされた実行ガバナンス",
     outcome: "経営ダッシュボード＆定着化ロードマップ",
     description: "経営会議で最終判断を行い、ダッシュボードと四半期レビューに組み込みます。",
-    aiRole: "最終資料を整形し、リアルタイムのアラート設定を実施",
-    humanRole: "経営者が説明責任を担い、専門家が伴走して定着化",
     icon: CheckCircle2,
     accent: "citrus",
     visual: growthChartVisual,
@@ -1081,85 +1069,61 @@ const processSteps: ProcessStep[] = [
 type ProcessFlowStage = {
   stage: string;
   icon: LucideIcon;
+  summary: string;
+  highlights: string[];
   aiFocus: string;
   humanFocus: string;
   accent: "mint" | "sky" | "citrus" | "navy";
-  badge: string;
-  summary: string;
-  deliverable: string;
-  decisionWindow: string;
-  proofPoint: string;
-  checklist: string[];
 };
 
 const processTimeline: ProcessFlowStage[] = [
   {
     stage: "無料相談",
     icon: Layers3,
-    aiFocus: "AI: 議事録の自動要約とアクション抽出",
-    humanFocus: "経営者×診断士: 経営課題と制約条件を言語化",
-    accent: "mint",
-    badge: "因果性",
-    summary: "課題の発生源と成果指標を一枚に整理し、投資判断の前提を揃えます。",
-    deliverable: "経営課題マップ＆優先KPIサマリー",
-    decisionWindow: "48時間以内に次アクションを提示",
-    proofPoint: "AI議事録×診断士レビューで仮説を整合",
-    checklist: [
-      "現状KGIと阻害要因を定量整理",
-      "投資判断の制約条件を棚卸し",
-      "経営陣と共有する次回アジェンダを確定",
+    summary: "課題の発生源と成果指標を整理し、投資判断の前提を揃えます。",
+    highlights: [
+      "主要成果物: 経営課題マップと優先KPIサマリー",
+      "48時間以内に次アクションとスケジュールを提示",
     ],
+    aiFocus: "AI: 議事録を要約し論点を抽出",
+    humanFocus: "経営者×診断士: 目標と制約条件を共有",
+    accent: "mint",
   },
   {
     stage: "データ連携・AI分析",
     icon: BrainCircuit,
-    aiFocus: "AI: 外部データ取得・財務シミュレーション・リスク検証",
+    summary: "安全なデータ接続と分析設計で、優先すべき打ち手とリスクを明確にします。",
+    highlights: [
+      "主要成果物: データ接続設計書とリスク一覧",
+      "権限設計と監査ログでガバナンスを担保",
+    ],
+    aiFocus: "AI: 外部データ取得とシミュレーション",
     humanFocus: "経営者: 取捨選択と優先度の設定",
     accent: "sky",
-    badge: "論理性",
-    summary: "財務・需要シナリオを多角的に比較し、優先すべき打ち手とリスクを定量化します。",
-    deliverable: "データ接続設計書とリスク一覧表",
-    decisionWindow: "1週間で安全なデータ連携を完了",
-    proofPoint: "APIログと監査証跡でガバナンスを担保",
-    checklist: [
-      "不足データと取得ソースを特定",
-      "権限・暗号化ポリシーを合意",
-      "AI分析の前提条件を文書化",
-    ],
   },
   {
     stage: "専門家レビュー",
     icon: ShieldCheck,
-    aiFocus: "AI: 修正内容を反映し図表と想定問答を更新",
+    summary: "審査基準に沿って根拠を補強し、現場と金融が納得できる品質へ仕上げます。",
+    highlights: [
+      "主要成果物: 査問想定リストと改善提案",
+      "法務・倫理リスクまでカバーしたレビュー",
+    ],
+    aiFocus: "AI: 修正内容を反映し資料を更新",
     humanFocus: "診断士: 金融機関目線と実行プランを整備",
     accent: "navy",
-    badge: "納得性",
-    summary: "専門家が審査基準で根拠を補強し、現場と金融の双方が納得する品質へ仕上げます。",
-    deliverable: "融資・補助金想定の査問リストと改善案",
-    decisionWindow: "面談当日に改善案と確証資料を提示",
-    proofPoint: "専門家レビューで倫理・法務リスクを補正",
-    checklist: [
-      "金融機関視点の質問に回答準備",
-      "法令・倫理リスクを洗い出し補正",
-      "実行ロードマップと担当を確定",
-    ],
   },
   {
     stage: "意思決定",
     icon: CheckCircle2,
+    summary: "意思決定のストーリーを行動計画と同期し、運用までスムーズに移行します。",
+    highlights: [
+      "主要成果物: 経営計画書とダッシュボード運用ガイド",
+      "週次モニタリングとリスクアラートを自動化",
+    ],
     aiFocus: "AI: 最終資料と根拠データを整理",
     humanFocus: "経営者: 意思決定とステークホルダー説明",
     accent: "citrus",
-    badge: "スマート実行",
-    summary: "意思決定ストーリーを行動計画と同期し、四半期レビューまでの管理をスマート化します。",
-    deliverable: "経営計画書＆ダッシュボード運用ガイド",
-    decisionWindow: "四半期レビューと週次モニタリングを開始",
-    proofPoint: "KPIモニターとリスクアラートを自動化",
-    checklist: [
-      "経営会議資料と根拠データを紐付け",
-      "進捗レポートと仮説検証ループを設定",
-      "成長投資シナリオの判断ルールを明文化",
-    ],
   },
 ];
 
@@ -3229,10 +3193,9 @@ const Index = () => {
           <div className="container">
             <div className="section-header" data-animate>
               <h2 id="process-heading">導入の流れ（最短4週間）</h2>
-              <ul className="section-intro">
-                <li>無料相談→データ連携→AIレポート→専門家面談→計画書完成を明確化。</li>
-                <li>MIT Sloanの研究が示す「AIと人の協働に向けたプロセス再設計」を実装。</li>
-              </ul>
+              <p className="section-intro">
+                無料相談から計画書完成までを4ステップに凝縮し、最短ルートで全体像を把握できます。
+              </p>
             </div>
             <ol className="process-timeline">
               {processSteps.map((step, index) => {
@@ -3275,23 +3238,13 @@ const Index = () => {
                       </figure>
                     ) : null}
                     <p className="process-card__description">{step.description}</p>
-                    <div className="process-card__roles">
-                      <div className="process-card__role">
-                        <span className="process-card__role-label">AIの役割</span>
-                        <p>{step.aiRole}</p>
-                      </div>
-                      <div className="process-card__role">
-                        <span className="process-card__role-label">人の役割</span>
-                        <p>{step.humanRole}</p>
-                      </div>
-                    </div>
                   </article>
                   </li>
                 );
               })}
             </ol>
             <p className="process-note" data-animate>
-              MIT Sloan Management Reviewの研究（2023）は、AIと人の協働には業務プロセス全体の再設計が不可欠だと指摘しています。本プログラムではその知見を踏まえ、因果性・論理性・デザイン性・スマート性・納得性を一貫させる導入ステップを設計しています。
+              MIT Sloan Management Review（2023）は、AIと人の協働には業務プロセスの再設計が不可欠だと指摘しています。本プログラムはその知見をもとに、最短ルートの4ステップへ要点を整理しました。
             </p>
             <div className="process-assurances" data-animate>
               {processAssurances.map((assurance) => (
@@ -3316,29 +3269,13 @@ const Index = () => {
                         <FlowIcon />
                       </div>
                     </header>
-                    <span className="process-flow-item__badge">{item.badge}</span>
                     <h3>{item.stage}</h3>
                     <p className="process-flow-item__summary">{item.summary}</p>
-                    <dl className="process-flow-item__meta">
-                      <div>
-                        <dt>主要成果物</dt>
-                        <dd>{item.deliverable}</dd>
-                      </div>
-                      <div>
-                        <dt>意思決定の期限</dt>
-                        <dd>{item.decisionWindow}</dd>
-                      </div>
-                      <div>
-                        <dt>検証アプローチ</dt>
-                        <dd>{item.proofPoint}</dd>
-                      </div>
-                    </dl>
                     <ul className="process-flow-item__checklist">
-                      {item.checklist.map((point) => (
+                      {item.highlights.map((point) => (
                         <li key={point}>{point}</li>
                       ))}
                     </ul>
-                    <div className="process-flow-item__divider" aria-hidden="true" />
                     <div className="process-flow-item__roles" role="list">
                       <div role="listitem">
                         <span className="process-flow-pill process-flow-pill--ai">
