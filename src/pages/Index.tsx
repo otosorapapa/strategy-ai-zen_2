@@ -48,6 +48,8 @@ import expertSaitoPhoto from "@/assets/representative_.jpg";
 import expertTanakaPhoto from "@/assets/representative.jpg";
 import decisionIntelligenceVisual from "@/assets/financial-analysis.jpg";
 import featureFlywheelVisual from "@/assets/dashboard-preview.jpg";
+import aiAnalysisVisual from "@/assets/ai-analysis.jpg";
+import growthChartVisual from "@/assets/growth-chart.jpg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -1003,6 +1005,9 @@ type ProcessStep = {
   humanRole: string;
   icon: LucideIcon;
   accent: "mint" | "sky" | "citrus" | "navy";
+  visual?: string;
+  visualAlt?: string;
+  visualCaption?: string;
 };
 
 const processSteps: ProcessStep[] = [
@@ -1015,6 +1020,9 @@ const processSteps: ProcessStep[] = [
     humanRole: "経営者・専門家が優先順位とスコープを決定",
     icon: ClipboardCheck,
     accent: "mint",
+    visual: expertKobayashiPhoto,
+    visualAlt: "専門家が経営者とオンラインで課題整理を行う様子",
+    visualCaption: "30分で課題とKPIを一枚に",
   },
   {
     title: "データ入力・連携",
@@ -1025,6 +1033,9 @@ const processSteps: ProcessStep[] = [
     humanRole: "専門家が連携ルールを整備しガバナンスを確認",
     icon: Database,
     accent: "sky",
+    visual: aiAnalysisVisual,
+    visualAlt: "AIが経営データと政策情報を自動収集するダッシュボード",
+    visualCaption: "連携と監査ログを自動化",
   },
   {
     title: "AIレポート生成",
@@ -1035,6 +1046,9 @@ const processSteps: ProcessStep[] = [
     humanRole: "経営者が仮説をレビューし意思決定基準を設定",
     icon: BrainCircuit,
     accent: "navy",
+    visual: simulatorGuidanceVisual,
+    visualAlt: "生成AIが複数シナリオを比較する戦略シミュレーター画面",
+    visualCaption: "48時間で比較ケースを整備",
   },
   {
     title: "専門家との面談",
@@ -1045,6 +1059,9 @@ const processSteps: ProcessStep[] = [
     humanRole: "専門家が審査目線で修正し実行計画を調整",
     icon: ShieldCheck,
     accent: "mint",
+    visual: decisionIntelligenceVisual,
+    visualAlt: "専門家が金融機関向けの根拠資料をレビューしている画面",
+    visualCaption: "審査目線で根拠を補強",
   },
   {
     title: "計画書完成・実行",
@@ -1055,6 +1072,9 @@ const processSteps: ProcessStep[] = [
     humanRole: "経営者が説明責任を担い、専門家が伴走して定着化",
     icon: CheckCircle2,
     accent: "citrus",
+    visual: growthChartVisual,
+    visualAlt: "経営ダッシュボードで成長指標を確認しているグラフ",
+    visualCaption: "実行管理と成長KPIを同期",
   },
 ];
 
@@ -3230,30 +3250,42 @@ const Index = () => {
                         <StepIcon />
                       </div>
                     </div>
-                    <article className="process-card">
-                      <header className="process-card__header">
-                        <div className="process-card__title">
-                          <span className="process-card__step">STEP {String(index + 1).padStart(2, "0")}</span>
-                          <span className="process-card__eyebrow">{step.pillar}</span>
-                          <h3>{step.title}</h3>
-                        </div>
-                        <div className="process-card__outcome">
-                          <span>主要成果物</span>
-                          <strong>{step.outcome}</strong>
-                        </div>
-                      </header>
-                      <p className="process-card__description">{step.description}</p>
-                      <div className="process-card__roles">
-                        <div className="process-card__role">
-                          <span className="process-card__role-label">AIの役割</span>
-                          <p>{step.aiRole}</p>
-                        </div>
-                        <div className="process-card__role">
-                          <span className="process-card__role-label">人の役割</span>
-                          <p>{step.humanRole}</p>
-                        </div>
+                  <article className="process-card">
+                    <header className="process-card__header">
+                      <div className="process-card__title">
+                        <span className="process-card__step">STEP {String(index + 1).padStart(2, "0")}</span>
+                        <span className="process-card__eyebrow">{step.pillar}</span>
+                        <h3>{step.title}</h3>
                       </div>
-                    </article>
+                      <div className="process-card__outcome">
+                        <span>主要成果物</span>
+                        <strong>{step.outcome}</strong>
+                      </div>
+                    </header>
+                    {step.visual ? (
+                      <figure className="process-card__visual">
+                        <img
+                          src={step.visual}
+                          alt={step.visualAlt ?? `${step.title}のイメージ`}
+                          loading="lazy"
+                        />
+                        {step.visualCaption ? (
+                          <figcaption>{step.visualCaption}</figcaption>
+                        ) : null}
+                      </figure>
+                    ) : null}
+                    <p className="process-card__description">{step.description}</p>
+                    <div className="process-card__roles">
+                      <div className="process-card__role">
+                        <span className="process-card__role-label">AIの役割</span>
+                        <p>{step.aiRole}</p>
+                      </div>
+                      <div className="process-card__role">
+                        <span className="process-card__role-label">人の役割</span>
+                        <p>{step.humanRole}</p>
+                      </div>
+                    </div>
+                  </article>
                   </li>
                 );
               })}

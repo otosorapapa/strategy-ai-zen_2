@@ -4824,6 +4824,7 @@ svg {
   justify-items: center;
   gap: 16px;
   padding-top: 12px;
+  align-self: stretch;
 }
 
 .process-step__timeline::before {
@@ -4891,6 +4892,12 @@ svg {
     0 30px 60px -40px var(--process-accent-glow);
   display: grid;
   gap: 22px;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "header"
+    "visual"
+    "description"
+    "roles";
   overflow: hidden;
 }
 
@@ -4904,11 +4911,29 @@ svg {
   pointer-events: none;
 }
 
+
 .process-card__header,
 .process-card__description,
-.process-card__roles {
+.process-card__roles,
+.process-card__visual {
   position: relative;
   z-index: 1;
+}
+
+.process-card__header {
+  grid-area: header;
+}
+
+.process-card__visual {
+  grid-area: visual;
+}
+
+.process-card__description {
+  grid-area: description;
+}
+
+.process-card__roles {
+  grid-area: roles;
 }
 
 .process-card__header {
@@ -4917,6 +4942,38 @@ svg {
   gap: 24px;
   justify-content: space-between;
   align-items: flex-start;
+}
+
+.process-card__visual {
+  border-radius: 22px;
+  overflow: hidden;
+  min-height: 200px;
+  background:
+    linear-gradient(135deg, rgba(148, 163, 184, 0.12), rgba(255, 255, 255, 0.85)),
+    rgba(255, 255, 255, 0.6);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.65),
+    0 22px 44px -28px rgba(15, 23, 42, 0.35);
+}
+
+.process-card__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.05);
+}
+
+.process-card__visual figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 12px 18px;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(15, 23, 42, 0.68);
+  font-weight: 700;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.92) 62%, rgba(255, 255, 255, 0.98) 100%);
 }
 
 .process-card__title {
@@ -5411,6 +5468,21 @@ svg {
   }
 }
 
+@media (min-width: 1180px) {
+  .process-card {
+    grid-template-columns: minmax(0, 1.1fr) minmax(240px, 0.9fr);
+    grid-template-areas:
+      "header visual"
+      "description visual"
+      "roles visual";
+    align-items: start;
+  }
+
+  .process-card__visual {
+    min-height: 100%;
+  }
+}
+
 @media (max-width: 1180px) {
   .process-step {
     grid-template-columns: 120px minmax(0, 1fr);
@@ -5424,6 +5496,33 @@ svg {
 
   .process-card {
     padding: 30px 32px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .process-timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px 36px;
+  }
+
+  .process-timeline::before {
+    display: none;
+  }
+
+  .process-step {
+    grid-template-columns: 144px minmax(0, 1fr);
+  }
+
+  .process-step:nth-child(odd) {
+    grid-column: 1 / span 1;
+  }
+
+  .process-step:nth-child(even) {
+    grid-column: 2 / span 1;
+  }
+
+  .process-step__timeline::before {
+    display: none;
   }
 }
 
@@ -5485,6 +5584,15 @@ svg {
 
   .process-card__outcome {
     min-width: auto;
+  }
+
+  .process-card__visual {
+    min-height: 170px;
+  }
+
+  .process-card__visual figcaption {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
   }
 
   .process-card__roles {
