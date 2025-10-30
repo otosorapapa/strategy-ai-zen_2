@@ -1,6 +1,7 @@
 import {
   ChangeEvent,
   FormEvent,
+  Fragment,
   MouseEvent,
   useEffect,
   useMemo,
@@ -558,46 +559,183 @@ const outcomeFootnotes = [
   "※3 Itrex Group (2024) \"Real-Time Data Analytics for Business\" が指摘するリアルタイム分析による意思決定スピード向上を反映。",
 ];
 
+type ResponsibilityFlowStage = "cause" | "logic" | "impact";
+
+type ResponsibilityFlow = {
+  stage: ResponsibilityFlowStage;
+  label: string;
+  description: string;
+};
+
+type ResponsibilityFocus = {
+  label: string;
+  description: string;
+};
+
 type ResponsibilityColumn = {
   id: string;
   title: string;
-  summary: string;
-  detail: string;
-  points: string[];
+  subtitle: string;
+  premise: string;
+  flow: ResponsibilityFlow[];
+  deliverable: string;
+  focus: ResponsibilityFocus[];
+  metricLabel: string;
+  metricValue: string;
+  trustSignal: string;
   icon: LucideIcon;
   accent: "mint" | "sky" | "citrus";
+  image: string;
+  imageAlt: string;
+};
+
+const roleFlowStageMarkers: Record<ResponsibilityFlowStage, string> = {
+  cause: "因",
+  logic: "論",
+  impact: "果",
 };
 
 const responsibilityColumns: ResponsibilityColumn[] = [
   {
     id: "ai",
     title: "AIがやること",
-    summary: "市場・競合データを収集し、シミュレーションと資料ドラフトを生成。",
-    detail:
-      "最新の市場動向・需要統計・競合指標をクロールし、財務シミュレーションと想定問答、ドラフト資料を数分で提示します。",
-    points: ["外部データの自動収集", "複数シナリオの財務予測", "想定問答と資料ドラフト"],
+    subtitle: "兆候を逃さず論点を整える",
+    premise:
+      "市場・政策・需要の変化を常時クロールし、財務と需給指標を横串で整理。意思決定に必要な前提条件を秒で揃えます。",
+    flow: [
+      {
+        stage: "cause",
+        label: "兆候を捕捉",
+        description: "国内外120指標と業界ニュースを常時収集し、異常値と政策トピックを即時フラグ。",
+      },
+      {
+        stage: "logic",
+        label: "論点を構造化",
+        description: "資金繰り・需給・投資回収のシナリオをAIが比較し、優先すべき論点をダッシュボード化。",
+      },
+      {
+        stage: "impact",
+        label: "準備時間を圧縮",
+        description: "会議資料と想定問答を同時生成し、意思決定リードタイムを最短2週間へ短縮します。",
+      },
+    ],
+    deliverable:
+      "議題別の根拠付きダッシュボードと、決裁会議でそのまま使える想定問答・ドラフト資料を納品。",
+    focus: [
+      {
+        label: "外部データの自動収集",
+        description: "政策・需給・競合KPIをクロールし、経営会議前日に最新状況を同期。",
+      },
+      {
+        label: "複数シナリオの財務予測",
+        description: "キャッシュ感度と利益計画をモンテカルロで比較し、投資余力を可視化。",
+      },
+      {
+        label: "想定問答と資料ドラフト",
+        description: "金融機関・株主向けQ&Aを生成し、説得のストーリーラインを整備。",
+      },
+    ],
+    metricLabel: "判断準備の待ち時間",
+    metricValue: "-52%",
+    trustSignal: "University of Cincinnati Online 調査を根拠化",
     icon: Bot,
     accent: "mint",
+    image: aiAnalysisVisual,
+    imageAlt: "生成AIが経営指標を解析するダッシュボードの画面",
   },
   {
     id: "ceo",
     title: "経営者がやること",
-    summary: "最終判断と優先順位設定で意思決定をリード。",
-    detail:
-      "AIの提案を精査し、自社のリスク許容度とビジョンに合わせて意思決定。社内外ステークホルダーへの説明と合意形成を行います。",
-    points: ["重点施策の取捨選択", "リスクと投資配分の決定", "意思決定の説明責任"],
+    subtitle: "判断軸を決め合意をつくる",
+    premise:
+      "AIが提案する複数シナリオを見比べ、自社のミッションと資源配分に照らして意思決定の優先順位を定義します。",
+    flow: [
+      {
+        stage: "cause",
+        label: "判断軸を定義",
+        description: "ミッション・資金制約・人員状況を基準化し、どの価値創造を守るかを明文化。",
+      },
+      {
+        stage: "logic",
+        label: "投資配分を決断",
+        description: "AIレポートを基に想定リスクとROIを比較し、シナリオごとのGo/No-Goを最終決定。",
+      },
+      {
+        stage: "impact",
+        label: "組織へ展開",
+        description: "役員・現場・金融機関へ意思と根拠を提示し、実行責任者と合意形成を完了。",
+      },
+    ],
+    deliverable:
+      "優先順位付きのロードマップ、決裁コメント、ステークホルダー別の説明シナリオを更新。",
+    focus: [
+      {
+        label: "重点施策の取捨選択",
+        description: "事業ポートフォリオを俯瞰し、撤退と集中の基準を設定。",
+      },
+      {
+        label: "リスクと投資配分",
+        description: "資金繰り感度と連動した再投資・守りの配分を意思決定。",
+      },
+      {
+        label: "意思決定の説明責任",
+        description: "株主・社員・金融機関に向けたメッセージとアクションを整列。",
+      },
+    ],
+    metricLabel: "役員稼働の再配分",
+    metricValue: "+45h/月",
+    trustSignal: "Rossum (2024) の創造性向上レポートを参照",
     icon: Compass,
     accent: "citrus",
+    image: growthChartVisual,
+    imageAlt: "役員会で共有される成長シナリオのダッシュボード",
   },
   {
     id: "experts",
     title: "専門家がやること",
-    summary: "レビューと伴走支援で実行精度を担保。",
-    detail:
-      "金融機関・コンサル経験者がAI出力をレビューし、融資や投資審査で求められる水準に仕上げ、実行フェーズも伴走します。",
-    points: ["レビューとチューニング", "金融機関連携・交渉支援", "四半期伴走ミーティング"],
+    subtitle: "審査水準で確度を担保",
+    premise:
+      "金融機関・コンサル出身のチームがAIアウトプットをレビューし、第三者の眼で信頼性と実行性を保証します。",
+    flow: [
+      {
+        stage: "cause",
+        label: "根拠を精査",
+        description: "財務指標と外部統計を突合し、審査で問われる根拠を脚注付きで補強。",
+      },
+      {
+        stage: "logic",
+        label: "実行計画に落とし込む",
+        description: "四半期ロードマップとリスクヘッジ案を整備し、担当者ごとのタスクに分解。",
+      },
+      {
+        stage: "impact",
+        label: "第三者証明を付与",
+        description: "金融機関・投資家向け想定問答とレビュー署名で、説明責任を満たす資料に仕上げます。",
+      },
+    ],
+    deliverable:
+      "融資・投資審査で使える証跡付き計画書、実行チェックリスト、リスク逆転バッジを整備。",
+    focus: [
+      {
+        label: "レビューとチューニング",
+        description: "AI提案の仮定を検証し、係数とシナリオを現実値に補正。",
+      },
+      {
+        label: "金融機関連携・交渉支援",
+        description: "面談で問われる財務・事業の回答集と証跡フォルダを準備。",
+      },
+      {
+        label: "四半期伴走ミーティング",
+        description: "90日ごとに成果と仮説を検証し、次アクションを共に決定。",
+      },
+    ],
+    metricLabel: "審査通過率の目安",
+    metricValue: "+18pt",
+    trustSignal: "OECD (2024) 金融AIレポートの知見を活用",
     icon: Users2,
     accent: "sky",
+    image: expertKobayashiPhoto,
+    imageAlt: "専門家が経営者と資料を確認している様子",
   },
 ];
 
@@ -2672,31 +2810,67 @@ const Index = () => {
                     className={`role-card role-card--${column.accent}`}
                     data-animate
                     tabIndex={0}
+                    aria-labelledby={`${column.id}-role-title`}
                   >
-                    <span className="role-card__step" aria-hidden="true">
-                      STEP {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <div className="role-card__header">
+                    <header className="role-card__header">
                       <div className={`role-icon role-icon--${column.accent}`} aria-hidden="true">
                         <RoleIcon />
                       </div>
                       <div className="role-card__titles">
-                        <h3>{column.title}</h3>
-                        <p>{column.summary}</p>
+                        <span className="role-card__step" aria-hidden="true">
+                          STEP {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <h3 id={`${column.id}-role-title`}>{column.title}</h3>
+                        <p>{column.subtitle}</p>
                       </div>
+                      <div className="role-card__metric" aria-label={`${column.metricLabel} ${column.metricValue}`}>
+                        <span>{column.metricLabel}</span>
+                        <strong>{column.metricValue}</strong>
+                      </div>
+                    </header>
+                    <figure className="role-card__visual">
+                      <img src={column.image} alt={column.imageAlt} loading="lazy" />
+                      <figcaption>{column.trustSignal}</figcaption>
+                    </figure>
+                    <div className="role-card__premise">
+                      <p>{column.premise}</p>
                     </div>
-                    <div className="role-card__body">
-                      <span className="role-card__label">フォーカスする役割</span>
+                    <div className="role-card__flow" role="list">
+                      {column.flow.map((flowItem, flowIndex) => (
+                        <Fragment key={`${column.id}-${flowItem.label}`}>
+                          <div
+                            className={`role-card__flow-node role-card__flow-node--${flowItem.stage}`}
+                            role="listitem"
+                          >
+                            <span className="role-card__flow-stage" aria-hidden="true">
+                              {roleFlowStageMarkers[flowItem.stage]}
+                            </span>
+                            <h4>{flowItem.label}</h4>
+                            <p>{flowItem.description}</p>
+                          </div>
+                          {flowIndex < column.flow.length - 1 ? (
+                            <span className="role-card__flow-arrow" aria-hidden="true">
+                              <ArrowRight />
+                            </span>
+                          ) : null}
+                        </Fragment>
+                      ))}
+                    </div>
+                    <div className="role-card__deliverable">
+                      <span className="role-card__label">提供アウトプット</span>
+                      <p>{column.deliverable}</p>
+                    </div>
+                    <footer className="role-card__footer">
+                      <span className="role-card__label">経営者が押さえるチェックポイント</span>
                       <ul>
-                        {column.points.map((point) => (
-                          <li key={point}>{point}</li>
+                        {column.focus.map((focusItem) => (
+                          <li key={`${column.id}-${focusItem.label}`}>
+                            <strong>{focusItem.label}</strong>
+                            <p>{focusItem.description}</p>
+                          </li>
                         ))}
                       </ul>
-                    </div>
-                    <div className="role-detail">
-                      <span className="role-card__label">実行ポイント</span>
-                      <p>{column.detail}</p>
-                    </div>
+                    </footer>
                   </article>
                 );
               })}
