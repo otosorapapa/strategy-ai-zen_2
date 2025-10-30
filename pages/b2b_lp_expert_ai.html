@@ -544,71 +544,264 @@
         line-height: 1.55;
         color: rgba(226, 232, 240, 0.85);
       }
-      .insight-meta-grid {
+      .insight-meta-wrapper {
+        position: relative;
         display: grid;
-        gap: 1rem;
+        gap: clamp(1.8rem, 4vw, 3.2rem);
+        margin-top: clamp(1.5rem, 3vw, 2.6rem);
+      }
+      @media (min-width: 1024px) {
+        .insight-meta-wrapper {
+          grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+          align-items: stretch;
+        }
+      }
+      .meta-visual {
+        position: relative;
+        border-radius: 2rem;
+        padding: clamp(1.75rem, 3vw, 2.5rem);
+        background: linear-gradient(155deg, rgba(15, 23, 42, 0.85), rgba(30, 64, 175, 0.75));
+        border: 1px solid rgba(148, 197, 253, 0.35);
+        box-shadow: 0 32px 72px rgba(15, 23, 42, 0.28);
+        overflow: hidden;
+        isolation: isolate;
+        display: grid;
+        gap: 1.25rem;
+      }
+      .meta-visual::before {
+        content: '';
+        position: absolute;
+        inset: -22% auto auto -18%;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.35), transparent 70%);
+        opacity: 0.65;
+        pointer-events: none;
+      }
+      .meta-visual::after {
+        content: '';
+        position: absolute;
+        inset: auto -18% -28% auto;
+        width: 260px;
+        height: 260px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.32), transparent 68%);
+        opacity: 0.65;
+        pointer-events: none;
+      }
+      .meta-visual-badge {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.4rem 1.1rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(148, 197, 253, 0.5);
+        background: rgba(15, 23, 42, 0.32);
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: rgba(224, 242, 254, 0.85);
+        box-shadow: 0 16px 30px rgba(15, 23, 42, 0.35);
+      }
+      .meta-visual img {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        border-radius: 1.35rem;
+        object-fit: cover;
+        aspect-ratio: 16 / 10;
+        box-shadow: 0 28px 48px rgba(15, 23, 42, 0.4);
+      }
+      .meta-visual figcaption {
+        position: relative;
+        z-index: 1;
+        font-size: 0.82rem;
+        line-height: 1.55;
+        color: rgba(226, 232, 240, 0.85);
+      }
+      .meta-visual figcaption strong {
+        display: block;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: rgba(224, 242, 254, 0.95);
+        margin-bottom: 0.35rem;
+        letter-spacing: 0.02em;
+      }
+      .meta-visual-points {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      }
+      .meta-visual-points li {
+        display: grid;
+        gap: 0.2rem;
+        padding: 0.55rem 0.75rem;
+        border-radius: 1rem;
+        background: rgba(15, 23, 42, 0.45);
+        border: 1px solid rgba(148, 197, 253, 0.35);
+        font-size: 0.75rem;
+        color: rgba(226, 232, 240, 0.85);
+        letter-spacing: 0.02em;
+      }
+      .meta-visual-points span {
+        font-size: 0.7rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(125, 211, 252, 0.92);
+      }
+      .meta-visual-points strong {
+        font-weight: 700;
+        color: rgba(248, 250, 252, 0.95);
+      }
+      .insight-meta-grid {
+        position: relative;
+        display: grid;
+        gap: clamp(1.25rem, 2.5vw, 1.75rem);
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        align-content: start;
       }
       .insight-meta-card {
         position: relative;
-        border-radius: 1.4rem;
-        padding: 1.1rem 1.2rem 1.25rem;
-        background:
-          linear-gradient(160deg, rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.32));
-        border: 1px solid rgba(148, 163, 184, 0.32);
-        box-shadow: 0 20px 36px rgba(15, 23, 42, 0.22);
+        border-radius: 1.6rem;
+        padding: 1.3rem 1.4rem 1.45rem;
+        background: linear-gradient(165deg, rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.35));
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        box-shadow: 0 24px 48px rgba(15, 23, 42, 0.24);
         display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 0.75rem;
-        align-items: start;
+        gap: 0.85rem;
+        align-content: start;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        overflow: hidden;
+      }
+      .insight-meta-card::before {
+        content: attr(data-index);
+        position: absolute;
+        inset: 1.05rem auto auto 1.2rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(125, 211, 252, 0.85);
+        font-weight: 700;
       }
       .insight-meta-card::after {
         content: '';
         position: absolute;
-        inset: -18% auto auto 55%;
+        inset: auto -18% -28% auto;
         width: 160px;
         height: 160px;
         background: radial-gradient(circle, rgba(59, 130, 246, 0.22), transparent 68%);
         pointer-events: none;
       }
-      .insight-meta-icon {
+      .insight-meta-card:hover,
+      .insight-meta-card:focus-within {
+        transform: translateY(-6px);
+        box-shadow: 0 32px 68px rgba(15, 23, 42, 0.3);
+      }
+      .insight-meta-header {
         position: relative;
         z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        padding-top: 0.75rem;
+      }
+      .insight-meta-icon {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 2.6rem;
-        height: 2.6rem;
-        border-radius: 0.85rem;
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 0.95rem;
         background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(56, 189, 248, 0.45));
-        border: 1px solid rgba(148, 197, 253, 0.4);
+        border: 1px solid rgba(148, 197, 253, 0.45);
         color: rgba(224, 242, 254, 0.95);
         font-weight: 700;
-        font-size: 0.75rem;
-        letter-spacing: 0.16em;
+        font-size: 0.8rem;
+        letter-spacing: 0.18em;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.28);
       }
-      .insight-meta-content {
+      .insight-meta-label {
+        display: grid;
+        gap: 0.25rem;
+      }
+      .insight-meta-label span {
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: rgba(148, 197, 253, 0.8);
+        font-weight: 600;
+      }
+      .insight-meta-label h5 {
+        margin: 0;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: rgba(241, 245, 249, 0.95);
+        letter-spacing: 0.02em;
+      }
+      .insight-meta-lead {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        font-size: 0.84rem;
+        line-height: 1.65;
+        color: rgba(226, 232, 240, 0.88);
+      }
+      .insight-meta-lead strong {
+        color: rgba(224, 242, 254, 0.95);
+        font-weight: 700;
+      }
+      .insight-meta-list {
         position: relative;
         z-index: 1;
         display: grid;
         gap: 0.35rem;
-      }
-      .insight-meta-content h5 {
         margin: 0;
-        font-size: 0.95rem;
-        font-weight: 700;
-        color: rgba(241, 245, 249, 0.95);
-        letter-spacing: 0.01em;
+        padding: 0;
+        list-style: none;
       }
-      .insight-meta-content p {
-        margin: 0;
-        font-size: 0.82rem;
-        line-height: 1.6;
+      .insight-meta-list li {
+        display: flex;
+        gap: 0.35rem;
+        align-items: flex-start;
+        font-size: 0.78rem;
+        line-height: 1.55;
         color: rgba(226, 232, 240, 0.88);
       }
-      .insight-meta-content strong {
-        color: rgba(224, 242, 254, 0.95);
+      .insight-meta-list li::before {
+        content: '▹';
+        color: rgba(125, 211, 252, 0.85);
+        font-size: 0.78rem;
+        line-height: 1.4;
+      }
+      .insight-meta-metric {
+        position: relative;
+        z-index: 1;
+        margin-top: 0.25rem;
+        padding: 0.65rem 0.8rem;
+        border-radius: 0.9rem;
+        background: rgba(15, 23, 42, 0.45);
+        border: 1px solid rgba(148, 197, 253, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+      }
+      .insight-meta-metric span {
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(148, 197, 253, 0.82);
+        font-weight: 600;
+      }
+      .insight-meta-metric strong {
+        font-size: 0.95rem;
         font-weight: 700;
+        color: rgba(248, 250, 252, 0.95);
+        letter-spacing: 0.02em;
       }
       .insight-confidence {
         display: flex;
@@ -2187,42 +2380,148 @@
                   <p>攻めと守りを両立する複数案をAIが算出し、診断士が業界KPIと照合。実行計画とリスクヘッジを同梱します。</p>
                 </article>
               </div>
-              <div class="insight-meta-grid" aria-label="提供価値のフレーム">
-                <article class="insight-meta-card">
-                  <div class="insight-meta-icon">因</div>
-                  <div class="insight-meta-content">
-                    <h5>因果性</h5>
-                    <p><strong>政策×需要×収益</strong>の相互作用を連続シミュレーションし、投資判断の根拠をトレース可能なログで残します。</p>
-                  </div>
-                </article>
-                <article class="insight-meta-card">
-                  <div class="insight-meta-icon">論</div>
-                  <div class="insight-meta-content">
-                    <h5>論理性</h5>
-                    <p>PL・BS・CFの整合性をAIが検証し、中小企業診断士が金融機関基準でレビュー。意思決定のロジックを破綻なく構築。</p>
-                  </div>
-                </article>
-                <article class="insight-meta-card">
-                  <div class="insight-meta-icon">デ</div>
-                  <div class="insight-meta-content">
-                    <h5>デザイン性</h5>
-                    <p>光源と奥行きを意識した情報設計で、取締役・幹部が瞬時に優先順位を共有できるダッシュボードを提供します。</p>
-                  </div>
-                </article>
-                <article class="insight-meta-card">
-                  <div class="insight-meta-icon">智</div>
-                  <div class="insight-meta-content">
-                    <h5>スマート性</h5>
-                    <p>異常値検出と影響シミュレーションを自動化し、決裁に必要な論点のみを厳選。現場と経営の認識ズレを最小化。</p>
-                  </div>
-                </article>
-                <article class="insight-meta-card">
-                  <div class="insight-meta-icon">証</div>
-                  <div class="insight-meta-content">
-                    <h5>納得性</h5>
-                    <p>根拠ドキュメントと想定問答を同梱し、金融機関・株主への説明責任に耐えるストーリーを体系化します。</p>
-                  </div>
-                </article>
+              <div class="insight-meta-wrapper">
+                <figure class="meta-visual" aria-label="意思決定フレームの俯瞰図">
+                  <span class="meta-visual-badge">Dual Coding Map</span>
+                  <img
+                    src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80"
+                    alt="経営会議で意思決定フレームを確認するチーム"
+                    loading="lazy"
+                  />
+                  <figcaption>
+                    <strong>因果・論理・デザインを統合した一枚の設計図</strong>
+                    政策シグナルと自社KPIを重ねたフレームで、次の打ち手と投資リスクを同時に把握。経営者・幹部・金融機関が同じ視点を共有できます。
+                  </figcaption>
+                  <ul class="meta-visual-points">
+                    <li>
+                      <span>因果</span>
+                      <strong>Policy⇄Demand</strong>
+                      ドライバー別に影響を算出
+                    </li>
+                    <li>
+                      <span>論理</span>
+                      <strong>3表一体</strong>
+                      PL・BS・CFを同時監査
+                    </li>
+                    <li>
+                      <span>デザイン</span>
+                      <strong>3秒理解</strong>
+                      視線誘導付きで共有
+                    </li>
+                    <li>
+                      <span>スマート</span>
+                      <strong>常時アラート</strong>
+                      想定ズレを即通知
+                    </li>
+                    <li>
+                      <span>納得</span>
+                      <strong>Proof Stack</strong>
+                      想定問答と根拠資料を同梱
+                    </li>
+                  </ul>
+                </figure>
+                <div class="insight-meta-grid" aria-label="提供価値のフレーム">
+                  <article class="insight-meta-card" data-index="01">
+                    <div class="insight-meta-header">
+                      <div class="insight-meta-icon">因</div>
+                      <div class="insight-meta-label">
+                        <span>Causal Clarity</span>
+                        <h5>因果性</h5>
+                      </div>
+                    </div>
+                    <p class="insight-meta-lead">
+                      <strong>政策×需要×収益</strong>の相互作用を連続シミュレーションし、投資判断の根拠をトレース可能なログで残します。
+                    </p>
+                    <ul class="insight-meta-list">
+                      <li>AIが政策・需要の揺らぎを収益ドライバー別に再計算。</li>
+                      <li>専門家が仮説メモと決裁資料を同じ指標軸で整理。</li>
+                    </ul>
+                    <div class="insight-meta-metric">
+                      <span>Trace Log</span>
+                      <strong>100%可視化</strong>
+                    </div>
+                  </article>
+                  <article class="insight-meta-card" data-index="02">
+                    <div class="insight-meta-header">
+                      <div class="insight-meta-icon">論</div>
+                      <div class="insight-meta-label">
+                        <span>Logic Framework</span>
+                        <h5>論理性</h5>
+                      </div>
+                    </div>
+                    <p class="insight-meta-lead">
+                      PL・BS・CFの整合性をAIが検証し、中小企業診断士が金融機関基準でレビュー。意思決定のロジックを破綻なく構築します。
+                    </p>
+                    <ul class="insight-meta-list">
+                      <li>監査テンプレートで財務ストーリーの抜け漏れを自動点検。</li>
+                      <li>想定問答とアクションプランを会議用フォーマットに同期。</li>
+                    </ul>
+                    <div class="insight-meta-metric">
+                      <span>Review Window</span>
+                      <strong>48h監査</strong>
+                    </div>
+                  </article>
+                  <article class="insight-meta-card" data-index="03">
+                    <div class="insight-meta-header">
+                      <div class="insight-meta-icon">デ</div>
+                      <div class="insight-meta-label">
+                        <span>Design Impact</span>
+                        <h5>デザイン性</h5>
+                      </div>
+                    </div>
+                    <p class="insight-meta-lead">
+                      光源と奥行きを意識した情報設計で、取締役・幹部が瞬時に優先順位を共有できるダッシュボードを提供します。
+                    </p>
+                    <ul class="insight-meta-list">
+                      <li>視線誘導付きの意思決定カードで要点を3秒以内に理解。</li>
+                      <li>金融機関・株主向けスライドにそのまま展開可能。</li>
+                    </ul>
+                    <div class="insight-meta-metric">
+                      <span>Design Sprint</span>
+                      <strong>3秒理解</strong>
+                    </div>
+                  </article>
+                  <article class="insight-meta-card" data-index="04">
+                    <div class="insight-meta-header">
+                      <div class="insight-meta-icon">智</div>
+                      <div class="insight-meta-label">
+                        <span>Smart Ops</span>
+                        <h5>スマート性</h5>
+                      </div>
+                    </div>
+                    <p class="insight-meta-lead">
+                      異常値検出と影響シミュレーションを自動化し、決裁に必要な論点のみを厳選。現場と経営の認識ズレを最小化します。
+                    </p>
+                    <ul class="insight-meta-list">
+                      <li>リスク兆候を24時間以内に通知する自動アラートを整備。</li>
+                      <li>現場ヒアリングとAI解析を紐付け、打ち手の優先度を可視化。</li>
+                    </ul>
+                    <div class="insight-meta-metric">
+                      <span>Alert Lead</span>
+                      <strong>-70%リードタイム</strong>
+                    </div>
+                  </article>
+                  <article class="insight-meta-card" data-index="05">
+                    <div class="insight-meta-header">
+                      <div class="insight-meta-icon">証</div>
+                      <div class="insight-meta-label">
+                        <span>Proof Engine</span>
+                        <h5>納得性</h5>
+                      </div>
+                    </div>
+                    <p class="insight-meta-lead">
+                      根拠ドキュメントと想定問答を同梱し、金融機関・株主への説明責任に耐えるストーリーを体系化します。
+                    </p>
+                    <ul class="insight-meta-list">
+                      <li>融資・投資家対応に使える権威バッジと実績サマリーを整備。</li>
+                      <li>交渉フェーズの確認事項をチェックリスト化し合意形成を後押し。</li>
+                    </ul>
+                    <div class="insight-meta-metric">
+                      <span>Stakeholder OK</span>
+                      <strong>4.7 / 5評価</strong>
+                    </div>
+                  </article>
+                </div>
               </div>
               <div class="insight-confidence">
                 <span>📈 根拠トレーサビリティ付き</span>
