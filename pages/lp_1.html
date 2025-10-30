@@ -997,53 +997,293 @@
         color: rgba(17, 24, 39, 0.72);
       }
 
-      .features-grid {
+      .feature-section {
+        background: #fff;
+      }
+
+      .feature-section .section-heading {
+        gap: clamp(16px, 2.6vw, 28px);
+      }
+
+      .features-intro-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 0.5rem;
+      }
+
+      .features-intro-meta span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.4rem 0.85rem;
+        border-radius: 999px;
+        background: rgba(15, 118, 110, 0.1);
+        color: rgba(15, 23, 42, 0.7);
+        font-weight: 600;
+        font-size: 0.8rem;
+        letter-spacing: 0.04em;
+      }
+
+      .features-intro-meta span i {
+        color: rgba(13, 148, 136, 0.9);
+      }
+
+      .feature-diagram {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: clamp(24px, 4vw, 40px);
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: clamp(20px, 4vw, 48px);
+        align-items: center;
+        margin-bottom: clamp(32px, 6vw, 56px);
+      }
+
+      .feature-diagram-figure {
+        grid-column: span 5;
+        position: relative;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 28px 60px rgba(15, 23, 42, 0.12);
+      }
+
+      .feature-diagram-figure img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .feature-diagram-figure figcaption {
+        position: absolute;
+        inset: auto 0 0 0;
+        padding: 1.1rem 1.4rem;
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0) 0%, rgba(15, 23, 42, 0.78) 100%);
+        color: #f8fafc;
+        font-size: 0.82rem;
+        letter-spacing: 0.02em;
+      }
+
+      .feature-diagram-flow {
+        grid-column: span 7;
+        background: linear-gradient(145deg, rgba(236, 254, 255, 0.85), rgba(240, 253, 250, 0.9));
+        border-radius: var(--radius);
+        padding: clamp(24px, 3vw, 36px);
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.12);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-diagram-flow::after {
+        content: "";
+        position: absolute;
+        inset: auto -20% -40% auto;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.18), transparent 70%);
+        pointer-events: none;
+      }
+
+      .feature-flow-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: rgba(15, 23, 42, 0.9);
+        margin-bottom: 1.2rem;
+        letter-spacing: -0.01em;
+      }
+
+      .feature-diagram-flow svg {
+        width: 100%;
+        height: auto;
+        margin-bottom: 1.5rem;
+      }
+
+      .feature-flow-list {
+        display: grid;
+        gap: 0.85rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .feature-flow-list li {
+        display: flex;
+        gap: 0.85rem;
+        align-items: flex-start;
+        color: rgba(15, 23, 42, 0.82);
+      }
+
+      .feature-flow-list strong {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 2.4rem;
+        height: 2.4rem;
+        border-radius: 0.75rem;
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.35), rgba(13, 148, 136, 0.25));
+        color: rgba(15, 23, 42, 0.9);
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      .feature-flow-list span {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 0.15rem;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: clamp(20px, 4vw, 36px);
       }
 
       .feature-card {
-        background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(236, 253, 245, 0.85));
+        grid-column: span 4;
+        background: linear-gradient(160deg, rgba(255, 255, 255, 0.96), rgba(236, 253, 245, 0.92));
         border-radius: var(--radius);
-        padding: clamp(32px, 3.6vw, 42px);
-        border: 1px solid rgba(148, 163, 184, 0.22);
+        padding: clamp(28px, 3.2vw, 38px);
+        border: 1px solid rgba(148, 163, 184, 0.25);
         position: relative;
         overflow: hidden;
-        box-shadow: 0 26px 46px rgba(15, 23, 42, 0.07);
+        box-shadow: 0 28px 58px rgba(15, 23, 42, 0.08);
+        display: grid;
+        gap: 1rem;
       }
 
-      .feature-card::after {
+      .feature-card--span6 {
+        grid-column: span 6;
+      }
+
+      .feature-card::before {
         content: "";
         position: absolute;
-        inset: auto auto 0 0;
-        width: 140px;
-        height: 140px;
-        background: radial-gradient(circle, rgba(249, 115, 22, 0.16), transparent 70%);
-        transform: translate(-30%, 30%);
+        inset: 0 0 auto 0;
+        height: 4px;
+        background: linear-gradient(120deg, rgba(14, 165, 233, 0.85), rgba(99, 102, 241, 0.65));
       }
 
       .feature-card h3 {
-        margin-top: 0;
-        font-size: 1.2rem;
+        margin: 0;
+        font-size: 1.22rem;
+        letter-spacing: -0.01em;
+        position: relative;
+        z-index: 1;
+      }
+
+      .feature-card p {
+        margin: 0;
+        color: rgba(15, 23, 42, 0.72);
+        line-height: 1.65;
+        position: relative;
+        z-index: 1;
       }
 
       .feature-metric {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 14px;
-        background: linear-gradient(120deg, rgba(104, 197, 168, 0.25), rgba(249, 115, 22, 0.18));
-        color: var(--primary);
-        border-radius: 999px;
+        display: flex;
+        align-items: baseline;
+        gap: 0.45rem;
+        font-size: 1.8rem;
         font-weight: 700;
-        margin: 18px 0;
+        color: rgba(14, 116, 144, 0.95);
+        letter-spacing: -0.02em;
+        position: relative;
+        z-index: 1;
+      }
+
+      .feature-metric small {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: rgba(15, 23, 42, 0.6);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
       }
 
       .feature-card ul {
-        padding-left: 20px;
+        list-style: none;
         margin: 0;
-        color: rgba(17, 24, 39, 0.75);
+        padding: 0;
+        display: grid;
+        gap: 0.65rem;
+        position: relative;
+        z-index: 1;
+        color: rgba(15, 23, 42, 0.72);
+      }
+
+      .feature-card li {
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-start;
+      }
+
+      .feature-card li i {
+        color: rgba(14, 165, 233, 0.85);
+        margin-top: 0.15rem;
+      }
+
+      .feature-proof {
+        margin-top: clamp(32px, 6vw, 56px);
+        display: grid;
+        gap: 1rem;
+      }
+
+      .feature-proof strong {
+        font-size: 0.95rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: rgba(15, 23, 42, 0.65);
+      }
+
+      .feature-proof-logos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.4rem;
+        align-items: center;
+        color: rgba(15, 23, 42, 0.55);
+        font-size: 0.82rem;
+        letter-spacing: 0.08em;
+      }
+
+      .feature-proof-logos span {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.4rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(226, 232, 240, 0.5);
+      }
+
+      @media (max-width: 1023px) {
+        .feature-diagram {
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .feature-diagram-figure,
+        .feature-diagram-flow {
+          grid-column: auto;
+        }
+
+        .feature-grid {
+          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        }
+
+        .feature-card,
+        .feature-card--span6 {
+          grid-column: auto;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .features-intro-meta {
+          gap: 0.45rem;
+        }
+
+        .feature-diagram-flow svg {
+          margin-bottom: 1.1rem;
+        }
+
+        .feature-metric {
+          font-size: 1.5rem;
+        }
       }
 
       .data-flow-section {
@@ -2419,45 +2659,145 @@
         </div>
       </section>
 
-      <section id="features" class="fade-in" style="background: #fff;">
+      <section id="features" class="feature-section fade-in">
         <div class="container">
           <div class="section-heading">
-            <h2>4つの生成AIコア機能で、経営計画の完成度とスピードを両立</h2>
-            <p>単なる文章生成ではなく、データソース連携・財務モデル化・専門家による最終レビューまでを一気通貫で支援します。</p>
+            <h2>経営改善で鍛えた専門家×生成AIが支える5つの機能</h2>
+            <p>
+              因果関係の把握から意思決定ロジック、役員説明資料まで。経営者の判断を速く・深く・納得感高く導くために、生成AIと専
+              門家が一気通貫で連携します。
+            </p>
+            <div class="features-intro-meta" role="list">
+              <span role="listitem"><i class="fa-solid fa-diagram-project"></i>因果性トレース</span>
+              <span role="listitem"><i class="fa-solid fa-scale-balanced"></i>論理検証</span>
+              <span role="listitem"><i class="fa-solid fa-palette"></i>デザイン監修</span>
+              <span role="listitem"><i class="fa-solid fa-robot"></i>スマート自動化</span>
+              <span role="listitem"><i class="fa-solid fa-circle-check"></i>納得性レビュー</span>
+            </div>
           </div>
-          <div class="features-grid">
-            <article class="feature-card">
-              <h3><i class="fa-solid fa-magnifying-glass-chart"></i> 市場・競合インサイト自動生成</h3>
-              <div class="feature-metric"><i class="fa-solid fa-arrow-trend-up"></i>リサーチ時間 68%削減</div>
+          <div class="feature-diagram">
+            <figure class="feature-diagram-figure">
+              <img
+                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
+                alt="経営チームがデータウォールを見ながら戦略の因果関係を議論している様子"
+                loading="lazy"
+              />
+              <figcaption>意思決定の前提となるデータと仮説を1画面に集約。会議の冒頭で視線を合わせられるように構成しています。</figcaption>
+            </figure>
+            <div class="feature-diagram-flow" aria-labelledby="feature-flow-title">
+              <h3 id="feature-flow-title" class="feature-flow-title">AI×専門家の因果連鎖フレーム</h3>
+              <svg viewBox="0 0 520 160" role="presentation" focusable="false">
+                <defs>
+                  <linearGradient id="featureArrow" x1="0" x2="1" y1="0.5" y2="0.5">
+                    <stop offset="0%" stop-color="rgba(14,165,233,0.6)" />
+                    <stop offset="100%" stop-color="rgba(59,130,246,0.85)" />
+                  </linearGradient>
+                  <linearGradient id="featureCircle" x1="0" x2="0" y1="1" y2="0">
+                    <stop offset="0%" stop-color="rgba(236,254,255,0.9)" />
+                    <stop offset="100%" stop-color="rgba(224,242,254,0.6)" />
+                  </linearGradient>
+                  <marker id="arrowhead" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+                    <polygon points="0 0, 12 6, 0 12" fill="url(#featureArrow)" />
+                  </marker>
+                </defs>
+                <g stroke="rgba(148, 163, 184, 0.45)" stroke-width="2" fill="none">
+                  <path d="M140 80 H220" marker-end="url(#arrowhead)" />
+                  <path d="M320 80 H400" marker-end="url(#arrowhead)" />
+                </g>
+                <g>
+                  <circle cx="80" cy="80" r="60" fill="url(#featureCircle)" stroke="rgba(14,165,233,0.35)" stroke-width="3" />
+                  <circle cx="280" cy="80" r="60" fill="url(#featureCircle)" stroke="rgba(14,165,233,0.35)" stroke-width="3" />
+                  <circle cx="480" cy="80" r="60" fill="url(#featureCircle)" stroke="rgba(14,165,233,0.35)" stroke-width="3" />
+                  <text x="80" y="72" text-anchor="middle" font-size="18" fill="rgba(15,23,42,0.85)" font-weight="600">データ</text>
+                  <text x="80" y="102" text-anchor="middle" font-size="13" fill="rgba(15,23,42,0.65)">政策・市場・現場</text>
+                  <text x="280" y="72" text-anchor="middle" font-size="18" fill="rgba(15,23,42,0.85)" font-weight="600">因果モデル</text>
+                  <text x="280" y="102" text-anchor="middle" font-size="13" fill="rgba(15,23,42,0.65)">AI推論×専門家検証</text>
+                  <text x="480" y="72" text-anchor="middle" font-size="18" fill="rgba(15,23,42,0.85)" font-weight="600">意思決定</text>
+                  <text x="480" y="102" text-anchor="middle" font-size="13" fill="rgba(15,23,42,0.65)">会議・金融機関共有</text>
+                </g>
+              </svg>
+              <ul class="feature-flow-list">
+                <li>
+                  <strong>01</strong>
+                  <div>
+                    <span>クロスデータ収集</span>
+                    政策・市場・自社KPIを1時間ごとに集約し、異常値と遅行指標のギャップをアラート化。
+                  </div>
+                </li>
+                <li>
+                  <strong>02</strong>
+                  <div>
+                    <span>因果モデル生成</span>
+                    生成AIが施策と財務影響の関係式を提示。診断士が反証と根拠文脈を補強し、論理破綻を排除します。
+                  </div>
+                </li>
+                <li>
+                  <strong>03</strong>
+                  <div>
+                    <span>意思決定パッケージ</span>
+                    会議用ストーリーボード・想定問答・金融機関向け説明資料を同梱し、納得性を担保した提案を即共有。
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="feature-grid">
+            <article class="feature-card" aria-label="因果マッピングコンソール">
+              <h3><i class="fa-solid fa-network-wired"></i> 因果マッピングコンソール</h3>
+              <p>政策変更・需給指数・社内データをAIが自動で因果マップ化。経営課題の根と枝を見える化します。</p>
+              <div class="feature-metric"><span>70%削減</span><small>RESEARCH TIME</small></div>
               <ul>
-                <li>最新ニュース、統計、SNSの声をクロールし、業界別の機会と脅威をレポート化</li>
-                <li>競合と自社の差異をレーダーチャートで可視化し、差別化戦略を提案</li>
+                <li><i class="fa-solid fa-diagram-project"></i><span>最新ニュース×社内KPIを自動クロス集計し、影響度順に提示。</span></li>
+                <li><i class="fa-solid fa-square-poll-vertical"></i><span>重回帰とベイジアンネットで根因をスコアリング。</span></li>
               </ul>
             </article>
-            <article class="feature-card">
-              <h3><i class="fa-solid fa-sack-dollar"></i> 売上・収支予測エンジン</h3>
-              <div class="feature-metric"><i class="fa-solid fa-chart-line"></i>シナリオ比較 3パターン自動生成</div>
+            <article class="feature-card" aria-label="論理検証エンジン">
+              <h3><i class="fa-solid fa-scale-balanced"></i> 論理検証エンジン</h3>
+              <p>PL・BS・CFの整合性をAIが検証し、診断士が金融機関基準でレビュー。反証例を提示して意思決定の筋道を補強します。</p>
+              <div class="feature-metric"><span>48H</span><small>TO APPROVAL DECK</small></div>
               <ul>
-                <li>PL・CF・BSを連動させた5年分の財務モデルを自動作成</li>
-                <li>投資・採用計画の調整によるROIや回収期間の変化を即時反映</li>
+                <li><i class="fa-solid fa-chart-area"></i><span>三表連動モデルで施策別キャッシュ影響を48時間以内に算出。</span></li>
+                <li><i class="fa-solid fa-clipboard-list"></i><span>想定問答・反論材料を自動生成し、会議前に合意形成。</span></li>
               </ul>
             </article>
-            <article class="feature-card">
-              <h3><i class="fa-solid fa-pen-nib"></i> 経営計画ドラフト自動構成</h3>
-              <div class="feature-metric"><i class="fa-solid fa-file-pen"></i>15章構成を自動生成</div>
+            <article class="feature-card" aria-label="デザインストーリーボード">
+              <h3><i class="fa-solid fa-clapperboard"></i> デザインストーリーボード</h3>
+              <p>役員・金融機関向けのストーリーラインをテンプレ化。視線誘導と余白設計を整えたスライドを即座に出力します。</p>
+              <div class="feature-metric"><span>80%削減</span><small>DECK REDRAFT</small></div>
               <ul>
-                <li>経営理念からリスク管理、行動計画までをテンプレート化し、文章の骨子をドラフト</li>
-                <li>金融機関・投資家向けに求められる指標・根拠を網羅</li>
+                <li><i class="fa-solid fa-eye"></i><span>ヒートマップ検証済みのレイアウトで集中してほしい数値を強調。</span></li>
+                <li><i class="fa-solid fa-layer-group"></i><span>Before/After図・CTA誘導矢印を自動生成し、議論の視線をコントロール。</span></li>
               </ul>
             </article>
-            <article class="feature-card">
-              <h3><i class="fa-solid fa-user-tie"></i> 専門家レビュー＆伴走</h3>
-              <div class="feature-metric"><i class="fa-solid fa-person-chalkboard"></i>修正提案 平均23件</div>
+            <article class="feature-card feature-card--span6" aria-label="スマートモニタリング・アラート">
+              <h3><i class="fa-solid fa-wave-square"></i> スマートモニタリング・アラート</h3>
+              <p>週次レポートと日次モニタリングをAIが担当。異常検知後は専門家が打ち手シミュレーションを添えて通知します。</p>
+              <div class="feature-metric"><span>＋18pt</span><small>EXEC REVIEW SCORE</small></div>
               <ul>
-                <li>中小企業診断士・財務専門家がドラフトを精査し、審査想定Q&Aを整備</li>
-                <li>提出後もローリング更新を支援し、外部環境変化に合わせた改訂を伴走</li>
+                <li><i class="fa-solid fa-bell"></i><span>意思決定に関係する差分のみを抽出し、Slack / Teamsへ即配信。</span></li>
+                <li><i class="fa-solid fa-gauge"></i><span>政策・市況の変化を吸収できるバッファ指標を可視化。</span></li>
+                <li><i class="fa-solid fa-user-gear"></i><span>経営陣が知りたい論点を週次ハイライトで整理し、会議に備えられる状態をキープ。</span></li>
               </ul>
             </article>
+            <article class="feature-card feature-card--span6" aria-label="納得性レビュー・証跡パック">
+              <h3><i class="fa-solid fa-shield-halved"></i> 納得性レビュー・証跡パック</h3>
+              <p>根拠資料と証跡リンクを体系化し、社内外の説明責任をクリア。第三者評価を組み込んだトラスト・シグナルで安心感を提供します。</p>
+              <div class="feature-metric"><span>1/2</span><small>RISK SIGN-OFF TIME</small></div>
+              <ul>
+                <li><i class="fa-solid fa-file-shield"></i><span>監査ログと改訂履歴を自動保管し、金融機関・株主とのやり取りに即応。</span></li>
+                <li><i class="fa-solid fa-quote-left"></i><span>フォト・テスティモニアル＋KPIを組み合わせた証跡テンプレを提供。</span></li>
+                <li><i class="fa-solid fa-handshake-angle"></i><span>行政認定・補助金採択実績を挟み込み、導入への心理的ハードルを低減。</span></li>
+              </ul>
+            </article>
+          </div>
+          <div class="feature-proof">
+            <strong>AUTHORITY STACK</strong>
+            <div class="feature-proof-logos">
+              <span><i class="fa-solid fa-building-columns"></i>福岡県DX推進事業パートナー</span>
+              <span><i class="fa-solid fa-certificate"></i>中小企業診断士協会</span>
+              <span><i class="fa-solid fa-newspaper"></i>日本経済新聞 掲載企業</span>
+              <span><i class="fa-solid fa-user-check"></i>導入企業27社の推奨バッジ</span>
+            </div>
           </div>
         </div>
       </section>
