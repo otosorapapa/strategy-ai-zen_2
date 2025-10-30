@@ -18,10 +18,36 @@
             <p class="hero-sub">
               3ヶ月で未来収支の見える化と意思決定シナリオを整備、6ヶ月で粗利率・回転率・キャッシュを同時改善。初回相談は無料、オンライン可。
             </p>
+            <div class="hero-proof">
+              <div>
+                <span class="hero-proof-label">因果ロジック</span>
+                <p>AIが政策・市況・自社指標のズレをトリアージし、「なぜ」を可視化。</p>
+              </div>
+              <div>
+                <span class="hero-proof-label">意思決定スピード</span>
+                <p>会議資料と代替案を同時生成。判断に迷うポイントへ視線誘導。</p>
+              </div>
+              <div>
+                <span class="hero-proof-label">実務への落とし込み</span>
+                <p>専門家伴走で行動計画化。成果指標までダッシュボード連動。</p>
+              </div>
+            </div>
             <ul class="hero-metrics">
-              <li><strong>-67%</strong><span>意思決定準備にかかる時間</span></li>
-              <li><strong>+1.75ヵ月</strong><span>手元資金の平均改善幅</span></li>
-              <li><strong>92%</strong><span>経営会議満足度（役員アンケート）</span></li>
+              <li>
+                <strong>-67%</strong>
+                <span>意思決定準備にかかる時間</span>
+                <small>（導入3ヶ月平均）</small>
+              </li>
+              <li>
+                <strong>+1.75ヵ月</strong>
+                <span>手元資金の平均改善幅</span>
+                <small>（財務KPI分析より）</small>
+              </li>
+              <li>
+                <strong>92%</strong>
+                <span>経営会議満足度</span>
+                <small>（役員アンケート）</small>
+              </li>
             </ul>
             <div class="cta-group">
               <button class="btn-primary" data-cta="consult">無料で相談する</button>
@@ -32,10 +58,12 @@
               <span>九州経済産業局パートナー</span>
               <span>日経BizGate掲載</span>
               <span>JBA DX認証</span>
+              <span>福岡DX推進拠点 登録支援者</span>
             </div>
           </div>
           <figure class="hero-visual">
             <img src="./assets/decision-dashboard.svg" alt="経営ダッシュボードのモックアップ" loading="lazy" />
+            <figcaption>視線の誘導で次に確認すべき KPI を指し示すUIモック</figcaption>
           </figure>
         </div>
       </div>
@@ -70,31 +98,37 @@
         <p class="section-lead">
           因果仮説を先に固め、指標の異常検知から打ち手の優先度までを一つの画面に集約。経営者が「何を決めれば良いか」を瞬時に掴める情報設計です。
         </p>
-        <div class="insight-grid">
-          <article>
-            <h3>01. コンディションレポート</h3>
-            <p>収益性・安全性・成長性をマルチインジケーターでスコア化。視線誘導ラインで次に読むべき項目を提示します。</p>
-            <ul>
-              <li>最新の政策・市況データと自社データをオーバーレイ</li>
-              <li>リスク閾値は取締役会で合意した基準を設定</li>
-            </ul>
-          </article>
-          <article>
-            <h3>02. シナリオファブリック</h3>
-            <p>AIが複数の資金シナリオを生成し、専門家が実行可能性と副作用を添削。メリット・デメリットが色面で対比されます。</p>
-            <ul>
-              <li>粗利とキャッシュの同時最適化をガイド</li>
-              <li>意思決定に必要な追加情報を自動抽出</li>
-            </ul>
-          </article>
-          <article>
-            <h3>03. アクションスプリント</h3>
-            <p>部門別の優先アクションを2週間スプリントに整理。担当者・達成指標・期待インパクトが一目で把握できます。</p>
-            <ul>
-              <li>Slack/Teams連携で進捗を自動収集</li>
-              <li>成果サマリーが次回会議資料に即反映</li>
-            </ul>
-          </article>
+        <div class="insight-layout">
+          <figure class="insight-visual">
+            <img src="./assets/causal-loop.svg" alt="指標・因果関係・意思決定の流れ図" loading="lazy" />
+            <figcaption>因果仮説→リスク検知→アクションの三位一体構造</figcaption>
+          </figure>
+          <div class="insight-grid">
+            <article>
+              <h3>01. コンディションレポート</h3>
+              <p>収益性・安全性・成長性をマルチインジケーターでスコア化。視線誘導ラインで次に読むべき項目を提示します。</p>
+              <ul>
+                <li>最新の政策・市況データと自社データをオーバーレイ</li>
+                <li>リスク閾値は取締役会で合意した基準を設定</li>
+              </ul>
+            </article>
+            <article>
+              <h3>02. シナリオファブリック</h3>
+              <p>AIが複数の資金シナリオを生成し、専門家が実行可能性と副作用を添削。メリット・デメリットが色面で対比されます。</p>
+              <ul>
+                <li>粗利とキャッシュの同時最適化をガイド</li>
+                <li>意思決定に必要な追加情報を自動抽出</li>
+              </ul>
+            </article>
+            <article>
+              <h3>03. アクションスプリント</h3>
+              <p>部門別の優先アクションを2週間スプリントに整理。担当者・達成指標・期待インパクトが一目で把握できます。</p>
+              <ul>
+                <li>Slack/Teams連携で進捗を自動収集</li>
+                <li>成果サマリーが次回会議資料に即反映</li>
+              </ul>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -256,40 +290,49 @@
 
       <section class="plans" id="plans">
         <h2>料金・プラン比較</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>プラン</th>
-              <th>月額費用（税別）</th>
-              <th>主な機能</th>
-              <th>サポート</th>
-              <th>期待ROI</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>ライト</td>
-              <td>120,000円</td>
-              <td>AIダッシュボード、月次レポート</td>
-              <td>チャットサポート48時間以内</td>
-              <td>資料作成工数▲30%</td>
-            </tr>
-            <tr>
-              <td>プロ</td>
-              <td>180,000円</td>
-              <td>AIシナリオ生成、月1回伴走ワークショップ</td>
-              <td>専任コンサル窓口、月次会議同席</td>
-              <td>意思決定時間▲40%、粗利率+3pt</td>
-            </tr>
-            <tr>
-              <td>エンタープライズ</td>
-              <td>280,000円〜</td>
-              <td>部門別KPI統合、金融機関連携サポート</td>
-              <td>週次レビュー、人材育成トレーニング</td>
-              <td>キャッシュ創出+1.5ヶ月、在庫回転+30%</td>
-            </tr>
-          </tbody>
-        </table>
+        <figure class="plan-visual">
+          <img src="./assets/plan-snapshot.svg" alt="推奨プランの比較スナップ" loading="lazy" />
+          <figcaption>推奨プラン：最短導入とROI確度のバランスが取れる「プロプラン」</figcaption>
+        </figure>
+        <div class="plan-grid">
+          <article class="plan-card">
+            <header>
+              <h3>ライト</h3>
+              <p class="price">月額 120,000円</p>
+            </header>
+            <ul>
+              <li>AIダッシュボード / 月次レポート</li>
+              <li>チャットサポート（48時間以内）</li>
+              <li>資料作成工数▲30%</li>
+            </ul>
+            <p class="roi-note">スモールスタートで基礎指標を高速整備</p>
+          </article>
+          <article class="plan-card popular" aria-label="推奨プラン">
+            <header>
+              <span class="plan-badge">推奨</span>
+              <h3>プロ</h3>
+              <p class="price">月額 180,000円</p>
+            </header>
+            <ul>
+              <li>AIシナリオ生成 / 伴走ワークショップ（月1）</li>
+              <li>専任コンサル窓口 / 月次会議同席</li>
+              <li>意思決定時間▲40% / 粗利率+3pt</li>
+            </ul>
+            <p class="roi-note">最短で効果実感。意思決定と実行をワンストップ支援</p>
+          </article>
+          <article class="plan-card">
+            <header>
+              <h3>エンタープライズ</h3>
+              <p class="price">月額 280,000円〜</p>
+            </header>
+            <ul>
+              <li>部門別KPI統合 / 金融機関連携サポート</li>
+              <li>週次レビュー / 人材育成トレーニング</li>
+              <li>キャッシュ創出+1.5ヶ月 / 在庫回転+30%</li>
+            </ul>
+            <p class="roi-note">マルチ拠点・大規模組織の変革を伴走</p>
+          </article>
+        </div>
       </section>
 
       <section class="faq" id="faq">
@@ -323,6 +366,20 @@
           <button type="submit" class="btn-primary">無料で相談する</button>
         </form>
         <p class="microcopy">送信直後に資料URLと日程調整リンクをお送りします。</p>
+        <div class="assurance-stack" aria-label="リスク逆転の証明">
+          <div>
+            <strong>全額返金保証</strong>
+            <span>初月で成果が見えない場合はご請求いたしません。</span>
+          </div>
+          <div>
+            <strong>NDA標準締結</strong>
+            <span>専門弁護士監修の秘密保持契約を即日対応。</span>
+          </div>
+          <div>
+            <strong>導入前診断無料</strong>
+            <span>財務・業務フローを診断し投資対効果を定量化。</span>
+          </div>
+        </div>
       </section>
     </main>
 

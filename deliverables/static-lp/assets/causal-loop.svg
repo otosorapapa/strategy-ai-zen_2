@@ -1,0 +1,60 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="16" y="16" width="608" height="388" rx="32" fill="url(#cardGradient)" />
+  <g filter="url(#shadow)">
+    <rect x="64" y="72" width="160" height="120" rx="20" fill="white"/>
+    <text x="144" y="120" text-anchor="middle" fill="#1F3A5F" font-family="'Noto Sans JP',sans-serif" font-size="20" font-weight="700">指標監視</text>
+    <text x="144" y="152" text-anchor="middle" fill="#6B7785" font-family="'Noto Sans JP',sans-serif" font-size="14">収益・安全・成長</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="240" y="196" width="160" height="120" rx="20" fill="white"/>
+    <text x="320" y="244" text-anchor="middle" fill="#1F3A5F" font-family="'Noto Sans JP',sans-serif" font-size="20" font-weight="700">因果仮説</text>
+    <text x="320" y="276" text-anchor="middle" fill="#6B7785" font-family="'Noto Sans JP',sans-serif" font-size="14">リスクと打ち手の紐付け</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="416" y="120" width="160" height="120" rx="20" fill="white"/>
+    <text x="496" y="168" text-anchor="middle" fill="#1F3A5F" font-family="'Noto Sans JP',sans-serif" font-size="20" font-weight="700">実行計画</text>
+    <text x="496" y="200" text-anchor="middle" fill="#6B7785" font-family="'Noto Sans JP',sans-serif" font-size="14">優先度・担当・KPI</text>
+  </g>
+  <path d="M224 132H256" stroke="#2F6CA3" stroke-width="6" stroke-linecap="round" marker-end="url(#arrowBlue)"/>
+  <path d="M400 180H432" stroke="#0F8C5A" stroke-width="6" stroke-linecap="round" marker-end="url(#arrowGreen)"/>
+  <path d="M368 292C456 360 248 360 312 340" stroke="#2F6CA3" stroke-width="4" stroke-dasharray="8 12" marker-end="url(#arrowBlue)"/>
+  <path d="M272 108C184 40 392 40 328 60" stroke="#0F8C5A" stroke-width="4" stroke-dasharray="8 12" marker-end="url(#arrowGreen)"/>
+  <g filter="url(#shadowSmall)">
+    <rect x="112" y="248" width="128" height="80" rx="16" fill="#1F3A5F" fill-opacity="0.92"/>
+    <text x="176" y="294" text-anchor="middle" fill="white" font-family="'Noto Sans JP',sans-serif" font-size="16" font-weight="600">アラート</text>
+    <text x="176" y="320" text-anchor="middle" fill="white" fill-opacity="0.75" font-family="'Noto Sans JP',sans-serif" font-size="12">閾値逸脱時に通知</text>
+  </g>
+  <g filter="url(#shadowSmall)">
+    <rect x="408" y="260" width="128" height="80" rx="16" fill="#0F8C5A" fill-opacity="0.92"/>
+    <text x="472" y="306" text-anchor="middle" fill="white" font-family="'Noto Sans JP',sans-serif" font-size="16" font-weight="600">成果レビュー</text>
+    <text x="472" y="332" text-anchor="middle" fill="white" fill-opacity="0.75" font-family="'Noto Sans JP',sans-serif" font-size="12">会議サマリーへ自動反映</text>
+  </g>
+  <defs>
+    <linearGradient id="cardGradient" x1="16" y1="16" x2="624" y2="404" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#F6F9FF"/>
+      <stop offset="1" stop-color="#E7F5F0"/>
+    </linearGradient>
+    <filter id="shadow" x="44" y="52" width="552" height="260" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="12"/>
+      <feOffset dy="12"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.12 0 0 0 0 0.2 0 0 0 0 0.29 0 0 0 0.18 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <filter id="shadowSmall" x="92" y="228" width="468" height="142" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10"/>
+      <feOffset dy="10"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.07 0 0 0 0 0.16 0 0 0 0 0.24 0 0 0 0.18 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+    <marker id="arrowBlue" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto">
+      <path d="M0 0L12 6L0 12Z" fill="#2F6CA3"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="12" markerHeight="12" orient="auto">
+      <path d="M0 0L12 6L0 12Z" fill="#0F8C5A"/>
+    </marker>
+  </defs>
+</svg>
