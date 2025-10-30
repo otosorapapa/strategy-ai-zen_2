@@ -839,160 +839,88 @@ const painPoints: PainPoint[] = [
   },
 ];
 
-type FeatureFlowSegment = {
-  label: string;
-  value: string;
-};
-
 type ServiceFeature = {
   title: string;
   description: string;
-  detail: string;
+  highlights: string[];
   benefit: string;
   badge: string;
   statValue: string;
   statLabel: string;
-  reference: string;
   icon: LucideIcon;
   accent: "mint" | "sky" | "citrus" | "navy" | "rose";
-  flow: FeatureFlowSegment[];
 };
 
 const serviceFeatures: ServiceFeature[] = [
   {
     title: "政策・市場・自社データの統合",
-    description: "Workday Blogが指摘するリアルタイム経営の要件を満たすデータ基盤。",
-    detail:
-      "API連携と安全なアップロードで政策更新、マクロ統計、社内KPIを一元化。意思決定に必要な最新指標を自動抽出し、判断の質を底上げします。",
-    benefit: "CFOが“判断だけ”に集中",
+    description: "政策更新と自社KPIをひとつのデータ基盤へ同期。",
+    highlights: [
+      "API連携とアップロードをまとめ、毎日の更新を自動化。",
+      "役員会に必要な指標だけをダッシュボードへ抽出。",
+    ],
+    benefit: "最新の判断材料をそのまま共有",
     badge: "DATA FABRIC",
     statValue: "70%削減",
-    statLabel: "判断材料探索の時間",
-    reference: "出典: Workday Real-time Finance 2024",
+    statLabel: "調査・集計にかかる時間",
     icon: Database,
     accent: "navy",
-    flow: [
-      {
-        label: "入力データ",
-        value: "政策更新・マクロ統計・社内KPIを自動収集",
-      },
-      {
-        label: "AI処理",
-        value: "API連携と品質チェックで単一データレイク化",
-      },
-      {
-        label: "意思決定",
-        value: "役員会へ最新指標を配信し判断工数を削減",
-      },
-    ],
   },
   {
     title: "複数シナリオ生成",
-    description: "blog.workday.comが紹介する生成AIのシナリオ構築を数分で。",
-    detail:
-      "需要・人員・投資の変化を反映したケースをAIが瞬時に比較。note.comのAI会議術が示す通り、社内報告と会議回数を削減し先見性を高めます。",
-    benefit: "攻めと守りを同時提示",
+    description: "主要な前提を入れるだけで比較ケースを即作成。",
+    highlights: [
+      "販売・人員・投資の変化を読み込み、AIが複数案を準備。",
+      "差分指標を揃えて議論時間をコンパクトに。",
+    ],
+    benefit: "攻めと守りの選択肢を即提示",
     badge: "SCENARIO AI",
     statValue: "4ケース / 48h",
-    statLabel: "比較可能な将来シナリオ",
-    reference: "出典: Workday Scenario Planning Survey",
+    statLabel: "意思決定に使えるプラン",
     icon: Layers3,
     accent: "mint",
-    flow: [
-      {
-        label: "入力データ",
-        value: "販売・人員・投資前提を読み込み",
-      },
-      {
-        label: "AI処理",
-        value: "ケース別の損益・資金繰りを48時間で比較",
-      },
-      {
-        label: "意思決定",
-        value: "攻めと守りを並べ議論時間を半減",
-      },
-    ],
   },
   {
     title: "財務計画の自動作成",
-    description: "資金繰りと投資回収表をテンプレート付きで生成。",
-    detail:
-      "キャッシュフロー、損益、BSインパクトを連動させたドラフトをAIが作成。専門家が前提条件を確認し、金融機関提出のスピードを引き上げます。",
-    benefit: "投資家説明まで一気通貫",
+    description: "BS・PL・CFを自動で連動させたドラフトを生成。",
+    highlights: [
+      "資金繰りや投資計画、返済条件を読み込んで整理。",
+      "金融機関にそのまま出せる形式で共有。",
+    ],
+    benefit: "提出までの待ち時間を短縮",
     badge: "FINANCE OS",
     statValue: "-80%",
-    statLabel: "財務ドラフト工数",
-    reference: "出典: Intuit QuickBooks Automation 2023",
+    statLabel: "ドラフトのやり直し",
     icon: BarChart3,
     accent: "citrus",
-    flow: [
-      {
-        label: "入力データ",
-        value: "資金繰り・投資計画・返済条件を取得",
-      },
-      {
-        label: "AI処理",
-        value: "BS/PL/CFを連動させた財務ドラフトを生成",
-      },
-      {
-        label: "成果",
-        value: "金融機関向け計画書を即共有し承認を前倒し",
-      },
-    ],
   },
   {
     title: "専門家レビューと倫理チェック",
-    description: "中小企業診断士と財務会計・管理会計の専門家がAIの弱点を補正。",
-    detail:
-      "ハルシネーションや倫理リスクを洗い出し、エビデンスと政策情報を追記。AI提案を融資審査レベルに磨き上げ、透明な意思決定プロセスを担保します。",
-    benefit: "融資想定問答を同梱",
+    description: "診断士と会計の専門家がAI出力を監査。",
+    highlights: [
+      "倫理リスクと審査ポイントをチェックリスト化。",
+      "根拠データと想定問答を補強し安心して提出。",
+    ],
+    benefit: "安心して提出できる品質",
     badge: "RISK & ETHICS",
     statValue: "+18pt",
     statLabel: "審査通過率の向上",
-    reference: "出典: JBIC 審査ガイドライン運用事例",
     icon: ShieldCheck,
     accent: "sky",
-    flow: [
-      {
-        label: "AI出力",
-        value: "AIドラフトと根拠データを精査",
-      },
-      {
-        label: "専門家検証",
-        value: "診断士と財務会計・管理会計専門家が審査基準と倫理を照合",
-      },
-      {
-        label: "成果",
-        value: "ハルシネーション排除と監査記録を付与",
-      },
-    ],
   },
   {
     title: "ROIシミュレーションと可視化",
-    description: "投資対効果を経営陣と共有するダッシュボード。",
-    detail:
-      "導入前後の工数・利益率・資金調達リードタイムを可視化し、意思決定のスピードと正確性を明示。プランごとの費用もリアルタイムで提示します。",
-    benefit: "役員会で“即説明”",
+    description: "投資対効果とキャッシュ影響を一画面で把握。",
+    highlights: [
+      "プロジェクト費用と成果指標をリアルタイム試算。",
+      "次の一手を役員会向けに簡潔にまとめて共有。",
+    ],
+    benefit: "意思決定のスピードを維持",
     badge: "ROI RADAR",
     statValue: "1/2",
-    statLabel: "投資判断リードタイム",
-    reference: "出典: Bain CFO Insights 2023",
+    statLabel: "投資判断までの時間",
     icon: TrendingUp,
     accent: "rose",
-    flow: [
-      {
-        label: "入力データ",
-        value: "プロジェクトコスト・人員・成果指標を統合",
-      },
-      {
-        label: "AI処理",
-        value: "ROI・キャッシュをリアルタイム試算",
-      },
-      {
-        label: "意思決定",
-        value: "役員会で即説明し投資判断を半分の時間に",
-      },
-    ],
   },
 ];
 
@@ -2924,24 +2852,17 @@ const Index = () => {
                       <div className="feature-card__content">
                         <h3>{feature.title}</h3>
                         <p className="feature-description">{feature.description}</p>
-                        <ol className="feature-card__flow">
-                          {feature.flow.map((segment) => (
-                            <li key={`${feature.title}-${segment.label}`}>
-                              <span>{segment.label}</span>
-                              <p>{segment.value}</p>
-                            </li>
+                        <ul className="feature-card__highlights">
+                          {feature.highlights.map((highlight, index) => (
+                            <li key={`${feature.title}-${index}`}>{highlight}</li>
                           ))}
-                        </ol>
-                        <div className="feature-card__insight">
-                          <div className="feature-card__stat">
-                            <strong>{feature.statValue}</strong>
-                            <span>{feature.statLabel}</span>
-                          </div>
-                          <p className="feature-detail">{feature.detail}</p>
-                        </div>
+                        </ul>
                       </div>
                       <footer className="feature-card__footer">
-                        <span className="feature-card__reference">{feature.reference}</span>
+                        <div className="feature-card__stat">
+                          <strong>{feature.statValue}</strong>
+                          <span>{feature.statLabel}</span>
+                        </div>
                         <span className="feature-benefit">{feature.benefit}</span>
                       </footer>
                     </article>
