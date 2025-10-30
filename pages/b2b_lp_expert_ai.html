@@ -483,19 +483,24 @@
         display: grid;
         gap: 1rem;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        align-items: stretch;
       }
-      .insight-meta-card {
+      .insight-meta-card,
+      .insight-meta-visual {
         position: relative;
         border-radius: 1.4rem;
-        padding: 1.1rem 1.2rem 1.25rem;
-        background:
-          linear-gradient(160deg, rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.32));
+        background: linear-gradient(160deg, rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.32));
         border: 1px solid rgba(148, 163, 184, 0.32);
         box-shadow: 0 20px 36px rgba(15, 23, 42, 0.22);
+        overflow: hidden;
+      }
+      .insight-meta-card {
+        padding: 1.1rem 1.2rem 1.25rem;
         display: grid;
         grid-template-columns: auto 1fr;
         gap: 0.75rem;
         align-items: start;
+        min-height: 220px;
       }
       .insight-meta-card::after {
         content: '';
@@ -505,6 +510,84 @@
         height: 160px;
         background: radial-gradient(circle, rgba(59, 130, 246, 0.22), transparent 68%);
         pointer-events: none;
+      }
+      .insight-meta-visual {
+        min-height: 260px;
+        display: grid;
+        place-items: stretch;
+        isolation: isolate;
+      }
+      .insight-meta-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: saturate(1.1) contrast(1.05);
+        transform: scale(1.02);
+      }
+      .insight-meta-visual figcaption {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 0.6rem;
+        padding: 1.6rem;
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.15) 0%, rgba(15, 23, 42, 0.82) 75%);
+        color: rgba(241, 245, 249, 0.95);
+      }
+      .insight-meta-visual-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.75rem;
+        border-radius: 9999px;
+        background: rgba(56, 189, 248, 0.18);
+        border: 1px solid rgba(125, 211, 252, 0.35);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(224, 242, 254, 0.95);
+        box-shadow: 0 10px 22px rgba(14, 165, 233, 0.25);
+      }
+      .insight-meta-visual h5 {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+      .insight-meta-visual p {
+        margin: 0;
+        font-size: 0.85rem;
+        line-height: 1.55;
+        color: rgba(226, 232, 240, 0.9);
+      }
+      .insight-meta-visual-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.4rem;
+      }
+      .insight-meta-visual-list li {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        color: rgba(226, 232, 240, 0.88);
+      }
+      .insight-meta-visual-list span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.6rem;
+        height: 1.6rem;
+        border-radius: 0.65rem;
+        background: rgba(15, 118, 110, 0.55);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        color: rgba(224, 242, 254, 0.92);
       }
       .insight-meta-icon {
         position: relative;
@@ -545,6 +628,30 @@
         color: rgba(224, 242, 254, 0.95);
         font-weight: 700;
       }
+      .insight-meta-card[data-area='cause'] .insight-meta-icon {
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(147, 197, 253, 0.55));
+        border-color: rgba(147, 197, 253, 0.5);
+      }
+      .insight-meta-card[data-area='logic'] .insight-meta-icon {
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.3), rgba(45, 212, 191, 0.55));
+        border-color: rgba(94, 234, 212, 0.45);
+      }
+      .insight-meta-card[data-area='design'] .insight-meta-icon {
+        background: linear-gradient(135deg, rgba(244, 114, 182, 0.3), rgba(249, 168, 212, 0.55));
+        border-color: rgba(244, 114, 182, 0.45);
+      }
+      .insight-meta-card[data-area='smart'] .insight-meta-icon {
+        background: linear-gradient(135deg, rgba(74, 222, 128, 0.32), rgba(134, 239, 172, 0.58));
+        border-color: rgba(134, 239, 172, 0.45);
+      }
+      .insight-meta-card[data-area='confidence'] {
+        background: linear-gradient(165deg, rgba(15, 23, 42, 0.65), rgba(15, 118, 110, 0.4));
+        border-color: rgba(94, 234, 212, 0.38);
+      }
+      .insight-meta-card[data-area='confidence'] .insight-meta-icon {
+        background: linear-gradient(135deg, rgba(249, 115, 22, 0.35), rgba(251, 191, 36, 0.55));
+        border-color: rgba(253, 186, 116, 0.45);
+      }
       .insight-confidence {
         display: flex;
         flex-wrap: wrap;
@@ -565,6 +672,35 @@
         color: rgba(226, 232, 240, 0.92);
         box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18);
       }
+      @media (min-width: 1024px) {
+        .insight-meta-grid {
+          grid-template-columns: repeat(12, minmax(0, 1fr));
+          grid-auto-rows: minmax(220px, auto);
+        }
+        .insight-meta-card[data-area='cause'] {
+          grid-column: 1 / span 4;
+        }
+        .insight-meta-card[data-area='logic'] {
+          grid-column: 9 / span 4;
+        }
+        .insight-meta-card[data-area='design'] {
+          grid-column: 1 / span 4;
+          grid-row: 2;
+        }
+        .insight-meta-card[data-area='smart'] {
+          grid-column: 9 / span 4;
+          grid-row: 2;
+        }
+        .insight-meta-card[data-area='confidence'] {
+          grid-column: 5 / span 4;
+          grid-row: 3;
+        }
+        .insight-meta-visual {
+          grid-column: 5 / span 4;
+          grid-row: 1 / span 2;
+          min-height: 100%;
+        }
+      }
       @media (max-width: 640px) {
         .insight-chart-head {
           flex-direction: column;
@@ -578,6 +714,13 @@
         }
         .insight-chart-caption {
           align-items: center;
+        }
+        .insight-meta-visual {
+          min-height: 220px;
+        }
+        .insight-meta-visual figcaption {
+          padding: 1.4rem;
+          gap: 0.5rem;
         }
       }
       @media (min-width: 768px) {
@@ -1779,39 +1922,56 @@
                 </article>
               </div>
               <div class="insight-meta-grid" aria-label="提供価値のフレーム">
-                <article class="insight-meta-card">
+                <article class="insight-meta-card" data-area="cause">
                   <div class="insight-meta-icon">因</div>
                   <div class="insight-meta-content">
                     <h5>因果性</h5>
-                    <p><strong>政策×需要×収益</strong>の相互作用を連続シミュレーションし、投資判断の根拠をトレース可能なログで残します。</p>
+                    <p><strong>政策×需要×収益</strong>を同一タイムラインで再計算し、ショック要因→粗利→キャッシュの波及を週次でトレースします。</p>
                   </div>
                 </article>
-                <article class="insight-meta-card">
+                <article class="insight-meta-card" data-area="logic">
                   <div class="insight-meta-icon">論</div>
                   <div class="insight-meta-content">
                     <h5>論理性</h5>
-                    <p>PL・BS・CFの整合性をAIが検証し、中小企業診断士が金融機関基準でレビュー。意思決定のロジックを破綻なく構築。</p>
+                    <p>PL・BS・CFの整合性と資金調達要件をAIが検証し、診断士が想定問答付きでレビュー。意思決定のロジックを破綻なく整えます。</p>
                   </div>
                 </article>
-                <article class="insight-meta-card">
+                <figure class="insight-meta-visual">
+                  <img
+                    src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
+                    alt="データウォールを囲み意思決定を行う経営チームの様子"
+                    loading="lazy"
+                  />
+                  <figcaption>
+                    <span class="insight-meta-visual-badge">Dual Coding Studio</span>
+                    <h5>AI×専門家が一堂に会する意思決定ルーム</h5>
+                    <p>経営者・診断士・AIアナリストが同じダッシュボードで優先順位と投資判断を同期します。</p>
+                    <ul class="insight-meta-visual-list">
+                      <li><span>因</span>施策の波及を3層で可視化し、勝ち筋とリスクを同時に把握</li>
+                      <li><span>論</span>金融機関が求める監査ログと根拠ドキュメントを自動整備</li>
+                      <li><span>証</span>経営会議用シナリオ資料を48時間で配布し、合意形成を加速</li>
+                    </ul>
+                  </figcaption>
+                </figure>
+                <article class="insight-meta-card" data-area="design">
                   <div class="insight-meta-icon">デ</div>
                   <div class="insight-meta-content">
                     <h5>デザイン性</h5>
-                    <p>光源と奥行きを意識した情報設計で、取締役・幹部が瞬時に優先順位を共有できるダッシュボードを提供します。</p>
+                    <p>光源と視線誘導を意識したレイアウトで、取締役・幹部が瞬時に意思決定の論点と優先順位を共有できるよう設計します。</p>
                   </div>
                 </article>
-                <article class="insight-meta-card">
+                <article class="insight-meta-card" data-area="smart">
                   <div class="insight-meta-icon">智</div>
                   <div class="insight-meta-content">
                     <h5>スマート性</h5>
-                    <p>異常値検出と影響シミュレーションを自動化し、決裁に必要な論点のみを厳選。現場と経営の認識ズレを最小化。</p>
+                    <p>異常値検出と影響シミュレーションを自動化し、48時間サイクルで「決裁に必要な論点のみ」を抽出して提示します。</p>
                   </div>
                 </article>
-                <article class="insight-meta-card">
+                <article class="insight-meta-card" data-area="confidence">
                   <div class="insight-meta-icon">証</div>
                   <div class="insight-meta-content">
                     <h5>納得性</h5>
-                    <p>根拠ドキュメントと想定問答を同梱し、金融機関・株主への説明責任に耐えるストーリーを体系化します。</p>
+                    <p>根拠ドキュメント・想定問答・金融機関向けの証跡をワンセットで提供し、投資判断の納得性と再現性を高めます。</p>
                   </div>
                 </article>
               </div>
