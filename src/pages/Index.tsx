@@ -46,6 +46,7 @@ import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
 import expertSaitoPhoto from "@/assets/representative_.jpg";
 import expertTanakaPhoto from "@/assets/representative.jpg";
 import decisionIntelligenceVisual from "@/assets/financial-analysis.jpg";
+import featureFlywheelVisual from "@/assets/dashboard-preview.jpg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -777,6 +778,11 @@ const painPoints: PainPoint[] = [
   },
 ];
 
+type FeatureFlowSegment = {
+  label: string;
+  value: string;
+};
+
 type ServiceFeature = {
   title: string;
   description: string;
@@ -788,6 +794,7 @@ type ServiceFeature = {
   reference: string;
   icon: LucideIcon;
   accent: "mint" | "sky" | "citrus" | "navy" | "rose";
+  flow: FeatureFlowSegment[];
 };
 
 const serviceFeatures: ServiceFeature[] = [
@@ -803,6 +810,20 @@ const serviceFeatures: ServiceFeature[] = [
     reference: "出典: Workday Real-time Finance 2024",
     icon: Database,
     accent: "navy",
+    flow: [
+      {
+        label: "入力データ",
+        value: "政策更新・マクロ統計・社内KPIを自動収集",
+      },
+      {
+        label: "AI処理",
+        value: "API連携と品質チェックで単一データレイク化",
+      },
+      {
+        label: "意思決定",
+        value: "役員会へ最新指標を配信し判断工数を削減",
+      },
+    ],
   },
   {
     title: "複数シナリオ生成",
@@ -816,6 +837,20 @@ const serviceFeatures: ServiceFeature[] = [
     reference: "出典: Workday Scenario Planning Survey",
     icon: Layers3,
     accent: "mint",
+    flow: [
+      {
+        label: "入力データ",
+        value: "販売・人員・投資前提を読み込み",
+      },
+      {
+        label: "AI処理",
+        value: "ケース別の損益・資金繰りを48時間で比較",
+      },
+      {
+        label: "意思決定",
+        value: "攻めと守りを並べ議論時間を半減",
+      },
+    ],
   },
   {
     title: "財務計画の自動作成",
@@ -829,6 +864,20 @@ const serviceFeatures: ServiceFeature[] = [
     reference: "出典: Intuit QuickBooks Automation 2023",
     icon: BarChart3,
     accent: "citrus",
+    flow: [
+      {
+        label: "入力データ",
+        value: "資金繰り・投資計画・返済条件を取得",
+      },
+      {
+        label: "AI処理",
+        value: "BS/PL/CFを連動させた財務ドラフトを生成",
+      },
+      {
+        label: "成果",
+        value: "金融機関向け計画書を即共有し承認を前倒し",
+      },
+    ],
   },
   {
     title: "専門家レビューと倫理チェック",
@@ -842,6 +891,20 @@ const serviceFeatures: ServiceFeature[] = [
     reference: "出典: JBIC 審査ガイドライン運用事例",
     icon: ShieldCheck,
     accent: "sky",
+    flow: [
+      {
+        label: "AI出力",
+        value: "AIドラフトと根拠データを精査",
+      },
+      {
+        label: "専門家検証",
+        value: "診断士・会計士が審査基準と倫理を照合",
+      },
+      {
+        label: "成果",
+        value: "ハルシネーション排除と監査記録を付与",
+      },
+    ],
   },
   {
     title: "ROIシミュレーションと可視化",
@@ -855,6 +918,20 @@ const serviceFeatures: ServiceFeature[] = [
     reference: "出典: Bain CFO Insights 2023",
     icon: TrendingUp,
     accent: "rose",
+    flow: [
+      {
+        label: "入力データ",
+        value: "プロジェクトコスト・人員・成果指標を統合",
+      },
+      {
+        label: "AI処理",
+        value: "ROI・キャッシュをリアルタイム試算",
+      },
+      {
+        label: "意思決定",
+        value: "役員会で即説明し投資判断を半分の時間に",
+      },
+    ],
   },
 ];
 
@@ -2659,39 +2736,82 @@ const Index = () => {
                 <li>AIの出力は診断士がレビューし、料金と支援範囲を透明に開示します。</li>
               </ul>
             </div>
-            <div className="feature-grid">
-              {serviceFeatures.map((feature) => {
-                const FeatureIcon = feature.icon;
-                return (
-                  <article
-                    key={feature.title}
-                    className={`feature-card feature-card--${feature.accent}`}
-                    data-animate
-                  >
-                    <header className="feature-card__header">
-                      <div className="feature-card__badge-group">
-                        <span className="feature-card__badge">{feature.badge}</span>
+            <div className="features-layout">
+              <aside className="features-visual" data-animate>
+                <span className="features-visual__badge">DECISION FLYWHEEL</span>
+                <h3>意思決定を加速する「データ→AI→専門家」の三層構造</h3>
+                <p>
+                  政策・市場・自社データを繋ぎ、AIがドラフトを作成。経営改善で鍛えた専門家が論点と信頼性を磨き込み、経営陣は判断と実行に集中できます。
+                </p>
+                <figure className="features-visual__figure">
+                  <img
+                    src={featureFlywheelVisual}
+                    alt="生成AI経営レポートのダッシュボードと主要指標の例"
+                    loading="lazy"
+                  />
+                  <figcaption>
+                    政策更新・市場指数・社内KPIをレイヤーで可視化し、意思決定の因果をワンビューで共有。
+                  </figcaption>
+                </figure>
+                <ul className="features-visual__legend">
+                  <li>
+                    <span>1. データガバナンス</span>
+                    内閣府指数・POS・会計を5分間隔で同期し、欠損値はAIが警告。
+                  </li>
+                  <li>
+                    <span>2. AIドラフト</span>
+                    KPI感度分析とROIダッシュボードを自動生成し、優先順位を色分け。
+                  </li>
+                  <li>
+                    <span>3. 専門家レビュー</span>
+                    診断士・会計士が審査基準と整合性を確認し、次アクションを提示。
+                  </li>
+                </ul>
+              </aside>
+              <div className="feature-grid">
+                {serviceFeatures.map((feature) => {
+                  const FeatureIcon = feature.icon;
+                  return (
+                    <article
+                      key={feature.title}
+                      className={`feature-card feature-card--${feature.accent}`}
+                      data-animate
+                    >
+                      <header className="feature-card__header">
+                        <div className="feature-card__badge-group">
+                          <span className="feature-card__badge">{feature.badge}</span>
+                        </div>
+                        <div className="feature-icon" aria-hidden="true">
+                          <FeatureIcon />
+                        </div>
+                      </header>
+                      <div className="feature-card__content">
+                        <h3>{feature.title}</h3>
+                        <p className="feature-description">{feature.description}</p>
+                        <ol className="feature-card__flow">
+                          {feature.flow.map((segment) => (
+                            <li key={`${feature.title}-${segment.label}`}>
+                              <span>{segment.label}</span>
+                              <p>{segment.value}</p>
+                            </li>
+                          ))}
+                        </ol>
+                        <div className="feature-card__insight">
+                          <div className="feature-card__stat">
+                            <strong>{feature.statValue}</strong>
+                            <span>{feature.statLabel}</span>
+                          </div>
+                          <p className="feature-detail">{feature.detail}</p>
+                        </div>
                       </div>
-                      <div className="feature-icon" aria-hidden="true">
-                        <FeatureIcon />
-                      </div>
-                    </header>
-                    <div className="feature-card__content">
-                      <h3>{feature.title}</h3>
-                      <p className="feature-description">{feature.description}</p>
-                      <div className="feature-card__stat">
-                        <strong>{feature.statValue}</strong>
-                        <span>{feature.statLabel}</span>
-                      </div>
-                      <p className="feature-detail">{feature.detail}</p>
-                    </div>
-                    <footer className="feature-card__footer">
-                      <span className="feature-card__reference">{feature.reference}</span>
-                      <span className="feature-benefit">{feature.benefit}</span>
-                    </footer>
-                  </article>
-                );
-              })}
+                      <footer className="feature-card__footer">
+                        <span className="feature-card__reference">{feature.reference}</span>
+                        <span className="feature-benefit">{feature.benefit}</span>
+                      </footer>
+                    </article>
+                  );
+                })}
+              </div>
             </div>
             <p className="features-note" data-animate>
               すべてのアウトプットは中小企業診断士・会計士がレビューし、AIのハルシネーションを排除したうえで金融機関や取締役会へ提出できる形に整えます。
