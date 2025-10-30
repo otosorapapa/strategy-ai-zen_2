@@ -785,6 +785,7 @@ const formatSigned = (value: number, suffix = "") => {
 type PainPoint = {
   title: string;
   detail: string;
+  summary: string;
   solution: string;
   aiAction: string;
   expertAction: string;
@@ -792,6 +793,7 @@ type PainPoint = {
   impactDetail: string;
   icon: LucideIcon;
   accent: "mint" | "sky" | "citrus";
+  proofs: { label: string; value: string }[];
 };
 
 const painPoints: PainPoint[] = [
@@ -799,6 +801,8 @@ const painPoints: PainPoint[] = [
     title: "外部の変化を追い切れず判断が後手に回る",
     detail:
       "市場シグナルや競合の一手を追う調査が経営者に集中し、戦略を描く時間が削られています。",
+    summary:
+      "情報収集に時間を奪われ、経営判断の裏付けが会議直前まで固まらない。",
     solution:
       "多様な再生・成長案件で培った専門家と生成AIが外部指標と自社データを常時計測し、迅速に優先課題と想定インパクトを提示します。",
     aiAction:
@@ -810,11 +814,17 @@ const painPoints: PainPoint[] = [
       "利益ドライバーを可視化し、判断の場で胸を張れる説明材料を確保。",
     icon: ScanSearch,
     accent: "sky",
+    proofs: [
+      { label: "先読みKPI", value: "52%短縮" },
+      { label: "意思決定ログ", value: "160件" },
+    ],
   },
   {
     title: "会議や計画作成に時間がかかり意思決定が遅い",
     detail:
       "会議資料と経営計画のドラフトを作るたびに各部門からデータを集め直し、意思決定リードタイムが長期化しています。",
+    summary:
+      "資料づくりに追われ、本来の戦略議論が後ろ倒しになってしまう。",
     solution:
       "専門家と生成AIが財務と実績データから複数シナリオとドラフト資料を揃え、経営陣は判断と説明に集中できます。",
     aiAction:
@@ -826,11 +836,17 @@ const painPoints: PainPoint[] = [
       "AI活用による迅速な意思決定を体現し、判断の迷いを減らして自信を持って決裁できる状態を実現。",
     icon: LineChart,
     accent: "citrus",
+    proofs: [
+      { label: "作成時間", value: "80%減" },
+      { label: "議題確定", value: "2.3倍" },
+    ],
   },
   {
     title: "資金調達時に金融機関から信頼される計画書が難しい",
     detail:
       "融資や投資の審査ポイントを押さえた計画書づくりが属人化し、提出スケジュールが後ろ倒しになります。",
+    summary:
+      "金融機関の質問に即答できず、資金計画の説得力が薄れてしまう。",
     solution:
       "専門家と生成AIが審査基準に沿った財務計画と想定問答を下書きし、金融機関から信頼される計画書へ磨き込みます。",
     aiAction:
@@ -842,6 +858,10 @@ const painPoints: PainPoint[] = [
       "AIドラフトと専門家のダブルチェックで資金調達の確度が向上し、導入後の運転資金計画も安心して提示できます。",
     icon: FileText,
     accent: "mint",
+    proofs: [
+      { label: "採択率", value: "+24pt" },
+      { label: "交渉準備", value: "48h短縮" },
+    ],
   },
 ];
 
@@ -2553,6 +2573,16 @@ const Index = () => {
                 市場や組織の変化が激しいほど、意思決定の質・速さ・先読み力は落ちやすくなります。160件の案件で蓄積した知見をもとに、「課題 → AI×専門家の解決策 → 得られる効果」の因果関係を3つのケースで示します。
               </p>
             </div>
+            <figure className="pain-visual" data-animate>
+              <img
+                src="/images/pain-value-flow.svg"
+                alt="課題→AI→専門家→成果の流れを表す因果マップ"
+                loading="lazy"
+              />
+              <figcaption>
+                情報の分散をAIが束ね、専門家が論理と信頼性を補強する三層構造。意思決定に必要な根拠を一枚で共有できます。
+              </figcaption>
+            </figure>
             <div className="pain-grid">
               {painPoints.map((item) => {
                 const PainIcon = item.icon;
@@ -2571,17 +2601,26 @@ const Index = () => {
                         <strong>{item.impact}</strong>
                       </div>
                     </header>
+                    <p className="pain-card__summary">{item.summary}</p>
+                    <div className="pain-card__proofs" role="list" aria-label="信頼を支える実績指標">
+                      {item.proofs.map((proof) => (
+                        <div key={`${item.title}-${proof.label}`} className="pain-proof" role="listitem">
+                          <span className="pain-proof__value">{proof.value}</span>
+                          <span className="pain-proof__label">{proof.label}</span>
+                        </div>
+                      ))}
+                    </div>
                     <div className="pain-cause">
                       <span className="pain-cause__label">課題の背景</span>
                       <p>{item.detail}</p>
                     </div>
                     <div className="pain-chain" role="list" aria-label="AIと専門家による解決プロセス">
-                      <div className="pain-chain__column" role="listitem" data-step="01">
+                      <div className="pain-chain__column" role="listitem" data-step="STEP 01">
                         <span className="pain-chain__label pain-chain__label--ai">生成AIのアクション</span>
                         <p>{item.aiAction}</p>
                       </div>
                       <div className="pain-chain__divider" aria-hidden="true" />
-                      <div className="pain-chain__column" role="listitem" data-step="02">
+                      <div className="pain-chain__column" role="listitem" data-step="STEP 02">
                         <span className="pain-chain__label pain-chain__label--expert">専門家のブラッシュアップ</span>
                         <p>{item.expertAction}</p>
                       </div>

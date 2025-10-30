@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="title desc">
+  <title id="title">AIと専門家が因果を整理する流れ</title>
+  <desc id="desc">経営課題をAIが解析し専門家が検証して成果に結びつける3ステップの図解</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="rgba(255,255,255,0.92)" />
+      <stop offset="1" stop-color="rgba(226,232,240,0.68)" />
+    </linearGradient>
+    <linearGradient id="accentBlue" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#38bdf8" />
+      <stop offset="1" stop-color="#0ea5e9" />
+    </linearGradient>
+    <linearGradient id="accentGreen" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#34d399" />
+      <stop offset="1" stop-color="#0f766e" />
+    </linearGradient>
+    <linearGradient id="accentNavy" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#1e3a8a" />
+      <stop offset="1" stop-color="#172554" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="28" flood-color="rgba(15,23,42,0.16)"/>
+    </filter>
+    <style>
+      text{font-family:'Inter', 'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;}
+      .label{font-size:18px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;fill:#1f2937;opacity:0.75;}
+      .title{font-size:26px;font-weight:800;fill:#0f172a;}
+      .body{font-size:18px;fill:#334155;line-height:1.4;}
+      .stat{font-size:34px;font-weight:800;fill:#0f172a;}
+      .stat-label{font-size:16px;fill:#0f172a;opacity:0.68;letter-spacing:0.06em;text-transform:uppercase;}
+    </style>
+  </defs>
+  <rect width="960" height="400" rx="40" fill="url(#bg)" filter="url(#shadow)" />
+  <g transform="translate(60 52)">
+    <text class="label">因果で語れる決断プロセス</text>
+    <text class="title" y="52">経営課題→AI解析→専門家検証→成果</text>
+    <text class="body" y="92">意思決定の迷いを「背景」「AIの先読み」「専門家レビュー」「成果指標」で一枚に統合。</text>
+  </g>
+  <g transform="translate(40 150)">
+    <g transform="translate(0 0)">
+      <rect width="220" height="180" rx="28" fill="rgba(30,41,59,0.08)" stroke="rgba(30,41,59,0.14)"/>
+      <text x="26" y="48" class="label" font-size="16">課題の背景</text>
+      <text x="26" y="92" class="body">現場で散在する
+        <tspan x="26" dy="24">シグナルが見えず</tspan>
+        <tspan x="26" dy="24">決断が遅延。</tspan>
+      </text>
+    </g>
+    <g transform="translate(240 0)">
+      <rect width="220" height="180" rx="28" fill="rgba(56,189,248,0.12)" stroke="#38bdf8" stroke-opacity="0.35"/>
+      <text x="26" y="48" class="label" font-size="16" fill="#0369a1">AIレイヤー</text>
+      <text x="26" y="92" class="body">
+        <tspan x="26">市場/財務データを統合。</tspan>
+        <tspan x="26" dy="24">シナリオを52%高速化。</tspan>
+      </text>
+      <circle cx="190" cy="42" r="18" fill="url(#accentBlue)" opacity="0.28" />
+      <circle cx="172" cy="62" r="10" fill="url(#accentBlue)" opacity="0.6" />
+    </g>
+    <g transform="translate(480 0)">
+      <rect width="220" height="180" rx="28" fill="rgba(16,185,129,0.12)" stroke="#22c55e" stroke-opacity="0.35"/>
+      <text x="26" y="48" class="label" font-size="16" fill="#047857">専門家レイヤー</text>
+      <text x="26" y="92" class="body">
+        <tspan x="26">金融/会計の基準で検証。</tspan>
+        <tspan x="26" dy="24">根拠と想定問答を装備。</tspan>
+      </text>
+      <path d="M180 50l26 26-26 26-26-26z" fill="url(#accentGreen)" opacity="0.25" />
+    </g>
+    <g transform="translate(720 0)">
+      <rect width="220" height="180" rx="28" fill="rgba(15,23,42,0.85)" stroke="rgba(15,23,42,0.9)"/>
+      <text x="26" y="48" class="label" font-size="16" fill="rgba(226,232,240,0.8)">成果</text>
+      <text x="26" y="92" class="body" fill="rgba(248,250,252,0.92)">
+        <tspan x="26">投資判断のスピードと</tspan>
+        <tspan x="26" dy="24">納得性が同時に向上。</tspan>
+      </text>
+      <text x="26" y="152" class="stat" fill="#f8fafc">1.8×</text>
+      <text x="110" y="152" class="stat-label" fill="rgba(226,232,240,0.82)">キャッシュ創出</text>
+    </g>
+    <g transform="translate(220 90)">
+      <path d="M0 0h24l20-20h56" fill="none" stroke="url(#accentBlue)" stroke-width="6" stroke-linecap="round" />
+      <path d="M148 -20h44l16 16" fill="none" stroke="url(#accentGreen)" stroke-width="6" stroke-linecap="round" />
+      <path d="M220 -4h46" fill="none" stroke="url(#accentNavy)" stroke-width="6" stroke-linecap="round" />
+    </g>
+  </g>
+</svg>
