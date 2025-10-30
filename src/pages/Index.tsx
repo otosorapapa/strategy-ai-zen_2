@@ -40,7 +40,7 @@ import {
 
 import { submitContactForm } from "@/lib/contact-api";
 
-import aiDashboardShot from "@/assets/growth-chart.jpg";
+import aiDashboardShot from "@/assets/dashboard-preview.jpg";
 import simulatorGuidanceVisual from "@/assets/strategy-planning.jpg";
 import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
 import expertSaitoPhoto from "@/assets/representative_.jpg";
@@ -91,6 +91,38 @@ const heroEvidence = [
       "生成AIは膨大なデータを要約し、複数シナリオを短時間で評価できると指摘。",
     source: "JAGGAER",
     url: "https://www.jaggaer.com/blog/how-to-use-generative-ai-procurement",
+  },
+];
+
+type HeroCausality = {
+  title: string;
+  cause: string;
+  logic: string;
+  impact: string;
+  icon: LucideIcon;
+};
+
+const heroCausality: HeroCausality[] = [
+  {
+    title: "政策・市場の先読み",
+    cause: "生成AIが政策・市場速報を常時計測",
+    logic: "診断士が自社条件で優先順位を補正し判断材料を整流化",
+    impact: "意思決定リードタイム -52%",
+    icon: ScanSearch,
+  },
+  {
+    title: "意思決定の論点設計",
+    cause: "会議前にAIがシナリオと想定問答をドラフト",
+    logic: "専門家が金融・戦略の観点で裏付けを補強",
+    impact: "計画作成工数 -80%",
+    icon: ClipboardCheck,
+  },
+  {
+    title: "納得性の高い提案",
+    cause: "AIレポートが証拠付きダッシュボードを提示",
+    logic: "元金融機関出身者が説明責任の視点でレビュー",
+    impact: "資金創出インパクト 1.8倍",
+    icon: TrendingUp,
   },
 ];
 
@@ -2173,6 +2205,34 @@ const Index = () => {
                 経営改善で鍛えた診断士・会計士が生成AIを操り、経営者の意思決定を先回りで支援します。
                 政策・市場・自社データをAIが集約し、専門家が金融審査レベルまで磨き込むからこそ、意思決定の質・速さ・先見性を一気に引き上げます。
               </p>
+              <div className="hero-causality" aria-label="因果とロジックの整理" data-animate>
+                {heroCausality.map((item, index) => {
+                  const ItemIcon = item.icon;
+                  return (
+                    <article key={item.title} className="hero-causality__card">
+                      <span className="hero-causality__step">STEP {index + 1}</span>
+                      <div className="hero-causality__icon" aria-hidden="true">
+                        <ItemIcon />
+                      </div>
+                      <div className="hero-causality__body">
+                        <h2>{item.title}</h2>
+                        <p>
+                          <span className="hero-causality__label">因</span>
+                          {item.cause}
+                        </p>
+                        <p>
+                          <span className="hero-causality__label">論</span>
+                          {item.logic}
+                        </p>
+                        <p className="hero-causality__impact">
+                          <span className="hero-causality__label hero-causality__label--impact">果</span>
+                          {item.impact}
+                        </p>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
               <ul className="hero-points">
                 <li>経営者の課題をAIが常時計測。政策更新と市場変化をシナリオ化し、判断材料を48時間以内に提示。</li>
                 <li>専門家が生成AIの提案を金融・戦略の観点で精査し、意思決定の質とリスク管理を同時に強化。</li>
@@ -2190,6 +2250,70 @@ const Index = () => {
                   資料をダウンロードして詳細を確認
                 </a>
               </div>
+              <ul className="trust-badges" aria-label="セキュリティ対策">
+                {securityBadges.map((badge) => {
+                  const BadgeIcon = badge.icon;
+                  return (
+                    <li key={badge.title}>
+                      <span className="trust-badge__icon" aria-hidden="true">
+                        <BadgeIcon />
+                      </span>
+                      <span className="trust-badge__label">{badge.badge}</span>
+                      <span className="trust-badge__title">{badge.title}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+              <ul className="hero-metrics" ref={metricsRef}>
+                {heroMetrics.map((metric, index) => (
+                  <li key={metric.label}>
+                    <strong>
+                      {metric.prefix}
+                      {metricValues[index].toLocaleString(undefined, {
+                        minimumFractionDigits: metric.decimals ?? 0,
+                        maximumFractionDigits: metric.decimals ?? 0,
+                      })}
+                      {metric.suffix}
+                    </strong>
+                    <span>{metric.label}</span>
+                    <small>
+                      {metric.note}
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            className="metric-detail-trigger"
+                            aria-label={`${metric.label}の測定方法`}
+                          >
+                            <Info aria-hidden="true" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>{metric.detail}</TooltipContent>
+                      </Tooltip>
+                    </small>
+                  </li>
+                ))}
+              </ul>
+              <div className="scroll-cue" aria-hidden="true">
+                <span className="scroll-cue__icon" />
+                <span className="scroll-cue__label">スクロールして詳細を見る</span>
+              </div>
+            </div>
+            <div className="hero-visual">
+              <figure
+                className="hero-dashboard-shot"
+                data-animate
+                data-initial-visible="true"
+              >
+                <img
+                  src={aiDashboardShot}
+                  alt="AIダッシュボードのスクリーンショット"
+                  loading="lazy"
+                />
+                <figcaption>
+                  政策・市場データと財務指標を一画面で確認し、次の一手を即断する下地をつくります。
+                </figcaption>
+              </figure>
               <div className="hero-quick-form" data-animate>
                 <div className="hero-quick-form__intro">
                   <h2>60秒でAI診断を予約</h2>
@@ -2302,70 +2426,6 @@ const Index = () => {
                   })}
                 </ol>
               </div>
-              <ul className="trust-badges" aria-label="セキュリティ対策">
-                {securityBadges.map((badge) => {
-                  const BadgeIcon = badge.icon;
-                  return (
-                    <li key={badge.title}>
-                      <span className="trust-badge__icon" aria-hidden="true">
-                        <BadgeIcon />
-                      </span>
-                      <span className="trust-badge__label">{badge.badge}</span>
-                      <span className="trust-badge__title">{badge.title}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-              <ul className="hero-metrics" ref={metricsRef}>
-                {heroMetrics.map((metric, index) => (
-                  <li key={metric.label}>
-                    <strong>
-                      {metric.prefix}
-                      {metricValues[index].toLocaleString(undefined, {
-                        minimumFractionDigits: metric.decimals ?? 0,
-                        maximumFractionDigits: metric.decimals ?? 0,
-                      })}
-                      {metric.suffix}
-                    </strong>
-                    <span>{metric.label}</span>
-                    <small>
-                      {metric.note}
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button
-                            type="button"
-                            className="metric-detail-trigger"
-                            aria-label={`${metric.label}の測定方法`}
-                          >
-                            <Info aria-hidden="true" />
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent>{metric.detail}</TooltipContent>
-                      </Tooltip>
-                    </small>
-                  </li>
-                ))}
-              </ul>
-              <div className="scroll-cue" aria-hidden="true">
-                <span className="scroll-cue__icon" />
-                <span className="scroll-cue__label">スクロールして詳細を見る</span>
-              </div>
-            </div>
-            <div className="hero-visual">
-              <figure
-                className="hero-dashboard-shot"
-                data-animate
-                data-initial-visible="true"
-              >
-                <img
-                  src={aiDashboardShot}
-                  alt="AIダッシュボードのスクリーンショット"
-                  loading="lazy"
-                />
-                <figcaption>
-                  政策・市場データと財務指標を一画面で確認し、次の一手を即断する下地をつくります。
-                </figcaption>
-              </figure>
               <div className="hero-demo" data-animate data-initial-visible="true">
                 <div className="hero-collab" aria-label="生成AIと専門家チームの連携イメージ">
                   <div className="hero-collab__panel hero-collab__panel--ai">
