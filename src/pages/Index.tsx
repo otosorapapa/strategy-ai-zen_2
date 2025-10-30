@@ -172,7 +172,7 @@ const heroAllianceExperts = [
   },
   {
     name: "斎藤 美咲",
-    role: "公認会計士 / 税理士",
+    role: "財務会計・管理会計専門家",
     focus: "財務管理・補助金対策",
     photo: expertSaitoPhoto,
   },
@@ -668,7 +668,7 @@ const quarterlySignals: QuarterlySignal[] = [
   },
   {
     title: "専門家伴走で実行を後押し",
-    description: "元メガバンク法人担当と公認会計士が実行レビューを実施。AI提案に資金繰り・リスクの観点を接続します。",
+    description: "元メガバンク法人担当と財務会計・管理会計専門家が実行レビューを実施。AI提案に資金繰り・リスクの観点を接続します。",
     sourceLabel: "伴走支援チーム",
     stat: "72h",
     statLabel: "レビューSLA",
@@ -785,7 +785,7 @@ const painPoints: PainPoint[] = [
     aiAction:
       "AI: 四半期ごとのシナリオ比較・財務予測・会議アジェンダを48時間以内に生成。",
     expertAction:
-      "専門家: 診断士と会計士が論点整理と審査基準の観点でレビューし、決裁に必要な根拠を補強。",
+      "専門家: 診断士と財務会計・管理会計専門家が論点整理と審査基準の観点でレビューし、決裁に必要な根拠を補強。",
     impact: "意思決定リードタイム -52% / 計画作成工数 -80%",
     impactDetail:
       "blog.iil.comが強調するAI活用による迅速な意思決定を体現し、導入企業平均で意思決定リードタイム52%短縮・計画作成工数80%削減。",
@@ -913,7 +913,7 @@ const serviceFeatures: ServiceFeature[] = [
   },
   {
     title: "専門家レビューと倫理チェック",
-    description: "中小企業診断士・会計士がAIの弱点を補正。",
+    description: "中小企業診断士と財務会計・管理会計の専門家がAIの弱点を補正。",
     detail:
       "ハルシネーションや倫理リスクを洗い出し、エビデンスと政策情報を追記。AI提案を融資審査レベルに磨き上げ、透明な意思決定プロセスを担保します。",
     benefit: "融資想定問答を同梱",
@@ -930,7 +930,7 @@ const serviceFeatures: ServiceFeature[] = [
       },
       {
         label: "専門家検証",
-        value: "診断士・会計士が審査基準と倫理を照合",
+        value: "診断士と財務会計・管理会計専門家が審査基準と倫理を照合",
       },
       {
         label: "成果",
@@ -1013,7 +1013,7 @@ const processSteps: ProcessStep[] = [
     title: "専門家との面談",
     pillar: "納得性レビュー",
     outcome: "専門家監修の実行計画＆リスク補強ドキュメント",
-    description: "診断士と会計士が内容を審査。金融機関が求める根拠を補強します。",
+    description: "診断士と財務会計・管理会計専門家が内容を審査。金融機関が求める根拠を補強します。",
     aiRole: "フィードバックを反映しモデルと資料を更新",
     humanRole: "専門家が審査目線で修正し実行計画を調整",
     icon: ShieldCheck,
@@ -1145,7 +1145,8 @@ const processAssurances: ProcessAssurance[] = [
   },
   {
     keyword: "納得性",
-    description: "中小企業診断士・会計士がエビデンスを補強し、銀行・株主・従業員へ説明可能なドキュメントに昇華。反論想定集まで提供します。",
+    description:
+      "中小企業診断士と財務会計・管理会計の専門家がエビデンスを補強し、銀行・株主・従業員へ説明可能なドキュメントに昇華。反論想定集まで提供します。",
     accent: "mint",
   },
 ];
@@ -1576,7 +1577,7 @@ const expertCards: ExpertCard[] = [
   },
   {
     name: "斎藤 美咲",
-    title: "公認会計士 / 税理士",
+    title: "財務会計・管理会計専門家",
     bio: "補助金・助成金対応と財務モデリングの専門家。",
     photo: expertSaitoPhoto,
     credentials: [
@@ -2279,7 +2280,7 @@ const Index = () => {
                 <span>意思決定の質・速さ・先見性を高める経営計画</span>
               </h1>
               <p className="hero-lead">
-                経営改善で鍛えた診断士・会計士が生成AIを操り、経営者の意思決定を先回りで支援します。
+                経営改善で鍛えた診断士と財務会計・管理会計の専門家が生成AIを操り、経営者の意思決定を先回りで支援します。
                 政策・市場・自社データをAIが集約し、専門家が金融審査レベルまで磨き込むからこそ、意思決定の質・速さ・先見性を一気に引き上げます。
               </p>
               <div className="hero-causality" aria-label="因果とロジックの整理" data-animate>
@@ -2824,7 +2825,7 @@ const Index = () => {
                   </li>
                   <li>
                     <span>3. 専門家レビュー</span>
-                    診断士・会計士が審査基準と整合性を確認し、次アクションを提示。
+                    診断士と財務会計・管理会計専門家が審査基準と整合性を確認し、次アクションを提示。
                   </li>
                 </ul>
               </aside>
@@ -2874,7 +2875,7 @@ const Index = () => {
               </div>
             </div>
             <p className="features-note" data-animate>
-              すべてのアウトプットは中小企業診断士・会計士がレビューし、AIのハルシネーションを排除したうえで金融機関や取締役会へ提出できる形に整えます。
+              すべてのアウトプットは中小企業診断士と財務会計・管理会計の専門家がレビューし、AIのハルシネーションを排除したうえで金融機関や取締役会へ提出できる形に整えます。
             </p>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
