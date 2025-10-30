@@ -57,9 +57,9 @@ const heroChecklist = [
 ];
 
 const heroSolutionHighlights = [
-  "AIダッシュボードが粗利とキャッシュの差異要因を10分で図解し、優先すべき現場アクションを自動提示",
-  "週1回のAIレポートで管理会計と資金繰りを一本化し、意思決定までの時間を平均50%削減",
-  "2ステップの無料経営診断フォームから、翌営業日に実行ロードマップと資金計画案を共有",
+  "AIダッシュボードが粗利とキャッシュの差異要因を数分で整理し、迷いなく着手できる優先順位を提示",
+  "週1回のAIレポートで管理会計と資金繰りを一本化し、判断までの道筋を平均50%短縮",
+  "2ステップの無料経営診断フォームから、翌営業日に実行ロードマップと数値シナリオを共有",
 ];
 
 const servicePillars = [
@@ -67,7 +67,7 @@ const servicePillars = [
     icon: BrainCircuit,
     title: "生成AI",
     description:
-      "経営指標・現場の声・未整理のナレッジをリアルタイムで取り込み、生成AIが複数シナリオと期待インパクトを提示。意思決定と実行が一気通貫でつながります。",
+      "経営指標・現場の声・未整理のナレッジをリアルタイムで束ね、生成AIが複数シナリオと期待インパクトを提示。意思決定と実行が一気通貫でつながります。",
   },
   {
     icon: BarChart3,
@@ -79,7 +79,7 @@ const servicePillars = [
     icon: PiggyBank,
     title: "資金繰り",
     description:
-      "資金ショートの兆しと投資余力を生成AIが確率で示し、資本政策や投資計画の意思決定を後押しします。",
+      "資金ショートの兆しと投資余力を生成AIが確率で示し、投資計画と成長資源の配分を支えます。",
   },
 ];
 
@@ -150,17 +150,17 @@ const HeroSection = () => {
               </span>
             </div>
             <h1 className="mt-5 text-balance text-[1.9rem] font-bold leading-[1.25] text-slate-900">
-              経営改善に鍛えられた中小企業診断士×生成AI＝意思決定の質・速さ・先見性を高める経営計画
+              専門家×生成AIで、社長が胸を張って選べる経営計画
             </h1>
             <p className="mt-4 text-sm font-semibold uppercase tracking-[0.32em] text-primary/80">
-              経営者の判断時間を半減し、先読みできる打ち手を届ける
+              判断の質・速さ・先見性を、ひとつの流れで引き上げる
             </p>
             <div className="mt-4 space-y-3 text-[0.95rem] leading-relaxed text-muted-foreground">
               <p>
-                現場・会計・市場のデータを生成AIが束ね、意思決定に必要な数字と根拠を即時に提示。診断士がシナリオの妥当性を検証し、実行ロードマップまで伴走します。
+                現場・会計・市場のデータを生成AIが束ね、意思決定に必要な数字と根拠を即時に提示。診断士がシナリオの妥当性を検証し、経営者が自信を崩さず語れるストーリーに整えます。
               </p>
               <p>
-                重要指標の監視とレポートを自動化し、経営会議の準備時間を50％以上短縮。先行指標まで可視化された経営計画で、判断の速さと再現性を両立させます。
+                重要指標の監視とレポートを自動化し、経営会議の準備時間を50％以上短縮。先行指標まで可視化された経営計画で、判断の速さと再現性を両立させ、決断の瞬間に堂々と向き合えます。
               </p>
             </div>
 
@@ -198,7 +198,7 @@ const HeroSection = () => {
                   <ChevronDown className="h-5 w-5 transition-transform duration-300 group-open:rotate-180" aria-hidden="true" />
                 </summary>
                 <p className="mt-3 text-[0.95rem] font-semibold leading-relaxed text-highlight-foreground">
-                  決断までの時間を50％削減。3ヶ月で利益とキャッシュが同時に増える仕組みをチームで並走構築します。
+                  決断までの時間を50％削減。3ヶ月で利益とキャッシュが同時に増える仕組みを整え、経営者が胸を張って語れる成果づくりを支援します。
                 </p>
               </details>
 
@@ -347,25 +347,25 @@ const HeroSection = () => {
                   </span>
                 </div>
                 <h1 className="text-balance text-3xl font-bold leading-[1.25] text-foreground md:text-4xl lg:text-[3.05rem] lg:leading-[1.25]">
-                  経営改善に鍛えられた中小企業診断士×生成AI＝意思決定の質・速さ・先見性を高める経営計画
+                  専門家×生成AIで、社長が胸を張って選べる経営計画
                 </h1>
                 <div className="space-y-3 rounded-3xl bg-white/92 px-6 py-5 shadow-lg shadow-primary/10 ring-1 ring-primary/15">
                   <p className="text-sm font-semibold uppercase tracking-[0.28em] text-primary/80">
-                    経営者の判断時間を半減し、未来の一手を先読み
+                    判断の質・速さ・先見性を、ひとつながりで高める
                   </p>
                   <div className="space-y-2 text-[1.05rem] leading-relaxed text-muted-foreground md:text-lg">
                     <p>生成AIが会計・現場・市場データを統合し、意思決定に必要な根拠と数値を即時に整理。</p>
-                    <p>中小企業診断士がシナリオのリスクと実行手順を補強し、先読みできる経営計画へ落とし込みます。</p>
+                    <p>中小企業診断士がシナリオのリスクと実行手順を補強し、経営者が迷わず語れる未来像へ落とし込みます。</p>
                   </div>
                 </div>
                 <div className="max-w-3xl space-y-2 text-[1.05rem] leading-relaxed text-muted-foreground md:text-lg">
                   <p>AIレポートが粗利・キャッシュ・在庫の変化を数分で図解し、判断材料をワンクリックで共有。</p>
-                  <p>会議準備を50％以上短縮しつつ、先行指標と複数シナリオを提示することで、意思決定の確度とスピードを両立します。</p>
+                  <p>会議準備を50％以上短縮しつつ、先行指標と複数シナリオを提示することで、判断の確信とスピードを両立します。</p>
                 </div>
                 <div className="flex flex-col gap-3 rounded-3xl border border-highlight/30 bg-highlight/10 px-6 py-5 text-highlight-foreground">
                   <span className="text-sm font-semibold uppercase tracking-[0.3em] text-highlight-foreground/80">実感できる成果</span>
                   <p className="text-[1.05rem] font-semibold leading-relaxed md:text-lg">
-                    決断までの時間を50％削減。3ヶ月で利益とキャッシュが同時に増える仕組みをチームで並走構築します。
+                    決断までの時間を50％削減。3ヶ月で利益とキャッシュが同時に増える仕組みを整え、経営者が胸を張って語れる成果づくりを支援します。
                   </p>
                 </div>
                 <div className="space-y-3 rounded-3xl border border-primary/20 bg-white/82 p-6 shadow-card">
