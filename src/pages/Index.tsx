@@ -1532,10 +1532,10 @@ const securityPoints: SecurityPoint[] = [
     badge: "AES-256",
   },
   {
-    title: "ISO/IEC 27001取得",
-    description: "情報セキュリティマネジメントシステムを国際認証。",
+    title: "第三者セキュリティ監査",
+    description: "年次の脆弱性診断と外部監査で運用プロセスを継続改善。",
     icon: Shield,
-    badge: "ISO 27001",
+    badge: "Security Audit",
   },
   {
     title: "機密保持契約 (NDA) 対応",
