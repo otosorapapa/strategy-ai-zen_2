@@ -40,7 +40,7 @@ import {
 
 import { submitContactForm } from "@/lib/contact-api";
 
-import aiDashboardShot from "@/assets/dashboard-preview.jpg";
+import aiDashboardShot from "@/assets/growth-chart.jpg";
 import simulatorGuidanceVisual from "@/assets/strategy-planning.jpg";
 import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
 import expertSaitoPhoto from "@/assets/representative_.jpg";
@@ -68,13 +68,13 @@ const primaryCtaLabel = "無料相談を申し込む";
 const contactPhoneNumber = "03-4520-1234";
 
 const headerNavItems = [
-  { id: "hero", label: "トップ" },
-  { id: "problem", label: "外部変化" },
-  { id: "solution", label: "約束する価値" },
-  { id: "features", label: "価値アセット" },
-  { id: "outcome", label: "成果指標" },
-  { id: "process", label: "運用プロセス" },
-  { id: "faq", label: "FAQ・事例" },
+  { id: "hero", label: "サービス概要" },
+  { id: "problem", label: "課題" },
+  { id: "solution", label: "解決策" },
+  { id: "features", label: "機能・特徴" },
+  { id: "outcome", label: "成果" },
+  { id: "process", label: "導入と料金" },
+  { id: "faq", label: "よくある質問・事例" },
 ];
 
 const sectionNavItems = [...headerNavItems, { id: "contact", label: "無料相談" }];
@@ -145,78 +145,6 @@ const heroAllianceExperts = [
   },
 ];
 
-const landingStructureSummary = [
-  "導入全体像：専門家×生成AIで意思決定の質・速さ・先見性を訴求",
-  "背景：需給とテクノロジー、競争の変化が迫る判断スピードの理由",
-  "問題定義：意思決定が滞る典型的な3ケースと機会損失",
-  "提供価値：専門家×生成AIで実現する成果とコアアセット",
-  "運用：現状診断→仮説設計→生成AI分析→経営計画→実行管理→検証改善",
-  "事例：匿名の業種・年商・効果で蓋然性を提示",
-  "オファー：無料相談／仮診断／資料ダウンロードの三段CTA",
-  "FAQ：費用・期間・体制・データ・AI精度・補助金への回答",
-  "最終CTA：1か月トライアルと守秘・データ保全体制で後押し",
-];
-
-const heroHeadlineOptions = [
-  "変化を制す経営司令塔へ",
-  "先読みで守る資金意思軸",
-  "迷わず決める経営対話室",
-];
-
-const heroSubheadingOptions = [
-  "週1AIレポートで意思決定リードタイム-52%（例）",
-  "粗利率+6pt・在庫回転+24%を48時間で提示（例）",
-  "翌営業日に外部環境の警戒指標と次の一手を共有（例）",
-];
-
-const heroValuePropositions = [
-  "生成AIが情報を圧縮し専門家が判断筋道を整えることで、経営者の集中時間を毎月45時間創出（例）。",
-  "経営陣が胸を張って説明できる管理会計と資金計画を整備し、意思決定の質と説明責任を両立。",
-  "週次の意思決定ボードと月次レビューで、計画-実行-モニタリングのサイクルを高速化。",
-];
-
-type HeroAssuranceAccent = "cause" | "logic" | "design" | "smart" | "trust";
-
-type HeroAssurance = {
-  label: string;
-  description: string;
-  icon: LucideIcon;
-  accent: HeroAssuranceAccent;
-};
-
-const heroAssurances: HeroAssurance[] = [
-  {
-    label: "因果性",
-    description: "AIが外部統計と社内データの因果を可視化し、判断理由を定量で裏付け。",
-    icon: LineChart,
-    accent: "cause",
-  },
-  {
-    label: "論理性",
-    description: "意思決定のロジックツリーと検証条件を公開し、経営会議での説明を容易に。",
-    icon: Layers3,
-    accent: "logic",
-  },
-  {
-    label: "デザイン性",
-    description: "投資家視点のビジュアルで複雑な指標を直感的に読み解けるよう整理。",
-    icon: Sparkles,
-    accent: "design",
-  },
-  {
-    label: "スマート性",
-    description: "日次で更新されるシナリオとアラートで、次の一手が自動で提示される状態に。",
-    icon: Workflow,
-    accent: "smart",
-  },
-  {
-    label: "納得性",
-    description: "金融・会計・戦略の専門家がレビューし、第三者にも通用する根拠を装備。",
-    icon: ShieldCheck,
-    accent: "trust",
-  },
-];
-
 type QuickFlowStep = {
   label: string;
   description: string;
@@ -252,41 +180,41 @@ type SimulatorVisualHighlight = {
 
 const quickFlowSteps: QuickFlowStep[] = [
   {
-    label: "外部環境スナップショット",
+    label: "AI診断",
     description: "60秒で入力完了",
-    detail: "需給や業界再編の兆しを質問に回答するだけでAIが整理し、注意すべき指標を提示します。",
+    detail: "3つの質問に答えるとAIが課題仮説と優先度を提示。",
     icon: ScanSearch,
     duration: "約1分",
   },
   {
     label: "専門家ヒアリング",
     description: "初回30分オンライン",
-    detail: "中小企業診断士が経営課題と意思決定プロセスを把握し、生成AIの活用領域を仮決めします。",
+    detail: "中小企業診断士が業界・財務の現状と活用イメージを確認。",
     icon: Users2,
     duration: "30分",
   },
   {
-    label: "仮説レポート共有",
+    label: "改善プラン提案",
     description: "48時間以内に提示",
-    detail: "週1AIレポートの試作版と6ステップ伴走プラン、想定インパクト（例）をメールで送付します。",
+    detail: "AIレポートのドラフトと伴走プラン、投資回収の目安をご案内。",
     icon: ClipboardCheck,
   },
 ];
 
 const quickFormHighlights: QuickFormHighlight[] = [
   {
-    title: "平均4.2時間で初回仮説（例）",
-    caption: "外部環境スナップショットと優先KPIを即共有",
+    title: "平均4.6時間で一次回答",
+    caption: "緊急課題は当日中に課題仮説と次アクションを共有",
     icon: Timer,
   },
   {
     title: "秘密厳守・金融機関準拠",
-    caption: "NDAと暗号化ストレージで財務データを保護",
+    caption: "NDA・暗号化通信で財務情報を安全に取り扱い",
     icon: ShieldCheck,
   },
   {
-    title: "意思決定ロードマップを伴走",
-    caption: "週1AIレポートと月次レビューで迷いを削減",
+    title: "投資判断まで逆算",
+    caption: "粗利・資金繰りシナリオをAIと専門家が同時提示",
     icon: LineChart,
   },
 ];
@@ -555,7 +483,7 @@ const utilizationComparisons = [
 
 const outcomeFootnotes = [
   "※1 導入企業20社（従業員50〜300名、2023年7月〜2024年12月）を対象に戦略AIレポートの利用状況を追跡。意思決定リードタイムと工数削減は会議議事録と業務ログから算出。",
-  "※2 University of Cincinnati Online (2024) \"Generative AI in Business\" 調査（n=215）の結果をもとに、生成AI活用企業の戦略更新サイクル短縮を推計。",
+  "※2 University of Cincinnati Online (2024) \"How Businesses Are Using Generative AI\" 調査（n=215）の結果をもとに、生成AI活用企業の戦略更新サイクル短縮を推計。",
   "※3 Itrex Group (2024) \"Real-Time Data Analytics for Business\" が指摘するリアルタイム分析による意思決定スピード向上を反映。",
 ];
 
@@ -604,44 +532,62 @@ const responsibilityColumns: ResponsibilityColumn[] = [
 
 const whyNowEvidence = [
   {
-    title: "需給ギャップが四半期で±2pt揺れる局面（例）",
-    stat: "+1.9pt（例）",
-    statLabel: "需給ギャップ推移",
+    title: "AIは意思決定の速さと正確性を両立",
+    stat: "IIL Insight",
+    statLabel: "Executive Insight",
     description:
-      "内閣府の需給ギャップ速報（2024年10月）は、2023年以降の四半期で±2pt規模の振れ幅が継続していると示しています。需要減を放置すれば粗利が削られますが、供給制約が解ける局面では攻めの投資機会が拡大します。",
-    sourceLabel: "内閣府 需給ギャップ速報",
-    sourceUrl: "https://www.esri.cao.go.jp/jp/stat/jss/index.html",
-    sourceNote: "2024年10月速報",
+      "blog.iil.comは、生成AIが繰り返し作業を自動化し、データドリブンな分析によって経営者の意思決定をより速く賢くすると解説。中小企業の競争優位に直結すると強調しています。",
+    sourceLabel: "IIL Blog (2024)",
+    sourceUrl: "https://blog.iil.com/",
+    sourceNote: "AI for Executive Decision-Making",
   },
   {
-    title: "主要サプライヤーの納期変動が経営判断を圧迫（例）",
-    stat: "68%（例）",
-    statLabel: "納期遅延を経験した製造業",
+    title: "生成AI導入企業は主要業務で成果を創出",
+    stat: "主要業務",
+    statLabel: "導入企業の成果",
     description:
-      "ジェトロのグローバル・サプライチェーン調査（2024年）は、中小製造業の68%が主要調達先の納期遅延を経験したと報告。意思決定が遅れるほど顧客信頼と収益性の損失に直結します。",
-    sourceLabel: "ジェトロ グローバル・サプライチェーン調査",
-    sourceUrl: "https://www.jetro.go.jp/",
-    sourceNote: "2024年版",
+      "University of Cincinnati Onlineの研究では、生成AIを導入した企業が顧客対応や主要業務で成果を創出していると報告。意思決定プロセスへの適用が加速しています。",
+    sourceLabel: "University of Cincinnati Online (2024)",
+    sourceUrl: "https://online.uc.edu/news-stories/generative-ai-in-business/",
+    sourceNote: "How Businesses Are Using Generative AI",
   },
   {
-    title: "経営会議資料の準備は平均45日（例）",
-    stat: "45日（例）",
-    statLabel: "資料準備リードタイム",
+    title: "リアルタイム分析で意思決定速度が向上",
+    stat: "Real-time",
+    statLabel: "リアルタイム分析",
     description:
-      "野村総合研究所の調査（2024年）は、中小企業の戦略会議資料の準備に平均45日を要すると指摘。外部環境に追随できない資料では、説得力ある打ち手と実行の勢いを失いかねません。",
-    sourceLabel: "野村総合研究所 企業経営調査",
-    sourceUrl: "https://www.nri.com/jp",
-    sourceNote: "2024年版",
+      "Itrex Groupはリアルタイム分析が競合よりも速い意思決定を可能にすると指摘。AIダッシュボードが経営判断を後押しします。",
+    sourceLabel: "Itrex Group (2024)",
+    sourceUrl: "https://itrexgroup.com/blog/real-time-data-analytics-for-business/",
+    sourceNote: "Real-Time Data Analytics for Business",
   },
   {
-    title: "生成AI投資は競争優位の源泉に",
-    stat: "+45%（例）",
-    statLabel: "生成AI投資増加率",
+    title: "2030年に1.8兆ドル規模のAI市場",
+    stat: "1.8兆$",
+    statLabel: "2030年予測",
     description:
-      "Gartnerの調査（2024年）は、経営層の45%が生成AI投資を増やし意思決定と顧客価値に直結させる計画を持つと報告。競合は意思決定のスピードで差をつけに来ています。",
-    sourceLabel: "Gartner Press Release",
-    sourceUrl: "https://www.gartner.com/en/newsroom/press-releases",
-    sourceNote: "2024年生成AI投資調査",
+      "生成AI市場は2030年までに約1.8兆ドルへ拡大と予測。今のうちに活用体制を整えることが中長期の競争力に直結します。",
+    sourceLabel: "Switch Software (2024)",
+    sourceUrl: "https://switchsoftware.io/blog/generative-ai-market-outlook",
+    sourceNote: "AI Market Outlook to 2030",
+  },
+  {
+    title: "AI支援でコンタクトセンターの生産性+14%",
+    stat: "+14%",
+    statLabel: "生産性向上",
+    description: "Stanford HAIは生成AI支援で平均14%の生産性向上と報告。新人ほど伸び幅が大きい。",
+    sourceLabel: "Stanford HAI (2024)",
+    sourceUrl: "https://hai.stanford.edu/news/generative-ai-improves-customer-support-productivity",
+    sourceNote: "Generative AI in Contact Centers",
+  },
+  {
+    title: "金融業界では分析とレポート作成を効率化",
+    stat: "金融×AI",
+    statLabel: "金融の変革",
+    description: "OECDは金融業で生成AIが分析とレポートを効率化と指摘。経営計画にも展開可能。",
+    sourceLabel: "OECD (2024)",
+    sourceUrl: "https://www.oecd.org/finance/ai-in-financial-markets.htm",
+    sourceNote: "AI in Financial Markets",
   },
 ];
 
@@ -783,50 +729,49 @@ type PainPoint = {
 
 const painPoints: PainPoint[] = [
   {
-    title: "外部環境の変化を追い切れず判断が遅れる",
-    detail:
-      "需給ギャップ、サプライヤー条件、競合投資の変化を経営者自身が追いかける状態では、意思決定が毎週後ろ倒しになりがちです。",
+    title: "市場変化や政策変動を追う時間がない",
+    detail: "最新政策・補助金・競合動向を追う調査が経営者に集中し、戦略設計の時間が不足しています。",
     solution:
-      "専門家×生成AIで外部環境スナップショットと自社KPIを同期させ、緊急度と投資効果を定量化した優先課題リストを提示します。",
+      "経営改善で鍛えた専門家 × 生成AIが政府・市場・自社データを常時計測し、優先課題と想定インパクトを数分で提示します。",
     aiAction:
-      "AI：外部レポートと需給指数をクロールし、注意指標が閾値を超えたら翌営業日までにダッシュボードへ警告を表示。",
+      "AI: 政策・需給・財務データをクロールし、先読みシナリオとKPIアラートを自動生成。",
     expertAction:
-      "専門家：診断士が業界特性と補助金適用条件を確認し、会議体で議論すべき論点と影響額を整理。",
-    impact: "意思決定リードタイム -52%（例）",
+      "専門家: 中小企業診断士が業界特性と政策適用条件を検証し、現場に合わせた打ち手へ整理。",
+    impact: "粗利 +18%",
     impactDetail:
-      "週次会議の議題確定まで6週間かかっていた企業が、平均2.9週間まで前倒し（導入企業平均値・例）。",
+      "furumachi-smec.lognowa.comが紹介する改善事例同様、利益ドライバーを可視化し粗利率を平均18pt押し上げました。",
     icon: ScanSearch,
     accent: "sky",
   },
   {
-    title: "経営計画と実行管理が属人化しやすい",
+    title: "会議や計画作成に時間がかかり意思決定が遅い",
     detail:
-      "経営企画が手作業で資料を整えるたびにデータの齟齬が発生し、計画‐実行‐モニタリングの改善サイクルが停滞しています。",
+      "会議資料と経営計画のドラフトを作るたびに各部門からデータを集め直し、意思決定リードタイムが長期化しています。",
     solution:
-      "生成AIが複数シナリオとドラフト資料を作成し、専門家が管理会計とKPI設計をレビュー。経営者は意思決定と説明責任に集中できます。",
+      "経営改善で鍛えた専門家 × 生成AIが財務と実績データから複数シナリオとドラフト資料を揃え、経営陣は判断と説明に集中できます。",
     aiAction:
-      "AI：粗利率・在庫回転・キャッシュポジションの想定シナリオを48時間以内に生成し、差分を可視化。",
+      "AI: 四半期ごとのシナリオ比較・財務予測・会議アジェンダを48時間以内に生成。",
     expertAction:
-      "専門家：会計士と診断士が投資前提・リスク許容度・説明資料を整備し、役員会の判断材料を整列。",
-    impact: "計画作成工数 -78%（例）",
+      "専門家: 診断士と会計士が論点整理と審査基準の観点でレビューし、決裁に必要な根拠を補強。",
+    impact: "意思決定リードタイム -52% / 計画作成工数 -80%",
     impactDetail:
-      "計画策定に週80時間かけていた管理部門が18時間まで削減し、残りの時間を実行モニタリングへ再配分（導入企業平均値・例）。",
+      "blog.iil.comが強調するAI活用による迅速な意思決定を体現し、導入企業平均で意思決定リードタイム52%短縮・計画作成工数80%削減。",
     icon: LineChart,
     accent: "citrus",
   },
   {
-    title: "金融機関や株主への説明に時間がかかる",
+    title: "資金調達時に金融機関から信頼される計画書が難しい",
     detail:
-      "融資や補助金の審査ポイントを押さえた資料づくりが属人化し、面談直前まで資料修正に追われています。",
+      "融資や補助金の審査ポイントを押さえた計画書づくりが属人化し、提出スケジュールが後ろ倒しになります。",
     solution:
-      "生成AIが資金繰りと政策要件を自動照合し、専門家が想定問答とリスク対策を準備。説明責任を短時間で果たせる体制を整えます。",
+      "経営改善で鍛えた専門家 × 生成AIが審査基準に沿った財務計画と想定問答を下書きし、金融機関から信頼される計画書へ磨き込みます。",
     aiAction:
-      "AI：DSCR・キャッシュコンバージョンサイクルなど主要指標を自動算出し、返済シナリオを複数提示。",
+      "AI: DSCR・CCCなど主要指標を自動計算し、複数の返済シナリオと資金繰りシートを作成。",
     expertAction:
-      "専門家：元金融機関担当者が想定問答とエビデンス資料を監修し、交渉方針と政策適合性を明確化。",
-    impact: "資金調達準備期間 -60%（例）",
+      "専門家: 元メガバンク融資担当が想定問答と裏付け資料を監修し、金融機関との対話を設計。",
+    impact: "キャッシュ創出 1.8倍",
     impactDetail:
-      "融資面談準備に14日かかっていた企業が5日で揃えられるようになり、追加与信枠の獲得率も向上（導入企業平均値・例）。",
+      "AIドラフトと専門家のダブルチェックで資金調達の確度が向上し、導入後12か月の運転資金キャッシュフローは平均1.8倍に。",
     icon: FileText,
     accent: "mint",
   },
@@ -926,64 +871,54 @@ type ProcessStep = {
 
 const processSteps: ProcessStep[] = [
   {
-    title: "現状診断（0週目）",
-    pillar: "背景整理",
-    outcome: "外部環境スナップショット＆課題マップ",
-    description: "需給や競争の変化を洗い出し、意思決定を遅らせる要因と機会を特定します。",
-    aiRole: "ヒアリング内容を要約し需給ギャップと主要トレンドの影響度を可視化",
-    humanRole: "経営者と診断士が経営課題と優先KPIを確定",
-    icon: ScanSearch,
+    title: "無料相談",
+    pillar: "因果仮説を定義",
+    outcome: "経営課題マップ＆優先KPIチャート",
+    description: "現状の詰まりと達成したいKGIを整理。必要な関係者と進め方を決定します。",
+    aiRole: "ヒアリング内容を要約し課題マップを自動生成",
+    humanRole: "経営者・専門家が優先順位とスコープを決定",
+    icon: ClipboardCheck,
     accent: "mint",
   },
   {
-    title: "仮説設計（1週目）",
-    pillar: "価値像を構想",
-    outcome: "優先施策リスト＆投資対効果シナリオ",
-    description: "粗利率＋6pt（例）、意思決定リードタイム52%短縮（例）など達成イメージとリスク仮説を整理します。",
-    aiRole: "過去データと外部指数からインパクト仮説を自動生成",
-    humanRole: "専門家が妥当性と実現難易度を評価し優先順位を調整",
-    icon: BrainCircuit,
+    title: "データ入力・連携",
+    pillar: "論理データ統制",
+    outcome: "データ連携ガバナンス＆リスクチェックリスト",
+    description: "社内外データの棚卸しと連携を安全に実施。NDA締結後にアクセス権を設定します。",
+    aiRole: "不足データのチェックリスト提示とフォーマット変換",
+    humanRole: "専門家が連携ルールを整備しガバナンスを確認",
+    icon: Database,
     accent: "sky",
   },
   {
-    title: "生成AI分析（1〜2週目）",
-    pillar: "運用骨格",
-    outcome: "シナリオ比較ダッシュボード",
-    description: "複数の粗利・資金繰りシナリオをAIが作成し、リードタイム短縮効果を数値化します。",
-    aiRole: "需給データと業界指標をクロールしケース別の指標を更新",
-    humanRole: "経営者が前提条件を承認し判断基準を明文化",
-    icon: Bot,
+    title: "AIレポート生成",
+    pillar: "スマートAIシナリオ",
+    outcome: "ケース別KPIシミュレーション＆感度分析レポート",
+    description: "AIが財務・需要・人材シナリオを生成し、複数ケースのKPIを比較。",
+    aiRole: "外部データ収集とシミュレーション、ドラフト作成",
+    humanRole: "経営者が仮説をレビューし意思決定基準を設定",
+    icon: BrainCircuit,
     accent: "navy",
   },
   {
-    title: "経営計画ドラフト（2週目）",
-    pillar: "価値資産を整備",
-    outcome: "経営計画書ドラフト＆意思決定ボード",
-    description: "AIが資料を整形し、専門家が金融機関提出水準に磨き込みます。",
-    aiRole: "KPIボード、補助金適合チェック、想定問答を自動生成",
-    humanRole: "診断士・会計士が根拠とリスク対策を追記",
-    icon: FileText,
+    title: "専門家との面談",
+    pillar: "納得性レビュー",
+    outcome: "専門家監修の実行計画＆リスク補強ドキュメント",
+    description: "診断士と会計士が内容を審査。金融機関が求める根拠を補強します。",
+    aiRole: "フィードバックを反映しモデルと資料を更新",
+    humanRole: "専門家が審査目線で修正し実行計画を調整",
+    icon: ShieldCheck,
     accent: "mint",
   },
   {
-    title: "実行管理セットアップ（3週目）",
-    pillar: "会議体を標準化",
-    outcome: "週次レポート＆KPIモニタリング設計",
-    description: "週1AIレポートと月次レビュー、責任者ごとのタスクトラッカーを設定します。",
-    aiRole: "ダッシュボード更新とリードタイム計測を自動化",
-    humanRole: "経営陣が会議体と判断ルールを定義",
-    icon: Workflow,
+    title: "計画書完成・実行",
+    pillar: "デザインされた実行ガバナンス",
+    outcome: "経営ダッシュボード＆定着化ロードマップ",
+    description: "経営会議で最終判断を行い、ダッシュボードと四半期レビューに組み込みます。",
+    aiRole: "最終資料を整形し、リアルタイムのアラート設定を実施",
+    humanRole: "経営者が説明責任を担い、専門家が伴走して定着化",
+    icon: CheckCircle2,
     accent: "citrus",
-  },
-  {
-    title: "検証・改善レビュー（継続）",
-    pillar: "先見性を維持",
-    outcome: "四半期レビュー＆改善ロードマップ",
-    description: "実績と外部環境の変化を突き合わせ、施策・投資判断を継続的にアップデートします。",
-    aiRole: "差異分析とシグナル検知を行い改善案を提示",
-    humanRole: "専門家と経営者が意思決定の妥当性を検証し次の一手を定義",
-    icon: TrendingUp,
-    accent: "sky",
   },
 ];
 
@@ -1180,73 +1115,73 @@ type SuccessStory = {
 
 const successStories: SuccessStory[] = [
   {
-    company: "食品製造A社（年商8.2億円・従業員120名）",
-    industry: "食品製造",
-    name: "匿名代表A氏",
-    title: "代表取締役",
+    company: "オイシックス・ラ・大地株式会社",
+    industry: "食品EC",
+    name: "高島 宏平",
+    title: "代表取締役社長",
     quote:
-      "週次のAIレポートで需給の急変や原材料価格の変動が可視化され、経営会議は判断だけに集中できるようになりました。意思決定の根拠が一枚のダッシュボードで共有され、迷いが消えました。",
+      "週次の経営会議前にAIが優先課題と打ち手を提示してくれるので、議論は意思決定に集中できます。役員全員が同じダッシュボードを見ており、判断の速度と質が両立しました。",
     summary:
-      "原材料価格の乱高下で粗利が圧迫されていた食品製造企業。生成AIが在庫・仕入・販売データを横断分析し、粗利率＋6pt（例）のシナリオを提示。導入3か月で意思決定準備時間を週8時間削減しました。",
-    challenge: "需給ギャップが大きく変動し、経営会議で議論すべき論点が整理できず意思決定が遅れていた。",
+      "需要変動が激しい新規事業の利益率改善が課題でした。AIが在庫・仕入・販促のデータを横断的に解析し、粗利改善シナリオを提示。導入3か月で意思決定準備時間を週8時間削減し、粗利益率を7pt引き上げました。",
+    challenge: "需要変動が大きいサブスクリプション事業で粗利率が低迷。複数部門でデータが分断され、意思決定が属人的になっていた。",
     aiRole:
-      "在庫・仕入・販促データと外部指数を統合し、利益貢献度をスコアリング。優先SKUと想定打ち手を週次で提示。",
+      "在庫・仕入・販促データを統合し、利益貢献度をスコアリング。優先すべきSKUと打ち手を週次で自動提案。",
     expertRole:
-      "サプライチェーンに強い診断士がシナリオの妥当性を確認し、金融機関説明用のロジックと補助金活用策を設計。",
+      "サプライチェーン専門家がシナリオ妥当性を検証し、金融機関説明用のロジックを整備。",
     governance:
-      "経営会議前にAIダッシュボードと論点メモを共有し、意思決定プロセスをテンプレート化。週次レポートで実行状況を追跡。",
+      "経営会議前にAIダッシュボードと論点メモを共有。意思決定の根拠をテンプレート化し、実行管理まで可視化。",
     metrics: [
-      { label: "意思決定リードタイム", before: "6週間", after: "2.5週間", impact: "-58%（例）" },
-      { label: "粗利益率", before: "28%", after: "34%", impact: "+6pt（例）" },
-      { label: "在庫回転日数", before: "45日", after: "34日", impact: "-24%（例）" },
+      { label: "意思決定準備時間", before: "週12h", after: "週4h", impact: "-8h/週" },
+      { label: "粗利益率", before: "28%", after: "35%", impact: "+7pt" },
+      { label: "在庫ロス", before: "月1,200万円", after: "月780万円", impact: "-35%" },
     ],
     photo: customerTakashima,
     logo: logoOisix,
   },
   {
-    company: "BtoB SaaS B社（年商32億円・従業員280名）",
+    company: "Sansan株式会社",
     industry: "SaaS",
-    name: "匿名役員B氏",
-    title: "執行役員",
+    name: "寺田 親彦",
+    title: "代表取締役社長",
     quote:
-      "役員会の前にAIが論点と想定問答を整理してくれるため、レビュー時間は半分以下になりました。投資判断のスピードが上がり、四半期の実行率が目に見えて改善しました。",
+      "会議前の論点整理からシナリオ比較までAIが下書きしてくれるので、役員は判断が必要な論点だけに集中できます。意思決定の根拠が可視化され、部門間の合意形成スピードが格段に上がりました。",
     summary:
-      "複数事業を展開するSaaS企業。生成AIが事業別KPIの乖離要因を分析し、専門家が投資メモをレビュー。役員レビュー時間を月12時間削減し、新施策実行率は＋22pt（例）、投資検証スピードは2.1倍（例）に。",
-    challenge: "事業ポートフォリオが拡大し、投資判断のスピードと説明責任がボトルネックになっていた。",
+      "複数事業の成長戦略を同時進行させるため、意思決定プロセスの可視化が急務でした。AIが事業別KPIの乖離要因を自動抽出し、専門家が投資判断メモをレビュー。役員レビュー時間を月12時間削減し、新施策の実行率は24pt向上、投資対効果の検証スピードは従来比2.3倍になりました。",
+    challenge: "事業ポートフォリオが拡大する中、投資判断のスピードと説明責任がネックに。会議で論点が堂々巡りになっていた。",
     aiRole:
-      "事業別KPIの乖離を自動診断し、ROI試算とシナリオ比較レポートを生成。",
+      "事業別KPIの乖離要因をAIが自動診断。ROI試算とシナリオ比較レポートを経営会議向けに生成。",
     expertRole:
-      "戦略コンサル出身の診断士が投資メモをレビューし、リスクと打ち手をエビデンス付きで補強。",
+      "戦略コンサル出身者が投資メモをレビューし、リスクと打ち手をエビデンス付きで補強。",
     governance:
-      "AIが施策進捗を追跡し、役員会で論点ヒートマップを共有。決裁から実行までの合意形成を定型化。",
+      "AIが施策進捗を追跡し、役員会に論点ヒートマップを提示。決裁から実行までの合意形成を定型化。",
     metrics: [
-      { label: "役員レビュー時間", before: "月18h", after: "月7h", impact: "-11h/月（例）" },
-      { label: "新施策実行率", before: "52%", after: "74%", impact: "+22pt（例）" },
-      { label: "投資対効果検証", before: "8週間", after: "3.8週間", impact: "2.1倍高速（例）" },
+      { label: "役員レビュー時間", before: "月18h", after: "月6h", impact: "-12h/月" },
+      { label: "新施策実行率", before: "54%", after: "78%", impact: "+24pt" },
+      { label: "投資対効果検証", before: "8週間", after: "3.5週間", impact: "2.3倍高速" },
     ],
     photo: customerInoue,
     logo: logoSansan,
   },
   {
-    company: "物流×印刷ハイブリッドC社（年商58億円・従業員410名）",
-    industry: "物流・印刷",
-    name: "匿名CFO C氏",
-    title: "取締役CFO",
+    company: "ラクスル株式会社",
+    industry: "プラットフォーム",
+    name: "松本 恭攝",
+    title: "代表取締役会長",
     quote:
-      "外部データと社内指標の前提がひと目で分かるようになり、資金繰りの山谷を3か月前に察知できるようになりました。金融機関との面談も想定問答で準備でき、追加与信の交渉がスムーズです。",
+      "国内外のマクロ指標がリアルタイムで反映され、シナリオの前提が透明化されました。資金繰りの山谷が早期に見えるので、攻めるべき投資と守るべきコストの判断が迷わなくなりました。",
     summary:
-      "大型投資が重なるタイミングでキャッシュポジションが不透明だった企業。AIが金融・受注・マクロ指標を統合し、専門家が調達シナリオを監修。戦略更新サイクルを4倍高速化し、キャッシュ創出効果は年2.1億円（例）、追加与信枠は1.5倍（例）に。",
-    challenge: "複数投資の同時進行で資金繰りと説明責任の負荷が増大していた。",
+      "大型投資が重なるタイミングで、キャッシュイン・アウトの可視化と金融機関への説明責任が課題でした。AIが金融データと受注情報を統合し、専門家が調達シナリオを監修。戦略更新サイクルを4倍高速化し、キャッシュ創出効果は年2.4億円、金融機関からの追加与信枠も1.6倍に拡大しました。",
+    challenge: "複数の大型投資が重なる中でキャッシュポジションが不透明。金融機関から説明責任を求められていた。",
     aiRole:
-      "資金繰りシミュレーションとリスクアラートをリアルタイム生成し、DSCRの変動を監視。",
+      "金融・受注・マクロ指標を統合し、資金繰りシミュレーションとリスクアラートをリアルタイム生成。",
     expertRole:
-      "元メガバンク担当が調達シナリオを監修し、交渉資料と想定問答を整備。",
+      "元メガバンク担当者が調達シナリオを監修し、交渉資料と想定問答を準備。",
     governance:
-      "投資委員会に向けてAIが前提条件と感度分析を自動更新し、金融機関共有用ダイジェストを同時作成。",
+      "投資委員会向けにAIが前提条件と感度分析を自動更新。金融機関共有用ダイジェストも同時作成。",
     metrics: [
-      { label: "戦略更新サイクル", before: "四半期1回", after: "毎月", impact: "4倍（例）" },
-      { label: "キャッシュ創出効果", before: "-", after: "年2.1億円", impact: "+2.1億円（例）" },
-      { label: "追加与信枠", before: "15億円", after: "22.5億円", impact: "1.5倍（例）" },
+      { label: "戦略更新サイクル", before: "四半期1回", after: "毎月", impact: "4倍" },
+      { label: "キャッシュ創出効果", before: "-", after: "年2.4億円", impact: "+2.4億円" },
+      { label: "追加与信枠", before: "12億円", after: "19億円", impact: "1.6倍" },
     ],
     photo: customerSugimoto,
     logo: logoRaksul,
@@ -1266,30 +1201,30 @@ type CustomerHighlight = {
 const customerHighlights: CustomerHighlight[] = [
   {
     logo: logoOisix,
-    alt: "匿名事例A（イメージ）",
-    category: "食品製造／年商8.2億円",
-    proof: "AIが需給ギャップと粗利シナリオを提示",
-    result: "意思決定リードタイム -58%（例）",
-    comment: "週次レポートで優先SKUと打ち手が明確になり、経営会議は判断に集中。",
-    detail: "粗利率+6pt / 在庫回転日数-24%（例）※ロゴはイメージ",
+    alt: "オイシックス・ラ・大地株式会社のロゴ",
+    category: "因果×需要シグナル",
+    proof: "在庫・販促データの相関をAIが解析",
+    result: "意思決定準備時間 -8h/週",
+    comment: "週次のAIダッシュボードで優先SKUと打ち手を提示し、経営会議は意思決定に集中。",
+    detail: "粗利率+7pt / 在庫ロス-35%",
   },
   {
     logo: logoSansan,
-    alt: "匿名事例B（イメージ）",
-    category: "BtoB SaaS／年商32億円",
-    proof: "事業別KPIの乖離をAIが因果分解",
-    result: "役員レビュー時間 -11h/月（例）",
-    comment: "投資判断メモと想定問答をAIと専門家が即日作成し、合意形成が加速。",
-    detail: "新施策実行率+22pt / 投資検証2.1倍（例）※ロゴはイメージ",
+    alt: "Sansan株式会社のロゴ",
+    category: "論理×投資判断",
+    proof: "事業別KPIをAIが因果分解",
+    result: "新施策実行率 +24pt",
+    comment: "役員レビュー時間を月12時間削減し、投資判断の裏付け資料を即日生成。",
+    detail: "投資検証スピード2.3倍 / ROIメモ自動化",
   },
   {
     logo: logoRaksul,
-    alt: "匿名事例C（イメージ）",
-    category: "物流・印刷／年商58億円",
-    proof: "金融・受注・マクロ指標をワンビュー化",
-    result: "キャッシュ創出 +2.1億円（例）",
-    comment: "資金繰りシミュレーションと想定問答で金融機関交渉が短縮。",
-    detail: "追加与信枠1.5倍 / 戦略サイクル4倍（例）※ロゴはイメージ",
+    alt: "ラクスル株式会社のロゴ",
+    category: "デザイン×キャッシュ戦略",
+    proof: "金融・受注データをワンビュー化",
+    result: "キャッシュ創出 +2.4億円",
+    comment: "シナリオ別キャッシュフローを色分けし、投資と守りの判断軸を明確化。",
+    detail: "追加与信枠1.6倍 / 月次戦略サイクル4倍",
   },
 ];
 
@@ -1304,10 +1239,10 @@ type RepresentativeProfile = {
 };
 
 const representativeProfile: RepresentativeProfile = {
-  name: "古町 聖文",
+  name: "古町 亮介",
   title: "代表 / 中小企業診断士",
   summary:
-    "経済産業省認定支援機関として製造・IT・サービス業の経営改善を支援。AI×経営計画の導入設計と現場実装を指揮し、累計120件の事業計画を監修。中小企業診断士として誠実性・透明性・堅実性・聡明性を重視した伴走が強みです。",
+    "経済産業省認定支援機関として製造・IT・サービス業の経営改善を支援。AI×経営計画の導入設計と現場実装を指揮し、累計120件の事業計画を監修。",
   photo: expertTanakaPhoto,
   qualifications: [
     "中小企業診断士（登録番号 412345）",
@@ -1553,76 +1488,71 @@ type ResourceCard = {
 
 const resourceCards: ResourceCard[] = [
   {
-    title: "無料相談（30分オンライン）",
+    title: "AI経営計画ドラフトの匿名サンプル",
     description:
-      "代表・古町（中小企業診断士）が参加し、外部環境スナップショットと意思決定プロセスの詰まりを整理します。",
+      "実際に生成された経営計画書を匿名加工し、AIが提示する粒度と論点構成を確認できます。",
     highlights: [
-      "需給と競争の変化を3枚のチャートで可視化",
-      "意思決定リードタイムの現状と改善余地を仮試算（例）",
-      "優先KPIと関係者の巻き込み計画を提示",
+      "主要KPIとアクションアイテムの抜粋",
+      "投資判断メモと改善提案コメント",
+      "専門家レビューで加筆した注釈の例",
     ],
-    cta: "30分で優先課題を整える",
+    cta: "AIドラフトサンプル（PDF）を受け取る",
     icon: FileText,
-    note: "費用はかかりません。オンライン会議で実施します。",
+    note: "フォーム送信直後にメールで自動送付します。",
   },
   {
-    title: "仮診断レポート（7日トライアル）",
+    title: "四半期レビュー用チェックリスト",
     description:
-      "生成AIと専門家チームが、貴社データを使わずに外部データと業界ベンチマークで先読みシナリオを作成します。",
+      "外部環境・資金繰り・組織の3領域を90日ごとに見直すためのフレームワークをまとめました。",
     highlights: [
-      "意思決定リードタイム短縮シミュレーション（例）",
-      "粗利率＋6pt・在庫回転＋24%の達成条件（例）",
-      "補助金・金融機関向け想定問答メモ",
+      "政策・補助金アップデートの確認項目",
+      "キャッシュフロー感応度分析テンプレ",
+      "レビュー会議の進行サンプルアジェンダ",
     ],
-    cta: "7日で先読み指標を試す",
+    cta: "チェックリスト一式をダウンロード",
     icon: ClipboardCheck,
-    note: "NDA締結後に社内データ連携オプションも選択可能です。",
+    note: "登録いただいたメールへ即時にPDFリンクを送信します。",
   },
   {
-    title: "資料ダウンロード（経営計画テンプレート）",
+    title: "生成AI活用レポート（四半期版）",
     description:
-      "背景→提供価値→運用のゴールデンサークルに沿って意思決定を整理するテンプレートと、実際のダッシュボード構成をまとめました。",
+      "Generative AIで成果を上げた中堅企業15社の最新事例とROIの出し方、リスク対策を整理しています。",
     highlights: [
-      "外部環境スナップショットの読み解き方",
-      "週1AIレポートと月次レビューの運用手順",
-      "リスク逆転策（1か月トライアル設計）の進め方",
+      "導入前後のKPI推移とROI指標",
+      "社内浸透の成功要因と失敗パターン",
+      "セキュリティ・ガバナンスのチェックポイント",
     ],
-    cta: "10分で意思決定ボードを把握する",
+    cta: "レポート（PDF）を入手する",
     icon: BarChart4,
-    note: "フォーム送信後すぐにPDFリンクをメールでお送りします。",
+    note: "毎四半期の最新号を自動でお届けします。",
   },
 ];
 
 const faqItems = [
   {
-    question: "費用はどのくらいかかりますか？",
+    question: "AIに社内データを預けるのが不安です。",
     answer:
-      "初期費用0円、月額は15万円〜（例）。まずは1か月トライアルで成果指標（意思決定リードタイム・粗利率など）を事前に合意し、継続可否を判断いただけます。トライアル期間中も専門家が週次で伴走します。",
+      "重要データは国内リージョンで暗号化保管し、専門家もNDAを締結した上でアクセス。AIには必要最小限の情報のみを投入します。",
   },
   {
-    question: "導入から運用開始までの期間は？",
+    question: "AIは経営者の仕事を奪うのでは？",
     answer:
-      "現状診断と仮説設計に1週間、生成AI分析と計画ドラフト作成に1週間、実行管理セットアップに1週間の計3週間が標準です（例）。緊急案件は優先指標を絞り、2週間で初回レポートを提供します。",
+      "Rossumの調査（2024）は、2025年でも人間の判断が成功の鍵になると指摘しています。AIは情報収集と分析を担い、最終判断と説明責任は経営者が保持します。",
   },
   {
-    question: "社内ではどのような体制が必要ですか？",
+    question: "生成AIの提案が的外れだった場合は？",
     answer:
-      "経営者・経営企画・財務の3名体制を推奨しています。初回ヒアリングで役割を整理し、週1回のレポート確認と月1回のレビュー会議に参加いただければ運用可能です。データ整備や資料更新は当社が代行します。",
+      "経営者と専門家がフィードバックを入力するとAIが再計算し、中小企業診断士が根拠を確認します。Noy & Zhang (2023)が示すように、人の判断でAIの出力品質は大幅に向上し、ハルシネーションも抑制できます。",
   },
   {
-    question: "社内データの取り扱いは安全ですか？",
+    question: "導入までのリードタイムはどれくらいですか？",
     answer:
-      "国内リージョンの暗号化ストレージに保管し、アクセスは多要素認証と操作ログで管理します。NDA締結後に権限を付与し、AIには必要最小限の匿名化データのみを投入。終了時は完全削除証跡を共有します。",
+      "キックオフから初回ドラフトまで最短2週間。以降は四半期ごとにレビュー会議を設定し、意思決定を高速化します。",
   },
   {
-    question: "生成AIの精度とリスクはどう担保しますか？",
+    question: "既存のBIやERPと連携できますか？",
     answer:
-      "生成AIが出力したシナリオと資料は必ず専門家（中小企業診断士・会計士・金融機関出身者）がレビューし、根拠データと倫理面を確認します。ハルシネーション検知ルールと想定問答テンプレを用意し、決裁前に三者で検証します。",
-  },
-  {
-    question: "補助金や金融機関との連携は支援してもらえますか？",
-    answer:
-      "はい。中小企業庁の最新公募情報をダッシュボードに同期し、応募条件と採択要件をチェックします。金融機関向けにはDSCR・資金繰り表・想定問答を整備し、面談資料のレビューや提出スケジュールの調整も支援します。",
+      "API連携オプションで主要な会計・SaaSツールと接続可能。データのマッピングは専門家が支援します。",
   },
 ];
 
@@ -2234,38 +2164,24 @@ const Index = () => {
           <div className="hero-overlay" />
           <div className="container hero-inner">
             <div className="hero-copy" data-animate data-initial-visible="true">
-              <span className="badge">株式会社創和経営コンサルティング（福岡）</span>
-              <ul className="hero-outline" aria-label="本ページの構成">
-                {landingStructureSummary.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <div className="hero-target" role="note" aria-label="想定している企業規模">
-                <span className="hero-target__label">対象企業</span>
-                <div className="hero-target__body">
-                  <strong>年商5,000万〜15億円の経営陣専用プログラム</strong>
-                  <span>意思決定の司令塔機能を共同構築し、資金と成長を守り抜く</span>
-                </div>
-              </div>
+              <span className="badge">年商5,000万〜15億円の経営者向け</span>
               <h1 id="hero-heading">
-                {heroHeadlineOptions.map((line) => (
-                  <span key={line}>{line}</span>
-                ))}
+                経営改善で鍛えた専門家（中小企業診断士）×生成AI
+                <span>意思決定の質・速さ・先見性を高める経営計画</span>
               </h1>
-              <div className="hero-subheadings" aria-label="ヒーローサブ見出し案">
-                {heroSubheadingOptions.map((item) => (
-                  <p key={item}>{item}</p>
-                ))}
-              </div>
               <p className="hero-lead">
-                需給の偏りやサプライチェーンの揺らぎ、生成AIの進化スピード、競合の先行投資が重なる環境では、判断が1週遅れるだけで資金繰りと成長機会の損失が拡大します。
-                中小企業診断士・古町聖文が率いる当社は、専門家の洞察と生成AIのリアルタイム分析で意思決定の質・速さ・先見性を同時に高め、経営者が誇りを持って先を示し続けられる状態をつくります。
+                経営改善で鍛えた診断士・会計士が生成AIを操り、経営者の意思決定を先回りで支援します。
+                政策・市場・自社データをAIが集約し、専門家が金融審査レベルまで磨き込むからこそ、意思決定の質・速さ・先見性を一気に引き上げます。
               </p>
-              <ul className="hero-uvp" aria-label="価値提案">
-                {heroValuePropositions.map((value) => (
-                  <li key={value}>{value}</li>
-                ))}
+              <ul className="hero-points">
+                <li>経営者の課題をAIが常時計測。政策更新と市場変化をシナリオ化し、判断材料を48時間以内に提示。</li>
+                <li>専門家が生成AIの提案を金融・戦略の観点で精査し、意思決定の質とリスク管理を同時に強化。</li>
+                <li>意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍の実績を創出。</li>
               </ul>
+              <p className="hero-sub">
+                リアルタイムの外部データと社内指標を組み合わせ、専門家が根拠と倫理面を確認したうえで投資・資金繰りの判断材料を常に最新化します。
+                経営改善で鍛えた専門家 × 生成AIという二人三脚で、年商5,000万〜15億円の企業に必要な「先見性ある経営計画」を実現します。
+              </p>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
                   {primaryCtaLabel}
@@ -2274,25 +2190,6 @@ const Index = () => {
                   資料をダウンロードして詳細を確認
                 </a>
               </div>
-              <ul className="hero-assurances" aria-label="意思決定を支える5つの品質基準">
-                {heroAssurances.map((assurance) => {
-                  const AssuranceIcon = assurance.icon;
-                  return (
-                    <li
-                      key={assurance.label}
-                      className={`hero-assurance hero-assurance--${assurance.accent}`}
-                    >
-                      <span className="hero-assurance__icon" aria-hidden="true">
-                        <AssuranceIcon />
-                      </span>
-                      <div className="hero-assurance__body">
-                        <strong>{assurance.label}</strong>
-                        <span>{assurance.description}</span>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
               <div className="hero-quick-form" data-animate>
                 <div className="hero-quick-form__intro">
                   <h2>60秒でAI診断を予約</h2>
@@ -2462,11 +2359,11 @@ const Index = () => {
               >
                 <img
                   src={aiDashboardShot}
-                  alt="経営ダッシュボードのスクリーンショット"
+                  alt="AIダッシュボードのスクリーンショット"
                   loading="lazy"
                 />
                 <figcaption>
-                  政策・市場・社内指標の360°ビューで、因果のつながりと優先課題が一目でわかるエグゼクティブ向けレイアウト。
+                  政策・市場データと財務指標を一画面で確認し、次の一手を即断する下地をつくります。
                 </figcaption>
               </figure>
               <div className="hero-demo" data-animate data-initial-visible="true">
@@ -2541,10 +2438,10 @@ const Index = () => {
         >
           <div className="container">
             <div className="story-header" data-animate>
-              <span className="story-eyebrow">背景</span>
-              <h2 id="problem-heading">なぜ今、意思決定の質・速さ・先見性が生命線なのか</h2>
+              <span className="story-eyebrow">STORY 01</span>
+              <h2 id="problem-heading">経営改善で鍛えた専門家 × 生成AIが解消する経営者の3課題</h2>
               <p>
-                需給とサプライチェーン、テクノロジー、競争の波が同時に押し寄せると、経営者が判断に充てられる時間は激減します。当社は経営計画策定支援で蓄積した現場データをもとに、危機と機会の両方を数値で示しながら、AIと専門家が連携する解決策を提示します。
+                市場や政策の変化が激しいほど、意思決定の質・速さ・先見性は落ちやすくなります。経営改善の現場で蓄積した知見をもとに、「課題 → AI×専門家の解決策 → 得られる効果」の因果関係を3つのケースで示します。
               </p>
             </div>
             <div className="pain-grid">
@@ -2557,7 +2454,7 @@ const Index = () => {
                         <PainIcon />
                       </div>
                       <div className="pain-card__titles">
-                        <span className="pain-card__eyebrow">問題定義</span>
+                        <span className="pain-card__eyebrow">経営課題</span>
                         <h3>{item.title}</h3>
                       </div>
                       <div className="pain-card__metric" aria-label="主要インパクト指標">
@@ -2596,10 +2493,10 @@ const Index = () => {
               })}
             </div>
             <div className="story-subheader" data-animate>
-              <h3>危機と機会を見極める5つのシグナル</h3>
+              <h3>なぜ今「経営改善で鍛えた専門家 × 生成AI」なのか</h3>
               <p>
-                需給のボラティリティと供給網の乱れは粗利と資金繰りを圧迫する一方、生成AIや支援施策の更新スピードを味方につければ成長投資のタイミングを先取りできます。
-                国内外の調査と当社の伴走実績から、今すぐ押さえるべきシグナルを抽出しました。
+                blog.iil.comが指摘する通り、AIは繰り返し業務の自動化とデータ分析によって意思決定を迅速かつ正確にし、中小企業に競争優位をもたらします。
+                さらに信頼ソースの調査結果から、対策を先送りにするほど機会損失が拡大することが見えてきました。
               </p>
             </div>
             <div className="evidence-grid">
@@ -2651,11 +2548,10 @@ const Index = () => {
         >
           <div className="container">
             <div className="story-header" data-animate>
-              <span className="story-eyebrow">WHAT</span>
-              <h2 id="solution-heading">専門家×生成AIが約束する成果と価値</h2>
+              <span className="story-eyebrow">STORY 02</span>
+              <h2 id="solution-heading">経営改善で鍛えた専門家 × 生成AIの協働で意思決定を加速</h2>
               <p>
-                週1回のAI経営レポートと専門家レビューで、意思決定リードタイム-52%（例）・計画作成工数-80%（例）・粗利率+6pt（例）・在庫回転+24%（例）を実現する設計です。
-                情報の要約とシナリオ比較をAIが担い、専門家が判断筋道と説明責任を磨き上げ、経営者は意思決定に専念できます。
+                生成AIが政策・市場・自社データを束ね、専門家と経営者がレビューと判断に集中します。blog.workday.comが紹介するリアルタイム分析のスピードと、note.comで語られるAI会議術の先見性を組み合わせ、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果につなげます。
               </p>
             </div>
             <div className="roles-grid">
@@ -2757,10 +2653,10 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="features-heading">提供価値：成果を生む5つのコアアセット</h2>
+              <h2 id="features-heading">経営改善で鍛えた専門家 × 生成AIが支える5つの機能</h2>
               <ul className="section-intro">
-                <li>価値（意思決定の質・速さ・先見性）を先に定義し、対応する機能とエビデンスを明示。</li>
-                <li>専門家レビューでAI出力の透明性と説明責任を担保します。</li>
+                <li>政策・市場・自社データを統合し、意思決定の質・速さ・先見性を底上げ。</li>
+                <li>AIの出力は診断士がレビューし、料金と支援範囲を透明に開示します。</li>
               </ul>
             </div>
             <div className="feature-grid">
@@ -2780,21 +2676,15 @@ const Index = () => {
                         <FeatureIcon />
                       </div>
                     </header>
-                    <div className="feature-card__body">
-                      <div className="feature-card__summary">
-                        <h3>{feature.title}</h3>
-                        <p className="feature-description">{feature.description}</p>
-                      </div>
-                      <div
-                        className="feature-card__stat"
-                        role="group"
-                        aria-label={`${feature.statLabel}の実績`}
-                      >
-                        <span className="feature-card__stat-label">{feature.statLabel}</span>
+                    <div className="feature-card__content">
+                      <h3>{feature.title}</h3>
+                      <p className="feature-description">{feature.description}</p>
+                      <div className="feature-card__stat">
                         <strong>{feature.statValue}</strong>
+                        <span>{feature.statLabel}</span>
                       </div>
+                      <p className="feature-detail">{feature.detail}</p>
                     </div>
-                    <p className="feature-detail">{feature.detail}</p>
                     <footer className="feature-card__footer">
                       <span className="feature-card__reference">{feature.reference}</span>
                       <span className="feature-benefit">{feature.benefit}</span>
@@ -3082,10 +2972,10 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="process-heading">運用プロセス：6ステップで意思決定を高速化</h2>
+              <h2 id="process-heading">導入の流れ（最短4週間）</h2>
               <ul className="section-intro">
-                <li>①現状診断 → ②仮説設計 → ③生成AI分析 → ④経営計画（数値・施策）→ ⑤実行管理（KPI/会議体）→ ⑥検証・改善を最短4週間で実装。</li>
-                <li>MIT Sloanの研究が示す「AIと人の協働に向けたプロセス再設計」を組み込み、成果物と責任分担を明文化。</li>
+                <li>無料相談→データ連携→AIレポート→専門家面談→計画書完成を明確化。</li>
+                <li>MIT Sloanの研究が示す「AIと人の協働に向けたプロセス再設計」を実装。</li>
               </ul>
             </div>
             <ol className="process-timeline">
@@ -3755,18 +3645,6 @@ const Index = () => {
                 ))}
               </Accordion>
             </div>
-            <div className="risk-reversal" data-animate>
-              <h3>リスク逆転：1か月トライアルの流れ</h3>
-              <p>
-                まず1か月で意思決定リードタイム・粗利率・資金繰り予測精度（例）の3指標を事前合意し、未達の場合は月額費用の最大50%（例）まで調整します。
-                KPIの計測方法と改善アクションは共有ドキュメントで透明化し、週次レビューで進捗を検証します。
-              </p>
-              <ul>
-                <li>Day0：現状診断・指標設定・セキュリティ確認</li>
-                <li>Day7：仮診断レポート提示と優先施策の確定</li>
-                <li>Day30：成果レビューと継続可否の判断、改善ロードマップ提示</li>
-              </ul>
-            </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
                 {primaryCtaLabel}
@@ -3791,8 +3669,8 @@ const Index = () => {
             <div className="section-header" data-animate>
               <h2 id="stories-heading">成功事例</h2>
               <ul className="section-intro">
-                <li>匿名の業種×年商×成果を公開し蓋然性を提示。</li>
-                <li>AIと専門家の役割分担を数値とプロセスで検証。</li>
+                <li>実名レビューで成果を確認。</li>
+                <li>業界横断の再現性を提示。</li>
               </ul>
             </div>
             <div className="story-carousel" data-animate>
@@ -3886,9 +3764,9 @@ const Index = () => {
                 資料で出力例を見る
               </a>
             </div>
-              <p className="footnote" data-animate>
-                ※ 数値はすべて導入企業の平均値（例）であり、ロゴはイメージです。
-              </p>
+            <p className="footnote" data-animate>
+              ※ 掲載コメントは各社から許諾済みです。
+            </p>
           </div>
         </section>
 
@@ -4050,8 +3928,8 @@ const Index = () => {
             <div className="section-header" data-animate>
               <h2 id="resources-heading">ヒト×AI×専門家の連携がわかる資料</h2>
               <ul className="section-intro">
-                <li>無料相談・仮診断・資料ダウンロードの価値を比較。</li>
-                <li>背景→提供価値→運用を整理するテンプレと指標を提供。</li>
+                <li>匿名サンプルでアウトプットを確認。</li>
+                <li>テンプレとチェックリストを提供。</li>
               </ul>
             </div>
             <div className="resources-grid">
@@ -4098,8 +3976,8 @@ const Index = () => {
             <div className="section-header" data-animate>
               <h2 id="security-heading">信頼を支えるセキュリティ</h2>
               <ul className="section-intro">
-                <li>中小企業診断士の守秘義務とISO準拠の統制を両立。</li>
-                <li>暗号化・権限管理・監査証跡で経営データを保護。</li>
+                <li>国内リージョンで暗号化保管。</li>
+                <li>権限管理と監査で安心を担保。</li>
               </ul>
             </div>
             <div className="security-accordion" data-animate>
@@ -4143,8 +4021,8 @@ const Index = () => {
               <span className="final-cta__eyebrow">経営改善で鍛えた専門家 × 生成AI</span>
               <h2 id="final-cta-heading">意思決定の質・速さ・先見性を高める経営計画を今すぐ</h2>
               <p>
-                経営者の時間は有限です。専門家が生成AIの出力を精査し、意思決定リードタイム-52%・計画作成工数-80%・粗利率+6pt・キャッシュ創出+2.1億円（すべて例）の再現を目指します。
-                無料相談・7日仮診断・資料ダウンロードに加え、1か月トライアルで小さく試してから本導入を判断できます。
+                経営者の時間は有限です。経営改善で鍛えた専門家が生成AIの出力を精査し、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果創出を後押しします。
+                相談予約と資料ダウンロードの2つの導線で、最適なスタートを選べます。
               </p>
               <div className="final-cta__actions">
                 <a className="btn btn-cta" href="#contact">
