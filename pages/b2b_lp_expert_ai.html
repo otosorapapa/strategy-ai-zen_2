@@ -169,6 +169,46 @@
         color: rgb(71, 85, 105);
         margin: 0;
       }
+      .hero-gallery {
+        display: grid;
+        gap: 0.85rem;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+      .hero-gallery figure {
+        position: relative;
+        border-radius: 1.35rem;
+        overflow: hidden;
+        background: rgba(15, 23, 42, 0.75);
+        box-shadow: 0 22px 46px rgba(15, 23, 42, 0.18);
+        border: 1px solid rgba(148, 163, 184, 0.4);
+      }
+      .hero-gallery img {
+        width: 100%;
+        aspect-ratio: 16 / 11;
+        object-fit: cover;
+        display: block;
+        filter: saturate(1.05);
+      }
+      .hero-gallery figcaption {
+        position: absolute;
+        inset: auto 1rem 1rem 1rem;
+        padding: 0.85rem 1rem;
+        border-radius: 1rem;
+        background: rgba(15, 23, 42, 0.82);
+        color: rgba(226, 232, 240, 0.92);
+        font-size: 0.78rem;
+        line-height: 1.5;
+        backdrop-filter: blur(6px);
+        box-shadow: 0 14px 28px rgba(15, 23, 42, 0.22);
+      }
+      .hero-gallery figcaption strong {
+        display: block;
+        font-size: 0.82rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(125, 211, 252, 0.95);
+        margin-bottom: 0.35rem;
+      }
       .hero-metrics {
         display: grid;
         gap: 0.85rem;
@@ -197,6 +237,31 @@
         line-height: 1.4;
         color: rgba(226, 232, 240, 0.92);
         margin: 0;
+      }
+      .trust-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        margin-top: 0.75rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgb(51, 65, 85);
+      }
+      .trust-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.4rem 0.9rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: rgba(255, 255, 255, 0.88);
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+      }
+      .trust-badge svg {
+        width: 1.1rem;
+        height: 1.1rem;
+        color: rgb(14, 165, 233);
       }
       .hero-aside {
         position: relative;
@@ -579,6 +644,18 @@
         .insight-chart-caption {
           align-items: center;
         }
+        .hero-gallery {
+          grid-template-columns: 1fr;
+        }
+        .hero-gallery figure {
+          border-radius: 1.15rem;
+        }
+        .hero-gallery figcaption {
+          position: static;
+          margin: 0.75rem;
+          padding: 0.75rem 0.9rem;
+          background: rgba(15, 23, 42, 0.85);
+        }
       }
       @media (min-width: 768px) {
         .hero-surface {
@@ -939,6 +1016,135 @@
         font-size: 0.85rem;
         color: rgb(71, 85, 105);
         line-height: 1.6;
+      }
+      .visual-anchor {
+        position: relative;
+        border-radius: 2rem;
+        padding: clamp(2rem, 4vw, 3rem);
+        background: linear-gradient(150deg, rgba(236, 254, 255, 0.88), rgba(219, 234, 254, 0.92));
+        border: 1px solid rgba(148, 197, 253, 0.45);
+        box-shadow: 0 28px 60px rgba(15, 23, 42, 0.12);
+        overflow: hidden;
+      }
+      .visual-anchor::before {
+        content: '';
+        position: absolute;
+        inset: -35% auto auto 12%;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(14, 165, 233, 0.25), transparent 70%);
+        pointer-events: none;
+      }
+      .visual-anchor::after {
+        content: '';
+        position: absolute;
+        inset: auto -30% -45% auto;
+        width: 280px;
+        height: 280px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.18), transparent 70%);
+        pointer-events: none;
+      }
+      .visual-intro {
+        position: relative;
+        z-index: 1;
+        max-width: 32rem;
+        display: grid;
+        gap: 1rem;
+        margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+      }
+      .visual-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        background: rgba(59, 130, 246, 0.12);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        font-size: 0.75rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgb(37, 99, 235);
+        font-weight: 700;
+      }
+      .visual-grid {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 1.25rem;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+      .visual-card {
+        position: relative;
+        border-radius: 1.75rem;
+        overflow: hidden;
+        background: rgba(15, 23, 42, 0.92);
+        border: 1px solid rgba(15, 118, 110, 0.22);
+        box-shadow: 0 28px 48px rgba(15, 23, 42, 0.18);
+        color: white;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .visual-card img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        filter: contrast(1.05) saturate(1.1);
+      }
+      .visual-card figcaption {
+        padding: 1.25rem 1.35rem 1.5rem;
+        display: grid;
+        gap: 0.6rem;
+        font-size: 0.85rem;
+        line-height: 1.6;
+        color: rgba(241, 245, 249, 0.9);
+      }
+      .visual-metric {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.75rem;
+        border-radius: 9999px;
+        background: rgba(15, 118, 110, 0.22);
+        border: 1px solid rgba(45, 212, 191, 0.35);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(110, 231, 183, 0.95);
+      }
+      .visual-card--accent {
+        background: linear-gradient(155deg, rgba(15, 23, 42, 0.92), rgba(30, 64, 175, 0.88));
+        border-color: rgba(59, 130, 246, 0.35);
+      }
+      .visual-card--light {
+        background: linear-gradient(160deg, rgba(248, 250, 252, 0.96), rgba(226, 232, 240, 0.9));
+        color: rgb(15, 23, 42);
+        border-color: rgba(148, 163, 184, 0.35);
+      }
+      .visual-card--light figcaption {
+        color: rgb(30, 41, 59);
+      }
+      .visual-card--light .visual-metric {
+        background: rgba(59, 130, 246, 0.14);
+        border-color: rgba(148, 197, 253, 0.45);
+        color: rgb(37, 99, 235);
+      }
+      .visual-arrow {
+        position: absolute;
+        inset: 1.25rem 1.25rem auto auto;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 9999px;
+        display: grid;
+        place-items: center;
+        background: rgba(15, 23, 42, 0.82);
+        color: rgba(226, 232, 240, 0.95);
+        box-shadow: 0 16px 32px rgba(15, 23, 42, 0.24);
+      }
+      .visual-card--light .visual-arrow {
+        background: rgba(14, 165, 233, 0.18);
+        color: rgb(14, 116, 144);
       }
       [data-animate] {
         opacity: 0;
@@ -1622,6 +1828,41 @@
                 <p>AIが財務整合性と仮説を検証し、診断士が金融機関・取引先への説明資料まで仕上げます。</p>
               </div>
             </div>
+            <div class="hero-gallery">
+              <figure>
+                <img
+                  src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=960&q=80"
+                  alt="役員会議で戦略ダッシュボードを確認する経営陣"
+                  loading="lazy"
+                />
+                <figcaption>
+                  <strong>Pattern Interrupt</strong>
+                  経営会議の前に1ページで状況を俯瞰。視線誘導されたボードが意思決定の論点を整理します。
+                </figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=960&q=80"
+                  alt="生成AIが可視化した財務ダッシュボード"
+                  loading="lazy"
+                />
+                <figcaption>
+                  <strong>Dual Coding</strong>
+                  因果マップ・KPI・資金繰りを同じ画面で同期。文章での説明を最小化し、理解速度を高めます。
+                </figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=960&q=80"
+                  alt="診断士と経営者が計画書を確認する様子"
+                  loading="lazy"
+                />
+                <figcaption>
+                  <strong>Picture Superiority</strong>
+                  顔の見える伴走体制で「金融機関に通る説明資料」を共同制作。納得と信頼の記憶に残ります。
+                </figcaption>
+              </figure>
+            </div>
             <p class="text-sm leading-relaxed text-slate-600 md:text-base">
               Foster School of BusinessやMITの研究でも、人が判断軸を設計しAIが大量データを絞り込むモデルが最も成果を出すと示されています。私たちはルール設計から会議運営、金融機関説明まで一気通貫で伴走します。
             </p>
@@ -1634,6 +1875,26 @@
               <span>⚡ 3分AI診断で課題を棚卸し</span>
               <span>🗓️ 48時間以内に因果マップ提案</span>
               <span>📞 電話予約：03-0000-1234（平日9〜18時）</span>
+            </div>
+            <div class="trust-badges">
+              <span class="trust-badge">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                経済産業省 認定支援機関
+              </span>
+              <span class="trust-badge">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M12 3l7 4v6c0 5-7 8-7 8s-7-3-7-8V7l7-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                中小企業庁 施策活用支援
+              </span>
+              <span class="trust-badge">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                日経クロストレンド掲載
+              </span>
             </div>
             <div class="hero-metrics">
               <div class="hero-metric">
@@ -1860,9 +2121,59 @@
             </div>
           </div>
         </div>
-      </section>
+        </section>
 
-      <section id="approach" class="mx-auto w-full max-w-5xl px-5" data-animate>
+        <section id="visual-blueprint" class="mx-auto w-full max-w-6xl px-5" data-animate>
+          <div class="visual-anchor">
+            <div class="visual-intro">
+              <span class="visual-pill">Visual Anchor｜Executive Decision Gallery</span>
+              <h2 class="section-title">経営者が直感で因果を掴める「視覚経営レイヤー」</h2>
+              <p class="section-subtitle">
+                単調なテキスト資料を脱し、意思決定の因果・論理・デザインを一枚で把握できるよう情報を視覚的に分解しました。AIが生成したデータの重み付けと専門家の洞察を、写真と図解で同期させることで、執行判断までの滞在時間と読了率を大幅に高めます。
+              </p>
+            </div>
+            <div class="visual-grid">
+              <figure class="visual-card visual-card--accent">
+                <span class="visual-arrow" aria-hidden="true">→</span>
+                <img
+                  src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=960&q=80"
+                  alt="経営者がスクリーンに映し出された戦略地図を指し示している様子"
+                  loading="lazy"
+                />
+                <figcaption>
+                  <span class="visual-metric">Before→After</span>
+                  断片的な部門報告から、因果マップを起点にKPIとリスクを一目で比較できる会議体へ。視線誘導で次アクションに集中。
+                </figcaption>
+              </figure>
+              <figure class="visual-card visual-card--light">
+                <span class="visual-arrow" aria-hidden="true">◎</span>
+                <img
+                  src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=960&q=80"
+                  alt="診断士と現場マネジャーが改善計画をレビューする様子"
+                  loading="lazy"
+                />
+                <figcaption>
+                  <span class="visual-metric">Dual Coding</span>
+                  ストーリーラインと財務シミュレーションをペアで提示。コメントは7行以内に圧縮し、意思決定の処理流暢性を向上させます。
+                </figcaption>
+              </figure>
+              <figure class="visual-card">
+                <span class="visual-arrow" aria-hidden="true">↗</span>
+                <img
+                  src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=960&q=80"
+                  alt="生産ラインのデジタルツインを映すモニター"
+                  loading="lazy"
+                />
+                <figcaption>
+                  <span class="visual-metric">Gaze Cueing</span>
+                  人物の視線と矢印でCTA方向へナビゲート。現場データと経営指標を統合した「因果のダッシュボード」で行動に繋がる導線を設計します。
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section id="approach" class="mx-auto w-full max-w-5xl px-5" data-animate>
         <div class="space-y-8">
           <h2 class="section-title">AIがデータを統合し専門家が判断を補強する4ステップ</h2>
           <p class="section-subtitle">
