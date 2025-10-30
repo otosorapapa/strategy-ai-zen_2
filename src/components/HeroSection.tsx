@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import commandCenterVisual from "@/assets/dashboard-preview.jpg";
+import heroImage from "@/assets/hero-fukuoka.jpg";
 import { PRIMARY_CTA } from "@/lib/ctaVariants";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import {
@@ -17,36 +17,6 @@ import {
   Sparkle,
   Timer,
 } from "lucide-react";
-
-const executiveMetrics = [
-  {
-    label: "判断リードタイム",
-    value: "-52%",
-    context: "AIレポート×専門家レビューで意思決定を先回り",
-  },
-  {
-    label: "計画作成工数",
-    value: "-80%",
-    context: "経営計画ドラフトと根拠資料を自動生成",
-  },
-  {
-    label: "粗利率インパクト",
-    value: "+6.0pt",
-    context: "案件別シナリオ比較で優先投資を可視化",
-  },
-];
-
-const commandSignals = [
-  "需給や原価の急変を24時間以内に検知し、経営会議に反映",
-  "キャッシュポジションと投資余力を日次シミュレーション",
-  "決定事項をタスク化し、Slack/Teamsへ自動配信",
-];
-
-const trustMarks = [
-  "中小企業診断士によるダブルチェック",
-  "金融機関・投資家向け根拠資料を同時生成",
-  "統合ダッシュボードと運用ガイドを提供",
-];
 
 const heroStats = [
   {
@@ -528,135 +498,47 @@ const HeroSection = () => {
             </div>
 
             <div className="relative flex flex-col gap-6">
-              <div className="relative overflow-hidden rounded-[40px] border border-primary/20 bg-slate-950 text-slate-50 shadow-[0_45px_120px_-60px_rgba(30,64,175,0.55)]">
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800" aria-hidden="true" />
-                <div className="pointer-events-none absolute -top-24 -right-20 h-72 w-72 rounded-full bg-sky-400/25 blur-3xl" aria-hidden="true" />
-                <div className="pointer-events-none absolute -bottom-24 -left-16 h-64 w-64 rounded-full bg-indigo-500/25 blur-[110px]" aria-hidden="true" />
-                <div className="relative z-10 flex flex-col gap-8 p-8">
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-slate-100/90">
-                      Executive Playbook
-                    </span>
-                    <span className="inline-flex items-center gap-2 rounded-full bg-primary/25 px-3.5 py-1 text-[0.75rem] font-semibold uppercase tracking-[0.28em] text-sky-50">
-                      <Sparkle className="h-4 w-4" aria-hidden="true" />
-                      信頼スコア 97%
-                    </span>
-                  </div>
-                  <div className="space-y-3">
-                    <h3 className="text-2xl font-semibold leading-snug text-white lg:text-[2.1rem]">
-                      変化を味方にする意思決定コックピット
-                    </h3>
-                    <p className="text-sm leading-relaxed text-slate-200/90">
-                      経営指標・現場シグナル・資金計画を一画面に束ね、AIが提案する複数シナリオを診断士が監査。経営者は判断とストーリーづくりに集中できます。
-                    </p>
-                    <p className="text-sm leading-relaxed text-slate-200/90">
-                      リアルタイムに更新されるダッシュボードが、会議前の準備と意思決定の根拠説明を同時に完了させます。
-                    </p>
-                  </div>
-                  <div className="grid gap-4 sm:grid-cols-3">
-                    {executiveMetrics.map((metric) => (
-                      <div
-                        key={metric.label}
-                        className="rounded-2xl border border-white/12 bg-white/10 p-4 shadow-[0_12px_32px_-18px_rgba(148,163,184,0.9)]"
-                      >
-                        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-slate-200/80">{metric.label}</p>
-                        <p className="mt-3 text-3xl font-bold text-white">{metric.value}</p>
-                        <p className="mt-2 text-xs leading-relaxed text-slate-200/75">{metric.context}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-                    <div className="flex flex-col gap-4 rounded-2xl border border-white/12 bg-white/10 p-5">
-                      <p className="text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-slate-200/80">Executive Signals</p>
-                      <div className="space-y-3">
-                        {commandSignals.map((signal) => (
-                          <p key={signal} className="flex items-start gap-2 text-sm leading-relaxed text-slate-100/95">
-                            <span className="mt-1 inline-flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary/35 text-[0.75rem] font-bold text-white">
-                              ✓
-                            </span>
-                            <span>{signal}</span>
-                          </p>
-                        ))}
-                      </div>
-                      <div className="flex flex-wrap gap-2 pt-2">
-                        {trustMarks.map((mark) => (
-                          <span
-                            key={mark}
-                            className="inline-flex items-center gap-2 rounded-full bg-slate-900/70 px-3 py-1 text-[0.75rem] font-semibold text-slate-100 ring-1 ring-white/15"
-                          >
-                            <ShieldCheck className="h-4 w-4" aria-hidden="true" />
-                            {mark}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="relative overflow-hidden rounded-2xl border border-white/12 bg-slate-950/40 shadow-[0_28px_90px_-50px_rgba(15,23,42,0.9)]">
-                      <img
-                        src={commandCenterVisual}
-                        alt="意思決定ダッシュボードのプレビュー"
-                        className="h-full w-full object-cover"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/20 to-transparent" aria-hidden="true" />
-                      <div className="absolute inset-x-5 bottom-5 flex flex-col gap-3 rounded-2xl border border-white/15 bg-slate-950/85 p-4 backdrop-blur-md">
-                        <p className="text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-slate-200/80">Real-Time Board</p>
-                        <p className="text-sm leading-relaxed text-slate-100">
-                          週次レビューで投資余力・粗利・在庫の動きを一望。経営会議の論点と根拠資料が同じ画面に揃います。
-                        </p>
-                        <p className="text-xs leading-relaxed text-slate-300/80">
-                          AIがデータを集約し、診断士が妥当性を監査。意思決定の背景をチーム全体に共有できます。
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="relative overflow-hidden rounded-[36px] border border-primary/20 bg-white shadow-elegant">
+                <img
+                  src={heroImage}
+                  alt="生成AIのダッシュボードを見ながら経営者と専門家が議論している様子"
+                  className="h-full max-h-[420px] w-full object-cover brightness-110"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-sky-900/5 via-transparent to-white/60" aria-hidden="true" />
               </div>
-              <div className="grid gap-4 lg:grid-cols-2">
-                <div className="rounded-3xl border border-primary/15 bg-white/95 p-6 shadow-[0_28px_90px_-50px_rgba(30,64,175,0.35)]">
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary/80">導入設計まで一気通貫</p>
-                  <div className="mt-5 space-y-4">
-                    {proofPoints.map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <div key={item.title} className="flex items-start gap-3">
-                          <span className="mt-1 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                            <Icon className="h-5 w-5" aria-hidden="true" />
-                          </span>
-                          <div>
-                            <p className="text-sm font-semibold text-foreground">{item.title}</p>
-                            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-                <div className="rounded-3xl border border-sky-200/70 bg-gradient-to-br from-sky-50/80 via-white to-blue-50/70 p-6 shadow-[0_32px_95px_-55px_rgba(56,189,248,0.55)]">
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-sky-700/80">リアルタイムで把握できる指標</p>
-                  <div className="mt-5 grid gap-4">
-                    {aiVisualHighlights.map((item) => {
-                      const Icon = item.icon;
-                      return (
-                        <div
-                          key={item.title}
-                          className="group flex items-start gap-3 rounded-2xl border border-sky-200/60 bg-white/70 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl"
-                        >
-                          <span className="mt-1 inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                            <Icon className="h-5 w-5" aria-hidden="true" />
-                          </span>
-                          <div>
-                            <p className="text-sm font-semibold text-foreground">{item.title}</p>
-                            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <div className="mt-5 rounded-2xl border border-primary/15 bg-white/80 p-4 text-sm leading-relaxed text-muted-foreground shadow-inner">
-                    週次レビューと月次アロケーションをひとつの意思決定ボードで共有。経営陣・財務・現場が同じ数値と根拠を見て迷いなく判断できます。
-                  </div>
-                </div>
+              <div className="grid gap-4 rounded-3xl border border-primary/15 bg-white/90 p-6 shadow-card sm:grid-cols-3">
+                {proofPoints.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.title} className="flex flex-col gap-2">
+                      <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <Icon className="h-6 w-6" aria-hidden="true" />
+                      </span>
+                      <h3 className="text-base font-semibold text-foreground">{item.title}</h3>
+                      <p className="text-[0.95rem] leading-relaxed text-muted-foreground">{item.description}</p>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="grid gap-4 rounded-3xl border border-sky-200/60 bg-sky-50/80 p-6 shadow-card sm:grid-cols-2">
+                {aiVisualHighlights.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div
+                      key={item.title}
+                      className="flex flex-col gap-2 rounded-2xl bg-white/80 p-4 shadow-inner transition-transform duration-500 hover:-translate-y-1 hover:shadow-lg"
+                    >
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                      </span>
+                      <p className="text-sm font-semibold text-foreground">{item.title}</p>
+                      <p className="text-xs leading-relaxed text-muted-foreground">{item.description}</p>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
