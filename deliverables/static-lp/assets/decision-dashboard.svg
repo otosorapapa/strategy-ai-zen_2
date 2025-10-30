@@ -1,0 +1,50 @@
+<svg width="360" height="320" viewBox="0 0 360 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">経営ダッシュボードのモックアップ</title>
+  <desc id="desc">主要指標カードと折れ線グラフ、実行タスクをまとめたインターフェースのイラスト</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="360" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F2F7FC" />
+      <stop offset="1" stop-color="#E7F4EF" />
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FFFFFF" stop-opacity="0.9" />
+      <stop offset="1" stop-color="#E3EEF9" stop-opacity="0.9" />
+    </linearGradient>
+    <linearGradient id="card2" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#FFFFFF" stop-opacity="0.95" />
+      <stop offset="1" stop-color="#E6F4F0" stop-opacity="0.95" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#2F6CA3" />
+      <stop offset="1" stop-color="#0F8C5A" />
+    </linearGradient>
+  </defs>
+  <rect width="360" height="320" rx="32" fill="url(#bg)" />
+  <rect x="28" y="34" width="304" height="64" rx="16" fill="url(#card)" stroke="#D5E2F1" />
+  <rect x="28" y="114" width="304" height="158" rx="20" fill="url(#card2)" stroke="#C7E2D7" />
+  <rect x="44" y="126" width="92" height="52" rx="12" fill="white" stroke="#D8E6F5" />
+  <rect x="150" y="126" width="92" height="52" rx="12" fill="white" stroke="#D8E6F5" />
+  <rect x="256" y="126" width="60" height="52" rx="12" fill="#133A5D" opacity="0.92" />
+  <rect x="44" y="190" width="272" height="18" rx="9" fill="white" opacity="0.8" />
+  <rect x="44" y="214" width="172" height="18" rx="9" fill="white" opacity="0.8" />
+  <rect x="224" y="214" width="92" height="18" rx="9" fill="#0F8C5A" opacity="0.85" />
+  <rect x="44" y="238" width="272" height="18" rx="9" fill="white" opacity="0.8" />
+  <circle cx="64" cy="66" r="12" fill="#2F6CA3" opacity="0.82" />
+  <rect x="86" y="56" width="70" height="8" rx="4" fill="#1F3A5F" opacity="0.7" />
+  <rect x="86" y="72" width="120" height="8" rx="4" fill="#1F3A5F" opacity="0.35" />
+  <rect x="218" y="56" width="64" height="8" rx="4" fill="#0F8C5A" opacity="0.7" />
+  <rect x="218" y="72" width="84" height="8" rx="4" fill="#1F3A5F" opacity="0.3" />
+  <polyline points="60,246 120,206 180,232 240,188 292,210" fill="none" stroke="url(#accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.85" />
+  <circle cx="60" cy="246" r="6" fill="#2F6CA3" />
+  <circle cx="120" cy="206" r="6" fill="#2F6CA3" />
+  <circle cx="180" cy="232" r="6" fill="#2F6CA3" />
+  <circle cx="240" cy="188" r="6" fill="#0F8C5A" />
+  <circle cx="292" cy="210" r="6" fill="#0F8C5A" />
+  <rect x="256" y="134" width="36" height="6" rx="3" fill="#7DB99D" />
+  <rect x="256" y="146" width="44" height="6" rx="3" fill="#D5E2F1" />
+  <rect x="256" y="158" width="28" height="6" rx="3" fill="#D5E2F1" />
+  <rect x="54" y="136" width="46" height="6" rx="3" fill="#1F3A5F" opacity="0.4" />
+  <rect x="54" y="150" width="64" height="6" rx="3" fill="#1F3A5F" opacity="0.25" />
+  <rect x="160" y="136" width="46" height="6" rx="3" fill="#1F3A5F" opacity="0.4" />
+  <rect x="160" y="150" width="54" height="6" rx="3" fill="#1F3A5F" opacity="0.25" />
+</svg>
