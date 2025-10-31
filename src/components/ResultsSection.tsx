@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   TrendingUp,
   DollarSign,
@@ -7,8 +8,12 @@ import {
   Timer,
   ArrowRight,
   ArrowLeft,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
 import { Line, LineChart, CartesianGrid, XAxis, YAxis } from "recharts";
@@ -16,6 +21,8 @@ import AnimatedCounter from "@/components/AnimatedCounter";
 import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
 import { useParallax } from "@/hooks/useParallax";
 import { cn } from "@/lib/utils";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Progress } from "@/components/ui/progress";
 
 const results = [
   {
@@ -150,123 +157,157 @@ const aggregateHighlights = [
 const ResultCard = ({ result, index }: { result: (typeof results)[number]; index: number }) => {
   const Icon = result.icon;
   const { ref, isVisible } = useRevealOnScroll<HTMLDivElement>({ threshold: 0.25 });
+  const [open, setOpen] = useState(false);
 
   const beforeDecimals = Number.isInteger(result.beforeValue) ? 0 : result.beforeValue.toString().split(".")[1]?.length ?? 0;
   const afterDecimals = Number.isInteger(result.afterValue) ? 0 : result.afterValue.toString().split(".")[1]?.length ?? 0;
-  const beforeHeight = Math.max((result.beforeValue / result.chartMax) * 100, 12);
-  const afterHeight = Math.max((result.afterValue / result.chartMax) * 100, 18);
+  const beforePercent = Math.min(100, Math.max(0, (result.beforeValue / result.chartMax) * 100));
+  const afterPercent = Math.min(100, Math.max(0, (result.afterValue / result.chartMax) * 100));
 
   return (
     <Card
       ref={ref}
       className={cn(
-        "rounded-3xl border border-border/70 bg-card/90 p-8 shadow-card transition-all duration-700 ease-out",
+        "flex h-full flex-col gap-6 rounded-3xl border border-border/70 bg-white/95 p-8 shadow-card transition-all duration-700 ease-out",
         "hover:-translate-y-1 hover:shadow-elegant",
         isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
       )}
       style={{ transitionDelay: `${index * 90}ms` }}
     >
-      <div className="flex flex-col gap-6">
-        <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+      <CardHeader className="flex flex-col gap-4 p-0">
+        <div className="flex flex-col gap-5 md:flex-row md:items-start md:justify-between">
           <div className="flex items-start gap-4">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-secondary/80 text-primary font-bold text-xl shadow-inner">
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-xl font-bold text-primary shadow-inner">
               {result.logoInitials}
             </div>
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-wider text-primary/80 mb-1">{result.industry}</p>
-              <h3 className="text-2xl font-bold text-foreground mb-1">{result.company}</h3>
-              <p className="text-base text-muted-foreground">{result.person}</p>
+            <div className="space-y-2">
+              <Badge
+                variant="outline"
+                className="w-fit rounded-full border-primary/40 bg-primary/5 text-[11px] font-semibold uppercase tracking-[0.32em] text-primary"
+              >
+                {result.industry}
+              </Badge>
+              <h3 className="text-2xl font-bold text-foreground">{result.company}</h3>
+              <p className="text-sm text-muted-foreground">{result.person}</p>
             </div>
           </div>
-          <div className="inline-flex items-center justify-center self-start rounded-xl bg-primary/10 p-4 text-primary shadow-sm">
-            <Icon className="h-8 w-8" />
+          <div className="flex flex-col items-end gap-3 text-right">
+            <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.32em] text-primary">
+              <Icon className="h-4 w-4" />
+              {result.metricLabel}
+            </span>
+            <div className="flex flex-wrap items-center justify-end gap-2 text-xs font-semibold">
+              <span className="rounded-full bg-white px-3 py-1 text-primary shadow-sm">{result.improvement}</span>
+              <span className={`rounded-full px-3 py-1 ${result.roiClass}`}>{result.roiLabel}</span>
+            </div>
           </div>
         </div>
-
-        <div className="grid gap-8 md:grid-cols-2">
-          <div className="space-y-6">
-            <div>
-              <p className="text-sm font-bold tracking-wide uppercase text-muted-foreground mb-2">課題</p>
-              <p className="text-lg text-muted-foreground leading-relaxed">{result.challenge}</p>
+      </CardHeader>
+      <CardContent className="space-y-6 p-0">
+        <div className="grid gap-6 md:grid-cols-2">
+          <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 shadow-inner">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-primary/70">主要指標</p>
+            <div className="mt-3 flex items-end gap-3">
+              <AnimatedCounter
+                value={result.afterValue}
+                decimals={afterDecimals}
+                suffix={result.unit}
+                className="text-4xl font-bold text-primary"
+              />
+              <span className="text-sm font-semibold text-primary/80">After</span>
             </div>
-            <div>
-              <p className="text-sm font-bold tracking-wide uppercase text-muted-foreground mb-2">AI活用</p>
-              <p className="text-lg text-muted-foreground leading-relaxed">{result.approach}</p>
-            </div>
-            <div>
-              <p className="text-sm font-bold tracking-wide uppercase text-muted-foreground mb-2">成果</p>
-              <p className="text-xl font-bold text-primary leading-relaxed">{result.outcome}</p>
-              <p className="text-base text-muted-foreground mt-2">{result.duration}</p>
-            </div>
-          </div>
-
-          <div className="space-y-6 rounded-2xl border border-border/60 bg-secondary/60 p-6 shadow-inner">
-            <div className="flex items-center justify-between gap-3">
-              <p className="text-base font-bold uppercase tracking-wide text-muted-foreground">Before → After</p>
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center rounded-full bg-primary/15 px-4 py-1 text-sm font-semibold uppercase tracking-[0.3em] text-primary">
-                  {result.improvement}
-                </span>
-                <span className={`inline-flex items-center rounded-full px-4 py-1 text-sm font-semibold ${result.roiClass}`}>
-                  {result.roiLabel}
-                </span>
-              </div>
-            </div>
-            <p className="text-lg font-semibold text-foreground">{result.metricLabel}</p>
-            <div className="flex flex-col gap-5">
-              <div className="flex h-56 items-end justify-around gap-6 rounded-2xl bg-white/80 p-4">
-                <div className="flex h-full w-20 flex-col items-center justify-end gap-3">
-                  <span className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">Before</span>
-                  <div className="relative flex h-full w-full items-end justify-center overflow-hidden rounded-full bg-muted">
-                    <div
-                      className="w-full rounded-full bg-muted-foreground/60"
-                      style={{
-                        height: isVisible ? `${beforeHeight}%` : "0%",
-                        transition: `height 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${0.12 + index * 0.04}s`,
-                      }}
-                    />
-                  </div>
+            <p className="mt-1 text-xs font-medium text-primary/70">Before {result.beforeValue}{result.unit}</p>
+            <div className="mt-6 space-y-4">
+              <div>
+                <div className="flex items-center justify-between text-[11px] font-semibold text-primary/70">
+                  <span>Before</span>
                   <AnimatedCounter
                     value={result.beforeValue}
                     decimals={beforeDecimals}
                     suffix={result.unit}
-                    className="text-sm font-semibold text-muted-foreground"
+                    className="text-xs font-semibold text-primary/70"
                   />
                 </div>
-                <div className="flex h-full w-20 flex-col items-center justify-end gap-3">
-                  <span className="text-xs font-semibold uppercase tracking-[0.3em] text-primary">After</span>
-                  <div className="relative flex h-full w-full items-end justify-center overflow-hidden rounded-full bg-primary/10">
-                    <div
-                      className="w-full rounded-full bg-primary"
-                      style={{
-                        height: isVisible ? `${afterHeight}%` : "0%",
-                        transition: `height 1s cubic-bezier(0.22, 1, 0.36, 1) ${0.2 + index * 0.05}s`,
-                      }}
-                    />
-                  </div>
+                <Progress value={beforePercent} className="mt-2 h-2 bg-white/60" indicatorClassName="bg-primary/40" />
+              </div>
+              <div>
+                <div className="flex items-center justify-between text-[11px] font-semibold text-primary">
+                  <span>After</span>
                   <AnimatedCounter
                     value={result.afterValue}
                     decimals={afterDecimals}
                     suffix={result.unit}
-                    className="text-sm font-semibold text-primary"
+                    className="text-xs font-semibold text-primary"
                   />
                 </div>
+                <Progress value={afterPercent} className="mt-2 h-2 bg-white/60" indicatorClassName="bg-primary" />
               </div>
-              <p className="rounded-2xl border border-primary/20 bg-white/90 p-3 text-xs leading-relaxed text-muted-foreground">
-                AIが施策のROIやキャッシュインパクトを色分けで可視化し、経営会議での意思決定を短時間で完了させました。
-              </p>
+            </div>
+          </div>
+          <div className="flex flex-col justify-between gap-4 rounded-2xl border border-border/70 bg-white/80 p-6 shadow-sm">
+            <div className="space-y-4">
+              <div>
+                <p className="text-sm font-semibold text-foreground">課題</p>
+                <p className="mt-1 text-sm text-muted-foreground">{result.challenge}</p>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-foreground">AI活用</p>
+                <p className="mt-1 text-sm text-muted-foreground">{result.approach}</p>
+              </div>
+            </div>
+            <div className="rounded-xl bg-secondary/60 p-4 shadow-inner">
+              <p className="text-sm font-semibold text-primary">成果</p>
+              <p className="mt-1 text-base font-bold text-primary">{result.outcome}</p>
+              <p className="mt-2 text-xs text-primary/70">{result.duration}</p>
             </div>
           </div>
         </div>
 
-        <div className="rounded-2xl border border-border/60 bg-white/70 p-6">
-          <div className="mb-3 flex items-center gap-2 text-primary">
-            <Quote className="h-5 w-5" />
-            <span className="text-sm font-bold tracking-wide uppercase">Voice</span>
-          </div>
-          <p className="text-lg leading-relaxed text-muted-foreground">{result.quote}</p>
+        <Collapsible open={open} onOpenChange={setOpen} className="overflow-hidden rounded-2xl border border-border/60 bg-white/80">
+          <CollapsibleContent className="space-y-4 px-6 pb-4 pt-6 text-sm leading-relaxed text-muted-foreground">
+            <p>AIが施策のROIやキャッシュインパクトを色分けで可視化し、経営会議での意思決定を短時間で完了させました。</p>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <div className="rounded-xl bg-white/90 p-3 text-center shadow-inner">
+                <p className="text-[11px] font-semibold text-muted-foreground">Before</p>
+                <p className="text-lg font-bold text-foreground">
+                  {result.beforeValue}
+                  {result.unit}
+                </p>
+              </div>
+              <div className="rounded-xl bg-white/90 p-3 text-center shadow-inner">
+                <p className="text-[11px] font-semibold text-muted-foreground">After</p>
+                <p className="text-lg font-bold text-primary">
+                  {result.afterValue}
+                  {result.unit}
+                </p>
+              </div>
+              <div className="rounded-xl bg-white/90 p-3 text-center shadow-inner">
+                <p className="text-[11px] font-semibold text-muted-foreground">導入まで</p>
+                <p className="text-sm font-semibold text-foreground">{result.duration}</p>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {result.industry}で得られた成果指標とROIを共通テンプレートに整備し、他部署への横展開にも活用できるナレッジに変換しています。
+            </p>
+          </CollapsibleContent>
+          <CollapsibleTrigger asChild>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="flex w-full items-center justify-center gap-2 rounded-none border-t border-border/60 bg-white/70 text-sm font-semibold text-primary"
+            >
+              {open ? "詳細を閉じる" : "詳細を見る"}
+              {open ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+            </Button>
+          </CollapsibleTrigger>
+        </Collapsible>
+      </CardContent>
+      <CardFooter className="p-0">
+        <div className="flex w-full items-start gap-3 rounded-2xl border border-border/60 bg-white/80 p-6 text-sm leading-relaxed text-muted-foreground">
+          <Quote className="mt-0.5 h-5 w-5 text-primary" />
+          <p>{result.quote}</p>
         </div>
-      </div>
+      </CardFooter>
     </Card>
   );
 };
