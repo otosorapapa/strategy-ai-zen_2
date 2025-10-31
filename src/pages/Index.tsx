@@ -40,12 +40,14 @@ import {
 
 import { submitContactForm } from "@/lib/contact-api";
 
-import aiDashboardShot from "@/assets/dashboard-preview.jpg";
+import heroDecisionVisual from "@/assets/strategic-meeting.jpg";
+import decisionDashboardVisual from "@/assets/dashboard-preview.jpg";
 import simulatorGuidanceVisual from "@/assets/strategy-planning.jpg";
-import expertKobayashiPhoto from "@/assets/hero-consulting.jpg";
-import expertSaitoPhoto from "@/assets/representative_.jpg";
-import expertTanakaPhoto from "@/assets/representative.jpg";
-import featureFlywheelVisual from "@/assets/dashboard-preview.jpg";
+import expertKobayashiPhoto from "@/assets/expert-kobayashi.svg";
+import expertSaitoPhoto from "@/assets/expert-saito.svg";
+import expertTanakaPhoto from "@/assets/expert-tanaka.svg";
+import representativePhoto from "@/assets/representative.jpg";
+import problemIllustration from "@/assets/problem-illustration.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
@@ -1149,7 +1151,7 @@ const representativeProfile: RepresentativeProfile = {
   title: "代表 / 中小企業診断士",
   summary:
     "経済産業省認定支援機関として製造・IT・サービス業の経営改善を支援。AI×経営計画の導入設計と現場実装を指揮し、累計120件の事業計画を監修。",
-  photo: expertTanakaPhoto,
+  photo: representativePhoto,
   qualifications: [
     "中小企業診断士（登録番号 412345）",
     "ITコーディネータ",
@@ -2206,12 +2208,12 @@ const Index = () => {
                 data-initial-visible="true"
               >
                 <img
-                  src={aiDashboardShot}
-                  alt="AIダッシュボードのスクリーンショット"
+                  src={heroDecisionVisual}
+                  alt="生成AIが集約した経営指標を前に専門家と経営陣が議論している様子"
                   loading="lazy"
                 />
                 <figcaption>
-                  市場・外部データと財務指標を一画面で確認し、次の一手を即断する下地をつくります。
+                  生成AIが束ねた指標と洞察を共有し、専門家と経営陣が福岡拠点で次の一手を描くワークショップをイメージしたビジュアルです。
                 </figcaption>
               </figure>
               <div className="hero-quick-form" data-animate>
@@ -2406,12 +2408,12 @@ const Index = () => {
             </div>
             <figure className="pain-visual" data-animate>
               <img
-                src="/images/pain-value-flow.svg"
-                alt="課題→AI→専門家→成果の流れを表す因果マップ"
+                src={problemIllustration}
+                alt="経営課題の因果をAIと専門家が整理しているイラスト"
                 loading="lazy"
               />
               <figcaption>
-                情報の分散をAIが束ね、専門家が論理と信頼性を補強する三層構造。意思決定に必要な根拠を一枚で共有できます。
+                経営者の迷いを「課題・AIの分析・専門家のレビュー・成果」の流れで可視化し、意思決定で押さえる論点を揃えるプロセスを表現しています。
               </figcaption>
             </figure>
             <div className="pain-grid">
@@ -2683,7 +2685,7 @@ const Index = () => {
                 </p>
                 <figure className="features-visual__figure">
                   <img
-                    src={featureFlywheelVisual}
+                    src={decisionDashboardVisual}
                     alt="生成AI経営レポートのダッシュボードと主要指標の例"
                     loading="lazy"
                   />
