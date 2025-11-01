@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import heroImage from "@/assets/hero-fukuoka.jpg";
 import { PRIMARY_CTA } from "@/lib/ctaVariants";
-import AnimatedCounter from "@/components/AnimatedCounter";
 import {
   ArrowRight,
   BarChart3,
@@ -17,38 +16,6 @@ import {
   Sparkle,
   Timer,
 } from "lucide-react";
-
-const heroStats = [
-  {
-    label: "意思決定までの時間削減",
-    value: 50,
-    suffix: "%",
-    duration: 1400,
-    annotation: "AIレポート導入後の平均削減率",
-  },
-  {
-    label: "会議準備にかかる時間短縮",
-    value: 66,
-    suffix: "%",
-    duration: 1600,
-    annotation: "資料作成・根拠整理の自動化",
-  },
-  {
-    label: "キャッシュ創出インパクト",
-    value: 1.8,
-    suffix: "倍",
-    duration: 1800,
-    annotation: "AIが提案した施策採用案件",
-    decimals: 1,
-  },
-  {
-    label: "年間で削減した単純作業",
-    value: 1200,
-    suffix: "時間",
-    duration: 1900,
-    annotation: "AI自動化で創出した意思決定時間",
-  },
-];
 
 const heroChecklist = [
   "現場に依存した管理会計で、粗利と案件別の原価がすぐに把握できない",
@@ -282,47 +249,23 @@ const HeroSection = () => {
               </div>
             </div>
 
-            <div className="mt-8 space-y-4">
-              <div className="grid grid-cols-2 gap-4 rounded-3xl border border-primary/15 bg-gradient-to-r from-white to-secondary/10 p-4 shadow-card">
-                {heroStats.map((stat) => (
-                  <div key={stat.label} className="rounded-2xl bg-white/85 p-4 text-center shadow-sm">
-                    <AnimatedCounter
-                      value={stat.value}
-                      decimals={stat.decimals}
-                      prefix={stat.prefix}
-                      suffix={stat.suffix}
-                      duration={stat.duration}
-                      className="mx-auto text-2xl font-black text-primary"
-                    />
-                    <p className="mt-2 text-[0.65rem] font-semibold uppercase tracking-[0.32em] text-muted-foreground">
-                      {stat.label}
-                    </p>
-                    {stat.annotation && (
-                      <p className="mt-1 text-[0.6rem] font-medium uppercase tracking-[0.28em] text-muted-foreground/70">
-                        {stat.annotation}
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[0.75rem] font-medium uppercase tracking-[0.32em] text-muted-foreground">
-                <span className="inline-flex items-center gap-1">
-                  <Timer className="h-3.5 w-3.5" aria-hidden="true" />
-                  60秒で完了
-                </span>
-                <span className="inline-flex items-center gap-1">
-                  <JapaneseYen className="h-3.5 w-3.5" aria-hidden="true" />
-                  月額18万円〜
-                </span>
-                <span className="inline-flex items-center gap-1">
-                  <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
-                  30日間返金保証
-                </span>
-                <span className="inline-flex items-center gap-1">
-                  <Lock className="h-3.5 w-3.5" aria-hidden="true" />
-                  NDA対応
-                </span>
-              </div>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[0.75rem] font-medium uppercase tracking-[0.32em] text-muted-foreground">
+              <span className="inline-flex items-center gap-1">
+                <Timer className="h-3.5 w-3.5" aria-hidden="true" />
+                60秒で完了
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <JapaneseYen className="h-3.5 w-3.5" aria-hidden="true" />
+                月額18万円〜
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+                30日間返金保証
+              </span>
+              <span className="inline-flex items-center gap-1">
+                <Lock className="h-3.5 w-3.5" aria-hidden="true" />
+                NDA対応
+              </span>
             </div>
 
             <button
@@ -473,28 +416,6 @@ const HeroSection = () => {
                 初回相談は無料｜所要30分｜オンライン/訪問どちらも対応
               </p>
 
-              <div className="grid gap-6 rounded-3xl border border-primary/15 bg-gradient-to-r from-white to-secondary/10 p-6 shadow-card sm:grid-cols-2 lg:grid-cols-4">
-                {heroStats.map((stat) => (
-                  <div key={stat.label} className="text-center">
-                    <AnimatedCounter
-                      value={stat.value}
-                      decimals={stat.decimals}
-                      prefix={stat.prefix}
-                      suffix={stat.suffix}
-                      duration={stat.duration}
-                      className="mx-auto inline-flex items-center justify-center rounded-2xl bg-primary/10 px-5 py-3 text-[2.05rem] font-black text-primary md:text-[2.7rem]"
-                    />
-                    <p className="mt-3 text-[0.95rem] font-semibold uppercase tracking-[0.28em] text-muted-foreground">
-                      {stat.label}
-                    </p>
-                    {stat.annotation && (
-                      <p className="mt-1 text-[0.75rem] font-medium uppercase tracking-[0.3em] text-muted-foreground/70">
-                        {stat.annotation}
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
             </div>
 
             <div className="relative flex flex-col gap-6">
