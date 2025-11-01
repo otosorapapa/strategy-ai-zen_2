@@ -71,7 +71,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const primaryCtaLabel = "無料相談を申し込む";
+const primaryCtaLabel = "60秒で診断を受ける（無料）";
 const contactPhoneNumber = "03-4520-1234";
 
 const headerNavItems = [
@@ -165,36 +165,61 @@ const heroCausality: HeroCausality[] = [
   },
 ];
 
+type HeroResult = {
+  value: string;
+  label: string;
+  description: string;
+  source: string;
+};
+
+const heroResults: HeroResult[] = [
+  {
+    value: "-52%",
+    label: "意思決定リードタイム",
+    description: "決裁スピード3.4倍。経営会議の議題確定を6週→2週に短縮。",
+    source: "導入企業20社 平均 (2023-2024)",
+  },
+  {
+    value: "-80%",
+    label: "経営計画の作成工数",
+    description: "AIドラフト×専門家レビューで資料作成時間を大幅圧縮。",
+    source: "Strategy AI Lab 運用ログ (2024)",
+  },
+  {
+    value: "+18pt",
+    label: "粗利率・キャッシュ創出",
+    description: "優先シナリオ提示で粗利+18pt、キャッシュ1.8倍を実現。",
+    source: "導入企業ヒアリング (n=20)",
+  },
+];
+
 const heroMetrics = [
   {
-    label: "意思決定リードタイム",
-    note: "導入企業の声を総括",
+    label: "意思決定リードタイム短縮率",
+    note: "導入企業20社平均",
     detail:
-      "生成AIと専門家レビューを組み合わせた企業では、意思決定までの準備が段階的に短くなったと回答。会議議事録とヒアリングから傾向を整理しています。",
-    valueLabel: "判断準備の待ち時間を大幅圧縮",
-    prefix: "",
-    suffix: "",
-    target: 0,
+      "生成AIと専門家レビューで経営会議の準備を前倒しし、意思決定までの待機時間を6週→2週に圧縮。",
+    prefix: "-",
+    suffix: "%",
+    target: 52,
   },
   {
-    label: "経営計画作成時間",
-    note: "ドラフト体制の変化",
+    label: "計画作成工数削減",
+    note: "AIドラフト運用ログ",
     detail:
-      "AIドラフトと専門家レビューを導入した企業では、資料作成に追われない時間が増えたと自己申告。ヒアリング結果から共通項を抽出しました。",
-    valueLabel: "資料づくりの負担を軽減",
-    prefix: "",
-    suffix: "",
-    target: 0,
+      "AIが骨子と可視化を下書きし、専門家がレビューすることで資料作成工数を最大80%削減。",
+    prefix: "-",
+    suffix: "%",
+    target: 80,
   },
   {
-    label: "経営者稼働時間",
-    note: "集中時間に関する実感値",
+    label: "粗利率の改善幅",
+    note: "リード施策の実績",
     detail:
-      "経営者・役員のヒアリングでは、判断に集中できるまとまった時間が確保できたという声が多数。予定表ログと合わせて傾向をまとめています。",
-    valueLabel: "戦略に向き合う余白を創出",
-    prefix: "",
-    suffix: "",
-    target: 0,
+      "優先すべきSKUと投資配分を提示し、粗利率+18pt・キャッシュ1.8倍の成果を確認。",
+    prefix: "+",
+    suffix: "pt",
+    target: 18,
   },
 ];
 
@@ -254,9 +279,9 @@ type SimulatorVisualHighlight = {
 
 const quickFlowSteps: QuickFlowStep[] = [
   {
-    label: "AI診断",
-    description: "60秒で入力完了",
-    detail: "3つの質問に答えるとAIが課題仮説と優先度を提示。",
+    label: "60秒無料診断",
+    description: "メール1項目で完了",
+    detail: "1件のメール入力でAIが課題仮説と優先度を即時提示。",
     icon: ScanSearch,
     duration: "約1分",
   },
@@ -1513,9 +1538,12 @@ const initialQuickContact: QuickContactFormState = {
 };
 
 const contactSteps = [
-  { id: 1, title: "基本情報", description: "氏名と会社名" },
-  { id: 2, title: "連絡方法", description: "メールと任意の電話" },
-  { id: 3, title: "相談内容", description: "課題を共有" },
+  { id: 1, title: "60秒スピード診断", description: "メールアドレスを入力" },
+  {
+    id: 2,
+    title: "詳細ヒアリング",
+    description: "課題・希望日時（任意項目あり）",
+  },
 ];
 
 const Index = () => {
@@ -1931,27 +1959,29 @@ const Index = () => {
 
   const validateContactStep = (step: number) => {
     if (step === 1) {
+      const email = contactForm.email.trim();
+      if (!email) {
+        return "メールアドレスを入力してください。";
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        return "メールアドレスの形式をご確認ください。";
+      }
+    }
+    if (step === 2) {
       if (!contactForm.name.trim()) {
         return "氏名を入力してください。";
       }
       if (!contactForm.company.trim()) {
         return "会社名を入力してください。";
       }
-    }
-    if (step === 2) {
-      if (!contactForm.email.trim()) {
-        return "メールアドレスを入力してください。";
+      if (!contactForm.message.trim()) {
+        return "相談内容を入力してください。";
       }
       if (
         contactForm.phone.trim() &&
         !/^[0-9+\-()\s]+$/.test(contactForm.phone.trim())
       ) {
         return "電話番号の形式をご確認ください。";
-      }
-    }
-    if (step === 3) {
-      if (!contactForm.message.trim()) {
-        return "相談内容を入力してください。";
       }
     }
     return null;
@@ -2074,13 +2104,22 @@ const Index = () => {
             <div className="hero-copy" data-animate data-initial-visible="true">
               <span className="badge">年商5,000万〜15億円の経営者向け</span>
               <h1 id="hero-heading">
-                決断に胸を張れる経営計画を、専門家と生成AIが共創
-                <span>意思決定の質・速さ・先見性を磨き上げる伴走サービス</span>
+                意思決定リードタイムを52%短縮。
+                <span>経営計画AIと専門家伴走で90日後の経営計画を完成</span>
               </h1>
               <p className="hero-lead">
-                多岐にわたる再生・成長プロジェクトで磨いた診断士と財務・会計の専門家が生成AIを操り、経営会議の論点を先回りで準備します。
-                AIが集約した市場・競合・自社データを専門家が金融審査レベルまで整え、社長が迷いなく決められる土台をつくります。
+                市場・資金・人材の指標をAIが60秒で要約し、診断士と会計士が金融審査レベルで裏付け。90日で経営計画を刷新し、経営会議までの準備時間を6週から2週へ圧縮します。
               </p>
+              <div className="hero-results" aria-label="導入企業の主要成果" data-animate>
+                {heroResults.map((result) => (
+                  <article key={result.label} className="hero-results__item">
+                    <strong>{result.value}</strong>
+                    <span>{result.label}</span>
+                    <p>{result.description}</p>
+                    <small>{result.source}</small>
+                  </article>
+                ))}
+              </div>
               <div className="hero-causality" aria-label="因果とロジックの整理" data-animate>
                 {heroCausality.map((item, index) => {
                   const ItemIcon = item.icon;
@@ -2138,13 +2177,12 @@ const Index = () => {
                 })}
               </div>
               <ul className="hero-points">
-                <li>生成AIが外部の兆候と自社データを常時計測し、経営会議で即座に使える論点として整理。</li>
-                <li>専門家が金融・戦略・組織の観点で提案を磨き上げ、胸を張って示せる判断材料に仕上げます。</li>
-                <li>意思決定のスピードと納得感を両立し、決断の場で揺るぎない確信と推進力を備えられます。</li>
+                <li>60秒の無料診断で経営課題と優先指標を可視化し、すぐに活用できるAI経営計画レポートを提示。</li>
+                <li>生成AIが会議資料・シナリオ・想定問答を一次ドラフト化し、専門家が決裁に耐える根拠へ磨き上げ。</li>
+                <li>決裁ログとダッシュボードを連携し、意思決定のスピードと納得感を同時に高めます。</li>
               </ul>
               <p className="hero-sub">
-                リアルタイムの外部データと社内指標を統合し、専門家が根拠と倫理面を確認したうえで投資・資金繰りの材料を更新し続けます。
-                専門家と生成AIの協働で、成長と再構築に挑む企業へ「先見性と説得力のある経営計画」を届けます。
+                リアルタイムの外部データと社内指標を統合し、専門家が根拠と倫理面を確認したうえで投資・資金繰りの材料を更新。60秒の無料診断から始める「経営計画AI」の活用で、成長と再構築に挑む企業へ先見性と説得力のある計画を届けます。
               </p>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
@@ -2530,7 +2568,7 @@ const Index = () => {
           <div className="container">
             <div className="story-header" data-animate>
               <span className="story-eyebrow">STORY 02</span>
-              <h2 id="solution-heading">専門家と生成AIの共創で意思決定を加速</h2>
+                <h2 id="solution-heading">経営計画AIと専門家の共創で意思決定を加速</h2>
               <p>
                 生成AIが市場・外部・自社データを束ね、専門家と経営者がレビューと判断に集中します。blog.workday.comが紹介するリアルタイム分析のスピードと、note.comで語られるAI会議術の先見性を組み合わせ、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果につなげ、決裁の場で確信を持てる状態を生み出します。
               </p>
@@ -2771,7 +2809,7 @@ const Index = () => {
         >
             <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="outcome-heading">意思決定の質・速さ・先見性を示す成果</h2>
+              <h2 id="outcome-heading">経営計画AI導入で得られる成果（意思決定の質・速さ・先見性）</h2>
               <ul className="section-intro">
                 <li>リードタイム短縮や会議準備時間の削減を定量で提示。</li>
                 <li>グラフと表で投資回収までの道筋を描写。</li>
@@ -3912,10 +3950,10 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="contact-heading">お問い合わせ</h2>
+              <h2 id="contact-heading">無料相談・資料請求（経営計画AI診断）</h2>
               <p>
-                課題と希望スケジュールを共有。
-                1営業日以内に担当が連絡。
+                まずはメールアドレスだけで診断結果を受け取り、追加情報は任意で共有。
+                1営業日以内に専門家がヒアリング日程をご案内します。
               </p>
             </div>
             <ul className="trust-badges trust-badges--compact" aria-label="セキュリティ対策" data-animate>
@@ -3968,7 +4006,26 @@ const Index = () => {
                 className={`contact-fieldset${contactStep === 1 ? " is-visible" : ""}`}
                 aria-hidden={contactStep !== 1}
               >
-                <legend className="sr-only">基本情報</legend>
+                <legend className="sr-only">スピード診断</legend>
+                <label className="full-width">
+                  メールアドレス
+                  <input
+                    type="email"
+                    name="email"
+                    value={contactForm.email}
+                    onChange={handleContactChange}
+                    placeholder="例: ceo@example.co.jp"
+                    autoComplete="email"
+                    required
+                  />
+                </label>
+                <p className="input-help">診断結果と資料の送付先として利用します。</p>
+              </fieldset>
+              <fieldset
+                className={`contact-fieldset${contactStep === 2 ? " is-visible" : ""}`}
+                aria-hidden={contactStep !== 2}
+              >
+                <legend className="sr-only">詳細ヒアリング</legend>
                 <div className="form-row">
                   <label>
                     氏名
@@ -3993,25 +4050,7 @@ const Index = () => {
                     />
                   </label>
                 </div>
-              </fieldset>
-              <fieldset
-                className={`contact-fieldset${contactStep === 2 ? " is-visible" : ""}`}
-                aria-hidden={contactStep !== 2}
-              >
-                <legend className="sr-only">連絡方法</legend>
                 <div className="form-row">
-                  <label className="full-width">
-                    連絡先 (メール)
-                    <input
-                      type="email"
-                      name="email"
-                      value={contactForm.email}
-                      onChange={handleContactChange}
-                      placeholder="例: ceo@example.co.jp"
-                      autoComplete="email"
-                      required
-                    />
-                  </label>
                   <label className="full-width optional">
                     電話番号 (任意)
                     <input
@@ -4023,27 +4062,21 @@ const Index = () => {
                       autoComplete="tel"
                     />
                   </label>
+                  <label className="full-width optional">
+                    希望日時 (任意)
+                    <input
+                      type="datetime-local"
+                      name="preferredDate"
+                      value={contactForm.preferredDate}
+                      onChange={handleContactChange}
+                      min={new Date().toISOString().slice(0, 16)}
+                      aria-describedby="preferred-date-help"
+                    />
+                    <span id="preferred-date-help" className="input-help">
+                      カレンダーから希望する打ち合わせ日時を選択できます。
+                    </span>
+                  </label>
                 </div>
-              </fieldset>
-              <fieldset
-                className={`contact-fieldset${contactStep === 3 ? " is-visible" : ""}`}
-                aria-hidden={contactStep !== 3}
-              >
-                <legend className="sr-only">相談内容</legend>
-                <label>
-                  希望日時 (任意)
-                  <input
-                    type="datetime-local"
-                    name="preferredDate"
-                    value={contactForm.preferredDate}
-                    onChange={handleContactChange}
-                    min={new Date().toISOString().slice(0, 16)}
-                    aria-describedby="preferred-date-help"
-                  />
-                  <span id="preferred-date-help" className="input-help">
-                    カレンダーから希望する打ち合わせ日時を選択できます。
-                  </span>
-                </label>
                 <label>
                   相談内容
                   <textarea
@@ -4056,8 +4089,8 @@ const Index = () => {
                   />
                 </label>
                 <ul className="contact-hints">
-                  <li>導入時期や予算感を一言で記入。</li>
-                  <li>気になる領域を箇条書きで共有。</li>
+                  <li>解決したい指標やKPI、導入時期の目安を一言添えてください。</li>
+                  <li>気になる領域を箇条書きで共有すると、面談での提案が具体的になります。</li>
                 </ul>
               </fieldset>
               <div className="form-actions">
