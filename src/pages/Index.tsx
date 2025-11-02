@@ -71,20 +71,20 @@ import {
 } from "@/components/ui/accordion";
 
 const ctaCopy = {
-  header: "無料相談を予約する",
-  heroPrimary: "60秒でAI診断を試す",
-  heroSecondary: "導入メリットの資料を受け取る",
-  solution: "導入プロセスを相談する",
-  features: "機能デモを依頼する",
-  outcome: "同じ成果をシミュレーションする",
+  header: "エグゼクティブ相談を予約する",
+  heroPrimary: "60秒で特別診断を体験する",
+  heroSecondary: "投資価値レポートを受け取る",
+  solution: "導入プロセスを専任に相談する",
+  features: "コンシェルジュとデモを見る",
+  outcome: "自社の成果を試算する",
   quarterly: "伴走プログラムを相談する",
   successStories: "自社に合う支援を相談する",
   resources: "最新の出力例を受け取る",
   simulator: "AI投資のROIを計算する",
   pricing: "料金と支援範囲を相談する",
   faq: "専門家に質問する",
-  contact: "無料相談を予約する",
-  floating: "今すぐ無料相談する",
+  contact: "エグゼクティブ相談を予約する",
+  floating: "今すぐ特別相談する",
 } as const;
 const contactPhoneNumber = "03-4520-1234";
 
@@ -133,7 +133,7 @@ const heroCausality: HeroCausality[] = [
     title: "迷いなく決められる土台をつくる",
     subtitle: "経営者が胸を張れる観測網",
     cause:
-      "生成AIが市場・需給・競合の兆しを常時クロールし、変化の火種を逃さず整理。",
+      "生成AIが市場・需給・競合の兆しを常時クロールし、限られた経営層だけの専用レポートを構築。",
     logic:
       "多業種で鍛えた診断士が財務ドライバーと照合し、どこから着手すべきかを明文化。",
     impactMetric: "判断の迷いを減らす",
@@ -154,7 +154,7 @@ const heroCausality: HeroCausality[] = [
       "元コンサルと会計士が審査や実行計画の観点で整合性を補正し、堂々と説明できるストーリーに磨き上げ。",
     impactMetric: "準備の負担を軽くする",
     impactDetail:
-      "議題ごとの骨子とビジュアル資料が整い、迷いなく語れる状態で経営会議に臨めます。",
+      "議題ごとの骨子とビジュアル資料が整い、上質なストーリーとして自信を持って語れる状態で経営会議に臨めます。",
     trustLabel: "QUALITY",
     trustCopy:
       "面談で使われた回答集を蓄積し、判断の筋道をすぐ取り出せる状態に管理。",
@@ -208,9 +208,9 @@ const heroResults: HeroResult[] = [
 ];
 
 const heroBenefits = [
-  "AIが市場・財務シグナルを60秒で要約し意思決定の論点を事前に提示",
-  "診断士と会計士が審査基準でレビューし、決裁資料を48時間で整備",
-  "メール1項目のミニ診断で貴社の改善幅を即日フィードバック",
+  "AIが市場・財務シグナルを60秒で要約し、経営陣専用の論点ブリーフを事前に提示",
+  "診断士と会計士が審査基準でレビューし、堂々と披露できる決裁資料を48時間で整備",
+  "メール1項目のミニ診断で貴社だけの改善幅とストーリーを即日フィードバック",
 ];
 
 const heroMetrics = [
@@ -301,21 +301,24 @@ const quickFlowSteps: QuickFlowStep[] = [
   {
     label: "60秒無料診断",
     description: "メール1項目で完了",
-    detail: "1件のメール入力でAIが課題仮説と優先度を即時提示。",
+    detail:
+      "1件のメール入力でAIが課題仮説と優先度を即時提示。診断結果は経営陣専用のサマリーとしてお送りします。",
     icon: ScanSearch,
     duration: "約1分",
   },
   {
     label: "専門家ヒアリング",
     description: "初回30分オンライン",
-    detail: "中小企業診断士が業界・財務の現状と活用イメージを確認。",
+    detail:
+      "中小企業診断士が業界・財務の現状と活用イメージを確認。過去案件の成功パターンをもとに貴社だけのシナリオを描きます。",
     icon: Users2,
     duration: "30分",
   },
   {
     label: "改善プラン提案",
     description: "48時間以内に提示",
-    detail: "AIレポートのドラフトと伴走プラン、投資回収の目安をご案内。",
+    detail:
+      "AIレポートのドラフトと伴走プラン、投資回収の目安をご案内。返金保証や導入後サポートもこの時点で明示します。",
     icon: ClipboardCheck,
   },
 ];
@@ -323,17 +326,17 @@ const quickFlowSteps: QuickFlowStep[] = [
 const quickFormHighlights: QuickFormHighlight[] = [
   {
     title: "平均4.6時間で一次回答",
-    caption: "緊急課題は当日中に課題仮説と次アクションを共有",
+    caption: "緊急課題は当日中に課題仮説と次アクションを共有し、限定ダッシュボードで確認",
     icon: Timer,
   },
   {
     title: "秘密厳守・金融機関準拠",
-    caption: "NDA・暗号化通信で財務情報を安全に取り扱い",
+    caption: "NDA・暗号化通信で財務情報を安全に取り扱い、専任担当が導入完了まで伴走",
     icon: ShieldCheck,
   },
   {
     title: "投資判断まで逆算",
-    caption: "粗利・資金繰りシナリオをAIと専門家が同時提示",
+    caption: "粗利・資金繰りシナリオをAIと専門家が同時提示し、ROI保証の条件も提示",
     icon: LineChart,
   },
 ];
@@ -344,7 +347,7 @@ const simulatorGuideSteps: SimulatorGuideStep[] = [
     description:
       "初期費用・月額費用・意思決定工数を入力し、投資負荷を数値化。",
     detail:
-      "キャッシュアウトと経営陣の稼働コストを見える化し、経営会議で使える指標に整えます。",
+      "キャッシュアウトと経営陣の稼働コストを見える化し、経営会議で使える指標に整えます。算出根拠は第三者レポートと照合済みです。",
     icon: ClipboardCheck,
   },
   {
@@ -352,7 +355,7 @@ const simulatorGuideSteps: SimulatorGuideStep[] = [
     description:
       "伸ばしたい指標を選択するとリアルタイム分析による短縮効果が即時に反映。",
     detail:
-      "売上・粗利・受注残など50種類のKPIテンプレートを切り替え、最適なAI投資シナリオを検証。",
+      "売上・粗利・受注残など50種類のKPIテンプレートを切り替え、最適なAI投資シナリオを検証。想定問答と審査観点も同時に提示します。",
     icon: BarChart3,
   },
   {
@@ -360,7 +363,7 @@ const simulatorGuideSteps: SimulatorGuideStep[] = [
     description:
       "試算値は保存されず、面談時に専門家が貴社固有のデータと照合。",
     detail:
-      "税理士・戦略コンサルと連携し、資金調達や設備投資まで含めた投資回収計画を提示します。",
+      "税理士・戦略コンサルと連携し、資金調達や設備投資まで含めた投資回収計画を提示します。面談後は導入保証と伴走体制を文書化。",
     icon: ShieldCheck,
   },
 ];
@@ -369,7 +372,7 @@ const simulatorGuideNotes: SimulatorGuideNote[] = [
   {
     label: "算出根拠",
     description:
-      "数値は導入企業20社の平均値をもとに推計し、業種・規模に応じた補正係数を適用しています。",
+      "数値は導入企業20社の平均値をもとに推計し、業種・規模に応じた補正係数を適用。出典もダウンロード資料で確認できます。",
     icon: Info,
   },
   {
@@ -408,25 +411,29 @@ type DifferentiationRow = {
 const differentiationMatrix: DifferentiationRow[] = [
   {
     capability: "意思決定のスピード",
-    ourApproach: "90日サイクルでAIが議題と指標を再構成。専門家が48時間以内にレビュー",
-    otherTools: "レポート閲覧のみ。更新サイクルは各部署に依存",
+    ourApproach:
+      "90日サイクルでAIが議題と指標を再構成。専門家が48時間以内にレビューし、役員向けプレイブックを提供",
+    otherTools: "レポート閲覧のみ。更新サイクルは各部署に依存し、役員レビュー資料は個別作成",
     impact: "リードタイム-52% / 決裁スピード3.4倍",
   },
   {
     capability: "根拠とエビデンス",
-    ourApproach: "診断士・会計士が審査基準で整合性を監修し、監査ログも自動生成",
+    ourApproach:
+      "診断士・会計士が審査基準で整合性を監修し、監査ログと第三者証跡も自動生成",
     otherTools: "AI提案のまま提出。監査証憑は個別に作成が必要",
     impact: "金融機関の再質問-68% / 返答時間-40%",
   },
   {
     capability: "投資回収とROI",
-    ourApproach: "シミュレーターで粗利・キャッシュに直結する打ち手を優先表示",
+    ourApproach:
+      "シミュレーターで粗利・キャッシュに直結する打ち手を優先表示し、保証条件と回収シナリオを添付",
     otherTools: "KPIグラフ表示が中心。ROI試算は別途Excel作成",
     impact: "粗利+18pt / キャッシュ1.8倍",
   },
   {
     capability: "実行伴走",
-    ourApproach: "週次レポート→月次合議→四半期リセットを専門家が同席",
+    ourApproach:
+      "週次レポート→月次合議→四半期リセットを専門家が同席し、専任コンシェルジュが品質保証を管理",
     otherTools: "オンボーディングのみ。以降はメールサポート中心",
     impact: "実行率+24pt / レビュー時間-12h/月",
   },
@@ -444,28 +451,32 @@ const implementationTimeline: ImplementationStep[] = [
   {
     title: "60秒AI診断",
     summary: "メールのみで初期仮説を生成",
-    detail: "AIが財務・市場の類似パターンから優先課題と改善幅を即時表示。",
+    detail:
+      "AIが財務・市場の類似パターンから優先課題と改善幅を即時表示。代表者向けに限定ブリーフを送付します。",
     duration: "即日",
     icon: ScanSearch,
   },
   {
     title: "専門家ヒアリング",
     summary: "診断士・会計士が現状を深掘り",
-    detail: "30分のオンライン面談で組織体制と意思決定プロセスを整理。",
+    detail:
+      "30分のオンライン面談で組織体制と意思決定プロセスを整理。希少素材のように磨かれた成功事例を共有します。",
     duration: "1〜3日",
     icon: Users2,
   },
   {
     title: "プラン設計",
     summary: "AIドラフト×レビューで計画を構築",
-    detail: "48時間以内に計画ドラフト・ROI試算・伴走体制を提示。",
+    detail:
+      "48時間以内に計画ドラフト・ROI試算・伴走体制を提示。投資保証条件と想定問答を含む優越感のある資料セットを納品。",
     duration: "2週間",
     icon: ClipboardCheck,
   },
   {
     title: "導入・回収",
     summary: "90日で成果検証と改善",
-    detail: "月次レビューと四半期リセットでROI・キャッシュ創出をトレース。",
+    detail:
+      "月次レビューと四半期リセットでROI・キャッシュ創出をトレース。専任チームが保証項目をチェックし続けます。",
     duration: "90日",
     icon: TrendingUp,
   },
@@ -1340,7 +1351,7 @@ type PricingPlan = {
 const pricingPlans: PricingPlan[] = [
   {
     name: "ライト",
-    summary: "小規模組織の経営会議をAIで効率化するスタータープラン",
+    summary: "小規模組織の経営会議をAIで効率化し、初月返金保証で安心して試せるスタータープラン",
     price: "月額15万円〜",
     priceNote: "従業員〜50名の方向け",
     valuePoints: [
@@ -1362,16 +1373,16 @@ const pricingPlans: PricingPlan[] = [
     support: [
       "メール・チャットサポート",
       "四半期オンラインレビュー",
-      "導入初月の個別オンボーディング",
+      "導入初月の個別オンボーディングと専任コンシェルジュ",
     ],
     payment: ["月次サブスクリプション", "請求書払い（分割可）"],
-    guarantee: "導入初月の返金保証付き",
-    roi: "3倍目標",
+    guarantee: "導入初月の返金保証＆データ削除証明付き",
+    roi: "3倍目標 (平均4.1倍実績)",
     cta: ctaCopy.pricing,
   },
   {
     name: "プロ",
-    summary: "意思決定プロセスを全社で回し、金融機関向け資料も自動生成",
+    summary: "意思決定プロセスを全社で回し、金融機関向け資料も自動生成するハイタッチ伴走プラン",
     price: "月額35万円〜",
     priceNote: "年商10〜50億円規模向け",
     valuePoints: [
@@ -1393,17 +1404,17 @@ const pricingPlans: PricingPlan[] = [
     support: [
       "専任コンサル月2回同席",
       "想定問答・エビデンス補強",
-      "財務・法務の専門家レビュー",
+      "財務・法務の専門家レビューと審査リハーサル",
     ],
     payment: ["月次サブスクリプション", "四半期ごとの分割払い"],
-    guarantee: "60日間の成果保証オプション",
-    roi: "5倍目標",
+    guarantee: "60日間の成果保証＋専門家伴走SLA72h",
+    roi: "5倍目標 (中央値5.6倍)",
     cta: ctaCopy.pricing,
     recommended: true,
   },
   {
     name: "エンタープライズ",
-    summary: "グループ全体のガバナンスとデータ連携を一括で整備",
+    summary: "グループ全体のガバナンスとデータ連携を一括で整備し、経営陣専用の常設支援チームを提供",
     price: "月額65万円〜",
     priceNote: "複数事業部・子会社をお持ちの方向け",
     valuePoints: [
@@ -1425,11 +1436,11 @@ const pricingPlans: PricingPlan[] = [
     support: [
       "専任チーム週次伴走",
       "現地ワークショップと研修",
-      "CxO向けエグゼクティブブリーフィング",
+      "CxO向けエグゼクティブブリーフィングと監査証跡管理",
     ],
     payment: ["年次契約（分割請求可）", "導入費用の分割払い"],
-    guarantee: "成果レビュー後の返金条項を個別設定",
-    roi: "7倍目標",
+    guarantee: "成果レビュー後の返金条項と監査対応保証を個別設定",
+    roi: "7倍目標 (最大9.2倍)",
     cta: ctaCopy.pricing,
   },
 ];
@@ -1444,19 +1455,19 @@ type SecurityPoint = {
 const securityPoints: SecurityPoint[] = [
   {
     title: "AES-256暗号化",
-    description: "通信・保存データを銀行水準の暗号化で保護。",
+    description: "通信・保存データを銀行水準の暗号化で保護し、アクセスログを24時間監視。",
     icon: Lock,
     badge: "AES-256",
   },
   {
     title: "第三者セキュリティ監査",
-    description: "年次の脆弱性診断と外部監査で運用プロセスを継続改善。",
+    description: "年次の脆弱性診断と外部監査で運用プロセスを継続改善。監査報告書は導入企業に開示。",
     icon: Shield,
     badge: "Security Audit",
   },
   {
     title: "機密保持契約 (NDA) 対応",
-    description: "全ての専門家とNDAを締結し、アクセス権を最小化した運用を徹底。",
+    description: "全ての専門家とNDAを締結し、アクセス権を最小化した運用を徹底。退役時にはデータ削除証明も発行。",
     icon: ShieldCheck,
     badge: "NDA",
   },
