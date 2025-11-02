@@ -90,6 +90,7 @@ const contactPhoneNumber = "03-4520-1234";
 
 const headerNavItems = [
   { id: "hero", label: "サービス概要" },
+  { id: "comparison", label: "比較検討" },
   { id: "problem", label: "課題" },
   { id: "solution", label: "解決策" },
   { id: "features", label: "機能・特徴" },
@@ -208,9 +209,9 @@ const heroResults: HeroResult[] = [
 ];
 
 const heroBenefits = [
-  "AIが市場・財務シグナルを60秒で要約し、経営陣専用の論点ブリーフを事前に提示",
-  "診断士と会計士が審査基準でレビューし、堂々と披露できる決裁資料を48時間で整備",
-  "メール1項目のミニ診断で貴社だけの改善幅とストーリーを即日フィードバック",
+  "年商5,000万〜15億円規模の市場・財務シグナルを60秒で要約し、経営陣専用の論点ブリーフを事前に提示",
+  "診断士と会計士が金融機関審査基準でレビューし、堂々と披露できる決裁資料を48時間で整備",
+  "メール1項目のミニ診断で貴社だけの改善幅と投資回収シナリオを即日フィードバック",
 ];
 
 const heroMetrics = [
@@ -261,6 +262,88 @@ const heroAllianceExperts = [
     role: "管理会計改革とIPO準備を支援",
     focus: "KPI設計とガバナンス整備",
     photo: expertSaitoPhoto,
+  },
+];
+
+type SelectionCriterion = {
+  title: string;
+  description: string;
+  proof: string;
+};
+
+const baselineCriteria: SelectionCriterion[] = [
+  {
+    title: "金融機関・投資家に通じる信頼性",
+    description:
+      "年商5,000万〜15億円規模の資金繰りを支える融資・補助金・投資家対応を想定した根拠資料を標準装備。",
+    proof: "診断士が提出物を監修し、審査コメントの反映まで伴走します。",
+  },
+  {
+    title: "経営チームが使い続けられる更新性",
+    description:
+      "月次・週次で変わる指標をそのまま取り込めるテンプレートで、社長・部門長が同じ画面で意思決定できます。",
+    proof: "会計・販売・SaaSからのCSV/BI連携に対応し、社内工数を抑制。",
+  },
+  {
+    title: "投資対効果の予測精度",
+    description:
+      "3年の財務・人員計画を複数シナリオで比較し、失敗ケースも含めた投資回収ラインを明示します。",
+    proof: "ROI・回収期間を自動算出し、意思決定会議の議事録に添付可能。",
+  },
+];
+
+const differentiatorCriteria: SelectionCriterion[] = [
+  {
+    title: "年商5,000万〜15億円の経営課題に特化",
+    description:
+      "製造・小売・BtoBサービスの実績120件から、中堅手前で生じるボトルネックをパターン化しました。",
+    proof: "粗利率・キャッシュ改善の実績値とベンチマークをテンプレート化。",
+  },
+  {
+    title: "AIドラフト×専門家の二重チェック",
+    description:
+      "AIが一次案を生成し、診断士・会計士が金融審査観点で修正。経営者は意思決定に集中できます。",
+    proof: "48時間以内に決裁資料と想定問答を返却するSLAを設定。",
+  },
+  {
+    title: "90日ごとの伴走プログラム",
+    description:
+      "経営計画・資金繰り・人員計画を四半期ごとに再設計し、実行と学習サイクルを高速化します。",
+    proof: "専任チームがレビュー会議とタスク管理を主導し、現場の稼働負担を最小化。",
+  },
+];
+
+type ComparisonRow = {
+  metric: string;
+  ours: string;
+  alternative: string;
+  note: string;
+};
+
+const comparisonRows: ComparisonRow[] = [
+  {
+    metric: "意思決定リードタイム",
+    ours: "6週→2週。AIシナリオと専門家レビューで平均-52%",
+    alternative: "情報収集が分散し8週以上かかる",
+    note: "役員会前の論点整理が自動化され、経営会議の迷いが減少。",
+  },
+  {
+    metric: "金融機関・投資家対応",
+    ours: "提出フォーマットと想定問答を48時間で整備",
+    alternative: "社内制作で修正往復が多く遅延しがち",
+    note: "融資・補助金ヒアリングを想定したドキュメントを提供。",
+  },
+  {
+    metric: "導入負荷",
+    ours: "メール1項目から開始。既存会計/販売CSVで初期設定完了",
+    alternative: "ゼロからモデル構築が必要で初期費用・稼働が膨らむ",
+    note: "担当者1名でもオペレーションが回るセットアップ手順。",
+  },
+  {
+    metric: "投資回収設計",
+    ours: "ROIとキャッシュフローを3ケース試算し経営指標に連動",
+    alternative: "属人的なExcelで再現性が低く説明が困難",
+    note: "年商5,000万〜15億円の平均回収期間12ヶ月を目安に試算。",
   },
 ];
 
@@ -2564,6 +2647,95 @@ const Index = () => {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 比較検討セクション */}
+        <section
+          id="comparison"
+          ref={(node) => {
+            sectionRefs.current["comparison"] = node ?? null;
+          }}
+          className="section comparison"
+          aria-labelledby="comparison-heading"
+        >
+          <div className="container">
+            <div className="section-header" data-animate>
+              <h2 id="comparison-heading">比較検討の基準でわかる導入メリット</h2>
+              <p>
+                年商5,000万〜15億円の経営者が意思決定のスピードと確信を両立させるために、最低限押さえたい基準と差別化ポイントを整理しました。
+              </p>
+            </div>
+            <div className="comparison-panels" data-animate>
+              <article className="comparison-panel comparison-panel--baseline">
+                <header>
+                  <span className="comparison-panel__eyebrow">Must criteria</span>
+                  <h3>必ず満たしたい期待水準</h3>
+                </header>
+                <p className="comparison-panel__lead">
+                  融資・投資家との対話や社内の合意形成で欠かせない安心材料を、標準機能と運用プロセスで担保します。
+                </p>
+                <ul className="comparison-panel__list">
+                  {baselineCriteria.map((item) => (
+                    <li key={item.title}>
+                      <h4>{item.title}</h4>
+                      <p>{item.description}</p>
+                      <span className="comparison-panel__proof">{item.proof}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+              <article className="comparison-panel comparison-panel--differentiator">
+                <header>
+                  <span className="comparison-panel__eyebrow">Plus alpha</span>
+                  <h3>選定理由になる差別化要素</h3>
+                </header>
+                <p className="comparison-panel__lead">
+                  中小企業の現場で検証した再現性の高い仕組みで、経営者が胸を張って判断理由を語れる状態をつくります。
+                </p>
+                <ul className="comparison-panel__list">
+                  {differentiatorCriteria.map((item) => (
+                    <li key={item.title}>
+                      <h4>{item.title}</h4>
+                      <p>{item.description}</p>
+                      <span className="comparison-panel__proof">{item.proof}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </div>
+            <div className="comparison-table" data-animate>
+              <table>
+                <caption className="sr-only">Strategy AI Labと他選択肢の比較表</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">比較項目</th>
+                    <th scope="col">Strategy AI Lab</th>
+                    <th scope="col">一般的な選択肢</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {comparisonRows.map((row) => (
+                    <tr key={row.metric}>
+                      <th scope="row">{row.metric}</th>
+                      <td>
+                        <strong>{row.ours}</strong>
+                        <p>{row.note}</p>
+                      </td>
+                      <td>{row.alternative}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <p className="comparison-table__note">
+                * 実績値は導入企業20社（従業員50〜300名、年商5,000万〜15億円）の平均。詳細はヒアリングで開示します。
+              </p>
+            </div>
+            <div className="section-cta" data-animate>
+              <a className="btn btn-cta" href="#contact">
+                {ctaCopy.solution}
+              </a>
             </div>
           </div>
         </section>
