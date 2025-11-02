@@ -10,6 +10,7 @@ import {
 
 import {
   ArrowDownRight,
+  ArrowRight,
   ArrowUpRight,
   Award,
   BarChart3,
@@ -70,22 +71,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const ctaCopy = {
-  header: "無料相談を予約する",
-  heroPrimary: "60秒でAI診断を試す",
-  heroSecondary: "導入メリットの資料を受け取る",
-  solution: "導入プロセスを相談する",
-  features: "機能デモを依頼する",
-  outcome: "同じ成果をシミュレーションする",
-  quarterly: "伴走プログラムを相談する",
-  successStories: "自社に合う支援を相談する",
-  resources: "最新の出力例を受け取る",
-  simulator: "AI投資のROIを計算する",
-  pricing: "料金と支援範囲を相談する",
-  faq: "専門家に質問する",
-  contact: "無料相談を予約する",
-  floating: "今すぐ無料相談する",
-} as const;
+const primaryCtaLabel = "60秒で診断を受ける（無料）";
 const contactPhoneNumber = "03-4520-1234";
 
 const headerNavItems = [
@@ -205,12 +191,6 @@ const heroResults: HeroResult[] = [
     description: "優先シナリオ提示で粗利+18pt、キャッシュ1.8倍を実現。",
     source: "導入企業ヒアリング (n=20)",
   },
-];
-
-const heroBenefits = [
-  "AIが市場・財務シグナルを60秒で要約し意思決定の論点を事前に提示",
-  "診断士と会計士が審査基準でレビューし、決裁資料を48時間で整備",
-  "メール1項目のミニ診断で貴社の改善幅を即日フィードバック",
 ];
 
 const heroMetrics = [
@@ -395,79 +375,6 @@ const simulatorGuidanceVisualHighlights: SimulatorVisualHighlight[] = [
     label: "専門家伴走",
     description: "面談で自社データを取り込み、導入判断まで伴走。",
     icon: Users2,
-  },
-];
-
-type DifferentiationRow = {
-  capability: string;
-  ourApproach: string;
-  otherTools: string;
-  impact: string;
-};
-
-const differentiationMatrix: DifferentiationRow[] = [
-  {
-    capability: "意思決定のスピード",
-    ourApproach: "90日サイクルでAIが議題と指標を再構成。専門家が48時間以内にレビュー",
-    otherTools: "レポート閲覧のみ。更新サイクルは各部署に依存",
-    impact: "リードタイム-52% / 決裁スピード3.4倍",
-  },
-  {
-    capability: "根拠とエビデンス",
-    ourApproach: "診断士・会計士が審査基準で整合性を監修し、監査ログも自動生成",
-    otherTools: "AI提案のまま提出。監査証憑は個別に作成が必要",
-    impact: "金融機関の再質問-68% / 返答時間-40%",
-  },
-  {
-    capability: "投資回収とROI",
-    ourApproach: "シミュレーターで粗利・キャッシュに直結する打ち手を優先表示",
-    otherTools: "KPIグラフ表示が中心。ROI試算は別途Excel作成",
-    impact: "粗利+18pt / キャッシュ1.8倍",
-  },
-  {
-    capability: "実行伴走",
-    ourApproach: "週次レポート→月次合議→四半期リセットを専門家が同席",
-    otherTools: "オンボーディングのみ。以降はメールサポート中心",
-    impact: "実行率+24pt / レビュー時間-12h/月",
-  },
-];
-
-type ImplementationStep = {
-  title: string;
-  summary: string;
-  detail: string;
-  duration: string;
-  icon: LucideIcon;
-};
-
-const implementationTimeline: ImplementationStep[] = [
-  {
-    title: "60秒AI診断",
-    summary: "メールのみで初期仮説を生成",
-    detail: "AIが財務・市場の類似パターンから優先課題と改善幅を即時表示。",
-    duration: "即日",
-    icon: ScanSearch,
-  },
-  {
-    title: "専門家ヒアリング",
-    summary: "診断士・会計士が現状を深掘り",
-    detail: "30分のオンライン面談で組織体制と意思決定プロセスを整理。",
-    duration: "1〜3日",
-    icon: Users2,
-  },
-  {
-    title: "プラン設計",
-    summary: "AIドラフト×レビューで計画を構築",
-    detail: "48時間以内に計画ドラフト・ROI試算・伴走体制を提示。",
-    duration: "2週間",
-    icon: ClipboardCheck,
-  },
-  {
-    title: "導入・回収",
-    summary: "90日で成果検証と改善",
-    detail: "月次レビューと四半期リセットでROI・キャッシュ創出をトレース。",
-    duration: "90日",
-    icon: TrendingUp,
   },
 ];
 
@@ -1367,7 +1274,7 @@ const pricingPlans: PricingPlan[] = [
     payment: ["月次サブスクリプション", "請求書払い（分割可）"],
     guarantee: "導入初月の返金保証付き",
     roi: "3倍目標",
-    cta: ctaCopy.pricing,
+    cta: primaryCtaLabel,
   },
   {
     name: "プロ",
@@ -1398,7 +1305,7 @@ const pricingPlans: PricingPlan[] = [
     payment: ["月次サブスクリプション", "四半期ごとの分割払い"],
     guarantee: "60日間の成果保証オプション",
     roi: "5倍目標",
-    cta: ctaCopy.pricing,
+    cta: primaryCtaLabel,
     recommended: true,
   },
   {
@@ -1430,7 +1337,7 @@ const pricingPlans: PricingPlan[] = [
     payment: ["年次契約（分割請求可）", "導入費用の分割払い"],
     guarantee: "成果レビュー後の返金条項を個別設定",
     roi: "7倍目標",
-    cta: ctaCopy.pricing,
+    cta: primaryCtaLabel,
   },
 ];
 
@@ -1990,8 +1897,8 @@ const Index = () => {
     const trimmedEmail = quickContact.email.trim();
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    if (!trimmedEmail) {
-      setQuickError("メールアドレスを入力してください。");
+    if (!trimmedName || !trimmedCompany || !trimmedEmail) {
+      setQuickError("氏名・会社名・メールアドレスを入力してください。");
       return;
     }
 
@@ -2005,16 +1912,12 @@ const Index = () => {
     setQuickSubmitted(false);
 
     try {
-      const fallbackName = trimmedName || "（クイック診断）未入力";
-      const fallbackCompany = trimmedCompany || "（クイック診断）未入力";
-      const memo = `【クイック診断リクエスト】メール1項目フォームより送信。\n氏名: ${
-        trimmedName || "未記入"
-      }\n会社名: ${trimmedCompany || "未記入"}`;
       await submitContactForm({
-        name: fallbackName,
-        company: fallbackCompany,
+        name: trimmedName,
+        company: trimmedCompany,
         email: trimmedEmail,
-        message: memo,
+        message:
+          "[クイック診断リクエスト] 上部フォームより送信。初回30分相談とAI診断の詳細連絡を希望。",
       });
       setQuickSubmitted(true);
       setQuickContact(initialQuickContact);
@@ -2168,7 +2071,7 @@ const Index = () => {
           </nav>
           <div className="header-actions" role="group" aria-label="主要な申し込み導線">
             <a className="btn btn-cta" href="#contact">
-              {ctaCopy.header}
+              {primaryCtaLabel}
             </a>
             <button
               type="button"
@@ -2207,16 +2110,6 @@ const Index = () => {
               <p className="hero-lead">
                 市場・資金・人材の指標をAIが60秒で要約し、診断士と会計士が金融審査レベルで裏付け。90日で経営計画を刷新し、経営会議までの準備時間を6週から2週へ圧縮します。
               </p>
-              <ul className="hero-benefits" aria-label="導入メリット">
-                {heroBenefits.map((benefit) => (
-                  <li key={benefit}>
-                    <span className="hero-benefits__icon" aria-hidden="true">
-                      <CheckCircle2 />
-                    </span>
-                    <span>{benefit}</span>
-                  </li>
-                ))}
-              </ul>
               <div className="hero-results" aria-label="導入企業の主要成果" data-animate>
                 {heroResults.map((result) => (
                   <article key={result.label} className="hero-results__item">
@@ -2227,51 +2120,120 @@ const Index = () => {
                   </article>
                 ))}
               </div>
-              <div className="hero-cta-group" data-animate>
+              <div className="hero-causality" aria-label="因果とロジックの整理" data-animate>
+                {heroCausality.map((item, index) => {
+                  const ItemIcon = item.icon;
+                  return (
+                    <article key={item.title} className="hero-causality__card">
+                      <header className="hero-causality__header">
+                        <div className="hero-causality__icon" aria-hidden="true">
+                          <ItemIcon />
+                        </div>
+                        <div className="hero-causality__heading">
+                          <span className="hero-causality__step">STEP {index + 1}</span>
+                          <h2>{item.title}</h2>
+                          <p className="hero-causality__subtitle">{item.subtitle}</p>
+                        </div>
+                      </header>
+                      <div className="hero-causality__flow" role="list">
+                        <div className="hero-causality__flow-item" role="listitem">
+                          <span className="hero-causality__pill hero-causality__pill--cause">因</span>
+                          <p>{item.cause}</p>
+                        </div>
+                        <span className="hero-causality__arrow" aria-hidden="true">
+                          <ArrowRight />
+                        </span>
+                        <div className="hero-causality__flow-item" role="listitem">
+                          <span className="hero-causality__pill hero-causality__pill--logic">論</span>
+                          <p>{item.logic}</p>
+                        </div>
+                        <span className="hero-causality__arrow" aria-hidden="true">
+                          <ArrowRight />
+                        </span>
+                        <div
+                          className="hero-causality__flow-item hero-causality__flow-item--impact"
+                          role="listitem"
+                        >
+                          <span className="hero-causality__pill hero-causality__pill--impact">果</span>
+                          <div>
+                            <strong>{item.impactMetric}</strong>
+                            <p>{item.impactDetail}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <footer className="hero-causality__footer">
+                        <div className="hero-causality__trust">
+                          <span className="hero-causality__trust-label">{item.trustLabel}</span>
+                          <p>{item.trustCopy}</p>
+                        </div>
+                        <ul className="hero-causality__qualities" aria-label="強調する価値">
+                          {item.highlights.map((quality) => (
+                            <li key={quality}>{quality}</li>
+                          ))}
+                        </ul>
+                      </footer>
+                    </article>
+                  );
+                })}
+              </div>
+              <ul className="hero-points">
+                <li>60秒の無料診断で経営課題と優先指標を可視化し、すぐに活用できるAI経営計画レポートを提示。</li>
+                <li>生成AIが会議資料・シナリオ・想定問答を一次ドラフト化し、専門家が決裁に耐える根拠へ磨き上げ。</li>
+                <li>決裁ログとダッシュボードを連携し、意思決定のスピードと納得感を同時に高めます。</li>
+              </ul>
+              <p className="hero-sub">
+                リアルタイムの外部データと社内指標を統合し、専門家が根拠と倫理面を確認したうえで投資・資金繰りの材料を更新。60秒の無料診断から始める「経営計画AI」の活用で、成長と再構築に挑む企業へ先見性と説得力のある計画を届けます。
+              </p>
+              <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
-                  {ctaCopy.heroPrimary}
+                  {primaryCtaLabel}
                 </a>
-                <a className="btn btn-outline" href="#simulator">
-                  {ctaCopy.heroSecondary}
+                <a className="hero-secondary-link" href="#resources">
+                  資料をダウンロードして詳細を確認
                 </a>
-                <p className="hero-cta-note">
-                  または
-                  <a href={`tel:${contactPhoneNumber.replace(/-/g, "")}`}>
-                    {contactPhoneNumber}
-                  </a>
-                  までお電話ください。
-                </p>
               </div>
-              <div className="hero-trust-snippet" data-animate>
-                <div className="hero-trust-snippet__profile">
-                  <img
-                    src={representativeProfile.photo}
-                    alt={`${representativeProfile.name}のプロフィール写真`}
-                    loading="lazy"
-                  />
-                </div>
-                <div className="hero-trust-snippet__body">
-                  <span className="hero-trust-snippet__eyebrow">Trust &amp; Assurance</span>
-                  <strong>{representativeProfile.name}</strong>
-                  <span>{representativeProfile.title}</span>
-                  <p>
-                    経済産業省認定支援機関としてAI×経営計画の導入を累計120件監修。金融機関提出レベルの根拠づくりを伴走します。
-                  </p>
-                  <ul className="hero-security-badges" aria-label="セキュリティ・信頼性バッジ">
-                    {securityBadges.map((badge) => {
-                      const BadgeIcon = badge.icon;
-                      return (
-                        <li key={badge.title}>
-                          <span className="hero-security-badges__icon" aria-hidden="true">
-                            <BadgeIcon />
-                          </span>
-                          <span>{badge.badge}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
-              </div>
+              <ul className="trust-badges" aria-label="セキュリティ対策">
+                {securityBadges.map((badge) => {
+                  const BadgeIcon = badge.icon;
+                  return (
+                    <li key={badge.title}>
+                      <span className="trust-badge__icon" aria-hidden="true">
+                        <BadgeIcon />
+                      </span>
+                      <span className="trust-badge__label">{badge.badge}</span>
+                      <span className="trust-badge__title">{badge.title}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+              <ul className="hero-metrics" ref={metricsRef}>
+                {heroMetrics.map((metric, index) => (
+                  <li key={metric.label}>
+                    <strong>
+                      {metric.valueLabel ?? `${metric.prefix}${metricValues[index].toLocaleString(undefined, {
+                        minimumFractionDigits: metric.decimals ?? 0,
+                        maximumFractionDigits: metric.decimals ?? 0,
+                      })}${metric.suffix}`}
+                    </strong>
+                    <span>{metric.label}</span>
+                    <small>
+                      {metric.note}
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            className="metric-detail-trigger"
+                            aria-label={`${metric.label}の測定方法`}
+                          >
+                            <Info aria-hidden="true" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>{metric.detail}</TooltipContent>
+                      </Tooltip>
+                    </small>
+                  </li>
+                ))}
+              </ul>
               <div className="scroll-cue" aria-hidden="true">
                 <span className="scroll-cue__icon" />
                 <span className="scroll-cue__label">スクロールして詳細を見る</span>
@@ -2294,9 +2256,9 @@ const Index = () => {
               </figure>
               <div className="hero-quick-form" data-animate>
                 <div className="hero-quick-form__intro">
-                  <h2>メール1項目で60秒診断</h2>
+                  <h2>60秒でAI診断を予約</h2>
                   <p>
-                    メールアドレスだけでAIが優先課題と改善幅を仮提示。任意で氏名・会社名を入力すれば、専門家が初回30分相談の候補日時までご案内します。
+                    氏名・会社名・メールの3項目だけで申し込み完了。初回30分のオンライン相談で、AI診断の結果と改善プランの方向性をご案内します。
                   </p>
                   <ul className="hero-quick-form__highlights" aria-label="申し込み後に得られる価値">
                     {quickFormHighlights.map((item) => {
@@ -2320,9 +2282,31 @@ const Index = () => {
                   aria-label="60秒AI診断申し込みフォーム"
                   onSubmit={handleQuickContactSubmit}
                 >
-                  <div className="quick-form-grid quick-form-grid--primary">
+                  <div className="quick-form-grid">
                     <label>
-                      メールアドレス（必須）
+                      氏名
+                      <input
+                        type="text"
+                        name="name"
+                        autoComplete="name"
+                        value={quickContact.name}
+                        onChange={handleQuickContactChange}
+                        required
+                      />
+                    </label>
+                    <label>
+                      会社名
+                      <input
+                        type="text"
+                        name="company"
+                        autoComplete="organization"
+                        value={quickContact.company}
+                        onChange={handleQuickContactChange}
+                        required
+                      />
+                    </label>
+                    <label>
+                      メールアドレス
                       <input
                         type="email"
                         name="email"
@@ -2330,30 +2314,6 @@ const Index = () => {
                         value={quickContact.email}
                         onChange={handleQuickContactChange}
                         required
-                      />
-                    </label>
-                  </div>
-                  <div className="quick-form-grid quick-form-grid--optional">
-                    <label>
-                      氏名（任意）
-                      <input
-                        type="text"
-                        name="name"
-                        autoComplete="name"
-                        value={quickContact.name}
-                        onChange={handleQuickContactChange}
-                        placeholder="例）経営 太郎"
-                      />
-                    </label>
-                    <label>
-                      会社名（任意）
-                      <input
-                        type="text"
-                        name="company"
-                        autoComplete="organization"
-                        value={quickContact.company}
-                        onChange={handleQuickContactChange}
-                        placeholder="例）株式会社サンプル"
                       />
                     </label>
                   </div>
@@ -2379,9 +2339,9 @@ const Index = () => {
                     {isQuickSubmitting && (
                       <span className="btn-spinner" aria-hidden="true" />
                     )}
-                    {isQuickSubmitting ? "送信中..." : ctaCopy.heroPrimary}
+                    {isQuickSubmitting ? "送信中..." : "60秒診断を申し込む"}
                   </button>
-                  <p className="quick-form-note">詳細のヒアリングは後日、専門家よりご連絡します。</p>
+                  <p className="quick-form-note">詳細な課題は追ってヒアリングいたします。</p>
                 </form>
                 <ol className="diagnosis-flow" aria-label="診断から提案までの流れ">
                   {quickFlowSteps.map((step) => {
@@ -2406,105 +2366,14 @@ const Index = () => {
                   })}
                 </ol>
               </div>
-            </div>
-          </div>
-        </section>
-
-        <section
-          id="proof"
-          className="section hero-proof"
-          aria-labelledby="proof-heading"
-        >
-          <div className="container">
-            <div className="hero-proof__intro" data-animate>
-              <span className="hero-proof__eyebrow">REASON TO BELIEVE</span>
-              <h2 id="proof-heading">成果の裏付けと共創プロセス</h2>
-              <p>
-                生成AIと専門家の因果設計、第三者エビデンス、定量指標で意思決定の速さと納得感を保証します。
-              </p>
-            </div>
-            <div className="hero-proof__grid">
-              <div className="hero-proof__accordion" data-animate>
-                <Accordion
-                  type="single"
-                  collapsible
-                  defaultValue={heroCausality[0]?.title ?? undefined}
-                >
-                  {heroCausality.map((item) => {
-                    const ItemIcon = item.icon;
-                    return (
-                      <AccordionItem key={item.title} value={item.title}>
-                        <AccordionTrigger>
-                          <div className="hero-proof__trigger">
-                            <span className="hero-proof__trigger-icon" aria-hidden="true">
-                              <ItemIcon />
-                            </span>
-                            <div className="hero-proof__trigger-text">
-                              <strong>{item.title}</strong>
-                              <span>{item.subtitle}</span>
-                            </div>
-                            <span className="hero-proof__trigger-metric">{item.impactMetric}</span>
-                          </div>
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          <div className="hero-proof__content">
-                            <p className="hero-proof__cause">{item.cause}</p>
-                            <p className="hero-proof__logic">{item.logic}</p>
-                            <div className="hero-proof__impact">
-                              <strong>{item.impactDetail}</strong>
-                              <div>
-                                <span className="hero-proof__badge">{item.trustLabel}</span>
-                                <p>{item.trustCopy}</p>
-                              </div>
-                            </div>
-                            <ul className="hero-proof__highlights">
-                              {item.highlights.map((highlight) => (
-                                <li key={highlight}>{highlight}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        </AccordionContent>
-                      </AccordionItem>
-                    );
-                  })}
-                </Accordion>
-              </div>
-              <div className="hero-proof__evidence" data-animate>
-                <ul className="hero-metrics" ref={metricsRef}>
-                  {heroMetrics.map((metric, index) => (
-                    <li key={metric.label}>
-                      <strong>
-                        {metric.valueLabel ?? `${metric.prefix}${metricValues[index].toLocaleString(undefined, {
-                          minimumFractionDigits: metric.decimals ?? 0,
-                          maximumFractionDigits: metric.decimals ?? 0,
-                        })}${metric.suffix}`}
-                      </strong>
-                      <span>{metric.label}</span>
-                      <small>
-                        {metric.note}
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <button
-                              type="button"
-                              className="metric-detail-trigger"
-                              aria-label={`${metric.label}の測定方法`}
-                            >
-                              <Info aria-hidden="true" />
-                            </button>
-                          </TooltipTrigger>
-                          <TooltipContent>{metric.detail}</TooltipContent>
-                        </Tooltip>
-                      </small>
-                    </li>
-                  ))}
-                </ul>
-                <div
-                  className="hero-collab hero-collab--compact"
-                  aria-label="生成AIと専門家チームの連携イメージ"
-                >
+              <div className="hero-demo" data-animate data-initial-visible="true">
+                <div className="hero-collab" aria-label="生成AIと専門家チームの連携イメージ">
                   <div className="hero-collab__panel hero-collab__panel--ai">
                     <span className="hero-collab__label">生成AI</span>
-                    <p>市場・外部・自社データをクロス分析し、資金繰りと成長シナリオを毎週ドラフト。</p>
+                    <p>
+                      市場・外部・自社データをクロス分析し、資金繰りと成長の複数シナリオを毎週ドラフト。
+                      JAGGAER (2024) が示すように、膨大なデータから最適解を素早く抽出します。
+                    </p>
                   </div>
                   <div className="hero-collab__connector" aria-hidden="true">
                     <Bot />
@@ -2525,7 +2394,7 @@ const Index = () => {
                     </ul>
                   </div>
                 </div>
-                <div className="hero-evidence hero-evidence--compact" aria-label="外部調査による裏付け">
+                <div className="hero-evidence" aria-label="外部調査による裏付け">
                   <span className="hero-evidence__eyebrow">Evidence</span>
                   <ul className="hero-evidence__list">
                     {heroEvidence.map((item) => (
@@ -2537,21 +2406,22 @@ const Index = () => {
                       </li>
                     ))}
                   </ul>
-                  <button
-                    type="button"
-                    className="hero-demo__button"
-                    onClick={() => {
-                      setIsDemoPlaying(false);
-                      setIsDemoOpen(true);
-                    }}
-                  >
-                    <PlayCircle aria-hidden="true" />
-                    <span>1分でわかる共創デモを見る</span>
-                  </button>
-                  <p className="hero-demo__caption hero-demo__caption--compact">
-                    University of Cincinnati Onlineなどの調査をもとに、意思決定リードタイム短縮の運用をダイジェストで紹介します。
-                  </p>
                 </div>
+                <button
+                  type="button"
+                  className="hero-demo__button"
+                  onClick={() => {
+                    setIsDemoPlaying(false);
+                    setIsDemoOpen(true);
+                  }}
+                >
+                  <PlayCircle aria-hidden="true" />
+                  <span>1分で分かるAI×専門家デモを見る</span>
+                </button>
+                <p className="hero-demo__caption">
+                  週1回のAIレポートと専門家セッションで、University of Cincinnati Onlineが指摘するリアルタイム意思決定の仕組みを体現。
+                  経営者は重要な判断に集中し、資料の整合性はチームが担保します。
+                </p>
               </div>
             </div>
           </div>
@@ -2818,7 +2688,7 @@ const Index = () => {
             </div>
             <div className="story-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
-                {ctaCopy.solution}
+                {primaryCtaLabel}
               </a>
               <a className="story-cta__link" href="#process">
                 導入プロセスを詳しく見る
@@ -2919,7 +2789,7 @@ const Index = () => {
             </p>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
-                {ctaCopy.features}
+                {primaryCtaLabel}
               </a>
               <a className="section-cta__link" href="#pricing">
                 料金と支援範囲を確認
@@ -3166,63 +3036,6 @@ const Index = () => {
                   </ul>
                 </article>
               </div>
-              <div className="comparison-section" id="comparison" data-animate>
-                <div className="comparison-section__header">
-                  <h3>他社ツールとの違い</h3>
-                  <p>AIの速度と専門家の根拠づくりを組み合わせ、意思決定までを伴走する点が最大の差別化要因です。</p>
-                </div>
-                <div className="comparison-table__wrapper">
-                  <table className="comparison-table">
-                    <thead>
-                      <tr>
-                        <th scope="col">評価項目</th>
-                        <th scope="col">Strategy AI Lab</th>
-                        <th scope="col">一般的なAIツール</th>
-                        <th scope="col">成果インパクト</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {differentiationMatrix.map((row) => (
-                        <tr key={row.capability}>
-                          <th scope="row">{row.capability}</th>
-                          <td>{row.ourApproach}</td>
-                          <td>{row.otherTools}</td>
-                          <td>{row.impact}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div
-                className="process-timeline"
-                id="process"
-                data-animate
-                aria-labelledby="process-heading"
-              >
-                <div className="process-timeline__intro">
-                  <h3 id="process-heading">導入から成果創出までの90日ロードマップ</h3>
-                  <p>メール1項目のミニ診断から90日後の成果検証まで、迷わず進めるステップを専門家が伴走します。</p>
-                </div>
-                <ol className="process-steps">
-                  {implementationTimeline.map((step) => {
-                    const StepIcon = step.icon;
-                    return (
-                      <li key={step.title} className="process-step">
-                        <div className="process-step__icon" aria-hidden="true">
-                          <StepIcon />
-                        </div>
-                        <div className="process-step__body">
-                          <span className="process-step__duration">{step.duration}</span>
-                          <h4>{step.title}</h4>
-                          <p className="process-step__summary">{step.summary}</p>
-                          <p className="process-step__detail">{step.detail}</p>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ol>
-              </div>
               <ol className="insights-footnotes" data-animate>
                 {outcomeFootnotes.map((footnote) => (
                   <li key={footnote}>{footnote}</li>
@@ -3230,7 +3043,7 @@ const Index = () => {
               </ol>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
-                {ctaCopy.outcome}
+                {primaryCtaLabel}
               </a>
               <a className="section-cta__link" href="#simulator">
                 <abbr title="投資利益率">ROI</abbr>試算で効果を確認
@@ -3433,7 +3246,7 @@ const Index = () => {
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
-                {ctaCopy.quarterly}
+                {primaryCtaLabel}
               </a>
               <button
                 type="button"
@@ -3569,7 +3382,7 @@ const Index = () => {
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
-                {ctaCopy.simulator}
+                {primaryCtaLabel}
               </a>
               <button
                 type="button"
@@ -3694,7 +3507,7 @@ const Index = () => {
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
-                {ctaCopy.pricing}
+                {primaryCtaLabel}
               </a>
             </div>
           </div>
@@ -3733,7 +3546,7 @@ const Index = () => {
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
-                {ctaCopy.faq}
+                {primaryCtaLabel}
               </a>
               <a className="section-cta__link" href="#stories">
                 導入事例も確認する
@@ -3844,7 +3657,7 @@ const Index = () => {
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
-                {ctaCopy.successStories}
+                {primaryCtaLabel}
               </a>
               <a className="section-cta__link" href="#resources">
                 資料で出力例を見る
@@ -3992,7 +3805,7 @@ const Index = () => {
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
-                {ctaCopy.contact}
+                {primaryCtaLabel}
               </a>
               <a className="section-cta__link" href="#hero">
                 60秒診断から始める
@@ -4043,7 +3856,7 @@ const Index = () => {
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
-                {ctaCopy.resources}
+                {primaryCtaLabel}
               </a>
             </div>
           </div>
@@ -4091,7 +3904,7 @@ const Index = () => {
             </div>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
-                {ctaCopy.contact}
+                {primaryCtaLabel}
               </a>
             </div>
             <p className="privacy-note" data-animate>
@@ -4112,7 +3925,7 @@ const Index = () => {
               </p>
               <div className="final-cta__actions">
                 <a className="btn btn-cta" href="#contact">
-                  {ctaCopy.contact}
+                  {primaryCtaLabel}
                 </a>
                 <a className="btn btn-outline" href="#resources">
                   資料をダウンロード
@@ -4308,7 +4121,7 @@ const Index = () => {
                         送信中...
                       </span>
                     ) : (
-                      ctaCopy.contact
+                      primaryCtaLabel
                     )}
                   </button>
                 )}
@@ -4328,7 +4141,7 @@ const Index = () => {
           </div>
           <div className="mobile-form-cta" aria-hidden="true">
             <a className="btn btn-cta" href="#contact">
-              {ctaCopy.contact}
+              {primaryCtaLabel}
             </a>
           </div>
         </section>
