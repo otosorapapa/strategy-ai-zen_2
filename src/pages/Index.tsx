@@ -265,6 +265,34 @@ const heroAllianceExperts = [
   },
 ];
 
+type AssuranceHighlight = {
+  title: string;
+  description: string;
+  detail: string;
+  icon: LucideIcon;
+};
+
+const assuranceHighlights: AssuranceHighlight[] = [
+  {
+    title: "72時間レビューSLA",
+    description: "診断士・会計士がAIドラフトを72時間以内に監修し、金融機関提出レベルまで整備します。",
+    detail: "経営陣の意思決定と審査回答を遅らせないための品質保証体制。",
+    icon: Timer,
+  },
+  {
+    title: "60日間成果保証",
+    description: "初回導入で効果を実感できなければ返金。改善提案と伴走プランを再設計します。",
+    detail: "四半期レビューで成果が確認できない場合は追加費用なく再構築。",
+    icon: ShieldCheck,
+  },
+  {
+    title: "金融機関準拠の想定問答",
+    description: "融資・補助金審査の質問に即答できる想定問答と証憑リストを提供。",
+    detail: "提出後の再質問削減を目的に、想定問答と根拠資料を標準化。",
+    icon: ClipboardCheck,
+  },
+];
+
 type SelectionCriterion = {
   title: string;
   description: string;
@@ -1556,47 +1584,6 @@ const securityPoints: SecurityPoint[] = [
   },
 ];
 
-type ExpertCard = {
-  name: string;
-  title: string;
-  bio: string;
-  photo: string;
-  credentials: { icon: LucideIcon; label: string }[];
-};
-
-const expertCards: ExpertCard[] = [
-  {
-    name: "田中 圭",
-    title: "元メガバンク法人融資担当",
-    bio: "大型調達案件を多数支援。資金戦略と金融機関交渉に精通。",
-    photo: expertTanakaPhoto,
-    credentials: [
-      { icon: ShieldCheck, label: "融資審査1,200件サポート" },
-      { icon: LineChart, label: "資金繰り最適化モデル監修" },
-    ],
-  },
-  {
-    name: "小林 真",
-    title: "元戦略コンサルティングファーム",
-    bio: "事業再生・新規事業開発の戦略立案を20社以上支援。",
-    photo: expertKobayashiPhoto,
-    credentials: [
-      { icon: BarChart3, label: "中期経営計画策定 20社" },
-      { icon: Workflow, label: "DX推進プロジェクト伴走" },
-    ],
-  },
-  {
-    name: "斎藤 美咲",
-    title: "財務会計・管理会計専門家",
-    bio: "成長投資支援と財務モデリングの専門家。",
-    photo: expertSaitoPhoto,
-    credentials: [
-      { icon: Award, label: "認定支援機関 10年" },
-      { icon: FileText, label: "資金計画成功率 86%" },
-    ],
-  },
-];
-
 type ResourceCard = {
   title: string;
   description: string;
@@ -2311,16 +2298,6 @@ const Index = () => {
                   </li>
                 ))}
               </ul>
-              <div className="hero-results" aria-label="導入企業の主要成果" data-animate>
-                {heroResults.map((result) => (
-                  <article key={result.label} className="hero-results__item">
-                    <strong>{result.value}</strong>
-                    <span>{result.label}</span>
-                    <p>{result.description}</p>
-                    <small>{result.source}</small>
-                  </article>
-                ))}
-              </div>
               <div className="hero-cta-group" data-animate>
                 <a className="btn btn-cta" href="#contact">
                   {ctaCopy.heroPrimary}
@@ -2505,207 +2482,122 @@ const Index = () => {
         </section>
 
         <section
-          id="proof"
-          className="section hero-proof"
-          aria-labelledby="proof-heading"
-        >
-          <div className="container">
-            <div className="hero-proof__intro" data-animate>
-              <span className="hero-proof__eyebrow">REASON TO BELIEVE</span>
-              <h2 id="proof-heading">成果の裏付けと共創プロセス</h2>
-              <p>
-                生成AIと専門家の因果設計、第三者エビデンス、定量指標で意思決定の速さと納得感を保証します。
-              </p>
-            </div>
-            <div className="hero-proof__grid">
-              <div className="hero-proof__accordion" data-animate>
-                <Accordion
-                  type="single"
-                  collapsible
-                  defaultValue={heroCausality[0]?.title ?? undefined}
-                >
-                  {heroCausality.map((item) => {
-                    const ItemIcon = item.icon;
-                    return (
-                      <AccordionItem key={item.title} value={item.title}>
-                        <AccordionTrigger>
-                          <div className="hero-proof__trigger">
-                            <span className="hero-proof__trigger-icon" aria-hidden="true">
-                              <ItemIcon />
-                            </span>
-                            <div className="hero-proof__trigger-text">
-                              <strong>{item.title}</strong>
-                              <span>{item.subtitle}</span>
-                            </div>
-                            <span className="hero-proof__trigger-metric">{item.impactMetric}</span>
-                          </div>
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          <div className="hero-proof__content">
-                            <p className="hero-proof__cause">{item.cause}</p>
-                            <p className="hero-proof__logic">{item.logic}</p>
-                            <div className="hero-proof__impact">
-                              <strong>{item.impactDetail}</strong>
-                              <div>
-                                <span className="hero-proof__badge">{item.trustLabel}</span>
-                                <p>{item.trustCopy}</p>
-                              </div>
-                            </div>
-                            <ul className="hero-proof__highlights">
-                              {item.highlights.map((highlight) => (
-                                <li key={highlight}>{highlight}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        </AccordionContent>
-                      </AccordionItem>
-                    );
-                  })}
-                </Accordion>
-              </div>
-              <div className="hero-proof__evidence" data-animate>
-                <ul className="hero-metrics" ref={metricsRef}>
-                  {heroMetrics.map((metric, index) => (
-                    <li key={metric.label}>
-                      <strong>
-                        {metric.valueLabel ?? `${metric.prefix}${metricValues[index].toLocaleString(undefined, {
-                          minimumFractionDigits: metric.decimals ?? 0,
-                          maximumFractionDigits: metric.decimals ?? 0,
-                        })}${metric.suffix}`}
-                      </strong>
-                      <span>{metric.label}</span>
-                      <small>
-                        {metric.note}
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <button
-                              type="button"
-                              className="metric-detail-trigger"
-                              aria-label={`${metric.label}の測定方法`}
-                            >
-                              <Info aria-hidden="true" />
-                            </button>
-                          </TooltipTrigger>
-                          <TooltipContent>{metric.detail}</TooltipContent>
-                        </Tooltip>
-                      </small>
-                    </li>
-                  ))}
-                </ul>
-                <div
-                  className="hero-collab hero-collab--compact"
-                  aria-label="生成AIと専門家チームの連携イメージ"
-                >
-                  <div className="hero-collab__panel hero-collab__panel--ai">
-                    <span className="hero-collab__label">生成AI</span>
-                    <p>市場・外部・自社データをクロス分析し、資金繰りと成長シナリオを毎週ドラフト。</p>
-                  </div>
-                  <div className="hero-collab__connector" aria-hidden="true">
-                    <Bot />
-                  </div>
-                  <div className="hero-collab__panel hero-collab__panel--experts">
-                    <span className="hero-collab__label">専門家チーム</span>
-                    <ul className="hero-collab__experts">
-                      {heroAllianceExperts.map((expert) => (
-                        <li key={expert.name}>
-                          <img src={expert.photo} alt={expert.name} loading="lazy" />
-                          <div>
-                            <strong>{expert.name}</strong>
-                            <span>{expert.role}</span>
-                            <small>{expert.focus}</small>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                <div className="hero-evidence hero-evidence--compact" aria-label="外部調査による裏付け">
-                  <span className="hero-evidence__eyebrow">Evidence</span>
-                  <ul className="hero-evidence__list">
-                    {heroEvidence.map((item) => (
-                      <li key={item.source} className="hero-evidence__item">
-                        <p>{item.summary}</p>
-                        <a href={item.url} target="_blank" rel="noreferrer">
-                          {item.source}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                  <button
-                    type="button"
-                    className="hero-demo__button"
-                    onClick={() => {
-                      setIsDemoPlaying(false);
-                      setIsDemoOpen(true);
-                    }}
-                  >
-                    <PlayCircle aria-hidden="true" />
-                    <span>1分でわかる共創デモを見る</span>
-                  </button>
-                  <p className="hero-demo__caption hero-demo__caption--compact">
-                    University of Cincinnati Onlineなどの調査をもとに、意思決定リードタイム短縮の運用をダイジェストで紹介します。
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 比較検討セクション */}
-        <section
           id="comparison"
           ref={(node) => {
             sectionRefs.current["comparison"] = node ?? null;
           }}
-          className="section comparison"
-          aria-labelledby="comparison-heading"
+          className="section stage stage--one"
+          aria-labelledby="stage-one-heading"
         >
           <div className="container">
-            <div className="section-header" data-animate>
-              <h2 id="comparison-heading">比較検討の基準でわかる導入メリット</h2>
+            <header className="stage__header" data-animate>
+              <span className="stage__badge">第1段階：事実と差別化</span>
+              <h2 id="stage-one-heading">特徴・ロジック・証拠を一画面で確認</h2>
               <p>
-                年商5,000万〜15億円の経営者が意思決定のスピードと確信を両立させるために、最低限押さえたい基準と差別化ポイントを整理しました。
+                年商5,000万〜15億円規模の経営者が、迷いなく判断できる根拠を集約。生成AIの因果ロジックと専門家レビューのフロー、競合比較を同じステージで確認できます。
               </p>
+            </header>
+            <div className="stage-one__causality" data-animate>
+              {heroCausality.map((item) => {
+                const ItemIcon = item.icon;
+                return (
+                  <article key={item.title} className="causality-card">
+                    <header className="causality-card__header">
+                      <span className="causality-card__icon" aria-hidden="true">
+                        <ItemIcon />
+                      </span>
+                      <div className="causality-card__titles">
+                        <h3>{item.title}</h3>
+                        <span>{item.subtitle}</span>
+                      </div>
+                      <span className="causality-card__metric">{item.impactMetric}</span>
+                    </header>
+                    <div className="causality-card__body">
+                      <p className="causality-card__cause">{item.cause}</p>
+                      <p className="causality-card__logic">{item.logic}</p>
+                      <div className="causality-card__impact">
+                        <strong>{item.impactDetail}</strong>
+                        <div className="causality-card__assurance">
+                          <span className="causality-card__badge">{item.trustLabel}</span>
+                          <p>{item.trustCopy}</p>
+                        </div>
+                      </div>
+                      <ul className="causality-card__highlights" aria-label={`${item.title}で強調する価値`}>
+                        {item.highlights.map((highlight) => (
+                          <li key={`${item.title}-${highlight}`}>{highlight}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
-            <div className="comparison-panels" data-animate>
-              <article className="comparison-panel comparison-panel--baseline">
+            <div className="stage-one__criteria" data-animate>
+              <article className="criteria-panel criteria-panel--baseline">
                 <header>
-                  <span className="comparison-panel__eyebrow">Must criteria</span>
-                  <h3>必ず満たしたい期待水準</h3>
+                  <span className="criteria-panel__eyebrow">Must Criteria</span>
+                  <h3>最低限満たすべき安心材料</h3>
                 </header>
-                <p className="comparison-panel__lead">
-                  融資・投資家との対話や社内の合意形成で欠かせない安心材料を、標準機能と運用プロセスで担保します。
+                <p>
+                  融資・投資家との対話や社内合意形成で欠かせない信頼性を、プロセスと成果物の両面で担保します。
                 </p>
-                <ul className="comparison-panel__list">
+                <ul>
                   {baselineCriteria.map((item) => (
                     <li key={item.title}>
                       <h4>{item.title}</h4>
                       <p>{item.description}</p>
-                      <span className="comparison-panel__proof">{item.proof}</span>
+                      <span>{item.proof}</span>
                     </li>
                   ))}
                 </ul>
               </article>
-              <article className="comparison-panel comparison-panel--differentiator">
+              <article className="criteria-panel criteria-panel--differentiator">
                 <header>
-                  <span className="comparison-panel__eyebrow">Plus alpha</span>
-                  <h3>選定理由になる差別化要素</h3>
+                  <span className="criteria-panel__eyebrow">Differentiator</span>
+                  <h3>選ばれる決め手</h3>
                 </header>
-                <p className="comparison-panel__lead">
-                  中小企業の現場で検証した再現性の高い仕組みで、経営者が胸を張って判断理由を語れる状態をつくります。
+                <p>
+                  中小企業の現場で磨いた型化された支援で、経営者が胸を張って判断理由を語れるよう支援します。
                 </p>
-                <ul className="comparison-panel__list">
+                <ul>
                   {differentiatorCriteria.map((item) => (
                     <li key={item.title}>
                       <h4>{item.title}</h4>
                       <p>{item.description}</p>
-                      <span className="comparison-panel__proof">{item.proof}</span>
+                      <span>{item.proof}</span>
                     </li>
                   ))}
                 </ul>
               </article>
+              <aside className="criteria-panel criteria-panel--evidence">
+                <header>
+                  <span className="criteria-panel__eyebrow">Evidence</span>
+                  <h3>第三者の裏付け</h3>
+                </header>
+                <ul>
+                  {heroEvidence.map((item) => (
+                    <li key={item.source}>
+                      <p>{item.summary}</p>
+                      <a href={item.url} target="_blank" rel="noreferrer">
+                        {item.source}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  type="button"
+                  className="criteria-panel__demo"
+                  onClick={() => {
+                    setIsDemoPlaying(false);
+                    setIsDemoOpen(true);
+                  }}
+                >
+                  <PlayCircle aria-hidden="true" />
+                  <span>1分ダイジェストで導入イメージを見る</span>
+                </button>
+              </aside>
             </div>
-            <div className="comparison-table" data-animate>
+            <div className="stage-one__comparison" data-animate>
               <table>
                 <caption className="sr-only">Strategy AI Labと他選択肢の比較表</caption>
                 <thead>
@@ -2728,14 +2620,98 @@ const Index = () => {
                   ))}
                 </tbody>
               </table>
-              <p className="comparison-table__note">
-                * 実績値は導入企業20社（従業員50〜300名、年商5,000万〜15億円）の平均。詳細はヒアリングで開示します。
-              </p>
+              <p>* 実績値は導入企業20社（従業員50〜300名、年商5,000万〜15億円）の平均。詳細はヒアリングで開示します。</p>
             </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
+            <div className="stage__cta" data-animate>
+              <span className="stage__cta-badge">Stage 1 → Stage 2</span>
+              <a className="btn btn-cta" href="#simulator">
                 {ctaCopy.solution}
               </a>
+              <span className="stage__cta-note">証拠が揃ったら実績データで確信を深めましょう。</span>
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="proof"
+          className="section stage stage--two"
+          aria-labelledby="stage-two-heading"
+        >
+          <div className="container">
+            <header className="stage__header" data-animate>
+              <span className="stage__badge stage__badge--secondary">第2段階：実績・比較データ</span>
+              <h2 id="stage-two-heading">導入効果を数字で裏付け</h2>
+              <p>
+                意思決定リードタイム短縮や粗利改善など、同規模企業の成果を定量で確認。導入検討の社内説得にそのまま使える指標を公開します。
+              </p>
+            </header>
+            <div className="stage-two__results" data-animate>
+              {heroResults.map((result) => (
+                <article key={result.label}>
+                  <strong>{result.value}</strong>
+                  <span>{result.label}</span>
+                  <p>{result.description}</p>
+                  <small>{result.source}</small>
+                </article>
+              ))}
+            </div>
+            <div className="stage-two__metrics" data-animate>
+              <h3>モニタリングする主要KPI</h3>
+              <ul ref={metricsRef}>
+                {heroMetrics.map((metric, index) => (
+                  <li key={metric.label}>
+                    <strong>
+                      {metric.valueLabel ?? `${metric.prefix}${metricValues[index].toLocaleString(undefined, {
+                        minimumFractionDigits: metric.decimals ?? 0,
+                        maximumFractionDigits: metric.decimals ?? 0,
+                      })}${metric.suffix}`}
+                    </strong>
+                    <span>{metric.label}</span>
+                    <small>
+                      {metric.note}
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <button
+                            type="button"
+                            className="metric-detail-trigger"
+                            aria-label={`${metric.label}の測定方法`}
+                          >
+                            <Info aria-hidden="true" />
+                          </button>
+                        </TooltipTrigger>
+                        <TooltipContent>{metric.detail}</TooltipContent>
+                      </Tooltip>
+                    </small>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="stage-two__trust" data-animate>
+              <h3>外部統計と市場シグナル</h3>
+              <div className="stage-two__trust-grid">
+                {trustDataPoints.map((point) => (
+                  <article key={point.label}>
+                    <header>
+                      <strong>{point.value}</strong>
+                      <span>{point.label}</span>
+                    </header>
+                    <p>{point.description}</p>
+                    <footer>
+                      <a href={point.url} target="_blank" rel="noreferrer">
+                        {point.source}
+                      </a>
+                      <span>{point.signal}</span>
+                    </footer>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div className="stage__cta" data-animate>
+              <span className="stage__cta-badge">Stage 2 → Stage 3</span>
+              <a className="btn btn-cta" href="#stories">
+                {ctaCopy.simulator}
+              </a>
+              <span className="stage__cta-note">数字に確信が持てたら、実際の経営者の声で最終確認を。</span>
             </div>
           </div>
         </section>
@@ -3931,15 +3907,16 @@ const Index = () => {
           ref={(node) => {
             sectionRefs.current["stories"] = node ?? null;
           }}
-          className="section stories"
+          className="section stories stage stage--three"
           aria-labelledby="stories-heading"
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="stories-heading">成功事例</h2>
+              <span className="stage__badge stage__badge--tertiary">第3段階：顧客の声</span>
+              <h2 id="stories-heading">導入前→導入中→活用後のストーリーで成果を確認</h2>
               <ul className="section-intro">
-                <li>実名レビューで成果を確認。</li>
-                <li>業界横断の再現性を提示。</li>
+                <li>実名レビューで中小企業の再現性を確認。</li>
+                <li>導入プロセスと成果指標を時間軸で把握。</li>
               </ul>
             </div>
             <div className="story-carousel" data-animate>
@@ -3970,25 +3947,22 @@ const Index = () => {
                         <span className="story-quote__icon" aria-hidden="true">“</span>
                         <p>{story.quote}</p>
                       </blockquote>
-                      <div className="story-structure" role="list">
-                        <div className="story-structure__item" role="listitem">
-                          <span className="story-structure__label">課題</span>
+                      <div className="story-timeline" role="list">
+                        <div className="story-timeline__step" role="listitem">
+                          <span className="story-timeline__phase">導入前</span>
                           <p>{story.challenge}</p>
                         </div>
-                        <div className="story-structure__item" role="listitem">
-                          <span className="story-structure__label">AIの役割</span>
-                          <p>{story.aiRole}</p>
+                        <div className="story-timeline__step" role="listitem">
+                          <span className="story-timeline__phase">導入中</span>
+                          <p className="story-timeline__ai">{story.aiRole}</p>
+                          <p className="story-timeline__expert">{story.expertRole}</p>
                         </div>
-                        <div className="story-structure__item" role="listitem">
-                          <span className="story-structure__label">専門家の伴走</span>
-                          <p>{story.expertRole}</p>
-                        </div>
-                        <div className="story-structure__item" role="listitem">
-                          <span className="story-structure__label">意思決定プロセス</span>
+                        <div className="story-timeline__step" role="listitem">
+                          <span className="story-timeline__phase">活用後</span>
                           <p>{story.governance}</p>
+                          <p className="story-timeline__summary">{story.summary}</p>
                         </div>
                       </div>
-                      <p className="story-summary">{story.summary}</p>
                       <ul className="story-metrics">
                         {story.metrics.map((metric) => (
                           <li key={metric.label}>
@@ -4025,13 +3999,12 @@ const Index = () => {
                 ))}
               </div>
             </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
+            <div className="stage__cta" data-animate>
+              <span className="stage__cta-badge">Stage 3 → Stage 4</span>
+              <a className="btn btn-cta" href="#credibility">
                 {ctaCopy.successStories}
               </a>
-              <a className="section-cta__link" href="#resources">
-                資料で出力例を見る
-              </a>
+              <span className="stage__cta-note">導入後の姿が描けたら、支援する専門家と保証内容を確認。</span>
             </div>
             <p className="footnote" data-animate>
               ※ 掲載コメントは各社から許諾済みです。
@@ -4039,147 +4012,131 @@ const Index = () => {
           </div>
         </section>
 
-        {/* パートナーロゴと専門家紹介 */}
-        <section className="section credibility" aria-labelledby="credibility-heading">
+        <section
+          id="credibility"
+          className="section credibility stage stage--four"
+          aria-labelledby="credibility-heading"
+        >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="credibility-heading">選ばれる理由</h2>
-              <ul className="section-intro">
-                <li>代表・専門家の実績と公的機関の登録情報を公開。</li>
-                <li>導入企業の成果と第三者データでAI活用の効果を証明。</li>
-              </ul>
+              <span className="stage__badge stage__badge--quaternary">第4段階：専門家の推奨</span>
+              <h2 id="credibility-heading">専門家と保証で最後の一押しを整える</h2>
+              <p>
+                代表と専門家チームの実績、導入企業の声、保証体制を一箇所で確認し、経営者が納得して意思決定できる裏付けを揃えます。
+              </p>
             </div>
-            <article className="representative-card" data-animate>
-              <div className="representative-card__photo">
-                <img
-                  src={representativeProfile.photo}
-                  alt={`${representativeProfile.name}のプロフィール写真`}
-                  loading="lazy"
-                />
-              </div>
-              <div className="representative-card__body">
-                <span className="representative-card__title">{representativeProfile.title}</span>
-                <h3>{representativeProfile.name}</h3>
-                <p>{representativeProfile.summary}</p>
-                <div className="representative-card__lists">
-                  <div>
-                    <strong>保有資格</strong>
-                    <ul>
-                      {representativeProfile.qualifications.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <strong>主要実績</strong>
-                    <ul>
-                      {representativeProfile.achievements.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <strong>登録・所属</strong>
-                    <ul>
-                      {representativeProfile.affiliations.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </div>
+            <div className="stage-four__leader" data-animate>
+              <article className="representative-card">
+                <div className="representative-card__photo">
+                  <img
+                    src={representativeProfile.photo}
+                    alt={`${representativeProfile.name}のプロフィール写真`}
+                    loading="lazy"
+                  />
                 </div>
-                <a className="representative-card__link" href="https://furumachi-smec.lognowa.com" target="_blank" rel="noreferrer">
-                  代表プロフィールと登録機関を見る
-                </a>
-              </div>
-            </article>
-            <div className="customer-highlights" role="list">
-              {customerHighlights.map((highlight) => (
-                <article key={highlight.result} className="customer-highlight" role="listitem" data-animate>
-                  <header className="customer-highlight__header">
-                    <div className="customer-highlight__identity">
-                      <div className="customer-highlight__logo">
-                        <img src={highlight.logo} alt={highlight.alt} loading="lazy" />
-                      </div>
-                      <div className="customer-highlight__meta">
-                        <span className="customer-highlight__category">{highlight.category}</span>
-                        <p className="customer-highlight__proof">{highlight.proof}</p>
-                      </div>
+                <div className="representative-card__body">
+                  <span className="representative-card__title">{representativeProfile.title}</span>
+                  <h3>{representativeProfile.name}</h3>
+                  <p>{representativeProfile.summary}</p>
+                  <div className="representative-card__lists">
+                    <div>
+                      <strong>保有資格</strong>
+                      <ul>
+                        {representativeProfile.qualifications.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
                     </div>
-                    <div className="customer-highlight__result" aria-label={`導入成果 ${highlight.result}`}>
-                      <span className="customer-highlight__result-label">導入成果</span>
-                      <strong>{highlight.result}</strong>
+                    <div>
+                      <strong>主要実績</strong>
+                      <ul>
+                        {representativeProfile.achievements.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
                     </div>
-                  </header>
-                  <div className="customer-highlight__insights">
-                    <div className="customer-highlight__comment" aria-label="戦略インサイト">
-                      <span className="customer-highlight__comment-label">意思決定の質</span>
-                      <p>{highlight.comment}</p>
+                    <div>
+                      <strong>登録・所属</strong>
+                      <ul>
+                        {representativeProfile.affiliations.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
                     </div>
-                    <ul className="customer-highlight__metrics" aria-label="成果の内訳">
-                      {highlight.detail.split(" / ").map((metric) => {
-                        const value = metric.trim();
-                        return (
-                          <li key={value}>
-                            <span>{value}</span>
-                          </li>
-                        );
-                      })}
-                    </ul>
                   </div>
-                </article>
-              ))}
-            </div>
-            <div className="trust-metrics" data-animate>
-              {trustDataPoints.map((point) => (
-                <div key={point.label} className="trust-metric">
-                  <span className="trust-metric__signal">{point.signal}</span>
-                  <div className="trust-metric__value" aria-label={`${point.label} ${point.value}`}>
-                    <strong>{point.value}</strong>
-                    <span>{point.label}</span>
-                  </div>
-                  <p>{point.description}</p>
-                  <a href={point.url} target="_blank" rel="noreferrer">
-                    {point.source}
+                  <a className="representative-card__link" href="https://furumachi-smec.lognowa.com" target="_blank" rel="noreferrer">
+                    代表プロフィールと登録機関を見る
                   </a>
                 </div>
-              ))}
-            </div>
-            <div className="expert-grid">
-              {expertCards.map((expert) => (
-                <article key={expert.name} className="expert-card" data-animate>
-                  <div className="expert-photo">
-                    <img
-                      src={expert.photo}
-                      alt={`${expert.name}のプロフィール写真`}
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="expert-body">
-                    <h3>{expert.name}</h3>
-                    <span>{expert.title}</span>
-                    <p>{expert.bio}</p>
-                    <ul className="expert-card__credentials">
-                      {expert.credentials.map((credential) => {
-                        const CredentialIcon = credential.icon;
-                        return (
-                          <li key={credential.label}>
-                            <CredentialIcon aria-hidden="true" />
-                            <span>{credential.label}</span>
-                          </li>
-                        );
+              </article>
+              <div className="stage-four__testimonials" role="list">
+                {customerHighlights.map((highlight) => (
+                  <article key={highlight.result} role="listitem">
+                    <header>
+                      <div className="stage-four__testimonial-meta">
+                        <img src={highlight.logo} alt={highlight.alt} loading="lazy" />
+                        <div>
+                          <span>{highlight.category}</span>
+                          <p>{highlight.proof}</p>
+                        </div>
+                      </div>
+                      <div className="stage-four__testimonial-result" aria-label={`導入成果 ${highlight.result}`}>
+                        <span>導入成果</span>
+                        <strong>{highlight.result}</strong>
+                      </div>
+                    </header>
+                    <p>{highlight.comment}</p>
+                    <ul>
+                      {highlight.detail.split(" / ").map((metric) => {
+                        const value = metric.trim();
+                        return <li key={value}>{value}</li>;
                       })}
                     </ul>
-                  </div>
-                </article>
-              ))}
+                  </article>
+                ))}
+              </div>
             </div>
-            <div className="section-cta" data-animate>
+            <div className="stage-four__experts" data-animate>
+              <h3>伴走する専門家チーム</h3>
+              <div className="stage-four__experts-grid">
+                {heroAllianceExperts.map((expert) => (
+                  <article key={expert.name}>
+                    <img src={expert.photo} alt={expert.name} loading="lazy" />
+                    <div>
+                      <strong>{expert.name}</strong>
+                      <span>{expert.role}</span>
+                      <p>{expert.focus}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div className="stage-four__assurance" data-animate>
+              <h3>保証と伴走の仕組み</h3>
+              <ul>
+                {assuranceHighlights.map((item) => {
+                  const HighlightIcon = item.icon;
+                  return (
+                    <li key={item.title}>
+                      <span className="stage-four__assurance-icon" aria-hidden="true">
+                        <HighlightIcon />
+                      </span>
+                      <div>
+                        <strong>{item.title}</strong>
+                        <p>{item.description}</p>
+                        <small>{item.detail}</small>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div className="stage__cta" data-animate>
+              <span className="stage__cta-badge">Stage 4 → Action</span>
               <a className="btn btn-cta" href="#contact">
                 {ctaCopy.contact}
               </a>
-              <a className="section-cta__link" href="#hero">
-                60秒診断から始める
-              </a>
+              <span className="stage__cta-note">専門家と直接相談し、貴社専用の導入ロードマップを作成します。</span>
             </div>
           </div>
         </section>
