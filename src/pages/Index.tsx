@@ -195,6 +195,36 @@ const heroResults: HeroResult[] = [
   },
 ];
 
+const heroPainPoints = [
+  {
+    title: "意思決定が会議直前まで揃わない",
+    detail: "部門ごとに数値と論点がばらつき、重要な判断が先送りになっている。",
+  },
+  {
+    title: "金融機関向け資料づくりが重い",
+    detail: "融資・投資家への説明資料を整えるために、経営陣が本来の判断に集中できない。",
+  },
+  {
+    title: "補助金・投資の優先順位が決められない",
+    detail: "複数のシナリオを検証する時間が足りず、打ち手の着手タイミングが遅れている。",
+  },
+];
+
+const heroBenefitHighlights = [
+  {
+    title: "72時間で優先指標とリスクを整理",
+    detail: "AIが財務・販売・外部データを束ね、経営会議の論点を一枚で共有。",
+  },
+  {
+    title: "1〜2週間で金融機関提出レベルの計画",
+    detail: "診断士と会計士がAIドラフトを磨き込み、ROIと資金計画を整合。",
+  },
+  {
+    title: "3か月伴走で施策実行と資金調達を完走",
+    detail: "週次レビューで進捗とキャッシュを追跡し、補助金・融資の採択率86%を実現。",
+  },
+];
+
 const heroMetrics = [
   {
     label: "意思決定リードタイム短縮率",
@@ -2181,86 +2211,64 @@ const Index = () => {
             <div className="hero-copy" data-animate data-initial-visible="true">
               <span className="badge">年商5,000万〜15億円の経営者向け</span>
               <h1 id="hero-heading">
-                年商5,000万〜15億円の社長専用
-                <span>生成AI×診断士で“数字が動く”経営計画を60日で</span>
+                意思決定の迷いを72時間でゼロに。
+                <span>生成AI×診断士が利益計画を描き切る</span>
               </h1>
               <p className="hero-lead">
-                資金繰り・銀行交渉・補助金申請・新規投資の意思決定を最速化。生成AIが財務・需要・外部シグナルを即時分析し、経営改善経験豊富な中小企業診断士が金融機関提出レベルの経営計画に磨き上げます。
+                資金繰りや投資判断の迷いを、AI分析と専門家レビューで72時間以内に整理し、経営会議までに数字と論点をそろえます。
               </p>
-              <div className="hero-results" aria-label="導入企業の主要成果" data-animate>
-                {heroResults.map((result) => (
-                  <article key={result.label} className="hero-results__item">
-                    <strong>{result.value}</strong>
-                    <span>{result.label}</span>
-                    <p>{result.description}</p>
-                    <small>{result.source}</small>
-                  </article>
-                ))}
+              <div className="hero-triad" data-animate>
+                <section
+                  className="hero-triad__column hero-triad__column--problem"
+                  aria-labelledby="hero-problem-heading"
+                >
+                  <span className="hero-triad__eyebrow">Problem</span>
+                  <h3 id="hero-problem-heading">意思決定を鈍らせる3つの壁</h3>
+                  <ul className="hero-triad__list">
+                    {heroPainPoints.map((item) => (
+                      <li key={item.title}>
+                        <strong>{item.title}</strong>
+                        <span>{item.detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+                <section
+                  className="hero-triad__column hero-triad__column--benefit"
+                  aria-labelledby="hero-benefit-heading"
+                >
+                  <span className="hero-triad__eyebrow hero-triad__eyebrow--benefit">Benefit</span>
+                  <h3 id="hero-benefit-heading">選ばれるスピードと確度</h3>
+                  <ul className="hero-triad__list">
+                    {heroBenefitHighlights.map((item) => (
+                      <li key={item.title}>
+                        <strong>{item.title}</strong>
+                        <span>{item.detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="hero-triad__note">
+                    72時間診断→計画ドラフト→3か月伴走の流れで、会議前に論点と数字を揃え意思決定を前倒しします。
+                  </p>
+                </section>
+                <section
+                  className="hero-triad__column hero-triad__column--proof"
+                  aria-labelledby="hero-proof-heading"
+                >
+                  <span className="hero-triad__eyebrow hero-triad__eyebrow--proof">Proof</span>
+                  <h3 id="hero-proof-heading">導入企業の成果</h3>
+                  <div className="hero-triad__metrics" aria-label="導入企業の主要成果">
+                    {heroResults.map((result) => (
+                      <article key={result.label} className="hero-triad__metric">
+                        <strong>{result.value}</strong>
+                        <span>{result.label}</span>
+                        <p>{result.description}</p>
+                        <small>{result.source}</small>
+                      </article>
+                    ))}
+                  </div>
+                </section>
               </div>
-              <div className="hero-causality" aria-label="因果とロジックの整理" data-animate>
-                {heroCausality.map((item, index) => {
-                  const ItemIcon = item.icon;
-                  return (
-                    <article key={item.title} className="hero-causality__card">
-                      <header className="hero-causality__header">
-                        <div className="hero-causality__icon" aria-hidden="true">
-                          <ItemIcon />
-                        </div>
-                        <div className="hero-causality__heading">
-                          <span className="hero-causality__step">STEP {index + 1}</span>
-                          <h2>{item.title}</h2>
-                          <p className="hero-causality__subtitle">{item.subtitle}</p>
-                        </div>
-                      </header>
-                      <div className="hero-causality__flow" role="list">
-                        <div className="hero-causality__flow-item" role="listitem">
-                          <span className="hero-causality__pill hero-causality__pill--cause">因</span>
-                          <p>{item.cause}</p>
-                        </div>
-                        <span className="hero-causality__arrow" aria-hidden="true">
-                          <ArrowRight />
-                        </span>
-                        <div className="hero-causality__flow-item" role="listitem">
-                          <span className="hero-causality__pill hero-causality__pill--logic">論</span>
-                          <p>{item.logic}</p>
-                        </div>
-                        <span className="hero-causality__arrow" aria-hidden="true">
-                          <ArrowRight />
-                        </span>
-                        <div
-                          className="hero-causality__flow-item hero-causality__flow-item--impact"
-                          role="listitem"
-                        >
-                          <span className="hero-causality__pill hero-causality__pill--impact">果</span>
-                          <div>
-                            <strong>{item.impactMetric}</strong>
-                            <p>{item.impactDetail}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <footer className="hero-causality__footer">
-                        <div className="hero-causality__trust">
-                          <span className="hero-causality__trust-label">{item.trustLabel}</span>
-                          <p>{item.trustCopy}</p>
-                        </div>
-                        <ul className="hero-causality__qualities" aria-label="強調する価値">
-                          {item.highlights.map((quality) => (
-                            <li key={quality}>{quality}</li>
-                          ))}
-                        </ul>
-                      </footer>
-                    </article>
-                  );
-                })}
-              </div>
-              <ul className="hero-points">
-                <li>30分無料相談で資金繰り・投資計画・補助金の課題を整理し、導入可否とスケジュールを即回答。</li>
-                <li>72時間でAI診断レポートと優先課題ロードマップを提示。経営会議で使える指標と想定問答もセットで共有。</li>
-                <li>1〜2週間で金融機関提出レベルの経営計画を完成させ、3か月の伴走で実行管理と資金調達を支援。</li>
-              </ul>
-              <p className="hero-sub">
-                現場データと外部シグナルをリアルタイムに統合し、中小企業診断士・財務専門家が審査基準でレビュー。補助金活用や資金調達を見据えた「攻めと守り」の経営計画を、年商5,000万〜15億円の企業へ短期間で届けます。
-              </p>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
                   {primaryCtaLabel}
@@ -2500,6 +2508,78 @@ const Index = () => {
                   経営者は重要な判断に集中し、資料の整合性はチームが担保します。
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ヒーロー下部: プロセス因果カード */}
+        <section
+          className="section hero-causality-section"
+          aria-labelledby="hero-journey-heading"
+        >
+          <div className="container">
+            <div className="hero-causality-intro" data-animate>
+              <span className="hero-causality-intro__eyebrow">PROCESS</span>
+              <h2 id="hero-journey-heading">72時間→1〜2週間→3か月で意思決定を固める流れ</h2>
+              <p>
+                初回ヒアリングで課題と数字を揃え、72時間の診断で論点を可視化。1〜2週間で計画書を仕上げ、3か月の伴走で実行と資金調達まで支援する再現性のあるプロセスです。
+              </p>
+            </div>
+            <div className="hero-causality" aria-label="因果とロジックの整理" data-animate>
+              {heroCausality.map((item, index) => {
+                const ItemIcon = item.icon;
+                return (
+                  <article key={item.title} className="hero-causality__card">
+                    <header className="hero-causality__header">
+                      <div className="hero-causality__icon" aria-hidden="true">
+                        <ItemIcon />
+                      </div>
+                      <div className="hero-causality__heading">
+                        <span className="hero-causality__step">STEP {index + 1}</span>
+                        <h3>{item.title}</h3>
+                        <p className="hero-causality__subtitle">{item.subtitle}</p>
+                      </div>
+                    </header>
+                    <div className="hero-causality__flow" role="list">
+                      <div className="hero-causality__flow-item" role="listitem">
+                        <span className="hero-causality__pill hero-causality__pill--cause">因</span>
+                        <p>{item.cause}</p>
+                      </div>
+                      <span className="hero-causality__arrow" aria-hidden="true">
+                        <ArrowRight />
+                      </span>
+                      <div className="hero-causality__flow-item" role="listitem">
+                        <span className="hero-causality__pill hero-causality__pill--logic">論</span>
+                        <p>{item.logic}</p>
+                      </div>
+                      <span className="hero-causality__arrow" aria-hidden="true">
+                        <ArrowRight />
+                      </span>
+                      <div
+                        className="hero-causality__flow-item hero-causality__flow-item--impact"
+                        role="listitem"
+                      >
+                        <span className="hero-causality__pill hero-causality__pill--impact">果</span>
+                        <div>
+                          <strong>{item.impactMetric}</strong>
+                          <p>{item.impactDetail}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <footer className="hero-causality__footer">
+                      <div className="hero-causality__trust">
+                        <span className="hero-causality__trust-label">{item.trustLabel}</span>
+                        <p>{item.trustCopy}</p>
+                      </div>
+                      <ul className="hero-causality__qualities" aria-label="強調する価値">
+                        {item.highlights.map((quality) => (
+                          <li key={quality}>{quality}</li>
+                        ))}
+                      </ul>
+                    </footer>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>

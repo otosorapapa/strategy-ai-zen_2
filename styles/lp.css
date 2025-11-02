@@ -546,6 +546,121 @@ svg {
   color: var(--gray-600);
 }
 
+.hero-triad {
+  display: grid;
+  gap: 18px;
+  margin: 12px 0 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.hero-triad__column {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(79, 163, 255, 0.22);
+  box-shadow: 0 20px 48px -32px rgba(8, 35, 74, 0.35);
+}
+
+.hero-triad__column--benefit {
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.9), rgba(191, 233, 216, 0.6));
+}
+
+.hero-triad__column--proof {
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.92), rgba(213, 236, 255, 0.64));
+}
+
+.hero-triad__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gray-600);
+}
+
+.hero-triad__eyebrow--benefit {
+  color: var(--mint-500);
+}
+
+.hero-triad__eyebrow--proof {
+  color: var(--sky-700);
+}
+
+.hero-triad__column h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--navy-800);
+}
+
+.hero-triad__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.hero-triad__list li {
+  display: grid;
+  gap: 4px;
+}
+
+.hero-triad__list li strong {
+  font-size: 0.95rem;
+  color: var(--navy-900);
+}
+
+.hero-triad__list li span {
+  font-size: 0.9rem;
+  color: var(--gray-600);
+}
+
+.hero-triad__note {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--navy-700);
+  line-height: 1.6;
+}
+
+.hero-triad__metrics {
+  display: grid;
+  gap: 12px;
+}
+
+.hero-triad__metric {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(79, 163, 255, 0.26);
+}
+
+.hero-triad__metric strong {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--navy-900);
+}
+
+.hero-triad__metric span {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--mint-500);
+  letter-spacing: 0.02em;
+}
+
+.hero-triad__metric p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--navy-700);
+}
+
+.hero-triad__metric small {
+  font-size: 0.75rem;
+  color: var(--gray-600);
+}
+
 .hero-results {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -627,6 +742,38 @@ svg {
   backdrop-filter: blur(18px);
 }
 
+.hero-causality-section {
+  background: linear-gradient(180deg, rgba(245, 248, 252, 0.88), rgba(255, 255, 255, 0.96));
+}
+
+.hero-causality-intro {
+  max-width: 760px;
+  margin: 0 auto 36px;
+  text-align: center;
+  display: grid;
+  gap: 12px;
+}
+
+.hero-causality-intro__eyebrow {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(20, 61, 106, 0.7);
+}
+
+.hero-causality-intro h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
+  color: var(--navy-800);
+}
+
+.hero-causality-intro p {
+  margin: 0;
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+
 .hero-causality__card {
   position: relative;
   display: flex;
@@ -688,7 +835,8 @@ svg {
   color: rgba(20, 61, 106, 0.7);
 }
 
-.hero-causality__heading h2 {
+.hero-causality__heading h2,
+.hero-causality__heading h3 {
   margin: 0;
   font-size: 1.12rem;
   color: var(--navy-700);
