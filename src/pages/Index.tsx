@@ -71,7 +71,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const primaryCtaLabel = "60秒で診断を受ける（無料）";
+const primaryCtaLabel = "無料経営課題ヒアリングを予約";
 const contactPhoneNumber = "03-4520-1234";
 
 const headerNavItems = [
@@ -116,51 +116,51 @@ type HeroCausality = {
 
 const heroCausality: HeroCausality[] = [
   {
-    title: "迷いなく決められる土台をつくる",
-    subtitle: "経営者が胸を張れる観測網",
+    title: "72時間で経営の視界をそろえる",
+    subtitle: "現状分析と優先課題の確定",
     cause:
-      "生成AIが市場・需給・競合の兆しを常時クロールし、変化の火種を逃さず整理。",
+      "生成AIが財務・販売・顧客データを読み込み、伸ばすべき指標とリスクの兆しを一枚に可視化。",
     logic:
-      "多業種で鍛えた診断士が財務ドライバーと照合し、どこから着手すべきかを明文化。",
+      "事業再生を経験した診断士がヒアリングで仮説を磨き込み、経営者の直感を裏付ける論点メモを72時間以内に共有。",
     impactMetric: "判断の迷いを減らす",
     impactDetail:
-      "気になるシグナルが上がった瞬間に論点と確認手順が揃い、堂々と判断へ踏み出せます。",
-    trustLabel: "EVIDENCE",
+      "会議前に優先課題と数字の裏付けを揃え、役員間の認識がそろった状態でディスカッションに臨めます。",
+    trustLabel: "BLUEPRINT",
     trustCopy:
-      "過去プロジェクトのレビュー記録を元に、胸を張って示せる根拠集をテンプレート化。",
-    highlights: ["変化対応", "先見性", "確信"],
+      "再生・改善案件で蓄積したチェックリストをテンプレート化。初回面談から迷わず論点を掘り下げられます。",
+    highlights: ["現状把握", "優先度", "スピード"],
     icon: ScanSearch,
   },
   {
-    title: "届ける価値を一枚で描く",
-    subtitle: "決断の焦点を揃えるシナリオ設計",
+    title: "1〜2週間で勝ち筋を描き切る",
+    subtitle: "戦略ストーリーとKPI設計",
     cause:
-      "生成AIが会議資料・シナリオ比較・想定問答をドラフトし、意思決定で使う論点を構造化。",
+      "生成AIが収益シナリオ・資金繰り・補助金適用パターンを複数案でドラフトし、論点を構造化。",
     logic:
-      "元コンサルと会計士が審査や実行計画の観点で整合性を補正し、堂々と説明できるストーリーに磨き上げ。",
+      "診断士と会計士が金融機関目線で整合性を補正し、説明資料・想定問答・実行ロードマップを仕上げます。",
     impactMetric: "準備の負担を軽くする",
     impactDetail:
-      "議題ごとの骨子とビジュアル資料が整い、迷いなく語れる状態で経営会議に臨めます。",
+      "KPIと投資配分が明確になり、決算や金融機関面談に合わせて迷いなく説明できる骨子が揃います。",
     trustLabel: "QUALITY",
     trustCopy:
-      "面談で使われた回答集を蓄積し、判断の筋道をすぐ取り出せる状態に管理。",
-    highlights: ["論理性", "整合性", "説得力"],
+      "補助金採択・資金調達で評価されたストーリーと数表をナレッジ化し、貴社仕様にカスタマイズ。",
+    highlights: ["戦略設計", "金融目線", "ロードマップ"],
     icon: ClipboardCheck,
   },
   {
-    title: "実行と成果を連続させる",
-    subtitle: "先読みダッシュボードと伴走体制",
+    title: "3か月伴走で成果を定着",
+    subtitle: "実行支援と金融機関対応",
     cause:
-      "生成AIレポートが打ち手別のKPI推移と資金の見通しを更新し続ける。",
+      "生成AIレポートが施策ごとのKPIとキャッシュ見通しを自動更新し、改善余地とリスクを通知。",
     logic:
-      "レビュー経験者がステークホルダー別の説明資料とリスクヘッジを監修。",
+      "再生案件に強い専門家が定例レビューに参加し、金融機関提出資料や補助金申請まで伴走します。",
     impactMetric: "成果への確信を高める",
     impactDetail:
-      "意思決定の根拠と成果を共有し、組織全体が自信を持って実行に踏み出せる環境を整備。",
+      "実行状況と成果の因果が共有され、組織と金融機関の双方が納得する形で進捗を報告できます。",
     trustLabel: "ASSURANCE",
     trustCopy:
-      "第三者レビューの記録と監査トレーサビリティを整え、説得材料を蓄積。",
-    highlights: ["実行力", "透明性", "信頼"],
+      "レビュー記録と監査証憑を蓄積し、第三者へ提示できる形で管理。伴走期間終了後も再現可能です。",
+    highlights: ["伴走", "透明性", "信頼"],
     icon: TrendingUp,
   },
 ];
@@ -174,16 +174,16 @@ type HeroResult = {
 
 const heroResults: HeroResult[] = [
   {
-    value: "-52%",
-    label: "意思決定リードタイム",
-    description: "決裁スピード3.4倍。経営会議の議題確定を6週→2週に短縮。",
-    source: "導入企業20社 平均 (2023-2024)",
+    value: "72h",
+    label: "集中ヒアリングとAI診断",
+    description: "財務・販売データを解析し72時間で改善骨子を提示。",
+    source: "導入企業平均 (2024)",
   },
   {
-    value: "-80%",
-    label: "経営計画の作成工数",
-    description: "AIドラフト×専門家レビューで資料作成時間を大幅圧縮。",
-    source: "Strategy AI Lab 運用ログ (2024)",
+    value: "1-2週",
+    label: "経営計画ドラフト完成",
+    description: "AIドラフト×診断士レビューで1〜2週間以内に金融機関提出レベルへ。",
+    source: "支援プロジェクト実績 (n=36)",
   },
   {
     value: "+18pt",
@@ -279,41 +279,42 @@ type SimulatorVisualHighlight = {
 
 const quickFlowSteps: QuickFlowStep[] = [
   {
-    label: "60秒無料診断",
-    description: "メール1項目で完了",
-    detail: "1件のメール入力でAIが課題仮説と優先度を即時提示。",
+    label: "72時間集中ヒアリング",
+    description: "初回30分オンライン＋財務データ共有",
+    detail: "AIが財務・顧客データを読み込み、診断士が課題と優先順位を整理。72時間で改善骨子を提示します。",
     icon: ScanSearch,
-    duration: "約1分",
+    duration: "Day0-3",
   },
   {
-    label: "専門家ヒアリング",
-    description: "初回30分オンライン",
-    detail: "中小企業診断士が業界・財務の現状と活用イメージを確認。",
+    label: "経営計画ドラフト",
+    description: "1〜2週間で骨子提示",
+    detail: "生成AIが複数シナリオをドラフトし、診断士と会計士が金融機関視点でレビュー。KPIと資金計画を確定します。",
     icon: Users2,
-    duration: "30分",
+    duration: "Day4-14",
   },
   {
-    label: "改善プラン提案",
-    description: "48時間以内に提示",
-    detail: "AIレポートのドラフトと伴走プラン、投資回収の目安をご案内。",
+    label: "3か月伴走・実行支援",
+    description: "隔週レビューと金融機関対応",
+    detail: "ダッシュボードで成果を追跡し、専門家が補助金申請や金融交渉まで並走。PDCAを定着させます。",
     icon: ClipboardCheck,
+    duration: "Day15-105",
   },
 ];
 
 const quickFormHighlights: QuickFormHighlight[] = [
   {
-    title: "平均4.6時間で一次回答",
-    caption: "緊急課題は当日中に課題仮説と次アクションを共有",
+    title: "72時間で改善骨子を提示",
+    caption: "初回ヒアリングから3日で優先課題と打ち手を共有",
     icon: Timer,
   },
   {
-    title: "秘密厳守・金融機関準拠",
-    caption: "NDA・暗号化通信で財務情報を安全に取り扱い",
+    title: "金融機関審査に通る品質",
+    caption: "補助金・融資提出実績を基に専門家がレビュー",
     icon: ShieldCheck,
   },
   {
-    title: "投資判断まで逆算",
-    caption: "粗利・資金繰りシナリオをAIと専門家が同時提示",
+    title: "3か月伴走で実行を定着",
+    caption: "隔週レビューとダッシュボードでPDCAを支援",
     icon: LineChart,
   },
 ];
@@ -643,32 +644,32 @@ type SolutionLogicStep = {
 const solutionLogicSteps: SolutionLogicStep[] = [
   {
     id: "sense",
-    stage: "Sense",
-    title: "市場と自社の兆しを一本化",
+    stage: "Diagnose 72h",
+    title: "72時間で経営課題を特定",
     description:
-      "AIが市場ニュース・金融指数・社内KPIをクロス解析し、変化率と影響領域を定量化。見落としや主観の偏りを排除します。",
-    metric: "+42件/月",
-    metricLabel: "リスク&機会アラート",
+      "AIが財務・販売・顧客データを統合し、利益ドライバーとリスクを定量化。診断士がヒアリングで仮説を確定します。",
+    metric: "72h",
+    metricLabel: "集中ヒアリング",
     accent: "mint",
   },
   {
     id: "shape",
-    stage: "Shape",
-    title: "専門家と論点を磨き上げ",
+    stage: "Design 1-2w",
+    title: "1〜2週間で戦略と数値を整備",
     description:
-      "財務・会計・戦略の専門家がAIドラフトをレビューし、金融審査目線の裏付けと実行順序を設計。意思決定材料を合意水準に整えます。",
-    metric: "72h",
-    metricLabel: "レビューSLA",
+      "生成AIが複数シナリオをドラフトし、診断士と会計士が金融機関基準で整合性を補正。KPIと投資配分を決め切ります。",
+    metric: "1-2週",
+    metricLabel: "ドラフト完成",
     accent: "sky",
   },
   {
     id: "decide",
-    stage: "Decide",
-    title: "経営陣が確信を持って決断",
+    stage: "Execute 3m",
+    title: "3か月伴走で実行と資金調達を両立",
     description:
-      "経営者は優先順位と資源配分に集中し、意思決定後の説明資料も同時に揃うため、社内外の納得形成が速く進みます。",
-    metric: "-52%",
-    metricLabel: "意思決定リードタイム",
+      "ダッシュボードで成果を追跡しながら、専門家がレビュー会議・補助金申請・金融交渉を支援。合意形成とPDCAを高速化します。",
+    metric: "+24pt",
+    metricLabel: "実行率向上",
     accent: "citrus",
   },
 ];
@@ -870,69 +871,69 @@ type PainPoint = {
 
 const painPoints: PainPoint[] = [
   {
-    title: "外部の変化を追い切れず判断が後手に回る",
+    title: "売上はあるのに利益とキャッシュが残らない",
     detail:
-      "市場シグナルや競合の一手を追う調査が経営者に集中し、戦略を描く時間が削られています。",
+      "粗利の改善策や在庫・原価の見直しが場当たり的になり、次の投資判断に踏み切れない状態が続いています。",
     summary:
-      "情報収集に時間を奪われ、経営判断の裏付けが会議直前まで固まらない。",
+      "数字の裏付けがばらばらで、役員間で優先順位が合意できない。",
     solution:
-      "多様な再生・成長案件で培った専門家と生成AIが外部指標と自社データを常時計測し、迅速に優先課題と想定インパクトを提示します。",
+      "72時間の集中ヒアリングとAI診断で利益ドライバーを特定し、キャッシュ創出に直結する打ち手とKPIを可視化します。",
     aiAction:
-      "AI: 市場・需給・財務データをクロールし、先読みシナリオとKPIアラートを自動生成。",
+      "AI: 財務・販売データから利益感度を分析し、改善余地が大きい領域とリスクを即時抽出。",
     expertAction:
-      "専門家: 各業界の意思決定ログをもとに根拠を補強し、現場が迷わず動ける打ち手に整理。",
-    impact: "判断の場で示せる利益シナリオ",
+      "専門家: 診断士が業界ベンチマークと照らし、優先度と投資配分を整理して実行計画を組み立て。",
+    impact: "利益改善の筋道を共有",
     impactDetail:
-      "利益ドライバーを可視化し、判断の場で胸を張れる説明材料を確保。",
+      "粗利率+18pt、キャッシュ1.8倍のシナリオを示し、経営会議で納得感を得たうえで意思決定できます。",
     icon: ScanSearch,
     accent: "sky",
     proofs: [
-      { label: "先読みKPI", value: "52%短縮" },
-      { label: "意思決定ログ", value: "160件" },
+      { label: "粗利率", value: "+18pt" },
+      { label: "キャッシュ創出", value: "1.8倍" },
     ],
   },
   {
-    title: "会議や計画作成に時間がかかり意思決定が遅い",
+    title: "金融機関・補助金の書類づくりが属人化",
     detail:
-      "会議資料と経営計画のドラフトを作るたびに各部門からデータを集め直し、意思決定リードタイムが長期化しています。",
+      "経営計画書や想定問答の準備に毎回追われ、与信判断に必要な根拠が揃うまで時間がかかっています。",
     summary:
-      "資料づくりに追われ、本来の戦略議論が後ろ倒しになってしまう。",
+      "資料作成が後ろ倒しになり、資金調達や補助金申請の機会を逃してしまう。",
     solution:
-      "専門家と生成AIが財務と実績データから複数シナリオとドラフト資料を揃え、経営陣は判断と説明に集中できます。",
+      "AIが審査項目に沿ってドラフトを作成し、診断士と会計士が金融機関基準でレビュー。72時間で骨子、1〜2週間で提出レベルまで仕上げます。",
     aiAction:
-      "AI: 四半期ごとのシナリオ比較・財務予測・会議アジェンダを短時間で生成。",
+      "AI: 与信指標・補助金要件を下敷きに、複数シナリオの収益計画と想定問答をドラフト化。",
     expertAction:
-      "専門家: 戦略コンサルと会計士が論点整理と審査基準の観点でレビューし、決裁に必要な根拠を補強。",
-    impact: "会議準備の負担を削減",
+      "専門家: 金融機関OB・診断士が表現や裏付けを調整し、審査で問われる根拠を補強。",
+    impact: "提出書類の品質向上",
     impactDetail:
-      "AI活用による迅速な意思決定を体現し、判断の迷いを減らして自信を持って決裁できる状態を実現。",
+      "補助金採択率86%、金融機関提出資料の差し戻しゼロを実現し、資金調達の確度を高めます。",
     icon: LineChart,
     accent: "citrus",
     proofs: [
-      { label: "作成時間", value: "80%減" },
-      { label: "議題確定", value: "2.3倍" },
+      { label: "採択率", value: "86%" },
+      { label: "提出スピード", value: "1-2週" },
     ],
   },
   {
-    title: "資金調達時に金融機関から信頼される計画書が難しい",
+    title: "AI活用の必要性は理解しているが進め方がわからない",
     detail:
-      "融資や投資の審査ポイントを押さえた計画書づくりが属人化し、提出スケジュールが後ろ倒しになります。",
+      "部署ごとにDXが分断され、AIを導入しても現場で活かしきれず成果につながらないという声が増えています。",
     summary:
-      "金融機関の質問に即答できず、資金計画の説得力が薄れてしまう。",
+      "現場で使える形まで落とし込めず、AI投資の意思決定が先送りに。",
     solution:
-      "専門家と生成AIが審査基準に沿った財務計画と想定問答を下書きし、金融機関から信頼される計画書へ磨き込みます。",
+      "AIダッシュボードと伴走支援でKPIの定着と人材育成を同時に実現。経営計画に紐づく運用まで設計します。",
     aiAction:
-      "AI: DSCR・CCCなど主要指標を自動計算し、複数の返済シナリオと資金繰りシートを作成。",
+      "AI: KPIごとの進捗とリスクを毎週レポートし、改善余地と次の打ち手を提案。",
     expertAction:
-      "専門家: 元メガバンク融資担当が想定問答と裏付け資料を監修し、胸を張って語れる交渉シナリオを設計。",
-    impact: "資金計画への信頼を高める",
+      "専門家: 役員・現場向けのワークショップで活用事例を共有し、社内運用の型を構築。",
+    impact: "AI投資の実行力を強化",
     impactDetail:
-      "AIドラフトと専門家のダブルチェックで資金調達の確度が向上し、導入後の運転資金計画も安心して提示できます。",
-    icon: FileText,
+      "AI活用プロジェクトの実行率78%、役員レビュー工数-12h/月など、社内に残る仕組みを整備します。",
+    icon: ShieldCheck,
     accent: "mint",
     proofs: [
-      { label: "採択率", value: "+24pt" },
-      { label: "交渉準備", value: "48h短縮" },
+      { label: "実行率", value: "78%" },
+      { label: "レビュー工数", value: "-12h/月" },
     ],
   },
 ];
@@ -1247,13 +1248,13 @@ type PricingPlan = {
 const pricingPlans: PricingPlan[] = [
   {
     name: "ライト",
-    summary: "小規模組織の経営会議をAIで効率化するスタータープラン",
+    summary: "72時間診断と月次ダッシュボードで経営会議を効率化するスタータープラン",
     price: "月額15万円〜",
     priceNote: "従業員〜50名の方向け",
     valuePoints: [
       {
-        label: "導入スピード",
-        description: "キックオフから2週間で運用開始。初期設計はテンプレート化。",
+        label: "初回成果",
+        description: "72時間で優先課題と改善骨子を提示し、経営会議で共有可能。",
       },
       {
         label: "推奨フェーズ",
@@ -1262,6 +1263,7 @@ const pricingPlans: PricingPlan[] = [
     ],
     services: [
       "経営計画AIドラフト（月1回）",
+      "72時間集中診断レポート",
       "指標ダッシュボード閲覧",
       "経営会議テンプレート共有",
       "議事録サマリーの自動共有",
@@ -1278,13 +1280,13 @@ const pricingPlans: PricingPlan[] = [
   },
   {
     name: "プロ",
-    summary: "意思決定プロセスを全社で回し、金融機関向け資料も自動生成",
+    summary: "1〜2週間で計画ドラフトを完成させ、金融機関向け資料まで自動生成",
     price: "月額35万円〜",
     priceNote: "年商10〜50億円規模向け",
     valuePoints: [
       {
         label: "想定成果",
-        description: "利益計画の見直しと資金調達資料の作成を月次で高速化。",
+        description: "1〜2週間で金融機関提出レベルのドラフトを仕上げ、補助金資料も並行作成。",
       },
       {
         label: "推奨フェーズ",
@@ -1294,6 +1296,7 @@ const pricingPlans: PricingPlan[] = [
     services: [
       "AIドラフト隔週更新",
       "戦略シナリオ自動比較",
+      "補助金・金融機関向けドキュメント草案",
       "金融機関向け資料生成",
       "OKR・KPIダッシュボード連携",
     ],
@@ -1310,7 +1313,7 @@ const pricingPlans: PricingPlan[] = [
   },
   {
     name: "エンタープライズ",
-    summary: "グループ全体のガバナンスとデータ連携を一括で整備",
+    summary: "グループ全体のガバナンスとデータ連携を一括で整備し、3か月伴走で実行定着",
     price: "月額65万円〜",
     priceNote: "複数事業部・子会社をお持ちの方向け",
     valuePoints: [
@@ -1538,11 +1541,11 @@ const initialQuickContact: QuickContactFormState = {
 };
 
 const contactSteps = [
-  { id: 1, title: "60秒スピード診断", description: "メールアドレスを入力" },
+  { id: 1, title: "ヒアリング予約", description: "メールアドレス・希望日時を入力" },
   {
     id: 2,
-    title: "詳細ヒアリング",
-    description: "課題・希望日時（任意項目あり）",
+    title: "経営課題の共有",
+    description: "現状の悩みや目標（任意項目あり）",
   },
 ];
 
@@ -2104,11 +2107,11 @@ const Index = () => {
             <div className="hero-copy" data-animate data-initial-visible="true">
               <span className="badge">年商5,000万〜15億円の経営者向け</span>
               <h1 id="hero-heading">
-                意思決定リードタイムを52%短縮。
-                <span>経営計画AIと専門家伴走で90日後の経営計画を完成</span>
+                次の決算で結果を出す経営計画を。
+                <span>生成AIと診断士が“戦略と実行”を伴走設計</span>
               </h1>
               <p className="hero-lead">
-                市場・資金・人材の指標をAIが60秒で要約し、診断士と会計士が金融審査レベルで裏付け。90日で経営計画を刷新し、経営会議までの準備時間を6週から2週へ圧縮します。
+                年商5,000万円〜15億円規模の企業を対象に、72時間の集中ヒアリングとAI診断で課題を特定。1〜2週間で金融機関も認める計画ドラフトを仕上げ、3か月の伴走で実行と資金調達を両立させます。
               </p>
               <div className="hero-results" aria-label="導入企業の主要成果" data-animate>
                 {heroResults.map((result) => (
@@ -2177,12 +2180,12 @@ const Index = () => {
                 })}
               </div>
               <ul className="hero-points">
-                <li>60秒の無料診断で経営課題と優先指標を可視化し、すぐに活用できるAI経営計画レポートを提示。</li>
+                <li>72時間の集中診断で経営課題と優先指標を可視化し、すぐに活用できるAIレポートを提示。</li>
                 <li>生成AIが会議資料・シナリオ・想定問答を一次ドラフト化し、専門家が決裁に耐える根拠へ磨き上げ。</li>
                 <li>決裁ログとダッシュボードを連携し、意思決定のスピードと納得感を同時に高めます。</li>
               </ul>
               <p className="hero-sub">
-                リアルタイムの外部データと社内指標を統合し、専門家が根拠と倫理面を確認したうえで投資・資金繰りの材料を更新。60秒の無料診断から始める「経営計画AI」の活用で、成長と再構築に挑む企業へ先見性と説得力のある計画を届けます。
+                リアルタイムの外部データと社内指標を統合し、専門家が根拠と倫理面を確認したうえで投資・資金繰りの材料を更新。72時間診断と3か月伴走から始める「経営計画AI」の活用で、成長と再構築に挑む企業へ先見性と説得力のある計画を届けます。
               </p>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
@@ -2256,9 +2259,9 @@ const Index = () => {
               </figure>
               <div className="hero-quick-form" data-animate>
                 <div className="hero-quick-form__intro">
-                  <h2>60秒でAI診断を予約</h2>
+                  <h2>無料経営課題ヒアリングを予約</h2>
                   <p>
-                    氏名・会社名・メールの3項目だけで申し込み完了。初回30分のオンライン相談で、AI診断の結果と改善プランの方向性をご案内します。
+                    氏名・会社名・メールの3項目で申し込み完了。初回30分のオンライン相談後、72時間以内にAI診断レポートと改善骨子を共有します。
                   </p>
                   <ul className="hero-quick-form__highlights" aria-label="申し込み後に得られる価値">
                     {quickFormHighlights.map((item) => {
@@ -2279,7 +2282,7 @@ const Index = () => {
                 </div>
                 <form
                   className="quick-form"
-                  aria-label="60秒AI診断申し込みフォーム"
+                  aria-label="無料経営課題ヒアリング申し込みフォーム"
                   onSubmit={handleQuickContactSubmit}
                 >
                   <div className="quick-form-grid">
@@ -2332,16 +2335,16 @@ const Index = () => {
                       role="status"
                       aria-live="polite"
                     >
-                      送信ありがとうございます。1営業日以内に診断士より初回30分相談の候補日時をご案内します。
+                      送信ありがとうございます。1営業日以内に診断士より初回30分相談の候補日時と72時間診断の流れをご案内します。
                     </p>
                   )}
                   <button type="submit" className="btn btn-cta btn-progress">
                     {isQuickSubmitting && (
                       <span className="btn-spinner" aria-hidden="true" />
                     )}
-                    {isQuickSubmitting ? "送信中..." : "60秒診断を申し込む"}
+                    {isQuickSubmitting ? "送信中..." : "無料ヒアリングを申し込む"}
                   </button>
-                  <p className="quick-form-note">詳細な課題は追ってヒアリングいたします。</p>
+                  <p className="quick-form-note">ヒアリング後72時間以内にAI診断レポートと優先課題の整理をお届けします。</p>
                 </form>
                 <ol className="diagnosis-flow" aria-label="診断から提案までの流れ">
                   {quickFlowSteps.map((step) => {
@@ -2570,7 +2573,7 @@ const Index = () => {
               <span className="story-eyebrow">STORY 02</span>
                 <h2 id="solution-heading">経営計画AIと専門家の共創で意思決定を加速</h2>
               <p>
-                生成AIが市場・外部・自社データを束ね、専門家と経営者がレビューと判断に集中します。blog.workday.comが紹介するリアルタイム分析のスピードと、note.comで語られるAI会議術の先見性を組み合わせ、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果につなげ、決裁の場で確信を持てる状態を生み出します。
+                72時間の集中診断で現状を把握し、1〜2週間で金融機関も納得する戦略シナリオをドラフト。以降3か月は専門家がAIダッシュボードと共に伴走し、施策の実行・補助金申請・資金調達まで支援します。スピード・品質・実行力を同時に実現する共創プロセスが、意思決定リードタイム52%短縮、計画作成工数80%削減、粗利18pt改善という成果につながっています。
               </p>
             </div>
             <div className="solution-synergy" data-animate>
@@ -2588,7 +2591,7 @@ const Index = () => {
                 <span className="solution-synergy__eyebrow">CAUSAL FRAMEWORK</span>
                 <h3>因果で裏付けた共創設計で、意思決定に論理と納得を同時実現</h3>
                 <p>
-                  AIが兆候を集め、専門家がレビューし、経営陣が決断するまでを一枚で把握できるように設計。各工程を定量管理することで、
+                  72時間診断→1〜2週間ドラフト→3か月伴走の流れに沿って、AIと専門家が役割分担。各工程のアウトプットとKPIを定量管理し、
                   「論理が通り、納得感のある判断材料が揃う」体験を再現性高く提供します。
                 </p>
                 <ul className="solution-synergy__highlights">
@@ -3808,7 +3811,7 @@ const Index = () => {
                 {primaryCtaLabel}
               </a>
               <a className="section-cta__link" href="#hero">
-                60秒診断から始める
+                72時間診断の流れを見る
               </a>
             </div>
           </div>
