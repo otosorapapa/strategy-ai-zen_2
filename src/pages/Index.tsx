@@ -80,8 +80,10 @@ const headerNavItems = [
   { id: "solution", label: "解決策" },
   { id: "features", label: "機能・特徴" },
   { id: "outcome", label: "成果" },
+  { id: "stories", label: "事例" },
   { id: "pricing", label: "導入と料金" },
-  { id: "faq", label: "よくある質問・事例" },
+  { id: "resources", label: "資料・イベント" },
+  { id: "faq", label: "FAQ" },
 ];
 
 const sectionNavItems = [...headerNavItems, { id: "contact", label: "無料相談" }];
@@ -1465,6 +1467,45 @@ const resourceCards: ResourceCard[] = [
   },
 ];
 
+type EventCard = {
+  title: string;
+  datetime: string;
+  format: string;
+  description: string;
+  cta: string;
+  link: string;
+  icon: LucideIcon;
+};
+
+const upcomingEvents: EventCard[] = [
+  {
+    title: "生成AIで描く3か月経営計画ウェビナー",
+    datetime: "2024年6月12日（水）12:00-13:00",
+    format: "オンライン（Zoom）／参加無料",
+    description:
+      "AI診断レポートの読み解き方と、金融機関から信頼される計画書の作り方を60分で解説。質疑応答の時間もご用意しています。",
+    cta: "ウェビナーに申し込む",
+    link: "#contact",
+    icon: PlayCircle,
+  },
+  {
+    title: "年商5億〜15億円企業のDX推進ラウンドテーブル",
+    datetime: "2024年7月4日（木）16:00-17:30",
+    format: "ハイブリッド（東京・オンライン）／定員15社",
+    description:
+      "同規模企業の経営者・経営企画責任者が集まり、AI活用と資金繰り改善の成功事例を共有。個別相談の優先枠も確保できます。",
+    cta: "参加希望を連絡する",
+    link: "#contact",
+    icon: Users2,
+  },
+];
+
+const newsletterHighlights = [
+  "月1回、生成AIで成果を出した中小企業の詳細レポートを配信",
+  "金融機関・補助金の最新トレンドや審査ポイントを速報",
+  "社内で共有しやすいテンプレート・チェックリストを提供",
+];
+
 const faqItems = [
   {
     question: "ITに詳しくなくても導入できますか？",
@@ -1562,6 +1603,9 @@ const Index = () => {
   const [simulator, setSimulator] = useState<SimulatorState>(defaultSimulator);
   const [quickContact, setQuickContact] =
     useState<QuickContactFormState>(initialQuickContact);
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
+  const [newsletterError, setNewsletterError] = useState<string | null>(null);
   const [contactForm, setContactForm] = useState<ContactFormState>(initialContact);
   const [contactStep, setContactStep] = useState(1);
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -1935,6 +1979,35 @@ const Index = () => {
     } finally {
       setIsQuickSubmitting(false);
     }
+  };
+
+  const handleNewsletterChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setNewsletterEmail(event.target.value);
+    setNewsletterError(null);
+    if (newsletterSubmitted) {
+      setNewsletterSubmitted(false);
+    }
+  };
+
+  const handleNewsletterSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setNewsletterError(null);
+    setNewsletterSubmitted(false);
+    const trimmedEmail = newsletterEmail.trim();
+
+    if (!trimmedEmail) {
+      setNewsletterError("メールアドレスを入力してください。");
+      return;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(trimmedEmail)) {
+      setNewsletterError("メールアドレスの形式をご確認ください。");
+      return;
+    }
+
+    setNewsletterSubmitted(true);
+    setNewsletterEmail("");
   };
 
   const handleContactChange = (
@@ -3858,6 +3931,79 @@ const Index = () => {
                 );
               })}
             </div>
+            <div className="resource-subsection" data-animate>
+              <div className="resource-subsection__header">
+                <h3>生成AI経営ウェビナー・イベント</h3>
+                <p>
+                  最新の成功事例や補助金トレンドをまとめたオンライン／オフラインイベントを定期開催。
+                  年商5,000万円〜15億円規模の経営者が意思決定に使える実践知を持ち帰れます。
+                </p>
+              </div>
+              <div className="event-list">
+                {upcomingEvents.map((event) => {
+                  const EventIcon = event.icon;
+                  return (
+                    <article key={event.title} className="event-card">
+                      <div className="event-card__meta">
+                        <span className="event-card__icon" aria-hidden="true">
+                          <EventIcon />
+                        </span>
+                        <div>
+                          <span className="event-card__date">{event.datetime}</span>
+                          <span className="event-card__format">{event.format}</span>
+                        </div>
+                      </div>
+                      <h4>{event.title}</h4>
+                      <p>{event.description}</p>
+                      <a className="event-card__link" href={event.link}>
+                        {event.cta}
+                      </a>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+            <article className="newsletter-card" data-animate>
+              <div className="newsletter-card__content">
+                <span className="newsletter-card__badge">無料購読</span>
+                <h3>生成AI経営アップデート・ニュースレター</h3>
+                <p>
+                  忙しい経営者向けに、AIで経営改善を進めた企業の成功要因と失敗例を凝縮してお届けします。
+                  社内共有しやすいテンプレートも毎号セットで配信します。
+                </p>
+                <ul className="newsletter-highlights">
+                  {newsletterHighlights.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+                <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
+                  <label className="newsletter-form__label">
+                    <span>メールアドレス</span>
+                    <input
+                      type="email"
+                      name="newsletter-email"
+                      value={newsletterEmail}
+                      onChange={handleNewsletterChange}
+                      placeholder="例: ceo@example.co.jp"
+                      required
+                    />
+                  </label>
+                  <button type="submit" className="btn btn-primary newsletter-form__button">
+                    購読する
+                  </button>
+                </form>
+                {newsletterError && (
+                  <p className="newsletter-message newsletter-message--error" role="alert">
+                    {newsletterError}
+                  </p>
+                )}
+                {newsletterSubmitted && !newsletterError && (
+                  <p className="newsletter-message newsletter-message--success" role="status">
+                    登録ありがとうございます。最新号をお送りいたします。
+                  </p>
+                )}
+              </div>
+            </article>
             <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
                 {primaryCtaLabel}

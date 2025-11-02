@@ -8303,6 +8303,198 @@ svg {
   color: var(--gray-500);
 }
 
+.resource-subsection {
+  margin-top: 40px;
+  display: grid;
+  gap: 20px;
+}
+
+.resource-subsection__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.resource-subsection__header h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  color: var(--navy-700);
+}
+
+.resource-subsection__header p {
+  margin: 0;
+  max-width: 560px;
+  color: var(--gray-600);
+  font-size: 0.95rem;
+}
+
+.event-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.event-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(223, 247, 238, 0.82));
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid rgba(31, 157, 122, 0.18);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  gap: 14px;
+}
+
+.event-card__meta {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.event-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: rgba(31, 157, 122, 0.16);
+  color: var(--mint-500);
+}
+
+.event-card__icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.event-card__date {
+  display: block;
+  font-weight: 600;
+  color: var(--navy-700);
+}
+
+.event-card__format {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+}
+
+.event-card h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--navy-700);
+}
+
+.event-card__link {
+  justify-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--teal-600);
+}
+
+.event-card__link::after {
+  content: "→";
+  font-size: 0.85em;
+}
+
+.newsletter-card {
+  margin-top: 40px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(232, 241, 255, 0.9));
+  border-radius: 24px;
+  padding: 32px;
+  border: 1px solid rgba(79, 163, 255, 0.24);
+  box-shadow: var(--shadow-md);
+}
+
+.newsletter-card__content {
+  display: grid;
+  gap: 16px;
+}
+
+.newsletter-card__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cta-600);
+  background: rgba(255, 106, 60, 0.12);
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.newsletter-card h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  color: var(--navy-700);
+}
+
+.newsletter-card p {
+  margin: 0;
+  color: var(--gray-600);
+  font-size: 0.95rem;
+}
+
+.newsletter-highlights {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 6px;
+  color: var(--gray-700);
+  font-size: 0.9rem;
+}
+
+.newsletter-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.newsletter-form__label {
+  display: grid;
+  gap: 6px;
+  flex: 1;
+  min-width: 220px;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+}
+
+.newsletter-form__label input {
+  border-radius: 12px;
+  border: 1px solid rgba(79, 163, 255, 0.4);
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.newsletter-form__label input:focus {
+  outline: 3px solid rgba(79, 163, 255, 0.28);
+  border-color: rgba(31, 157, 122, 0.5);
+}
+
+.newsletter-form__button {
+  padding: 12px 24px;
+}
+
+.newsletter-message {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.newsletter-message--error {
+  color: var(--error-500);
+}
+
+.newsletter-message--success {
+  color: var(--mint-500);
+}
+
 /* ======================================================
    Pricing section
    ====================================================== */
@@ -9360,8 +9552,13 @@ svg {
   .quarterly-grid,
   .expert-grid,
   .resources-grid,
+  .event-list,
   .process-dataflow {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .newsletter-card {
+    padding: 28px;
   }
 
   .roles-grid::before {
@@ -9549,9 +9746,27 @@ svg {
   .process-flowchart,
   .process-dataflow,
   .resources-grid,
+  .event-list,
   .customer-highlights,
   .trust-metrics {
     grid-template-columns: 1fr;
+  }
+
+  .event-card {
+    padding: 20px;
+  }
+
+  .newsletter-card {
+    padding: 24px;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .newsletter-form__button {
+    width: 100%;
   }
 
   .representative-card {
