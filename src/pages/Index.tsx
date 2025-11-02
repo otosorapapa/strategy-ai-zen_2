@@ -71,26 +71,25 @@ import {
 } from "@/components/ui/accordion";
 
 const ctaCopy = {
-  header: "エグゼクティブ相談を予約する",
-  heroPrimary: "60秒で特別診断を体験する",
-  heroSecondary: "投資価値レポートを受け取る",
-  solution: "導入プロセスを専任に相談する",
-  features: "コンシェルジュとデモを見る",
-  outcome: "自社の成果を試算する",
+  header: "無料相談を予約する",
+  heroPrimary: "60秒でAI診断を試す",
+  heroSecondary: "導入メリットの資料を受け取る",
+  solution: "導入プロセスを相談する",
+  features: "機能デモを依頼する",
+  outcome: "同じ成果をシミュレーションする",
   quarterly: "伴走プログラムを相談する",
   successStories: "自社に合う支援を相談する",
   resources: "最新の出力例を受け取る",
   simulator: "AI投資のROIを計算する",
   pricing: "料金と支援範囲を相談する",
   faq: "専門家に質問する",
-  contact: "エグゼクティブ相談を予約する",
-  floating: "今すぐ特別相談する",
+  contact: "無料相談を予約する",
+  floating: "今すぐ無料相談する",
 } as const;
 const contactPhoneNumber = "03-4520-1234";
 
 const headerNavItems = [
   { id: "hero", label: "サービス概要" },
-  { id: "comparison", label: "比較検討" },
   { id: "problem", label: "課題" },
   { id: "solution", label: "解決策" },
   { id: "features", label: "機能・特徴" },
@@ -134,7 +133,7 @@ const heroCausality: HeroCausality[] = [
     title: "迷いなく決められる土台をつくる",
     subtitle: "経営者が胸を張れる観測網",
     cause:
-      "生成AIが市場・需給・競合の兆しを常時クロールし、限られた経営層だけの専用レポートを構築。",
+      "生成AIが市場・需給・競合の兆しを常時クロールし、変化の火種を逃さず整理。",
     logic:
       "多業種で鍛えた診断士が財務ドライバーと照合し、どこから着手すべきかを明文化。",
     impactMetric: "判断の迷いを減らす",
@@ -155,7 +154,7 @@ const heroCausality: HeroCausality[] = [
       "元コンサルと会計士が審査や実行計画の観点で整合性を補正し、堂々と説明できるストーリーに磨き上げ。",
     impactMetric: "準備の負担を軽くする",
     impactDetail:
-      "議題ごとの骨子とビジュアル資料が整い、上質なストーリーとして自信を持って語れる状態で経営会議に臨めます。",
+      "議題ごとの骨子とビジュアル資料が整い、迷いなく語れる状態で経営会議に臨めます。",
     trustLabel: "QUALITY",
     trustCopy:
       "面談で使われた回答集を蓄積し、判断の筋道をすぐ取り出せる状態に管理。",
@@ -209,9 +208,9 @@ const heroResults: HeroResult[] = [
 ];
 
 const heroBenefits = [
-  "年商5,000万〜15億円規模の市場・財務シグナルを60秒で要約し、経営陣専用の論点ブリーフを事前に提示",
-  "診断士と会計士が金融機関審査基準でレビューし、堂々と披露できる決裁資料を48時間で整備",
-  "メール1項目のミニ診断で貴社だけの改善幅と投資回収シナリオを即日フィードバック",
+  "AIが市場・財務シグナルを60秒で要約し意思決定の論点を事前に提示",
+  "診断士と会計士が審査基準でレビューし、決裁資料を48時間で整備",
+  "メール1項目のミニ診断で貴社の改善幅を即日フィードバック",
 ];
 
 const heroMetrics = [
@@ -265,116 +264,6 @@ const heroAllianceExperts = [
   },
 ];
 
-type AssuranceHighlight = {
-  title: string;
-  description: string;
-  detail: string;
-  icon: LucideIcon;
-};
-
-const assuranceHighlights: AssuranceHighlight[] = [
-  {
-    title: "72時間レビューSLA",
-    description: "診断士・会計士がAIドラフトを72時間以内に監修し、金融機関提出レベルまで整備します。",
-    detail: "経営陣の意思決定と審査回答を遅らせないための品質保証体制。",
-    icon: Timer,
-  },
-  {
-    title: "60日間成果保証",
-    description: "初回導入で効果を実感できなければ返金。改善提案と伴走プランを再設計します。",
-    detail: "四半期レビューで成果が確認できない場合は追加費用なく再構築。",
-    icon: ShieldCheck,
-  },
-  {
-    title: "金融機関準拠の想定問答",
-    description: "融資・補助金審査の質問に即答できる想定問答と証憑リストを提供。",
-    detail: "提出後の再質問削減を目的に、想定問答と根拠資料を標準化。",
-    icon: ClipboardCheck,
-  },
-];
-
-type SelectionCriterion = {
-  title: string;
-  description: string;
-  proof: string;
-};
-
-const baselineCriteria: SelectionCriterion[] = [
-  {
-    title: "金融機関・投資家に通じる信頼性",
-    description:
-      "年商5,000万〜15億円規模の資金繰りを支える融資・補助金・投資家対応を想定した根拠資料を標準装備。",
-    proof: "診断士が提出物を監修し、審査コメントの反映まで伴走します。",
-  },
-  {
-    title: "経営チームが使い続けられる更新性",
-    description:
-      "月次・週次で変わる指標をそのまま取り込めるテンプレートで、社長・部門長が同じ画面で意思決定できます。",
-    proof: "会計・販売・SaaSからのCSV/BI連携に対応し、社内工数を抑制。",
-  },
-  {
-    title: "投資対効果の予測精度",
-    description:
-      "3年の財務・人員計画を複数シナリオで比較し、失敗ケースも含めた投資回収ラインを明示します。",
-    proof: "ROI・回収期間を自動算出し、意思決定会議の議事録に添付可能。",
-  },
-];
-
-const differentiatorCriteria: SelectionCriterion[] = [
-  {
-    title: "年商5,000万〜15億円の経営課題に特化",
-    description:
-      "製造・小売・BtoBサービスの実績120件から、中堅手前で生じるボトルネックをパターン化しました。",
-    proof: "粗利率・キャッシュ改善の実績値とベンチマークをテンプレート化。",
-  },
-  {
-    title: "AIドラフト×専門家の二重チェック",
-    description:
-      "AIが一次案を生成し、診断士・会計士が金融審査観点で修正。経営者は意思決定に集中できます。",
-    proof: "48時間以内に決裁資料と想定問答を返却するSLAを設定。",
-  },
-  {
-    title: "90日ごとの伴走プログラム",
-    description:
-      "経営計画・資金繰り・人員計画を四半期ごとに再設計し、実行と学習サイクルを高速化します。",
-    proof: "専任チームがレビュー会議とタスク管理を主導し、現場の稼働負担を最小化。",
-  },
-];
-
-type ComparisonRow = {
-  metric: string;
-  ours: string;
-  alternative: string;
-  note: string;
-};
-
-const comparisonRows: ComparisonRow[] = [
-  {
-    metric: "意思決定リードタイム",
-    ours: "6週→2週。AIシナリオと専門家レビューで平均-52%",
-    alternative: "情報収集が分散し8週以上かかる",
-    note: "役員会前の論点整理が自動化され、経営会議の迷いが減少。",
-  },
-  {
-    metric: "金融機関・投資家対応",
-    ours: "提出フォーマットと想定問答を48時間で整備",
-    alternative: "社内制作で修正往復が多く遅延しがち",
-    note: "融資・補助金ヒアリングを想定したドキュメントを提供。",
-  },
-  {
-    metric: "導入負荷",
-    ours: "メール1項目から開始。既存会計/販売CSVで初期設定完了",
-    alternative: "ゼロからモデル構築が必要で初期費用・稼働が膨らむ",
-    note: "担当者1名でもオペレーションが回るセットアップ手順。",
-  },
-  {
-    metric: "投資回収設計",
-    ours: "ROIとキャッシュフローを3ケース試算し経営指標に連動",
-    alternative: "属人的なExcelで再現性が低く説明が困難",
-    note: "年商5,000万〜15億円の平均回収期間12ヶ月を目安に試算。",
-  },
-];
-
 type QuickFlowStep = {
   label: string;
   description: string;
@@ -412,24 +301,21 @@ const quickFlowSteps: QuickFlowStep[] = [
   {
     label: "60秒無料診断",
     description: "メール1項目で完了",
-    detail:
-      "1件のメール入力でAIが課題仮説と優先度を即時提示。診断結果は経営陣専用のサマリーとしてお送りします。",
+    detail: "1件のメール入力でAIが課題仮説と優先度を即時提示。",
     icon: ScanSearch,
     duration: "約1分",
   },
   {
     label: "専門家ヒアリング",
     description: "初回30分オンライン",
-    detail:
-      "中小企業診断士が業界・財務の現状と活用イメージを確認。過去案件の成功パターンをもとに貴社だけのシナリオを描きます。",
+    detail: "中小企業診断士が業界・財務の現状と活用イメージを確認。",
     icon: Users2,
     duration: "30分",
   },
   {
     label: "改善プラン提案",
     description: "48時間以内に提示",
-    detail:
-      "AIレポートのドラフトと伴走プラン、投資回収の目安をご案内。返金保証や導入後サポートもこの時点で明示します。",
+    detail: "AIレポートのドラフトと伴走プラン、投資回収の目安をご案内。",
     icon: ClipboardCheck,
   },
 ];
@@ -437,17 +323,17 @@ const quickFlowSteps: QuickFlowStep[] = [
 const quickFormHighlights: QuickFormHighlight[] = [
   {
     title: "平均4.6時間で一次回答",
-    caption: "緊急課題は当日中に課題仮説と次アクションを共有し、限定ダッシュボードで確認",
+    caption: "緊急課題は当日中に課題仮説と次アクションを共有",
     icon: Timer,
   },
   {
     title: "秘密厳守・金融機関準拠",
-    caption: "NDA・暗号化通信で財務情報を安全に取り扱い、専任担当が導入完了まで伴走",
+    caption: "NDA・暗号化通信で財務情報を安全に取り扱い",
     icon: ShieldCheck,
   },
   {
     title: "投資判断まで逆算",
-    caption: "粗利・資金繰りシナリオをAIと専門家が同時提示し、ROI保証の条件も提示",
+    caption: "粗利・資金繰りシナリオをAIと専門家が同時提示",
     icon: LineChart,
   },
 ];
@@ -458,7 +344,7 @@ const simulatorGuideSteps: SimulatorGuideStep[] = [
     description:
       "初期費用・月額費用・意思決定工数を入力し、投資負荷を数値化。",
     detail:
-      "キャッシュアウトと経営陣の稼働コストを見える化し、経営会議で使える指標に整えます。算出根拠は第三者レポートと照合済みです。",
+      "キャッシュアウトと経営陣の稼働コストを見える化し、経営会議で使える指標に整えます。",
     icon: ClipboardCheck,
   },
   {
@@ -466,7 +352,7 @@ const simulatorGuideSteps: SimulatorGuideStep[] = [
     description:
       "伸ばしたい指標を選択するとリアルタイム分析による短縮効果が即時に反映。",
     detail:
-      "売上・粗利・受注残など50種類のKPIテンプレートを切り替え、最適なAI投資シナリオを検証。想定問答と審査観点も同時に提示します。",
+      "売上・粗利・受注残など50種類のKPIテンプレートを切り替え、最適なAI投資シナリオを検証。",
     icon: BarChart3,
   },
   {
@@ -474,7 +360,7 @@ const simulatorGuideSteps: SimulatorGuideStep[] = [
     description:
       "試算値は保存されず、面談時に専門家が貴社固有のデータと照合。",
     detail:
-      "税理士・戦略コンサルと連携し、資金調達や設備投資まで含めた投資回収計画を提示します。面談後は導入保証と伴走体制を文書化。",
+      "税理士・戦略コンサルと連携し、資金調達や設備投資まで含めた投資回収計画を提示します。",
     icon: ShieldCheck,
   },
 ];
@@ -483,7 +369,7 @@ const simulatorGuideNotes: SimulatorGuideNote[] = [
   {
     label: "算出根拠",
     description:
-      "数値は導入企業20社の平均値をもとに推計し、業種・規模に応じた補正係数を適用。出典もダウンロード資料で確認できます。",
+      "数値は導入企業20社の平均値をもとに推計し、業種・規模に応じた補正係数を適用しています。",
     icon: Info,
   },
   {
@@ -522,29 +408,25 @@ type DifferentiationRow = {
 const differentiationMatrix: DifferentiationRow[] = [
   {
     capability: "意思決定のスピード",
-    ourApproach:
-      "90日サイクルでAIが議題と指標を再構成。専門家が48時間以内にレビューし、役員向けプレイブックを提供",
-    otherTools: "レポート閲覧のみ。更新サイクルは各部署に依存し、役員レビュー資料は個別作成",
+    ourApproach: "90日サイクルでAIが議題と指標を再構成。専門家が48時間以内にレビュー",
+    otherTools: "レポート閲覧のみ。更新サイクルは各部署に依存",
     impact: "リードタイム-52% / 決裁スピード3.4倍",
   },
   {
     capability: "根拠とエビデンス",
-    ourApproach:
-      "診断士・会計士が審査基準で整合性を監修し、監査ログと第三者証跡も自動生成",
+    ourApproach: "診断士・会計士が審査基準で整合性を監修し、監査ログも自動生成",
     otherTools: "AI提案のまま提出。監査証憑は個別に作成が必要",
     impact: "金融機関の再質問-68% / 返答時間-40%",
   },
   {
     capability: "投資回収とROI",
-    ourApproach:
-      "シミュレーターで粗利・キャッシュに直結する打ち手を優先表示し、保証条件と回収シナリオを添付",
+    ourApproach: "シミュレーターで粗利・キャッシュに直結する打ち手を優先表示",
     otherTools: "KPIグラフ表示が中心。ROI試算は別途Excel作成",
     impact: "粗利+18pt / キャッシュ1.8倍",
   },
   {
     capability: "実行伴走",
-    ourApproach:
-      "週次レポート→月次合議→四半期リセットを専門家が同席し、専任コンシェルジュが品質保証を管理",
+    ourApproach: "週次レポート→月次合議→四半期リセットを専門家が同席",
     otherTools: "オンボーディングのみ。以降はメールサポート中心",
     impact: "実行率+24pt / レビュー時間-12h/月",
   },
@@ -562,32 +444,28 @@ const implementationTimeline: ImplementationStep[] = [
   {
     title: "60秒AI診断",
     summary: "メールのみで初期仮説を生成",
-    detail:
-      "AIが財務・市場の類似パターンから優先課題と改善幅を即時表示。代表者向けに限定ブリーフを送付します。",
+    detail: "AIが財務・市場の類似パターンから優先課題と改善幅を即時表示。",
     duration: "即日",
     icon: ScanSearch,
   },
   {
     title: "専門家ヒアリング",
     summary: "診断士・会計士が現状を深掘り",
-    detail:
-      "30分のオンライン面談で組織体制と意思決定プロセスを整理。希少素材のように磨かれた成功事例を共有します。",
+    detail: "30分のオンライン面談で組織体制と意思決定プロセスを整理。",
     duration: "1〜3日",
     icon: Users2,
   },
   {
     title: "プラン設計",
     summary: "AIドラフト×レビューで計画を構築",
-    detail:
-      "48時間以内に計画ドラフト・ROI試算・伴走体制を提示。投資保証条件と想定問答を含む優越感のある資料セットを納品。",
+    detail: "48時間以内に計画ドラフト・ROI試算・伴走体制を提示。",
     duration: "2週間",
     icon: ClipboardCheck,
   },
   {
     title: "導入・回収",
     summary: "90日で成果検証と改善",
-    detail:
-      "月次レビューと四半期リセットでROI・キャッシュ創出をトレース。専任チームが保証項目をチェックし続けます。",
+    detail: "月次レビューと四半期リセットでROI・キャッシュ創出をトレース。",
     duration: "90日",
     icon: TrendingUp,
   },
@@ -1462,7 +1340,7 @@ type PricingPlan = {
 const pricingPlans: PricingPlan[] = [
   {
     name: "ライト",
-    summary: "小規模組織の経営会議をAIで効率化し、初月返金保証で安心して試せるスタータープラン",
+    summary: "小規模組織の経営会議をAIで効率化するスタータープラン",
     price: "月額15万円〜",
     priceNote: "従業員〜50名の方向け",
     valuePoints: [
@@ -1484,16 +1362,16 @@ const pricingPlans: PricingPlan[] = [
     support: [
       "メール・チャットサポート",
       "四半期オンラインレビュー",
-      "導入初月の個別オンボーディングと専任コンシェルジュ",
+      "導入初月の個別オンボーディング",
     ],
     payment: ["月次サブスクリプション", "請求書払い（分割可）"],
-    guarantee: "導入初月の返金保証＆データ削除証明付き",
-    roi: "3倍目標 (平均4.1倍実績)",
+    guarantee: "導入初月の返金保証付き",
+    roi: "3倍目標",
     cta: ctaCopy.pricing,
   },
   {
     name: "プロ",
-    summary: "意思決定プロセスを全社で回し、金融機関向け資料も自動生成するハイタッチ伴走プラン",
+    summary: "意思決定プロセスを全社で回し、金融機関向け資料も自動生成",
     price: "月額35万円〜",
     priceNote: "年商10〜50億円規模向け",
     valuePoints: [
@@ -1515,17 +1393,17 @@ const pricingPlans: PricingPlan[] = [
     support: [
       "専任コンサル月2回同席",
       "想定問答・エビデンス補強",
-      "財務・法務の専門家レビューと審査リハーサル",
+      "財務・法務の専門家レビュー",
     ],
     payment: ["月次サブスクリプション", "四半期ごとの分割払い"],
-    guarantee: "60日間の成果保証＋専門家伴走SLA72h",
-    roi: "5倍目標 (中央値5.6倍)",
+    guarantee: "60日間の成果保証オプション",
+    roi: "5倍目標",
     cta: ctaCopy.pricing,
     recommended: true,
   },
   {
     name: "エンタープライズ",
-    summary: "グループ全体のガバナンスとデータ連携を一括で整備し、経営陣専用の常設支援チームを提供",
+    summary: "グループ全体のガバナンスとデータ連携を一括で整備",
     price: "月額65万円〜",
     priceNote: "複数事業部・子会社をお持ちの方向け",
     valuePoints: [
@@ -1547,11 +1425,11 @@ const pricingPlans: PricingPlan[] = [
     support: [
       "専任チーム週次伴走",
       "現地ワークショップと研修",
-      "CxO向けエグゼクティブブリーフィングと監査証跡管理",
+      "CxO向けエグゼクティブブリーフィング",
     ],
     payment: ["年次契約（分割請求可）", "導入費用の分割払い"],
-    guarantee: "成果レビュー後の返金条項と監査対応保証を個別設定",
-    roi: "7倍目標 (最大9.2倍)",
+    guarantee: "成果レビュー後の返金条項を個別設定",
+    roi: "7倍目標",
     cta: ctaCopy.pricing,
   },
 ];
@@ -1566,21 +1444,62 @@ type SecurityPoint = {
 const securityPoints: SecurityPoint[] = [
   {
     title: "AES-256暗号化",
-    description: "通信・保存データを銀行水準の暗号化で保護し、アクセスログを24時間監視。",
+    description: "通信・保存データを銀行水準の暗号化で保護。",
     icon: Lock,
     badge: "AES-256",
   },
   {
     title: "第三者セキュリティ監査",
-    description: "年次の脆弱性診断と外部監査で運用プロセスを継続改善。監査報告書は導入企業に開示。",
+    description: "年次の脆弱性診断と外部監査で運用プロセスを継続改善。",
     icon: Shield,
     badge: "Security Audit",
   },
   {
     title: "機密保持契約 (NDA) 対応",
-    description: "全ての専門家とNDAを締結し、アクセス権を最小化した運用を徹底。退役時にはデータ削除証明も発行。",
+    description: "全ての専門家とNDAを締結し、アクセス権を最小化した運用を徹底。",
     icon: ShieldCheck,
     badge: "NDA",
+  },
+];
+
+type ExpertCard = {
+  name: string;
+  title: string;
+  bio: string;
+  photo: string;
+  credentials: { icon: LucideIcon; label: string }[];
+};
+
+const expertCards: ExpertCard[] = [
+  {
+    name: "田中 圭",
+    title: "元メガバンク法人融資担当",
+    bio: "大型調達案件を多数支援。資金戦略と金融機関交渉に精通。",
+    photo: expertTanakaPhoto,
+    credentials: [
+      { icon: ShieldCheck, label: "融資審査1,200件サポート" },
+      { icon: LineChart, label: "資金繰り最適化モデル監修" },
+    ],
+  },
+  {
+    name: "小林 真",
+    title: "元戦略コンサルティングファーム",
+    bio: "事業再生・新規事業開発の戦略立案を20社以上支援。",
+    photo: expertKobayashiPhoto,
+    credentials: [
+      { icon: BarChart3, label: "中期経営計画策定 20社" },
+      { icon: Workflow, label: "DX推進プロジェクト伴走" },
+    ],
+  },
+  {
+    name: "斎藤 美咲",
+    title: "財務会計・管理会計専門家",
+    bio: "成長投資支援と財務モデリングの専門家。",
+    photo: expertSaitoPhoto,
+    credentials: [
+      { icon: Award, label: "認定支援機関 10年" },
+      { icon: FileText, label: "資金計画成功率 86%" },
+    ],
   },
 ];
 
@@ -2298,6 +2217,16 @@ const Index = () => {
                   </li>
                 ))}
               </ul>
+              <div className="hero-results" aria-label="導入企業の主要成果" data-animate>
+                {heroResults.map((result) => (
+                  <article key={result.label} className="hero-results__item">
+                    <strong>{result.value}</strong>
+                    <span>{result.label}</span>
+                    <p>{result.description}</p>
+                    <small>{result.source}</small>
+                  </article>
+                ))}
+              </div>
               <div className="hero-cta-group" data-animate>
                 <a className="btn btn-cta" href="#contact">
                   {ctaCopy.heroPrimary}
@@ -2482,236 +2411,148 @@ const Index = () => {
         </section>
 
         <section
-          id="comparison"
-          ref={(node) => {
-            sectionRefs.current["comparison"] = node ?? null;
-          }}
-          className="section stage stage--one"
-          aria-labelledby="stage-one-heading"
-        >
-          <div className="container">
-            <header className="stage__header" data-animate>
-              <span className="stage__badge">第1段階：事実と差別化</span>
-              <h2 id="stage-one-heading">特徴・ロジック・証拠を一画面で確認</h2>
-              <p>
-                年商5,000万〜15億円規模の経営者が、迷いなく判断できる根拠を集約。生成AIの因果ロジックと専門家レビューのフロー、競合比較を同じステージで確認できます。
-              </p>
-            </header>
-            <div className="stage-one__causality" data-animate>
-              {heroCausality.map((item) => {
-                const ItemIcon = item.icon;
-                return (
-                  <article key={item.title} className="causality-card">
-                    <header className="causality-card__header">
-                      <span className="causality-card__icon" aria-hidden="true">
-                        <ItemIcon />
-                      </span>
-                      <div className="causality-card__titles">
-                        <h3>{item.title}</h3>
-                        <span>{item.subtitle}</span>
-                      </div>
-                      <span className="causality-card__metric">{item.impactMetric}</span>
-                    </header>
-                    <div className="causality-card__body">
-                      <p className="causality-card__cause">{item.cause}</p>
-                      <p className="causality-card__logic">{item.logic}</p>
-                      <div className="causality-card__impact">
-                        <strong>{item.impactDetail}</strong>
-                        <div className="causality-card__assurance">
-                          <span className="causality-card__badge">{item.trustLabel}</span>
-                          <p>{item.trustCopy}</p>
-                        </div>
-                      </div>
-                      <ul className="causality-card__highlights" aria-label={`${item.title}で強調する価値`}>
-                        {item.highlights.map((highlight) => (
-                          <li key={`${item.title}-${highlight}`}>{highlight}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-            <div className="stage-one__criteria" data-animate>
-              <article className="criteria-panel criteria-panel--baseline">
-                <header>
-                  <span className="criteria-panel__eyebrow">Must Criteria</span>
-                  <h3>最低限満たすべき安心材料</h3>
-                </header>
-                <p>
-                  融資・投資家との対話や社内合意形成で欠かせない信頼性を、プロセスと成果物の両面で担保します。
-                </p>
-                <ul>
-                  {baselineCriteria.map((item) => (
-                    <li key={item.title}>
-                      <h4>{item.title}</h4>
-                      <p>{item.description}</p>
-                      <span>{item.proof}</span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-              <article className="criteria-panel criteria-panel--differentiator">
-                <header>
-                  <span className="criteria-panel__eyebrow">Differentiator</span>
-                  <h3>選ばれる決め手</h3>
-                </header>
-                <p>
-                  中小企業の現場で磨いた型化された支援で、経営者が胸を張って判断理由を語れるよう支援します。
-                </p>
-                <ul>
-                  {differentiatorCriteria.map((item) => (
-                    <li key={item.title}>
-                      <h4>{item.title}</h4>
-                      <p>{item.description}</p>
-                      <span>{item.proof}</span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
-              <aside className="criteria-panel criteria-panel--evidence">
-                <header>
-                  <span className="criteria-panel__eyebrow">Evidence</span>
-                  <h3>第三者の裏付け</h3>
-                </header>
-                <ul>
-                  {heroEvidence.map((item) => (
-                    <li key={item.source}>
-                      <p>{item.summary}</p>
-                      <a href={item.url} target="_blank" rel="noreferrer">
-                        {item.source}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  type="button"
-                  className="criteria-panel__demo"
-                  onClick={() => {
-                    setIsDemoPlaying(false);
-                    setIsDemoOpen(true);
-                  }}
-                >
-                  <PlayCircle aria-hidden="true" />
-                  <span>1分ダイジェストで導入イメージを見る</span>
-                </button>
-              </aside>
-            </div>
-            <div className="stage-one__comparison" data-animate>
-              <table>
-                <caption className="sr-only">Strategy AI Labと他選択肢の比較表</caption>
-                <thead>
-                  <tr>
-                    <th scope="col">比較項目</th>
-                    <th scope="col">Strategy AI Lab</th>
-                    <th scope="col">一般的な選択肢</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {comparisonRows.map((row) => (
-                    <tr key={row.metric}>
-                      <th scope="row">{row.metric}</th>
-                      <td>
-                        <strong>{row.ours}</strong>
-                        <p>{row.note}</p>
-                      </td>
-                      <td>{row.alternative}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <p>* 実績値は導入企業20社（従業員50〜300名、年商5,000万〜15億円）の平均。詳細はヒアリングで開示します。</p>
-            </div>
-            <div className="stage__cta" data-animate>
-              <span className="stage__cta-badge">Stage 1 → Stage 2</span>
-              <a className="btn btn-cta" href="#simulator">
-                {ctaCopy.solution}
-              </a>
-              <span className="stage__cta-note">証拠が揃ったら実績データで確信を深めましょう。</span>
-            </div>
-          </div>
-        </section>
-
-        <section
           id="proof"
-          className="section stage stage--two"
-          aria-labelledby="stage-two-heading"
+          className="section hero-proof"
+          aria-labelledby="proof-heading"
         >
           <div className="container">
-            <header className="stage__header" data-animate>
-              <span className="stage__badge stage__badge--secondary">第2段階：実績・比較データ</span>
-              <h2 id="stage-two-heading">導入効果を数字で裏付け</h2>
+            <div className="hero-proof__intro" data-animate>
+              <span className="hero-proof__eyebrow">REASON TO BELIEVE</span>
+              <h2 id="proof-heading">成果の裏付けと共創プロセス</h2>
               <p>
-                意思決定リードタイム短縮や粗利改善など、同規模企業の成果を定量で確認。導入検討の社内説得にそのまま使える指標を公開します。
+                生成AIと専門家の因果設計、第三者エビデンス、定量指標で意思決定の速さと納得感を保証します。
               </p>
-            </header>
-            <div className="stage-two__results" data-animate>
-              {heroResults.map((result) => (
-                <article key={result.label}>
-                  <strong>{result.value}</strong>
-                  <span>{result.label}</span>
-                  <p>{result.description}</p>
-                  <small>{result.source}</small>
-                </article>
-              ))}
             </div>
-            <div className="stage-two__metrics" data-animate>
-              <h3>モニタリングする主要KPI</h3>
-              <ul ref={metricsRef}>
-                {heroMetrics.map((metric, index) => (
-                  <li key={metric.label}>
-                    <strong>
-                      {metric.valueLabel ?? `${metric.prefix}${metricValues[index].toLocaleString(undefined, {
-                        minimumFractionDigits: metric.decimals ?? 0,
-                        maximumFractionDigits: metric.decimals ?? 0,
-                      })}${metric.suffix}`}
-                    </strong>
-                    <span>{metric.label}</span>
-                    <small>
-                      {metric.note}
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button
-                            type="button"
-                            className="metric-detail-trigger"
-                            aria-label={`${metric.label}の測定方法`}
-                          >
-                            <Info aria-hidden="true" />
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent>{metric.detail}</TooltipContent>
-                      </Tooltip>
-                    </small>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="stage-two__trust" data-animate>
-              <h3>外部統計と市場シグナル</h3>
-              <div className="stage-two__trust-grid">
-                {trustDataPoints.map((point) => (
-                  <article key={point.label}>
-                    <header>
-                      <strong>{point.value}</strong>
-                      <span>{point.label}</span>
-                    </header>
-                    <p>{point.description}</p>
-                    <footer>
-                      <a href={point.url} target="_blank" rel="noreferrer">
-                        {point.source}
-                      </a>
-                      <span>{point.signal}</span>
-                    </footer>
-                  </article>
-                ))}
+            <div className="hero-proof__grid">
+              <div className="hero-proof__accordion" data-animate>
+                <Accordion
+                  type="single"
+                  collapsible
+                  defaultValue={heroCausality[0]?.title ?? undefined}
+                >
+                  {heroCausality.map((item) => {
+                    const ItemIcon = item.icon;
+                    return (
+                      <AccordionItem key={item.title} value={item.title}>
+                        <AccordionTrigger>
+                          <div className="hero-proof__trigger">
+                            <span className="hero-proof__trigger-icon" aria-hidden="true">
+                              <ItemIcon />
+                            </span>
+                            <div className="hero-proof__trigger-text">
+                              <strong>{item.title}</strong>
+                              <span>{item.subtitle}</span>
+                            </div>
+                            <span className="hero-proof__trigger-metric">{item.impactMetric}</span>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <div className="hero-proof__content">
+                            <p className="hero-proof__cause">{item.cause}</p>
+                            <p className="hero-proof__logic">{item.logic}</p>
+                            <div className="hero-proof__impact">
+                              <strong>{item.impactDetail}</strong>
+                              <div>
+                                <span className="hero-proof__badge">{item.trustLabel}</span>
+                                <p>{item.trustCopy}</p>
+                              </div>
+                            </div>
+                            <ul className="hero-proof__highlights">
+                              {item.highlights.map((highlight) => (
+                                <li key={highlight}>{highlight}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    );
+                  })}
+                </Accordion>
               </div>
-            </div>
-            <div className="stage__cta" data-animate>
-              <span className="stage__cta-badge">Stage 2 → Stage 3</span>
-              <a className="btn btn-cta" href="#stories">
-                {ctaCopy.simulator}
-              </a>
-              <span className="stage__cta-note">数字に確信が持てたら、実際の経営者の声で最終確認を。</span>
+              <div className="hero-proof__evidence" data-animate>
+                <ul className="hero-metrics" ref={metricsRef}>
+                  {heroMetrics.map((metric, index) => (
+                    <li key={metric.label}>
+                      <strong>
+                        {metric.valueLabel ?? `${metric.prefix}${metricValues[index].toLocaleString(undefined, {
+                          minimumFractionDigits: metric.decimals ?? 0,
+                          maximumFractionDigits: metric.decimals ?? 0,
+                        })}${metric.suffix}`}
+                      </strong>
+                      <span>{metric.label}</span>
+                      <small>
+                        {metric.note}
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <button
+                              type="button"
+                              className="metric-detail-trigger"
+                              aria-label={`${metric.label}の測定方法`}
+                            >
+                              <Info aria-hidden="true" />
+                            </button>
+                          </TooltipTrigger>
+                          <TooltipContent>{metric.detail}</TooltipContent>
+                        </Tooltip>
+                      </small>
+                    </li>
+                  ))}
+                </ul>
+                <div
+                  className="hero-collab hero-collab--compact"
+                  aria-label="生成AIと専門家チームの連携イメージ"
+                >
+                  <div className="hero-collab__panel hero-collab__panel--ai">
+                    <span className="hero-collab__label">生成AI</span>
+                    <p>市場・外部・自社データをクロス分析し、資金繰りと成長シナリオを毎週ドラフト。</p>
+                  </div>
+                  <div className="hero-collab__connector" aria-hidden="true">
+                    <Bot />
+                  </div>
+                  <div className="hero-collab__panel hero-collab__panel--experts">
+                    <span className="hero-collab__label">専門家チーム</span>
+                    <ul className="hero-collab__experts">
+                      {heroAllianceExperts.map((expert) => (
+                        <li key={expert.name}>
+                          <img src={expert.photo} alt={expert.name} loading="lazy" />
+                          <div>
+                            <strong>{expert.name}</strong>
+                            <span>{expert.role}</span>
+                            <small>{expert.focus}</small>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <div className="hero-evidence hero-evidence--compact" aria-label="外部調査による裏付け">
+                  <span className="hero-evidence__eyebrow">Evidence</span>
+                  <ul className="hero-evidence__list">
+                    {heroEvidence.map((item) => (
+                      <li key={item.source} className="hero-evidence__item">
+                        <p>{item.summary}</p>
+                        <a href={item.url} target="_blank" rel="noreferrer">
+                          {item.source}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                  <button
+                    type="button"
+                    className="hero-demo__button"
+                    onClick={() => {
+                      setIsDemoPlaying(false);
+                      setIsDemoOpen(true);
+                    }}
+                  >
+                    <PlayCircle aria-hidden="true" />
+                    <span>1分でわかる共創デモを見る</span>
+                  </button>
+                  <p className="hero-demo__caption hero-demo__caption--compact">
+                    University of Cincinnati Onlineなどの調査をもとに、意思決定リードタイム短縮の運用をダイジェストで紹介します。
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -3907,16 +3748,15 @@ const Index = () => {
           ref={(node) => {
             sectionRefs.current["stories"] = node ?? null;
           }}
-          className="section stories stage stage--three"
+          className="section stories"
           aria-labelledby="stories-heading"
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <span className="stage__badge stage__badge--tertiary">第3段階：顧客の声</span>
-              <h2 id="stories-heading">導入前→導入中→活用後のストーリーで成果を確認</h2>
+              <h2 id="stories-heading">成功事例</h2>
               <ul className="section-intro">
-                <li>実名レビューで中小企業の再現性を確認。</li>
-                <li>導入プロセスと成果指標を時間軸で把握。</li>
+                <li>実名レビューで成果を確認。</li>
+                <li>業界横断の再現性を提示。</li>
               </ul>
             </div>
             <div className="story-carousel" data-animate>
@@ -3947,22 +3787,25 @@ const Index = () => {
                         <span className="story-quote__icon" aria-hidden="true">“</span>
                         <p>{story.quote}</p>
                       </blockquote>
-                      <div className="story-timeline" role="list">
-                        <div className="story-timeline__step" role="listitem">
-                          <span className="story-timeline__phase">導入前</span>
+                      <div className="story-structure" role="list">
+                        <div className="story-structure__item" role="listitem">
+                          <span className="story-structure__label">課題</span>
                           <p>{story.challenge}</p>
                         </div>
-                        <div className="story-timeline__step" role="listitem">
-                          <span className="story-timeline__phase">導入中</span>
-                          <p className="story-timeline__ai">{story.aiRole}</p>
-                          <p className="story-timeline__expert">{story.expertRole}</p>
+                        <div className="story-structure__item" role="listitem">
+                          <span className="story-structure__label">AIの役割</span>
+                          <p>{story.aiRole}</p>
                         </div>
-                        <div className="story-timeline__step" role="listitem">
-                          <span className="story-timeline__phase">活用後</span>
+                        <div className="story-structure__item" role="listitem">
+                          <span className="story-structure__label">専門家の伴走</span>
+                          <p>{story.expertRole}</p>
+                        </div>
+                        <div className="story-structure__item" role="listitem">
+                          <span className="story-structure__label">意思決定プロセス</span>
                           <p>{story.governance}</p>
-                          <p className="story-timeline__summary">{story.summary}</p>
                         </div>
                       </div>
+                      <p className="story-summary">{story.summary}</p>
                       <ul className="story-metrics">
                         {story.metrics.map((metric) => (
                           <li key={metric.label}>
@@ -3999,12 +3842,13 @@ const Index = () => {
                 ))}
               </div>
             </div>
-            <div className="stage__cta" data-animate>
-              <span className="stage__cta-badge">Stage 3 → Stage 4</span>
-              <a className="btn btn-cta" href="#credibility">
+            <div className="section-cta" data-animate>
+              <a className="btn btn-cta" href="#contact">
                 {ctaCopy.successStories}
               </a>
-              <span className="stage__cta-note">導入後の姿が描けたら、支援する専門家と保証内容を確認。</span>
+              <a className="section-cta__link" href="#resources">
+                資料で出力例を見る
+              </a>
             </div>
             <p className="footnote" data-animate>
               ※ 掲載コメントは各社から許諾済みです。
@@ -4012,131 +3856,147 @@ const Index = () => {
           </div>
         </section>
 
-        <section
-          id="credibility"
-          className="section credibility stage stage--four"
-          aria-labelledby="credibility-heading"
-        >
+        {/* パートナーロゴと専門家紹介 */}
+        <section className="section credibility" aria-labelledby="credibility-heading">
           <div className="container">
             <div className="section-header" data-animate>
-              <span className="stage__badge stage__badge--quaternary">第4段階：専門家の推奨</span>
-              <h2 id="credibility-heading">専門家と保証で最後の一押しを整える</h2>
-              <p>
-                代表と専門家チームの実績、導入企業の声、保証体制を一箇所で確認し、経営者が納得して意思決定できる裏付けを揃えます。
-              </p>
-            </div>
-            <div className="stage-four__leader" data-animate>
-              <article className="representative-card">
-                <div className="representative-card__photo">
-                  <img
-                    src={representativeProfile.photo}
-                    alt={`${representativeProfile.name}のプロフィール写真`}
-                    loading="lazy"
-                  />
-                </div>
-                <div className="representative-card__body">
-                  <span className="representative-card__title">{representativeProfile.title}</span>
-                  <h3>{representativeProfile.name}</h3>
-                  <p>{representativeProfile.summary}</p>
-                  <div className="representative-card__lists">
-                    <div>
-                      <strong>保有資格</strong>
-                      <ul>
-                        {representativeProfile.qualifications.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <strong>主要実績</strong>
-                      <ul>
-                        {representativeProfile.achievements.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <strong>登録・所属</strong>
-                      <ul>
-                        {representativeProfile.affiliations.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                  <a className="representative-card__link" href="https://furumachi-smec.lognowa.com" target="_blank" rel="noreferrer">
-                    代表プロフィールと登録機関を見る
-                  </a>
-                </div>
-              </article>
-              <div className="stage-four__testimonials" role="list">
-                {customerHighlights.map((highlight) => (
-                  <article key={highlight.result} role="listitem">
-                    <header>
-                      <div className="stage-four__testimonial-meta">
-                        <img src={highlight.logo} alt={highlight.alt} loading="lazy" />
-                        <div>
-                          <span>{highlight.category}</span>
-                          <p>{highlight.proof}</p>
-                        </div>
-                      </div>
-                      <div className="stage-four__testimonial-result" aria-label={`導入成果 ${highlight.result}`}>
-                        <span>導入成果</span>
-                        <strong>{highlight.result}</strong>
-                      </div>
-                    </header>
-                    <p>{highlight.comment}</p>
-                    <ul>
-                      {highlight.detail.split(" / ").map((metric) => {
-                        const value = metric.trim();
-                        return <li key={value}>{value}</li>;
-                      })}
-                    </ul>
-                  </article>
-                ))}
-              </div>
-            </div>
-            <div className="stage-four__experts" data-animate>
-              <h3>伴走する専門家チーム</h3>
-              <div className="stage-four__experts-grid">
-                {heroAllianceExperts.map((expert) => (
-                  <article key={expert.name}>
-                    <img src={expert.photo} alt={expert.name} loading="lazy" />
-                    <div>
-                      <strong>{expert.name}</strong>
-                      <span>{expert.role}</span>
-                      <p>{expert.focus}</p>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </div>
-            <div className="stage-four__assurance" data-animate>
-              <h3>保証と伴走の仕組み</h3>
-              <ul>
-                {assuranceHighlights.map((item) => {
-                  const HighlightIcon = item.icon;
-                  return (
-                    <li key={item.title}>
-                      <span className="stage-four__assurance-icon" aria-hidden="true">
-                        <HighlightIcon />
-                      </span>
-                      <div>
-                        <strong>{item.title}</strong>
-                        <p>{item.description}</p>
-                        <small>{item.detail}</small>
-                      </div>
-                    </li>
-                  );
-                })}
+              <h2 id="credibility-heading">選ばれる理由</h2>
+              <ul className="section-intro">
+                <li>代表・専門家の実績と公的機関の登録情報を公開。</li>
+                <li>導入企業の成果と第三者データでAI活用の効果を証明。</li>
               </ul>
             </div>
-            <div className="stage__cta" data-animate>
-              <span className="stage__cta-badge">Stage 4 → Action</span>
+            <article className="representative-card" data-animate>
+              <div className="representative-card__photo">
+                <img
+                  src={representativeProfile.photo}
+                  alt={`${representativeProfile.name}のプロフィール写真`}
+                  loading="lazy"
+                />
+              </div>
+              <div className="representative-card__body">
+                <span className="representative-card__title">{representativeProfile.title}</span>
+                <h3>{representativeProfile.name}</h3>
+                <p>{representativeProfile.summary}</p>
+                <div className="representative-card__lists">
+                  <div>
+                    <strong>保有資格</strong>
+                    <ul>
+                      {representativeProfile.qualifications.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <strong>主要実績</strong>
+                    <ul>
+                      {representativeProfile.achievements.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <strong>登録・所属</strong>
+                    <ul>
+                      {representativeProfile.affiliations.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <a className="representative-card__link" href="https://furumachi-smec.lognowa.com" target="_blank" rel="noreferrer">
+                  代表プロフィールと登録機関を見る
+                </a>
+              </div>
+            </article>
+            <div className="customer-highlights" role="list">
+              {customerHighlights.map((highlight) => (
+                <article key={highlight.result} className="customer-highlight" role="listitem" data-animate>
+                  <header className="customer-highlight__header">
+                    <div className="customer-highlight__identity">
+                      <div className="customer-highlight__logo">
+                        <img src={highlight.logo} alt={highlight.alt} loading="lazy" />
+                      </div>
+                      <div className="customer-highlight__meta">
+                        <span className="customer-highlight__category">{highlight.category}</span>
+                        <p className="customer-highlight__proof">{highlight.proof}</p>
+                      </div>
+                    </div>
+                    <div className="customer-highlight__result" aria-label={`導入成果 ${highlight.result}`}>
+                      <span className="customer-highlight__result-label">導入成果</span>
+                      <strong>{highlight.result}</strong>
+                    </div>
+                  </header>
+                  <div className="customer-highlight__insights">
+                    <div className="customer-highlight__comment" aria-label="戦略インサイト">
+                      <span className="customer-highlight__comment-label">意思決定の質</span>
+                      <p>{highlight.comment}</p>
+                    </div>
+                    <ul className="customer-highlight__metrics" aria-label="成果の内訳">
+                      {highlight.detail.split(" / ").map((metric) => {
+                        const value = metric.trim();
+                        return (
+                          <li key={value}>
+                            <span>{value}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="trust-metrics" data-animate>
+              {trustDataPoints.map((point) => (
+                <div key={point.label} className="trust-metric">
+                  <span className="trust-metric__signal">{point.signal}</span>
+                  <div className="trust-metric__value" aria-label={`${point.label} ${point.value}`}>
+                    <strong>{point.value}</strong>
+                    <span>{point.label}</span>
+                  </div>
+                  <p>{point.description}</p>
+                  <a href={point.url} target="_blank" rel="noreferrer">
+                    {point.source}
+                  </a>
+                </div>
+              ))}
+            </div>
+            <div className="expert-grid">
+              {expertCards.map((expert) => (
+                <article key={expert.name} className="expert-card" data-animate>
+                  <div className="expert-photo">
+                    <img
+                      src={expert.photo}
+                      alt={`${expert.name}のプロフィール写真`}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="expert-body">
+                    <h3>{expert.name}</h3>
+                    <span>{expert.title}</span>
+                    <p>{expert.bio}</p>
+                    <ul className="expert-card__credentials">
+                      {expert.credentials.map((credential) => {
+                        const CredentialIcon = credential.icon;
+                        return (
+                          <li key={credential.label}>
+                            <CredentialIcon aria-hidden="true" />
+                            <span>{credential.label}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </article>
+              ))}
+            </div>
+            <div className="section-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
                 {ctaCopy.contact}
               </a>
-              <span className="stage__cta-note">専門家と直接相談し、貴社専用の導入ロードマップを作成します。</span>
+              <a className="section-cta__link" href="#hero">
+                60秒診断から始める
+              </a>
             </div>
           </div>
         </section>
