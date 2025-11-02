@@ -97,48 +97,6 @@
         color: rgba(15, 118, 110, 0.9);
         font-weight: 600;
       }
-      .hero-details {
-        border-radius: 1.5rem;
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        background: rgba(255, 255, 255, 0.9);
-        padding: 1.25rem 1.5rem;
-        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
-      }
-      .hero-details summary {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        font-weight: 600;
-        font-size: 0.95rem;
-        color: rgb(15, 23, 42);
-        list-style: none;
-      }
-      .hero-details summary::-webkit-details-marker {
-        display: none;
-      }
-      .hero-details summary::after {
-        content: '＋';
-        font-size: 1.1rem;
-        line-height: 1;
-        color: rgba(14, 165, 233, 0.9);
-        transition: transform 0.2s ease;
-      }
-      .hero-details[open] summary::after {
-        content: '−';
-        transform: rotate(180deg);
-      }
-      .hero-details-content {
-        margin-top: 1.5rem;
-        display: grid;
-        gap: 1.5rem;
-      }
-      .hero-details-note {
-        font-size: 0.8rem;
-        color: rgb(71, 85, 105);
-        line-height: 1.5;
-      }
       .hero-surface {
         position: relative;
         display: grid;
@@ -335,68 +293,6 @@
         line-height: 1.4;
         color: rgba(226, 232, 240, 0.92);
         margin: 0;
-      }
-      .pain-shell {
-        border-radius: 2rem;
-        padding: clamp(2rem, 4vw, 3rem);
-        background: linear-gradient(160deg, rgba(241, 245, 249, 0.92), rgba(224, 242, 254, 0.85));
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        box-shadow: 0 28px 56px rgba(15, 23, 42, 0.12);
-      }
-      .pain-grid {
-        display: grid;
-        gap: 1.25rem;
-      }
-      @media (min-width: 768px) {
-        .pain-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
-      .pain-chart {
-        border-radius: 1.5rem;
-        padding: 1.5rem;
-        background: rgba(255, 255, 255, 0.92);
-        border: 1px solid rgba(148, 163, 184, 0.3);
-        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
-      }
-      .pain-chart h3 {
-        margin: 0 0 1rem;
-        font-size: 1.05rem;
-        font-weight: 700;
-        color: rgb(15, 23, 42);
-      }
-      .pain-row {
-        display: grid;
-        gap: 0.35rem;
-        margin-bottom: 0.85rem;
-      }
-      .pain-label {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.82rem;
-        color: rgb(71, 85, 105);
-        font-weight: 600;
-      }
-      .pain-bar {
-        position: relative;
-        border-radius: 9999px;
-        background: rgba(226, 232, 240, 0.8);
-        height: 0.75rem;
-        overflow: hidden;
-      }
-      .pain-bar span {
-        position: absolute;
-        inset: 0;
-        border-radius: 9999px;
-        background: linear-gradient(135deg, rgba(14, 165, 233, 0.85), rgba(13, 148, 136, 0.85));
-      }
-      .pain-insight {
-        font-size: 0.85rem;
-        color: rgb(51, 65, 85);
-        line-height: 1.6;
-      }
-      .pain-insight strong {
-        color: rgb(15, 23, 42);
       }
       .trust-badges {
         display: flex;
@@ -1628,36 +1524,6 @@
         font-size: 0.75rem;
         color: rgb(100, 116, 139);
       }
-      .assurance-box {
-        border-radius: 1.25rem;
-        border: 1px solid rgba(148, 163, 184, 0.3);
-        background: rgba(241, 245, 249, 0.75);
-        padding: 1rem 1.25rem;
-        display: grid;
-        gap: 0.65rem;
-      }
-      .assurance-box h4 {
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: rgb(15, 23, 42);
-        margin: 0;
-      }
-      .assurance-list {
-        display: grid;
-        gap: 0.35rem;
-        font-size: 0.78rem;
-        color: rgb(51, 65, 85);
-      }
-      .assurance-list li {
-        display: flex;
-        gap: 0.4rem;
-        align-items: flex-start;
-      }
-      .assurance-list li span {
-        font-size: 0.85rem;
-        color: rgba(14, 165, 233, 0.9);
-        line-height: 1.2;
-      }
       .workflow-step::before {
         content: attr(data-step);
         display: inline-flex;
@@ -2377,14 +2243,14 @@
           <a href="#pricing" class="hover:text-slate-900">料金</a>
           <a href="#contact" class="hover:text-slate-900">相談</a>
         </nav>
-        <a href="#consult-form" class="btn-secondary min-w-[44px]">60秒診断を開始</a>
+        <a href="#consult-form" class="btn-secondary min-w-[44px]">60秒で無料診断</a>
       </div>
     </header>
     <main class="space-y-20 pb-24 pt-16 md:space-y-28 md:pt-24">
       <section id="hero" class="mx-auto w-full max-w-6xl px-5" data-animate>
         <div class="hero-surface">
           <div class="hero-copy">
-            <span class="badge">年商5,000万〜15億規模の製造・建設業経営者向け｜集中伴走プログラム</span>
+            <span class="badge">年商数千万円〜数十億円規模の製造・建設業経営者向け｜集中伴走プログラム</span>
             <div class="flex flex-wrap gap-2">
               <span class="accent-pill">CVとキャッシュを同時に最大化</span>
               <span class="accent-pill">AI分析×診断士レビュー</span>
@@ -2395,7 +2261,7 @@
                 最短90日で“金融審査に耐える”経営計画を完成。AI×専門家で意思決定を52%速く。
               </h1>
               <p class="text-base leading-relaxed text-slate-700 md:text-lg">
-                AIが財務・市場データを走査し、診断士が審査目線で筋道を整理。経営会議・金融機関・現場が迷わない判断材料を60秒で提示します。
+                市場・資金・人材データを生成AIが瞬時に要約し、診断士がロジックと根拠を補強。経営会議・金融機関・現場の納得感をそろえ、判断のスピードと確度を引き上げます。
               </p>
             </div>
             <div class="hero-summary-grid">
@@ -2415,114 +2281,110 @@
                 <p class="hero-summary-text">2023年支援企業の平均。審議回数と議事時間が半減。</p>
               </article>
             </div>
+            <p class="text-sm leading-relaxed text-slate-600 md:text-base">
+              Foster School of BusinessやMITの研究で、人が判断軸を設計しAIが大量データを絞り込むモデルが最も成果を出すと示されています。私たちはルール設計から会議運営、外部ステークホルダーへの説明まで一気通貫で伴走します。
+            </p>
+            <div class="hero-proof">
+              <div class="hero-proof-item">
+                <h3>AI診断で論点を60秒要約</h3>
+                <p>政策・需要・財務指標を同一スケールで整理し、会議に持ち込むべき論点を瞬時に提示します。</p>
+              </div>
+              <div class="hero-proof-item">
+                <h3>診断士が審査通過ロジックを設計</h3>
+                <p>金融機関の想定問答とリスク対策を事前に準備。意思決定者の不安を払拭し、社内外の合意を後押しします。</p>
+              </div>
+              <div class="hero-proof-item">
+                <h3>ROIシミュレーターで投資判断を可視化</h3>
+                <p>攻めと守りのシナリオを並列比較し、キャッシュ創出までのロードマップを同時に提示します。</p>
+              </div>
+            </div>
+            <div class="hero-gallery">
+              <figure>
+                <img
+                  src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=960&q=80"
+                  alt="役員会議で戦略ダッシュボードを確認する経営陣"
+                  loading="lazy"
+                />
+                <figcaption>
+                  <strong>因果マップで視線を集中</strong>
+                  経営会議前に1ページで状況を俯瞰。論点カードで議論の順番が揃います。
+                </figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=960&q=80"
+                  alt="生成AIが可視化した財務ダッシュボード"
+                  loading="lazy"
+                />
+                <figcaption>
+                  <strong>週次で更新されるKPIダッシュボード</strong>
+                  粗利・キャッシュ・在庫を一元管理し、意思決定リードタイムを短縮します。
+                </figcaption>
+              </figure>
+              <figure>
+                <img
+                  src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=960&q=80"
+                  alt="診断士と経営者が計画書を確認する様子"
+                  loading="lazy"
+                />
+                <figcaption>
+                  <strong>伴走する専門家チーム</strong>
+                  金融機関・投資家への説明資料まで同時に仕上げ、信頼を裏付けます。
+                </figcaption>
+              </figure>
+            </div>
+            <div class="hero-cta-note">
+              <span>⏱️ 初回ヒアリング：オンライン30分</span>
+              <span>📄 準備物：直近2期の決算書</span>
+              <span>🔒 データはNDAと暗号化で保護</span>
+            </div>
             <div class="flex flex-col gap-3 sm:flex-row">
-              <a href="#consult-form" class="btn-primary w-full sm:w-auto">60秒無料診断で優先課題を判定</a>
-              <a href="#contact" class="btn-secondary w-full sm:w-auto" data-arrow="false">30分の個別相談を予約</a>
-              <a href="#sample" class="btn-secondary w-full sm:w-auto" data-arrow="false">ROI事例と導入資料を受け取る</a>
+              <a href="#consult-form" class="btn-primary w-full sm:w-auto">60秒で課題レポートを受け取る（無料診断）</a>
+              <a href="#contact" class="btn-secondary w-full sm:w-auto" data-arrow="false">30分相談で伴走プランを確認</a>
+              <a href="#sample" class="btn-secondary w-full sm:w-auto" data-arrow="false">導入事例資料でROIを確認</a>
             </div>
             <div class="cta-options">
-              <span>⚡ 診断は3項目の入力のみ／即時レポート送付</span>
-              <span>🧭 相談・診断・資料請求から最適な行動を選択</span>
+              <span>⚡ 所要60秒｜AI診断レポートを即時送付</span>
+              <span>🧭 相談後3営業日以内に因果マップ案を共有</span>
+              <span>📞 電話相談：03-0000-1234（平日9〜18時）</span>
             </div>
-            <details class="hero-details">
-              <summary>支援の流れと裏付けデータを詳しく見る</summary>
-              <div class="hero-details-content">
-                <p class="hero-details-note">
-                  Foster School of BusinessやMITの研究で、人が判断軸を設計しAIが大量データを絞り込むモデルが最も成果を出すと示されています。私たちはルール設計から会議運営、外部ステークホルダーへの説明まで一気通貫で伴走します。
-                </p>
-                <div class="hero-proof">
-                  <div class="hero-proof-item">
-                    <h3>AI診断で論点を60秒要約</h3>
-                    <p>政策・需要・財務指標を同一スケールで整理し、会議に持ち込むべき論点を瞬時に提示します。</p>
-                  </div>
-                  <div class="hero-proof-item">
-                    <h3>診断士が審査通過ロジックを設計</h3>
-                    <p>金融機関の想定問答とリスク対策を事前に準備。意思決定者の不安を払拭し、社内外の合意を後押しします。</p>
-                  </div>
-                  <div class="hero-proof-item">
-                    <h3>ROIシミュレーターで投資判断を可視化</h3>
-                    <p>攻めと守りのシナリオを並列比較し、キャッシュ創出までのロードマップを同時に提示します。</p>
-                  </div>
-                </div>
-                <div class="hero-gallery">
-                  <figure>
-                    <img
-                      src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=960&q=80"
-                      alt="役員会議で戦略ダッシュボードを確認する経営陣"
-                      loading="lazy"
-                    />
-                    <figcaption>
-                      <strong>因果マップで視線を集中</strong>
-                      経営会議前に1ページで状況を俯瞰。論点カードで議論の順番が揃います。
-                    </figcaption>
-                  </figure>
-                  <figure>
-                    <img
-                      src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=960&q=80"
-                      alt="生成AIが可視化した財務ダッシュボード"
-                      loading="lazy"
-                    />
-                    <figcaption>
-                      <strong>週次で更新されるKPIダッシュボード</strong>
-                      粗利・キャッシュ・在庫を一元管理し、意思決定リードタイムを短縮します。
-                    </figcaption>
-                  </figure>
-                  <figure>
-                    <img
-                      src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=960&q=80"
-                      alt="診断士と経営者が計画書を確認する様子"
-                      loading="lazy"
-                    />
-                    <figcaption>
-                      <strong>伴走する専門家チーム</strong>
-                      金融機関・投資家への説明資料まで同時に仕上げ、信頼を裏付けます。
-                    </figcaption>
-                  </figure>
-                </div>
-                <div class="hero-cta-note">
-                  <span>⏱️ 初回ヒアリング：オンライン30分</span>
-                  <span>📄 準備物：直近2期の決算書</span>
-                  <span>🔒 データはNDAと暗号化で保護</span>
-                </div>
-                <div class="trust-badges">
-                  <span class="trust-badge">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    福岡発｜診断士とデータストラテジストの専門チーム
-                  </span>
-                  <span class="trust-badge">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M12 3l7 4v6c0 5-7 8-7 8s-7-3-7-8V7l7-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    地域金融機関と連携した計画支援の実績
-                  </span>
-                  <span class="trust-badge">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                      <path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                    ビジネスメディアでの紹介・登壇経験
-                  </span>
-                </div>
-                <div class="hero-metrics">
-                  <div class="hero-metric">
-                    <span>CVR +15%想定</span>
-                    <p>課題を60秒で要約し、適切なCTAへ誘導することでリード獲得を底上げします。</p>
-                  </div>
-                  <div class="hero-metric">
-                    <span>直帰率 −10pt</span>
-                    <p>要約カードと視線誘導で初期理解を高速化。スクロール率が平均15pt向上。</p>
-                  </div>
-                  <div class="hero-metric">
-                    <span>商談化率 +10pt</span>
-                    <p>金融機関視点の安心材料とROI試算で、意思決定者の確信度が高まります。</p>
-                  </div>
-                </div>
-                <p class="hero-details-note">
-                  ※AIは意思決定を補助するツールであり、最終判断は経営者が行います。
-                </p>
+            <div class="trust-badges">
+              <span class="trust-badge">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M5 12l4 4 10-10" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                福岡発｜診断士とデータストラテジストの専門チーム
+              </span>
+              <span class="trust-badge">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M12 3l7 4v6c0 5-7 8-7 8s-7-3-7-8V7l7-4z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                地域金融機関と連携した計画支援の実績
+              </span>
+              <span class="trust-badge">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                ビジネスメディアでの紹介・登壇経験
+              </span>
+            </div>
+            <div class="hero-metrics">
+              <div class="hero-metric">
+                <span>CVR +15%想定</span>
+                <p>課題を60秒で要約し、適切なCTAへ誘導することでリード獲得を底上げします。</p>
               </div>
-            </details>
+              <div class="hero-metric">
+                <span>直帰率 −10pt</span>
+                <p>要約カードと視線誘導で初期理解を高速化。スクロール率が平均15pt向上。</p>
+              </div>
+              <div class="hero-metric">
+                <span>商談化率 +10pt</span>
+                <p>金融機関視点の安心材料とROI試算で、意思決定者の確信度が高まります。</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-500">
+              ※AIは意思決定を補助するツールであり、最終判断は経営者が行います。
+            </p>
           </div>
           <div class="hero-aside">
             <div class="insight-suite">
@@ -2889,7 +2751,7 @@
           </div>
         </section>
 
-      <section id="approach" class="mx-auto w-full max-w-5xl px-5" data-animate>
+        <section id="approach" class="mx-auto w-full max-w-5xl px-5" data-animate>
         <div class="space-y-8">
           <h2 class="section-title">専門家と生成AIが届ける価値の全体像</h2>
           <p class="section-subtitle">
@@ -2911,55 +2773,6 @@
             <div class="workflow-step" data-step="Step 4">
               <h3>専門家が計画と実行体制を磨き上げ</h3>
               <p>中小企業診断士と財務会計・管理会計の専門家がAIドラフトを審査目線でレビューし、根拠資料とリスク対応策を補強。稟議資料・会議アジェンダを仕上げ、経営陣が誇りを持って共有できるレベルまで整えて実行モニタリングまで伴走します。</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="pain-index" class="mx-auto w-full max-w-5xl px-5" data-animate>
-        <div class="pain-shell space-y-6">
-          <div class="space-y-4">
-            <h2 class="section-title">意思決定を先送りすると何が起きるか</h2>
-            <p class="section-subtitle">
-              PASの「Problem→Agitate→Solution」を踏まえ、現状のままではどれだけ時間とキャッシュが失われるのかを定量化しました。共感と危機感を喚起した上で、次のセクションで解決策へと導きます。
-            </p>
-          </div>
-          <div class="pain-grid">
-            <div class="pain-chart">
-              <h3>現状のムダ時間（1社あたり月間）</h3>
-              <div class="pain-row">
-                <div class="pain-label"><span>経営会議準備</span><span>145時間</span></div>
-                <div class="pain-bar"><span style="width: 88%"></span></div>
-              </div>
-              <div class="pain-row">
-                <div class="pain-label"><span>金融機関資料の修正</span><span>62時間</span></div>
-                <div class="pain-bar"><span style="width: 58%"></span></div>
-              </div>
-              <div class="pain-row">
-                <div class="pain-label"><span>社内調整メール</span><span>38時間</span></div>
-                <div class="pain-bar"><span style="width: 40%"></span></div>
-              </div>
-              <p class="pain-insight">
-                <strong>合計245時間</strong>が意思決定の前段で消費され、現場への着手が約3.5週間遅れています。AIDMAの「Interest→Desire」フェーズで危機感を定量的に提示します。
-              </p>
-            </div>
-            <div class="pain-chart">
-              <h3>先送りによる推定損失（年商10億円企業の例）</h3>
-              <div class="pain-row">
-                <div class="pain-label"><span>粗利機会ロス</span><span>▲3,200万円</span></div>
-                <div class="pain-bar"><span style="width: 82%"></span></div>
-              </div>
-              <div class="pain-row">
-                <div class="pain-label"><span>在庫・滞留コスト</span><span>▲1,150万円</span></div>
-                <div class="pain-bar"><span style="width: 64%"></span></div>
-              </div>
-              <div class="pain-row">
-                <div class="pain-label"><span>人件費超過</span><span>▲780万円</span></div>
-                <div class="pain-bar"><span style="width: 52%"></span></div>
-              </div>
-              <p class="pain-insight">
-                リードタイムの遅延はAISASの「Action」阻害要因となり、投資判断が守りに偏ります。AI×専門家の伴走でこのロスを解消し、90日で意思決定を前倒しする設計が次章の解決策です。
-              </p>
             </div>
           </div>
         </div>
@@ -3338,7 +3151,7 @@
             </div>
           </div>
           <div class="flex flex-wrap items-center justify-center gap-3">
-            <a href="#consult-form" class="btn-primary">個別相談（30分）を予約→</a>
+            <a href="#consult-form" class="btn-primary">30分相談で伴走プランを確認→</a>
             <a href="#process" class="btn-secondary">導入ステップを見る→</a>
           </div>
         </div>
@@ -3586,7 +3399,7 @@
             <div class="card space-y-3">
               <h3 class="text-lg font-semibold text-slate-900">経営計画ダッシュボード</h3>
               <p class="text-sm text-slate-600">PL・BS・CF・主要KPIを週次で更新。意思決定に必要な指標を一枚に集約したテンプレートを共有します。</p>
-              <a href="#consult-form" class="btn-secondary">ダイジェストPDFを30秒で入手→</a>
+              <a href="#consult-form" class="btn-secondary">ダイジェストPDFを見る→</a>
             </div>
             <div class="card space-y-3">
               <h3 class="text-lg font-semibold text-slate-900">採択・融資実績</h3>
@@ -3627,7 +3440,7 @@
             <span class="security-badge">NDA SIGNED</span>
           </div>
           <div class="flex flex-wrap items-center gap-3 pt-2">
-            <a href="#sample" class="btn-primary">導入資料を3分で請求→</a>
+            <a href="#sample" class="btn-primary">導入資料を請求する→</a>
             <a href="tel:0300001234" class="btn-secondary" data-arrow="false">電話で相談（平日9〜18時）</a>
           </div>
         </div>
@@ -3681,14 +3494,6 @@
               method="post"
             >
               <h3 class="text-lg font-semibold text-slate-900">無料オンライン相談（短時間）</h3>
-              <div class="assurance-box" role="note">
-                <h4>安心してお申し込みいただくために</h4>
-                <ul class="assurance-list">
-                  <li><span>✔</span><span>秘密保持契約（NDA）とAES-256暗号化でデータを保護します。</span></li>
-                  <li><span>✔</span><span>初回提案は平均3営業日以内／導入までの平均リードタイムは30日。</span></li>
-                  <li><span>✔</span><span>初回相談と60秒診断は完全無料。導入可否の判断材料のみご提供。</span></li>
-                </ul>
-              </div>
               <ol class="form-progress" role="list">
                 <li class="is-active" data-progress="1">STEP A 連絡先</li>
                 <li data-progress="2">STEP B 会社情報</li>
@@ -3759,15 +3564,15 @@
       <div class="mx-auto flex w-full max-w-6xl flex-col items-center gap-4 px-5 text-center text-xs text-slate-500 md:flex-row md:justify-between md:text-left">
         <p>© 2024 Strategy AI Lab. All rights reserved.</p>
         <div class="flex flex-wrap items-center justify-center gap-4">
-          <a href="#consult-form" class="btn-secondary text-xs" data-arrow="false">無料オンライン相談を予約</a>
-          <a href="#sample" class="btn-secondary text-xs" data-arrow="false">ROIサンプルを見る</a>
+          <a href="#consult-form" class="btn-secondary text-xs" data-arrow="false">無料オンライン相談へ</a>
+          <a href="#sample" class="btn-secondary text-xs" data-arrow="false">サンプルを見る</a>
         </div>
       </div>
     </footer>
     <div class="sticky-cta">
       <div>
         <p class="font-semibold">生成AI×診断士で意思決定を磨きませんか？</p>
-        <a href="#consult-form" class="btn-primary">60秒診断で優先課題を可視化→</a>
+        <a href="#consult-form" class="btn-primary">60秒診断で課題を可視化→</a>
       </div>
     </div>
     <a href="#hero" class="back-to-top" aria-label="ページ上部へ戻る">
