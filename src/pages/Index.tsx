@@ -71,7 +71,35 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const primaryCtaLabel = "30分無料相談を予約（3分で完了）";
+const primaryCtaLabel = "まずは60秒で自社の意思決定リスクを診断する";
+const heroSnapshotHighlights = [
+  {
+    label: "72時間でAI診断レポート",
+    description: "財務・販売・在庫データを束ねた優先課題の整理表を即共有。",
+  },
+  {
+    label: "1〜2週間で計画ドラフト",
+    description: "金融機関提出レベルのストーリーとKPIを専門家が伴走作成。",
+  },
+  {
+    label: "3か月で定着・資金確保",
+    description: "週次レビューと補助金・融資支援でROIと資金繰りを追跡。",
+  },
+];
+const heroTrustSignals = [
+  {
+    label: "経済産業省 認定経営革新等支援機関",
+    description: "登録専門家チームが金融機関提出資料の品質を担保。",
+  },
+  {
+    label: "地域金融機関との共同伴走 12行",
+    description: "審査ロジックを踏まえた計画づくりで交渉をスムーズに。",
+  },
+  {
+    label: "案件継続率 92%",
+    description: "成果創出まで伴走し継続契約をいただいたプロジェクト比率。",
+  },
+];
 const contactPhoneNumber = "03-4520-1234";
 
 const headerNavItems = [
@@ -311,9 +339,10 @@ type SimulatorVisualHighlight = {
 
 const quickFlowSteps: QuickFlowStep[] = [
   {
-    label: "30分無料相談",
-    description: "オンラインで経営課題を整理",
-    detail: "社長の現在地と直近の資金繰り・補助金・投資予定をヒアリングし、導入是非と必要資料を3分でご案内します。",
+    label: "60秒無料診断申し込み",
+    description: "フォーム入力で即時受付",
+    detail:
+      "メールアドレスと基本情報の入力だけで受付完了。診断結果は最短即日でメール共有し、面談の候補日時も合わせてお送りします。",
     icon: CalendarClock,
     duration: "Day0",
   },
@@ -335,8 +364,8 @@ const quickFlowSteps: QuickFlowStep[] = [
 
 const quickFormHighlights: QuickFormHighlight[] = [
   {
-    title: "初回相談は完全無料",
-    caption: "営業目的の連絡なし・30分で導入可否を診断",
+    title: "診断と相談は完全無料",
+    caption: "営業電話なし・60秒入力で優先課題の仮説を共有",
     icon: Shield,
   },
   {
@@ -1613,10 +1642,10 @@ const initialQuickContact: QuickContactFormState = {
 };
 
 const contactSteps = [
-  { id: 1, title: "ヒアリング予約", description: "メールアドレス・希望日時を入力" },
+  { id: 1, title: "スピード診断の受付", description: "メールアドレスを入力" },
   {
     id: 2,
-    title: "経営課題の共有",
+    title: "詳細ヒアリングの準備",
     description: "現状の悩みや目標（任意項目あり）",
   },
 ];
@@ -2217,6 +2246,14 @@ const Index = () => {
               <p className="hero-lead">
                 資金繰りや投資判断の迷いを、AI分析と専門家レビューで72時間以内に整理し、経営会議までに数字と論点をそろえます。
               </p>
+              <ul className="hero-snapshot" aria-label="提供価値のスナップ要約">
+                {heroSnapshotHighlights.map((item) => (
+                  <li key={item.label}>
+                    <strong>{item.label}</strong>
+                    <span>{item.description}</span>
+                  </li>
+                ))}
+              </ul>
               <div className="hero-triad" data-animate>
                 <section
                   className="hero-triad__column hero-triad__column--problem"
@@ -2268,6 +2305,14 @@ const Index = () => {
                     ))}
                   </div>
                 </section>
+              </div>
+              <div className="hero-trust-signals" data-animate aria-label="第三者証明と継続実績">
+                {heroTrustSignals.map((signal) => (
+                  <article key={signal.label}>
+                    <h4>{signal.label}</h4>
+                    <p>{signal.description}</p>
+                  </article>
+                ))}
               </div>
               <div className="hero-actions">
                 <a className="btn btn-cta" href="#contact">
@@ -2341,9 +2386,9 @@ const Index = () => {
               </figure>
               <div className="hero-quick-form" data-animate>
                 <div className="hero-quick-form__intro">
-                  <h2>無料経営課題ヒアリングを予約</h2>
+                  <h2>60秒で申し込む無料AI診断</h2>
                   <p>
-                    氏名・会社名・メールの3項目で申し込み完了。初回30分のオンライン相談後、72時間以内にAI診断レポートと改善骨子を共有します。
+                    メールと基本情報の入力だけで受付が完了。最短72時間以内にAI診断レポートと改善骨子をお届けし、専門家がオンラインで初回ヒアリングを行います。
                   </p>
                   <ul className="hero-quick-form__highlights" aria-label="申し込み後に得られる価値">
                     {quickFormHighlights.map((item) => {
@@ -2364,7 +2409,7 @@ const Index = () => {
                 </div>
                 <form
                   className="quick-form"
-                  aria-label="無料経営課題ヒアリング申し込みフォーム"
+                  aria-label="無料AI診断申し込みフォーム"
                   onSubmit={handleQuickContactSubmit}
                 >
                   <div className="quick-form-grid">
@@ -4151,7 +4196,7 @@ const Index = () => {
               <h2 id="final-cta-heading">意思決定の質・速さ・先見性を高める経営計画を今すぐ</h2>
               <p>
                 経営者の時間は有限です。160件の案件で磨いた専門家が生成AIの出力を精査し、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果創出を後押しします。
-                相談予約と資料ダウンロードの2つの導線で、組織が胸を張って前進できるスタートを選べます。
+                まずは無料AI診断で現状と優先課題を把握し、必要な資料は後からダウンロードできます。
               </p>
               <div className="final-cta__actions">
                 <a className="btn btn-cta" href="#contact">
@@ -4180,10 +4225,9 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="contact-heading">無料相談・資料請求（経営計画AI診断）</h2>
+              <h2 id="contact-heading">無料AI診断・相談申し込み</h2>
               <p>
-                まずはメールアドレスだけで診断結果を受け取り、追加情報は任意で共有。
-                1営業日以内に専門家がヒアリング日程をご案内します。
+                メールアドレスを入力するだけでスピード診断がスタート。追加のヒアリング内容は任意で、1営業日以内に専門家が具体的な日程とレポート共有方法をご案内します。
               </p>
             </div>
             <ul className="trust-badges trust-badges--compact" aria-label="セキュリティ対策" data-animate>
