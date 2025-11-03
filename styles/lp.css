@@ -546,6 +546,35 @@ svg {
   color: var(--gray-600);
 }
 
+.hero-snapshot {
+  list-style: none;
+  margin: -4px 0 4px;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.hero-snapshot li {
+  display: grid;
+  gap: 2px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(79, 163, 255, 0.18);
+  box-shadow: 0 14px 32px -24px rgba(8, 35, 74, 0.35);
+}
+
+.hero-snapshot li strong {
+  font-size: 0.95rem;
+  color: var(--navy-800);
+}
+
+.hero-snapshot li span {
+  font-size: 0.88rem;
+  color: var(--gray-600);
+  line-height: 1.5;
+}
+
 .hero-triad {
   display: grid;
   gap: 18px;
@@ -659,6 +688,36 @@ svg {
 .hero-triad__metric small {
   font-size: 0.75rem;
   color: var(--gray-600);
+}
+
+.hero-trust-signals {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin: 8px 0 12px;
+}
+
+.hero-trust-signals article {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(15, 118, 110, 0.08);
+  border: 1px solid rgba(15, 118, 110, 0.24);
+  display: grid;
+  gap: 6px;
+}
+
+.hero-trust-signals h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--teal-600);
+}
+
+.hero-trust-signals p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--gray-600);
+  line-height: 1.55;
 }
 
 .hero-results {
