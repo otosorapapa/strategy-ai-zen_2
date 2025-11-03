@@ -116,6 +116,64 @@ const headerNavItems = [
 
 const sectionNavItems = [...headerNavItems, { id: "contact", label: "無料相談" }];
 
+type CtaJourneyStage = {
+  id: "learn" | "evaluate" | "decide";
+  stageLabel: string;
+  headline: string;
+  description: string;
+  buttonLabel: string;
+  href: string;
+  icon: LucideIcon;
+};
+
+const ctaJourneyStages: CtaJourneyStage[] = [
+  {
+    id: "learn",
+    stageLabel: "情報収集フェーズ",
+    headline: "まずは3分で要点を掴む",
+    description:
+      "AI診断〜伴走までの流れと成果指標をまとめたサマリースライドと要約動画を確認。",
+    buttonLabel: "3分サマリーを確認",
+    href: "#summary",
+    icon: BookOpen,
+  },
+  {
+    id: "evaluate",
+    stageLabel: "比較検討フェーズ",
+    headline: "投資対効果をその場で把握",
+    description:
+      "年商規模と投資額を入力し、ROI・回収期間・削減工数を簡易シミュレーション。",
+    buttonLabel: "ROIを試算する",
+    href: "#roi-preview",
+    icon: BarChart4,
+  },
+  {
+    id: "decide",
+    stageLabel: "実行準備フェーズ",
+    headline: "無料相談で自社条件を精査",
+    description:
+      "専門家が72時間診断の進め方と提出資料例を提示。社内稟議の準備まで伴走します。",
+    buttonLabel: primaryCtaLabel,
+    href: "#contact",
+    icon: ClipboardCheck,
+  },
+];
+
+const sectionToJourneyStage: Record<string, CtaJourneyStage["id"]> = {
+  hero: "learn",
+  problem: "learn",
+  solution: "evaluate",
+  features: "evaluate",
+  outcome: "evaluate",
+  stories: "evaluate",
+  resources: "learn",
+  simulator: "evaluate",
+  pricing: "evaluate",
+  faq: "evaluate",
+  security: "decide",
+  contact: "decide",
+};
+
 const heroEvidence = [
   {
     summary:
@@ -250,6 +308,37 @@ const heroBenefitHighlights = [
   {
     title: "3か月伴走で施策実行と資金調達を完走",
     detail: "週次レビューで進捗とキャッシュを追跡し、補助金・融資の採択率86%を実現。",
+  },
+];
+
+type HeroSummaryCard = {
+  title: string;
+  description: string;
+  stat: string;
+  icon: LucideIcon;
+};
+
+const heroSummaryCards: HeroSummaryCard[] = [
+  {
+    title: "3分で成果ストーリー",
+    description:
+      "72時間診断→1〜2週間で計画完成→3か月伴走という全体像と、粗利・資金調達の成果を要約。",
+    stat: "成果創出160件",
+    icon: BookOpen,
+  },
+  {
+    title: "KPIとROIを数値で把握",
+    description:
+      "意思決定リードタイム52%短縮、計画作成工数80%削減、粗利+18ptなどの主要KPIをひと目で確認。",
+    stat: "ROI 3.4倍",
+    icon: BarChart4,
+  },
+  {
+    title: "導入ハードルをチェック",
+    description:
+      "初期費用・月額・社内稼働の目安と、実際の導入手順をスライドで整理。動画で1分概要も視聴可能。",
+    stat: "準備工数-145h/月",
+    icon: PlayCircle,
   },
 ];
 
@@ -1090,6 +1179,9 @@ type SuccessMetric = {
   before: string;
   after: string;
   impact: string;
+  beforeValue?: number;
+  afterValue?: number;
+  unit?: string;
 };
 
 type SuccessStory = {
@@ -1097,6 +1189,7 @@ type SuccessStory = {
   industry: string;
   name: string;
   title: string;
+  projectScale: string;
   quote: string;
   summary: string;
   challenge: string;
@@ -1114,6 +1207,7 @@ const successStories: SuccessStory[] = [
     industry: "製造業",
     name: "井上 研二",
     title: "代表取締役",
+    projectScale: "年商7.8億円 / 従業員160名",
     quote:
       "銀行からの借入更新で説明責任が重くなる中、AI診断レポートが粗利改善と投資回収の道筋を明快に示してくれました。会議資料づくりに追われていた時間を、次の投資判断に充てられるようになりました。",
     summary:
@@ -1126,9 +1220,33 @@ const successStories: SuccessStory[] = [
     governance:
       "月次レビューでダッシュボードを共有し、施策ごとの進捗と投資回収を定例化。銀行面談用の想定問答も準備。",
     metrics: [
-      { label: "会議準備時間", before: "週10h", after: "週3h", impact: "-7h/週" },
-      { label: "粗利率", before: "24%", after: "28%", impact: "+4pt" },
-      { label: "設備投資補助金", before: "0円", after: "1,200万円", impact: "採択" },
+      {
+        label: "会議準備時間",
+        before: "週10h",
+        after: "週3h",
+        impact: "-7h/週",
+        beforeValue: 10,
+        afterValue: 3,
+        unit: "h/週",
+      },
+      {
+        label: "粗利率",
+        before: "24%",
+        after: "28%",
+        impact: "+4pt",
+        beforeValue: 24,
+        afterValue: 28,
+        unit: "%",
+      },
+      {
+        label: "設備投資補助金",
+        before: "0円",
+        after: "1,200万円",
+        impact: "採択",
+        beforeValue: 0,
+        afterValue: 1200,
+        unit: "万円",
+      },
     ],
     photo: customerTakashima,
     logo: logoOisix,
@@ -1138,6 +1256,7 @@ const successStories: SuccessStory[] = [
     industry: "小売・EC",
     name: "高嶋 明日香",
     title: "代表取締役社長",
+    projectScale: "年商12.4億円 / 店舗12拠点",
     quote:
       "在庫と広告の数字が散らばっていたのですが、AIが利益に直結するSKUと販促の優先順位を整理。診断士の伴走で店舗とECの会議が数字ベースになり、意思決定が格段に速くなりました。",
     summary:
@@ -1150,9 +1269,33 @@ const successStories: SuccessStory[] = [
     governance:
       "週次の商談会でダッシュボードを共有し、施策別KPIの進捗と資金繰りを同じ指標系で確認。",
     metrics: [
-      { label: "売上高", before: "月1.1億円", after: "月1.3億円", impact: "+18%" },
-      { label: "在庫廃棄", before: "月450万円", after: "月315万円", impact: "-30%" },
-      { label: "販促費ROI", before: "1.8倍", after: "2.6倍", impact: "+0.8pt" },
+      {
+        label: "売上高",
+        before: "月1.1億円",
+        after: "月1.3億円",
+        impact: "+18%",
+        beforeValue: 110,
+        afterValue: 130,
+        unit: "百万円",
+      },
+      {
+        label: "在庫廃棄",
+        before: "月450万円",
+        after: "月315万円",
+        impact: "-30%",
+        beforeValue: 450,
+        afterValue: 315,
+        unit: "万円",
+      },
+      {
+        label: "販促費ROI",
+        before: "1.8倍",
+        after: "2.6倍",
+        impact: "+0.8pt",
+        beforeValue: 1.8,
+        afterValue: 2.6,
+        unit: "倍",
+      },
     ],
     photo: customerInoue,
     logo: logoSansan,
@@ -1162,6 +1305,7 @@ const successStories: SuccessStory[] = [
     industry: "建設・サービス",
     name: "杉本 拓也",
     title: "代表取締役",
+    projectScale: "年商9.6億円 / 現場24案件",
     quote:
       "公共工事と民間案件が重なり資金繰りが不安定でしたが、AIがキャッシュフローを先読みし、診断士が金融機関との交渉資料を整えてくれました。経営会議の議題が明確になり、次の投資にも踏み出せています。",
     summary:
@@ -1174,9 +1318,33 @@ const successStories: SuccessStory[] = [
     governance:
       "隔週の進捗会議でキャッシュ見通しと工事進捗をセットで共有。意思決定ログも自動記録。",
     metrics: [
-      { label: "キャッシュ残高", before: "月末6,800万円", after: "月末1.2億円", impact: "1.8倍" },
-      { label: "追加融資枠", before: "0円", after: "3億円", impact: "獲得" },
-      { label: "会議準備時間", before: "月30h", after: "月14h", impact: "-16h/月" },
+      {
+        label: "キャッシュ残高",
+        before: "月末6,800万円",
+        after: "月末1.2億円",
+        impact: "1.8倍",
+        beforeValue: 6800,
+        afterValue: 12000,
+        unit: "万円",
+      },
+      {
+        label: "追加融資枠",
+        before: "0円",
+        after: "3億円",
+        impact: "獲得",
+        beforeValue: 0,
+        afterValue: 30000,
+        unit: "万円",
+      },
+      {
+        label: "会議準備時間",
+        before: "月30h",
+        after: "月14h",
+        impact: "-16h/月",
+        beforeValue: 30,
+        afterValue: 14,
+        unit: "h/月",
+      },
     ],
     photo: customerSugimoto,
     logo: logoRaksul,
@@ -1681,6 +1849,49 @@ const Index = () => {
   const [quickSubmitted, setQuickSubmitted] = useState(false);
   const [quickError, setQuickError] = useState<string | null>(null);
 
+  const evaluateStage = ctaJourneyStages.find((stage) => stage.id === "evaluate");
+  const decideStage = ctaJourneyStages.find((stage) => stage.id === "decide");
+  const activeJourneyStage =
+    sectionToJourneyStage[activeSection] ?? ctaJourneyStages[0].id;
+
+  const renderStageCta = (
+    stageId: CtaJourneyStage["id"],
+    options?: {
+      secondary?: { label: string; href: string };
+      secondaryButton?: { label: string; onClick: () => void };
+    }
+  ) => {
+    const stage = ctaJourneyStages.find((item) => item.id === stageId);
+    if (!stage) return null;
+    return (
+      <div className="section-cta" data-animate>
+        <div className="section-cta__meta">
+          <span className="section-cta__stage">{stage.stageLabel}</span>
+          <p>{stage.description}</p>
+        </div>
+        <div className="section-cta__actions">
+          <a className="btn btn-cta" href={stage.href}>
+            {stage.buttonLabel}
+          </a>
+          {options?.secondary && (
+            <a className="section-cta__link" href={options.secondary.href}>
+              {options.secondary.label}
+            </a>
+          )}
+          {options?.secondaryButton && (
+            <button
+              type="button"
+              className="link-button"
+              onClick={options.secondaryButton.onClick}
+            >
+              {options.secondaryButton.label}
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   const contactStepCount = contactSteps.length;
   const contactProgress = Math.round((contactStep / contactStepCount) * 100);
   const metricsRef = useRef<HTMLDivElement | null>(null);
@@ -1831,6 +2042,19 @@ const Index = () => {
       simulatorResult.roiPercent,
     ]
   );
+
+  const quickRoiGauge = useMemo(() => {
+    const roi = Math.max(simulatorResult.roiPercent, 0);
+    const max = Math.max(roi, 200);
+    return Math.min(100, Math.round((roi / max) * 100));
+  }, [simulatorResult.roiPercent]);
+
+  const quickHoursSaved = Math.round(simulatorResult.annualHoursSaved);
+  const quickCostSavings = Math.round(simulatorResult.annualCostSavings);
+  const quickPaybackMonths =
+    simulatorResult.paybackMonths !== null
+      ? Math.ceil(simulatorResult.paybackMonths)
+      : null;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -2206,8 +2430,11 @@ const Index = () => {
             </ul>
           </nav>
           <div className="header-actions" role="group" aria-label="主要な申し込み導線">
+            {decideStage && (
+              <span className="header-actions__stage">{decideStage.stageLabel}</span>
+            )}
             <a className="btn btn-cta" href="#contact">
-              {primaryCtaLabel}
+              {decideStage?.buttonLabel ?? primaryCtaLabel}
             </a>
             <button
               type="button"
@@ -2254,6 +2481,47 @@ const Index = () => {
                   </li>
                 ))}
               </ul>
+              <div
+                id="summary"
+                className="hero-quick-summary"
+                data-animate
+                ref={(node) => {
+                  sectionRefs.current.summary = node ?? null;
+                }}
+              >
+                <div className="hero-quick-summary__header">
+                  <div>
+                    <span className="hero-quick-summary__eyebrow">3分で要点を整理</span>
+                    <h2>AI診断の全体像と成果を冒頭で把握</h2>
+                  </div>
+                  <button
+                    type="button"
+                    className="hero-quick-summary__video"
+                    onClick={() => {
+                      setIsDemoOpen(true);
+                      setIsDemoPlaying(true);
+                    }}
+                  >
+                    <PlayCircle aria-hidden />
+                    <span>1分動画で概要を見る</span>
+                  </button>
+                </div>
+                <div className="hero-quick-summary__grid">
+                  {heroSummaryCards.map((card) => {
+                    const SummaryIcon = card.icon;
+                    return (
+                      <article key={card.title} className="hero-quick-summary__card">
+                        <div className="hero-quick-summary__icon" aria-hidden="true">
+                          <SummaryIcon />
+                        </div>
+                        <h3>{card.title}</h3>
+                        <p>{card.description}</p>
+                        <span className="hero-quick-summary__stat">{card.stat}</span>
+                      </article>
+                    );
+                  })}
+                </div>
+              </div>
               <div className="hero-triad" data-animate>
                 <section
                   className="hero-triad__column hero-triad__column--problem"
@@ -2629,6 +2897,46 @@ const Index = () => {
           </div>
         </section>
 
+        <section className="journey-cta" aria-label="検討フェーズ別の導線">
+          <div className="container journey-cta__inner">
+            <div className="journey-cta__intro" data-animate>
+              <span className="journey-cta__eyebrow">Conversion journey</span>
+              <h2>検討フェーズに合わせた3つの推奨アクション</h2>
+              <p>
+                情報収集・比較検討・実行準備の順に、必要な資料とCTAを整理しました。スクロール位置に応じて該当カードが強調表示されます。
+              </p>
+            </div>
+            <div className="journey-cta__grid">
+              {ctaJourneyStages.map((stage) => {
+                const StageIcon = stage.icon;
+                const isActive = activeJourneyStage === stage.id;
+                return (
+                  <article
+                    key={stage.id}
+                    className={`journey-cta__card${isActive ? " is-active" : ""}`}
+                    data-animate
+                  >
+                    <div className="journey-cta__stage-label">
+                      <StageIcon aria-hidden />
+                      <span>{stage.stageLabel}</span>
+                    </div>
+                    <h3>{stage.headline}</h3>
+                    <p>{stage.description}</p>
+                    <a
+                      className="journey-cta__link"
+                      href={stage.href}
+                      aria-current={isActive ? "true" : undefined}
+                    >
+                      <span>{stage.buttonLabel}</span>
+                      <ArrowRight aria-hidden />
+                    </a>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* ストーリー1: 課題 */}
         <section
           id="problem"
@@ -2989,14 +3297,9 @@ const Index = () => {
             <p className="features-note" data-animate>
               すべてのアウトプットは中小企業診断士と財務会計・管理会計の専門家がレビューし、AIのハルシネーションを排除したうえで金融機関や取締役会へ提出できる形に整えます。
             </p>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
-                {primaryCtaLabel}
-              </a>
-              <a className="section-cta__link" href="#pricing">
-                料金と支援範囲を確認
-              </a>
-            </div>
+            {renderStageCta("evaluate", {
+              secondary: { label: "料金と支援範囲を確認", href: "#pricing" },
+            })}
           </div>
         </section>
 
@@ -3243,14 +3546,12 @@ const Index = () => {
                   <li key={footnote}>{footnote}</li>
                 ))}
               </ol>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
-                {primaryCtaLabel}
-              </a>
-              <a className="section-cta__link" href="#simulator">
-                <abbr title="投資利益率">ROI</abbr>試算で効果を確認
-              </a>
-            </div>
+            {renderStageCta("evaluate", {
+              secondary: {
+                label: "ROI試算で効果を確認",
+                href: "#roi-preview",
+              },
+            })}
           </div>
         </section>
 
@@ -3446,18 +3747,12 @@ const Index = () => {
                 </div>
               </div>
             </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
-                {primaryCtaLabel}
-              </a>
-              <button
-                type="button"
-                className="link-button"
-                onClick={() => setRoiModalOpen(true)}
-              >
-                <abbr title="投資利益率">ROI</abbr>シミュレーションを試す
-              </button>
-            </div>
+            {renderStageCta("evaluate", {
+              secondary: {
+                label: "ROIシミュレーションを試す",
+                href: "#roi-preview",
+              },
+            })}
           </div>
         </section>
         {/* ROIシミュレーター セクション */}
@@ -3582,18 +3877,12 @@ const Index = () => {
                 初期費用・月額費用・期待効果を入力して、自社の投資対効果を画面上で確認できます。
               </p>
             </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
-                {primaryCtaLabel}
-              </a>
-              <button
-                type="button"
-                className="link-button"
-                onClick={() => setPricingModalOpen(true)}
-              >
-                料金プランを表示
-              </button>
-            </div>
+            {renderStageCta("decide", {
+              secondaryButton: {
+                label: "料金プランを表示",
+                onClick: () => setPricingModalOpen(true),
+              },
+            })}
           </div>
         </section>
 
@@ -3707,11 +3996,7 @@ const Index = () => {
                 初期費用・月額費用・期待<abbr title="投資利益率">ROI</abbr>をモーダルで比較できます。
               </p>
             </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
-                {primaryCtaLabel}
-              </a>
-            </div>
+            {renderStageCta("decide")}
           </div>
         </section>
 
@@ -3746,14 +4031,9 @@ const Index = () => {
                 ))}
               </Accordion>
             </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
-                {primaryCtaLabel}
-              </a>
-              <a className="section-cta__link" href="#stories">
-                導入事例も確認する
-              </a>
-            </div>
+            {renderStageCta("evaluate", {
+              secondary: { label: "導入事例も確認する", href: "#stories" },
+            })}
           </div>
         </section>
 
@@ -3796,6 +4076,7 @@ const Index = () => {
                           <span className="story-company">{story.company}</span>
                           <span className="story-role">{story.title} / {story.name}</span>
                           <span className="story-industry">{story.industry}</span>
+                          <span className="story-scale">{story.projectScale}</span>
                         </div>
                       </div>
                       <blockquote className="story-quote">
@@ -3820,25 +4101,59 @@ const Index = () => {
                           <p>{story.governance}</p>
                         </div>
                       </div>
+                      <div className="story-project" aria-label="案件規模">
+                        <span className="story-project__label">案件規模</span>
+                        <strong className="story-project__value">{story.projectScale}</strong>
+                      </div>
                       <p className="story-summary">{story.summary}</p>
                       <ul className="story-metrics">
-                        {story.metrics.map((metric) => (
-                          <li key={metric.label}>
-                            <span className="story-metric__label">{metric.label}</span>
-                            <div className="story-metric__values">
-                              <span className="story-metric__before" aria-label="導入前の数値">
-                                {metric.before}
-                              </span>
-                              <span className="story-metric__arrow" aria-hidden="true">
-                                →
-                              </span>
-                              <span className="story-metric__after" aria-label="導入後の数値">
-                                {metric.after}
-                              </span>
-                            </div>
-                            <strong className="story-metric__impact">{metric.impact}</strong>
-                          </li>
-                        ))}
+                        {story.metrics.map((metric) => {
+                          const max = Math.max(
+                            metric.beforeValue ?? 0,
+                            metric.afterValue ?? 0,
+                            1
+                          );
+                          const beforePercent =
+                            metric.beforeValue !== undefined
+                              ? Math.max(6, (metric.beforeValue / max) * 100)
+                              : null;
+                          const afterPercent =
+                            metric.afterValue !== undefined
+                              ? Math.max(6, (metric.afterValue / max) * 100)
+                              : null;
+                          return (
+                            <li key={metric.label}>
+                              <span className="story-metric__label">{metric.label}</span>
+                              <div className="story-metric__values">
+                                <span className="story-metric__before" aria-label="導入前の数値">
+                                  {metric.before}
+                                </span>
+                                <span className="story-metric__arrow" aria-hidden="true">
+                                  →
+                                </span>
+                                <span className="story-metric__after" aria-label="導入後の数値">
+                                  {metric.after}
+                                </span>
+                              </div>
+                              {beforePercent !== null && afterPercent !== null && (
+                                <div className="story-metric__chart" aria-hidden="true">
+                                  <div
+                                    className="story-metric__bar story-metric__bar--before"
+                                    style={{ width: `${beforePercent}%` }}
+                                  />
+                                  <div
+                                    className="story-metric__bar story-metric__bar--after"
+                                    style={{ width: `${afterPercent}%` }}
+                                  />
+                                  {metric.unit && (
+                                    <span className="story-metric__unit">{metric.unit}</span>
+                                  )}
+                                </div>
+                              )}
+                              <strong className="story-metric__impact">{metric.impact}</strong>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   </article>
@@ -3857,14 +4172,9 @@ const Index = () => {
                 ))}
               </div>
             </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
-                {primaryCtaLabel}
-              </a>
-              <a className="section-cta__link" href="#resources">
-                資料で出力例を見る
-              </a>
-            </div>
+            {renderStageCta("evaluate", {
+              secondary: { label: "資料で出力例を見る", href: "#resources" },
+            })}
             <p className="footnote" data-animate>
               ※ 掲載コメントは各社から許諾済みです。
             </p>
@@ -4005,14 +4315,9 @@ const Index = () => {
                 </article>
               ))}
             </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
-                {primaryCtaLabel}
-              </a>
-              <a className="section-cta__link" href="#hero">
-                72時間診断の流れを見る
-              </a>
-            </div>
+            {renderStageCta("learn", {
+              secondary: { label: "72時間診断の流れを見る", href: "#hero" },
+            })}
           </div>
         </section>
 
@@ -4129,11 +4434,7 @@ const Index = () => {
                 )}
               </div>
             </article>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
-                {primaryCtaLabel}
-              </a>
-            </div>
+            {renderStageCta("learn")}
           </div>
         </section>
 
@@ -4177,11 +4478,7 @@ const Index = () => {
                 })}
               </Accordion>
             </div>
-            <div className="section-cta" data-animate>
-              <a className="btn btn-cta" href="#contact">
-                {primaryCtaLabel}
-              </a>
-            </div>
+            {renderStageCta("decide")}
             <p className="privacy-note" data-animate>
               データの取り扱いについては<a href="/privacy" target="_blank" rel="noreferrer">プライバシーポリシー</a>をご覧ください。
             </p>
@@ -4193,6 +4490,9 @@ const Index = () => {
           <div className="container">
             <div className="final-cta__content" data-animate>
               <span className="final-cta__eyebrow">専門家×生成AIの伴走</span>
+              {decideStage && (
+                <span className="final-cta__stage">{decideStage.stageLabel}</span>
+              )}
               <h2 id="final-cta-heading">意思決定の質・速さ・先見性を高める経営計画を今すぐ</h2>
               <p>
                 経営者の時間は有限です。160件の案件で磨いた専門家が生成AIの出力を精査し、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果創出を後押しします。
@@ -4200,10 +4500,13 @@ const Index = () => {
               </p>
               <div className="final-cta__actions">
                 <a className="btn btn-cta" href="#contact">
-                  {primaryCtaLabel}
+                  {decideStage?.buttonLabel ?? primaryCtaLabel}
                 </a>
-                <a className="btn btn-outline" href="#resources">
-                  資料をダウンロード
+                <a
+                  className="btn btn-outline"
+                  href={evaluateStage?.href ?? "#roi-preview"}
+                >
+                  {evaluateStage?.buttonLabel ?? "ROIを試算する"}
                 </a>
               </div>
               <p className="final-cta__phone">
@@ -4225,6 +4528,9 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
+              {decideStage && (
+                <span className="section-header__stage">{decideStage.stageLabel}</span>
+              )}
               <h2 id="contact-heading">無料AI診断・相談申し込み</h2>
               <p>
                 メールアドレスを入力するだけでスピード診断がスタート。追加のヒアリング内容は任意で、1営業日以内に専門家が具体的な日程とレポート共有方法をご案内します。
@@ -4244,6 +4550,167 @@ const Index = () => {
                 );
               })}
             </ul>
+            <div id="roi-preview" className="contact-roi" data-animate>
+              <div className="contact-roi__header">
+                <div>
+                  <span className="contact-roi__eyebrow">Quick ROI simulator</span>
+                  <h3>入力30秒で投資対効果を先に確認</h3>
+                  <p>
+                    年商規模・初期費用・伴走予算・意思決定工数を調整すると、期待<abbr title="投資利益率">ROI</abbr>と回収期間、年間削減工数が即座に更新されます。
+                    詳細なシナリオ比較はシミュレーター詳細で確認できます。
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  className="contact-roi__modal"
+                  onClick={() => setRoiModalOpen(true)}
+                >
+                  詳細シミュレーターを見る
+                </button>
+              </div>
+              <div className="contact-roi__body">
+                <div className="contact-roi__controls">
+                  <label className="contact-roi__field">
+                    <span>年商規模（目安）</span>
+                    <input
+                      type="range"
+                      name="annualRevenue"
+                      min={3}
+                      max={20}
+                      step={0.5}
+                      value={simulator.annualRevenue}
+                      onChange={handleSimulatorChange}
+                    />
+                    <output>{simulator.annualRevenue.toFixed(1)} 億円</output>
+                  </label>
+                  <label className="contact-roi__field">
+                    <span>初期費用</span>
+                    <input
+                      type="range"
+                      name="initialCost"
+                      min={30}
+                      max={180}
+                      step={5}
+                      value={simulator.initialCost}
+                      onChange={handleSimulatorChange}
+                    />
+                    <output>{numberFormatter.format(Math.round(simulator.initialCost))} 万円</output>
+                  </label>
+                  <label className="contact-roi__field">
+                    <span>月額伴走費</span>
+                    <input
+                      type="range"
+                      name="aiBudget"
+                      min={10}
+                      max={80}
+                      step={5}
+                      value={simulator.aiBudget}
+                      onChange={handleSimulatorChange}
+                    />
+                    <output>{numberFormatter.format(Math.round(simulator.aiBudget))} 万円</output>
+                  </label>
+                  <label className="contact-roi__field">
+                    <span>意思決定にかかる社内工数</span>
+                    <input
+                      type="range"
+                      name="decisionHours"
+                      min={40}
+                      max={260}
+                      step={10}
+                      value={simulator.decisionHours}
+                      onChange={handleSimulatorChange}
+                    />
+                    <output>{Math.round(simulator.decisionHours)} 時間/月</output>
+                  </label>
+                  <fieldset className="contact-roi__field contact-roi__field--radios">
+                    <legend>優先したい経営領域</legend>
+                    <div className="contact-roi__radios" role="radiogroup" aria-label="優先領域を選択">
+                      <label>
+                        <input
+                          type="radio"
+                          name="focus"
+                          value="finance"
+                          checked={simulator.focus === "finance"}
+                          onChange={handleSimulatorChange}
+                        />
+                        財務・資金繰り
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          name="focus"
+                          value="growth"
+                          checked={simulator.focus === "growth"}
+                          onChange={handleSimulatorChange}
+                        />
+                        成長投資
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          name="focus"
+                          value="talent"
+                          checked={simulator.focus === "talent"}
+                          onChange={handleSimulatorChange}
+                        />
+                        人材・組織
+                      </label>
+                    </div>
+                  </fieldset>
+                </div>
+                <div className="contact-roi__stats" role="list">
+                  <div
+                    className="contact-roi__stat"
+                    role="listitem"
+                    aria-live="polite"
+                    aria-atomic="true"
+                  >
+                    <span>期待ROI</span>
+                    <strong>{simulatorResult.roiPercent.toFixed(1)}%</strong>
+                    <div
+                      className="contact-roi__gauge"
+                      role="img"
+                      aria-label={`期待ROI ${simulatorResult.roiPercent.toFixed(1)}%`}
+                    >
+                      <div
+                        className="contact-roi__gauge-fill"
+                        style={{ width: `${quickRoiGauge}%` }}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className="contact-roi__stat"
+                    role="listitem"
+                    aria-live="polite"
+                    aria-atomic="true"
+                  >
+                    <span>回収目安</span>
+                    <strong>{quickPaybackMonths ? `${quickPaybackMonths}か月` : "検証中"}</strong>
+                    <p>72時間診断で初期投資の妥当性を検証</p>
+                  </div>
+                  <div
+                    className="contact-roi__stat"
+                    role="listitem"
+                    aria-live="polite"
+                    aria-atomic="true"
+                  >
+                    <span>年間削減工数</span>
+                    <strong>{numberFormatter.format(quickHoursSaved)} 時間</strong>
+                    <p>会議準備・資料作成の稼働を可視化して削減</p>
+                  </div>
+                  <div
+                    className="contact-roi__stat"
+                    role="listitem"
+                    aria-live="polite"
+                    aria-atomic="true"
+                  >
+                    <span>年間価値創出</span>
+                    <strong>{numberFormatter.format(quickCostSavings)} 万円</strong>
+                    <p>AI自動化と専門家伴走で捻出できる予測額</p>
+                  </div>
+                </div>
+              </div>
+            </div>
             <form className="contact-form" onSubmit={handleContactSubmit}>
               <div className="contact-progress" aria-hidden="true">
                 <div className="contact-progress__track">
@@ -4414,8 +4881,11 @@ const Index = () => {
             </form>
           </div>
           <div className="mobile-form-cta" aria-hidden="true">
+            {decideStage && (
+              <span className="mobile-form-cta__stage">{decideStage.stageLabel}</span>
+            )}
             <a className="btn btn-cta" href="#contact">
-              {primaryCtaLabel}
+              {decideStage?.buttonLabel ?? primaryCtaLabel}
             </a>
           </div>
         </section>
@@ -4838,8 +5308,11 @@ const Index = () => {
 
       {!isFloatingHidden && (
         <div className="floating-cta" role="complementary" aria-label="相談用ショートカット">
+          {decideStage && (
+            <span className="floating-cta__stage">{decideStage.stageLabel}</span>
+          )}
           <a className="floating-cta__button" href="#contact">
-            無料相談を申し込む
+            {decideStage?.buttonLabel ?? primaryCtaLabel}
           </a>
           <button
             type="button"
