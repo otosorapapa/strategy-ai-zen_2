@@ -107,6 +107,7 @@ const headerNavItems = [
   { id: "problem", label: "課題" },
   { id: "solution", label: "解決策" },
   { id: "features", label: "機能・特徴" },
+  { id: "comparison", label: "他社比較" },
   { id: "outcome", label: "成果" },
   { id: "stories", label: "事例" },
   { id: "pricing", label: "導入と料金" },
@@ -164,6 +165,7 @@ const sectionToJourneyStage: Record<string, CtaJourneyStage["id"]> = {
   problem: "learn",
   solution: "evaluate",
   features: "evaluate",
+  comparison: "evaluate",
   outcome: "evaluate",
   stories: "evaluate",
   resources: "learn",
@@ -390,6 +392,44 @@ const heroAllianceExperts = [
     role: "管理会計改革とIPO準備を支援",
     focus: "KPI設計とガバナンス整備",
     photo: expertSaitoPhoto,
+  },
+];
+
+type ComparisonRow = {
+  axis: string;
+  ourValue: string;
+  others: string;
+  proof: string;
+};
+
+const competitorComparison: ComparisonRow[] = [
+  {
+    axis: "初動スピード",
+    ourValue:
+      "72時間以内にAI診断レポートと優先課題リストを共有。経営会議の意思決定に間に合わせます。",
+    others: "一般的なコンサルティングでは現状分析に2〜4週間を要し、意思決定が後ろ倒しに。",
+    proof: "導入160件の平均リードタイム52%短縮ログ",
+  },
+  {
+    axis: "成果物の品質",
+    ourValue:
+      "金融機関提出レベルの計画書・想定問答・稟議資料を専門家が監修し、すぐに使える形で納品。",
+    others: "AIツール単体はドラフト止まりで、金融機関視点の整合性は社内で再調整が必要。",
+    proof: "補助金・融資採択率86%（2023-2024）",
+  },
+  {
+    axis: "伴走体制",
+    ourValue:
+      "診断士・会計士・金融機関経験者が週次レビューを実施し、稟議突破まで伴走します。",
+    others: "担当1名・チャットサポート中心で、稟議資料づくりは自社対応になるケースが多い。",
+    proof: "継続率92%・専門家3人体制の標準化",
+  },
+  {
+    axis: "投資対効果",
+    ourValue:
+      "意思決定リードタイム52%短縮、計画作成工数80%削減、粗利+18ptでROI3.4倍を実現。",
+    others: "成果指標が定量化されにくく、投資判断・社内稟議で根拠提示が難しい。",
+    proof: "伴走プロジェクト実績レポート",
   },
 ];
 
@@ -1809,15 +1849,6 @@ const initialQuickContact: QuickContactFormState = {
   email: "",
 };
 
-const contactSteps = [
-  { id: 1, title: "スピード診断の受付", description: "メールアドレスを入力" },
-  {
-    id: 2,
-    title: "詳細ヒアリングの準備",
-    description: "現状の悩みや目標（任意項目あり）",
-  },
-];
-
 const Index = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>(sectionNavItems[0].id);
@@ -1834,11 +1865,10 @@ const Index = () => {
   const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
   const [newsletterError, setNewsletterError] = useState<string | null>(null);
   const [contactForm, setContactForm] = useState<ContactFormState>(initialContact);
-  const [contactStep, setContactStep] = useState(1);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionError, setSubmissionError] = useState<string | null>(null);
-  const [stepError, setStepError] = useState<string | null>(null);
+  const [formError, setFormError] = useState<string | null>(null);
   const [isFloatingHidden, setIsFloatingHidden] = useState(false);
   const [isDemoOpen, setIsDemoOpen] = useState(false);
   const [isDemoPlaying, setIsDemoPlaying] = useState(false);
@@ -1848,6 +1878,8 @@ const Index = () => {
   const [isQuickSubmitting, setIsQuickSubmitting] = useState(false);
   const [quickSubmitted, setQuickSubmitted] = useState(false);
   const [quickError, setQuickError] = useState<string | null>(null);
+  const [isHeroSummaryExpanded, setHeroSummaryExpanded] = useState(false);
+  const [isHeroProblemExpanded, setHeroProblemExpanded] = useState(false);
 
   const evaluateStage = ctaJourneyStages.find((stage) => stage.id === "evaluate");
   const decideStage = ctaJourneyStages.find((stage) => stage.id === "decide");
@@ -1892,8 +1924,6 @@ const Index = () => {
     );
   };
 
-  const contactStepCount = contactSteps.length;
-  const contactProgress = Math.round((contactStep / contactStepCount) * 100);
   const metricsRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const securityBadges = useMemo(() => securityPoints.slice(0, 3), []);
@@ -2042,19 +2072,6 @@ const Index = () => {
       simulatorResult.roiPercent,
     ]
   );
-
-  const quickRoiGauge = useMemo(() => {
-    const roi = Math.max(simulatorResult.roiPercent, 0);
-    const max = Math.max(roi, 200);
-    return Math.min(100, Math.round((roi / max) * 100));
-  }, [simulatorResult.roiPercent]);
-
-  const quickHoursSaved = Math.round(simulatorResult.annualHoursSaved);
-  const quickCostSavings = Math.round(simulatorResult.annualCostSavings);
-  const quickPaybackMonths =
-    simulatorResult.paybackMonths !== null
-      ? Math.ceil(simulatorResult.paybackMonths)
-      : null;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -2298,7 +2315,7 @@ const Index = () => {
   ) => {
     const { name, value } = event.target;
     setContactForm((prev) => ({ ...prev, [name]: value }));
-    setStepError(null);
+    setFormError(null);
     setSubmissionError(null);
     setFormSubmitted(false);
   };
@@ -2317,80 +2334,57 @@ const Index = () => {
     setIsMobileNavOpen(false);
   };
 
-  const validateContactStep = (step: number) => {
-    if (step === 1) {
-      const email = contactForm.email.trim();
-      if (!email) {
-        return "メールアドレスを入力してください。";
-      }
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        return "メールアドレスの形式をご確認ください。";
-      }
-    }
-    if (step === 2) {
-      if (!contactForm.name.trim()) {
-        return "氏名を入力してください。";
-      }
-      if (!contactForm.company.trim()) {
-        return "会社名を入力してください。";
-      }
-      if (!contactForm.message.trim()) {
-        return "相談内容を入力してください。";
-      }
-      if (
-        contactForm.phone.trim() &&
-        !/^[0-9+\-()\s]+$/.test(contactForm.phone.trim())
-      ) {
-        return "電話番号の形式をご確認ください。";
-      }
-    }
-    return null;
-  };
-
-  const handleContactNext = () => {
-    const error = validateContactStep(contactStep);
-    if (error) {
-      setStepError(error);
-      return;
-    }
-    setStepError(null);
-    setContactStep((prev) => Math.min(contactStepCount, prev + 1));
-  };
-
-  const handleContactBack = () => {
-    setStepError(null);
-    setContactStep((prev) => Math.max(1, prev - 1));
-  };
-
   const handleContactSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (isSubmitting) return;
+    const trimmedEmail = contactForm.email.trim();
+    const trimmedName = contactForm.name.trim();
+    const trimmedCompany = contactForm.company.trim();
+    const trimmedMessage = contactForm.message.trim();
+    const trimmedPhone = contactForm.phone.trim();
+    const trimmedPreferredDate = contactForm.preferredDate.trim();
 
-    const error = validateContactStep(contactStep);
-    if (error) {
-      setStepError(error);
+    if (!trimmedEmail) {
+      setFormError("メールアドレスを入力してください。");
       return;
     }
-    setStepError(null);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      setFormError("メールアドレスの形式をご確認ください。");
+      return;
+    }
+    if (!trimmedName) {
+      setFormError("氏名を入力してください。");
+      return;
+    }
+    if (!trimmedCompany) {
+      setFormError("会社名を入力してください。");
+      return;
+    }
+    if (!trimmedMessage) {
+      setFormError("相談内容を入力してください。");
+      return;
+    }
+    if (trimmedPhone && !/^[0-9+\-()\s]+$/.test(trimmedPhone)) {
+      setFormError("電話番号の形式をご確認ください。");
+      return;
+    }
 
+    setFormError(null);
     setIsSubmitting(true);
     setFormSubmitted(false);
     setSubmissionError(null);
 
     try {
-      const trimmedPhone = contactForm.phone.trim();
-      const trimmedPreferredDate = contactForm.preferredDate.trim();
       await submitContactForm({
-        name: contactForm.name.trim(),
-        company: contactForm.company.trim(),
-        email: contactForm.email.trim(),
+        name: trimmedName,
+        company: trimmedCompany,
+        email: trimmedEmail,
         phone: trimmedPhone ? trimmedPhone : undefined,
-        message: contactForm.message.trim(),
+        message: trimmedMessage,
         preferredDate: trimmedPreferredDate ? trimmedPreferredDate : undefined,
       });
       setFormSubmitted(true);
       setContactForm(initialContact);
-      setContactStep(1);
     } catch (error) {
       console.error("Failed to submit contact form", error);
       const message =
@@ -2483,7 +2477,9 @@ const Index = () => {
               </ul>
               <div
                 id="summary"
-                className="hero-quick-summary"
+                className={`hero-quick-summary${
+                  isHeroSummaryExpanded ? " is-expanded" : ""
+                }`}
                 data-animate
                 ref={(node) => {
                   sectionRefs.current.summary = node ?? null;
@@ -2493,34 +2489,54 @@ const Index = () => {
                   <div>
                     <span className="hero-quick-summary__eyebrow">3分で要点を整理</span>
                     <h2>AI診断の全体像と成果を冒頭で把握</h2>
+                    <p className="hero-quick-summary__description">
+                      まずは要点のみを提示。必要に応じて詳細カードを開き、導入成果やKPIの内訳を確認いただけます。
+                    </p>
                   </div>
-                  <button
-                    type="button"
-                    className="hero-quick-summary__video"
-                    onClick={() => {
-                      setIsDemoOpen(true);
-                      setIsDemoPlaying(true);
-                    }}
+                  <div className="hero-quick-summary__actions">
+                    <button
+                      type="button"
+                      className="hero-toggle"
+                      aria-expanded={isHeroSummaryExpanded}
+                      onClick={() => setHeroSummaryExpanded((prev) => !prev)}
+                    >
+                      <ArrowDownRight aria-hidden />
+                      <span>{isHeroSummaryExpanded ? "サマリーを閉じる" : "詳細サマリーを表示"}</span>
+                    </button>
+                    <button
+                      type="button"
+                      className="hero-quick-summary__video"
+                      onClick={() => {
+                        setIsDemoOpen(true);
+                        setIsDemoPlaying(true);
+                      }}
+                    >
+                      <PlayCircle aria-hidden />
+                      <span>1分動画で概要を見る</span>
+                    </button>
+                  </div>
+                </div>
+                {isHeroSummaryExpanded && (
+                  <div
+                    className="hero-quick-summary__grid"
+                    role="region"
+                    aria-label="導入成果の詳細サマリー"
                   >
-                    <PlayCircle aria-hidden />
-                    <span>1分動画で概要を見る</span>
-                  </button>
-                </div>
-                <div className="hero-quick-summary__grid">
-                  {heroSummaryCards.map((card) => {
-                    const SummaryIcon = card.icon;
-                    return (
-                      <article key={card.title} className="hero-quick-summary__card">
-                        <div className="hero-quick-summary__icon" aria-hidden="true">
-                          <SummaryIcon />
-                        </div>
-                        <h3>{card.title}</h3>
-                        <p>{card.description}</p>
-                        <span className="hero-quick-summary__stat">{card.stat}</span>
-                      </article>
-                    );
-                  })}
-                </div>
+                    {heroSummaryCards.map((card) => {
+                      const SummaryIcon = card.icon;
+                      return (
+                        <article key={card.title} className="hero-quick-summary__card">
+                          <div className="hero-quick-summary__icon" aria-hidden="true">
+                            <SummaryIcon />
+                          </div>
+                          <h3>{card.title}</h3>
+                          <p>{card.description}</p>
+                          <span className="hero-quick-summary__stat">{card.stat}</span>
+                        </article>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
               <div className="hero-triad" data-animate>
                 <section
@@ -2529,14 +2545,28 @@ const Index = () => {
                 >
                   <span className="hero-triad__eyebrow">Problem</span>
                   <h3 id="hero-problem-heading">意思決定を鈍らせる3つの壁</h3>
-                  <ul className="hero-triad__list">
-                    {heroPainPoints.map((item) => (
-                      <li key={item.title}>
-                        <strong>{item.title}</strong>
-                        <span>{item.detail}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <p className="hero-triad__summary">
+                    経営会議直前の準備や金融機関対応で、判断が後ろ倒しになる声が多く寄せられています。
+                  </p>
+                  <button
+                    type="button"
+                    className="hero-toggle hero-toggle--inline"
+                    aria-expanded={isHeroProblemExpanded}
+                    onClick={() => setHeroProblemExpanded((prev) => !prev)}
+                  >
+                    <ArrowDownRight aria-hidden />
+                    <span>{isHeroProblemExpanded ? "課題を閉じる" : "課題詳細を見る"}</span>
+                  </button>
+                  {isHeroProblemExpanded && (
+                    <ul className="hero-triad__list" aria-label="意思決定を妨げる課題の詳細">
+                      {heroPainPoints.map((item) => (
+                        <li key={item.title}>
+                          <strong>{item.title}</strong>
+                          <span>{item.detail}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </section>
                 <section
                   className="hero-triad__column hero-triad__column--benefit"
@@ -3297,11 +3327,68 @@ const Index = () => {
             <p className="features-note" data-animate>
               すべてのアウトプットは中小企業診断士と財務会計・管理会計の専門家がレビューし、AIのハルシネーションを排除したうえで金融機関や取締役会へ提出できる形に整えます。
             </p>
-            {renderStageCta("evaluate", {
-              secondary: { label: "料金と支援範囲を確認", href: "#pricing" },
-            })}
-          </div>
-        </section>
+        {renderStageCta("evaluate", {
+          secondary: { label: "料金と支援範囲を確認", href: "#pricing" },
+        })}
+      </div>
+    </section>
+
+    {/* 比較セクション */}
+    <section
+      id="comparison"
+      ref={(node) => {
+        sectionRefs.current["comparison"] = node ?? null;
+      }}
+      className="section comparison"
+      aria-labelledby="comparison-heading"
+    >
+      <div className="container">
+        <div className="section-header" data-animate>
+          <h2 id="comparison-heading">他社AI支援との比較</h2>
+          <ul className="section-intro">
+            <li>72時間診断〜3か月伴走の速度と品質を比較し、稟議に必要な根拠を提示します。</li>
+            <li>投資対効果・成果物品質・伴走体制を定量化し、導入判断の不安を解消します。</li>
+          </ul>
+        </div>
+        <div className="comparison-table-wrapper" data-animate>
+          <table className="comparison-table">
+            <caption className="sr-only">AI経営計画書ラボと一般的なAI支援サービスの比較</caption>
+            <thead>
+              <tr>
+                <th scope="col">比較軸</th>
+                <th scope="col">AI経営計画書ラボ</th>
+                <th scope="col">一般的なAI/コンサルサービス</th>
+                <th scope="col">根拠・実績</th>
+              </tr>
+            </thead>
+            <tbody>
+              {competitorComparison.map((row) => (
+                <tr key={row.axis}>
+                  <th scope="row">{row.axis}</th>
+                  <td>
+                    <span className="comparison-badge">当社</span>
+                    <p>{row.ourValue}</p>
+                  </td>
+                  <td>
+                    <span className="comparison-badge comparison-badge--neutral">一般的なサービス</span>
+                    <p>{row.others}</p>
+                  </td>
+                  <td>
+                    <p>{row.proof}</p>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {renderStageCta("evaluate", {
+          secondaryButton: {
+            label: "詳細なROI試算を開く",
+            onClick: () => setRoiModalOpen(true),
+          },
+        })}
+      </div>
+    </section>
 
         {/* ストーリー3: 成果 */}
         <section
@@ -4550,14 +4637,14 @@ const Index = () => {
                 );
               })}
             </ul>
+
             <div id="roi-preview" className="contact-roi" data-animate>
               <div className="contact-roi__header">
                 <div>
                   <span className="contact-roi__eyebrow">Quick ROI simulator</span>
-                  <h3>入力30秒で投資対効果を先に確認</h3>
+                  <h3>導入前に投資対効果を60秒で把握</h3>
                   <p>
-                    年商規模・初期費用・伴走予算・意思決定工数を調整すると、期待<abbr title="投資利益率">ROI</abbr>と回収期間、年間削減工数が即座に更新されます。
-                    詳細なシナリオ比較はシミュレーター詳細で確認できます。
+                    年商規模・社内稼働・投資額を入力するだけで、期待ROIや投資回収目安が算出されます。フォーム入力とは切り離してご利用いただけます。
                   </p>
                 </div>
                 <button
@@ -4565,189 +4652,38 @@ const Index = () => {
                   className="contact-roi__modal"
                   onClick={() => setRoiModalOpen(true)}
                 >
-                  詳細シミュレーターを見る
+                  ROIを試算する
+                  <ArrowUpRight aria-hidden />
                 </button>
               </div>
-              <div className="contact-roi__body">
-                <div className="contact-roi__controls">
-                  <label className="contact-roi__field">
-                    <span>年商規模（目安）</span>
-                    <input
-                      type="range"
-                      name="annualRevenue"
-                      min={3}
-                      max={20}
-                      step={0.5}
-                      value={simulator.annualRevenue}
-                      onChange={handleSimulatorChange}
-                    />
-                    <output>{simulator.annualRevenue.toFixed(1)} 億円</output>
-                  </label>
-                  <label className="contact-roi__field">
-                    <span>初期費用</span>
-                    <input
-                      type="range"
-                      name="initialCost"
-                      min={30}
-                      max={180}
-                      step={5}
-                      value={simulator.initialCost}
-                      onChange={handleSimulatorChange}
-                    />
-                    <output>{numberFormatter.format(Math.round(simulator.initialCost))} 万円</output>
-                  </label>
-                  <label className="contact-roi__field">
-                    <span>月額伴走費</span>
-                    <input
-                      type="range"
-                      name="aiBudget"
-                      min={10}
-                      max={80}
-                      step={5}
-                      value={simulator.aiBudget}
-                      onChange={handleSimulatorChange}
-                    />
-                    <output>{numberFormatter.format(Math.round(simulator.aiBudget))} 万円</output>
-                  </label>
-                  <label className="contact-roi__field">
-                    <span>意思決定にかかる社内工数</span>
-                    <input
-                      type="range"
-                      name="decisionHours"
-                      min={40}
-                      max={260}
-                      step={10}
-                      value={simulator.decisionHours}
-                      onChange={handleSimulatorChange}
-                    />
-                    <output>{Math.round(simulator.decisionHours)} 時間/月</output>
-                  </label>
-                  <fieldset className="contact-roi__field contact-roi__field--radios">
-                    <legend>優先したい経営領域</legend>
-                    <div className="contact-roi__radios" role="radiogroup" aria-label="優先領域を選択">
-                      <label>
-                        <input
-                          type="radio"
-                          name="focus"
-                          value="finance"
-                          checked={simulator.focus === "finance"}
-                          onChange={handleSimulatorChange}
-                        />
-                        財務・資金繰り
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          name="focus"
-                          value="growth"
-                          checked={simulator.focus === "growth"}
-                          onChange={handleSimulatorChange}
-                        />
-                        成長投資
-                      </label>
-                      <label>
-                        <input
-                          type="radio"
-                          name="focus"
-                          value="talent"
-                          checked={simulator.focus === "talent"}
-                          onChange={handleSimulatorChange}
-                        />
-                        人材・組織
-                      </label>
+              <div className="contact-roi__summary" role="list">
+                {simulatorSummaryMetrics.slice(0, 3).map((metric) => {
+                  const MetricIcon = metric.icon;
+                  return (
+                    <div key={metric.label} className="contact-roi__summary-item" role="listitem">
+                      <span className="contact-roi__summary-badge">{metric.badge}</span>
+                      <div className="contact-roi__summary-icon" aria-hidden="true">
+                        <MetricIcon />
+                      </div>
+                      <div className="contact-roi__summary-body">
+                        <strong>{metric.value}</strong>
+                        <p>{metric.helper}</p>
+                      </div>
                     </div>
-                  </fieldset>
-                </div>
-                <div className="contact-roi__stats" role="list">
-                  <div
-                    className="contact-roi__stat"
-                    role="listitem"
-                    aria-live="polite"
-                    aria-atomic="true"
-                  >
-                    <span>期待ROI</span>
-                    <strong>{simulatorResult.roiPercent.toFixed(1)}%</strong>
-                    <div
-                      className="contact-roi__gauge"
-                      role="img"
-                      aria-label={`期待ROI ${simulatorResult.roiPercent.toFixed(1)}%`}
-                    >
-                      <div
-                        className="contact-roi__gauge-fill"
-                        style={{ width: `${quickRoiGauge}%` }}
-                      />
-                    </div>
-                  </div>
-                  <div
-                    className="contact-roi__stat"
-                    role="listitem"
-                    aria-live="polite"
-                    aria-atomic="true"
-                  >
-                    <span>回収目安</span>
-                    <strong>{quickPaybackMonths ? `${quickPaybackMonths}か月` : "検証中"}</strong>
-                    <p>72時間診断で初期投資の妥当性を検証</p>
-                  </div>
-                  <div
-                    className="contact-roi__stat"
-                    role="listitem"
-                    aria-live="polite"
-                    aria-atomic="true"
-                  >
-                    <span>年間削減工数</span>
-                    <strong>{numberFormatter.format(quickHoursSaved)} 時間</strong>
-                    <p>会議準備・資料作成の稼働を可視化して削減</p>
-                  </div>
-                  <div
-                    className="contact-roi__stat"
-                    role="listitem"
-                    aria-live="polite"
-                    aria-atomic="true"
-                  >
-                    <span>年間価値創出</span>
-                    <strong>{numberFormatter.format(quickCostSavings)} 万円</strong>
-                    <p>AI自動化と専門家伴走で捻出できる予測額</p>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
+              <p className="contact-roi__note">
+                詳細な条件を試算したい場合は上記ボタンからモーダルを開いてください。入力内容は保存されません。
+              </p>
             </div>
             <form className="contact-form" onSubmit={handleContactSubmit}>
-              <div className="contact-progress" aria-hidden="true">
-                <div className="contact-progress__track">
-                  <div
-                    className="contact-progress__bar"
-                    style={{ width: `${contactProgress}%` }}
-                  />
-                </div>
-                <span className="contact-progress__label">
-                  STEP {contactStep} / {contactStepCount}
-                </span>
-              </div>
-              <div className="contact-steps" role="list">
-                {contactSteps.map((step, index) => (
-                  <div
-                    key={step.id}
-                    className={`contact-step${contactStep === step.id ? " is-active" : ""}${contactStep > step.id ? " is-complete" : ""}`}
-                    role="listitem"
-                  >
-                    <span className="contact-step__number">{index + 1}</span>
-                    <div>
-                      <strong>{step.title}</strong>
-                      <span>{step.description}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              {stepError && (
+              {formError && (
                 <div className="form-error form-error--inline" role="alert" aria-live="assertive">
-                  {stepError}
+                  {formError}
                 </div>
               )}
-              <fieldset
-                className={`contact-fieldset${contactStep === 1 ? " is-visible" : ""}`}
-                aria-hidden={contactStep !== 1}
-              >
-                <legend className="sr-only">スピード診断</legend>
+              <div className="contact-form__grid">
                 <label className="full-width">
                   メールアドレス
                   <input
@@ -4760,112 +4696,82 @@ const Index = () => {
                     required
                   />
                 </label>
-                <p className="input-help">診断結果と資料の送付先として利用します。</p>
-              </fieldset>
-              <fieldset
-                className={`contact-fieldset${contactStep === 2 ? " is-visible" : ""}`}
-                aria-hidden={contactStep !== 2}
-              >
-                <legend className="sr-only">詳細ヒアリング</legend>
-                <div className="form-row">
-                  <label>
-                    氏名
-                    <input
-                      type="text"
-                      name="name"
-                      value={contactForm.name}
-                      onChange={handleContactChange}
-                      autoComplete="name"
-                      required
-                    />
-                  </label>
-                  <label>
-                    会社名
-                    <input
-                      type="text"
-                      name="company"
-                      value={contactForm.company}
-                      onChange={handleContactChange}
-                      autoComplete="organization"
-                      required
-                    />
-                  </label>
-                </div>
-                <div className="form-row">
-                  <label className="full-width optional">
-                    電話番号 (任意)
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={contactForm.phone}
-                      onChange={handleContactChange}
-                      placeholder="例: 03-1234-5678"
-                      autoComplete="tel"
-                    />
-                  </label>
-                  <label className="full-width optional">
-                    希望日時 (任意)
-                    <input
-                      type="datetime-local"
-                      name="preferredDate"
-                      value={contactForm.preferredDate}
-                      onChange={handleContactChange}
-                      min={new Date().toISOString().slice(0, 16)}
-                      aria-describedby="preferred-date-help"
-                    />
-                    <span id="preferred-date-help" className="input-help">
-                      カレンダーから希望する打ち合わせ日時を選択できます。
-                    </span>
-                  </label>
-                </div>
                 <label>
-                  相談内容
-                  <textarea
-                    name="message"
-                    rows={5}
-                    value={contactForm.message}
+                  氏名
+                  <input
+                    type="text"
+                    name="name"
+                    value={contactForm.name}
                     onChange={handleContactChange}
-                    placeholder="例: 事業計画の刷新時期と改善したい指標"
+                    autoComplete="name"
                     required
                   />
                 </label>
-                <ul className="contact-hints">
-                  <li>解決したい指標やKPI、導入時期の目安を一言添えてください。</li>
-                  <li>気になる領域を箇条書きで共有すると、面談での提案が具体的になります。</li>
-                </ul>
-              </fieldset>
+                <label>
+                  会社名
+                  <input
+                    type="text"
+                    name="company"
+                    value={contactForm.company}
+                    onChange={handleContactChange}
+                    autoComplete="organization"
+                    required
+                  />
+                </label>
+              </div>
+              <div className="contact-form__grid contact-form__grid--optional">
+                <label className="optional">
+                  電話番号 (任意)
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={contactForm.phone}
+                    onChange={handleContactChange}
+                    placeholder="例: 03-1234-5678"
+                    autoComplete="tel"
+                  />
+                </label>
+                <label className="optional">
+                  希望日時 (任意)
+                  <input
+                    type="datetime-local"
+                    name="preferredDate"
+                    value={contactForm.preferredDate}
+                    onChange={handleContactChange}
+                    min={new Date().toISOString().slice(0, 16)}
+                    aria-describedby="preferred-date-help"
+                  />
+                  <span id="preferred-date-help" className="input-help">
+                    カレンダーから希望する打ち合わせ日時を選択できます。
+                  </span>
+                </label>
+              </div>
+              <label className="full-width">
+                相談内容
+                <textarea
+                  name="message"
+                  rows={5}
+                  value={contactForm.message}
+                  onChange={handleContactChange}
+                  placeholder="例: 事業計画の刷新時期と改善したい指標"
+                  required
+                />
+              </label>
+              <ul className="contact-hints">
+                <li>解決したい指標やKPI、導入時期の目安を一言添えてください。</li>
+                <li>気になる領域を箇条書きで共有すると、面談での提案が具体的になります。</li>
+              </ul>
               <div className="form-actions">
-                {contactStep > 1 && (
-                  <button
-                    type="button"
-                    className="btn btn-ghost"
-                    onClick={handleContactBack}
-                    disabled={isSubmitting}
-                  >
-                    戻る
-                  </button>
-                )}
-                {contactStep < contactStepCount ? (
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={handleContactNext}
-                    disabled={isSubmitting}
-                  >
-                    次へ進む
-                  </button>
-                ) : (
-                  <button className="btn btn-cta" type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? (
-                      <span className="btn-progress">
-                        <span className="btn-spinner" aria-hidden="true" />
-                        送信中...
-                      </span>
-                    ) : (
-                      primaryCtaLabel
-                    )}
-                  </button>
-                )}
+                <button className="btn btn-cta" type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <span className="btn-progress">
+                      <span className="btn-spinner" aria-hidden="true" />
+                      送信中...
+                    </span>
+                  ) : (
+                    primaryCtaLabel
+                  )}
+                </button>
                 <div className="form-messages">
                   <div className="form-feedback" role="status" aria-live="polite">
                     {isSubmitting && "送信を受け付けています..."}
@@ -4879,6 +4785,7 @@ const Index = () => {
                 </div>
               </div>
             </form>
+
           </div>
           <div className="mobile-form-cta" aria-hidden="true">
             {decideStage && (
