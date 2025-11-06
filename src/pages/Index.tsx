@@ -22,13 +22,16 @@ import {
   ClipboardCheck,
   Compass,
   Database,
+  FileSearch,
   FileText,
+  Fingerprint,
   Info,
   Layers3,
   LineChart,
   Lock,
   PlayCircle,
   ScanSearch,
+  ServerCog,
   Shield,
   ShieldCheck,
   Sparkles,
@@ -57,6 +60,7 @@ import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
 import aiValueAugmentationVisual from "@/assets/ai-value-augmentation.svg";
 import aiValueLatticeVisual from "@/assets/ai-value-lattice.svg";
 import evidencePrimeVisual from "@/assets/causality-flow.jpg";
+import securityMatrixVisual from "@/assets/security-matrix.svg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -2175,6 +2179,72 @@ const securityPoints: SecurityPoint[] = [
     description: "全ての専門家とNDAを締結し、アクセス権を最小化した運用を徹底。",
     icon: ShieldCheck,
     badge: "NDA",
+  },
+];
+
+const securityMetrics = [
+  {
+    value: "99.982%",
+    label: "システム稼働率",
+    caption: "東京・大阪リージョン冗長化",
+  },
+  {
+    value: "0件",
+    label: "重大インシデント",
+    caption: "導入後の累計",
+  },
+  {
+    value: "<4h",
+    label: "検知から一次封じ込め",
+    caption: "CSIRT初動SLA",
+  },
+];
+
+const securityFrameworks = [
+  {
+    title: "ゼロトラスト統制",
+    description:
+      "端末・ID・ネットワークの振る舞いをAIで相関分析し、権限はプロジェクト単位で自動失効。",
+    bullets: [
+      "多要素認証と端末証跡の自動照合",
+      "権限リクエストはCxO承認フロー",
+    ],
+    icon: Fingerprint,
+  },
+  {
+    title: "金融機関水準の運用体制",
+    description:
+      "SOCと連携した24/365監視、BCP訓練、外部監査の改善指示を経営会議でレビュー。",
+    bullets: [
+      "SOCアラートの24分以内一次対応",
+      "年2回のレジリエンス演習",
+    ],
+    icon: ServerCog,
+  },
+  {
+    title: "証跡とコンプライアンス管理",
+    description:
+      "監査ログは7年間保管し、顧客別のアクセス状況をダッシュボードで可視化。",
+    bullets: [
+      "ISO/IEC 27001・27017整備",
+      "四半期ごとの証跡レビュー",
+    ],
+    icon: FileSearch,
+  },
+];
+
+const securityTrustSignals = [
+  {
+    label: "ISMSクラウドセキュリティ認証",
+    caption: "JIS Q 27017 / ISO 27017",
+  },
+  {
+    label: "個人情報保護委員会 届出済み",
+    caption: "Pマーク準拠の体制整備",
+  },
+  {
+    label: "地域金融機関連携12行",
+    caption: "与信審査プロセスと整合",
   },
 ];
 
@@ -5737,6 +5807,46 @@ const Index = () => {
                 <li>権限管理と監査で安心を担保。</li>
               </ul>
             </div>
+            <div className="security-layout" data-animate>
+              <div className="security-visual">
+                <figure className="security-figure">
+                  <img src={securityMatrixVisual} alt="ゼロトラストのライフサイクルを示すマトリクス" />
+                  <figcaption>
+                    認証・監視・監査をフェーズごとに重ねるゼロトラスト統制。経営会議での報告フォーマットと連動しています。
+                  </figcaption>
+                </figure>
+                <ul className="security-metrics" aria-label="運用実績">
+                  {securityMetrics.map((metric) => (
+                    <li key={metric.label}>
+                      <span className="security-metric__value">{metric.value}</span>
+                      <span className="security-metric__label">{metric.label}</span>
+                      <span className="security-metric__caption">{metric.caption}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="security-pillars" aria-label="セキュリティ体制の柱">
+                {securityFrameworks.map((framework) => {
+                  const FrameworkIcon = framework.icon;
+                  return (
+                    <article key={framework.title} className="security-pillar">
+                      <div className="security-pillar__icon" aria-hidden="true">
+                        <FrameworkIcon />
+                      </div>
+                      <div className="security-pillar__body">
+                        <h3>{framework.title}</h3>
+                        <p>{framework.description}</p>
+                        <ul>
+                          {framework.bullets.map((bullet) => (
+                            <li key={bullet}>{bullet}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
             <div className="security-accordion" data-animate>
               <Accordion type="multiple" className="security-list">
                 {securityPoints.map((point) => {
@@ -5760,6 +5870,14 @@ const Index = () => {
                 })}
               </Accordion>
             </div>
+            <ul className="security-trust" data-animate aria-label="第三者評価・提携">
+              {securityTrustSignals.map((signal) => (
+                <li key={signal.label}>
+                  <span className="security-trust__label">{signal.label}</span>
+                  <span className="security-trust__caption">{signal.caption}</span>
+                </li>
+              ))}
+            </ul>
             {renderStageCta("decide")}
             <p className="privacy-note" data-animate>
               データの取り扱いについては<a href="/privacy" target="_blank" rel="noreferrer">プライバシーポリシー</a>をご覧ください。
