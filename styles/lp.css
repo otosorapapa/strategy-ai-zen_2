@@ -1868,68 +1868,6 @@ svg {
   gap: clamp(24px, 3vw, 32px);
 }
 
-.journey-cta__progress-panel {
-  position: relative;
-  display: grid;
-  gap: clamp(22px, 3vw, 28px);
-  padding: clamp(24px, 3vw, 32px);
-  border-radius: 28px;
-  background: linear-gradient(160deg, rgba(12, 32, 58, 0.96), rgba(41, 91, 146, 0.8));
-  border: 1px solid rgba(129, 186, 255, 0.32);
-  box-shadow: 0 52px 110px -60px rgba(8, 35, 74, 0.7);
-  color: rgba(240, 248, 255, 0.95);
-  overflow: hidden;
-}
-
-.journey-cta__progress-panel::before {
-  content: "";
-  position: absolute;
-  inset: -40% -40% auto auto;
-  width: clamp(220px, 24vw, 360px);
-  height: clamp(220px, 24vw, 360px);
-  background: radial-gradient(circle, rgba(129, 186, 255, 0.35), transparent 70%);
-  pointer-events: none;
-}
-
-.journey-cta__progress-panel::after {
-  content: "";
-  position: absolute;
-  inset: auto auto -35% -25%;
-  width: clamp(180px, 22vw, 320px);
-  height: clamp(180px, 22vw, 320px);
-  background: radial-gradient(circle, rgba(65, 136, 217, 0.28), transparent 70%);
-  pointer-events: none;
-}
-
-.journey-cta__progress-header {
-  position: relative;
-  display: grid;
-  gap: 12px;
-  z-index: 1;
-}
-
-.journey-cta__progress-eyebrow {
-  font-size: 0.72rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: rgba(186, 220, 255, 0.82);
-}
-
-.journey-cta__progress-header h3 {
-  margin: 0;
-  font-size: clamp(1.25rem, 2.1vw, 1.6rem);
-  font-weight: 700;
-  color: #fff;
-}
-
-.journey-cta__progress-header p {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.7;
-  color: rgba(214, 232, 255, 0.86);
-}
-
 .journey-cta__visual {
   position: relative;
   margin: 0;
@@ -2071,182 +2009,6 @@ svg {
   margin: 0;
   font-size: 0.9rem;
   color: rgba(20, 61, 106, 0.75);
-  line-height: 1.6;
-}
-
-.journey-cta__progress {
-  list-style: none;
-  display: grid;
-  gap: 18px;
-  padding: 0;
-  margin: 0;
-  position: relative;
-  z-index: 1;
-}
-
-.journey-cta__progress-item {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 16px;
-  align-items: center;
-  padding: 18px 22px 18px 18px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(213, 236, 255, 0.24);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 28px 60px -40px rgba(5, 17, 33, 0.65);
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-}
-
-.journey-cta__progress-item::after {
-  content: "";
-  position: absolute;
-  left: calc(18px + 24px);
-  top: calc(18px + 48px - 6px);
-  bottom: -26px;
-  width: 2px;
-  background: linear-gradient(180deg, rgba(213, 236, 255, 0.65), rgba(213, 236, 255, 0));
-  pointer-events: none;
-}
-
-.journey-cta__progress-item:last-child::after {
-  display: none;
-}
-
-.journey-cta__progress-item.is-active {
-  background: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.58);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 36px 80px -44px rgba(10, 38, 82, 0.7);
-  transform: translateY(-2px);
-}
-
-.journey-cta__progress-step {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, rgba(213, 236, 255, 0.95), rgba(153, 210, 255, 0.72));
-  color: var(--cta-700);
-  font-weight: 700;
-  font-size: 0.85rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  box-shadow: 0 22px 44px -30px rgba(12, 56, 112, 0.6);
-}
-
-.journey-cta__progress-body {
-  display: grid;
-  gap: 6px;
-}
-
-.journey-cta__progress-text {
-  font-weight: 600;
-  color: rgba(238, 245, 255, 0.94);
-  line-height: 1.5;
-}
-
-.journey-cta__progress-meta {
-  font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(197, 224, 255, 0.78);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.journey-cta__progress-meta span[aria-hidden] {
-  font-weight: 400;
-  opacity: 0.65;
-}
-
-.journey-cta__progress-item.is-active .journey-cta__progress-text {
-  color: #fff;
-}
-
-.journey-cta__progress-item.is-active .journey-cta__progress-meta {
-  color: rgba(240, 248, 255, 0.92);
-}
-
-.journey-cta__progress-item.is-active .journey-cta__progress-step {
-  background: linear-gradient(135deg, #ffffff, rgba(213, 236, 255, 0.88));
-  color: var(--cta-700);
-  box-shadow: 0 28px 56px -34px rgba(12, 56, 112, 0.68);
-}
-
-.journey-cta__logic {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-  margin: 8px 0 12px;
-}
-
-.journey-cta__logic-item {
-  position: relative;
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 14px;
-  padding: 20px 22px;
-  border-radius: 20px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(213, 236, 255, 0.62));
-  border: 1px solid rgba(20, 61, 106, 0.14);
-  box-shadow: 0 28px 56px -46px rgba(8, 35, 74, 0.42);
-  overflow: hidden;
-}
-
-.journey-cta__logic-item::after {
-  content: "";
-  position: absolute;
-  inset: auto -60px -48px 40%;
-  height: 160px;
-  background: radial-gradient(circle, rgba(79, 163, 255, 0.22), transparent 70%);
-  pointer-events: none;
-}
-
-.journey-cta__logic-icon {
-  width: 32px;
-  height: 32px;
-  color: var(--cta-600);
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 12px;
-  padding: 6px;
-  box-shadow: 0 18px 40px -30px rgba(8, 35, 74, 0.5);
-}
-
-.journey-cta__logic-body {
-  display: grid;
-  gap: 6px;
-}
-
-.journey-cta__logic-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(20, 61, 106, 0.7);
-  background: rgba(213, 236, 255, 0.7);
-  border-radius: 999px;
-  padding: 4px 10px;
-}
-
-.journey-cta__logic-title {
-  margin: 0;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--navy-900);
-  line-height: 1.45;
-}
-
-.journey-cta__logic-description {
-  margin: 0;
-  font-size: 0.9rem;
-  color: rgba(20, 61, 106, 0.8);
   line-height: 1.6;
 }
 
@@ -2416,18 +2178,9 @@ svg {
     grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
     align-items: start;
   }
-
-  .journey-cta__experience {
-    grid-template-columns: minmax(0, 0.52fr) minmax(0, 0.78fr);
-  }
 }
 
 @media (min-width: 1280px) {
-  .journey-cta__progress-panel {
-    position: sticky;
-    top: clamp(32px, 7vh, 120px);
-  }
-
   .journey-cta__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2441,29 +2194,6 @@ svg {
 
   .journey-cta__visual {
     padding: 16px;
-  }
-
-  .journey-cta__progress-panel {
-    padding: 20px;
-    border-radius: 24px;
-  }
-
-  .journey-cta__progress-item {
-    padding: 16px 18px 16px 16px;
-  }
-
-  .journey-cta__progress-item::after {
-    left: calc(16px + 22px);
-    top: calc(16px + 44px - 4px);
-  }
-
-  .journey-cta__progress-step {
-    width: 44px;
-    height: 44px;
-  }
-
-  .journey-cta__progress-meta {
-    font-size: 0.76rem;
   }
 
   .journey-cta__summary {
@@ -2488,10 +2218,6 @@ svg {
   .journey-cta__trust-item {
     grid-template-columns: 1fr;
     justify-items: start;
-  }
-
-  .journey-cta__logic {
-    grid-template-columns: 1fr;
   }
 
   .journey-cta__grid {
@@ -6382,7 +6108,6 @@ svg {
   border-color: rgba(79, 163, 255, 0.3);
 }
 
-
 .solution-synergy {
   margin-top: 44px;
   padding: 44px;
@@ -6772,7 +6497,6 @@ svg {
 .solution-logic__step:focus-within {
   outline: 3px solid rgba(79, 163, 255, 0.32);
 }
-
 
 .ai-value-grid {
   margin-top: 56px;
@@ -8144,7 +7868,6 @@ svg {
   opacity: 0.75;
 }
 
-
 /* ======================================================
    Why now section
    ====================================================== */
@@ -8718,7 +8441,6 @@ svg {
   background: linear-gradient(135deg, var(--mint-500), var(--sky-500));
   box-shadow: 0 0 0 4px rgba(69, 214, 200, 0.18);
 }
-
 
 .quarterly-card {
   position: relative;
@@ -9768,7 +9490,6 @@ svg {
   opacity: 0.95;
   pointer-events: none;
 }
-
 
 .process-card__header,
 .process-card__description,
@@ -11569,7 +11290,6 @@ svg {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-
 
 .customer-highlights {
   display: grid;
@@ -14139,7 +13859,6 @@ svg {
 .security {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(213, 230, 243, 0.9));
 }
-
 
 .security-accordion {
   max-width: 900px;
