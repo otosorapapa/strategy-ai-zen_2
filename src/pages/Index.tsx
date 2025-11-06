@@ -55,7 +55,7 @@ import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
 import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
 import aiValueAugmentationVisual from "@/assets/ai-value-augmentation.svg";
 import aiValueLatticeVisual from "@/assets/ai-value-lattice.svg";
-import evidencePrimeVisual from "@/assets/process-flow.jpg";
+import evidencePrimeVisual from "@/assets/causality-flow.jpg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -1215,34 +1215,34 @@ const whyNowEvidence: EvidenceItem[] = [
     statLabel: "専門誌レポート",
     stat: "意思決定速度 1.8×",
     description:
-      "IIL Blog (2024) は、生成AIが繰り返し作業を肩代わりし、経営会議の論点提示を1.8倍速にしたケースを紹介。AIが因を洗い出し、中小企業診断士などの専門家が論を検証することで、年商5,000万〜15億円規模でも納得性の高い決裁を量産できると分析しています。",
+      "IIL Blog (2024) では、AIアシスタントを導入した製造業で論点提示が1.8倍速化し、意思決定の確信度が指数関数的に高まったと報告。AIが兆しの因を洗い出し、中小企業診断士などの専門家が論を磨くことで、年商5,000万〜15億円規模でも役員会の納得性を標準化できると示しています。",
     sourceLabel: "IIL Blog (2024)",
     sourceUrl: "https://blog.iil.com/",
-    sourceNote: "AI活用による経営判断",
+    sourceNote: "AIオペレーティングモデル事例",
     variant: "prime",
     layout: "spotlight",
     visual: {
       src: evidencePrimeVisual,
-      alt: "経営会議の因・論・果を描いた3レイヤー構造のフレームワーク図",
-      caption: "因（データ検知）→論（専門家検証）→果（経営判断）を1枚で同期したプレミアム設計図。",
+      alt: "因・論・果を矢印で連結した生成AI経営オペレーティングモデルの図解",
+      caption: "兆し（Signal）→論拠（Evidence）→決裁（Result）の循環を示したプレミアム設計図。",
     },
     highlights: [
       {
         label: "因",
         value: "論点整理 -42%",
-        description: "AIが議題整理と資料素案を自動生成し、迷いの源を特定。",
+        description: "AIが市場×社内データを束ねて議題とリスク要因を特定。",
         accent: "cause",
       },
       {
         label: "論",
         value: "整合性 2倍",
-        description: "診断士が金融機関視点で根拠と整合性を監査。",
+        description: "診断士が金融機関視点で論点を検証し、整合性を監査。",
         accent: "logic",
       },
       {
         label: "果",
         value: "合意率 +35pt",
-        description: "会議の意思決定リードタイムを52%短縮し、反対理由を可視化。",
+        description: "会議の意思決定リードタイムを52%短縮し、反対理由も定量化。",
         accent: "result",
       },
     ],
