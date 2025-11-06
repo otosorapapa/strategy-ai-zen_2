@@ -935,54 +935,56 @@ type QuarterlySignal = {
 
 const quarterlySignals: QuarterlySignal[] = [
   {
-    title: "四半期ごとに再アライン",
-    description: "経営・事業・ファイナンスの意図を90日で同期。ドラゴンボートのフレームを日本の中小企業向けに再構成しました。",
-    sourceLabel: "Dragonboat (2024)",
-    sourceUrl: "https://dragonboat.io/blog/quarterly-planning-guide",
+    title: "90日の全社リズムを整える",
+    description:
+      "経営陣と主要メンバーが集まり、戦略・資金・現場の行動計画を同じ資料で確認。生成AIが直前まで数字を更新し、中小企業診断士が判断の骨子を整えます。",
+    sourceLabel: "創和経営コンサルティング 実務ガイド",
     stat: "90日",
-    statLabel: "アライン周期",
-    focus: "Strategy Reset",
+    statLabel: "見直しサイクル",
+    focus: "戦略更新",
     icon: Compass,
     highlights: [
-      "経営計画と資金繰りダッシュボードを同一指標で統合",
-      "90日スプリントごとにAIが因果ループを自動提案",
-      "役員レビュー用の判断メモを48時間以内に生成",
+      "経営計画と資金繰りダッシュボードを共通指標で統合",
+      "AIが候補施策と想定リスクを下書き、議論の時間を確保",
+      "役員向けの判断メモと議事案を48時間以内に共有",
     ],
   },
   {
-    title: "市場の変化を90日で捉え直す",
-    description: "金融・市場・需要の指標をAIが自動収集。変化率がしきい値を超えると経営者へアラートを送信します。",
-    sourceLabel: "Strategy AI Lab 推計",
-    stat: "+42件",
-    statLabel: "外部指標アラート/月",
-    focus: "Signal Intelligence",
+    title: "市場の変化を先読みする",
+    description:
+      "金融・需要・仕入れのデータを自動で集約。変化が想定範囲を超えた時は経営者と現場にすぐ知らせます。",
+    sourceLabel: "創和AIラボ 推計",
+    stat: "常時監視",
+    statLabel: "外部指標",
+    focus: "環境モニタリング",
     icon: Workflow,
     highlights: [
-      "国内外120指標を常時ウォッチしシナリオを再評価",
-      "与信・仕入れ・投資判断の閾値をベイズ更新",
-      "リスクシグナルはSlack・Teamsへ即時共有",
+      "国内外120指標を常に監視しシナリオを再評価",
+      "仕入れ・与信・投資判断の基準を随時アップデート",
+      "リスク通知をSlack・Teams・メールで即時配信",
     ],
   },
   {
-    title: "専門家伴走で実行を後押し",
-    description: "元メガバンク法人担当と財務会計・管理会計専門家が実行レビューを実施。AI提案に資金繰り・リスクの観点を接続します。",
+    title: "専門家伴走で実行を継続",
+    description:
+      "元メガバンク法人担当と財務・管理会計の専門家が、AIの提案に資金と組織の視点を重ねます。胸を張って提示できる資料づくりまで寄り添います。",
     sourceLabel: "伴走支援チーム",
-    stat: "72h",
-    statLabel: "レビューSLA",
-    focus: "Expert Assurance",
+    stat: "72時間",
+    statLabel: "レビュー標準",
+    focus: "実行サポート",
     icon: ShieldCheck,
     highlights: [
       "資金調達・投資ドキュメントを専任チームが監修",
       "月次・四半期レビューの実行会議に同席",
-      "NDA・BCP・監査証憑の整備までワンストップ",
+      "守秘契約・BCP・監査証憑の整備までワンストップ",
     ],
   },
 ];
 
 const quarterlySummaryPoints = [
-  "経営計画・資金繰り・事業KPIを同じ指標系で可視化",
-  "生成AIドラフト → 専門家レビュー → 経営会議承認のリズムを標準化",
-  "未達要因を因果ループで分析し、次の90日施策へ連結",
+  "売上・資金・現場KPIを一つの画面で共有し、議論の軸をそろえる",
+  "生成AIの下書きを診断士が整え、会議で即決できる資料を準備",
+  "進捗差を因果関係で整理し、次の90日に集中する行動へ落とし込む",
 ];
 
 const velocityNarratives = [
@@ -3656,18 +3658,19 @@ const Index = () => {
             <div className="section-header" data-animate>
               <h2 id="quarterly-heading">四半期ごとに戦略と実行を再設計</h2>
               <ul className="section-intro">
-                <li>Dragonboatが説く90日アライン。</li>
-                <li>生成AIと専門家で更新を自動化。</li>
+                <li>先行きが揺れる市場でも経営者が方向を語り切れる体制を築きます。</li>
+                <li>戦略・資金・現場を90日サイクルでそろえ、迷いを最小化します。</li>
+                <li>生成AIと専門家が意思決定の裏付けを緻密に整えます。</li>
               </ul>
             </div>
             <div className="quarterly-grid">
               <div className="quarterly-insights" data-animate>
                 <article className="quarterly-summary">
-                  <span className="quarterly-summary__eyebrow">Quarterly Operating System</span>
-                  <h3>90日ごとに戦略・資金・実行を同期し、意思決定を加速</h3>
+                  <span className="quarterly-summary__eyebrow">四半期運営モデル</span>
+                  <h3>90日ごとに戦略・資金・現場の意図をそろえ、自信をもって舵を取る</h3>
                   <p>
-                    Dragonboatの90日アラインに、当社の生成AIオペレーションと専門家レビューを組み合わせた経営OSです。
-                    因果仮説→実行→リスケジュールのサイクルを一気通貫で仕組み化します。
+                    予測が難しい状況でも、経営者が堂々と方向性を示せる舞台を整えます。生成AIが集めた事実と診断士の見立てを重ね、
+                    90日のリズムで判断と実行を磨き続ける経営運営モデルです。
                   </p>
                   <ul>
                     {quarterlySummaryPoints.map((point) => (
@@ -3719,11 +3722,11 @@ const Index = () => {
                 <div className="velocity-chart">
                   <div className="velocity-header">
                     <div className="velocity-title">
-                      <span className="velocity-eyebrow">Executive signal intelligence</span>
+                      <span className="velocity-eyebrow">経営アラート可視化</span>
                       <h3>外部環境と生成AIの変化速度</h3>
                       <p>
                         {velocityBaseQuarter}を100とした指数で、経営判断に直結する環境変化と
-                        技術進化のギャップを可視化します。
+                        技術進化のギャップを比較し、見落としがちな兆しを捉えます。
                       </p>
                     </div>
                     <dl className="velocity-insights">
