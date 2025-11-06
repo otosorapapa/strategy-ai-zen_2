@@ -51,7 +51,7 @@ import expertTanakaPhoto from "@/assets/expert-tanaka.svg";
 import representativePhoto from "@/assets/representative.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import solutionLogicTimeline from "@/assets/process-flow-infographic.jpg";
-import journeyFlowVisual from "@/assets/data-infographic-growth.jpg";
+import journeyFlowVisual from "@/assets/process-flow-infographic.jpg";
 import heroCausalityDiagram from "@/assets/causality-flow.jpg";
 import executiveStrategyVisual from "@/assets/executive-strategy-meeting.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
@@ -3777,7 +3777,8 @@ const Index = () => {
                 <span className="journey-cta__eyebrow">導入ステップ</span>
                 <h2>経営判断の進み具合に合わせた3つの行動支援</h2>
                 <p>
-                  「課題の因果→改善シナリオ→合意形成」の順で支援内容を分解しました。各ステップで得られる成果物と時間軸を明示することで、意思決定プロセスの論理が一目でわかります。
+                  {"「課題の因果→改善シナリオ→合意形成」の順で支援内容を分解。"}
+                  {"ステージごとに必要な証拠・会議ゴール・準備物を揃えることで、経営チームが納得する筋道を即座に共有できます。"}
                 </p>
               </div>
               <figure className="journey-cta__visual" data-animate>
@@ -3787,7 +3788,8 @@ const Index = () => {
                   loading="lazy"
                 />
                 <figcaption>
-                  因果整理→打ち手設計→実行準備の流れを一枚で視覚化。色分けと矢印で視線を次のカードに運び、スクロール継続と理解の同期を両立させます。
+                  {"因果整理→打ち手設計→実行準備の流れを一枚で視覚化。"}
+                  {"色分けと矢印で視線を次セクションに誘導し、スクロール継続と理解の同期を両立させます。"}
                 </figcaption>
               </figure>
               <div className="journey-cta__summary" data-animate>
@@ -3820,75 +3822,99 @@ const Index = () => {
                 })}
               </ul>
             </div>
-            <ol className="journey-cta__progress" aria-label="経営判断支援の進行ステップ">
-              {ctaJourneyStages.map((stage, index) => {
-                const isActive = activeJourneyStage === stage.id;
-                return (
-                  <li
-                    key={stage.id}
-                    className={`journey-cta__progress-item${isActive ? " is-active" : ""}`}
-                  >
-                    <span className="journey-cta__progress-step">0{index + 1}</span>
-                    <span className="journey-cta__progress-text">{stage.stageLabel}</span>
-                  </li>
-                );
-              })}
-            </ol>
-            <div className="journey-cta__logic" data-animate>
-              {journeyCausalityPoints.map((point) => {
-                const LogicIcon = point.icon;
-                return (
-                  <article className="journey-cta__logic-item" key={point.title}>
-                    <LogicIcon aria-hidden className="journey-cta__logic-icon" />
-                    <div className="journey-cta__logic-body">
-                      <span className="journey-cta__logic-tag">{point.tag}</span>
-                      <h3 className="journey-cta__logic-title">{point.title}</h3>
-                      <p className="journey-cta__logic-description">{point.description}</p>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-            <div className="journey-cta__grid">
-              {ctaJourneyStages.map((stage) => {
-                const StageIcon = stage.icon;
-                const isActive = activeJourneyStage === stage.id;
-                return (
-                  <article
-                    key={stage.id}
-                    className={`journey-cta__card${isActive ? " is-active" : ""}`}
-                    data-animate
-                  >
-                    <div className="journey-cta__stage-label">
-                      <StageIcon aria-hidden />
-                      <span>{stage.stageLabel}</span>
-                    </div>
-                    <div className="journey-cta__metric" aria-label={`${stage.metricLabel}の目安`}>
-                      <span className="journey-cta__metric-value">{stage.metricValue}</span>
-                      <span className="journey-cta__metric-label">{stage.metricLabel}</span>
-                    </div>
-                    <h3>{stage.headline}</h3>
-                    <p>{stage.description}</p>
-                    <ul className="journey-cta__deliverables">
-                      {stage.deliverables.map((deliverable) => (
-                        <li key={deliverable}>
-                          <CheckCircle2 aria-hidden />
-                          <span>{deliverable}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="journey-cta__proof">{stage.proof}</p>
-                    <a
-                      className="journey-cta__link"
-                      href={stage.href}
-                      aria-current={isActive ? "true" : undefined}
+            <div className="journey-cta__experience">
+              <aside
+                className="journey-cta__progress-panel"
+                aria-labelledby="journey-cta-progress-heading"
+                aria-describedby="journey-cta-progress-description"
+                data-animate
+              >
+                <div className="journey-cta__progress-header">
+                  <span className="journey-cta__progress-eyebrow">判断の筋道</span>
+                  <h3 id="journey-cta-progress-heading">各ステージで揃えるべき合意証拠を一目で把握</h3>
+                  <p id="journey-cta-progress-description">
+                    {"財務インパクト・組織稼働・ガバナンスの3視点でチェックリスト化。"}
+                    {"優先判断に迷いが出ないよう、前段の因果と後段の実行整備を一本の線でつなぎます。"}
+                  </p>
+                </div>
+                <ol className="journey-cta__progress" aria-label="支援ジャーニーの進行ステップ">
+                  {ctaJourneyStages.map((stage, index) => {
+                    const isActive = activeJourneyStage === stage.id;
+                    return (
+                      <li
+                        key={stage.id}
+                        className={`journey-cta__progress-item${isActive ? " is-active" : ""}`}
+                      >
+                        <span className="journey-cta__progress-step">0{index + 1}</span>
+                        <div className="journey-cta__progress-body">
+                          <span className="journey-cta__progress-text">{stage.stageLabel}</span>
+                          <span className="journey-cta__progress-meta">
+                            {stage.metricValue}
+                            <span aria-hidden>／</span>
+                            {stage.metricLabel}
+                          </span>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ol>
+                <div className="journey-cta__logic">
+                  {journeyCausalityPoints.map((point) => {
+                    const LogicIcon = point.icon;
+                    return (
+                      <article className="journey-cta__logic-item" key={point.title}>
+                        <LogicIcon aria-hidden className="journey-cta__logic-icon" />
+                        <div className="journey-cta__logic-body">
+                          <span className="journey-cta__logic-tag">{point.tag}</span>
+                          <h3 className="journey-cta__logic-title">{point.title}</h3>
+                          <p className="journey-cta__logic-description">{point.description}</p>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              </aside>
+              <div className="journey-cta__grid">
+                {ctaJourneyStages.map((stage) => {
+                  const StageIcon = stage.icon;
+                  const isActive = activeJourneyStage === stage.id;
+                  return (
+                    <article
+                      key={stage.id}
+                      className={`journey-cta__card${isActive ? " is-active" : ""}`}
+                      data-animate
                     >
-                      <span>{stage.buttonLabel}</span>
-                      <ArrowRight aria-hidden />
-                    </a>
-                  </article>
-                );
-              })}
+                      <div className="journey-cta__stage-label">
+                        <StageIcon aria-hidden />
+                        <span>{stage.stageLabel}</span>
+                      </div>
+                      <div className="journey-cta__metric" aria-label={`${stage.metricLabel}の目安`}>
+                        <span className="journey-cta__metric-value">{stage.metricValue}</span>
+                        <span className="journey-cta__metric-label">{stage.metricLabel}</span>
+                      </div>
+                      <h3>{stage.headline}</h3>
+                      <p>{stage.description}</p>
+                      <ul className="journey-cta__deliverables">
+                        {stage.deliverables.map((deliverable) => (
+                          <li key={deliverable}>
+                            <CheckCircle2 aria-hidden />
+                            <span>{deliverable}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="journey-cta__proof">{stage.proof}</p>
+                      <a
+                        className="journey-cta__link"
+                        href={stage.href}
+                        aria-current={isActive ? "true" : undefined}
+                      >
+                        <span>{stage.buttonLabel}</span>
+                        <ArrowRight aria-hidden />
+                      </a>
+                    </article>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </section>
