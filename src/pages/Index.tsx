@@ -59,6 +59,9 @@ import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
 import aiValueAugmentationVisual from "@/assets/ai-value-augmentation.svg";
 import aiValueLatticeVisual from "@/assets/ai-value-lattice.svg";
 import evidencePrimeVisual from "@/assets/causality-flow.jpg";
+import storyManufacturingVisual from "@/assets/business-dashboard-analytics.jpg";
+import storyRetailVisual from "@/assets/data-visualization.jpg";
+import storyConstructionVisual from "@/assets/process-flow.jpg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -1937,6 +1940,11 @@ type SuccessMetric = {
   unit?: string;
 };
 
+type StoryHighlight = {
+  label: string;
+  value: string;
+};
+
 type SuccessStory = {
   company: string;
   industry: string;
@@ -1950,6 +1958,11 @@ type SuccessStory = {
   expertRole: string;
   governance: string;
   metrics: SuccessMetric[];
+  headline: string;
+  resultHeadline: string;
+  keyHighlights: StoryHighlight[];
+  visual: string;
+  visualAlt: string;
   photo: string;
   logo: string;
 };
@@ -1972,6 +1985,15 @@ const successStories: SuccessStory[] = [
       "製造業を熟知した診断士が経営管理アプリを自社仕様に設計し、会議用シナリオと提出資料を共通フォーマットで用意。",
     governance:
       "月次レビューでダッシュボードを見ながら意思決定を記録し、想定問答と改善メモを更新。",
+    headline: "因果で語れる決算ストーリーに刷新",
+    resultHeadline: "粗利率+4pt / 会議準備7時間削減で投資判断が加速",
+    keyHighlights: [
+      { label: "課題", value: "原価高騰で投資判断が停滞" },
+      { label: "打ち手", value: "AIが製品別採算とキャッシュを統合" },
+      { label: "成果", value: "会議準備7時間削減・粗利率+4pt" },
+    ],
+    visual: storyManufacturingVisual,
+    visualAlt: "製造業の経営ダッシュボードを俯瞰する写真",
     metrics: [
       {
         label: "会議準備時間",
@@ -2021,6 +2043,15 @@ const successStories: SuccessStory[] = [
       "流通業を支援してきた診断士が経営管理アプリを店舗別にカスタマイズし、数字に基づく会議運営を仕組み化。",
     governance:
       "週次会議でダッシュボードを投影し、各施策の進捗と現金残高をワンクリックで共有。",
+    headline: "多拠点の意思決定を一枚のダッシュボードに統合",
+    resultHeadline: "意思決定時間50%短縮、在庫回転+0.5回で利益の再成長",
+    keyHighlights: [
+      { label: "課題", value: "在庫と広告データが分断" },
+      { label: "打ち手", value: "AIが優先施策をランキング化" },
+      { label: "成果", value: "会議時間半減・在庫回転1.6→2.1回" },
+    ],
+    visual: storyRetailVisual,
+    visualAlt: "小売チェーンの販売ダッシュボードのスクリーンショット",
     metrics: [
       {
         label: "意思決定までの時間",
@@ -2070,6 +2101,15 @@ const successStories: SuccessStory[] = [
       "建設業を多数支援してきた診断士が管理アプリを現場用にカスタマイズし、金融機関連携資料まで同じストーリーで整備。",
     governance:
       "隔週会議でキャッシュと工程の両方を確認し、決定事項とフォローアップをダッシュボードで共有。",
+    headline: "資金繰りと工程を一体で見える化し先手を打つ",
+    resultHeadline: "キャッシュ見通し更新頻度4倍、面談準備9時間削減で交渉力向上",
+    keyHighlights: [
+      { label: "課題", value: "案件別の資金ギャップが把握できない" },
+      { label: "打ち手", value: "AIが入出金と工数を同時可視化" },
+      { label: "成果", value: "キャッシュ更新4倍・資料差し戻し半減" },
+    ],
+    visual: storyConstructionVisual,
+    visualAlt: "建設プロジェクトの進捗と資金計画ダッシュボード",
     metrics: [
       {
         label: "キャッシュ見通しの更新頻度",
@@ -5549,102 +5589,131 @@ const Index = () => {
                 {successStories.map((story) => (
                   <article key={story.company} className="story-card">
                     <div className="story-card__content">
-                      <div className="story-meta">
-                        <img
-                          className="story-photo"
-                          src={story.photo}
-                          alt={`${story.company} ${story.title} ${story.name}の顔写真`}
-                          loading="lazy"
-                        />
-                        <div className="story-profile">
+                      <header className="story-card__header">
+                        <div className="story-meta">
                           <img
-                            className="story-logo"
-                            src={story.logo}
-                            alt={`${story.company}のロゴ`}
+                            className="story-photo"
+                            src={story.photo}
+                            alt={`${story.company} ${story.title} ${story.name}の顔写真`}
                             loading="lazy"
                           />
-                          <span className="story-company">{story.company}</span>
-                          <span className="story-role">{story.title} / {story.name}</span>
-                          <span className="story-industry">{story.industry}</span>
-                          <span className="story-scale">{story.projectScale}</span>
+                          <div className="story-profile">
+                            <img
+                              className="story-logo"
+                              src={story.logo}
+                              alt={`${story.company}のロゴ`}
+                              loading="lazy"
+                            />
+                            <span className="story-company">{story.company}</span>
+                            <span className="story-role">{story.title} / {story.name}</span>
+                            <div className="story-profile__tags">
+                              <span className="story-industry">{story.industry}</span>
+                              <span className="story-scale">{story.projectScale}</span>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <blockquote className="story-quote">
-                        <span className="story-quote__icon" aria-hidden="true">“</span>
-                        <p>{story.quote}</p>
-                      </blockquote>
-                      <div className="story-structure" role="list">
-                        <div className="story-structure__item" role="listitem">
-                          <span className="story-structure__label">課題</span>
-                          <p>{story.challenge}</p>
-                        </div>
-                        <div className="story-structure__item" role="listitem">
-                          <span className="story-structure__label">AIの役割</span>
-                          <p>{story.aiRole}</p>
-                        </div>
-                        <div className="story-structure__item" role="listitem">
-                          <span className="story-structure__label">専門家の伴走</span>
-                          <p>{story.expertRole}</p>
-                        </div>
-                        <div className="story-structure__item" role="listitem">
-                          <span className="story-structure__label">意思決定プロセス</span>
-                          <p>{story.governance}</p>
-                        </div>
-                      </div>
-                      <div className="story-project" aria-label="案件規模">
-                        <span className="story-project__label">案件規模</span>
-                        <strong className="story-project__value">{story.projectScale}</strong>
-                      </div>
-                      <p className="story-summary">{story.summary}</p>
-                      <ul className="story-metrics">
-                        {story.metrics.map((metric) => {
-                          const max = Math.max(
-                            metric.beforeValue ?? 0,
-                            metric.afterValue ?? 0,
-                            1
-                          );
-                          const beforePercent =
-                            metric.beforeValue !== undefined
-                              ? Math.max(6, (metric.beforeValue / max) * 100)
-                              : null;
-                          const afterPercent =
-                            metric.afterValue !== undefined
-                              ? Math.max(6, (metric.afterValue / max) * 100)
-                              : null;
-                          return (
-                            <li key={metric.label}>
-                              <span className="story-metric__label">{metric.label}</span>
-                              <div className="story-metric__values">
-                                <span className="story-metric__before" aria-label="導入前の数値">
-                                  {metric.before}
-                                </span>
-                                <span className="story-metric__arrow" aria-hidden="true">
-                                  →
-                                </span>
-                                <span className="story-metric__after" aria-label="導入後の数値">
-                                  {metric.after}
-                                </span>
+                        <figure className="story-visual">
+                          <img src={story.visual} alt={story.visualAlt} loading="lazy" />
+                          <figcaption>
+                            <span>Before→Afterダッシュボード</span>
+                            <strong>{story.resultHeadline}</strong>
+                          </figcaption>
+                        </figure>
+                      </header>
+                      <div className="story-card__grid">
+                        <div className="story-main">
+                          <div className="story-headline">
+                            <span className="story-headline__eyebrow">意思決定の変化</span>
+                            <h3>{story.headline}</h3>
+                          </div>
+                          <div className="story-highlights" role="list">
+                            {story.keyHighlights.map((highlight) => (
+                              <div className="story-highlight" role="listitem" key={highlight.label}>
+                                <span className="story-highlight__label">{highlight.label}</span>
+                                <strong className="story-highlight__value">{highlight.value}</strong>
                               </div>
-                              {beforePercent !== null && afterPercent !== null && (
-                                <div className="story-metric__chart" aria-hidden="true">
-                                  <div
-                                    className="story-metric__bar story-metric__bar--before"
-                                    style={{ width: `${beforePercent}%` }}
-                                  />
-                                  <div
-                                    className="story-metric__bar story-metric__bar--after"
-                                    style={{ width: `${afterPercent}%` }}
-                                  />
-                                  {metric.unit && (
-                                    <span className="story-metric__unit">{metric.unit}</span>
+                            ))}
+                          </div>
+                          <blockquote className="story-quote">
+                            <span className="story-quote__icon" aria-hidden="true">“</span>
+                            <p>{story.quote}</p>
+                          </blockquote>
+                          <p className="story-summary">{story.summary}</p>
+                        </div>
+                        <aside className="story-aside" aria-label="伴走プロセスと成果">
+                          <div className="story-structure" role="list">
+                            <div className="story-structure__item" role="listitem">
+                              <span className="story-structure__label">課題</span>
+                              <p>{story.challenge}</p>
+                            </div>
+                            <div className="story-structure__item" role="listitem">
+                              <span className="story-structure__label">AIの役割</span>
+                              <p>{story.aiRole}</p>
+                            </div>
+                            <div className="story-structure__item" role="listitem">
+                              <span className="story-structure__label">専門家の伴走</span>
+                              <p>{story.expertRole}</p>
+                            </div>
+                            <div className="story-structure__item" role="listitem">
+                              <span className="story-structure__label">意思決定プロセス</span>
+                              <p>{story.governance}</p>
+                            </div>
+                          </div>
+                          <div className="story-project" aria-label="成果サマリー">
+                            <span className="story-project__label">成果サマリー</span>
+                            <strong className="story-project__value">{story.resultHeadline}</strong>
+                          </div>
+                          <ul className="story-metrics">
+                            {story.metrics.map((metric) => {
+                              const max = Math.max(
+                                metric.beforeValue ?? 0,
+                                metric.afterValue ?? 0,
+                                1
+                              );
+                              const beforePercent =
+                                metric.beforeValue !== undefined
+                                  ? Math.max(6, (metric.beforeValue / max) * 100)
+                                  : null;
+                              const afterPercent =
+                                metric.afterValue !== undefined
+                                  ? Math.max(6, (metric.afterValue / max) * 100)
+                                  : null;
+                              return (
+                                <li key={metric.label}>
+                                  <span className="story-metric__label">{metric.label}</span>
+                                  <div className="story-metric__values">
+                                    <span className="story-metric__before" aria-label="導入前の数値">
+                                      {metric.before}
+                                    </span>
+                                    <span className="story-metric__arrow" aria-hidden="true">
+                                      →
+                                    </span>
+                                    <span className="story-metric__after" aria-label="導入後の数値">
+                                      {metric.after}
+                                    </span>
+                                  </div>
+                                  {beforePercent !== null && afterPercent !== null && (
+                                    <div className="story-metric__chart" aria-hidden="true">
+                                      <div
+                                        className="story-metric__bar story-metric__bar--before"
+                                        style={{ width: `${beforePercent}%` }}
+                                      />
+                                      <div
+                                        className="story-metric__bar story-metric__bar--after"
+                                        style={{ width: `${afterPercent}%` }}
+                                      />
+                                      {metric.unit && (
+                                        <span className="story-metric__unit">{metric.unit}</span>
+                                      )}
+                                    </div>
                                   )}
-                                </div>
-                              )}
-                              <strong className="story-metric__impact">{metric.impact}</strong>
-                            </li>
-                          );
-                        })}
-                      </ul>
+                                  <strong className="story-metric__impact">{metric.impact}</strong>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </aside>
+                      </div>
                     </div>
                   </article>
                 ))}
