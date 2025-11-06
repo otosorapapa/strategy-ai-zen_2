@@ -6615,19 +6615,24 @@ svg {
 .ai-value-grid {
   margin-top: 56px;
   position: relative;
-  padding: 48px;
+  padding: clamp(42px, 32px + 2vw, 56px);
   border-radius: 44px;
   background: linear-gradient(135deg, rgba(244, 249, 255, 0.95), rgba(230, 242, 255, 0.78));
   border: 1px solid rgba(20, 61, 106, 0.08);
   display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-  grid-template-areas:
-    "intro cards"
-    "blueprint cards";
-  gap: 40px;
+  gap: clamp(32px, 24px + 1.5vw, 56px);
   overflow: hidden;
   isolation: isolate;
-  align-items: start;
+  align-content: start;
+}
+
+.ai-value-grid__overview {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+  align-items: stretch;
 }
 
 .ai-value-grid::before {
@@ -6652,9 +6657,8 @@ svg {
 }
 
 .ai-value-grid__intro {
-  grid-area: intro;
   display: grid;
-  gap: 22px;
+  gap: 24px;
   align-content: start;
   position: relative;
   z-index: 1;
@@ -6672,6 +6676,130 @@ svg {
   background: rgba(20, 61, 106, 0.12);
   color: var(--navy-700);
   font-weight: 600;
+}
+
+.ai-value-grid__intro > p {
+  margin: 0;
+}
+
+.ai-value-grid__flow {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.ai-value-grid__flow-step {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  padding: 22px 24px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(20, 61, 106, 0.08);
+  box-shadow: 0 22px 44px rgba(15, 37, 71, 0.14);
+  overflow: hidden;
+  color: var(--gray-600);
+}
+
+.ai-value-grid__flow-step::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 16% 20%, var(--flow-accent, rgba(79, 163, 255, 0.16)), transparent 62%);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ai-value-grid__flow-step > * {
+  position: relative;
+  z-index: 1;
+}
+
+.ai-value-grid__flow-step--navy {
+  --flow-accent: rgba(20, 61, 106, 0.25);
+  --flow-highlight: #143d6a;
+}
+
+.ai-value-grid__flow-step--mint {
+  --flow-accent: rgba(31, 157, 122, 0.24);
+  --flow-highlight: #1f9d7a;
+}
+
+.ai-value-grid__flow-step--citrus {
+  --flow-accent: rgba(255, 154, 69, 0.26);
+  --flow-highlight: #ff7a1a;
+}
+
+.ai-value-grid__flow-symbol {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: rgba(20, 61, 106, 0.1);
+  line-height: 1;
+}
+
+.ai-value-grid__flow-body {
+  display: grid;
+  gap: 10px;
+}
+
+.ai-value-grid__flow-body h4 {
+  margin: 0;
+  color: var(--navy-800);
+  font-size: 1.18rem;
+}
+
+.ai-value-grid__flow-body p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.ai-value-grid__flow-cue {
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(20, 61, 106, 0.64);
+}
+
+.ai-value-grid__flow-metric {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--flow-highlight, var(--navy-700));
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 1024px) {
+  .ai-value-grid__flow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ai-value-grid__flow-step::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -32px;
+    width: 32px;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(20, 61, 106, 0.14), rgba(20, 61, 106, 0));
+    transform: translateY(-50%);
+  }
+
+  .ai-value-grid__flow-step:last-child::after {
+    display: none;
+  }
+}
+
+@media (min-width: 1400px) {
+  .ai-value-grid__overview {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  }
+
+  .ai-value-grid__cards {
+    grid-template-columns: repeat(2, minmax(360px, 1fr));
+  }
 }
 
 .ai-value-grid__intro h3 {
@@ -6743,22 +6871,22 @@ svg {
 }
 
 .ai-value-grid__blueprint {
-  grid-area: blueprint;
   margin: 0;
   display: grid;
-  gap: 18px;
-  padding: 26px;
+  gap: 22px;
+  padding: 28px;
   border-radius: 32px;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(20, 61, 106, 0.08);
   box-shadow: 0 30px 50px rgba(15, 37, 71, 0.12);
   position: relative;
   z-index: 1;
+  align-content: start;
 }
 
 .ai-value-grid__blueprint img {
   width: 100%;
-  max-height: 420px;
+  max-height: 360px;
   object-fit: contain;
   border-radius: 24px;
   box-shadow: 0 26px 44px rgba(15, 37, 71, 0.18);
@@ -6768,6 +6896,8 @@ svg {
   font-size: 0.92rem;
   color: rgba(20, 61, 106, 0.75);
   line-height: 1.65;
+  margin: 0;
+  max-width: 540px;
 }
 
 .ai-value-grid__legend {
@@ -6775,16 +6905,19 @@ svg {
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 12px;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .ai-value-grid__legend-item {
   display: grid;
-  gap: 4px;
-  padding: 14px 16px;
-  border-radius: 18px;
-  background: rgba(244, 247, 253, 0.75);
+  gap: 6px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: rgba(244, 247, 253, 0.8);
   border: 1px solid rgba(79, 163, 255, 0.18);
+  align-content: start;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
 }
 
 .ai-value-grid__legend-item--navy {
@@ -6819,14 +6952,13 @@ svg {
 }
 
 .ai-value-grid__cards {
-  grid-area: cards;
   display: grid;
   gap: 32px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   position: relative;
   z-index: 1;
   align-content: start;
-  grid-auto-rows: minmax(0, 1fr);
+  grid-auto-rows: 1fr;
 }
 
 .ai-value-card {
@@ -6882,21 +7014,21 @@ svg {
 .ai-value-card__surface {
   position: relative;
   z-index: 1;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 28px;
   padding: 36px;
   height: 100%;
   border-radius: 28px;
   border: 1px solid rgba(20, 61, 106, 0.1);
   backdrop-filter: blur(14px);
+  grid-template-rows: auto 1fr;
 }
 
 .ai-value-card__header {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 24px;
-  align-items: flex-start;
+  align-items: start;
 }
 
 .ai-value-card__identity {
@@ -6965,7 +7097,7 @@ svg {
 
 .ai-value-card__visual {
   flex-shrink: 0;
-  width: 168px;
+  width: clamp(150px, 120px + 4vw, 188px);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 20px 36px rgba(15, 37, 71, 0.18);
@@ -6978,13 +7110,13 @@ svg {
 }
 
 .ai-value-card__body {
-  display: flex;
+  display: grid;
   gap: 28px;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.85fr);
+  align-items: start;
 }
 
 .ai-value-card__narrative {
-  flex: 1;
   display: grid;
   gap: 16px;
   margin: 0;
@@ -7083,20 +7215,24 @@ svg {
 
 @media (max-width: 1200px) {
   .ai-value-grid {
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "intro"
-      "blueprint"
-      "cards";
     padding: 40px;
+  }
+
+  .ai-value-grid__overview {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .ai-value-grid__stats {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 
-  .ai-value-grid__cards {
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  .ai-value-grid__legend {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .ai-value-grid__flow {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
   .ai-value-card__surface {
@@ -7104,8 +7240,7 @@ svg {
   }
 
   .ai-value-card__header {
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr;
   }
 
   .ai-value-card__visual {
@@ -7114,7 +7249,7 @@ svg {
   }
 
   .ai-value-card__body {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
   .ai-value-card__metric {
@@ -7133,6 +7268,14 @@ svg {
     grid-template-columns: 1fr;
   }
 
+  .ai-value-grid__legend {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-value-grid__flow {
+    grid-template-columns: 1fr;
+  }
+
   .ai-value-grid__cards {
     grid-template-columns: 1fr;
   }
@@ -7145,6 +7288,10 @@ svg {
   .ai-value-card__identity {
     flex-direction: column;
     gap: 12px;
+  }
+
+  .ai-value-card__body {
+    gap: 24px;
   }
 
   .ai-value-card__icon {
