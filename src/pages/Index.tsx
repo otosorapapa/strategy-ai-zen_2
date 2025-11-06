@@ -51,8 +51,9 @@ import expertTanakaPhoto from "@/assets/expert-tanaka.svg";
 import representativePhoto from "@/assets/representative.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import solutionLogicTimeline from "@/assets/process-flow-infographic.jpg";
-import heroCausalityDiagram from "@/assets/causality-flow.jpg";
+import heroCausalityDiagram from "@/assets/data-infographic-growth.jpg";
 import executiveStrategyVisual from "@/assets/executive-strategy-meeting.jpg";
+import roiComparisonSnapshot from "@/assets/roi-chart.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
 import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
@@ -118,9 +119,36 @@ const heroProcessPrinciples = [
       "金融機関・取引先の審査観点を基準にロジックツリーで仮説検証。納得性の高い説明ストーリーを設計。",
   },
   {
-    label: "成果ドリブン",
+    label: "成果統制",
     description:
-      "3か月の伴走で粗利・資金繰り・組織浸透を週次ダッシュボードで追跡し、打ち手を継続改善します。",
+      "週次伴走とAIダッシュボードで実行度・リスクを定点観測。改善判断を迅速化し成果をやり切ります。",
+  },
+];
+
+const heroProcessDigest = [
+  {
+    label: "因果リンク",
+    metric: "26箇所",
+    metricCaption: "KPI↔現場施策の結節点",
+    description:
+      "粗利・資金繰り・在庫回転などのKPIと現場施策を因果グラフで可視化。どこを押さえれば成果が出るかを即座に共有できます。",
+    accent: "cause" as const,
+  },
+  {
+    label: "論点圧縮",
+    metric: "8→1枚",
+    metricCaption: "会議資料の骨子",
+    description:
+      "金融機関提出レベルの論点・根拠・アクションを1枚のエグゼクティブサマリーに圧縮。社内調整や稟議のスピードを落としません。",
+    accent: "logic" as const,
+  },
+  {
+    label: "成果追跡",
+    metric: "+3.2pt",
+    metricCaption: "平均粗利改善",
+    description:
+      "週次レビューで粗利・キャッシュポジション・受注確度のKPIを同期。意思決定の結果が数字にどう跳ね返るかを明示します。",
+    accent: "result" as const,
   },
 ];
 
@@ -3853,22 +3881,60 @@ const Index = () => {
                 className="hero-causality-intro__visual"
                 aria-label="72時間診断から3か月伴走までのプロセス図"
               >
-                <div className="hero-causality-intro__visual-graphic">
-                  <img
-                    src={heroCausalityDiagram}
-                    alt="72時間→3か月の伴走プロセスを描いたインフォグラフィック"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <ul className="hero-causality-intro__visual-snapshot" aria-label="時間軸のハイライト">
-                    {heroProcessSnapshot.map((snapshot) => (
-                      <li key={snapshot.value}>
-                        <strong>{snapshot.value}</strong>
-                        <span>{snapshot.label}</span>
-                        <small>{snapshot.caption}</small>
-                      </li>
-                    ))}
-                  </ul>
+                <div className="hero-causality-intro__visual-grid">
+                  <div className="hero-causality-intro__visual-graphic">
+                    <img
+                      src={heroCausalityDiagram}
+                      alt="72時間→3か月の伴走プロセスを描いたインフォグラフィック"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <ul className="hero-causality-intro__visual-snapshot" aria-label="時間軸のハイライト">
+                      {heroProcessSnapshot.map((snapshot) => (
+                        <li key={snapshot.value}>
+                          <strong>{snapshot.value}</strong>
+                          <span>{snapshot.label}</span>
+                          <small>{snapshot.caption}</small>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <aside
+                    className="hero-causality-intro__visual-digest"
+                    aria-label="経営会議で評価される因果・論理・成果の要約"
+                  >
+                    <div className="hero-causality-intro__visual-digest-header">
+                      <img
+                        src={roiComparisonSnapshot}
+                        alt="ROI比較チャートのモックアップ"
+                        loading="lazy"
+                        decoding="async"
+                        className="hero-causality-intro__visual-digest-image"
+                      />
+                      <div>
+                        <span className="hero-causality-intro__visual-digest-tag">Executive Briefing</span>
+                        <p>
+                          72時間で因果と数字を整理した1枚サマリーを提示。論点・根拠・投資回収を同一フレームで合意形成します。
+                        </p>
+                      </div>
+                    </div>
+                    <ul className="hero-causality-intro__visual-digest-list">
+                      {heroProcessDigest.map((digest) => (
+                        <li
+                          key={digest.label}
+                          className="hero-causality-intro__visual-digest-item"
+                          data-accent={digest.accent}
+                        >
+                          <span className="hero-causality-intro__visual-digest-label">{digest.label}</span>
+                          <div className="hero-causality-intro__visual-digest-metric">
+                            <strong>{digest.metric}</strong>
+                            <span>{digest.metricCaption}</span>
+                          </div>
+                          <p>{digest.description}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  </aside>
                 </div>
                 <header className="hero-causality-intro__visual-header">
                   <span className="hero-causality-intro__visual-eyebrow">DECISION ROADMAP</span>
@@ -3928,7 +3994,7 @@ const Index = () => {
                   </ul>
                 </footer>
                 <figcaption>
-                  因果→論理→成果の一連を72時間・1〜2週間・90日のスプリントで俯瞰できるロードマップ
+                  因果→論理→成果の全体像を、72時間・1〜2週間・90日のスプリントで俯瞰し意思決定の納得性を高めるビジュアルボード
                 </figcaption>
               </figure>
             </div>
