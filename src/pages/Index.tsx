@@ -49,6 +49,7 @@ import expertTanakaPhoto from "@/assets/expert-tanaka.svg";
 import representativePhoto from "@/assets/representative.jpg";
 import problemIllustration from "@/assets/problem-illustration.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
+import journeyFlowVisual from "@/assets/process-flow-infographic.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
 import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
@@ -125,38 +126,63 @@ type CtaJourneyStage = {
   buttonLabel: string;
   href: string;
   icon: LucideIcon;
+  metricValue: string;
+  metricLabel: string;
+  deliverables: string[];
+  proof: string;
 };
 
 const ctaJourneyStages: CtaJourneyStage[] = [
   {
     id: "learn",
     stageLabel: "状況整理の段階",
-    headline: "まずは全体像を素早く把握",
+    headline: "72時間で経営課題の因果を可視化",
     description:
-      "AI活用と専門家支援の設計思想をまとめた要点スライドと短尺動画で、意思決定の物差しを揃えます。",
+      "財務・営業・人材の指標を束ね、生成AIが抽出したリスクと機会を専門家がストーリーボード化。判断基準を全員で揃えます。",
     buttonLabel: "3分サマリーを確認",
     href: "#summary",
     icon: BookOpen,
+    metricValue: "72h",
+    metricLabel: "初回診断レポート",
+    deliverables: [
+      "経営課題の因果マップと意思決定カレンダー",
+      "部門別リスクヒートマップと優先順位表",
+    ],
+    proof: "経営層の納得度 4.7 / 5",
   },
   {
     id: "evaluate",
     stageLabel: "具体策の検討段階",
-    headline: "自社に合わせた改善策を描く",
+    headline: "2週間で実行プランとROIシナリオを設計",
     description:
-      "年商規模や業態に応じたダッシュボード例と伴走プロセスを確認し、導入後の活用イメージを高めます。",
+      "業界ベンチマークと自社データを突き合わせ、打ち手の優先度・担当・投資対効果を可視化。合意形成に必要な論拠を整えます。",
     buttonLabel: "設計イメージを見る",
     href: "#roi-preview",
     icon: BarChart4,
+    metricValue: "2w",
+    metricLabel: "投資対効果プラン",
+    deliverables: [
+      "AIダッシュボード試作と指標定義シート",
+      "意思決定シナリオ別の収益インパクト比較",
+    ],
+    proof: "粗利改善シナリオの確度 +28%",
   },
   {
     id: "decide",
     stageLabel: "実行準備の段階",
-    headline: "専門家との個別設計相談",
+    headline: "専門家と伴走し合意形成資料を完成",
     description:
-      "診断士が経営データを踏まえた次の一手と資料整備の進め方を提案し、社内調整で説得力を発揮できる状態に整えます。",
+      "診断士が金融機関・株主視点でレビューし、アクションプランとリスクヘッジ策をセットで提示。意思決定の納得感を高めます。",
     buttonLabel: primaryCtaLabel,
     href: "#contact",
     icon: ClipboardCheck,
+    metricValue: "30d",
+    metricLabel: "実行ロードマップ",
+    deliverables: [
+      "役員会・金融機関向け提案資料テンプレート",
+      "リスク逆転オファーとKPIレビュー体制設計",
+    ],
+    proof: "案件継続率 92%",
   },
 ];
 
@@ -2933,13 +2959,39 @@ const Index = () => {
 
         <section className="journey-cta" aria-label="検討フェーズ別の導線">
           <div className="container journey-cta__inner">
-            <div className="journey-cta__intro" data-animate>
-              <span className="journey-cta__eyebrow">導入ステップ</span>
-              <h2>経営判断の進み具合に合わせた3つの行動支援</h2>
-              <p>
-                状況整理・具体策検討・実行準備の流れごとに、今確認すべき資料と相談窓口を並べました。画面の表示位置にあわせて注目すべきカードが浮かび上がり、先を読む決断を後押しします。
-              </p>
+            <div className="journey-cta__lead">
+              <div className="journey-cta__intro" data-animate>
+                <span className="journey-cta__eyebrow">導入ステップ</span>
+                <h2>経営判断の進み具合に合わせた3つの行動支援</h2>
+                <p>
+                  「課題の因果→改善シナリオ→合意形成」の順で支援内容を分解しました。各ステップで得られる成果物と時間軸を明示することで、意思決定プロセスの論理が一目でわかります。
+                </p>
+              </div>
+              <figure className="journey-cta__visual" data-animate>
+                <img
+                  src={journeyFlowVisual}
+                  alt="課題整理から実行準備までの3ステップが流れ図で示されている"
+                  loading="lazy"
+                />
+                <figcaption>
+                  因果整理→打ち手設計→実行準備の流れを一枚で視覚化。視線誘導の矢印が次のカードに意識を向け、スクロール継続を促します。
+                </figcaption>
+              </figure>
             </div>
+            <ol className="journey-cta__progress" aria-label="経営判断支援の進行ステップ">
+              {ctaJourneyStages.map((stage, index) => {
+                const isActive = activeJourneyStage === stage.id;
+                return (
+                  <li
+                    key={stage.id}
+                    className={`journey-cta__progress-item${isActive ? " is-active" : ""}`}
+                  >
+                    <span className="journey-cta__progress-step">0{index + 1}</span>
+                    <span className="journey-cta__progress-text">{stage.stageLabel}</span>
+                  </li>
+                );
+              })}
+            </ol>
             <div className="journey-cta__grid">
               {ctaJourneyStages.map((stage) => {
                 const StageIcon = stage.icon;
@@ -2954,8 +3006,21 @@ const Index = () => {
                       <StageIcon aria-hidden />
                       <span>{stage.stageLabel}</span>
                     </div>
+                    <div className="journey-cta__metric" aria-label={`${stage.metricLabel}の目安`}>
+                      <span className="journey-cta__metric-value">{stage.metricValue}</span>
+                      <span className="journey-cta__metric-label">{stage.metricLabel}</span>
+                    </div>
                     <h3>{stage.headline}</h3>
                     <p>{stage.description}</p>
+                    <ul className="journey-cta__deliverables">
+                      {stage.deliverables.map((deliverable) => (
+                        <li key={deliverable}>
+                          <CheckCircle2 aria-hidden />
+                          <span>{deliverable}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="journey-cta__proof">{stage.proof}</p>
                     <a
                       className="journey-cta__link"
                       href={stage.href}

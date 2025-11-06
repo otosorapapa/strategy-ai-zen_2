@@ -980,7 +980,7 @@ svg {
 
 .journey-cta__inner {
   display: grid;
-  gap: 32px;
+  gap: 40px;
 }
 
 .journey-cta__intro {
@@ -1009,28 +1009,126 @@ svg {
   line-height: 1.7;
 }
 
+.journey-cta__lead {
+  display: grid;
+  gap: 24px;
+  align-items: center;
+}
+
+.journey-cta__visual {
+  margin: 0;
+  padding: 20px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(53, 93, 156, 0.08), rgba(14, 31, 53, 0.02));
+  border: 1px solid rgba(53, 93, 156, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 18px 48px -30px rgba(8, 35, 74, 0.45);
+  display: grid;
+  gap: 12px;
+}
+
+.journey-cta__visual img {
+  width: 100%;
+  border-radius: 16px;
+  object-fit: cover;
+  box-shadow: 0 18px 60px -36px rgba(12, 38, 74, 0.42);
+}
+
+.journey-cta__visual figcaption {
+  font-size: 0.85rem;
+  color: rgba(16, 42, 78, 0.75);
+  line-height: 1.6;
+}
+
+.journey-cta__progress {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+}
+
+.journey-cta__progress-item {
+  position: relative;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(20, 61, 106, 0.05);
+  border: 1px solid transparent;
+  display: grid;
+  gap: 6px;
+  transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.journey-cta__progress-item::after {
+  content: "";
+  position: absolute;
+  inset: auto 12px -18px 12px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(20, 61, 106, 0.18), rgba(20, 61, 106, 0));
+  pointer-events: none;
+}
+
+.journey-cta__progress-item:last-child::after {
+  display: none;
+}
+
+.journey-cta__progress-item.is-active {
+  background: rgba(20, 61, 106, 0.1);
+  border-color: rgba(20, 61, 106, 0.35);
+  box-shadow: 0 20px 40px -32px rgba(8, 35, 74, 0.45);
+}
+
+.journey-cta__progress-step {
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.14em;
+  color: var(--cta-600);
+}
+
+.journey-cta__progress-text {
+  font-weight: 600;
+  color: var(--navy-700);
+  line-height: 1.4;
+}
+
 .journey-cta__grid {
   display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
 .journey-cta__card {
   position: relative;
   border-radius: 20px;
-  padding: 24px;
+  padding: 28px;
   background: var(--white);
   border: 1px solid rgba(20, 61, 106, 0.12);
-  box-shadow: 0 24px 48px -36px rgba(8, 35, 74, 0.35);
+  box-shadow: 0 26px 54px -40px rgba(8, 35, 74, 0.4);
   display: grid;
-  gap: 14px;
+  gap: 18px;
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  overflow: hidden;
+}
+
+.journey-cta__card::before {
+  content: "";
+  position: absolute;
+  inset: -40% -40% auto;
+  height: 60%;
+  background: radial-gradient(circle at top, rgba(63, 143, 255, 0.28), rgba(63, 143, 255, 0));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .journey-cta__card.is-active {
   border-color: var(--cta-600);
   box-shadow: 0 32px 60px -30px rgba(20, 61, 106, 0.28);
   transform: translateY(-4px);
+}
+
+.journey-cta__card.is-active::before {
+  opacity: 1;
 }
 
 .journey-cta__stage-label {
@@ -1062,6 +1160,78 @@ svg {
   line-height: 1.6;
 }
 
+.journey-cta__metric {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.9), rgba(209, 231, 255, 0.75));
+  border: 1px solid rgba(79, 163, 255, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  color: var(--cta-700);
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.journey-cta__metric-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--cta-700);
+}
+
+.journey-cta__metric-label {
+  font-size: 0.85rem;
+  color: rgba(20, 61, 106, 0.7);
+}
+
+.journey-cta__deliverables {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.journey-cta__deliverables li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+  align-items: start;
+  font-size: 0.92rem;
+  color: var(--navy-700);
+}
+
+.journey-cta__deliverables svg {
+  width: 18px;
+  height: 18px;
+  color: var(--cta-600);
+}
+
+.journey-cta__proof {
+  margin: 0;
+  font-weight: 600;
+  color: rgba(20, 61, 106, 0.85);
+  background: rgba(20, 61, 106, 0.08);
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.journey-cta__proof::before {
+  content: "実績";
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cta-600);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(79, 163, 255, 0.26);
+}
+
 .journey-cta__link {
   display: inline-flex;
   align-items: center;
@@ -1079,6 +1249,31 @@ svg {
 .journey-cta__link:hover svg,
 .journey-cta__link:focus-visible svg {
   transform: translateX(4px);
+}
+
+@media (min-width: 992px) {
+  .journey-cta__lead {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: stretch;
+  }
+
+  .journey-cta__progress {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .journey-cta__progress-item::after {
+    inset: auto -16px -24px -16px;
+  }
+}
+
+@media (max-width: 767px) {
+  .journey-cta__visual {
+    padding: 16px;
+  }
+
+  .journey-cta__metric {
+    width: fit-content;
+  }
 }
 
 .hero-causality-intro {
