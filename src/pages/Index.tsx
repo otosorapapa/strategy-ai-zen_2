@@ -47,7 +47,7 @@ import expertSaitoPhoto from "@/assets/expert-saito.svg";
 import expertTanakaPhoto from "@/assets/expert-tanaka.svg";
 import representativePhoto from "@/assets/representative.jpg";
 import problemIllustration from "@/assets/problem-illustration.jpg";
-import solutionSynergyVisual from "@/assets/solution-synergy.svg";
+import solutionSynergyVisual from "@/assets/process-flow-infographic.jpg";
 import journeyFlowVisual from "@/assets/data-infographic-growth.jpg";
 import heroCausalityDiagram from "@/assets/causality-flow.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
@@ -977,6 +977,66 @@ const collaborationHighlights: CollaborationHighlight[] = [
     value: "決裁の迷いを事前に解消",
     description: "AIドラフトと合意形成テンプレートで論点をそろえ、会議の集中度を高めます。",
     evidence: "伴走プロジェクトレポート",
+    accent: "citrus",
+  },
+];
+
+type SynergyBadge = {
+  icon: LucideIcon;
+  label: string;
+  description: string;
+};
+
+const synergyBadges: SynergyBadge[] = [
+  {
+    icon: ShieldCheck,
+    label: "経済産業省 認定支援機関",
+    description: "公的認証を持つコンサルチームが品質と守秘を担保。",
+  },
+  {
+    icon: Users2,
+    label: "伴走企業 120社超",
+    description: "製造・小売・ITの年商5千万円〜15億円の実績。",
+  },
+  {
+    icon: BarChart3,
+    label: "金融機関連携 12行",
+    description: "審査ロジックを踏まえた計画で資金調達を後押し。",
+  },
+];
+
+type SynergyMetric = {
+  id: string;
+  icon: LucideIcon;
+  value: string;
+  label: string;
+  caption: string;
+  accent: "mint" | "sky" | "citrus";
+};
+
+const synergyMetrics: SynergyMetric[] = [
+  {
+    id: "diagnosis-speed",
+    icon: ScanSearch,
+    value: "72h",
+    label: "初動診断で論点を可視化",
+    caption: "AI監査×ヒアリングで課題とKPIを特定",
+    accent: "mint",
+  },
+  {
+    id: "design-cycle",
+    icon: Workflow,
+    value: "14日",
+    label: "戦略ドラフトと財務整合",
+    caption: "AIドラフトと専門家レビューの統合プロセス",
+    accent: "sky",
+  },
+  {
+    id: "decision-confidence",
+    icon: CheckCircle2,
+    value: "92%",
+    label: "会議内での決裁率",
+    caption: "論点整理テンプレで意思決定を前倒し",
     accent: "citrus",
   },
 ];
@@ -3486,36 +3546,92 @@ const Index = () => {
               </p>
             </div>
             <div className="solution-synergy" data-animate>
+              <div className="solution-synergy__panel">
+                <div className="solution-synergy__badges" role="list" aria-label="信頼の根拠">
+                  {synergyBadges.map((badge) => {
+                    const BadgeIcon = badge.icon;
+                    return (
+                      <div key={badge.label} className="solution-synergy__badge" role="listitem">
+                        <span className="solution-synergy__badge-icon" aria-hidden>
+                          <BadgeIcon />
+                        </span>
+                        <div className="solution-synergy__badge-copy">
+                          <span>{badge.label}</span>
+                          <p>{badge.description}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="solution-synergy__summary">
+                  <span className="solution-synergy__eyebrow">共創設計図</span>
+                  <h3>因果で裏付けた設計で、意思決定に論理と安心を同時に届ける</h3>
+                  <p>
+                    初動診断から伴走支援までの工程を一本の因果ループで結び、AIが兆しを検知、専門家が論拠を整え、経営陣が納得性の高い判断を下せるよう配置しています。各工程の成果物と確認ポイントを明示し、会議での説明が短時間で済むよう設計しています。
+                  </p>
+                </div>
+                <div className="solution-synergy__metrics" role="list" aria-label="共創プロジェクトの成果指標">
+                  {synergyMetrics.map((metric) => {
+                    const MetricIcon = metric.icon;
+                    return (
+                      <article
+                        key={metric.id}
+                        className={`solution-synergy__metric solution-synergy__metric--${metric.accent}`}
+                        role="listitem"
+                      >
+                        <span className="solution-synergy__metric-icon" aria-hidden>
+                          <MetricIcon />
+                        </span>
+                        <div>
+                          <span className="solution-synergy__metric-value">{metric.value}</span>
+                          <span className="solution-synergy__metric-label">{metric.label}</span>
+                          <p>{metric.caption}</p>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+                <div className="solution-synergy__insights">
+                  <p>
+                    因（兆し）・論（検証）・果（決断）の一連の流れを分断せず、各フェーズで必要なドキュメント・責任者・意思決定基準を同期させます。図面に沿って進めることで、チームの迷いとやり直しコストを最小化します。
+                  </p>
+                  <ul className="solution-synergy__points">
+                    <li>
+                      <strong>因果の見取り図:</strong> 財務・需要・人材データを結び、成果指標に直結する要因を洗い出します。
+                    </li>
+                    <li>
+                      <strong>論拠の蓄積:</strong> 専門家がロジックツリーと想定問答を整備し、金融機関・取引先への説明を準備します。
+                    </li>
+                    <li>
+                      <strong>決裁のスマート化:</strong> 会議前に意思決定パックを共有し、当日の合意形成を前倒しにします。
+                    </li>
+                  </ul>
+                  <ul className="solution-synergy__highlights" role="list" aria-label="共創プロセスのハイライト">
+                    {collaborationHighlights.map((item) => (
+                      <li
+                        key={item.label}
+                        className={`solution-synergy__item solution-synergy__item--${item.accent}`}
+                        role="listitem"
+                      >
+                        <span className="solution-synergy__value">{item.value}</span>
+                        <span className="solution-synergy__label">{item.label}</span>
+                        <p>{item.description}</p>
+                        <small>{item.evidence}</small>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
               <figure className="solution-synergy__visual">
                 <img
                   src={solutionSynergyVisual}
-                  alt="AI・専門家・経営者の因果ループを示す共創フレームワーク"
+                  alt="AI・専門家・経営陣の役割が循環する共創プロジェクトの設計図"
                   loading="lazy"
                 />
                 <figcaption>
-                  「検知→検証→決断」を循環させる共創ダイアグラム。各役割が担うアウトプットとタイムラインを明示しています。
+                  因果フローとレビュータイムラインを一体化した共創ダイアグラム。AIの検知結果から専門家レビュー、経営会議までの連携が一望できます。
                 </figcaption>
               </figure>
-              <div className="solution-synergy__insights">
-                <span className="solution-synergy__eyebrow">共創設計図</span>
-                <h3>因果で裏付けた設計で、意思決定に論理と安心を同時に届ける</h3>
-                <p>
-                  初動診断から伴走支援までの道筋を一枚に整理し、AIが兆しを検知、専門家が論点を整え、経営陣が説得力ある判断を示せるように構成しています。各工程の成果物と確認ポイントを明確にし、会議での説明が短時間で済むよう工夫しています。
-                </p>
-                <ul className="solution-synergy__highlights">
-                  {collaborationHighlights.map((item) => (
-                    <li
-                      key={item.label}
-                      className={`solution-synergy__item solution-synergy__item--${item.accent}`}
-                    >
-                      <span className="solution-synergy__value">{item.value}</span>
-                      <span className="solution-synergy__label">{item.label}</span>
-                      <p>{item.description}</p>
-                      <small>{item.evidence}</small>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
             <div className="solution-logic" data-animate>
               <div className="solution-logic__header">
