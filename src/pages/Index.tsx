@@ -49,7 +49,9 @@ import representativePhoto from "@/assets/representative.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import solutionLogicTimeline from "@/assets/process-flow-infographic.jpg";
 import journeyFlowVisual from "@/assets/data-infographic-growth.jpg";
-import heroCausalityDiagram from "@/assets/causality-flow.jpg";
+import heroCausalityDiagram from "@/assets/process-flow-infographic.jpg";
+import executiveStrategyMeeting from "@/assets/executive-strategy-meeting.jpg";
+import beforeAfterVisual from "@/assets/before-after-visual.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
 import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
@@ -154,6 +156,24 @@ const heroProcessKpis = [
     value: "+18pt",
     label: "粗利率改善事例",
     caption: "製造・小売での最大値",
+  },
+];
+
+const heroProcessCaseMetrics = [
+  {
+    value: "年商12億円",
+    label: "製造業の再構築事例",
+    caption: "粗利+3.2pt／在庫回転+14%",
+  },
+  {
+    value: "経営会議2回",
+    label: "72時間内で意思統一",
+    caption: "役員と金融機関が同席",
+  },
+  {
+    value: "NPS 68",
+    label: "経営者満足度",
+    caption: "2024年伴走プロジェクト調査",
   },
 ];
 const heroProcessMilestones = [
@@ -3403,6 +3423,32 @@ const Index = () => {
                 <p>
                   初回ヒアリングで経営者の譲れない方向性と現状の数字を言語化。72時間で経営の論点を一枚に整理し、1〜2週間で計画書と会議資料を完成。3か月の伴走で実行と報告を滞りなく進める、納得感の高い支援サイクルです。
                 </p>
+                <div className="hero-causality-intro__context" role="presentation">
+                  <figure className="hero-causality-intro__context-visual">
+                    <img
+                      src={executiveStrategyMeeting}
+                      alt="経営陣が戦略会議で資料を確認しながら視線を右方向へ向けている様子"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <figcaption>意思決定ラインを同じ資料で共有し、視線を次のアクションへ誘導。</figcaption>
+                  </figure>
+                  <div className="hero-causality-intro__context-copy">
+                    <span className="hero-causality-intro__context-eyebrow">EXECUTIVE SNAPSHOT</span>
+                    <p>
+                      右肩のインフォグラフィックと連動した「Before→After」視覚を配置し、視線を因果→論理→成果の順に導きます。
+                    </p>
+                    <ul className="hero-causality-intro__context-metrics" aria-label="代表的な支援実績">
+                      {heroProcessCaseMetrics.map((metric) => (
+                        <li key={metric.label}>
+                          <span className="hero-causality-intro__context-value">{metric.value}</span>
+                          <span className="hero-causality-intro__context-label">{metric.label}</span>
+                          <small>{metric.caption}</small>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
                 <ul className="hero-causality-intro__principles">
                   {heroProcessPrinciples.map((principle) => (
                     <li key={principle.label}>
@@ -3463,14 +3509,28 @@ const Index = () => {
                       </li>
                     ))}
                   </ol>
-                  <div className="hero-causality-intro__visual-kpis" aria-label="支援で得られる指標改善">
-                    {heroProcessKpis.map((kpi) => (
-                      <div key={kpi.label} className="hero-causality-intro__visual-kpi">
-                        <span className="hero-causality-intro__visual-kpi-value">{kpi.value}</span>
-                        <span className="hero-causality-intro__visual-kpi-label">{kpi.label}</span>
-                        <small>{kpi.caption}</small>
-                      </div>
-                    ))}
+                  <div className="hero-causality-intro__visual-insights">
+                    <div className="hero-causality-intro__visual-kpis" aria-label="支援で得られる指標改善">
+                      {heroProcessKpis.map((kpi) => (
+                        <div key={kpi.label} className="hero-causality-intro__visual-kpi">
+                          <span className="hero-causality-intro__visual-kpi-value">{kpi.value}</span>
+                          <span className="hero-causality-intro__visual-kpi-label">{kpi.label}</span>
+                          <small>{kpi.caption}</small>
+                        </div>
+                      ))}
+                    </div>
+                    <figure className="hero-causality-intro__visual-beforeafter">
+                      <img
+                        src={beforeAfterVisual}
+                        alt="支援前後でKPIが改善される様子を示したビフォー・アフターのインフォグラフィック"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <figcaption>
+                        <strong>Before → After</strong>
+                        <p>課題の断片化から、意思決定の再現性がある数値運用体制へ。3か月で経営会議の議題が投資判断中心に変化。</p>
+                      </figcaption>
+                    </figure>
                   </div>
                 </div>
                 <footer className="hero-causality-intro__visual-footer">
