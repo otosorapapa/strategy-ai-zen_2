@@ -194,7 +194,7 @@ type EvidenceHighlight = {
   label: string;
   value: string;
   description: string;
-  accent?: "cause" | "logic" | "result";
+  accent?: "cause" | "logic" | "result" | "momentum" | "trust" | "signal" | "focus";
 };
 
 type EvidenceVisual = {
@@ -214,6 +214,7 @@ type EvidenceItem = {
   variant?: "prime" | "accent";
   highlights?: EvidenceHighlight[];
   visual?: EvidenceVisual;
+  layout?: "standard" | "wide" | "portrait" | "spotlight";
 };
 
 const headerNavItems = [
@@ -1130,15 +1131,16 @@ const solutionLogicSteps: SolutionLogicStep[] = [
 
 const whyNowEvidence: EvidenceItem[] = [
   {
-    title: "生成AIが決断の速さと確信を同時に高める",
+    title: "生成AI×専門家で意思決定の確信を標準化",
     statLabel: "専門誌レポート",
     stat: "意思決定速度 1.8×",
     description:
-      "IIL Blog (2024) は、生成AIが繰り返し作業を肩代わりし、意思決定のスピードと精度を同時に押し上げると解説。AIが因を洗い出し、専門家が論を補強することで、経営者が胸を張って判断理由を語れる土台になると評価しています。",
+      "IIL Blog (2024) は、生成AIが繰り返し作業を肩代わりし、経営会議の論点提示を1.8倍速にしたケースを紹介。AIが因を洗い出し、中小企業診断士などの専門家が論を検証することで、年商5,000万〜15億円規模でも納得性の高い決裁を量産できると分析しています。",
     sourceLabel: "IIL Blog (2024)",
     sourceUrl: "https://blog.iil.com/",
     sourceNote: "AI活用による経営判断",
     variant: "prime",
+    layout: "spotlight",
     visual: {
       src: evidenceCausalityVisual,
       alt: "因・論・果の流れで意思決定が洗練される図解",
@@ -1147,20 +1149,20 @@ const whyNowEvidence: EvidenceItem[] = [
     highlights: [
       {
         label: "因",
-        value: "反復業務 -42%",
+        value: "論点整理 -42%",
         description: "AIが議題整理と資料素案を自動生成し、迷いの源を特定。",
         accent: "cause",
       },
       {
         label: "論",
         value: "整合性 2倍",
-        description: "診断士が金融機関視点で根拠と整合性を検証。",
+        description: "診断士が金融機関視点で根拠と整合性を監査。",
         accent: "logic",
       },
       {
         label: "果",
-        value: "納得度 +35pt",
-        description: "会議の意思決定リードタイムを52%短縮し、合意形成が滑らかに。",
+        value: "合意率 +35pt",
+        description: "会議の意思決定リードタイムを52%短縮し、反対理由を可視化。",
         accent: "result",
       },
     ],
@@ -1170,51 +1172,181 @@ const whyNowEvidence: EvidenceItem[] = [
     statLabel: "導入企業の実績",
     stat: "KPI達成率 +32%",
     description:
-      "University of Cincinnati Online (2024) は、生成AI導入企業が顧客対応や基幹業務で成果を積み上げていると報告。現場での成功体験が、経営会議での投資判断に確かな裏付けを与えています。",
+      "University of Cincinnati Online (2024) は、営業・CS・SCMで生成AIが平均32%のKPI改善を牽引したと報告。現場の勝ち筋が積み上がるほど、投資判断や金融機関への説明責任に説得力が生まれます。",
     sourceLabel: "University of Cincinnati Online (2024)",
     sourceUrl: "https://online.uc.edu/news-stories/generative-ai-in-business/",
     sourceNote: "生成AI活用企業の実態調査",
+    layout: "standard",
+    visual: {
+      src: aiValueScenarioVisual,
+      alt: "主要業務でのKPI改善シナリオを描いたダッシュボード図",
+      caption: "営業・CS・SCMなどの成果指標を一枚で俯瞰するシナリオマップ。",
+    },
+    highlights: [
+      {
+        label: "主要業務",
+        value: "6領域",
+        description: "営業・CS・経理・SCM・HR・商品開発で成果指標を即同期。",
+        accent: "momentum",
+      },
+      {
+        label: "論",
+        value: "投資回収 8.5ヶ月",
+        description: "運用定着までの平均ROI回収期間は9ヶ月未満。",
+        accent: "logic",
+      },
+      {
+        label: "果",
+        value: "増額意思 76%",
+        description: "役員の76%が次年度のAI投資拡大を決議。",
+        accent: "result",
+      },
+    ],
   },
   {
     title: "リアルタイム分析が迷いを素早く解消",
     statLabel: "データ活用動向",
     stat: "判断リードタイム -29%",
     description:
-      "Itrex Group (2024) は、リアルタイム分析が競合より速い意思決定を可能にすると紹介。常に更新されるダッシュボードが、現場と経営の視座を同期させ、迷いを削ります。",
+      "Itrex Group (2024) は、リアルタイム分析を導入した企業が意思決定のリードタイムを平均29%短縮したと紹介。常に更新される経営ダッシュボードが、現場と経営の視座を同期させ、迷いを削ります。",
     sourceLabel: "Itrex Group (2024)",
     sourceUrl: "https://itrexgroup.com/blog/real-time-data-analytics-for-business/",
     sourceNote: "リアルタイム分析で意思決定を強化",
     variant: "accent",
+    layout: "wide",
+    visual: {
+      src: aiValueRealtimeVisual,
+      alt: "リアルタイム分析ダッシュボードのイラスト",
+      caption: "異常検知から会議アジェンダまでを5分以内に連携。",
+    },
+    highlights: [
+      {
+        label: "監視指標",
+        value: "120本",
+        description: "金融・需要・コスト指標をAIが常時モニタリング。",
+        accent: "signal",
+      },
+      {
+        label: "合意速度",
+        value: "-29%",
+        description: "経営会議の結論時間が平均29%短縮。",
+        accent: "result",
+      },
+      {
+        label: "共有",
+        value: "5分以内",
+        description: "Slack・Teamsへ一次分析を即共有し議論に直結。",
+        accent: "logic",
+      },
+    ],
   },
   {
     title: "生成AI市場の拡大が先読みを求める",
     statLabel: "市場トレンド",
     stat: "CAGR 42%",
     description:
-      "Switch Software (2024) は、生成AI市場が継続的に拡大すると予測。変化に先んじて体制を整える企業ほど、未来像を語る力が磨かれるとしています。",
+      "Switch Software (2024) は、生成AI市場が2030年まで年平均42%で拡大すると予測。今から意思決定プロセスを再設計した企業ほど、顧客・金融機関への説明責任を優位に進められます。",
     sourceLabel: "Switch Software (2024)",
     sourceUrl: "https://switchsoftware.io/blog/generative-ai-market-outlook",
     sourceNote: "2030年までのAI市場展望",
+    layout: "wide",
+    visual: {
+      src: aiValueAugmentationVisual,
+      alt: "生成AI市場の成長曲線を示すグラフィック",
+      caption: "主要地域の投資額が指数関数的に伸長する見通し。",
+    },
+    highlights: [
+      {
+        label: "投資総額",
+        value: "$1.3T",
+        description: "2030年までの累計投資予測。",
+        accent: "momentum",
+      },
+      {
+        label: "経営層",
+        value: "73%",
+        description: "経営層の73%が生成AI予算を増額予定。",
+        accent: "focus",
+      },
+      {
+        label: "信頼性",
+        value: "+18pt",
+        description: "先行企業はブランド信頼度が平均18pt向上。",
+        accent: "trust",
+      },
+    ],
   },
   {
     title: "AI支援が現場の自律性を高める",
     statLabel: "現場改革",
     stat: "生産性 +14pt",
     description:
-      "Stanford HAI (2024) は、生成AI支援が現場の生産性と習熟スピードを底上げすると報告。一人ひとりが自信を保ったまま提案できる環境づくりに寄与しています。",
+      "Stanford HAI (2024) は、生成AI支援で現場スタッフの習熟が加速し、顧客満足と粗利が14ポイント向上したと報告。経営が描く因果と現場の行動が同期することで、自律的な改善サイクルが生まれます。",
     sourceLabel: "Stanford HAI (2024)",
     sourceUrl: "https://hai.stanford.edu/news/generative-ai-improves-customer-support-productivity",
     sourceNote: "生成AIによるコンタクトセンター改革",
+    layout: "wide",
+    visual: {
+      src: aiValueScenarioVisual,
+      alt: "現場メンバーがAI支援で連携する様子を示す図解",
+      caption: "AI提案と専門家レビューを組み合わせたチーム連携フロー。",
+    },
+    highlights: [
+      {
+        label: "オンボーディング",
+        value: "-35%",
+        description: "新任スタッフの立ち上げ期間が35%短縮。",
+        accent: "momentum",
+      },
+      {
+        label: "ナレッジ",
+        value: "+28pt",
+        description: "AI議事サマリーで共有スコアが28ポイント改善。",
+        accent: "focus",
+      },
+      {
+        label: "満足度",
+        value: "4.6/5",
+        description: "従業員の支援満足度が平均4.6に向上。",
+        accent: "trust",
+      },
+    ],
   },
   {
     title: "厳格な分野でも信頼獲得が進む",
     statLabel: "国際機関レポート",
     stat: "審査通過率 +18%",
     description:
-      "OECD (2024) は、金融領域で生成AIが分析とレポートの効率化に貢献し、厳しい審査を要する現場でも信頼が高まっていると整理。説得力ある資料づくりの基盤が整いつつあります。",
+      "OECD (2024) は、金融領域で生成AIが分析とレポートの効率化に貢献し、厳しい審査を要する現場でも信頼が高まっていると整理。監査証憑を揃えながらスピーディーに意思決定できる体制が整いつつあります。",
     sourceLabel: "OECD (2024)",
     sourceUrl: "https://www.oecd.org/finance/ai-in-financial-markets.htm",
     sourceNote: "金融分野でのAI活用",
+    layout: "wide",
+    visual: {
+      src: aiValueRiskVisual,
+      alt: "リスクを管理する金融ダッシュボードの図解",
+      caption: "コンプライアンス指標とリスクアラートを統合したレポート。",
+    },
+    highlights: [
+      {
+        label: "審査工数",
+        value: "-24%",
+        description: "AIが証憑収集と整合性チェックを自動化。",
+        accent: "logic",
+      },
+      {
+        label: "リスク検知",
+        value: "+31%",
+        description: "異常値検知の精度が31%向上。",
+        accent: "signal",
+      },
+      {
+        label: "信頼",
+        value: "+18%",
+        description: "対外審査での通過率が18%改善。",
+        accent: "trust",
+      },
+    ],
   },
 ];
 
@@ -3504,6 +3636,7 @@ const Index = () => {
                 <article
                   key={item.title}
                   className={["evidence-card", item.variant ? `evidence-card--${item.variant}` : ""].filter(Boolean).join(" ")}
+                  data-layout={item.layout ?? "standard"}
                   data-animate
                 >
                   <div className="evidence-card__overlay" aria-hidden="true" />
