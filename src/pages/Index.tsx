@@ -731,18 +731,57 @@ const simulatorGuidanceVisualHighlights: SimulatorVisualHighlight[] = [
   },
 ];
 
-const insightHighlights = [
+type InsightHighlight = {
+  value: string;
+  label: string;
+  description: string;
+  detail: string;
+  accent: "sunrise" | "mint" | "citrus";
+  icon: LucideIcon;
+  delta: string;
+  deltaTone: "up" | "down";
+  source: string;
+  visual: {
+    caption: string;
+    unit: string;
+    before: { label: string; value: number; display?: string };
+    after: { label: string; value: number; display?: string };
+  };
+  logic: { title: string; description: string }[];
+};
+
+const insightHighlights: InsightHighlight[] = [
   {
     value: "-67%",
     label: "意思決定リードタイム",
     description: "週次経営会議の準備〜決裁までを6週間から2週間へ短縮",
     detail:
       "AI導入企業20社の四半期計画更新に要した期間。導入前後のプロジェクトガントチャートを比較して算出 (2023年7月〜2024年12月)。",
-    accent: "sunrise" as const,
+    accent: "sunrise",
     icon: Timer,
     delta: "決裁スピード 3.4倍",
-    deltaTone: "down" as const,
+    deltaTone: "down",
     source: "導入企業20社 平均 (2023-2024)",
+    visual: {
+      caption: "会議準備〜決裁完了までの所要期間",
+      unit: "週",
+      before: { label: "導入前", value: 6 },
+      after: { label: "導入後", value: 2 },
+    },
+    logic: [
+      {
+        title: "データ統合",
+        description: "財務・販売・在庫ログをAIが集約し週次で更新。論点の抜け漏れを防ぎます。",
+      },
+      {
+        title: "意思決定フレーム",
+        description: "金融機関の審査観点に沿ったシナリオ比較と問答想定を自動ドラフト。",
+      },
+      {
+        title: "即時決裁",
+        description: "経営会議前に優先順位とリスク対策を提示し、決裁の後ろ倒しを防止。",
+      },
+    ],
   },
   {
     value: "-1,750h",
@@ -750,11 +789,31 @@ const insightHighlights = [
     description: "AIレポートのドラフト化で管理部門の累計工数を削減",
     detail:
       "経営会議準備・レポート作成・データ収集に費やした時間の削減量。導入企業20社のワークログと専門家ヒアリングを集計。",
-    accent: "mint" as const,
+    accent: "mint",
     icon: CalendarClock,
     delta: "月あたり145時間削減",
-    deltaTone: "down" as const,
+    deltaTone: "down",
     source: "Strategy AI Lab 内部統計",
+    visual: {
+      caption: "年間の会議準備・報告関連工数",
+      unit: "時間",
+      before: { label: "導入前", value: 2310, display: "2,310h" },
+      after: { label: "導入後", value: 560, display: "560h" },
+    },
+    logic: [
+      {
+        title: "要約自動化",
+        description: "会議資料・議事録をAIが要約し、論点別にテンプレートへ転記。",
+      },
+      {
+        title: "プロセス標準化",
+        description: "部門横断の提出フォーマットとチェックリストを共通化。",
+      },
+      {
+        title: "伴走レビュー",
+        description: "専門家が週次でドラフトをレビューし、追加作業の手戻りを削減。",
+      },
+    ],
   },
   {
     value: "92%",
@@ -762,11 +821,31 @@ const insightHighlights = [
     description: "速報ベースの市場・競合・需要データをダッシュボードに同期",
     detail:
       "市場レポート・競合ニュース・需給統計の更新情報がダッシュボードに反映されるまでの割合。2024年Q1〜Q4の月次レビューから集計。",
-    accent: "citrus" as const,
+    accent: "citrus",
     icon: TrendingUp,
     delta: "即時反映 12h以内",
-    deltaTone: "up" as const,
+    deltaTone: "up",
     source: "月次レビュー (2024年)",
+    visual: {
+      caption: "外部ニュース・統計の反映率",
+      unit: "%",
+      before: { label: "業界平均", value: 58 },
+      after: { label: "導入企業", value: 92 },
+    },
+    logic: [
+      {
+        title: "ソース監視",
+        description: "省庁・業界団体・競合ニュースをクローリングして重要度を自動判定。",
+      },
+      {
+        title: "即時シンク",
+        description: "判定結果をダッシュボードへプッシュし、需要予測モデルを再学習。",
+      },
+      {
+        title: "アクション提示",
+        description: "反映したシグナルから推奨アクションとインパクトを通知。",
+      },
+    ],
   },
 ];
 
@@ -4076,6 +4155,8 @@ const Index = () => {
                 {insightHighlights.map((highlight) => {
                   const HighlightIcon = highlight.icon;
                   const DeltaIcon = highlight.deltaTone === "down" ? ArrowDownRight : ArrowUpRight;
+                  const visualMax =
+                    Math.max(highlight.visual.before.value, highlight.visual.after.value) || 1;
                   return (
                     <article
                       key={highlight.label}
@@ -4098,15 +4179,42 @@ const Index = () => {
                         </div>
                       </header>
                       <div className="insight-highlight__body">
-                        <div className="insight-highlight__value-group">
-                          <div className="insight-highlight__value">
-                            <span>{highlight.label}</span>
-                            <strong>{highlight.value}</strong>
+                        <div className="insight-highlight__value-column">
+                          <div className="insight-highlight__value-group">
+                            <div className="insight-highlight__value">
+                              <span>{highlight.label}</span>
+                              <strong>{highlight.value}</strong>
+                            </div>
+                            <span className="insight-highlight__assurance">
+                              <ShieldCheck aria-hidden="true" />
+                              <span>専門家レビュー済</span>
+                            </span>
                           </div>
-                          <span className="insight-highlight__assurance">
-                            <ShieldCheck aria-hidden="true" />
-                            <span>専門家レビュー済</span>
-                          </span>
+                          <figure
+                            className="insight-highlight__visual"
+                            aria-label={`${highlight.visual.caption}の比較`}
+                          >
+                            <figcaption>{highlight.visual.caption}</figcaption>
+                            <div className="insight-highlight__bars">
+                              {[highlight.visual.before, highlight.visual.after].map((entry) => {
+                                const barWidth = Math.max((entry.value / visualMax) * 100, 12);
+                                const displayValue =
+                                  entry.display ?? `${entry.value.toLocaleString()}${highlight.visual.unit}`;
+                                return (
+                                  <div key={entry.label} className="insight-highlight__bar-row">
+                                    <span>{entry.label}</span>
+                                    <div className="insight-highlight__bar-track">
+                                      <div
+                                        className="insight-highlight__bar-fill"
+                                        style={{ width: `${barWidth}%` }}
+                                      />
+                                      <span className="insight-highlight__bar-value">{displayValue}</span>
+                                    </div>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          </figure>
                         </div>
                         <div className="insight-highlight__context">
                           <p className="insight-highlight__description">{highlight.description}</p>
@@ -4127,7 +4235,15 @@ const Index = () => {
                                 <TooltipContent>{highlight.detail}</TooltipContent>
                               </Tooltip>
                             </div>
-                            <p>{highlight.detail}</p>
+                            <ol className="insight-highlight__logic-list">
+                              {highlight.logic.map((logicItem) => (
+                                <li key={logicItem.title}>
+                                  <strong>{logicItem.title}</strong>
+                                  <p>{logicItem.description}</p>
+                                </li>
+                              ))}
+                            </ol>
+                            <p className="insight-highlight__logic-note">{highlight.detail}</p>
                           </div>
                         </div>
                       </div>
