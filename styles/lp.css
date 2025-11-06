@@ -7069,28 +7069,6 @@ svg {
   align-items: stretch;
 }
 
-.pain-visual {
-  margin: 42px auto 36px;
-  max-width: 920px;
-  display: grid;
-  gap: 18px;
-  justify-items: center;
-  text-align: center;
-}
-
-.pain-visual img {
-  width: min(100%, 920px);
-  border-radius: 32px;
-  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.12);
-}
-
-.pain-visual figcaption {
-  font-size: 0.98rem;
-  line-height: 1.7;
-  color: rgba(30, 41, 59, 0.78);
-  max-width: 720px;
-}
-
 .pain-card {
   position: relative;
   background: rgba(255, 255, 255, 0.96);
@@ -7474,10 +7452,6 @@ svg {
 @media (max-width: 960px) {
   .pain-grid {
     gap: 24px;
-  }
-
-  .pain-visual {
-    margin: 36px 0 28px;
   }
 
   .pain-card__grid {

@@ -46,7 +46,6 @@ import expertKobayashiPhoto from "@/assets/expert-kobayashi.svg";
 import expertSaitoPhoto from "@/assets/expert-saito.svg";
 import expertTanakaPhoto from "@/assets/expert-tanaka.svg";
 import representativePhoto from "@/assets/representative.jpg";
-import problemIllustration from "@/assets/problem-illustration.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import journeyFlowVisual from "@/assets/data-infographic-growth.jpg";
 import heroCausalityDiagram from "@/assets/causality-flow.jpg";
@@ -3286,16 +3285,6 @@ const Index = () => {
                 市場や組織の変化が激しいほど、意思決定の質・速さ・先読み力は落ちやすくなります。160件の案件で蓄積した知見をもとに、「課題 → AI×専門家の解決策 → 得られる効果」の因果関係を3つのケースで示します。
               </p>
             </div>
-            <figure className="pain-visual" data-animate>
-              <img
-                src={problemIllustration}
-                alt="経営課題の因果をAIと専門家が整理しているイラスト"
-                loading="lazy"
-              />
-              <figcaption>
-                経営者の迷いを「課題・AIの分析・専門家のレビュー・成果」の流れで可視化し、意思決定で押さえる論点を揃えるプロセスを表現しています。
-              </figcaption>
-            </figure>
             <div className="pain-grid">
               {painPoints.map((item) => {
                 const PainIcon = item.icon;
