@@ -630,6 +630,263 @@ svg {
   text-transform: uppercase;
 }
 
+.hero-roadmap {
+  display: grid;
+  gap: 24px;
+  margin-top: 16px;
+  padding: 28px 30px;
+  border-radius: 28px;
+  background:
+    linear-gradient(140deg, rgba(230, 244, 255, 0.92), rgba(203, 244, 226, 0.78));
+  border: 1px solid rgba(63, 121, 197, 0.24);
+  box-shadow: 0 32px 68px -40px rgba(8, 35, 74, 0.45);
+}
+
+.hero-roadmap__header {
+  display: grid;
+  gap: 10px;
+  max-width: 640px;
+}
+
+.hero-roadmap__eyebrow {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(20, 61, 106, 0.7);
+}
+
+.hero-roadmap__header h3 {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  color: var(--navy-900);
+}
+
+.hero-roadmap__header p {
+  margin: 0;
+  color: var(--gray-600);
+  line-height: 1.65;
+}
+
+.hero-roadmap__body {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  align-items: start;
+}
+
+.hero-roadmap__visual {
+  margin: 0;
+  display: grid;
+  gap: 12px;
+  padding: 18px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(20, 61, 106, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 20px 44px -32px rgba(15, 37, 71, 0.42);
+}
+
+.hero-roadmap__visual img {
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  box-shadow: 0 20px 44px -32px rgba(15, 37, 71, 0.42);
+}
+
+.hero-roadmap__visual figcaption {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--gray-500);
+}
+
+.hero-roadmap__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.hero-roadmap__step {
+  position: relative;
+  display: grid;
+  gap: 12px;
+  padding: 20px 22px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(15, 37, 71, 0.12);
+  box-shadow: 0 26px 58px -36px rgba(8, 35, 74, 0.38);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero-roadmap__step:hover,
+.hero-roadmap__step:focus-within {
+  transform: translateY(-2px);
+  box-shadow: 0 32px 72px -32px rgba(8, 35, 74, 0.48);
+}
+
+.hero-roadmap__step-phase {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(79, 163, 255, 0.14);
+  color: var(--sky-700);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.hero-roadmap__step-heading {
+  display: grid;
+  gap: 8px;
+}
+
+.hero-roadmap__icon {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(45, 127, 230, 0.18), rgba(31, 157, 122, 0.28));
+  color: var(--cta-600);
+}
+
+.hero-roadmap__step-heading h4 {
+  margin: 0;
+  font-size: 1.08rem;
+  color: var(--navy-800);
+}
+
+.hero-roadmap__step p {
+  margin: 0;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+
+.hero-roadmap__metric {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(31, 157, 122, 0.12);
+  color: var(--mint-500);
+  width: fit-content;
+}
+
+.hero-roadmap__metric strong {
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.hero-roadmap__metric span {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(15, 37, 71, 0.7);
+}
+
+.hero-proof-stack {
+  display: grid;
+  gap: 18px;
+  padding: 26px 28px;
+  border-radius: 26px;
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.95), rgba(213, 241, 255, 0.75));
+  border: 1px solid rgba(20, 61, 106, 0.14);
+  box-shadow: 0 30px 70px -40px rgba(8, 35, 74, 0.42);
+}
+
+.hero-proof-stack__header {
+  display: grid;
+  gap: 10px;
+}
+
+.hero-proof-stack__eyebrow {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(20, 61, 106, 0.7);
+}
+
+.hero-proof-stack__header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--navy-800);
+}
+
+.hero-proof-stack__header p {
+  margin: 0;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+
+.hero-proof-stack__logos {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(15, 37, 71, 0.08);
+}
+
+.hero-proof-stack__logos img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+}
+
+.hero-proof-stack__list {
+  display: block;
+}
+
+.hero-proof-highlights {
+  display: grid;
+  gap: 16px;
+  margin: 4px 0 12px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.hero-proof-highlights__item {
+  display: grid;
+  gap: 8px;
+  padding: 20px 22px;
+  border-radius: 22px;
+  background: linear-gradient(150deg, rgba(15, 37, 71, 0.92), rgba(45, 127, 230, 0.78));
+  border: 1px solid rgba(15, 37, 71, 0.24);
+  color: #f8fafc;
+  box-shadow: 0 30px 64px -36px rgba(8, 35, 74, 0.5);
+}
+
+.hero-proof-highlights__value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--mint-300);
+}
+
+.hero-proof-highlights__item h4 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #e2e8f0;
+}
+
+.hero-proof-highlights__item p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(226, 232, 240, 0.85);
+}
+
+.hero-proof-highlights__item small {
+  font-size: 0.78rem;
+  color: rgba(226, 232, 240, 0.7);
+}
+
 .hero-aside {
   display: grid;
   gap: 32px;
@@ -1887,6 +2144,18 @@ svg {
     text-align: left;
     gap: 16px;
   }
+
+  .hero-roadmap__body {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-roadmap__visual {
+    order: -1;
+  }
+
+  .hero-proof-highlights {
+    grid-template-columns: 1fr;
+  }
 }
 
 .hero-causality-intro__eyebrow {
@@ -2789,6 +3058,29 @@ svg {
 
   .hero-causality__visual-tag {
     letter-spacing: 0.12em;
+  }
+
+  .hero-roadmap {
+    padding: 22px 22px;
+    border-radius: 24px;
+  }
+
+  .hero-roadmap__metric {
+    gap: 6px;
+  }
+
+  .hero-proof-stack {
+    padding: 22px;
+    border-radius: 24px;
+  }
+
+  .hero-proof-stack__logos {
+    padding: 12px 14px;
+  }
+
+  .hero-proof-highlights__item {
+    padding: 18px 20px;
+    border-radius: 20px;
   }
 }
 

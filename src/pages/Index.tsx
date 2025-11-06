@@ -139,6 +139,76 @@ const heroProcessSnapshot = [
   },
 ];
 
+type HeroRoadmapStep = {
+  phase: string;
+  title: string;
+  description: string;
+  metric: string;
+  metricLabel: string;
+  icon: LucideIcon;
+};
+
+const heroRoadmapSteps: HeroRoadmapStep[] = [
+  {
+    phase: "Day 0-3",
+    title: "72時間診断で意思決定リスクを特定",
+    description:
+      "財務・販売・人員データをAIが統合し、優先課題とリスクヒートマップを因果関係で可視化。経営会議前に論点の抜け漏れを塞ぎます。",
+    metric: "-52%",
+    metricLabel: "意思決定リードタイム",
+    icon: Timer,
+  },
+  {
+    phase: "Day 7-14",
+    title: "金融機関提出レベルでストーリー化",
+    description:
+      "診断士と会計士がAIドラフトを磨き込み、融資・補助金の審査観点に沿った計画書とシナリオ比較資料を作成。説明責任の準備を完了させます。",
+    metric: "86%",
+    metricLabel: "採択・承認率",
+    icon: ClipboardCheck,
+  },
+  {
+    phase: "Day 30-90",
+    title: "週次伴走でKPIと資金繰りを更新",
+    description:
+      "実行状況をダッシュボードで追跡し、キャッシュ予測と粗利計画を週次で調整。意思決定の納得性と実行スピードを両立させます。",
+    metric: "+18pt",
+    metricLabel: "粗利率の改善",
+    icon: TrendingUp,
+  },
+];
+
+type HeroExecutiveSignal = {
+  value: string;
+  label: string;
+  description: string;
+  caption: string;
+};
+
+const heroExecutiveSignals: HeroExecutiveSignal[] = [
+  {
+    value: "-52%",
+    label: "意思決定リードタイム",
+    description:
+      "論点マップと実行指示書を72時間で共有し、経営会議前の準備に費やす時間を半減。経営陣が議論に集中できます。",
+    caption: "Day3で意思決定草案を提示",
+  },
+  {
+    value: "-80%",
+    label: "計画作成工数",
+    description:
+      "AIドラフトと専門家レビューを組み合わせ、金融機関提出資料の整備工数を圧縮。社内の関係者調整もテンプレ化します。",
+    caption: "提出書式をワンクリックで生成",
+  },
+  {
+    value: "92%",
+    label: "伴走継続率",
+    description:
+      "週次レポートと共同ダッシュボードでKPIを追跡。成果創出まで伴走する体制が継続契約92%につながっています。",
+    caption: "経営者満足度 4.7 / 5",
+  },
+];
+
 const heroProcessKpis = [
   {
     value: "-52%",
@@ -3193,15 +3263,75 @@ const Index = () => {
                       </div>
                     </section>
                   </div>
+                  <div className="hero-roadmap" aria-label="72時間から90日までの実行ロードマップ">
+                    <header className="hero-roadmap__header">
+                      <span className="hero-roadmap__eyebrow">Decision Flow</span>
+                      <h3>意思決定の因果を72時間で描き切り、90日で成果まで接続</h3>
+                      <p>
+                        データ診断→計画ドラフト→実行伴走をひとつの流れで可視化。経営会議・金融機関・現場の三者が同じ数字とストーリーで合意できるよう、各フェーズの出口を明確に設計しています。
+                      </p>
+                    </header>
+                    <div className="hero-roadmap__body">
+                      <figure className="hero-roadmap__visual">
+                        <img
+                          src="/images/hero-decision-dashboard.svg"
+                          alt="72時間診断で共有する意思決定ダッシュボードのイメージ"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <figcaption>AI診断レポートとシナリオ比較ダッシュボードのサンプル</figcaption>
+                      </figure>
+                      <ol className="hero-roadmap__steps">
+                        {heroRoadmapSteps.map((step) => {
+                          const StepIcon = step.icon
+                          return (
+                            <li key={step.phase} className="hero-roadmap__step">
+                              <span className="hero-roadmap__step-phase">{step.phase}</span>
+                              <div className="hero-roadmap__step-heading">
+                                <span className="hero-roadmap__icon" aria-hidden="true">
+                                  <StepIcon />
+                                </span>
+                                <h4>{step.title}</h4>
+                              </div>
+                              <p>{step.description}</p>
+                              <div className="hero-roadmap__metric">
+                                <strong>{step.metric}</strong>
+                                <span>{step.metricLabel}</span>
+                              </div>
+                            </li>
+                          )
+                        })}
+                      </ol>
+                    </div>
+                  </div>
                 </div>
                 <aside className="hero-main__secondary" aria-label="信頼証明と主要指標">
-                  <div className="hero-trust-signals" data-animate aria-label="第三者証明と継続実績">
-                    {heroTrustSignals.map((signal) => (
-                      <article key={signal.label}>
-                        <h4>{signal.label}</h4>
-                        <p>{signal.description}</p>
-                      </article>
-                    ))}
+                  <div className="hero-proof-stack" data-animate aria-label="金融・行政からの信頼と伴走実績">
+                    <header className="hero-proof-stack__header">
+                      <span className="hero-proof-stack__eyebrow">Authority Stack</span>
+                      <h3>行政認定と金融機関と磨いた審査品質</h3>
+                      <p>
+                        経済産業省の認定支援機関としての審査実績に、地域金融機関との共同伴走で蓄積したノウハウを掛け合わせ、資料の納得性と実行可能性を両立させます。
+                      </p>
+                    </header>
+                    <figure className="hero-proof-stack__logos">
+                      <img
+                        src="/images/hero-trust-logos.svg"
+                        alt="行政ロゴや金融機関パートナー企業のロゴ"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </figure>
+                    <div className="hero-proof-stack__list">
+                      <div className="hero-trust-signals" aria-label="第三者証明と継続実績">
+                        {heroTrustSignals.map((signal) => (
+                          <article key={signal.label}>
+                            <h4>{signal.label}</h4>
+                            <p>{signal.description}</p>
+                          </article>
+                        ))}
+                      </div>
+                    </div>
                   </div>
                   <figure className="hero-metrics-board" data-animate>
                     <figcaption>72時間診断で把握できる主要指標</figcaption>
@@ -3234,6 +3364,16 @@ const Index = () => {
                       ))}
                     </ul>
                   </figure>
+                  <div className="hero-proof-highlights" data-animate aria-label="導入企業の主要成果ハイライト">
+                    {heroExecutiveSignals.map((signal) => (
+                      <article key={signal.label} className="hero-proof-highlights__item">
+                        <span className="hero-proof-highlights__value">{signal.value}</span>
+                        <h4>{signal.label}</h4>
+                        <p>{signal.description}</p>
+                        <small>{signal.caption}</small>
+                      </article>
+                    ))}
+                  </div>
                   <div className="hero-actions" data-animate>
                     <a className="btn btn-cta" href="#contact">
                       {primaryCtaLabel}
