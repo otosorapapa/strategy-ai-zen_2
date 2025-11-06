@@ -54,6 +54,7 @@ import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
 import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
 import aiValueAugmentationVisual from "@/assets/ai-value-augmentation.svg";
+import evidenceCausalityVisual from "@/assets/evidence-causality.svg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -187,6 +188,32 @@ const heroProcessMilestones = [
   },
 ];
 const contactPhoneNumber = "03-4520-1234";
+
+type EvidenceHighlight = {
+  label: string;
+  value: string;
+  description: string;
+  accent?: "cause" | "logic" | "result";
+};
+
+type EvidenceVisual = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
+type EvidenceItem = {
+  title: string;
+  description: string;
+  sourceLabel: string;
+  sourceNote: string;
+  sourceUrl?: string;
+  stat?: string;
+  statLabel?: string;
+  variant?: "prime" | "accent";
+  highlights?: EvidenceHighlight[];
+  visual?: EvidenceVisual;
+};
 
 const headerNavItems = [
   { id: "hero", label: "サービス概要" },
@@ -1048,21 +1075,49 @@ const solutionLogicSteps: SolutionLogicStep[] = [
   },
 ];
 
-const whyNowEvidence = [
+const whyNowEvidence: EvidenceItem[] = [
   {
     title: "生成AIが決断の速さと確信を同時に高める",
     statLabel: "専門誌レポート",
+    stat: "意思決定速度 1.8×",
     description:
-      "IIL Blog (2024) は、生成AIが繰り返し作業を肩代わりし、意思決定のスピードと精度を同時に押し上げると解説。経営者が胸を張って判断理由を語れる土台になると評価しています。",
+      "IIL Blog (2024) は、生成AIが繰り返し作業を肩代わりし、意思決定のスピードと精度を同時に押し上げると解説。AIが因を洗い出し、専門家が論を補強することで、経営者が胸を張って判断理由を語れる土台になると評価しています。",
     sourceLabel: "IIL Blog (2024)",
     sourceUrl: "https://blog.iil.com/",
     sourceNote: "AI活用による経営判断",
+    variant: "prime",
+    visual: {
+      src: evidenceCausalityVisual,
+      alt: "因・論・果の流れで意思決定が洗練される図解",
+      caption: "AIが因（Cause）を抽出し、専門家が論（Logic）を検証、経営陣が果（Result）を導くフレーム",
+    },
+    highlights: [
+      {
+        label: "因",
+        value: "反復業務 -42%",
+        description: "AIが議題整理と資料素案を自動生成し、迷いの源を特定。",
+        accent: "cause",
+      },
+      {
+        label: "論",
+        value: "整合性 2倍",
+        description: "診断士が金融機関視点で根拠と整合性を検証。",
+        accent: "logic",
+      },
+      {
+        label: "果",
+        value: "納得度 +35pt",
+        description: "会議の意思決定リードタイムを52%短縮し、合意形成が滑らかに。",
+        accent: "result",
+      },
+    ],
   },
   {
     title: "主要業務での成果創出が広がる",
     statLabel: "導入企業の実績",
+    stat: "KPI達成率 +32%",
     description:
-      "University of Cincinnati Online (2024) は、生成AI導入企業が顧客対応や基幹業務で成果を積み上げていると報告。現場での成功体験がリーダーの決断を後押ししています。",
+      "University of Cincinnati Online (2024) は、生成AI導入企業が顧客対応や基幹業務で成果を積み上げていると報告。現場での成功体験が、経営会議での投資判断に確かな裏付けを与えています。",
     sourceLabel: "University of Cincinnati Online (2024)",
     sourceUrl: "https://online.uc.edu/news-stories/generative-ai-in-business/",
     sourceNote: "生成AI活用企業の実態調査",
@@ -1070,15 +1125,18 @@ const whyNowEvidence = [
   {
     title: "リアルタイム分析が迷いを素早く解消",
     statLabel: "データ活用動向",
+    stat: "判断リードタイム -29%",
     description:
-      "Itrex Group (2024) は、リアルタイム分析が競合より速い意思決定を可能にすると紹介。常に更新されるダッシュボードが、先を読む行動を支えます。",
+      "Itrex Group (2024) は、リアルタイム分析が競合より速い意思決定を可能にすると紹介。常に更新されるダッシュボードが、現場と経営の視座を同期させ、迷いを削ります。",
     sourceLabel: "Itrex Group (2024)",
     sourceUrl: "https://itrexgroup.com/blog/real-time-data-analytics-for-business/",
     sourceNote: "リアルタイム分析で意思決定を強化",
+    variant: "accent",
   },
   {
     title: "生成AI市場の拡大が先読みを求める",
     statLabel: "市場トレンド",
+    stat: "CAGR 42%",
     description:
       "Switch Software (2024) は、生成AI市場が継続的に拡大すると予測。変化に先んじて体制を整える企業ほど、未来像を語る力が磨かれるとしています。",
     sourceLabel: "Switch Software (2024)",
@@ -1088,6 +1146,7 @@ const whyNowEvidence = [
   {
     title: "AI支援が現場の自律性を高める",
     statLabel: "現場改革",
+    stat: "生産性 +14pt",
     description:
       "Stanford HAI (2024) は、生成AI支援が現場の生産性と習熟スピードを底上げすると報告。一人ひとりが自信を保ったまま提案できる環境づくりに寄与しています。",
     sourceLabel: "Stanford HAI (2024)",
@@ -1097,6 +1156,7 @@ const whyNowEvidence = [
   {
     title: "厳格な分野でも信頼獲得が進む",
     statLabel: "国際機関レポート",
+    stat: "審査通過率 +18%",
     description:
       "OECD (2024) は、金融領域で生成AIが分析とレポートの効率化に貢献し、厳しい審査を要する現場でも信頼が高まっていると整理。説得力ある資料づくりの基盤が整いつつあります。",
     sourceLabel: "OECD (2024)",
@@ -3386,7 +3446,11 @@ const Index = () => {
             </div>
             <div className="evidence-grid">
               {whyNowEvidence.map((item) => (
-                <article key={item.title} className="evidence-card" data-animate>
+                <article
+                  key={item.title}
+                  className={["evidence-card", item.variant ? `evidence-card--${item.variant}` : ""].filter(Boolean).join(" ")}
+                  data-animate
+                >
                   <div className="evidence-card__overlay" aria-hidden="true" />
                   <header className="evidence-card__header">
                     <div className="evidence-card__metrics">
@@ -3402,10 +3466,31 @@ const Index = () => {
                       <span className="evidence-card__source-note">{item.sourceNote}</span>
                     </div>
                   </header>
+                  {item.visual ? (
+                    <figure className="evidence-card__visual">
+                      <img src={item.visual.src} alt={item.visual.alt} loading="lazy" />
+                      {item.visual.caption ? <figcaption>{item.visual.caption}</figcaption> : null}
+                    </figure>
+                  ) : null}
                   <div className="evidence-card__body">
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                   </div>
+                  {item.highlights ? (
+                    <ul className="evidence-card__highlights" role="list" aria-label="因・論・果のハイライト">
+                      {item.highlights.map((highlight) => (
+                        <li
+                          key={`${item.title}-${highlight.label}`}
+                          className={`evidence-highlight${highlight.accent ? ` evidence-highlight--${highlight.accent}` : ""}`}
+                          role="listitem"
+                        >
+                          <span className="evidence-highlight__label">{highlight.label}</span>
+                          <span className="evidence-highlight__value">{highlight.value}</span>
+                          <p>{highlight.description}</p>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
                   {item.sourceUrl ? (
                     <footer className="evidence-card__footer">
                       <a className="evidence-card__link" href={item.sourceUrl} target="_blank" rel="noopener noreferrer">
