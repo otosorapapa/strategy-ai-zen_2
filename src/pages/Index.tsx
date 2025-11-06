@@ -679,6 +679,13 @@ type ComparisonPillar = {
   bullets: string[];
 };
 
+type ComparisonExecutiveSignal = {
+  value: string;
+  label: string;
+  description: string;
+  icon: LucideIcon;
+};
+
 const comparisonHighlights: ComparisonHighlight[] = [
   {
     stat: "-52%",
@@ -736,6 +743,30 @@ const comparisonPillars: ComparisonPillar[] = [
       "週次レポートでROIとキャッシュを二軸管理",
       "融資・補助金の想定問答と資料を専門家が準備",
     ],
+  },
+];
+
+const comparisonExecutiveSignals: ComparisonExecutiveSignal[] = [
+  {
+    value: "3層連動",
+    label: "Vision / Finance / Ops",
+    description:
+      "経営者の構想を起点に財務と現場のKPIを一枚の意思決定ストーリーに束ね、社内外の認識を揃えます。",
+    icon: Layers3,
+  },
+  {
+    value: "90日",
+    label: "ROI検証ループ",
+    description:
+      "週次レビューとAIレポートで投資対効果を検証。意思決定の速さと納得性を落とさず改善サイクルを回します。",
+    icon: Gauge,
+  },
+  {
+    value: "100%",
+    label: "証跡ログ化",
+    description:
+      "根拠データ・議事・意思決定をワンクリックで追跡できる監査ログを整備し、金融機関や取締役会への説明を容易にします。",
+    icon: CheckCircle2,
   },
 ];
 
@@ -4651,12 +4682,43 @@ const Index = () => {
     >
       <div className="container">
         <div className="section-header" data-animate>
+          <span className="section-eyebrow">Executive Benchmark</span>
           <h2 id="comparison-heading">他社AI支援との比較</h2>
+          <p className="section-lead">
+            年商5,000万円〜15億円の経営チームが、因果性・論理性・納得性の高い意思決定を実現するための伴走体制を、他社支援と定量・定性の両面で比較しました。
+          </p>
           <ul className="section-intro">
             <li>経営者の構想を真ん中に置き、財務と現場をつなぐ意思決定軸を共創します。</li>
             <li>生成AIと専門チームが貴社専用の計画書と管理ダッシュボードを整え、次の一手を見える化します。</li>
             <li>先読みアラートと週次レビューで、揺るがないリーダーシップを支える体制を維持します。</li>
           </ul>
+        </div>
+        <div className="comparison-overview" data-animate>
+          <figure className="comparison-overview__figure">
+            <img
+              src="/images/comparison-blueprint.svg"
+              alt="構想・財務・現場を因果でつなぐブループリントの図解"
+              loading="lazy"
+            />
+            <figcaption>Vision・Finance・Opsの3層を因果で同期し、意思決定の根拠を一気通貫で整備。</figcaption>
+          </figure>
+          <div className="comparison-overview__signals">
+            {comparisonExecutiveSignals.map((signal) => {
+              const SignalIcon = signal.icon;
+              return (
+                <article key={signal.label} className="comparison-signal-card">
+                  <span className="comparison-signal-card__icon" aria-hidden="true">
+                    <SignalIcon />
+                  </span>
+                  <div className="comparison-signal-card__body">
+                    <span className="comparison-signal-card__value">{signal.value}</span>
+                    <h3>{signal.label}</h3>
+                    <p>{signal.description}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
         <div className="comparison-highlights" data-animate>
           {comparisonHighlights.map((highlight) => {
@@ -4677,6 +4739,19 @@ const Index = () => {
               </article>
             );
           })}
+        </div>
+        <div className="comparison-trust-stack" data-animate>
+          <div className="comparison-trust-stack__copy">
+            <span className="comparison-trust-stack__label">公的認定・掲載実績</span>
+            <p>
+              経済産業省 認定経営革新等支援機関／地方銀行12行との共同伴走／日経クロストレンド掲載事例
+            </p>
+          </div>
+          <div className="comparison-trust-stack__logos" aria-hidden="true">
+            <img src={logoOisix} alt="Oisix" loading="lazy" />
+            <img src={logoSansan} alt="Sansan" loading="lazy" />
+            <img src={logoRaksul} alt="ラクスル" loading="lazy" />
+          </div>
         </div>
         <figure className="comparison-visual" data-animate>
           <div className="comparison-visual__header">
