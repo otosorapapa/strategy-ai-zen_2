@@ -51,7 +51,6 @@ import expertTanakaPhoto from "@/assets/expert-tanaka.svg";
 import representativePhoto from "@/assets/representative.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import solutionLogicTimeline from "@/assets/process-flow-infographic.jpg";
-import journeyFlowVisual from "@/assets/process-flow-infographic.jpg";
 import heroCausalityDiagram from "@/assets/causality-flow.jpg";
 import executiveStrategyVisual from "@/assets/executive-strategy-meeting.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
@@ -3915,17 +3914,6 @@ const Index = () => {
                   {"ステージごとに必要な証拠・会議ゴール・準備物を揃えることで、経営チームが納得する筋道を即座に共有できます。"}
                 </p>
               </div>
-              <figure className="journey-cta__visual" data-animate>
-                <img
-                  src={journeyFlowVisual}
-                  alt="課題整理から実行準備までの3ステップがインフォグラフィックで示されている"
-                  loading="lazy"
-                />
-                <figcaption>
-                  {"因果整理→打ち手設計→実行準備の流れを一枚で視覚化。"}
-                  {"色分けと矢印で視線を次セクションに誘導し、スクロール継続と理解の同期を両立させます。"}
-                </figcaption>
-              </figure>
               <div className="journey-cta__summary" data-animate>
                 {journeySummaryStats.map((stat) => {
                   const SummaryIcon = stat.icon;
