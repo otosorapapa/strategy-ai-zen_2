@@ -1,0 +1,74 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="420" rx="28" fill="url(#paint0_linear)" />
+  <g filter="url(#filter0_d)">
+    <rect x="48" y="56" width="544" height="308" rx="24" fill="rgba(255,255,255,0.92)" />
+  </g>
+  <path d="M128 128H512" stroke="url(#paint1_linear)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="8 12" />
+  <circle cx="128" cy="128" r="36" fill="url(#paint2_radial)" />
+  <circle cx="320" cy="128" r="36" fill="url(#paint3_radial)" />
+  <circle cx="512" cy="128" r="36" fill="url(#paint4_radial)" />
+  <g font-family="'Noto Sans JP', 'Hiragino Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="600" fill="#17365C">
+    <text font-size="18" x="96" y="236">属人的な会議準備</text>
+    <text font-size="28" x="72" y="208">現状課題</text>
+    <text font-size="18" x="276" y="236">AIが一次ドラフト</text>
+    <text font-size="28" x="248" y="208">導入アプローチ</text>
+    <text font-size="18" x="460" y="236">2週間で決裁</text>
+    <text font-size="28" x="432" y="208">定量インパクト</text>
+  </g>
+  <g font-family="'Noto Sans JP', 'Hiragino Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="400" fill="#3C4C63">
+    <text font-size="15" x="72" y="262">会議準備に月145時間を消費</text>
+    <text font-size="15" x="72" y="286">外部シグナルの反映は6週間遅延</text>
+    <text font-size="15" x="244" y="262">経営課題をAIが因果マップ化</text>
+    <text font-size="15" x="244" y="286">専門家が意思決定ロジックを監修</text>
+    <text font-size="15" x="420" y="262">意思決定リードタイム67%短縮</text>
+    <text font-size="15" x="420" y="286">外部ニュースの反映12時間以内</text>
+  </g>
+  <g font-family="'Roboto Mono', 'Fira Mono', monospace" font-weight="600" fill="#115E67">
+    <text font-size="14" x="112" y="134">STEP 01</text>
+    <text font-size="14" x="304" y="134">STEP 02</text>
+    <text font-size="14" x="496" y="134">STEP 03</text>
+  </g>
+  <g font-family="'Noto Sans JP', 'Hiragino Sans', 'Helvetica Neue', Arial, sans-serif" font-weight="700" fill="#0F6BAF">
+    <text font-size="32" x="82" y="96">課題</text>
+    <text font-size="32" x="266" y="96">介入</text>
+    <text font-size="32" x="450" y="96">成果</text>
+  </g>
+  <g opacity="0.9" fill="#0D5C93">
+    <path d="M128 120L134 132H122L128 120Z" />
+    <path d="M320 120L326 132H314L320 120Z" />
+    <path d="M512 120L518 132H506L512 120Z" />
+  </g>
+  <defs>
+    <filter id="filter0_d" x="32" y="40" width="576" height="340" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <feGaussianBlur in="BackgroundImageFix" stdDeviation="8" />
+      <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur" />
+      <feOffset dy="10" />
+      <feGaussianBlur stdDeviation="18" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.0666667 0 0 0 0 0.211765 0 0 0 0 0.352941 0 0 0 0.18 0" />
+      <feBlend mode="normal" in2="effect1_backgroundBlur" result="effect1_dropShadow" />
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+    </filter>
+    <linearGradient id="paint0_linear" x1="0" y1="0" x2="640" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E8F2FF" />
+      <stop offset="50%" stop-color="#F2FBF7" />
+      <stop offset="100%" stop-color="#E3F5FF" />
+    </linearGradient>
+    <linearGradient id="paint1_linear" x1="128" y1="128" x2="512" y2="128" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F6BAF" stop-opacity="0.2" />
+      <stop offset="1" stop-color="#1E9E84" stop-opacity="0.4" />
+    </linearGradient>
+    <radialGradient id="paint2_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(128 128) rotate(90) scale(36)">
+      <stop stop-color="#0F6BAF" stop-opacity="0.18" />
+      <stop offset="1" stop-color="#0F6BAF" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="paint3_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(320 128) rotate(90) scale(36)">
+      <stop stop-color="#1E9E84" stop-opacity="0.18" />
+      <stop offset="1" stop-color="#1E9E84" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="paint4_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(512 128) rotate(90) scale(36)">
+      <stop stop-color="#FF7A1A" stop-opacity="0.18" />
+      <stop offset="1" stop-color="#FF7A1A" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+</svg>

@@ -797,6 +797,24 @@ const outcomeNarrative = [
   },
 ];
 
+const outcomeNarrativeSignals = [
+  {
+    label: "意思決定リードタイム",
+    value: "-67%",
+    caption: "週次会議の準備〜決裁期間を短縮",
+  },
+  {
+    label: "会議準備工数",
+    value: "-145h/月",
+    caption: "AIドラフト化で属人業務を削減",
+  },
+  {
+    label: "外部シグナル反映",
+    value: "12h以内",
+    caption: "速報ニュースをダッシュボードへ同期",
+  },
+];
+
 type AiValuePoint = {
   title: string;
   challenge: string;
@@ -4141,19 +4159,74 @@ const Index = () => {
                   );
                 })}
               </div>
-              <div className="insights-narrative" data-animate>
-                {outcomeNarrative.map((item, index) => (
-                  <article key={item.stage} className="insights-narrative__item">
-                    <div className="insights-narrative__index">{`${index + 1}`.padStart(2, "0")}</div>
-                    <header>
-                      <span>{item.stage}</span>
-                      <h3>{item.headline}</h3>
-                    </header>
-                    <p className="insights-narrative__metric">{item.metric}</p>
-                    <p>{item.description}</p>
-                    <footer>{item.evidence}</footer>
-                  </article>
-                ))}
+              <div className="insights-narrative-layout" data-animate>
+                <aside className="insights-narrative__sidebar">
+                  <figure className="insights-narrative__figure">
+                    <img
+                      src="/images/outcome-logic-map.svg"
+                      alt="課題・介入・成果を3段で示した因果マップ"
+                      loading="lazy"
+                    />
+                    <figcaption>
+                      課題→介入→成果の連なりを1枚で可視化。経営層・現場・金融機関の
+                      共通認識を揃えるための説明資料として提供しています。
+                    </figcaption>
+                  </figure>
+                  <ul className="insights-narrative__signals">
+                    {outcomeNarrativeSignals.map((signal) => (
+                      <li key={signal.label}>
+                        <span>{signal.label}</span>
+                        <strong>{signal.value}</strong>
+                        <p>{signal.caption}</p>
+                      </li>
+                    ))}
+                  </ul>
+                  <figure className="insights-narrative__testimonial">
+                    <img
+                      src={customerTakashima}
+                      alt="株式会社タカシマ 代表取締役 高島様"
+                      loading="lazy"
+                    />
+                    <figcaption>
+                      <blockquote>
+                        「週次会議の論点が先に届くので、役員が意思決定に集中できるように
+                        なりました。銀行交渉の資料精度も評価されています。」
+                      </blockquote>
+                      <cite>株式会社タカシマ 代表取締役 高島様</cite>
+                    </figcaption>
+                  </figure>
+                  <div className="insights-narrative__trust">
+                    <span>導入企業・連携先</span>
+                    <img src={logoOisix} alt="Oisix" loading="lazy" />
+                    <img src={logoSansan} alt="Sansan" loading="lazy" />
+                    <img src={logoRaksul} alt="ラクスル" loading="lazy" />
+                  </div>
+                </aside>
+                <div className="insights-narrative">
+                  {outcomeNarrative.map((item, index) => (
+                    <article key={item.stage} className="insights-narrative__item">
+                      <div className="insights-narrative__index">
+                        <span>STEP</span>
+                        <strong>{`${index + 1}`.padStart(2, "0")}</strong>
+                      </div>
+                      <header>
+                        <span>{item.stage}</span>
+                        <h3>{item.headline}</h3>
+                      </header>
+                      <div className="insights-narrative__body">
+                        <p className="insights-narrative__metric">
+                          <span>Key Metric</span>
+                          <strong>{item.metric}</strong>
+                        </p>
+                        <p>{item.description}</p>
+                      </div>
+                      <footer>
+                        <span>検証ソース</span>
+                        <strong>{item.evidence}</strong>
+                      </footer>
+                    </article>
+                  ))}
+                </div>
               </div>
               <div className="insights-grid">
                 <article className="insights-panel" data-animate>
