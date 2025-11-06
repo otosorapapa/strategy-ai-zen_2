@@ -53,6 +53,7 @@ import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
 import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
 import aiValueAugmentationVisual from "@/assets/ai-value-augmentation.svg";
+import aiValueLatticeVisual from "@/assets/ai-value-lattice.svg";
 import evidenceCausalityVisual from "@/assets/evidence-causality.svg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
@@ -808,6 +809,69 @@ type AiValuePoint = {
   visual: string;
   visualAlt: string;
 };
+
+type AiValueStat = {
+  label: string;
+  value: string;
+  caption: string;
+  accent: AiValuePoint["accent"];
+};
+
+type AiValueLegend = {
+  accent: AiValuePoint["accent"];
+  label: string;
+  description: string;
+};
+
+const aiValueStats: AiValueStat[] = [
+  {
+    label: "意思決定リードタイム",
+    value: "-67%",
+    caption: "導入企業の平均短縮幅",
+    accent: "navy",
+  },
+  {
+    label: "週次レビュー継続率",
+    value: "93%",
+    caption: "3か月継続モニタリング",
+    accent: "mint",
+  },
+  {
+    label: "アラート検知の先読み",
+    value: "10日前",
+    caption: "資金繰り・需要シグナル",
+    accent: "sky",
+  },
+  {
+    label: "経営者の集中時間",
+    value: "+45h/月",
+    caption: "役員ヒアリング中央値",
+    accent: "citrus",
+  },
+];
+
+const aiValueLegend: AiValueLegend[] = [
+  {
+    accent: "navy",
+    label: "Vision Layer",
+    description: "AIが常時更新するダッシュボードで意思決定の起点を揃える",
+  },
+  {
+    accent: "mint",
+    label: "Scenario Layer",
+    description: "複数案を1画面で比較し、論点を事前に共有",
+  },
+  {
+    accent: "sky",
+    label: "Alert Layer",
+    description: "偏りを抑えた閾値監視で手遅れを防ぐ",
+  },
+  {
+    accent: "citrus",
+    label: "Execution Layer",
+    description: "伴走支援で社長の集中時間を取り戻し決裁をスムーズに",
+  },
+];
 
 const aiValuePoints: AiValuePoint[] = [
   {
@@ -3535,56 +3599,84 @@ const Index = () => {
               </ol>
             </div>
             <div className="ai-value-grid" data-animate>
-              {aiValuePoints.map((point) => {
-                const ValueIcon = point.icon;
-                return (
-                  <article
-                    key={point.title}
-                    className={`ai-value-card ai-value-card--${point.accent}`}
-                  >
-                    <div className="ai-value-card__surface">
-                      <header className="ai-value-card__header">
-                        <div className="ai-value-card__identity">
-                          <div
-                            className={`ai-value-card__icon ai-value-card__icon--${point.accent}`}
-                            aria-hidden="true"
-                          >
-                            <ValueIcon />
+              <div className="ai-value-grid__intro">
+                <span className="ai-value-grid__badge">VALUE BLUEPRINT</span>
+                <h3>因果で束ねた意思決定の指揮所を一枚で俯瞰</h3>
+                <p>
+                  経営計画AIと専門家チームが「因（兆し）→論（論拠）→果（成果）」を循環させるための司令塔を設計しました。
+                  事前共有する論点と、会議で握るべき数字をワンセットで提示することで、役員会の納得感とスピードを同時に高めます。
+                </p>
+                <ul className="ai-value-grid__stats" role="list" aria-label="提供価値の主要指標">
+                  {aiValueStats.map((stat) => (
+                    <li key={stat.label} className={`ai-value-grid__stat ai-value-grid__stat--${stat.accent}`}>
+                      <strong>{stat.value}</strong>
+                      <span>{stat.label}</span>
+                      <small>{stat.caption}</small>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <figure className="ai-value-grid__blueprint">
+                <img src={aiValueLatticeVisual} alt="因・論・果の価値連鎖を可視化した設計図" loading="lazy" />
+                <figcaption>
+                  AIが兆しを検知し、専門家が論理を磨き、経営陣が成果を提示するまでの一連の価値連鎖を視覚化。
+                  会議のストーリーラインを共有し、次のアクションへ視線を導きます。
+                </figcaption>
+                <ul className="ai-value-grid__legend" role="list" aria-label="価値レイヤーの説明">
+                  {aiValueLegend.map((item) => (
+                    <li key={item.label} className={`ai-value-grid__legend-item ai-value-grid__legend-item--${item.accent}`}>
+                      <span className="ai-value-grid__legend-label">{item.label}</span>
+                      <p>{item.description}</p>
+                    </li>
+                  ))}
+                </ul>
+              </figure>
+              <div className="ai-value-grid__cards">
+                {aiValuePoints.map((point) => {
+                  const ValueIcon = point.icon;
+                  return (
+                    <article key={point.title} className={`ai-value-card ai-value-card--${point.accent}`}>
+                      <div className="ai-value-card__surface">
+                        <header className="ai-value-card__header">
+                          <div className="ai-value-card__identity">
+                            <div
+                              className={`ai-value-card__icon ai-value-card__icon--${point.accent}`}
+                              aria-hidden="true"
+                            >
+                              <ValueIcon />
+                            </div>
+                            <div className="ai-value-card__meta">
+                              <span className="ai-value-card__evidence">{point.evidence}</span>
+                              <h3>{point.title}</h3>
+                            </div>
                           </div>
-                          <div className="ai-value-card__meta">
-                            <span className="ai-value-card__evidence">{point.evidence}</span>
-                            <h3>{point.title}</h3>
-                          </div>
+                          <figure className="ai-value-card__visual">
+                            <img src={point.visual} alt={point.visualAlt} loading="lazy" />
+                          </figure>
+                        </header>
+                        <div className="ai-value-card__body">
+                          <dl className="ai-value-card__narrative">
+                            <div className="ai-value-card__row">
+                              <dt>課題</dt>
+                              <dd>{point.challenge}</dd>
+                            </div>
+                            <div className="ai-value-card__row">
+                              <dt>解決</dt>
+                              <dd>{point.mechanism}</dd>
+                            </div>
+                          </dl>
+                          <aside className="ai-value-card__metric" aria-label={`${point.impactLabel}の成果値`}>
+                            <span className="ai-value-card__metric-label">{point.impactLabel}</span>
+                            <strong>{point.impactValue}</strong>
+                            <p>{point.executiveTakeaway}</p>
+                            <small>{point.impactContext}</small>
+                          </aside>
                         </div>
-                        <figure className="ai-value-card__visual">
-                          <img src={point.visual} alt={point.visualAlt} loading="lazy" />
-                        </figure>
-                      </header>
-                      <div className="ai-value-card__body">
-                        <dl className="ai-value-card__narrative">
-                          <div className="ai-value-card__row">
-                            <dt>課題</dt>
-                            <dd>{point.challenge}</dd>
-                          </div>
-                          <div className="ai-value-card__row">
-                            <dt>解決</dt>
-                            <dd>{point.mechanism}</dd>
-                          </div>
-                        </dl>
-                        <aside
-                          className="ai-value-card__metric"
-                          aria-label={`${point.impactLabel}の成果値`}
-                        >
-                          <span className="ai-value-card__metric-label">{point.impactLabel}</span>
-                          <strong>{point.impactValue}</strong>
-                          <p>{point.executiveTakeaway}</p>
-                          <small>{point.impactContext}</small>
-                        </aside>
                       </div>
-                    </div>
-                  </article>
-                );
-              })}
+                    </article>
+                  );
+                })}
+              </div>
             </div>
             <div className="story-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
