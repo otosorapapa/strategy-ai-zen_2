@@ -3562,14 +3562,6 @@ const Index = () => {
                   </ul>
                 </header>
                 <div className="hero-dashboard-shot__visual">
-                  <div className="hero-dashboard-shot__image-frame">
-                    <img
-                      src={decisionDashboardVisual}
-                      alt="資金繰りと利益シナリオを比較するAIダッシュボードの画面"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
                   <div className="hero-dashboard-shot__meta-panel">
                     <h4>伴走チームが読み解く3つの焦点</h4>
                     <ul className="hero-dashboard-shot__callouts" aria-label="ダッシュボードで確認できる主要論点">
