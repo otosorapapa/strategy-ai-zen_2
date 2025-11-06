@@ -5669,31 +5669,75 @@ const Index = () => {
         {/* CTAセクション（締め） */}
         <section className="section final-cta" aria-labelledby="final-cta-heading">
           <div className="container">
-            <div className="final-cta__content" data-animate>
-              <span className="final-cta__eyebrow">専門家×生成AIの伴走</span>
-              {decideStage && (
-                <span className="final-cta__stage">{decideStage.stageLabel}</span>
-              )}
-              <h2 id="final-cta-heading">意思決定の質・速さ・先見性を高める経営計画を今すぐ</h2>
-              <p>
-                経営者の時間は有限です。160件の案件で磨いた専門家が生成AIの出力を精査し、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果創出を後押しします。
-                まずは無料AI診断で現状と優先課題を把握し、必要な資料は後からダウンロードできます。
-              </p>
-              <div className="final-cta__actions">
-                <a className="btn btn-cta" href="#contact">
-                  {decideStage?.buttonLabel ?? primaryCtaLabel}
-                </a>
-                <a
-                  className="btn btn-outline"
-                  href={evaluateStage?.href ?? "#roi-preview"}
-                >
-                  {evaluateStage?.buttonLabel ?? "ROIを試算する"}
-                </a>
+            <div className="final-cta__layout">
+              <div className="final-cta__content" data-animate>
+                <span className="final-cta__eyebrow">専門家×生成AIの伴走</span>
+                {decideStage && (
+                  <span className="final-cta__stage">{decideStage.stageLabel}</span>
+                )}
+                <h2 id="final-cta-heading">意思決定の質・速さ・先見性を高める経営計画を今すぐ</h2>
+                <p>
+                  経営者の時間は有限です。160件の案件で磨いた専門家が生成AIの出力を精査し、意思決定リードタイム52%短縮・計画作成工数80%削減・粗利18%増・キャッシュ1.8倍という成果創出を後押しします。
+                  まずは無料AI診断で現状と優先課題を把握し、必要な資料は後からダウンロードできます。
+                </p>
+                <ul className="final-cta__metrics" aria-label="創出してきた成果">
+                  <li>
+                    <strong>52%</strong>
+                    <span>意思決定リードタイム短縮</span>
+                  </li>
+                  <li>
+                    <strong>80%</strong>
+                    <span>計画作成工数削減</span>
+                  </li>
+                  <li>
+                    <strong>+18%</strong>
+                    <span>粗利率向上</span>
+                  </li>
+                  <li>
+                    <strong>1.8倍</strong>
+                    <span>フリーキャッシュ創出</span>
+                  </li>
+                </ul>
+                <div className="final-cta__actions">
+                  <a className="btn btn-cta" href="#contact">
+                    {decideStage?.buttonLabel ?? primaryCtaLabel}
+                  </a>
+                  <a
+                    className="btn btn-outline"
+                    href={evaluateStage?.href ?? "#roi-preview"}
+                  >
+                    {evaluateStage?.buttonLabel ?? "ROIを試算する"}
+                  </a>
+                </div>
+                <div className="final-cta__guarantee" role="note">
+                  <span className="final-cta__guarantee-badge">無料診断</span>
+                  <p>
+                    守秘義務契約の締結と、診断後30日以内の無料伴走レビューを標準提供。経営数値を預けても安心です。
+                  </p>
+                </div>
+                <p className="final-cta__phone">
+                  お電話でのご相談: <a href={`tel:${contactPhoneNumber.replace(/-/g, "")}`}>{contactPhoneNumber}</a>
+                  <span>（平日9:00-18:00）</span>
+                </p>
               </div>
-              <p className="final-cta__phone">
-                お電話でのご相談: <a href={`tel:${contactPhoneNumber.replace(/-/g, "")}`}>{contactPhoneNumber}</a>
-                <span>（平日9:00-18:00）</span>
-              </p>
+              <aside className="final-cta__visual" data-animate>
+                <figure className="final-cta__mock">
+                  <img
+                    src="/images/hero-decision-dashboard.svg"
+                    alt="生成AIが提案する意思決定ダッシュボードのサマリー"
+                    loading="lazy"
+                  />
+                  <figcaption>意思決定フローの全体像と優先アクションが一目で把握できます。</figcaption>
+                </figure>
+                <div className="final-cta__trust" aria-label="信頼の根拠">
+                  <p>主要メディア・行政に選ばれた専門家が監修</p>
+                  <ul className="final-cta__badge-row">
+                    <li>東京都DX推進パートナー</li>
+                    <li>日経クロストレンド掲載</li>
+                    <li>IPA情報セキュリティ遵守</li>
+                  </ul>
+                </div>
+              </aside>
             </div>
           </div>
         </section>
