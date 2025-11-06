@@ -558,49 +558,6 @@ const heroMetrics = [
   },
 ];
 
-type HeroVisualInsight = {
-  stage: "因" | "論" | "果";
-  tone: "cause" | "logic" | "impact";
-  label: string;
-  description: string;
-  metric: string;
-  metricLabel: string;
-  icon: LucideIcon;
-};
-
-const heroVisualInsights: HeroVisualInsight[] = [
-  {
-    stage: "因",
-    tone: "cause",
-    label: "128指標の外部・内部データ統合",
-    description:
-      "金融機関審査に使われるマクロ指標と自社PL・BSのドライバーを生成AIが一枚に統合。意思決定に効く因果関係を抽出します。",
-    metric: "128",
-    metricLabel: "評価指標を同時解析",
-    icon: ScanSearch,
-  },
-  {
-    stage: "論",
-    tone: "logic",
-    label: "3階層の意思決定ロジックツリー",
-    description:
-      "経営課題→打ち手→KPIをロジックツリーで接続し、役員会の論点ズレを排除。合意形成に必要な論拠を即座に共有します。",
-    metric: "3階層",
-    metricLabel: "論点構造を自動生成",
-    icon: Workflow,
-  },
-  {
-    stage: "果",
-    tone: "impact",
-    label: "利益インパクトと資金繰りの即時試算",
-    description:
-      "粗利率・営業CF・回収サイトを同時に可視化し、投資判断の根拠と資金繰りの余力を明確に提示。迷いを残さない意思決定を後押しします。",
-    metric: "+3.6pt",
-    metricLabel: "平均粗利率の押し上げ",
-    icon: TrendingUp,
-  },
-];
-
 const heroAllianceExperts = [
   {
     name: "田中 圭",
@@ -2899,38 +2856,6 @@ const Index = () => {
               </div>
             </div>
             <div className="hero-visual">
-              <div className="hero-visual__cluster" data-animate data-initial-visible="true">
-                <div
-                  className="hero-visual__insight-board"
-                  role="list"
-                  aria-label="生成AI診断で提示する因・論・果のロジック"
-                >
-                  {heroVisualInsights.map((insight, index) => {
-                    const InsightIcon = insight.icon;
-                    return (
-                      <article
-                        key={insight.label}
-                        className={`hero-insight hero-insight--${insight.tone}`}
-                        role="listitem"
-                        data-index={index}
-                      >
-                        <div className="hero-insight__header">
-                          <span className="hero-insight__stage">{insight.stage}</span>
-                          <p className="hero-insight__label">{insight.label}</p>
-                          <span className="hero-insight__icon" aria-hidden="true">
-                            <InsightIcon />
-                          </span>
-                        </div>
-                        <p className="hero-insight__description">{insight.description}</p>
-                        <div className="hero-insight__metric">
-                          <strong>{insight.metric}</strong>
-                          <span>{insight.metricLabel}</span>
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
-              </div>
               <div className="hero-quick-form" data-animate>
                 <div className="hero-quick-form__intro">
                   <h2>60秒で申し込む無料AI診断</h2>
