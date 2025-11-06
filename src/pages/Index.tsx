@@ -2278,6 +2278,38 @@ const upcomingEvents: EventCard[] = [
   },
 ];
 
+type EventSignal = {
+  value: string;
+  label: string;
+  description: string;
+};
+
+const eventSignals: EventSignal[] = [
+  {
+    value: "90分×3フェーズ",
+    label: "意思決定の筋道を再構築",
+    description: "課題の棚卸し→AI提案の検証→合意形成までを1つの流れで体験。",
+  },
+  {
+    value: "実務テンプレ7点",
+    label: "翌日から共有できる資料",
+    description: "経営計画ドラフトや会議サマリーのフォーマットをその場で配布。",
+  },
+  {
+    value: "参加企業 5,000万〜15億円規模",
+    label: "同規模の視座を獲得",
+    description: "財務・人材・市場テーマを同規模企業の事例で検証できます。",
+  },
+];
+
+const eventFitPoints = [
+  "経営会議でAI活用の筋道を説明する必要がある",
+  "金融機関や株主への説得力を高めたい",
+  "短期間で全社の合意形成を進めたい",
+];
+
+const eventJourneyVisual = new URL("/images/event-journey.svg", import.meta.url).href;
+
 const newsletterHighlights = [
   "月1回、生成AIで成果を出した中小企業の実例を解説",
   "信頼を得た伝え方や合意形成の工夫を紹介",
@@ -5400,12 +5432,35 @@ const Index = () => {
               })}
             </div>
             <div className="resource-subsection" data-animate>
-              <div className="resource-subsection__header">
-                <h3>生成AI経営セミナー・イベント</h3>
-                <p>
-                  最新の成功事例や信頼を得た伝え方を学べるオンライン／オフラインイベントを定期開催。
-                  年商5,000万円〜15億円規模の経営者が、自ら舵を取れる判断軸を持ち帰れます。
-                </p>
+              <div className="resource-subsection__intro">
+                <div className="resource-subsection__header">
+                  <h3>生成AI経営セミナー・イベント</h3>
+                  <p>
+                    最新の成功事例や信頼を得た伝え方を学べるオンライン／オフラインイベントを定期開催。
+                    年商5,000万円〜15億円規模の経営者が、自ら舵を取れる判断軸を持ち帰れます。
+                  </p>
+                  <ul className="resource-subsection__metrics">
+                    {eventSignals.map((signal) => (
+                      <li key={signal.value} className="resource-subsection__metric">
+                        <span className="resource-subsection__metric-value">{signal.value}</span>
+                        <span className="resource-subsection__metric-label">{signal.label}</span>
+                        <p className="resource-subsection__metric-description">{signal.description}</p>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="resource-subsection__insight" aria-labelledby="resource-insight-heading">
+                    <h4 id="resource-insight-heading">こうした経営者さまに最適です</h4>
+                    <ul>
+                      {eventFitPoints.map((point) => (
+                        <li key={point}>{point}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <figure className="resource-subsection__visual">
+                  <img src={eventJourneyVisual} alt="課題把握・AI共創・浸透プランの3パートで構成されたイベントの流れ" loading="lazy" />
+                  <figcaption>参加前後のサポートが一目で分かるフレームで、社内展開のイメージを共有できます。</figcaption>
+                </figure>
               </div>
               <div className="event-list">
                 {upcomingEvents.map((event) => {
