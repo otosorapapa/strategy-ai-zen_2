@@ -55,7 +55,7 @@ import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
 import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
 import aiValueAugmentationVisual from "@/assets/ai-value-augmentation.svg";
 import aiValueLatticeVisual from "@/assets/ai-value-lattice.svg";
-import evidenceCausalityVisual from "@/assets/evidence-causality.svg";
+import evidencePrimeVisual from "@/assets/process-flow.jpg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -1142,9 +1142,9 @@ const whyNowEvidence: EvidenceItem[] = [
     variant: "prime",
     layout: "spotlight",
     visual: {
-      src: evidenceCausalityVisual,
-      alt: "因・論・果の流れで意思決定が洗練される図解",
-      caption: "AIが因（Cause）を抽出し、専門家が論（Logic）を検証、経営陣が果（Result）を導くフレーム",
+      src: evidencePrimeVisual,
+      alt: "経営会議の因・論・果を描いた3レイヤー構造のフレームワーク図",
+      caption: "因（データ検知）→論（専門家検証）→果（経営判断）を1枚で同期したプレミアム設計図。",
     },
     highlights: [
       {
