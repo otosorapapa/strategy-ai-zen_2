@@ -9,6 +9,7 @@ import {
 } from "react";
 
 import {
+  Activity,
   ArrowDownRight,
   ArrowRight,
   ArrowUpRight,
@@ -23,6 +24,7 @@ import {
   Compass,
   Database,
   FileText,
+  Gauge,
   Info,
   Layers3,
   LineChart,
@@ -32,6 +34,7 @@ import {
   Shield,
   ShieldCheck,
   Sparkles,
+  Target,
   Timer,
   TrendingUp,
   Users2,
@@ -155,6 +158,47 @@ const heroProcessKpis = [
     label: "粗利率改善事例",
     caption: "製造・小売での最大値",
   },
+];
+
+const heroDashboardStats = [
+  {
+    value: "3シナリオ",
+    label: "資金繰り×投資余力",
+    caption: "ベース/投資/守りの打ち手を即時比較",
+  },
+  {
+    value: "92%",
+    label: "経営会議納得度",
+    caption: "導入企業で意思決定が前倒し",
+  },
+  {
+    value: "-48h",
+    label: "資料準備リードタイム",
+    caption: "週次レポート自動生成で削減",
+  },
+];
+
+const heroDashboardCallouts = [
+  {
+    icon: Gauge,
+    title: "シナリオ・ナビゲーション",
+    description: "キャッシュ残高と投資余力をシミュレーションし投資余地を可視化。",
+  },
+  {
+    icon: Activity,
+    title: "アラート・リスクヒートマップ",
+    description: "3か月先の資金ショートをAIが色分け通知し対策優先度を提示。",
+  },
+  {
+    icon: Target,
+    title: "フォーカスKPI連動",
+    description: "EBITDA感応度と現場リスクを因果マップで連結し会議論点を固定化。",
+  },
+];
+
+const heroDashboardConfidencePoints = [
+  "金融機関提出レベルのロジック構成をテンプレート化",
+  "専門家レビューで納得性と実行確度を担保",
 ];
 const heroProcessMilestones = [
   {
@@ -3193,27 +3237,82 @@ const Index = () => {
             </div>
             <aside className="hero-aside" aria-label="経営ダッシュボードと申し込み導線">
               <figure className="hero-dashboard-shot" data-animate>
-                <img
-                  src="/images/hero-decision-dashboard.svg"
-                  alt="AIダッシュボードが資金繰りと利益計画のシナリオを可視化している画面"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="hero-dashboard-shot__meta">
-                  <div>
-                    <strong>Scenario</strong>
-                    <span>キャッシュ残高×投資余力の即時比較</span>
+                <header className="hero-dashboard-shot__header">
+                  <span className="hero-dashboard-shot__eyebrow">Decision Intelligence Cockpit</span>
+                  <div className="hero-dashboard-shot__headline">
+                    <h3>72時間で論点と数字を同期させる経営ダッシュボード</h3>
+                    <p>
+                      財務・販売・在庫データを束ねた因果マップで、投資余力と警戒ラインを同じ画面に可視化。経営陣と金融機関の納得感を両立させます。
+                    </p>
                   </div>
-                  <div>
-                    <strong>Alert</strong>
-                    <span>3か月先の資金不足を色分け通知</span>
+                  <ul className="hero-dashboard-shot__stats" aria-label="AIダッシュボードが提示する主要指標">
+                    {heroDashboardStats.map((stat) => (
+                      <li key={stat.label}>
+                        <strong>{stat.value}</strong>
+                        <span>{stat.label}</span>
+                        <small>{stat.caption}</small>
+                      </li>
+                    ))}
+                  </ul>
+                </header>
+                <div className="hero-dashboard-shot__visual">
+                  <div className="hero-dashboard-shot__image-frame">
+                    <img
+                      src={decisionDashboardVisual}
+                      alt="資金繰りと利益シナリオを比較するAIダッシュボードの画面"
+                      loading="lazy"
+                      decoding="async"
+                    />
                   </div>
-                  <div>
-                    <strong>Focus</strong>
-                    <span>EBITDA感応度とリスク要因を一望</span>
+                  <div className="hero-dashboard-shot__meta-panel">
+                    <h4>伴走チームが読み解く3つの焦点</h4>
+                    <ul className="hero-dashboard-shot__callouts" aria-label="ダッシュボードで確認できる主要論点">
+                      {heroDashboardCallouts.map((callout) => {
+                        const CalloutIcon = callout.icon
+                        return (
+                          <li key={callout.title}>
+                            <span className="hero-dashboard-shot__callout-icon" aria-hidden="true">
+                              <CalloutIcon />
+                            </span>
+                            <div>
+                              <strong>{callout.title}</strong>
+                              <span>{callout.description}</span>
+                            </div>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                    <div className="hero-dashboard-shot__diagram">
+                      <img
+                        src={heroCausalityDiagram}
+                        alt="課題・施策・KPIの因果マップを示す図解"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <p>課題→施策→KPIを因果で連結し、会議資料と連動する説明ストーリーを自動生成。</p>
+                    </div>
+                    <ul className="hero-dashboard-shot__confidence-points" aria-label="ダッシュボード運用の信頼性">
+                      {heroDashboardConfidencePoints.map((point) => (
+                        <li key={point}>
+                          <span aria-hidden="true" className="hero-dashboard-shot__confidence-icon">
+                            <ShieldCheck />
+                          </span>
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-                <figcaption>経営会議で説明しやすい論点マップと数値の関係性を72時間で提示</figcaption>
+                <figcaption>
+                  <p>AIが抽出した意思決定ストーリーと数値根拠を、専門家が金融機関提出レベルまで磨き上げ、経営会議の合意形成を最短3日で整備します。</p>
+                  <div className="hero-dashboard-shot__cta">
+                    <a className="hero-dashboard-shot__cta-link" href="#resources">
+                      サンプルレポートを確認
+                      <ArrowRight aria-hidden="true" />
+                    </a>
+                    <span>全業種120社の実績データを匿名加工で比較可能。</span>
+                  </div>
+                </figcaption>
               </figure>
               <div className="hero-visual">
                 <div className="hero-quick-form" data-animate>
