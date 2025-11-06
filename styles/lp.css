@@ -3040,7 +3040,21 @@ svg {
 
   .insight-highlight__body {
     display: grid;
-    gap: 18px;
+    gap: clamp(18px, 3vw, 28px);
+    grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  @media (max-width: 1024px) {
+    .insight-highlight__body {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .insight-highlight__value-column {
+    display: grid;
+    gap: clamp(16px, 2.5vw, 24px);
+    align-content: start;
   }
 
   .insight-highlight__value-group {
@@ -3073,7 +3087,7 @@ svg {
 
   .insight-highlight__context {
     display: grid;
-    gap: 12px;
+    gap: clamp(12px, 2vw, 18px);
   }
 
   .insight-highlight__description {
@@ -3083,12 +3097,88 @@ svg {
     line-height: 1.7;
   }
 
+  .insight-highlight__visual {
+    margin: 0;
+    padding: clamp(14px, 2vw, 22px);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(79, 163, 255, 0.14);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    display: grid;
+    gap: 12px;
+  }
+
+  .insight-highlight__visual figcaption {
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--gray-500);
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .insight-highlight__bars {
+    display: grid;
+    gap: 10px;
+  }
+
+  .insight-highlight__bar-row {
+    display: grid;
+    gap: 6px;
+  }
+
+  .insight-highlight__bar-row > span {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--gray-500);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .insight-highlight__bar-track {
+    position: relative;
+    height: 40px;
+    border-radius: 14px;
+    background: rgba(235, 244, 255, 0.6);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding-right: 14px;
+  }
+
+  .insight-highlight__bar-fill {
+    position: relative;
+    height: 100%;
+    border-radius: 14px;
+    background: linear-gradient(120deg, var(--insight-accent), rgba(255, 255, 255, 0.25));
+    box-shadow: 0 16px 28px rgba(20, 61, 106, 0.2);
+  }
+
+  @supports (color: color-mix(in srgb, red 50%, white 50%)) {
+    .insight-highlight__bar-fill {
+      background: linear-gradient(
+        120deg,
+        color-mix(in srgb, var(--insight-accent) 86%, white 14%),
+        color-mix(in srgb, var(--insight-accent) 42%, white 58%)
+      );
+    }
+  }
+
+  .insight-highlight__bar-value {
+    margin-left: auto;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--navy-800);
+    font-variant-numeric: tabular-nums;
+  }
+
   .insight-highlight__logic {
-    padding: 14px 18px;
+    padding: clamp(14px, 2vw, 20px);
     border-radius: 18px;
     background: linear-gradient(140deg, rgba(255, 255, 255, 0.86), rgba(230, 242, 255, 0.78));
     border: 1px solid rgba(79, 163, 255, 0.12);
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+    display: grid;
+    gap: clamp(12px, 2vw, 18px);
   }
 
   @supports (color: color-mix(in srgb, red 50%, white 50%)) {
@@ -3117,19 +3207,53 @@ svg {
     font-weight: 700;
   }
 
-  .insight-highlight__logic p {
-    margin: 8px 0 0;
+  .insight-highlight__logic-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .insight-highlight__logic-list li {
+    display: grid;
+    gap: 4px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: inset 0 0 0 1px rgba(79, 163, 255, 0.12);
+  }
+
+  @supports (color: color-mix(in srgb, red 50%, white 50%)) {
+    .insight-highlight__logic-list li {
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--insight-accent) 18%, transparent);
+      background: color-mix(in srgb, var(--insight-accent) 6%, white 94%);
+    }
+  }
+
+  .insight-highlight__logic-list strong {
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--navy-700);
+  }
+
+  .insight-highlight__logic-list p {
+    margin: 0;
     color: var(--gray-600);
     font-size: 0.85rem;
     line-height: 1.6;
-    display: block;
   }
 
-  .insight-highlight__logic p {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .insight-highlight__logic-note {
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--gray-500);
+    font-size: 0.78rem;
+    line-height: 1.6;
+    border: 1px dashed rgba(79, 163, 255, 0.24);
   }
 
   .insight-highlight__footer {
