@@ -50,6 +50,7 @@ import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import solutionLogicTimeline from "@/assets/process-flow-infographic.jpg";
 import journeyFlowVisual from "@/assets/data-infographic-growth.jpg";
 import heroCausalityDiagram from "@/assets/causality-flow.jpg";
+import executiveStrategyVisual from "@/assets/executive-strategy-meeting.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
 import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
@@ -136,6 +137,30 @@ const heroProcessSnapshot = [
     value: "90日",
     label: "成果検証",
     caption: "週次レビューと資金管理",
+  },
+];
+
+type HeroDecisionPillar = {
+  label: string;
+  description: string;
+  icon: LucideIcon;
+};
+
+const heroDecisionPillars: HeroDecisionPillar[] = [
+  {
+    label: "因果で捉える",
+    description: "AI診断がボトルネックと成長ドライバーを因果リンクで提示。",
+    icon: Workflow,
+  },
+  {
+    label: "論理で語る",
+    description: "診断士が金融機関目線でロジックツリーを整備し説明負荷を軽減。",
+    icon: Layers3,
+  },
+  {
+    label: "数字で確証",
+    description: "意思決定KPIとキャッシュ影響をダッシュボードで即比較。",
+    icon: LineChart,
   },
 ];
 
@@ -3045,22 +3070,98 @@ const Index = () => {
           <div className="container hero-inner">
             <div className="hero-main">
               <div className="hero-intro" data-animate data-initial-visible="true">
-                <span className="badge">年商5,000万〜15億円の経営者向け</span>
-                <h1 id="hero-heading">
-                  意思決定の迷いを72時間でゼロに。
-                  <span>生成AI×診断士が利益計画を描き切る</span>
-                </h1>
-                <p className="hero-lead">
-                  資金繰りや投資判断の迷いを、AI分析と専門家レビューで72時間以内に整理し、経営会議までに数字と論点をそろえます。
-                </p>
-                <ul className="hero-snapshot" aria-label="提供価値のスナップ要約">
-                  {heroSnapshotHighlights.map((item) => (
-                    <li key={item.label}>
-                      <strong>{item.label}</strong>
-                      <span>{item.description}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div className="hero-intro__header">
+                  <span className="badge">年商5,000万〜15億円の経営者向け</span>
+                  <h1 id="hero-heading">
+                    意思決定の迷いを72時間でゼロに。
+                    <span>生成AI×診断士が利益計画を描き切る</span>
+                  </h1>
+                  <p className="hero-lead">
+                    資金繰りや投資判断の迷いを、AI分析と専門家レビューで72時間以内に整理し、経営会議までに数字と論点をそろえます。
+                  </p>
+                </div>
+                <div className="hero-intro__grid">
+                  <figure
+                    className="hero-intro__visual"
+                    data-animate
+                    aria-label="72時間診断から90日伴走までの意思決定デザイン"
+                  >
+                    <div className="hero-intro__visual-media">
+                      <img
+                        src={executiveStrategyVisual}
+                        alt="経営陣がAIダッシュボードを前に意思決定シナリオを検討している様子"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="hero-intro__visual-overlay" aria-hidden="true" />
+                      <div className="hero-intro__visual-callout">
+                        <span>Executive Brief</span>
+                        <strong>72h Decision Map</strong>
+                        <p>AI診断の因果マップと数値を1枚に収め、会議の納得感を高めます。</p>
+                      </div>
+                    </div>
+                    <figcaption>
+                      <span className="hero-intro__visual-eyebrow">因果 × 論理 × 数字</span>
+                      <p className="hero-intro__visual-summary">
+                        72時間で論点と数字の相関を可視化し、1〜2週間で提出水準の計画書に昇華。90日伴走でKPIと資金繰りを検証します。
+                      </p>
+                      <ol className="hero-intro__timeline" aria-label="72時間から90日までの支援ステップ">
+                        {heroProcessSnapshot.map((snapshot) => (
+                          <li key={snapshot.value}>
+                            <span className="hero-intro__timeline-value">{snapshot.value}</span>
+                            <span className="hero-intro__timeline-label">{snapshot.label}</span>
+                            <small>{snapshot.caption}</small>
+                          </li>
+                        ))}
+                      </ol>
+                    </figcaption>
+                  </figure>
+                  <div className="hero-intro__insight">
+                    <div className="hero-intro__pillars" aria-label="意思決定品質を支える3つの原則">
+                      {heroDecisionPillars.map((pillar) => {
+                        const PillarIcon = pillar.icon;
+                        return (
+                          <article key={pillar.label} className="hero-intro__pillar">
+                            <span className="hero-intro__pillar-icon" aria-hidden="true">
+                              <PillarIcon />
+                            </span>
+                            <div>
+                              <strong>{pillar.label}</strong>
+                              <span>{pillar.description}</span>
+                            </div>
+                          </article>
+                        )
+                      })}
+                    </div>
+                    <ul
+                      className="hero-snapshot hero-intro__snapshot"
+                      aria-label="提供価値のスナップ要約"
+                    >
+                      {heroSnapshotHighlights.map((item, index) => (
+                        <li key={item.label}>
+                          <span className="hero-snapshot__step" aria-hidden="true">
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
+                          <div>
+                            <strong>{item.label}</strong>
+                            <span>{item.description}</span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="hero-intro__proof" aria-label="第三者評価と継続実績">
+                      <span className="hero-intro__proof-eyebrow">TRUST</span>
+                      <ul>
+                        {heroTrustSignals.map((signal) => (
+                          <li key={signal.label}>
+                            <strong>{signal.label}</strong>
+                            <span>{signal.description}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div
                 id="summary"
