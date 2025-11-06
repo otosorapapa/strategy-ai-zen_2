@@ -3806,20 +3806,6 @@ const Index = () => {
                     外部指標と社内指標を重ねて可視化し、判断の筋道をひと目で共有。
                   </figcaption>
                 </figure>
-                <ul className="features-visual__legend">
-                  <li>
-                    <span>1. データ整備</span>
-                    公的指数や販売・会計データを自動同期し、抜け漏れはAIが通知。
-                  </li>
-                  <li>
-                    <span>2. 予測ドラフト</span>
-                    主要指標の変化を複数シナリオにまとめ、優先順位を色分け表示。
-                  </li>
-                  <li>
-                    <span>3. 専門家レビュー</span>
-                    診断士と財務・管理会計の専門家が審査視点で確認し、次の一手を提案。
-                  </li>
-                </ul>
               </aside>
               <div className="feature-grid">
                 {serviceFeatures.map((feature) => {
