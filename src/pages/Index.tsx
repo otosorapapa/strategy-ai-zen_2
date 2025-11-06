@@ -48,7 +48,7 @@ import expertTanakaPhoto from "@/assets/expert-tanaka.svg";
 import representativePhoto from "@/assets/representative.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import solutionLogicTimeline from "@/assets/process-flow-infographic.jpg";
-import journeyFlowVisual from "@/assets/data-infographic-growth.jpg";
+import journeyFlowVisual from "@/assets/process-flow-infographic.jpg";
 import heroCausalityDiagram from "@/assets/causality-flow.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
@@ -2398,6 +2398,9 @@ const Index = () => {
   const decideStage = ctaJourneyStages.find((stage) => stage.id === "decide");
   const activeJourneyStage =
     sectionToJourneyStage[activeSection] ?? ctaJourneyStages[0].id;
+  const currentJourneyStage = ctaJourneyStages.find(
+    (stage) => stage.id === activeJourneyStage
+  );
 
   const renderStageCta = (
     stageId: CtaJourneyStage["id"],
@@ -3511,11 +3514,11 @@ const Index = () => {
               <figure className="journey-cta__visual" data-animate>
                 <img
                   src={journeyFlowVisual}
-                  alt="課題整理から実行準備までの3ステップがインフォグラフィックで示されている"
+                  alt="72時間・2週間・30日を示す経営判断支援のフロー図"
                   loading="lazy"
                 />
                 <figcaption>
-                  因果整理→打ち手設計→実行準備の流れを一枚で視覚化。色分けと矢印で視線を次のカードに運び、スクロール継続と理解の同期を両立させます。
+                  因果整理→打ち手設計→実行準備の流れを一枚図に同期。各フェーズのKPIと責任者を矢印で可視化し、視線誘導と理解のスピードを両立させます。
                 </figcaption>
               </figure>
               <div className="journey-cta__summary" data-animate>
@@ -3533,90 +3536,144 @@ const Index = () => {
                   );
                 })}
               </div>
-              <ul className="journey-cta__trust" data-animate>
-                {journeyAssurancePoints.map((point) => {
-                  const TrustIcon = point.icon;
+            </div>
+            <div className="journey-cta__layout">
+              <aside className="journey-cta__sidebar">
+                <div className="journey-cta__sidebar-header" data-animate>
+                  <span className="journey-cta__sidebar-eyebrow">Decision Journey</span>
+                  <h3>72時間→30日で経営判断を「因果×数字」でデザイン</h3>
+                  <p>
+                    スクロール位置に合わせて、必要なアウトプットとCTAが自動でハイライトされます。全体像と根拠を先に把握することで、判断のスピードと納得感がそろいます。
+                  </p>
+                  {currentJourneyStage && (
+                    <div className="journey-cta__sidebar-focus">
+                      <span>注目フェーズ</span>
+                      <strong>{currentJourneyStage.stageLabel}</strong>
+                      <p>{currentJourneyStage.headline}</p>
+                    </div>
+                  )}
+                </div>
+                <ol
+                  className="journey-cta__progress"
+                  aria-label="経営判断支援の進行ステップ"
+                  data-animate
+                >
+                  {ctaJourneyStages.map((stage, index) => {
+                    const isActive = activeJourneyStage === stage.id;
+                    return (
+                      <li
+                        key={stage.id}
+                        className={`journey-cta__progress-item${isActive ? " is-active" : ""}`}
+                      >
+                        <span className="journey-cta__progress-marker" aria-hidden />
+                        <div className="journey-cta__progress-content">
+                          <div className="journey-cta__progress-meta">
+                            <span className="journey-cta__progress-step">0{index + 1}</span>
+                            <span className="journey-cta__progress-text">{stage.stageLabel}</span>
+                          </div>
+                          <span className="journey-cta__progress-metric">
+                            {stage.metricValue}・{stage.metricLabel}
+                          </span>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ol>
+                <div className="journey-cta__logic-block" data-animate>
+                  <div className="journey-cta__logic-heading">
+                    <span className="journey-cta__sidebar-eyebrow">Causality Design</span>
+                    <h3>論点を3つの視点で分解</h3>
+                    <p>
+                      因果性・論理性・納得性を担保するチェックポイントをカードに同期。意思決定の根拠がどこにあるかを瞬時に確認できます。
+                    </p>
+                  </div>
+                  <div className="journey-cta__logic">
+                    {journeyCausalityPoints.map((point) => {
+                      const LogicIcon = point.icon;
+                      return (
+                        <article className="journey-cta__logic-item" key={point.title}>
+                          <LogicIcon aria-hidden className="journey-cta__logic-icon" />
+                          <div className="journey-cta__logic-body">
+                            <span className="journey-cta__logic-tag">{point.tag}</span>
+                            <h3 className="journey-cta__logic-title">{point.title}</h3>
+                            <p className="journey-cta__logic-description">{point.description}</p>
+                          </div>
+                        </article>
+                      );
+                    })}
+                  </div>
+                </div>
+                <div className="journey-cta__trust-block" data-animate>
+                  <div className="journey-cta__trust-heading">
+                    <span className="journey-cta__sidebar-eyebrow">Proof Stack</span>
+                    <h3>審査に耐える品質保証ライン</h3>
+                    <p>
+                      行政認定チームと専門家レビューで、年商5,000万〜15億円の企業でも導入後のリスクを抑制。CTA周辺にトラストシグナルを挟み込み、迷いを削ります。
+                    </p>
+                  </div>
+                  <ul className="journey-cta__trust">
+                    {journeyAssurancePoints.map((point) => {
+                      const TrustIcon = point.icon;
+                      return (
+                        <li className="journey-cta__trust-item" key={point.title}>
+                          <TrustIcon aria-hidden className="journey-cta__trust-icon" />
+                          <div className="journey-cta__trust-content">
+                            <span className="journey-cta__trust-title">{point.title}</span>
+                            <p className="journey-cta__trust-description">{point.description}</p>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </aside>
+              <div className="journey-cta__grid">
+                {ctaJourneyStages.map((stage) => {
+                  const StageIcon = stage.icon;
+                  const isActive = activeJourneyStage === stage.id;
                   return (
-                    <li className="journey-cta__trust-item" key={point.title}>
-                      <TrustIcon aria-hidden className="journey-cta__trust-icon" />
-                      <div className="journey-cta__trust-content">
-                        <span className="journey-cta__trust-title">{point.title}</span>
-                        <p className="journey-cta__trust-description">{point.description}</p>
+                    <article
+                      key={stage.id}
+                      className={`journey-cta__card${isActive ? " is-active" : ""}`}
+                      data-animate
+                    >
+                      <div className="journey-cta__card-header">
+                        <div className="journey-cta__stage-label">
+                          <StageIcon aria-hidden />
+                          <span>{stage.stageLabel}</span>
+                        </div>
+                        <div className="journey-cta__metric" aria-label={`${stage.metricLabel}の目安`}>
+                          <span className="journey-cta__metric-value">{stage.metricValue}</span>
+                          <span className="journey-cta__metric-label">{stage.metricLabel}</span>
+                        </div>
                       </div>
-                    </li>
+                      <div className="journey-cta__card-body">
+                        <h3>{stage.headline}</h3>
+                        <p>{stage.description}</p>
+                        <ul className="journey-cta__deliverables">
+                          {stage.deliverables.map((deliverable) => (
+                            <li key={deliverable}>
+                              <CheckCircle2 aria-hidden />
+                              <span>{deliverable}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className="journey-cta__card-footer">
+                        <p className="journey-cta__proof">{stage.proof}</p>
+                        <a
+                          className="journey-cta__link"
+                          href={stage.href}
+                          aria-current={isActive ? "true" : undefined}
+                        >
+                          <span>{stage.buttonLabel}</span>
+                          <ArrowRight aria-hidden />
+                        </a>
+                      </div>
+                    </article>
                   );
                 })}
-              </ul>
-            </div>
-            <ol className="journey-cta__progress" aria-label="経営判断支援の進行ステップ">
-              {ctaJourneyStages.map((stage, index) => {
-                const isActive = activeJourneyStage === stage.id;
-                return (
-                  <li
-                    key={stage.id}
-                    className={`journey-cta__progress-item${isActive ? " is-active" : ""}`}
-                  >
-                    <span className="journey-cta__progress-step">0{index + 1}</span>
-                    <span className="journey-cta__progress-text">{stage.stageLabel}</span>
-                  </li>
-                );
-              })}
-            </ol>
-            <div className="journey-cta__logic" data-animate>
-              {journeyCausalityPoints.map((point) => {
-                const LogicIcon = point.icon;
-                return (
-                  <article className="journey-cta__logic-item" key={point.title}>
-                    <LogicIcon aria-hidden className="journey-cta__logic-icon" />
-                    <div className="journey-cta__logic-body">
-                      <span className="journey-cta__logic-tag">{point.tag}</span>
-                      <h3 className="journey-cta__logic-title">{point.title}</h3>
-                      <p className="journey-cta__logic-description">{point.description}</p>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-            <div className="journey-cta__grid">
-              {ctaJourneyStages.map((stage) => {
-                const StageIcon = stage.icon;
-                const isActive = activeJourneyStage === stage.id;
-                return (
-                  <article
-                    key={stage.id}
-                    className={`journey-cta__card${isActive ? " is-active" : ""}`}
-                    data-animate
-                  >
-                    <div className="journey-cta__stage-label">
-                      <StageIcon aria-hidden />
-                      <span>{stage.stageLabel}</span>
-                    </div>
-                    <div className="journey-cta__metric" aria-label={`${stage.metricLabel}の目安`}>
-                      <span className="journey-cta__metric-value">{stage.metricValue}</span>
-                      <span className="journey-cta__metric-label">{stage.metricLabel}</span>
-                    </div>
-                    <h3>{stage.headline}</h3>
-                    <p>{stage.description}</p>
-                    <ul className="journey-cta__deliverables">
-                      {stage.deliverables.map((deliverable) => (
-                        <li key={deliverable}>
-                          <CheckCircle2 aria-hidden />
-                          <span>{deliverable}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="journey-cta__proof">{stage.proof}</p>
-                    <a
-                      className="journey-cta__link"
-                      href={stage.href}
-                      aria-current={isActive ? "true" : undefined}
-                    >
-                      <span>{stage.buttonLabel}</span>
-                      <ArrowRight aria-hidden />
-                    </a>
-                  </article>
-                );
-              })}
+              </div>
             </div>
           </div>
         </section>
