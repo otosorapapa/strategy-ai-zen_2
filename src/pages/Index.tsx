@@ -53,6 +53,7 @@ import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
 import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
 import aiValueAugmentationVisual from "@/assets/ai-value-augmentation.svg";
+import processFlowInfographic from "@/assets/process-flow-infographic.jpg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -191,6 +192,11 @@ const heroEvidence = [
   },
 ];
 
+type HeroCausalityDeliverable = {
+  label: string;
+  description: string;
+};
+
 type HeroCausality = {
   title: string;
   subtitle: string;
@@ -202,6 +208,8 @@ type HeroCausality = {
   trustCopy: string;
   highlights: string[];
   icon: LucideIcon;
+  duration: string;
+  deliverables: HeroCausalityDeliverable[];
 };
 
 const heroCausality: HeroCausality[] = [
@@ -219,6 +227,17 @@ const heroCausality: HeroCausality[] = [
     trustCopy:
       "160件超の支援で磨いた質問票とチェックリストをテンプレート化。初回面談から迷わず掘り下げられます。",
     highlights: ["現状把握", "優先順位", "スピード"],
+    duration: "0〜72時間",
+    deliverables: [
+      {
+        label: "経営論点サマリー",
+        description: "粗利・資金・需要のリスク信号を一枚図で共有。",
+      },
+      {
+        label: "ヒアリングログ",
+        description: "意思決定の背景を整理した議事メモと洞察。",
+      },
+    ],
     icon: ScanSearch,
   },
   {
@@ -235,6 +254,17 @@ const heroCausality: HeroCausality[] = [
     trustCopy:
       "採択実績で評価されたストーリーと数表を知見化し、御社仕様にカスタマイズ。説明の手離れが良くなります。",
     highlights: ["戦略設計", "資金管理", "ダッシュボード"],
+    duration: "1〜2週間",
+    deliverables: [
+      {
+        label: "実行ロードマップ",
+        description: "打ち手・担当・KPIを整えたアクションプラン。",
+      },
+      {
+        label: "想定問答集",
+        description: "金融機関・取引先への説明要点と裏付け資料。",
+      },
+    ],
     icon: ClipboardCheck,
   },
   {
@@ -251,6 +281,17 @@ const heroCausality: HeroCausality[] = [
     trustCopy:
       "レビュー記録と根拠資料を蓄積し、第三者に示せる形で管理。伴走後も自走できる仕組みが残ります。",
     highlights: ["伴走", "透明性", "信頼"],
+    duration: "導入後3か月",
+    deliverables: [
+      {
+        label: "週次レビュー記録",
+        description: "施策ごとの進捗とリスク対応を可視化。",
+      },
+      {
+        label: "資金計画ダッシュボード",
+        description: "入出金見通しと調達状況をリアルタイム更新。",
+      },
+    ],
     icon: TrendingUp,
   },
 ];
@@ -2866,11 +2907,21 @@ const Index = () => {
         >
           <div className="container">
             <div className="hero-causality-intro" data-animate>
-              <span className="hero-causality-intro__eyebrow">PROCESS</span>
-              <h2 id="hero-journey-heading">72時間→1〜2週間→3か月で意思決定を固める流れ</h2>
-              <p>
-                初回ヒアリングで経営者の譲れない方向性と現状の数字を言語化。72時間で経営の論点を一枚に整理し、1〜2週間で計画書と会議資料を完成。3か月の伴走で実行と報告を滞りなく進める、納得感の高い支援サイクルです。
-              </p>
+              <div className="hero-causality-intro__content">
+                <span className="hero-causality-intro__eyebrow">PROCESS</span>
+                <h2 id="hero-journey-heading">72時間→1〜2週間→3か月で意思決定を固める流れ</h2>
+                <p>
+                  初回ヒアリングで経営者の譲れない方向性と現状の数字を言語化。72時間で経営の論点を一枚に整理し、1〜2週間で計画書と会議資料を完成。3か月の伴走で実行と報告を滞りなく進める、納得感の高い支援サイクルです。
+                </p>
+              </div>
+              <figure className="hero-causality-intro__visual">
+                <img
+                  src={processFlowInfographic}
+                  alt="72時間診断から3か月伴走までのプロセス図"
+                  loading="lazy"
+                />
+                <figcaption>意思決定の因果と成果を一望できるロードマップ</figcaption>
+              </figure>
             </div>
             <div className="hero-causality" aria-label="因果とロジックの整理" data-animate>
               {heroCausality.map((item, index) => {
@@ -2882,7 +2933,10 @@ const Index = () => {
                         <ItemIcon />
                       </div>
                       <div className="hero-causality__heading">
-                        <span className="hero-causality__step">STEP {index + 1}</span>
+                        <div className="hero-causality__meta">
+                          <span className="hero-causality__step">STEP {index + 1}</span>
+                          <span className="hero-causality__duration">{item.duration}</span>
+                        </div>
                         <h3>{item.title}</h3>
                         <p className="hero-causality__subtitle">{item.subtitle}</p>
                       </div>
@@ -2902,16 +2956,24 @@ const Index = () => {
                       <span className="hero-causality__arrow" aria-hidden="true">
                         <ArrowRight />
                       </span>
-                      <div
-                        className="hero-causality__flow-item hero-causality__flow-item--impact"
-                        role="listitem"
-                      >
+                      <div className="hero-causality__flow-item hero-causality__flow-item--impact" role="listitem">
                         <span className="hero-causality__pill hero-causality__pill--impact">果</span>
                         <div>
-                          <strong>{item.impactMetric}</strong>
+                          <span className="hero-causality__impact">{item.impactMetric}</span>
                           <p>{item.impactDetail}</p>
                         </div>
                       </div>
+                    </div>
+                    <div className="hero-causality__deliverables" aria-label="主要アウトプット">
+                      {item.deliverables.map((deliverable) => (
+                        <div key={deliverable.label} className="hero-causality__deliverable">
+                          <CheckCircle2 aria-hidden="true" />
+                          <div>
+                            <strong>{deliverable.label}</strong>
+                            <p>{deliverable.description}</p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                     <footer className="hero-causality__footer">
                       <div className="hero-causality__trust">
