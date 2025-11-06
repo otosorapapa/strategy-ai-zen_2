@@ -1,5 +1,4 @@
 import { AlertTriangle, BrainCircuit, CalendarClock, DollarSign, Network, TrendingUp, Users } from "lucide-react";
-import problemImage from "@/assets/problem-illustration.jpg";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
 import { cn } from "@/lib/utils";
@@ -181,7 +180,7 @@ const ProblemSection = () => {
   return (
     <section className="bg-gradient-to-b from-white via-slate-50/80 to-slate-100/60 py-28 md:py-32">
       <div className="container mx-auto px-4">
-        <div className="mb-16 grid items-center gap-12 lg:grid-cols-2">
+        <div className="mb-16 grid items-center gap-12">
           <div className="space-y-6">
             <span className="inline-flex items-center rounded-full bg-highlight/20 px-5 py-2.5 text-sm font-bold uppercase tracking-[0.3em] text-highlight-foreground">
               よくある課題
@@ -192,15 +191,6 @@ const ProblemSection = () => {
             <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
               属人化した会議準備や資金繰りの更新に時間を奪われると、勝ち筋の案件や投資判断が後ろ倒しになりがちです。経営チームの声から抽出したボトルネックを整理しました。
             </p>
-          </div>
-          <div className="overflow-hidden rounded-[32px] border border-white/60 shadow-elegant">
-            <img
-              src={problemImage}
-              alt="経営課題の可視化"
-              className="h-full w-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
           </div>
         </div>
 
