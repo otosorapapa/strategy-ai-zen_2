@@ -1360,7 +1360,15 @@ svg {
   margin: 0;
   position: relative;
   display: grid;
-  gap: clamp(20px, 3.5vw, 28px);
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.95fr);
+  grid-template-areas:
+    "graphic digest"
+    "header digest"
+    "body digest"
+    "footer digest"
+    "caption digest";
+  column-gap: clamp(22px, 3.5vw, 32px);
+  row-gap: clamp(20px, 3vw, 28px);
   padding: clamp(24px, 4vw, 32px);
   border-radius: 28px;
   background:
@@ -1374,16 +1382,15 @@ svg {
 }
 
 .hero-causality-intro__visual-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(16px, 3vw, 26px);
-  align-items: start;
+  display: contents;
 }
 
 .hero-causality-intro__visual-graphic {
   position: relative;
   display: grid;
   gap: 14px;
+  grid-area: graphic;
+  align-self: stretch;
 }
 
 .hero-causality-intro__visual-graphic img {
@@ -1397,11 +1404,24 @@ svg {
 .hero-causality-intro__visual-digest {
   display: grid;
   gap: 18px;
-  padding: clamp(18px, 3vw, 24px);
+  padding: clamp(20px, 3vw, 26px) clamp(24px, 3.8vw, 32px);
+  padding-left: clamp(28px, 4.5vw, 38px);
   border-radius: 22px;
   background: linear-gradient(165deg, rgba(255, 255, 255, 0.96), rgba(205, 231, 255, 0.78));
   border: 1px solid rgba(79, 163, 255, 0.22);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  grid-area: digest;
+  align-self: stretch;
+  position: relative;
+}
+
+.hero-causality-intro__visual-digest::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 1px 0 0 rgba(79, 163, 255, 0.16);
+  pointer-events: none;
 }
 
 .hero-causality-intro__visual-digest-header {
@@ -1572,6 +1592,8 @@ svg {
   display: grid;
   gap: 8px;
   text-align: left;
+  grid-area: header;
+  max-width: 520px;
 }
 
 .hero-causality-intro__visual-eyebrow {
@@ -1591,9 +1613,10 @@ svg {
 
 .hero-causality-intro__visual-body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(180px, 0.9fr);
+  grid-template-columns: minmax(0, 1fr) minmax(200px, 0.85fr);
   gap: clamp(16px, 4vw, 26px);
-  align-items: start;
+  align-items: stretch;
+  grid-area: body;
 }
 
 .hero-causality-intro__timeline {
@@ -1602,6 +1625,7 @@ svg {
   padding: 0;
   display: grid;
   gap: clamp(16px, 3vw, 20px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .hero-causality-intro__timeline-step {
@@ -1613,6 +1637,7 @@ svg {
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(79, 163, 255, 0.24);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65);
+  height: 100%;
 }
 
 .hero-causality-intro__timeline-step::before {
@@ -1706,6 +1731,7 @@ svg {
   display: grid;
   gap: 12px;
   align-content: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .hero-causality-intro__visual-kpi {
@@ -1716,6 +1742,7 @@ svg {
   background: linear-gradient(140deg, rgba(255, 255, 255, 0.92), rgba(213, 236, 255, 0.78));
   border: 1px solid rgba(79, 163, 255, 0.24);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  height: 100%;
 }
 
 .hero-causality-intro__visual-kpi-value {
@@ -1743,6 +1770,7 @@ svg {
   gap: 18px;
   padding-top: 12px;
   border-top: 1px solid rgba(79, 163, 255, 0.2);
+  grid-area: footer;
 }
 
 .hero-causality-intro__visual-proof {
@@ -1785,6 +1813,15 @@ svg {
   width: auto;
   filter: saturate(0) contrast(0.95) brightness(1.1);
   opacity: 0.85;
+}
+
+.hero-causality-intro__visual figcaption {
+  grid-area: caption;
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: rgba(15, 43, 86, 0.68);
+  max-width: 520px;
 }
 
 .hero-causality {
@@ -2243,12 +2280,26 @@ svg {
     gap: 16px;
   }
 
-  .hero-causality-intro__visual-grid {
-    grid-template-columns: 1fr;
+  .hero-causality-intro__visual {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "graphic"
+      "header"
+      "digest"
+      "body"
+      "footer"
+      "caption";
+    row-gap: 22px;
+    column-gap: 0;
   }
 
   .hero-causality-intro__visual-digest {
-    padding: 20px;
+    padding: 22px 22px 24px;
+    padding-left: 22px;
+  }
+
+  .hero-causality-intro__visual-digest::after {
+    box-shadow: inset 0 1px 0 rgba(79, 163, 255, 0.16);
   }
 
   .hero-causality-intro__visual-digest-header {
@@ -2258,6 +2309,24 @@ svg {
 
   .hero-causality-intro__visual-digest-image {
     width: min(100%, 280px);
+  }
+
+  .hero-causality-intro__visual-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .hero-causality-intro__timeline {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero-causality-intro__visual-kpis {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .hero-causality-intro__visual-footer {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
@@ -3009,8 +3078,10 @@ svg {
   }
 
   .hero-causality-intro__visual {
-    justify-self: center;
-    width: min(100%, 460px);
+    justify-self: stretch;
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 0.9fr);
+    column-gap: clamp(18px, 3vw, 24px);
   }
 
   .hero-causality-intro__visual-graphic {
@@ -3022,11 +3093,12 @@ svg {
   }
 
   .hero-causality-intro__visual-body {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(200px, 0.9fr);
+    gap: clamp(16px, 3vw, 24px);
   }
 
   .hero-causality-intro__visual-kpis {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
 
   .hero-quick-form {
