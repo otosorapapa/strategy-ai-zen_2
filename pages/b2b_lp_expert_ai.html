@@ -111,6 +111,12 @@
         box-shadow: 0 40px 80px rgba(15, 23, 42, 0.16);
         overflow: hidden;
       }
+      @media (min-width: 1024px) {
+        .hero-surface {
+          grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+          align-items: stretch;
+        }
+      }
       .hero-surface::before {
         content: '';
         position: absolute;
@@ -133,13 +139,31 @@
       .hero-copy {
         position: relative;
         z-index: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
+        display: grid;
+        gap: 1.75rem;
       }
       .hero-headline {
         display: grid;
         gap: 0.75rem;
+      }
+      .hero-main-columns {
+        display: grid;
+        gap: 1.5rem;
+      }
+      @media (min-width: 768px) {
+        .hero-main-columns {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+      @media (min-width: 1280px) {
+        .hero-main-columns {
+          grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+          align-items: start;
+        }
+      }
+      .hero-column {
+        display: grid;
+        gap: 1.5rem;
       }
       .hero-summary-grid {
         display: grid;
@@ -181,11 +205,7 @@
       .hero-proof {
         display: grid;
         gap: 0.9rem;
-      }
-      @media (min-width: 640px) {
-        .hero-proof {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       }
       .hero-proof-item {
         border-radius: 1.5rem;
@@ -225,6 +245,65 @@
         background: rgba(14, 165, 233, 0.12);
         font-weight: 600;
       }
+      .hero-logic-grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+      .logic-card {
+        position: relative;
+        border-radius: 1.4rem;
+        border: 1px solid rgba(148, 163, 184, 0.28);
+        background: linear-gradient(160deg, rgba(255, 255, 255, 0.95), rgba(224, 242, 254, 0.65));
+        padding: 1.1rem 1.2rem 1.2rem;
+        box-shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+        display: grid;
+        gap: 0.55rem;
+      }
+      .logic-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 1.4rem;
+        pointer-events: none;
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), rgba(13, 148, 136, 0.08));
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .logic-card:hover::after,
+      .logic-card:focus-within::after {
+        opacity: 1;
+      }
+      .logic-stage {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: rgba(14, 116, 144, 0.95);
+        background: rgba(14, 165, 233, 0.12);
+        border-radius: 9999px;
+        padding: 0.35rem 0.8rem;
+      }
+      .logic-card h4 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: rgb(15, 23, 42);
+        margin: 0;
+      }
+      .logic-card p {
+        font-size: 0.82rem;
+        line-height: 1.55;
+        color: rgb(71, 85, 105);
+        margin: 0;
+      }
+      .logic-card strong {
+        font-weight: 700;
+        color: rgb(14, 116, 144);
+      }
       .hero-gallery {
         display: grid;
         gap: 0.85rem;
@@ -256,6 +335,42 @@
         line-height: 1.5;
         backdrop-filter: blur(6px);
         box-shadow: 0 14px 28px rgba(15, 23, 42, 0.22);
+      }
+      .hero-infographic {
+        position: relative;
+        border-radius: 1.6rem;
+        overflow: hidden;
+        border: 1px solid rgba(148, 163, 184, 0.35);
+        background: linear-gradient(160deg, rgba(15, 23, 42, 0.92), rgba(30, 64, 175, 0.82));
+        box-shadow: 0 24px 48px rgba(15, 23, 42, 0.25);
+      }
+      .hero-infographic img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.78;
+      }
+      .hero-infographic-caption {
+        position: absolute;
+        inset: auto 1.25rem 1.25rem 1.25rem;
+        background: rgba(15, 23, 42, 0.82);
+        border-radius: 1.1rem;
+        padding: 1rem 1.2rem;
+        color: rgba(226, 232, 240, 0.95);
+        display: grid;
+        gap: 0.45rem;
+        box-shadow: 0 22px 44px rgba(15, 23, 42, 0.35);
+      }
+      .hero-infographic-caption strong {
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(125, 211, 252, 0.95);
+      }
+      .hero-infographic-caption p {
+        font-size: 0.88rem;
+        line-height: 1.55;
+        margin: 0;
       }
       .hero-gallery figcaption strong {
         display: block;
@@ -2264,74 +2379,108 @@
                 市場や仕入れが揺れる局面でも、AIが業界・顧客・資金のデータを一気に整理。診断士が実務視点で優先順位と根拠を磨き上げ、経営会議も金融機関との対話も落ち着いて主導できる状態に整えます。
               </p>
             </div>
-            <div class="hero-summary-grid">
-              <article class="hero-summary-item">
-                <span class="hero-summary-label">伴走企業</span>
-                <span class="hero-summary-value">製造・建設・ITの経営チームが選択</span>
-                <p class="hero-summary-text">地域で挑戦を続ける企業が、幹部会議の定番ツールとして活用しています。</p>
-              </article>
-              <article class="hero-summary-item">
-                <span class="hero-summary-label">初回診断</span>
-                <span class="hero-summary-value">オンライン60秒</span>
-                <p class="hero-summary-text">財務と外部データをAIがスキャンし、判断材料の抜け漏れを即時チェックします。</p>
-              </article>
-              <article class="hero-summary-item">
-                <span class="hero-summary-label">意思決定速度</span>
-                <span class="hero-summary-value">会議準備の待ち時間を圧縮</span>
-                <p class="hero-summary-text">審議回数と議事時間を減らし、次の打ち手に時間を回せるリズムへ導きます。</p>
-              </article>
-            </div>
-            <p class="text-sm leading-relaxed text-slate-600 md:text-base">
-              経営者が描く未来像を軸に、AIが要点を抽出し、専門家が現場と金融機関の視点で整えます。数字とストーリーが揃うことで、社内外の信頼を損なわず前向きな挑戦を進められます。
-            </p>
-            <div class="hero-proof">
-              <div class="hero-proof-item">
-                <h3>AI診断で論点を1分以内に要約</h3>
-                <p>政策・需要・財務指標を同じ物差しで整理し、すぐ共有すべき論点を瞬時に提示します。</p>
+            <div class="hero-main-columns">
+              <div class="hero-column">
+                <div class="hero-summary-grid">
+                  <article class="hero-summary-item">
+                    <span class="hero-summary-label">伴走企業</span>
+                    <span class="hero-summary-value">製造・建設・ITの経営チームが選択</span>
+                    <p class="hero-summary-text">地域で挑戦を続ける企業が、幹部会議の定番ツールとして活用しています。</p>
+                  </article>
+                  <article class="hero-summary-item">
+                    <span class="hero-summary-label">初回診断</span>
+                    <span class="hero-summary-value">オンライン60秒</span>
+                    <p class="hero-summary-text">財務と外部データをAIがスキャンし、判断材料の抜け漏れを即時チェックします。</p>
+                  </article>
+                  <article class="hero-summary-item">
+                    <span class="hero-summary-label">意思決定速度</span>
+                    <span class="hero-summary-value">会議準備の待ち時間を圧縮</span>
+                    <p class="hero-summary-text">審議回数と議事時間を減らし、次の打ち手に時間を回せるリズムへ導きます。</p>
+                  </article>
+                </div>
+                <p class="text-sm leading-relaxed text-slate-600 md:text-base">
+                  経営者が描く未来像を軸に、AIが要点を抽出し、専門家が現場と金融機関の視点で整えます。数字とストーリーが揃うことで、社内外の信頼を損なわず前向きな挑戦を進められます。
+                </p>
+                <div class="hero-logic-grid">
+                  <article class="logic-card">
+                    <span class="logic-stage">Day0-1</span>
+                    <h4>現状の歪みを因果で可視化</h4>
+                    <p>AIが外部データと財務を照合し、<strong>需要・供給・資金繰り</strong>のズレを因果関係で抽出。経営課題を3指標に整理します。</p>
+                  </article>
+                  <article class="logic-card">
+                    <span class="logic-stage">Day2</span>
+                    <h4>優先シナリオと打ち手を設計</h4>
+                    <p>診断士が現場ヒアリングを反映し、<strong>攻めと守りのシナリオ</strong>を分岐。金融機関の審査観点と合致させます。</p>
+                  </article>
+                  <article class="logic-card">
+                    <span class="logic-stage">Day3</span>
+                    <h4>会議と金融機関の説明資料を統合</h4>
+                    <p>意思決定ダッシュボードとプレゼン資料を同時に仕上げ、<strong>社内合意と資金調達</strong>の両方を支援します。</p>
+                  </article>
+                </div>
+                <div class="hero-proof">
+                  <div class="hero-proof-item">
+                    <h3>AI診断で論点を1分以内に要約</h3>
+                    <p>政策・需要・財務指標を同じ物差しで整理し、すぐ共有すべき論点を瞬時に提示します。</p>
+                  </div>
+                  <div class="hero-proof-item">
+                    <h3>診断士が審査通過ロジックを設計</h3>
+                    <p>金融機関の想定問答とリスク対策を事前に準備。落ち着いて語れる説明台本が整います。</p>
+                  </div>
+                  <div class="hero-proof-item">
+                    <h3>投資判断シミュレーターで可視化</h3>
+                    <p>攻めと守りのシナリオを横並びに比較し、キャッシュ創出までの道筋を同時に提示します。</p>
+                  </div>
+                </div>
               </div>
-              <div class="hero-proof-item">
-                <h3>診断士が審査通過ロジックを設計</h3>
-                <p>金融機関の想定問答とリスク対策を事前に準備。落ち着いて語れる説明台本が整います。</p>
+              <div class="hero-column">
+                <figure class="hero-infographic">
+                  <img
+                    src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1080&q=80"
+                    alt="戦略レビュー会議でダッシュボードを確認する経営陣"
+                    loading="lazy"
+                  />
+                  <figcaption class="hero-infographic-caption">
+                    <strong>Dual Coding｜因果フローの一目理解</strong>
+                    <p>現状→施策→KPIのつながりを1枚で表示。幹部全員が同じ未来像を描いた状態で意思決定に入れます。</p>
+                  </figcaption>
+                </figure>
+                <div class="hero-gallery">
+                  <figure>
+                    <img
+                      src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=960&q=80"
+                      alt="役員会議で戦略ダッシュボードを確認する経営陣"
+                      loading="lazy"
+                    />
+                    <figcaption>
+                      <strong>因果マップで視線を集中</strong>
+                      経営会議前に1ページで状況を俯瞰。論点カードで議論の順番が揃います。
+                    </figcaption>
+                  </figure>
+                  <figure>
+                    <img
+                      src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=960&q=80"
+                      alt="生成AIが可視化した財務ダッシュボード"
+                      loading="lazy"
+                    />
+                    <figcaption>
+                      <strong>週次で更新されるKPIダッシュボード</strong>
+                      粗利・キャッシュ・在庫を一元管理し、意思決定リードタイムを短縮します。
+                    </figcaption>
+                  </figure>
+                  <figure>
+                    <img
+                      src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=960&q=80"
+                      alt="金融機関との協議に向けて資料を確認する専門家チーム"
+                      loading="lazy"
+                    />
+                    <figcaption>
+                      <strong>専門家が審査資料をレビュー</strong>
+                      審査のツボを押さえたドキュメントで、資金調達の不確実性を抑えます。
+                    </figcaption>
+                  </figure>
+                </div>
               </div>
-              <div class="hero-proof-item">
-                <h3>投資判断シミュレーターで可視化</h3>
-                <p>攻めと守りのシナリオを横並びに比較し、キャッシュ創出までの道筋を同時に提示します。</p>
-              </div>
-            </div>
-            <div class="hero-gallery">
-              <figure>
-                <img
-                  src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=960&q=80"
-                  alt="役員会議で戦略ダッシュボードを確認する経営陣"
-                  loading="lazy"
-                />
-                <figcaption>
-                  <strong>因果マップで視線を集中</strong>
-                  経営会議前に1ページで状況を俯瞰。論点カードで議論の順番が揃います。
-                </figcaption>
-              </figure>
-              <figure>
-                <img
-                  src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=960&q=80"
-                  alt="生成AIが可視化した財務ダッシュボード"
-                  loading="lazy"
-                />
-                <figcaption>
-                  <strong>週次で更新されるKPIダッシュボード</strong>
-                  粗利・キャッシュ・在庫を一元管理し、意思決定リードタイムを短縮します。
-                </figcaption>
-              </figure>
-              <figure>
-                <img
-                  src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=960&q=80"
-                  alt="診断士と経営者が計画書を確認する様子"
-                  loading="lazy"
-                />
-                <figcaption>
-                  <strong>伴走する専門家チーム</strong>
-                  金融機関・投資家への説明資料まで同時に仕上げ、信頼を裏付けます。
-                </figcaption>
-              </figure>
             </div>
             <div class="hero-cta-note">
               <span>⏱️ 初回ヒアリング：オンライン30分</span>
