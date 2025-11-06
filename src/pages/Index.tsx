@@ -52,6 +52,7 @@ import representativePhoto from "@/assets/representative.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import solutionLogicTimeline from "@/assets/process-flow-infographic.jpg";
 import journeyFlowVisual from "@/assets/data-infographic-growth.jpg";
+import journeyLogicDiagram from "@/assets/process-flow.jpg";
 import heroCausalityDiagram from "@/assets/causality-flow.jpg";
 import executiveStrategyVisual from "@/assets/executive-strategy-meeting.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
@@ -3835,19 +3836,45 @@ const Index = () => {
               })}
             </ol>
             <div className="journey-cta__logic" data-animate>
-              {journeyCausalityPoints.map((point) => {
-                const LogicIcon = point.icon;
-                return (
-                  <article className="journey-cta__logic-item" key={point.title}>
-                    <LogicIcon aria-hidden className="journey-cta__logic-icon" />
-                    <div className="journey-cta__logic-body">
-                      <span className="journey-cta__logic-tag">{point.tag}</span>
-                      <h3 className="journey-cta__logic-title">{point.title}</h3>
-                      <p className="journey-cta__logic-description">{point.description}</p>
-                    </div>
-                  </article>
-                );
-              })}
+              <figure
+                className="journey-cta__logic-visual"
+                aria-label="課題の因果・論理・納得性を一望できる設計図"
+              >
+                <img
+                  src={journeyLogicDiagram}
+                  alt="課題→施策→成果のシナリオが矢印と色分けで整理されたインフォグラフィック"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>
+                  因果マップ・反証シナリオ・視線誘導ストーリーを1枚に同期。視覚と文章の両面で納得感を高め、スクロールの離脱を抑えます。
+                </figcaption>
+              </figure>
+              <div className="journey-cta__logic-list">
+                {journeyCausalityPoints.map((point, index) => {
+                  const LogicIcon = point.icon;
+                  const stepNumber = String(index + 1).padStart(2, "0");
+                  const isLast = index === journeyCausalityPoints.length - 1;
+                  return (
+                    <article className="journey-cta__logic-item" key={point.title}>
+                      <div className="journey-cta__logic-marker" aria-hidden="true">
+                        <span className="journey-cta__logic-index">{stepNumber}</span>
+                        {!isLast && <span className="journey-cta__logic-divider" />}
+                      </div>
+                      <div className="journey-cta__logic-content">
+                        <div className="journey-cta__logic-header">
+                          <span className="journey-cta__logic-icon">
+                            <LogicIcon aria-hidden />
+                          </span>
+                          <span className="journey-cta__logic-tag">{point.tag}</span>
+                        </div>
+                        <h3 className="journey-cta__logic-title">{point.title}</h3>
+                        <p className="journey-cta__logic-description">{point.description}</p>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
             </div>
             <div className="journey-cta__grid">
               {ctaJourneyStages.map((stage) => {
