@@ -2201,6 +2201,11 @@ type ResourceCard = {
   cta: string;
   icon: LucideIcon;
   note: string;
+  badge?: string;
+  stat?: {
+    value: string;
+    label: string;
+  };
 };
 
 const resourceCards: ResourceCard[] = [
@@ -2216,6 +2221,11 @@ const resourceCards: ResourceCard[] = [
     cta: "AI草案サンプル（PDF）を受け取る",
     icon: FileText,
     note: "フォーム送信直後にメールで自動送付します。",
+    badge: "経営計画テンプレート",
+    stat: {
+      value: "12件",
+      label: "実案件の構成例付き",
+    },
   },
   {
     title: "90日レビュー整理シート",
@@ -2229,6 +2239,11 @@ const resourceCards: ResourceCard[] = [
     cta: "整理シート一式をダウンロード",
     icon: ClipboardCheck,
     note: "登録いただいたメールへ即時にPDFリンクを送信します。",
+    badge: "90日運用サイクル",
+    stat: {
+      value: "3視点",
+      label: "外部環境・資金・人材",
+    },
   },
   {
     title: "生成AI活用レポート（季刊）",
@@ -2242,8 +2257,33 @@ const resourceCards: ResourceCard[] = [
     cta: "レポート（PDF）を入手する",
     icon: BarChart4,
     note: "毎号の最新情報をメールでお届けします。",
+    badge: "季刊レポート",
+    stat: {
+      value: "24事例",
+      label: "成功と失敗の比較付き",
+    },
   },
 ];
+
+const featuredResource = {
+  badge: "72時間診断 資料セット",
+  title: "経営判断を支える3点資料をまとめて確認",
+  description:
+    "AIが作成した草案と専門家の監修プロセス、実際の計画書アウトラインを1セットで把握できます。因果の流れと判断基準が視覚化され、社内での説明もスムーズになります。",
+  bullets: [
+    "ヒアリング→AI生成→専門家レビューの全工程を図解",
+    "計画立案から資金繰り管理までの連動フローを掲載",
+    "経営会議で使える要約スライドとQ&Aひな型付き",
+  ],
+  metrics: [
+    { value: "72h", label: "初回ドラフト提示スピード" },
+    { value: "86%", label: "改善提案の採択率" },
+    { value: "120件", label: "監修済み事業計画" },
+  ],
+  cta: { label: "資料をまとめて受け取る", href: "#contact" },
+  note: "年商5,000万円〜15億円規模の経営者限定でご案内しています。",
+  image: "/images/resource-operating-model.svg",
+};
 
 type EventCard = {
   title: string;
@@ -5376,22 +5416,70 @@ const Index = () => {
                 <li>テンプレとチェックリストを提供。</li>
               </ul>
             </div>
+            <div className="resources-proof" data-animate>
+              <span className="resources-proof__label">掲載・登壇実績</span>
+              <ul className="resources-proof__list">
+                <li>経済産業省 認定支援機関ネットワーク</li>
+                <li>日経 xTECH 特集</li>
+                <li>中小企業デジタル化応援プロジェクト</li>
+              </ul>
+            </div>
+            <article className="resources-lead" data-animate>
+              <div className="resources-lead__content">
+                <span className="resources-lead__badge">{featuredResource.badge}</span>
+                <h3>{featuredResource.title}</h3>
+                <p>{featuredResource.description}</p>
+                <ul className="resources-lead__bullets">
+                  {featuredResource.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+                <dl className="resources-lead__metrics">
+                  {featuredResource.metrics.map((metric) => (
+                    <div key={metric.label}>
+                      <dt>{metric.value}</dt>
+                      <dd>{metric.label}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <a className="btn btn-cta resources-lead__cta" href={featuredResource.cta.href}>
+                  {featuredResource.cta.label}
+                </a>
+                <p className="resources-lead__note">{featuredResource.note}</p>
+              </div>
+              <div className="resources-lead__visual">
+                <img src={featuredResource.image} alt="AIと専門家の連携プロセス図" loading="lazy" />
+              </div>
+            </article>
             <div className="resources-grid">
               {resourceCards.map((resource) => {
                 const ResourceIcon = resource.icon;
                 return (
                   <article key={resource.title} className="resource-card" data-animate>
-                    <div className="resource-icon" aria-hidden="true">
-                      <ResourceIcon />
+                    <div className="resource-card__header">
+                      <div className="resource-icon" aria-hidden="true">
+                        <ResourceIcon />
+                      </div>
+                      <div className="resource-card__title">
+                        {resource.badge ? (
+                          <span className="resource-card__badge">{resource.badge}</span>
+                        ) : null}
+                        <h3>{resource.title}</h3>
+                      </div>
                     </div>
-                    <h3>{resource.title}</h3>
-                    <p>{resource.description}</p>
+                    <p className="resource-card__description">{resource.description}</p>
+                    {resource.stat ? (
+                      <div className="resource-card__stat">
+                        <strong>{resource.stat.value}</strong>
+                        <span>{resource.stat.label}</span>
+                      </div>
+                    ) : null}
                     <ul className="resource-highlights">
                       {resource.highlights.map((highlight) => (
                         <li key={highlight}>{highlight}</li>
                       ))}
                     </ul>
-                    <a className="resource-card__link" href="#contact">
+                    <a className="btn btn-ghost resource-card__cta" href="#contact">
                       {resource.cta}
                     </a>
                     <p className="resource-note">{resource.note}</p>
