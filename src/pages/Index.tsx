@@ -130,30 +130,30 @@ type CtaJourneyStage = {
 const ctaJourneyStages: CtaJourneyStage[] = [
   {
     id: "learn",
-    stageLabel: "情報収集フェーズ",
-    headline: "まずは3分で要点を掴む",
+    stageLabel: "状況整理の段階",
+    headline: "まずは全体像を素早く把握",
     description:
-      "AI診断〜伴走までの流れと成果指標をまとめたサマリースライドと要約動画を確認。",
+      "AI活用と専門家支援の設計思想をまとめた要点スライドと短尺動画で、意思決定の物差しを揃えます。",
     buttonLabel: "3分サマリーを確認",
     href: "#summary",
     icon: BookOpen,
   },
   {
     id: "evaluate",
-    stageLabel: "比較検討フェーズ",
-    headline: "投資対効果をその場で把握",
+    stageLabel: "具体策の検討段階",
+    headline: "自社に合わせた改善策を描く",
     description:
-      "年商規模と投資額を入力し、ROI・回収期間・削減工数を簡易シミュレーション。",
-    buttonLabel: "ROIを試算する",
+      "年商規模や業態に応じたダッシュボード例と伴走プロセスを確認し、導入後の活用イメージを高めます。",
+    buttonLabel: "設計イメージを見る",
     href: "#roi-preview",
     icon: BarChart4,
   },
   {
     id: "decide",
-    stageLabel: "実行準備フェーズ",
-    headline: "無料相談で自社条件を精査",
+    stageLabel: "実行準備の段階",
+    headline: "専門家との個別設計相談",
     description:
-      "専門家が72時間診断の進め方と提出資料例を提示。社内稟議の準備まで伴走します。",
+      "診断士が経営データを踏まえた次の一手と資料整備の進め方を提案し、社内調整で説得力を発揮できる状態に整えます。",
     buttonLabel: primaryCtaLabel,
     href: "#contact",
     icon: ClipboardCheck,
@@ -2930,10 +2930,10 @@ const Index = () => {
         <section className="journey-cta" aria-label="検討フェーズ別の導線">
           <div className="container journey-cta__inner">
             <div className="journey-cta__intro" data-animate>
-              <span className="journey-cta__eyebrow">Conversion journey</span>
-              <h2>検討フェーズに合わせた3つの推奨アクション</h2>
+              <span className="journey-cta__eyebrow">導入ステップ</span>
+              <h2>経営判断の進み具合に合わせた3つの行動支援</h2>
               <p>
-                情報収集・比較検討・実行準備の順に、必要な資料とCTAを整理しました。スクロール位置に応じて該当カードが強調表示されます。
+                状況整理・具体策検討・実行準備の流れごとに、今確認すべき資料と相談窓口を並べました。画面の表示位置にあわせて注目すべきカードが浮かび上がり、先を読む決断を後押しします。
               </p>
             </div>
             <div className="journey-cta__grid">
