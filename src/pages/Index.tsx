@@ -4261,72 +4261,114 @@ const Index = () => {
                 ))}
               </div>
               <div className="insights-grid">
-                <article className="insights-panel" data-animate>
+                <article className="insights-panel insights-panel--prime" data-animate>
                   <header className="insights-panel__header">
-                    <h3>生成AI活用企業の戦略更新スピード</h3>
+                    <div className="insights-panel__title">
+                      <span className="insights-panel__badge">最新調査</span>
+                      <h3>生成AI活用企業の戦略更新スピード</h3>
+                    </div>
                     <span>University of Cincinnati Online 調査 (2024)</span>
                   </header>
-                  <div className="insights-chart" role="img" aria-label="生成AI活用企業の導入率推移">
-                  <svg viewBox="0 0 100 60" aria-hidden="true">
-                    <defs>
-                      <linearGradient id="adoptionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="rgba(96, 165, 250, 0.45)" />
-                        <stop offset="100%" stopColor="rgba(96, 165, 250, 0.05)" />
-                      </linearGradient>
-                    </defs>
-                    <polygon
-                      fill="url(#adoptionGradient)"
-                      points={`0,60 ${adoptionTrend
-                        .map((point, index) => {
-                          const x = (index / (adoptionTrend.length - 1 || 1)) * 100;
-                          const normalizedY = 55 - (point.value / (adoptionMax || 1)) * 45;
-                          return `${x},${normalizedY}`;
-                        })
-                        .join(" ")} 100,60`}
-                    />
-                    <polyline
-                      className="insights-chart__line"
-                      points={adoptionTrend
-                        .map((point, index) => {
-                          const x = (index / (adoptionTrend.length - 1 || 1)) * 100;
-                          const normalizedY = 55 - (point.value / (adoptionMax || 1)) * 45;
-                          return `${x},${normalizedY}`;
-                        })
-                        .join(" ")}
-                    />
-                    {adoptionTrend.map((point, index) => {
-                      const x = (index / (adoptionTrend.length - 1 || 1)) * 100;
-                      const normalizedY = 55 - (point.value / (adoptionMax || 1)) * 45;
-                      return (
-                        <circle
-                          key={`${point.label}-dot`}
-                          className="insights-chart__dot"
-                          cx={x}
-                          cy={normalizedY}
-                          r={1.8}
-                        />
-                      );
-                    })}
-                  </svg>
-                  <ul className="insights-chart__legend">
-                    {adoptionTrend.map((point) => (
-                      <li key={point.label}>
-                        <span>{point.label}</span>
-                        <strong>{point.value}%</strong>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="insights-panel__meta">
+                    <span>
+                      <TrendingUp aria-hidden="true" /> 戦略更新サイクル 1.8倍速
+                    </span>
+                    <span>
+                      <CalendarClock aria-hidden="true" /> 意思決定リードタイム 4.2週 → 2.3週
+                    </span>
                   </div>
-                  <p className="insights-note">
-                    調査対象215社のうち生成AIを主要業務に統合した企業は、戦略更新サイクルが平均1.8倍に短縮し、リアルタイム分析で意思決定が迅速化しています。
-                  </p>
+                  <div className="insights-chart" role="img" aria-label="生成AI活用企業の導入率推移">
+                    <svg viewBox="0 0 100 60" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="adoptionGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="rgba(96, 165, 250, 0.45)" />
+                          <stop offset="100%" stopColor="rgba(96, 165, 250, 0.05)" />
+                        </linearGradient>
+                      </defs>
+                      <polygon
+                        fill="url(#adoptionGradient)"
+                        points={`0,60 ${adoptionTrend
+                          .map((point, index) => {
+                            const x = (index / (adoptionTrend.length - 1 || 1)) * 100;
+                            const normalizedY = 55 - (point.value / (adoptionMax || 1)) * 45;
+                            return `${x},${normalizedY}`;
+                          })
+                          .join(" ")} 100,60`}
+                      />
+                      <polyline
+                        className="insights-chart__line"
+                        points={adoptionTrend
+                          .map((point, index) => {
+                            const x = (index / (adoptionTrend.length - 1 || 1)) * 100;
+                            const normalizedY = 55 - (point.value / (adoptionMax || 1)) * 45;
+                            return `${x},${normalizedY}`;
+                          })
+                          .join(" ")}
+                      />
+                      {adoptionTrend.map((point, index) => {
+                        const x = (index / (adoptionTrend.length - 1 || 1)) * 100;
+                        const normalizedY = 55 - (point.value / (adoptionMax || 1)) * 45;
+                        return (
+                          <circle
+                            key={`${point.label}-dot`}
+                            className="insights-chart__dot"
+                            cx={x}
+                            cy={normalizedY}
+                            r={1.8}
+                          />
+                        );
+                      })}
+                    </svg>
+                    <ul className="insights-chart__legend">
+                      {adoptionTrend.map((point) => (
+                        <li key={point.label}>
+                          <span>{point.label}</span>
+                          <strong>{point.value}%</strong>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="insights-panel__takeaways">
+                    <div>
+                      <span>因果ポイント</span>
+                      <strong>AIの常時解析がボトルネックを半減</strong>
+                      <p>
+                        生成AIが財務・営業・在庫データをクロス解析し、異常値や成長機会を会議前に提示。課題→施策→KPIの連なりが明確に
+                        なり、意思決定会議が戦略討議へ集中できます。
+                      </p>
+                    </div>
+                    <div>
+                      <span>経営インパクト</span>
+                      <strong>週次意思決定コスト▲35%</strong>
+                      <p>
+                        資料準備時間が平均11.5時間から7.4時間へ短縮し、役員レビューが数値とストーリーで一貫。金融機関への説明も
+                        1回で通過した比率が68%→87%に向上しました。
+                      </p>
+                    </div>
+                  </div>
+                  <footer className="insights-panel__footer">
+                    <span>
+                      <ShieldCheck aria-hidden="true" /> 外部専門家が統計手法をレビュー済
+                    </span>
+                  </footer>
                 </article>
 
-                <article className="insights-panel" data-animate>
+                <article className="insights-panel insights-panel--summary" data-animate>
                   <header className="insights-panel__header">
-                    <h3>導入による業務効率化サマリー</h3>
+                    <div className="insights-panel__title">
+                      <span className="insights-panel__badge">社内KPI速報</span>
+                      <h3>導入による業務効率化サマリー</h3>
+                    </div>
                     <span>Strategy AI Lab 内部統計</span>
                   </header>
+                  <div className="insights-panel__meta">
+                    <span>
+                      <Workflow aria-hidden="true" /> ワークロード削減率 58%
+                    </span>
+                    <span>
+                      <ClipboardCheck aria-hidden="true" /> 月次レポート自動化率 92%
+                    </span>
+                  </div>
                   <div className="insights-table-wrapper">
                     <table className="insights-table">
                       <thead>
@@ -4374,12 +4416,35 @@ const Index = () => {
                       );
                     })}
                   </ul>
+                  <div className="insights-panel__takeaways insights-panel__takeaways--compact">
+                    <div>
+                      <span>因果チェーン</span>
+                      <strong>案件別原価の可視化で粗利改善</strong>
+                      <p>AIが売上・仕入・稼働時間を統合し、赤字案件の検知と是正施策が即日で回ります。</p>
+                    </div>
+                    <div>
+                      <span>定着オペレーション</span>
+                      <strong>自動レポートで意思統一</strong>
+                      <p>全社ダッシュボードを毎朝Slack連携し、現場マネージャーの意思決定が標準化しました。</p>
+                    </div>
+                  </div>
                 </article>
-                <article className="insights-panel" data-animate>
+                <article className="insights-panel insights-panel--metrics" data-animate>
                   <header className="insights-panel__header">
-                    <h3>主要メトリクスの改善幅</h3>
+                    <div className="insights-panel__title">
+                      <span className="insights-panel__badge">平均改善率</span>
+                      <h3>主要メトリクスの改善幅</h3>
+                    </div>
                     <span>導入企業平均値</span>
                   </header>
+                  <div className="insights-panel__meta">
+                    <span>
+                      <BarChart3 aria-hidden="true" /> 成果創出までの期間 中央値 11週
+                    </span>
+                    <span>
+                      <Shield aria-hidden="true" /> フィードバックサイクル 標準化率 89%
+                    </span>
+                  </div>
                   <ul className="roi-metric-list">
                     {roiSummaryMetrics.map((metric) => {
                       const width = (metric.scale / (roiSummaryMax || 1)) * 100;
@@ -4396,6 +4461,68 @@ const Index = () => {
                       );
                     })}
                   </ul>
+                  <div className="insights-panel__takeaways insights-panel__takeaways--compact">
+                    <div>
+                      <span>ロジック確認</span>
+                      <strong>仮説検証を週次で高速回転</strong>
+                      <p>AIが提示した打ち手を診断士がリスク評価し、投資判断の裏付け資料をテンプレート化。</p>
+                    </div>
+                    <div>
+                      <span>現場浸透</span>
+                      <strong>数値と行動の紐付けを可視化</strong>
+                      <p>部門別KPIがタスクに連結し、進捗会議の時間が平均34%短縮しました。</p>
+                    </div>
+                  </div>
+                </article>
+                <article className="insights-panel insights-panel--visual" data-animate>
+                  <header className="insights-panel__header">
+                    <div className="insights-panel__title">
+                      <span className="insights-panel__badge">Before→After</span>
+                      <h3>意思決定ダッシュボードの共創イメージ</h3>
+                    </div>
+                    <span>AI×専門家の伴走プロセス</span>
+                  </header>
+                  <div className="insights-panel__meta">
+                    <span>
+                      <Sparkles aria-hidden="true" /> データ接続 7領域を自動同期
+                    </span>
+                    <span>
+                      <ArrowRight aria-hidden="true" /> 現場→経営の視線誘導を設計
+                    </span>
+                  </div>
+                  <figure className="insights-visual">
+                    <img
+                      src={solutionLogicTimeline}
+                      alt="AIと専門家が連動して課題抽出から施策決定まで導く意思決定ダッシュボードのタイムライン"
+                      loading="lazy"
+                    />
+                    <figcaption>
+                      <ul className="insights-visual__callouts">
+                        <li>
+                          <strong>Before</strong>
+                          <span>属人的な週次Excelで判断が2週間遅延</span>
+                        </li>
+                        <li>
+                          <strong>介入</strong>
+                          <span>AIがKPI異常を検知→専門家が因果ロジックを補正</span>
+                        </li>
+                        <li>
+                          <strong>After</strong>
+                          <span>取締役会までに打ち手候補3案と資金インパクトを自動提示</span>
+                        </li>
+                      </ul>
+                    </figcaption>
+                  </figure>
+                  <div className="insights-visual__meta">
+                    <div className="insights-visual__kpi">
+                      <strong>粗利率 +3.2pt</strong>
+                      <span>導入3か月平均</span>
+                    </div>
+                    <a className="insights-panel__cta" href="#contact">
+                      ケーススタディを確認
+                      <ArrowUpRight aria-hidden="true" />
+                    </a>
+                  </div>
                 </article>
               </div>
               <ol className="insights-footnotes" data-animate>
