@@ -3254,39 +3254,48 @@ const Index = () => {
                         <strong>{item.impact}</strong>
                       </div>
                     </header>
-                    <p className="pain-card__summary">{item.summary}</p>
-                    <div className="pain-card__proofs" role="list" aria-label="信頼を支える実績指標">
-                      {item.proofs.map((proof) => (
-                        <div key={`${item.title}-${proof.label}`} className="pain-proof" role="listitem">
-                          <span className="pain-proof__value">{proof.value}</span>
-                          <span className="pain-proof__label">{proof.label}</span>
+                    <div className="pain-card__grid">
+                      <div className="pain-card__column pain-card__column--context">
+                        <p className="pain-card__summary">{item.summary}</p>
+                        <div className="pain-card__proofs" role="list" aria-label="信頼を支える実績指標">
+                          {item.proofs.map((proof) => (
+                            <div key={`${item.title}-${proof.label}`} className="pain-proof" role="listitem">
+                              <span className="pain-proof__value">{proof.value}</span>
+                              <span className="pain-proof__label">{proof.label}</span>
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                    <div className="pain-cause">
-                      <span className="pain-cause__label">課題の背景</span>
-                      <p>{item.detail}</p>
-                    </div>
-                    <div className="pain-chain" role="list" aria-label="AIと専門家による解決プロセス">
-                      <div className="pain-chain__column" role="listitem" data-step="STEP 01">
-                        <span className="pain-chain__label pain-chain__label--ai">生成AIのアクション</span>
-                        <p>{item.aiAction}</p>
+                        <div className="pain-cause">
+                          <span className="pain-cause__label">課題の背景</span>
+                          <p>{item.detail}</p>
+                        </div>
                       </div>
-                      <div className="pain-chain__divider" aria-hidden="true" />
-                      <div className="pain-chain__column" role="listitem" data-step="STEP 02">
-                        <span className="pain-chain__label pain-chain__label--expert">専門家のブラッシュアップ</span>
-                        <p>{item.expertAction}</p>
-                      </div>
-                    </div>
-                    <div className="pain-results">
-                      <div className="pain-impact" aria-label="想定インパクトの詳細">
-                        <span className="pain-impact__label">成果の因果</span>
-                        <span className="pain-impact__metric">{item.impact}</span>
-                        <p>{item.impactDetail}</p>
-                      </div>
-                      <div className="pain-solution">
-                        <span className="pain-solution__label">専門家×AIの解決ストーリー</span>
-                        <p>{item.solution}</p>
+                      <div className="pain-card__column pain-card__column--resolution">
+                        <span className="pain-card__column-label">
+                          <ArrowUpRight aria-hidden /> 因果でつなぐ支援プロセス
+                        </span>
+                        <div className="pain-chain" role="list" aria-label="AIと専門家による解決プロセス">
+                          <div className="pain-chain__column" role="listitem" data-step="STEP 01">
+                            <span className="pain-chain__label pain-chain__label--ai">生成AIのアクション</span>
+                            <p>{item.aiAction}</p>
+                          </div>
+                          <div className="pain-chain__divider" aria-hidden="true" />
+                          <div className="pain-chain__column" role="listitem" data-step="STEP 02">
+                            <span className="pain-chain__label pain-chain__label--expert">専門家のブラッシュアップ</span>
+                            <p>{item.expertAction}</p>
+                          </div>
+                        </div>
+                        <div className="pain-results">
+                          <div className="pain-impact" aria-label="想定インパクトの詳細">
+                            <span className="pain-impact__label">成果の因果</span>
+                            <span className="pain-impact__metric">{item.impact}</span>
+                            <p>{item.impactDetail}</p>
+                          </div>
+                          <div className="pain-solution">
+                            <span className="pain-solution__label">専門家×AIの解決ストーリー</span>
+                            <p>{item.solution}</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </article>
