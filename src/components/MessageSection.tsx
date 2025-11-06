@@ -1,6 +1,6 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { Quote } from "lucide-react";
-import representativeImage from "@/assets/representative.jpg";
+import representativeImage from "@/assets/executive-strategy-meeting.jpg";
 
 const MessageSection = () => {
   return (
@@ -21,7 +21,7 @@ const MessageSection = () => {
               <div className="relative overflow-hidden rounded-[40px] border-4 border-primary/30 shadow-elegant">
                 <img
                   src={representativeImage}
-                  alt="代表取締役 / 中小企業診断士 古町 聖文"
+                  alt="経営会議でビジョンを語る代表の様子"
                   className="w-full aspect-[3/4] object-cover"
                   loading="lazy"
                   decoding="async"
