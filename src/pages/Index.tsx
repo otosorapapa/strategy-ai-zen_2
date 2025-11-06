@@ -271,6 +271,14 @@ type HeroCausalityDeliverable = {
   description: string;
 };
 
+type HeroCausalityVisual = {
+  image: string;
+  alt: string;
+  headline: string;
+  caption: string;
+  tag: string;
+};
+
 type HeroCausality = {
   title: string;
   subtitle: string;
@@ -284,6 +292,7 @@ type HeroCausality = {
   icon: LucideIcon;
   duration: string;
   deliverables: HeroCausalityDeliverable[];
+  visual: HeroCausalityVisual;
 };
 
 const heroCausality: HeroCausality[] = [
@@ -313,6 +322,14 @@ const heroCausality: HeroCausality[] = [
       },
     ],
     icon: ScanSearch,
+    visual: {
+      image:
+        "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80",
+      alt: "経営者と診断士が因果マップをモニターで確認している様子",
+      headline: "判断材料の見える化",
+      caption: "財務・販売・在庫の指標を重ねて共有し、初回会議で意思決定の土台を揃えます。",
+      tag: "72h BLUEPRINT",
+    },
   },
   {
     title: "1〜2週間で実行シナリオを描く",
@@ -340,6 +357,14 @@ const heroCausality: HeroCausality[] = [
       },
     ],
     icon: ClipboardCheck,
+    visual: {
+      image:
+        "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80",
+      alt: "専門家チームが戦略資料を囲んでレビューしている",
+      headline: "戦略と数字を同期",
+      caption: "複数シナリオの期待値を比較し、金融機関への説明も踏まえた実行計画を整備します。",
+      tag: "SCENARIO DESIGN",
+    },
   },
   {
     title: "3か月伴走で結果を育てる",
@@ -367,6 +392,14 @@ const heroCausality: HeroCausality[] = [
       },
     ],
     icon: TrendingUp,
+    visual: {
+      image:
+        "https://images.unsplash.com/photo-1525182008055-f88b95ff7980?auto=format&fit=crop&w=1200&q=80",
+      alt: "定例ミーティングでダッシュボードを確認する経営陣",
+      headline: "進捗と資金を同時管理",
+      caption: "週次レビューで成果とリスクを更新し、社内外に示せる証跡を蓄積します。",
+      tag: "EXECUTION REVIEW",
+    },
   },
 ];
 
@@ -3152,28 +3185,38 @@ const Index = () => {
                         <p className="hero-causality__subtitle">{item.subtitle}</p>
                       </div>
                     </header>
-                    <div className="hero-causality__flow" role="list">
-                      <div className="hero-causality__flow-item" role="listitem">
-                        <span className="hero-causality__pill hero-causality__pill--cause">因</span>
-                        <p>{item.cause}</p>
-                      </div>
-                      <span className="hero-causality__arrow" aria-hidden="true">
-                        <ArrowRight />
-                      </span>
-                      <div className="hero-causality__flow-item" role="listitem">
-                        <span className="hero-causality__pill hero-causality__pill--logic">論</span>
-                        <p>{item.logic}</p>
-                      </div>
-                      <span className="hero-causality__arrow" aria-hidden="true">
-                        <ArrowRight />
-                      </span>
-                      <div className="hero-causality__flow-item hero-causality__flow-item--impact" role="listitem">
-                        <span className="hero-causality__pill hero-causality__pill--impact">果</span>
-                        <div>
-                          <span className="hero-causality__impact">{item.impactMetric}</span>
-                          <p>{item.impactDetail}</p>
+                    <div className="hero-causality__summary">
+                      <div className="hero-causality__flow" role="list">
+                        <div className="hero-causality__flow-item" role="listitem">
+                          <span className="hero-causality__pill hero-causality__pill--cause">因</span>
+                          <p>{item.cause}</p>
+                        </div>
+                        <span className="hero-causality__arrow" aria-hidden="true">
+                          <ArrowRight />
+                        </span>
+                        <div className="hero-causality__flow-item" role="listitem">
+                          <span className="hero-causality__pill hero-causality__pill--logic">論</span>
+                          <p>{item.logic}</p>
+                        </div>
+                        <span className="hero-causality__arrow" aria-hidden="true">
+                          <ArrowRight />
+                        </span>
+                        <div className="hero-causality__flow-item hero-causality__flow-item--impact" role="listitem">
+                          <span className="hero-causality__pill hero-causality__pill--impact">果</span>
+                          <div>
+                            <span className="hero-causality__impact">{item.impactMetric}</span>
+                            <p>{item.impactDetail}</p>
+                          </div>
                         </div>
                       </div>
+                      <figure className="hero-causality__visual">
+                        <span className="hero-causality__visual-tag">{item.visual.tag}</span>
+                        <img src={item.visual.image} alt={item.visual.alt} loading="lazy" />
+                        <figcaption>
+                          <strong>{item.visual.headline}</strong>
+                          <p>{item.visual.caption}</p>
+                        </figcaption>
+                      </figure>
                     </div>
                     <div className="hero-causality__deliverables" aria-label="主要アウトプット">
                       {item.deliverables.map((deliverable) => (
