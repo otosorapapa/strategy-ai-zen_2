@@ -10178,6 +10178,31 @@ svg {
   background: linear-gradient(180deg, rgba(246, 247, 249, 0.6), rgba(255, 255, 255, 0.98));
 }
 
+.comparison-visual {
+  margin-top: 32px;
+  margin-bottom: 8px;
+  padding: 20px 24px 28px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(28, 86, 129, 0.08), rgba(20, 157, 122, 0.12));
+  border: 1px solid rgba(14, 44, 76, 0.12);
+  box-shadow: var(--shadow-xs);
+  text-align: center;
+}
+
+.comparison-visual img {
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 16px;
+  display: block;
+}
+
+.comparison-visual figcaption {
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  line-height: 1.6;
+}
+
 .comparison-table-wrapper {
   margin-top: 36px;
   border-radius: 24px;
@@ -10259,6 +10284,14 @@ svg {
 }
 
 @media (max-width: 768px) {
+  .comparison-visual {
+    padding: 20px;
+  }
+
+  .comparison-visual img {
+    max-width: 100%;
+  }
+
   .comparison-table {
     min-width: 600px;
   }
