@@ -1,0 +1,110 @@
+<svg width="640" height="420" viewBox="0 0 640 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="panelGradient" x1="60" y1="40" x2="520" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0EA5E9" stop-opacity="0.45" />
+      <stop offset="1" stop-color="#0D9488" stop-opacity="0.6" />
+    </linearGradient>
+    <linearGradient id="cardGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F8FBFF" />
+      <stop offset="1" stop-color="#E0F2FE" />
+    </linearGradient>
+    <linearGradient id="chartBar" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#38BDF8" />
+      <stop offset="1" stop-color="#0EA5E9" />
+    </linearGradient>
+    <linearGradient id="chartBarAlt" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#14B8A6" />
+      <stop offset="1" stop-color="#0D9488" />
+    </linearGradient>
+    <filter id="shadowSoft" x="-10" y="-10" width="660" height="440" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="32" flood-color="#0F172A" flood-opacity="0.16" />
+    </filter>
+    <filter id="shadowCard" x="-50" y="-50" width="260" height="260" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="26" flood-color="#0F172A" flood-opacity="0.16" />
+    </filter>
+  </defs>
+  <rect x="0" y="0" width="640" height="420" rx="32" fill="#F3F8FF" />
+  <rect x="32" y="28" width="576" height="364" rx="28" fill="url(#panelGradient)" opacity="0.25" />
+  <g filter="url(#shadowSoft)">
+    <rect x="48" y="48" width="544" height="324" rx="26" fill="url(#cardGradient)" />
+    <rect x="48" y="48" width="544" height="324" rx="26" stroke="rgba(148, 163, 184, 0.35)" stroke-width="1.5" />
+  </g>
+  <rect x="96" y="92" width="192" height="44" rx="22" fill="rgba(14, 165, 233, 0.12)" />
+  <text x="112" y="121" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-weight="600" font-size="16" fill="#0369A1">
+    経営指標ハイライト
+  </text>
+  <g>
+    <rect x="96" y="152" width="200" height="116" rx="20" fill="#FFFFFF" stroke="rgba(148, 163, 184, 0.25)" stroke-width="1" />
+    <text x="116" y="182" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-weight="700" font-size="28" fill="#0F172A">
+      粗利率 +3.2pt
+    </text>
+    <text x="116" y="208" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-size="14" fill="#475569">
+      AI施策導入後の四半期比較
+    </text>
+    <line x1="116" y1="224" x2="276" y2="224" stroke="#E2E8F0" stroke-width="1.5" stroke-linecap="round" />
+    <text x="116" y="246" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-size="13" fill="#0F172A" font-weight="600">
+      根因: 滞留在庫25%削減 / 営業KPIの可視化
+    </text>
+  </g>
+  <g>
+    <rect x="340" y="108" width="196" height="104" rx="18" fill="#FFFFFF" stroke="rgba(148, 163, 184, 0.25)" stroke-width="1" />
+    <text x="358" y="142" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-size="14" fill="#0F172A" font-weight="600">
+      意思決定サマリー
+    </text>
+    <text x="358" y="168" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-size="12" fill="#475569">
+      1. 仮説検証 → 2. 対策設計 → 3. KPIモニタリング
+    </text>
+    <rect x="358" y="184" width="160" height="18" rx="9" fill="rgba(14, 165, 233, 0.15)" />
+    <rect x="358" y="184" width="112" height="18" rx="9" fill="rgba(14, 165, 233, 0.7)" />
+    <circle cx="470" cy="193" r="6" fill="#0EA5E9" />
+  </g>
+  <g>
+    <text x="110" y="308" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-weight="600" font-size="14" fill="#0F172A">
+      KPIトレンド
+    </text>
+    <rect x="96" y="320" width="200" height="36" rx="18" fill="#FFFFFF" stroke="rgba(148, 163, 184, 0.25)" />
+    <line x1="120" y1="338" x2="260" y2="338" stroke="#0EA5E9" stroke-width="2.4" stroke-linecap="round" />
+    <circle cx="150" cy="338" r="5" fill="#0EA5E9" />
+    <circle cx="206" cy="332" r="5" fill="#0EA5E9" />
+    <circle cx="240" cy="344" r="5" fill="#0EA5E9" />
+  </g>
+  <g>
+    <rect x="340" y="232" width="196" height="140" rx="22" fill="#FFFFFF" stroke="rgba(148, 163, 184, 0.25)" stroke-width="1" />
+    <text x="360" y="260" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-weight="700" font-size="24" fill="#0F172A">
+      Before → After
+    </text>
+    <text x="360" y="286" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-size="13" fill="#475569">
+      Before: 月次報告に8日
+    </text>
+    <text x="360" y="308" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-size="13" fill="#047857">
+      After: 判断資料を2日で共有
+    </text>
+    <g>
+      <rect x="360" y="320" width="54" height="52" rx="12" fill="#ECFEFF" stroke="rgba(14, 165, 233, 0.4)" />
+      <rect x="370" y="332" width="12" height="28" rx="4" fill="url(#chartBar)" />
+      <rect x="386" y="324" width="12" height="36" rx="4" fill="url(#chartBarAlt)" />
+      <rect x="402" y="338" width="12" height="22" rx="4" fill="url(#chartBar)" />
+    </g>
+    <g>
+      <rect x="426" y="320" width="96" height="52" rx="12" fill="#FFF7ED" stroke="rgba(249, 115, 22, 0.35)" />
+      <text x="438" y="346" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-size="12" fill="#F97316" font-weight="600">
+        次アクション
+      </text>
+      <text x="438" y="364" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-size="11" fill="#C2410C">
+        経営会議で承認 → 現場共有
+      </text>
+    </g>
+  </g>
+  <g filter="url(#shadowCard)">
+    <rect x="246" y="40" width="156" height="156" rx="28" fill="#FFFFFF" />
+    <rect x="246" y="40" width="156" height="156" rx="28" stroke="rgba(148, 163, 184, 0.35)" />
+    <text x="270" y="96" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-weight="700" font-size="18" fill="#0F172A">
+      Executive
+    </text>
+    <text x="270" y="122" font-family="'Noto Sans JP', 'Segoe UI', sans-serif" font-size="12" fill="#475569">
+      ダイジェスト配信
+    </text>
+    <rect x="270" y="134" width="110" height="6" rx="3" fill="#0EA5E9" opacity="0.5" />
+    <rect x="270" y="146" width="84" height="6" rx="3" fill="#0EA5E9" opacity="0.3" />
+  </g>
+</svg>
