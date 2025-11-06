@@ -48,7 +48,7 @@ import expertTanakaPhoto from "@/assets/expert-tanaka.svg";
 import representativePhoto from "@/assets/representative.jpg";
 import problemIllustration from "@/assets/problem-illustration.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
-import journeyFlowVisual from "@/assets/process-flow-infographic.jpg";
+import journeyFlowVisual from "@/assets/data-infographic-growth.jpg";
 import heroCausalityDiagram from "@/assets/causality-flow.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
@@ -268,6 +268,92 @@ const ctaJourneyStages: CtaJourneyStage[] = [
       "リスク逆転オファーとKPIレビュー体制設計",
     ],
     proof: "案件継続率 92%",
+  },
+];
+
+type JourneySummaryStat = {
+  label: string;
+  value: string;
+  description: string;
+  icon: LucideIcon;
+};
+
+const journeySummaryStats: JourneySummaryStat[] = [
+  {
+    label: "初回因果診断",
+    value: "72h",
+    description: "エグゼクティブ報告書と因果マップで全員の前提を揃える",
+    icon: Timer,
+  },
+  {
+    label: "ROIシミュレーション",
+    value: "2w",
+    description: "複数施策の投資対効果と稟議資料ドラフトを並行作成",
+    icon: LineChart,
+  },
+  {
+    label: "合意形成パッケージ",
+    value: "30d",
+    description: "金融機関・役員会向けの説明ストーリーとKPI管理表を整備",
+    icon: FileText,
+  },
+];
+
+type JourneyAssurancePoint = {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+};
+
+const journeyAssurancePoints: JourneyAssurancePoint[] = [
+  {
+    title: "経営革新等支援機関×専門チーム",
+    description:
+      "中小企業診断士・元事業会社CxOが審査ロジックをレビューし、納得感の高い計画を保証",
+    icon: ShieldCheck,
+  },
+  {
+    title: "経営会議の合意形成に強い伴走",
+    description:
+      "週次のファシリテーションとアジェンダ設計で議論を因果構造に沿って整理",
+    icon: Workflow,
+  },
+  {
+    title: "再現性のある成果指標",
+    description:
+      "導入企業の平均粗利+3.2pt／資金調達成功率87%の実績データを共有",
+    icon: TrendingUp,
+  },
+];
+
+type JourneyCausalityPoint = {
+  tag: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+};
+
+const journeyCausalityPoints: JourneyCausalityPoint[] = [
+  {
+    tag: "因果性の可視化",
+    title: "部門指標を束ねた課題→施策→KPIマップ",
+    description:
+      "財務・営業・人材データを統合し、リスクと機会を因果でひも付け。議論が感覚論に戻らないよう構造化します。",
+    icon: Database,
+  },
+  {
+    tag: "論理性の検証",
+    title: "稟議で刺さる反証シナリオの事前提示",
+    description:
+      "稟議否決時の代表的なツッコミを想定し、ROI・キャッシュフローの分岐を先回りして提示。意思決定のスピードを高めます。",
+    icon: Shield,
+  },
+  {
+    tag: "納得性の醸成",
+    title: "役員・金融機関向けの視線誘導ストーリー",
+    description:
+      "ストーリーボード化した合意形成資料で、視線を次のアクションに誘導。行動喚起までの離脱を抑えます。",
+    icon: Compass,
   },
 ];
 
@@ -3302,13 +3388,42 @@ const Index = () => {
               <figure className="journey-cta__visual" data-animate>
                 <img
                   src={journeyFlowVisual}
-                  alt="課題整理から実行準備までの3ステップが流れ図で示されている"
+                  alt="課題整理から実行準備までの3ステップがインフォグラフィックで示されている"
                   loading="lazy"
                 />
                 <figcaption>
-                  因果整理→打ち手設計→実行準備の流れを一枚で視覚化。視線誘導の矢印が次のカードに意識を向け、スクロール継続を促します。
+                  因果整理→打ち手設計→実行準備の流れを一枚で視覚化。色分けと矢印で視線を次のカードに運び、スクロール継続と理解の同期を両立させます。
                 </figcaption>
               </figure>
+              <div className="journey-cta__summary" data-animate>
+                {journeySummaryStats.map((stat) => {
+                  const SummaryIcon = stat.icon;
+                  return (
+                    <div className="journey-cta__summary-item" key={stat.label}>
+                      <SummaryIcon aria-hidden className="journey-cta__summary-icon" />
+                      <div className="journey-cta__summary-content">
+                        <span className="journey-cta__summary-label">{stat.label}</span>
+                        <span className="journey-cta__summary-value">{stat.value}</span>
+                        <p className="journey-cta__summary-description">{stat.description}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <ul className="journey-cta__trust" data-animate>
+                {journeyAssurancePoints.map((point) => {
+                  const TrustIcon = point.icon;
+                  return (
+                    <li className="journey-cta__trust-item" key={point.title}>
+                      <TrustIcon aria-hidden className="journey-cta__trust-icon" />
+                      <div className="journey-cta__trust-content">
+                        <span className="journey-cta__trust-title">{point.title}</span>
+                        <p className="journey-cta__trust-description">{point.description}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
             <ol className="journey-cta__progress" aria-label="経営判断支援の進行ステップ">
               {ctaJourneyStages.map((stage, index) => {
@@ -3324,6 +3439,21 @@ const Index = () => {
                 );
               })}
             </ol>
+            <div className="journey-cta__logic" data-animate>
+              {journeyCausalityPoints.map((point) => {
+                const LogicIcon = point.icon;
+                return (
+                  <article className="journey-cta__logic-item" key={point.title}>
+                    <LogicIcon aria-hidden className="journey-cta__logic-icon" />
+                    <div className="journey-cta__logic-body">
+                      <span className="journey-cta__logic-tag">{point.tag}</span>
+                      <h3 className="journey-cta__logic-title">{point.title}</h3>
+                      <p className="journey-cta__logic-description">{point.description}</p>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
             <div className="journey-cta__grid">
               {ctaJourneyStages.map((stage) => {
                 const StageIcon = stage.icon;
