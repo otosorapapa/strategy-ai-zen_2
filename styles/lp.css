@@ -3589,8 +3589,7 @@ svg {
     line-height: 1.7;
   }
 
-  .insight-highlight__visual {
-    margin: 0;
+  .insight-highlight__metrics {
     padding: clamp(14px, 2vw, 22px);
     border-radius: 18px;
     background: rgba(255, 255, 255, 0.82);
@@ -3600,7 +3599,8 @@ svg {
     gap: 12px;
   }
 
-  .insight-highlight__visual figcaption {
+  .insight-highlight__metrics-caption {
+    margin: 0;
     font-size: 0.8rem;
     letter-spacing: 0.04em;
     color: var(--gray-500);
@@ -3608,17 +3608,21 @@ svg {
     font-weight: 700;
   }
 
-  .insight-highlight__bars {
+  .insight-highlight__metrics-list {
+    margin: 0;
+    padding: 0;
     display: grid;
     gap: 10px;
   }
 
-  .insight-highlight__bar-row {
-    display: grid;
-    gap: 6px;
+  .insight-highlight__metric {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
   }
 
-  .insight-highlight__bar-row > span {
+  .insight-highlight__metric dt {
     font-size: 0.78rem;
     font-weight: 600;
     color: var(--gray-500);
@@ -3626,38 +3630,9 @@ svg {
     text-transform: uppercase;
   }
 
-  .insight-highlight__bar-track {
-    position: relative;
-    height: 40px;
-    border-radius: 14px;
-    background: rgba(235, 244, 255, 0.6);
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    padding-right: 14px;
-  }
-
-  .insight-highlight__bar-fill {
-    position: relative;
-    height: 100%;
-    border-radius: 14px;
-    background: linear-gradient(120deg, var(--insight-accent), rgba(255, 255, 255, 0.25));
-    box-shadow: 0 16px 28px rgba(20, 61, 106, 0.2);
-  }
-
-  @supports (color: color-mix(in srgb, red 50%, white 50%)) {
-    .insight-highlight__bar-fill {
-      background: linear-gradient(
-        120deg,
-        color-mix(in srgb, var(--insight-accent) 86%, white 14%),
-        color-mix(in srgb, var(--insight-accent) 42%, white 58%)
-      );
-    }
-  }
-
-  .insight-highlight__bar-value {
-    margin-left: auto;
-    font-size: 0.9rem;
+  .insight-highlight__metric dd {
+    margin: 0;
+    font-size: 0.95rem;
     font-weight: 700;
     color: var(--navy-800);
     font-variant-numeric: tabular-nums;
