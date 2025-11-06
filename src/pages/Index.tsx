@@ -1142,72 +1142,72 @@ type ServiceFeature = {
 
 const serviceFeatures: ServiceFeature[] = [
   {
-    title: "外部シグナルと自社データの統合",
-    description: "市場更新と自社KPIをひとつのデータ基盤へ同期。",
+    title: "経営データの一元化",
+    description: "外部指数と自社の数字を一つの基盤に集約。",
     highlights: [
-      "API連携とアップロードをまとめ、毎日の更新を自動化。",
-      "役員会に必要な指標だけをダッシュボードへ抽出。",
+      "会計・販売・在庫などを自動連携し、更新漏れを知らせます。",
+      "経営判断に必要な指標だけをダッシュボードへ整理します。",
     ],
-    benefit: "最新の判断材料をそのまま共有",
-    badge: "DATA FABRIC",
-    statValue: "70%削減",
-    statLabel: "調査・集計にかかる時間",
+    benefit: "胸を張って示せる判断材料を確保",
+    badge: "統合基盤",
+    statValue: "常時更新",
+    statLabel: "経営指標の鮮度",
     icon: Database,
     accent: "navy",
   },
   {
-    title: "複数シナリオ生成",
-    description: "主要な前提を入れるだけで比較ケースを即作成。",
+    title: "意思決定シナリオの即時比較",
+    description: "主要な前提を入力するだけで複数の打ち手を提示。",
     highlights: [
-      "販売・人員・投資の変化を読み込み、AIが複数案を準備。",
-      "差分指標を揃えて議論時間をコンパクトに。",
+      "販売・人員・投資の変化を読み込み、AIがケースを整えます。",
+      "差分指標を並べて会議準備時間を圧縮します。",
     ],
-    benefit: "攻めと守りの選択肢を即提示",
-    badge: "SCENARIO AI",
-    statValue: "4ケース / 48h",
-    statLabel: "意思決定に使えるプラン",
+    benefit: "迷わず選べる打ち手を常に提示",
+    badge: "戦略シミュレーション",
+    statValue: "即時提案",
+    statLabel: "比較シナリオ",
     icon: Layers3,
     accent: "mint",
   },
   {
-    title: "財務計画の自動作成",
-    description: "BS・PL・CFを自動で連動させたドラフトを生成。",
+    title: "資金計画ドラフト",
+    description: "貸借対照表・損益計算書・資金繰りを連動させた案を自動作成。",
     highlights: [
-      "資金繰りや投資計画、返済条件を読み込んで整理。",
-      "金融機関にそのまま出せる形式で共有。",
+      "資金繰りや投資計画を読み込み、数字の整合性を保ちます。",
+      "金融機関にそのまま出せる形式で共有できます。",
     ],
-    benefit: "提出までの待ち時間を短縮",
-    badge: "FINANCE OS",
-    statValue: "-80%",
-    statLabel: "ドラフトのやり直し",
+    benefit: "金融機関にも堂々と差し出せる内容に",
+    badge: "資金設計",
+    statValue: "提出水準",
+    statLabel: "金融機関資料",
     icon: BarChart3,
     accent: "citrus",
   },
   {
-    title: "専門家レビューと倫理チェック",
-    description: "診断士と会計の専門家がAI出力を監査。",
+    title: "専門家の点検と安心設計",
+    description: "診断士と会計専門家がAIの提案を確認。",
     highlights: [
-      "倫理リスクと審査ポイントをチェックリスト化。",
-      "根拠データと想定問答を補強し安心して提出。",
+      "倫理リスクと審査視点をチェックリスト化します。",
+      "根拠データと想定問答を整え、説明に落ち着きを持たせます。",
     ],
-    benefit: "安心して提出できる品質",
-    badge: "RISK & ETHICS",
-    statValue: "+18pt",
-    statLabel: "審査通過率の向上",
+    benefit: "社内外に説明しやすい安心感を付与",
+    badge: "品質監査",
+    statValue: "二重確認",
+    statLabel: "審査視点チェック",
     icon: ShieldCheck,
     accent: "sky",
   },
   {
-    title: "ROIシミュレーションと可視化",
-    description: "投資対効果とキャッシュ影響を一画面で把握。",
+    title: "投資判断の見える化",
+    description: "投資額と効果を一画面で整理。",
     highlights: [
-      "プロジェクト費用と成果指標をリアルタイム試算。",
-      "次の一手を役員会向けに簡潔にまとめて共有。",
+      "プロジェクト費用と成果指標をリアルタイムで試算します。",
+      "次の一手を役員会向けに簡潔にまとめて共有します。",
     ],
-    benefit: "意思決定のスピードを維持",
-    badge: "ROI RADAR",
-    statValue: "1/2",
-    statLabel: "投資判断までの時間",
+    benefit: "投資の筋道を自信を持って語れる",
+    badge: "投資判断",
+    statValue: "一目で把握",
+    statLabel: "投資と効果の関係",
     icon: TrendingUp,
     accent: "rose",
   },
@@ -3250,16 +3250,16 @@ const Index = () => {
             <div className="section-header" data-animate>
               <h2 id="features-heading">専門家×生成AIが支える5つの機能</h2>
               <ul className="section-intro">
-                <li>市場・外部・自社データを統合し、意思決定の質・速さ・先見性を底上げ。</li>
-                <li>AIの出力は診断士がレビューし、料金と支援範囲を透明に開示します。</li>
+                <li>経営に必要な数字を一つの画面に束ね、判断の根拠と先を読む力を整えます。</li>
+                <li>AIの提案は診断士が点検し、進め方と費用もその都度共有して安心につなげます。</li>
               </ul>
             </div>
             <div className="features-layout">
               <aside className="features-visual" data-animate>
-                <span className="features-visual__badge">DECISION FLYWHEEL</span>
-                <h3>意思決定を加速する「データ→AI→専門家」の三層構造</h3>
+                <span className="features-visual__badge">判断循環モデル</span>
+                <h3>数字が語り、専門家が整える三層の判断基盤</h3>
                 <p>
-                  市場・外部・自社データを繋ぎ、AIがドラフトを作成。160件の案件で磨いた専門家チームが論点と信頼性を磨き込み、経営陣は判断と実行に集中できます。
+                  市場の動き、社内の実績、現場の声を束ねてAIが叩き台を作成。実務で鍛えた診断士チームが論点と信頼性を磨き込み、社長は迷わず決断と実行に集中できます。
                 </p>
                 <figure className="features-visual__figure">
                   <img
@@ -3268,21 +3268,21 @@ const Index = () => {
                     loading="lazy"
                   />
                   <figcaption>
-                    外部更新・市場指数・社内KPIをレイヤーで可視化し、意思決定の因果をワンビューで共有。
+                    外部指標と社内指標を重ねて可視化し、判断の筋道をひと目で共有。
                   </figcaption>
                 </figure>
                 <ul className="features-visual__legend">
                   <li>
-                    <span>1. データガバナンス</span>
-                    内閣府指数・POS・会計を5分間隔で同期し、欠損値はAIが警告。
+                    <span>1. データ整備</span>
+                    公的指数や販売・会計データを自動同期し、抜け漏れはAIが通知。
                   </li>
                   <li>
-                    <span>2. AIドラフト</span>
-                    KPI感度分析とROIダッシュボードを自動生成し、優先順位を色分け。
+                    <span>2. 予測ドラフト</span>
+                    主要指標の変化を複数シナリオにまとめ、優先順位を色分け表示。
                   </li>
                   <li>
                     <span>3. 専門家レビュー</span>
-                    診断士と財務会計・管理会計専門家が審査基準と整合性を確認し、次アクションを提示。
+                    診断士と財務・管理会計の専門家が審査視点で確認し、次の一手を提案。
                   </li>
                 </ul>
               </aside>
