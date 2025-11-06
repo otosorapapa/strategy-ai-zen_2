@@ -1036,6 +1036,29 @@ type AiValueLegend = {
   description: string;
 };
 
+type AiValueCardNarrative = {
+  label: string;
+  description: string;
+};
+
+type AiValueCard = {
+  id: string;
+  accent: AiValueAccent;
+  evidence: string;
+  title: string;
+  summary: string;
+  icon: LucideIcon;
+  visual: {
+    src: string;
+    alt: string;
+  };
+  narrative: AiValueCardNarrative[];
+  metricValue: string;
+  metricLabel: string;
+  metricDescription: string;
+  metricNote: string;
+};
+
 const aiValueStats: AiValueStat[] = [
   {
     label: "意思決定リードタイム",
@@ -1083,6 +1106,117 @@ const aiValueLegend: AiValueLegend[] = [
     accent: "citrus",
     label: "Execution Layer",
     description: "伴走支援で社長の集中時間を取り戻し決裁をスムーズに",
+  },
+];
+
+const aiValueCards: AiValueCard[] = [
+  {
+    id: "signal",
+    accent: "navy",
+    evidence: "SIGNAL DESIGN",
+    title: "兆しを逃さないシグナル指揮所",
+    summary:
+      "財務・外部ニュース・現場メモをAIが束ね、経営課題の因を72時間で炙り出します。",
+    icon: ScanSearch,
+    visual: {
+      src: aiValueRealtimeVisual,
+      alt: "リアルタイムに更新される経営指標ダッシュボード",
+    },
+    narrative: [
+      {
+        label: "アウトプット",
+        description: "重要KPIと資金指標を日次で更新し、役員会の議題を即提示。",
+      },
+      {
+        label: "エスカレーション",
+        description: "外部シグナルを検知すると専門家へ自動通知し検証を前倒し。",
+      },
+    ],
+    metricValue: "72h",
+    metricLabel: "初回診断",
+    metricDescription: "経営課題のファクトブックを共有",
+    metricNote: "導入企業20社の中央値",
+  },
+  {
+    id: "scenario",
+    accent: "mint",
+    evidence: "SCENARIO LAB",
+    title: "論点を整えるシナリオ設計室",
+    summary:
+      "複数の資金計画と収益シナリオをAIが比較し、診断士が論理補強して意思決定ラインを揃えます。",
+    icon: Layers3,
+    visual: {
+      src: aiValueScenarioVisual,
+      alt: "複数の経営シナリオを比較するフレームワーク図",
+    },
+    narrative: [
+      {
+        label: "ディスカッション",
+        description: "想定問答と根拠資料をセットで準備し、会議の議事を短縮。",
+      },
+      {
+        label: "トレーサビリティ",
+        description: "数値の出典と検証ログを自動で紐づけて監査に対応。",
+      },
+    ],
+    metricValue: "12案",
+    metricLabel: "比較シナリオ",
+    metricDescription: "投資余地と資金計画を多面評価",
+    metricNote: "週次レビューの上限構成",
+  },
+  {
+    id: "alert",
+    accent: "sky",
+    evidence: "RISK WATCH",
+    title: "リスクを先読みする警戒レーダー",
+    summary:
+      "AIが閾値と異常パターンを監視し、資金・需要・業務リスクを10日前にアラートします。",
+    icon: Shield,
+    visual: {
+      src: aiValueRiskVisual,
+      alt: "リスクアラートを通知するモニタリング画面",
+    },
+    narrative: [
+      {
+        label: "リードタイム",
+        description: "資金繰りと需要のズレを最大10日前に共有し対策を事前合意。",
+      },
+      {
+        label: "対応フロー",
+        description: "担当・期限・優先度を自動割当てし、Slack/Teamsで進捗を追跡。",
+      },
+    ],
+    metricValue: "10日前",
+    metricLabel: "リスク通知",
+    metricDescription: "キャッシュと需要の閾値を先読み",
+    metricNote: "2024年運用ログベース",
+  },
+  {
+    id: "execution",
+    accent: "citrus",
+    evidence: "EXECUTION DESK",
+    title: "成果を着地させる伴走コマンド",
+    summary:
+      "伴走チームが実行と金融機関連携を管理し、経営者の集中時間を45時間/月創出します。",
+    icon: TrendingUp,
+    visual: {
+      src: aiValueAugmentationVisual,
+      alt: "実行プランと成果指標を管理するダッシュボード",
+    },
+    narrative: [
+      {
+        label: "コミュニケーション",
+        description: "会議アジェンダ・議事録・成果レポートをテンプレ化して共有。",
+      },
+      {
+        label: "ファイナンス",
+        description: "融資・補助金の書類作成を並走し、交渉ステップを見える化。",
+      },
+    ],
+    metricValue: "+45h/月",
+    metricLabel: "経営者の集中時間",
+    metricDescription: "現場調整からの解放時間を創出",
+    metricNote: "役員ヒアリング中央値",
   },
 ];
 
@@ -4213,6 +4347,55 @@ const Index = () => {
                   ))}
                 </ul>
               </figure>
+              <div className="ai-value-grid__cards" role="list">
+                {aiValueCards.map((card) => {
+                  const CardIcon = card.icon;
+                  return (
+                    <article
+                      key={card.id}
+                      className={`ai-value-card ai-value-card--${card.accent}`}
+                      role="listitem"
+                    >
+                      <div className="ai-value-card__surface">
+                        <header className="ai-value-card__header">
+                          <div className="ai-value-card__identity">
+                            <span
+                              className={`ai-value-card__icon ai-value-card__icon--${card.accent}`}
+                              aria-hidden="true"
+                            >
+                              <CardIcon />
+                            </span>
+                            <div className="ai-value-card__meta">
+                              <span className="ai-value-card__evidence">{card.evidence}</span>
+                              <h3>{card.title}</h3>
+                              <p>{card.summary}</p>
+                            </div>
+                          </div>
+                          <figure className="ai-value-card__visual">
+                            <img src={card.visual.src} alt={card.visual.alt} loading="lazy" />
+                          </figure>
+                        </header>
+                        <div className="ai-value-card__body">
+                          <dl className="ai-value-card__narrative">
+                            {card.narrative.map((item) => (
+                              <div key={`${card.id}-${item.label}`} className="ai-value-card__row">
+                                <dt>{item.label}</dt>
+                                <dd>{item.description}</dd>
+                              </div>
+                            ))}
+                          </dl>
+                          <div className="ai-value-card__metric">
+                            <span className="ai-value-card__metric-label">{card.metricLabel}</span>
+                            <strong>{card.metricValue}</strong>
+                            <p>{card.metricDescription}</p>
+                            <small>{card.metricNote}</small>
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
             </div>
             <div className="story-cta" data-animate>
               <a className="btn btn-cta" href="#contact">
