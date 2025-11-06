@@ -454,37 +454,6 @@ const journeyAssurancePoints: JourneyAssurancePoint[] = [
   },
 ];
 
-type JourneyCausalityPoint = {
-  tag: string;
-  title: string;
-  description: string;
-  icon: LucideIcon;
-};
-
-const journeyCausalityPoints: JourneyCausalityPoint[] = [
-  {
-    tag: "因果性の可視化",
-    title: "部門指標を束ねた課題→施策→KPIマップ",
-    description:
-      "財務・営業・人材データを統合し、リスクと機会を因果でひも付け。議論が感覚論に戻らないよう構造化します。",
-    icon: Database,
-  },
-  {
-    tag: "論理性の検証",
-    title: "稟議で刺さる反証シナリオの事前提示",
-    description:
-      "稟議否決時の代表的なツッコミを想定し、ROI・キャッシュフローの分岐を先回りして提示。意思決定のスピードを高めます。",
-    icon: Shield,
-  },
-  {
-    tag: "納得性の醸成",
-    title: "役員・金融機関向けの視線誘導ストーリー",
-    description:
-      "ストーリーボード化した合意形成資料で、視線を次のアクションに誘導。行動喚起までの離脱を抑えます。",
-    icon: Compass,
-  },
-];
-
 const sectionToJourneyStage: Record<string, CtaJourneyStage["id"]> = {
   hero: "learn",
   problem: "learn",
@@ -4083,57 +4052,6 @@ const Index = () => {
               </ul>
             </div>
             <div className="journey-cta__experience">
-              <aside
-                className="journey-cta__progress-panel"
-                aria-labelledby="journey-cta-progress-heading"
-                aria-describedby="journey-cta-progress-description"
-                data-animate
-              >
-                <div className="journey-cta__progress-header">
-                  <span className="journey-cta__progress-eyebrow">判断の筋道</span>
-                  <h3 id="journey-cta-progress-heading">各ステージで揃えるべき合意証拠を一目で把握</h3>
-                  <p id="journey-cta-progress-description">
-                    {"財務インパクト・組織稼働・ガバナンスの3視点でチェックリスト化。"}
-                    {"優先判断に迷いが出ないよう、前段の因果と後段の実行整備を一本の線でつなぎます。"}
-                  </p>
-                </div>
-                <ol className="journey-cta__progress" aria-label="支援ジャーニーの進行ステップ">
-                  {ctaJourneyStages.map((stage, index) => {
-                    const isActive = activeJourneyStage === stage.id;
-                    return (
-                      <li
-                        key={stage.id}
-                        className={`journey-cta__progress-item${isActive ? " is-active" : ""}`}
-                      >
-                        <span className="journey-cta__progress-step">0{index + 1}</span>
-                        <div className="journey-cta__progress-body">
-                          <span className="journey-cta__progress-text">{stage.stageLabel}</span>
-                          <span className="journey-cta__progress-meta">
-                            {stage.metricValue}
-                            <span aria-hidden>／</span>
-                            {stage.metricLabel}
-                          </span>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ol>
-                <div className="journey-cta__logic">
-                  {journeyCausalityPoints.map((point) => {
-                    const LogicIcon = point.icon;
-                    return (
-                      <article className="journey-cta__logic-item" key={point.title}>
-                        <LogicIcon aria-hidden className="journey-cta__logic-icon" />
-                        <div className="journey-cta__logic-body">
-                          <span className="journey-cta__logic-tag">{point.tag}</span>
-                          <h3 className="journey-cta__logic-title">{point.title}</h3>
-                          <p className="journey-cta__logic-description">{point.description}</p>
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
-              </aside>
               <div className="journey-cta__grid">
                 {ctaJourneyStages.map((stage) => {
                   const StageIcon = stage.icon;
