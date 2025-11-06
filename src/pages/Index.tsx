@@ -48,6 +48,7 @@ import expertTanakaPhoto from "@/assets/expert-tanaka.svg";
 import representativePhoto from "@/assets/representative.jpg";
 import problemIllustration from "@/assets/problem-illustration.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
+import solutionLogicTimeline from "@/assets/process-flow-infographic.jpg";
 import journeyFlowVisual from "@/assets/data-infographic-growth.jpg";
 import heroCausalityDiagram from "@/assets/causality-flow.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
@@ -990,6 +991,46 @@ type SolutionLogicStep = {
   metricLabel: string;
   accent: "mint" | "sky" | "citrus";
 };
+
+type SolutionLogicProof = {
+  title: string;
+  detail: string;
+};
+
+type SolutionLogicFigure = {
+  label: string;
+  value: string;
+};
+
+const solutionLogicProofs: SolutionLogicProof[] = [
+  {
+    title: "専門家ダブルレビュー",
+    detail: "中小企業診断士と公認会計士が48時間以内にAI診断を検証し、因果の抜け漏れを補正。",
+  },
+  {
+    title: "金融機関を想定した根拠テンプレ",
+    detail: "融資・補助金の質問想定を一覧化。信用調査で問われる論点をあらかじめ整理。",
+  },
+  {
+    title: "実行を可視化する伴走ダッシュボード",
+    detail: "粗利・資金繰り・人材KPIなど18指標を週次更新し、会議で迷わない判断材料を共有。",
+  },
+];
+
+const solutionLogicFigures: SolutionLogicFigure[] = [
+  {
+    label: "可視化KPI",
+    value: "18指標を1画面で同期",
+  },
+  {
+    label: "伴走チーム",
+    value: "診断士×会計士×AIストラテジスト",
+  },
+  {
+    label: "意思決定速度",
+    value: "平均52%短縮の実績",
+  },
+];
 
 const solutionLogicSteps: SolutionLogicStep[] = [
   {
@@ -3444,7 +3485,7 @@ const Index = () => {
           <div className="container">
             <div className="story-header" data-animate>
               <span className="story-eyebrow">STORY 02</span>
-                <h2 id="solution-heading">経営計画AIと専門家の共創で意思決定を加速</h2>
+              <h2 id="solution-heading">経営計画AIと専門家の共創で意思決定を加速</h2>
               <p>
                 挑戦を続ける経営者が会議で胸を張って未来を語れるよう、私たちは経営の筋道を一緒に描き直します。提供するのは、生成AIと専門家が連携した経営計画書づくりと実行サポートのセット。最短3日で現状を診断し、2週間ほどで信頼に足る戦略ドラフトを整備、その後もダッシュボードと伴走支援で実行を支えます。
               </p>
@@ -3482,12 +3523,41 @@ const Index = () => {
               </div>
             </div>
             <div className="solution-logic" data-animate>
-              <div className="solution-logic__header">
-                <h3>検知→検証→決断を回す「因・論・果」の進行設計</h3>
-                <p>
-                  3つのステップが連動することで、数字の裏付けとストーリーが同期します。AIが因（原因）を示し、専門家が論（論拠）を整え、
-                  経営陣が果（成果）を迷いなく示せるよう導きます。
-                </p>
+              <div className="solution-logic__layout">
+                <div className="solution-logic__header">
+                  <span className="solution-logic__eyebrow">因果で裏付けた意思決定オペレーティングモデル</span>
+                  <h3>検知→検証→決断を回す「因・論・果」の進行設計</h3>
+                  <p>
+                    3つのステップが連動することで、数字の裏付けとストーリーが同期します。AIが因（原因）を示し、専門家が論（論拠）を整え、
+                    経営陣が果（成果）を自信を持って語れる状態をつくります。会議で問われるリスクと根拠を事前に整理し、納得性を失わずに意思決定を前へ進めます。
+                  </p>
+                  <ul className="solution-logic__proof" role="list">
+                    {solutionLogicProofs.map((item) => (
+                      <li key={item.title}>
+                        <strong>{item.title}</strong>
+                        <p>{item.detail}</p>
+                      </li>
+                    ))}
+                  </ul>
+                  <dl className="solution-logic__figures">
+                    {solutionLogicFigures.map((figure) => (
+                      <div key={figure.label} className="solution-logic__figure">
+                        <dt>{figure.label}</dt>
+                        <dd>{figure.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+                <figure className="solution-logic__visual">
+                  <img
+                    src={solutionLogicTimeline}
+                    alt="検知・検証・決断の流れを示したタイムライン図。会議準備から伴走支援までの成果物が3段で整理されている。"
+                    loading="lazy"
+                  />
+                  <figcaption>
+                    因（Signal）・論（Evidence）・果（Result）の出力が同期するよう、会議前後のアクションと成果物を一枚で俯瞰できる構成。
+                  </figcaption>
+                </figure>
               </div>
               <ol className="solution-logic__steps" role="list">
                 {solutionLogicSteps.map((step, index) => (
@@ -3495,6 +3565,7 @@ const Index = () => {
                     key={step.id}
                     className={`solution-logic__step solution-logic__step--${step.accent}`}
                   >
+                    <span className="solution-logic__indicator" aria-hidden="true" />
                     <span className="solution-logic__index">{String(index + 1).padStart(2, "0")}</span>
                     <div className="solution-logic__body">
                       <span className="solution-logic__stage">{step.stage}</span>
