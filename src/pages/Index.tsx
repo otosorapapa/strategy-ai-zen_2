@@ -40,7 +40,6 @@ import {
 
 import { submitContactForm } from "@/lib/contact-api";
 
-import heroDecisionVisual from "@/assets/hero-dashboard-analytics.jpg";
 import decisionDashboardVisual from "@/assets/dashboard-preview.jpg";
 import simulatorGuidanceVisual from "@/assets/strategy-planning.jpg";
 import expertKobayashiPhoto from "@/assets/expert-kobayashi.svg";
@@ -2864,30 +2863,6 @@ const Index = () => {
             </div>
             <div className="hero-visual">
               <div className="hero-visual__cluster" data-animate data-initial-visible="true">
-                <figure className="hero-dashboard-shot">
-                  <img
-                    src={heroDecisionVisual}
-                    alt="AIダッシュボードで経営指標を確認しながら専門家と経営陣が次の一手を議論している様子"
-                    loading="lazy"
-                  />
-                  <div className="hero-dashboard-shot__meta" aria-label="ダッシュボードの主要指標スナップショット">
-                    <div>
-                      <strong>フォーカスKPI</strong>
-                      <span>営業利益率 8.4% → 12.0%</span>
-                    </div>
-                    <div>
-                      <strong>意思決定リードタイム</strong>
-                      <span>6週 → 2週</span>
-                    </div>
-                    <div>
-                      <strong>資金繰り余力</strong>
-                      <span>運転資金 +3.2か月</span>
-                    </div>
-                  </div>
-                  <figcaption>
-                    生成AIが統合した指標群を俯瞰し、専門家が因果とリスクの筋道を整理しながら、社長と次の投資ストーリーを設計しているシーンです。
-                  </figcaption>
-                </figure>
                 <div
                   className="hero-visual__insight-board"
                   role="list"
