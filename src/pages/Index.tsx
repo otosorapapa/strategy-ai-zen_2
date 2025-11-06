@@ -40,7 +40,7 @@ import {
 
 import { submitContactForm } from "@/lib/contact-api";
 
-import heroDecisionVisual from "@/assets/strategic-meeting.jpg";
+import heroDecisionVisual from "@/assets/executive-strategy-meeting.jpg";
 import decisionDashboardVisual from "@/assets/dashboard-preview.jpg";
 import simulatorGuidanceVisual from "@/assets/strategy-planning.jpg";
 import expertKobayashiPhoto from "@/assets/expert-kobayashi.svg";
@@ -573,6 +573,27 @@ const quickFormHighlights: QuickFormHighlight[] = [
     title: "資金調達・補助金まで伴走",
     caption: "提出資料・想定問答・実行管理まで専門家が支援",
     icon: LineChart,
+  },
+];
+
+const quickFormStats: { value: string; label: string; detail: string; icon: LucideIcon }[] = [
+  {
+    value: "72h以内",
+    label: "AI診断レポート共有",
+    detail: "初回ヒアリング後72時間で因果マップ草案と優先KPIを提出。",
+    icon: Timer,
+  },
+  {
+    value: "1〜2週",
+    label: "金融機関提出レベルの計画",
+    detail: "審査ロジックに沿ったストーリーと提出資料を診断士が監修。",
+    icon: FileText,
+  },
+  {
+    value: "86%",
+    label: "補助金・融資の採択率",
+    detail: "資金調達と補助金申請の伴走支援で継続して実現。",
+    icon: CheckCircle2,
   },
 ];
 
@@ -2746,124 +2767,155 @@ const Index = () => {
               >
                 <img
                   src={heroDecisionVisual}
-                  alt="生成AIが集約した経営指標を前に専門家と経営陣が議論している様子"
+                  alt="経営陣と専門家が因果マップを前に意思決定の筋道を検討している様子"
                   loading="lazy"
                 />
                 <figcaption>
-                  生成AIが束ねた指標と洞察を共有し、専門家と経営陣が福岡拠点で次の一手を描くワークショップをイメージしたビジュアルです。
+                  生成AIが束ねた指標を専門家が精査し、経営陣が因果シナリオを確認する福岡拠点でのセッションをイメージしたビジュアルです。
                 </figcaption>
               </figure>
               <div className="hero-quick-form" data-animate>
-                <div className="hero-quick-form__intro">
-                  <h2>60秒で申し込む無料AI診断</h2>
-                  <p>
-                    メールと基本情報の入力だけで受付が完了。最短72時間以内にAI診断レポートと改善骨子をお届けし、専門家がオンラインで初回ヒアリングを行います。
-                  </p>
-                  <ul className="hero-quick-form__highlights" aria-label="申し込み後に得られる価値">
-                    {quickFormHighlights.map((item) => {
-                      const HighlightIcon = item.icon;
+                <div className="hero-quick-form__grid">
+                  <div className="hero-quick-form__intro">
+                    <h2>60秒で申し込む無料AI診断</h2>
+                    <p>
+                      メールと基本情報の入力だけで受付が完了。最短72時間以内にAI診断レポートと改善骨子をお届けし、専門家がオンラインで初回ヒアリングを行います。
+                    </p>
+                    <ul className="hero-quick-form__highlights" aria-label="申し込み後に得られる価値">
+                      {quickFormHighlights.map((item) => {
+                        const HighlightIcon = item.icon;
+                        return (
+                          <li key={item.title}>
+                            <span className="hero-quick-form__highlight-icon" aria-hidden="true">
+                              <HighlightIcon />
+                            </span>
+                            <div>
+                              <strong>{item.title}</strong>
+                              <span>{item.caption}</span>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                  <form
+                    className="quick-form"
+                    aria-label="無料AI診断申し込みフォーム"
+                    onSubmit={handleQuickContactSubmit}
+                  >
+                    <div className="quick-form-grid">
+                      <label>
+                        氏名
+                        <input
+                          type="text"
+                          name="name"
+                          autoComplete="name"
+                          value={quickContact.name}
+                          onChange={handleQuickContactChange}
+                          required
+                        />
+                      </label>
+                      <label>
+                        会社名
+                        <input
+                          type="text"
+                          name="company"
+                          autoComplete="organization"
+                          value={quickContact.company}
+                          onChange={handleQuickContactChange}
+                          required
+                        />
+                      </label>
+                      <label>
+                        メールアドレス
+                        <input
+                          type="email"
+                          name="email"
+                          autoComplete="email"
+                          value={quickContact.email}
+                          onChange={handleQuickContactChange}
+                          required
+                        />
+                      </label>
+                    </div>
+                    {quickError && (
+                      <div
+                        className="form-error form-error--inline"
+                        role="alert"
+                        aria-live="assertive"
+                      >
+                        {quickError}
+                      </div>
+                    )}
+                    {quickSubmitted && (
+                      <p
+                        className="quick-form-success"
+                        role="status"
+                        aria-live="polite"
+                      >
+                        送信ありがとうございます。1営業日以内に診断士より初回30分相談の候補日時と72時間診断の流れをご案内します。
+                      </p>
+                    )}
+                    <button type="submit" className="btn btn-cta btn-progress">
+                      {isQuickSubmitting && (
+                        <span className="btn-spinner" aria-hidden="true" />
+                      )}
+                      {isQuickSubmitting ? "送信中..." : "無料相談を申し込む"}
+                    </button>
+                    <p className="quick-form-note">
+                      初回オンライン相談後72時間以内にAI診断レポートと優先課題の整理をお届けします。NDA締結と暗号化ストレージで情報を保護したうえでご案内します。
+                    </p>
+                  </form>
+                </div>
+                <div className="hero-quick-form__confidence">
+                  <ul className="hero-quick-form__stats" aria-label="72時間診断で得られる成果">
+                    {quickFormStats.map((stat) => {
+                      const StatIcon = stat.icon;
                       return (
-                        <li key={item.title}>
-                          <span className="hero-quick-form__highlight-icon" aria-hidden="true">
-                            <HighlightIcon />
+                        <li key={stat.label} className="hero-quick-form__stat">
+                          <span className="hero-quick-form__stat-icon" aria-hidden="true">
+                            <StatIcon />
                           </span>
                           <div>
-                            <strong>{item.title}</strong>
-                            <span>{item.caption}</span>
+                            <strong>{stat.value}</strong>
+                            <span>{stat.label}</span>
+                            <p>{stat.detail}</p>
                           </div>
                         </li>
                       );
                     })}
                   </ul>
-                </div>
-                <form
-                  className="quick-form"
-                  aria-label="無料AI診断申し込みフォーム"
-                  onSubmit={handleQuickContactSubmit}
-                >
-                  <div className="quick-form-grid">
-                    <label>
-                      氏名
-                      <input
-                        type="text"
-                        name="name"
-                        autoComplete="name"
-                        value={quickContact.name}
-                        onChange={handleQuickContactChange}
-                        required
-                      />
-                    </label>
-                    <label>
-                      会社名
-                      <input
-                        type="text"
-                        name="company"
-                        autoComplete="organization"
-                        value={quickContact.company}
-                        onChange={handleQuickContactChange}
-                        required
-                      />
-                    </label>
-                    <label>
-                      メールアドレス
-                      <input
-                        type="email"
-                        name="email"
-                        autoComplete="email"
-                        value={quickContact.email}
-                        onChange={handleQuickContactChange}
-                        required
-                      />
-                    </label>
-                  </div>
-                  {quickError && (
-                    <div
-                      className="form-error form-error--inline"
-                      role="alert"
-                      aria-live="assertive"
-                    >
-                      {quickError}
+                  <div className="hero-quick-form__timeline">
+                    <div className="hero-quick-form__timeline-header">
+                      <h3>72時間で意思決定の筋道を描くロードマップ</h3>
+                      <p>
+                        AIが因果関係を抽出し、診断士がストーリーと説明資料を磨き込むプロセスを3ステップで共創します。各段階で確認する指標とアウトプットを明確にし、判断の納得性を高めます。
+                      </p>
                     </div>
-                  )}
-                  {quickSubmitted && (
-                    <p
-                      className="quick-form-success"
-                      role="status"
-                      aria-live="polite"
-                    >
-                      送信ありがとうございます。1営業日以内に診断士より初回30分相談の候補日時と72時間診断の流れをご案内します。
-                    </p>
-                  )}
-                  <button type="submit" className="btn btn-cta btn-progress">
-                    {isQuickSubmitting && (
-                      <span className="btn-spinner" aria-hidden="true" />
-                    )}
-                    {isQuickSubmitting ? "送信中..." : "無料相談を申し込む"}
-                  </button>
-                  <p className="quick-form-note">ヒアリング後72時間以内にAI診断レポートと優先課題の整理をお届けします。初回相談と診断レポートは無料でご提供します。</p>
-                </form>
-                <ol className="diagnosis-flow" aria-label="診断から提案までの流れ">
-                  {quickFlowSteps.map((step) => {
-                    const StepIcon = step.icon;
-                    return (
-                      <li key={step.label} className="diagnosis-flow__item">
-                        <div className="diagnosis-flow__icon" aria-hidden="true">
-                          <StepIcon />
-                        </div>
-                        <div className="diagnosis-flow__body">
-                          <div className="diagnosis-flow__header">
-                            <strong>{step.label}</strong>
-                            {step.duration && (
-                              <span className="diagnosis-flow__duration">{step.duration}</span>
-                            )}
-                          </div>
-                          <span>{step.description}</span>
-                          <p>{step.detail}</p>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ol>
+                    <ol className="diagnosis-flow" aria-label="診断から提案までの流れ">
+                      {quickFlowSteps.map((step) => {
+                        const StepIcon = step.icon;
+                        return (
+                          <li key={step.label} className="diagnosis-flow__item">
+                            <div className="diagnosis-flow__icon" aria-hidden="true">
+                              <StepIcon />
+                            </div>
+                            <div className="diagnosis-flow__body">
+                              <div className="diagnosis-flow__header">
+                                <strong>{step.label}</strong>
+                                {step.duration && (
+                                  <span className="diagnosis-flow__duration">{step.duration}</span>
+                                )}
+                              </div>
+                              <span>{step.description}</span>
+                              <p>{step.detail}</p>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ol>
+                  </div>
+                </div>
               </div>
               <div className="hero-demo" data-animate data-initial-visible="true">
                 <div className="hero-collab" aria-label="生成AIと専門家チームの連携イメージ">
