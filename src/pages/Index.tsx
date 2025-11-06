@@ -71,33 +71,33 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const primaryCtaLabel = "まずは60秒で自社の意思決定リスクを診断する";
+const primaryCtaLabel = "まずは簡単に自社の意思決定リスクを診断する";
 const heroSnapshotHighlights = [
   {
-    label: "72時間でAI診断レポート",
-    description: "財務・販売・在庫データを束ねた優先課題の整理表を即共有。",
+    label: "短期間でAI診断レポート",
+    description: "財務・販売・在庫データを束ねた優先課題の整理表を共有。",
   },
   {
-    label: "1〜2週間で計画ドラフト",
-    description: "金融機関提出レベルのストーリーとKPIを専門家が伴走作成。",
+    label: "計画ドラフトを素早く構築",
+    description: "金融機関にも伝わるストーリーと指標を専門家が伴走作成。",
   },
   {
-    label: "3か月で定着・資金確保",
-    description: "週次レビューと補助金・融資支援でROIと資金繰りを追跡。",
+    label: "定着と資金準備まで伴走",
+    description: "週次レビューと資金支援で実行サイクルを持続。",
   },
 ];
 const heroTrustSignals = [
   {
-    label: "経済産業省 認定経営革新等支援機関",
-    description: "登録専門家チームが金融機関提出資料の品質を担保。",
+    label: "国の認定を受けた支援体制",
+    description: "専門家チームが金融機関提出資料の品質を担保。",
   },
   {
-    label: "地域金融機関との共同伴走 12行",
-    description: "審査ロジックを踏まえた計画づくりで交渉をスムーズに。",
+    label: "地域金融機関との共同伴走実績",
+    description: "審査視点を踏まえた計画づくりで交渉をスムーズに。",
   },
   {
-    label: "案件継続率 92%",
-    description: "成果創出まで伴走し継続契約をいただいたプロジェクト比率。",
+    label: "継続契約が続くプロジェクト",
+    description: "成果創出まで伴走し長期契約につながった事例が多数。",
   },
 ];
 const contactPhoneNumber = "03-4520-1234";
@@ -131,20 +131,20 @@ const ctaJourneyStages: CtaJourneyStage[] = [
   {
     id: "learn",
     stageLabel: "情報収集フェーズ",
-    headline: "まずは3分で要点を掴む",
+    headline: "短時間で全体像を掴む",
     description:
-      "AI診断〜伴走までの流れと成果指標をまとめたサマリースライドと要約動画を確認。",
-    buttonLabel: "3分サマリーを確認",
+      "AI診断から伴走までの流れと成果指標をまとめたサマリースライドと要約動画を確認。",
+    buttonLabel: "サービスの要点を確認",
     href: "#summary",
     icon: BookOpen,
   },
   {
     id: "evaluate",
     stageLabel: "比較検討フェーズ",
-    headline: "投資対効果をその場で把握",
+    headline: "投資の見通しを整理",
     description:
-      "年商規模と投資額を入力し、ROI・回収期間・削減工数を簡易シミュレーション。",
-    buttonLabel: "ROIを試算する",
+      "年商規模と投資額を入力し、費用回収の目安や削減工数を簡易シミュレーション。",
+    buttonLabel: "シミュレーションを試す",
     href: "#roi-preview",
     icon: BarChart4,
   },
@@ -153,7 +153,7 @@ const ctaJourneyStages: CtaJourneyStage[] = [
     stageLabel: "実行準備フェーズ",
     headline: "無料相談で自社条件を精査",
     description:
-      "専門家が72時間診断の進め方と提出資料例を提示。社内稟議の準備まで伴走します。",
+      "専門家が短期間診断の進め方と提出資料例を提示。社内稟議の準備まで伴走します。",
     buttonLabel: primaryCtaLabel,
     href: "#contact",
     icon: ClipboardCheck,
