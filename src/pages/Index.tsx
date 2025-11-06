@@ -800,23 +800,23 @@ const outcomeFootnotes = [
 const collaborationHighlights: CollaborationHighlight[] = [
   {
     label: "シグナル検知の速さ",
-    value: "外部アラート +42/月",
-    description: "国内外120指標をAIが12時間以内に同期し、変化の因果を整理。",
-    evidence: "Signal Intelligence トラッキング",
+    value: "主要指標を毎日更新",
+    description: "国内外の指標やニュースを自動収集し、経営に影響する変化を素早く整理。",
+    evidence: "日次モニタリングレポート",
     accent: "mint",
   },
   {
     label: "レビュー品質",
-    value: "専門家SLA 72h",
-    description: "金融・会計・戦略のトリプルチェックで、投資家・金融機関基準を担保。",
-    evidence: "Expert Assurance 監査ログ",
+    value: "専門家が最短3日対応",
+    description: "金融・会計・戦略の観点で確認し、金融機関からの質問にも備えられる状態に仕上げます。",
+    evidence: "専門家レビュー記録",
     accent: "sky",
   },
   {
     label: "意思決定速度",
-    value: "決裁リードタイム -52%",
-    description: "AIドラフトと合意形成テンプレートで、決裁会議の迷いを削減。",
-    evidence: "導入20社 実測中央値",
+    value: "決裁の迷いを事前に解消",
+    description: "AIドラフトと合意形成テンプレートで論点をそろえ、会議の集中度を高めます。",
+    evidence: "伴走プロジェクトレポート",
     accent: "citrus",
   },
 ];
@@ -834,32 +834,32 @@ type SolutionLogicStep = {
 const solutionLogicSteps: SolutionLogicStep[] = [
   {
     id: "sense",
-    stage: "Diagnose 72h",
-    title: "72時間で経営課題を特定",
+    stage: "初動診断（最短3日）",
+    title: "最短3日で経営課題を洗い出す",
     description:
-      "AIが財務・販売・顧客データを統合し、利益ドライバーとリスクを定量化。診断士がヒアリングで仮説を確定します。",
-    metric: "72h",
+      "AIが財務・販売・顧客データを統合し、利益を左右する要因とリスクを整理。診断士がヒアリングで確認し、優先順位を固めます。",
+    metric: "最短3日",
     metricLabel: "集中ヒアリング",
     accent: "mint",
   },
   {
     id: "shape",
-    stage: "Design 1-2w",
-    title: "1〜2週間で戦略と数値を整備",
+    stage: "戦略設計（約2週間）",
+    title: "2週間ほどで戦略と数値を揃える",
     description:
-      "生成AIが複数シナリオをドラフトし、診断士と会計士が金融機関基準で整合性を補正。KPIと投資配分を決め切ります。",
-    metric: "1-2週",
+      "生成AIが複数シナリオを下書きし、診断士と会計士が金融機関目線で整合性を調整。KPIと投資配分を明確にします。",
+    metric: "約2週間",
     metricLabel: "ドラフト完成",
     accent: "sky",
   },
   {
     id: "decide",
-    stage: "Execute 3m",
-    title: "3か月伴走で実行と資金調達を両立",
+    stage: "伴走実行（約3か月）",
+    title: "3か月伴走で実行と資金確保を並走",
     description:
-      "ダッシュボードで成果を追跡しながら、専門家がレビュー会議・補助金申請・金融交渉を支援。合意形成とPDCAを高速化します。",
-    metric: "+24pt",
-    metricLabel: "実行率向上",
+      "ダッシュボードで成果を追いながら、専門家がレビュー会議・申請資料づくり・金融交渉を支援。意思決定から実行までを滑らかにします。",
+    metric: "約3か月",
+    metricLabel: "伴走支援",
     accent: "citrus",
   },
 ];
@@ -3112,7 +3112,7 @@ const Index = () => {
               <span className="story-eyebrow">STORY 02</span>
                 <h2 id="solution-heading">経営計画AIと専門家の共創で意思決定を加速</h2>
               <p>
-                72時間の集中診断で現状を把握し、1〜2週間で金融機関も納得する戦略シナリオをドラフト。以降3か月は専門家がAIダッシュボードと共に伴走し、施策の実行・補助金申請・資金調達まで支援します。スピード・品質・実行力を同時に実現する共創プロセスが、意思決定リードタイム52%短縮、計画作成工数80%削減、粗利18pt改善という成果につながっています。
+                挑戦を続ける経営者が会議で胸を張って未来を語れるよう、私たちは経営の筋道を一緒に描き直します。提供するのは、生成AIと専門家が連携した経営計画書づくりと実行サポートのセット。最短3日で現状を診断し、2週間ほどで信頼に足る戦略ドラフトを整備、その後もダッシュボードと伴走支援で実行を支えます。
               </p>
             </div>
             <div className="solution-synergy" data-animate>
@@ -3127,11 +3127,10 @@ const Index = () => {
                 </figcaption>
               </figure>
               <div className="solution-synergy__insights">
-                <span className="solution-synergy__eyebrow">CAUSAL FRAMEWORK</span>
-                <h3>因果で裏付けた共創設計で、意思決定に論理と納得を同時実現</h3>
+                <span className="solution-synergy__eyebrow">共創設計図</span>
+                <h3>因果で裏付けた設計で、意思決定に論理と安心を同時に届ける</h3>
                 <p>
-                  72時間診断→1〜2週間ドラフト→3か月伴走の流れに沿って、AIと専門家が役割分担。各工程のアウトプットとKPIを定量管理し、
-                  「論理が通り、納得感のある判断材料が揃う」体験を再現性高く提供します。
+                  初動診断から伴走支援までの道筋を一枚に整理し、AIが兆しを検知、専門家が論点を整え、経営陣が説得力ある判断を示せるように構成しています。各工程の成果物と確認ポイントを明確にし、会議での説明が短時間で済むよう工夫しています。
                 </p>
                 <ul className="solution-synergy__highlights">
                   {collaborationHighlights.map((item) => (
@@ -3150,10 +3149,10 @@ const Index = () => {
             </div>
             <div className="solution-logic" data-animate>
               <div className="solution-logic__header">
-                <h3>検知→検証→決断を回す「因・論・果」オペレーティングモデル</h3>
+                <h3>検知→検証→決断を回す「因・論・果」の進行設計</h3>
                 <p>
-                  3つのステップが連動することで、数字の裏付けとストーリーが同期。AIが因（Cause）を提示し、専門家が論（Logic）を整え、
-                  経営陣が果（Impact）を確信を持って示せるようになります。
+                  3つのステップが連動することで、数字の裏付けとストーリーが同期します。AIが因（原因）を示し、専門家が論（論拠）を整え、
+                  経営陣が果（成果）を迷いなく示せるよう導きます。
                 </p>
               </div>
               <ol className="solution-logic__steps" role="list">
