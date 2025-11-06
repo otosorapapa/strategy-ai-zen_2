@@ -48,7 +48,7 @@ import expertTanakaPhoto from "@/assets/expert-tanaka.svg";
 import representativePhoto from "@/assets/representative.jpg";
 import problemIllustration from "@/assets/problem-illustration.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
-import journeyFlowVisual from "@/assets/process-flow-infographic.jpg";
+import journeyFlowVisual from "@/assets/data-infographic-growth.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
 import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
@@ -178,6 +178,63 @@ type CtaJourneyStage = {
   metricLabel: string;
   deliverables: string[];
   proof: string;
+};
+
+type JourneyInsightPoint = {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+};
+
+type JourneyAuthoritySignal = {
+  logo: string;
+  alt: string;
+  caption: string;
+};
+
+const journeyInsightPoints: JourneyInsightPoint[] = [
+  {
+    icon: Workflow,
+    title: "因果の筋道が即座にわかる可視化設計",
+    description:
+      "経営指標・現場ヒアリング・AI解析を一枚のロードマップに重ね、判断の抜け漏れを排除します。",
+  },
+  {
+    icon: LineChart,
+    title: "ROIシナリオの比較と投資優先度を数値化",
+    description:
+      "3つの収益シナリオをダッシュボード連動で検証し、役員会での合意形成に必要な裏付けを提示。",
+  },
+  {
+    icon: ShieldCheck,
+    title: "第三者レビューで納得性を担保",
+    description:
+      "認定支援機関の専門家が金融機関・株主視点で査読し、リスク逆転オファーまで設計します。",
+  },
+];
+
+const journeyAuthoritySignals: JourneyAuthoritySignal[] = [
+  {
+    logo: logoSansan,
+    alt: "Sansan 共同プロジェクト",
+    caption: "Sansan DX Award 2024 選出パートナー",
+  },
+  {
+    logo: logoOisix,
+    alt: "Oisix 導入支援",
+    caption: "Oisix グループ新規事業の投資判断を支援",
+  },
+  {
+    logo: logoRaksul,
+    alt: "ラクスル 伴走実績",
+    caption: "ラクスル出身CxOと共同でKPI整備",
+  },
+];
+
+const journeyScorecard = {
+  value: "160",
+  unit: "プロジェクト",
+  label: "年商5,000万〜15億円企業の意思決定データを蓄積",
 };
 
 const ctaJourneyStages: CtaJourneyStage[] = [
@@ -3227,21 +3284,66 @@ const Index = () => {
             <div className="journey-cta__lead">
               <div className="journey-cta__intro" data-animate>
                 <span className="journey-cta__eyebrow">導入ステップ</span>
-                <h2>経営判断の進み具合に合わせた3つの行動支援</h2>
+                <h2>経営判断の進捗を「因果 → シナリオ → 合意形成」で設計</h2>
                 <p>
-                  「課題の因果→改善シナリオ→合意形成」の順で支援内容を分解しました。各ステップで得られる成果物と時間軸を明示することで、意思決定プロセスの論理が一目でわかります。
+                  財務・顧客・現場のデータを束ねて、課題の因果整理から実行準備までを3フェーズにチャンク化しました。各フェーズのアウトプットとリードタイムを並列表示し、社内説明や金融機関との対話でも筋道を即共有できます。
                 </p>
+                <ul className="journey-cta__insights" aria-label="伴走支援の要点">
+                  {journeyInsightPoints.map((point) => {
+                    const InsightIcon = point.icon;
+                    return (
+                      <li key={point.title}>
+                        <span className="journey-cta__insights-icon" aria-hidden="true">
+                          <InsightIcon />
+                        </span>
+                        <div>
+                          <strong>{point.title}</strong>
+                          <p>{point.description}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
               <figure className="journey-cta__visual" data-animate>
-                <img
-                  src={journeyFlowVisual}
-                  alt="課題整理から実行準備までの3ステップが流れ図で示されている"
-                  loading="lazy"
-                />
+                <div className="journey-cta__visual-frame">
+                  <span className="journey-cta__visual-eyebrow">Decision Journey Map</span>
+                  <div className="journey-cta__visual-callout">
+                    <ArrowDownRight aria-hidden />
+                    <span>次フェーズのカードへ視線誘導</span>
+                  </div>
+                  <img
+                    src={journeyFlowVisual}
+                    alt="課題の因果整理から実行準備までの流れを矢印付きで示すインフォグラフィック"
+                    loading="lazy"
+                  />
+                </div>
                 <figcaption>
-                  因果整理→打ち手設計→実行準備の流れを一枚で視覚化。視線誘導の矢印が次のカードに意識を向け、スクロール継続を促します。
+                  3フェーズそれぞれのリードタイム・アウトプット・意思決定基準を一枚のインフォグラフィックに同期。データ×専門家の判断軸が視覚化され、次のセクションへスムーズにスクロールしたくなる構成です。
                 </figcaption>
               </figure>
+            </div>
+            <div className="journey-cta__authority" aria-label="導入実績と保証" data-animate>
+              <div className="journey-cta__authority-logos" role="list">
+                {journeyAuthoritySignals.map((signal) => (
+                  <figure
+                    key={signal.caption}
+                    className="journey-cta__authority-item"
+                    role="group"
+                    aria-label={signal.caption}
+                  >
+                    <img src={signal.logo} alt={signal.alt} loading="lazy" />
+                    <figcaption>{signal.caption}</figcaption>
+                  </figure>
+                ))}
+              </div>
+              <div className="journey-cta__scorecard" role="group" aria-label="支援実績スコアカード">
+                <span className="journey-cta__scorecard-value">
+                  {journeyScorecard.value}
+                  <span>{journeyScorecard.unit}</span>
+                </span>
+                <p className="journey-cta__scorecard-label">{journeyScorecard.label}</p>
+              </div>
             </div>
             <ol className="journey-cta__progress" aria-label="経営判断支援の進行ステップ">
               {ctaJourneyStages.map((stage, index) => {
