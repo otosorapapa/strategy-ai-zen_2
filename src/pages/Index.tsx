@@ -2646,23 +2646,25 @@ const Index = () => {
         >
           <div className="hero-overlay" />
           <div className="container hero-inner">
-            <div className="hero-copy" data-animate data-initial-visible="true">
-              <span className="badge">年商5,000万〜15億円の経営者向け</span>
-              <h1 id="hero-heading">
-                意思決定の迷いを72時間でゼロに。
-                <span>生成AI×診断士が利益計画を描き切る</span>
-              </h1>
-              <p className="hero-lead">
-                資金繰りや投資判断の迷いを、AI分析と専門家レビューで72時間以内に整理し、経営会議までに数字と論点をそろえます。
-              </p>
-              <ul className="hero-snapshot" aria-label="提供価値のスナップ要約">
-                {heroSnapshotHighlights.map((item) => (
-                  <li key={item.label}>
-                    <strong>{item.label}</strong>
-                    <span>{item.description}</span>
-                  </li>
-                ))}
-              </ul>
+            <div className="hero-main">
+              <div className="hero-intro" data-animate data-initial-visible="true">
+                <span className="badge">年商5,000万〜15億円の経営者向け</span>
+                <h1 id="hero-heading">
+                  意思決定の迷いを72時間でゼロに。
+                  <span>生成AI×診断士が利益計画を描き切る</span>
+                </h1>
+                <p className="hero-lead">
+                  資金繰りや投資判断の迷いを、AI分析と専門家レビューで72時間以内に整理し、経営会議までに数字と論点をそろえます。
+                </p>
+                <ul className="hero-snapshot" aria-label="提供価値のスナップ要約">
+                  {heroSnapshotHighlights.map((item) => (
+                    <li key={item.label}>
+                      <strong>{item.label}</strong>
+                      <span>{item.description}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
               <div
                 id="summary"
                 className={`hero-quick-summary${
@@ -2711,7 +2713,7 @@ const Index = () => {
                     aria-label="導入成果の詳細サマリー"
                   >
                     {heroSummaryCards.map((card) => {
-                      const SummaryIcon = card.icon;
+                      const SummaryIcon = card.icon
                       return (
                         <article key={card.title} className="hero-quick-summary__card">
                           <div className="hero-quick-summary__icon" aria-hidden="true">
@@ -2721,311 +2723,345 @@ const Index = () => {
                           <p>{card.description}</p>
                           <span className="hero-quick-summary__stat">{card.stat}</span>
                         </article>
-                      );
+                      )
                     })}
                   </div>
                 )}
               </div>
-              <div className="hero-triad" data-animate>
-                <section
-                  className="hero-triad__column hero-triad__column--problem"
-                  aria-labelledby="hero-problem-heading"
-                >
-                  <span className="hero-triad__eyebrow">Problem</span>
-                  <h3 id="hero-problem-heading">意思決定を鈍らせる3つの壁</h3>
-                  <p className="hero-triad__summary">
-                    経営会議直前の準備や金融機関対応で、判断が後ろ倒しになる声が多く寄せられています。
-                  </p>
-                  <button
-                    type="button"
-                    className="hero-toggle hero-toggle--inline"
-                    aria-expanded={isHeroProblemExpanded}
-                    onClick={() => setHeroProblemExpanded((prev) => !prev)}
-                  >
-                    <ArrowDownRight aria-hidden />
-                    <span>{isHeroProblemExpanded ? "課題を閉じる" : "課題詳細を見る"}</span>
-                  </button>
-                  {isHeroProblemExpanded && (
-                    <ul className="hero-triad__list" aria-label="意思決定を妨げる課題の詳細">
-                      {heroPainPoints.map((item) => (
-                        <li key={item.title}>
-                          <strong>{item.title}</strong>
-                          <span>{item.detail}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </section>
-                <section
-                  className="hero-triad__column hero-triad__column--benefit"
-                  aria-labelledby="hero-benefit-heading"
-                >
-                  <span className="hero-triad__eyebrow hero-triad__eyebrow--benefit">Benefit</span>
-                  <h3 id="hero-benefit-heading">選ばれるスピードと確度</h3>
-                  <ul className="hero-triad__list">
-                    {heroBenefitHighlights.map((item) => (
-                      <li key={item.title}>
-                        <strong>{item.title}</strong>
-                        <span>{item.detail}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="hero-triad__note">
-                    72時間診断→計画ドラフト→3か月伴走の流れで、会議前に論点と数字を揃え意思決定を前倒しします。
-                  </p>
-                </section>
-                <section
-                  className="hero-triad__column hero-triad__column--proof"
-                  aria-labelledby="hero-proof-heading"
-                >
-                  <span className="hero-triad__eyebrow hero-triad__eyebrow--proof">Proof</span>
-                  <h3 id="hero-proof-heading">導入企業の成果</h3>
-                  <div className="hero-triad__metrics" aria-label="導入企業の主要成果">
-                    {heroResults.map((result) => (
-                      <article key={result.label} className="hero-triad__metric">
-                        <strong>{result.value}</strong>
-                        <span>{result.label}</span>
-                        <p>{result.description}</p>
-                        <small>{result.source}</small>
+              <div className="hero-main__grid">
+                <div className="hero-main__primary" data-animate>
+                  <div className="hero-triad" aria-label="因果とベネフィットの整理">
+                    <section
+                      className="hero-triad__column hero-triad__column--problem"
+                      aria-labelledby="hero-problem-heading"
+                    >
+                      <span className="hero-triad__eyebrow">Problem</span>
+                      <h3 id="hero-problem-heading">意思決定を鈍らせる3つの壁</h3>
+                      <p className="hero-triad__summary">
+                        経営会議直前の準備や金融機関対応で、判断が後ろ倒しになる声が多く寄せられています。
+                      </p>
+                      <button
+                        type="button"
+                        className="hero-toggle hero-toggle--inline"
+                        aria-expanded={isHeroProblemExpanded}
+                        onClick={() => setHeroProblemExpanded((prev) => !prev)}
+                      >
+                        <ArrowDownRight aria-hidden />
+                        <span>{isHeroProblemExpanded ? "課題を閉じる" : "課題詳細を見る"}</span>
+                      </button>
+                      {isHeroProblemExpanded && (
+                        <ul className="hero-triad__list" aria-label="意思決定を妨げる課題の詳細">
+                          {heroPainPoints.map((item) => (
+                            <li key={item.title}>
+                              <strong>{item.title}</strong>
+                              <span>{item.detail}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </section>
+                    <section
+                      className="hero-triad__column hero-triad__column--benefit"
+                      aria-labelledby="hero-benefit-heading"
+                    >
+                      <span className="hero-triad__eyebrow hero-triad__eyebrow--benefit">Benefit</span>
+                      <h3 id="hero-benefit-heading">選ばれるスピードと確度</h3>
+                      <ul className="hero-triad__list">
+                        {heroBenefitHighlights.map((item) => (
+                          <li key={item.title}>
+                            <strong>{item.title}</strong>
+                            <span>{item.detail}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <p className="hero-triad__note">
+                        72時間診断→計画ドラフト→3か月伴走の流れで、会議前に論点と数字を揃え意思決定を前倒しします。
+                      </p>
+                    </section>
+                    <section
+                      className="hero-triad__column hero-triad__column--proof"
+                      aria-labelledby="hero-proof-heading"
+                    >
+                      <span className="hero-triad__eyebrow hero-triad__eyebrow--proof">Proof</span>
+                      <h3 id="hero-proof-heading">導入企業の成果</h3>
+                      <div className="hero-triad__metrics" aria-label="導入企業の主要成果">
+                        {heroResults.map((result) => (
+                          <article key={result.label} className="hero-triad__metric">
+                            <strong>{result.value}</strong>
+                            <span>{result.label}</span>
+                            <p>{result.description}</p>
+                            <small>{result.source}</small>
+                          </article>
+                        ))}
+                      </div>
+                    </section>
+                  </div>
+                </div>
+                <aside className="hero-main__secondary" aria-label="信頼証明と主要指標">
+                  <div className="hero-trust-signals" data-animate aria-label="第三者証明と継続実績">
+                    {heroTrustSignals.map((signal) => (
+                      <article key={signal.label}>
+                        <h4>{signal.label}</h4>
+                        <p>{signal.description}</p>
                       </article>
                     ))}
                   </div>
-                </section>
+                  <figure className="hero-metrics-board" data-animate>
+                    <figcaption>72時間診断で把握できる主要指標</figcaption>
+                    <ul className="hero-metrics" ref={metricsRef}>
+                      {heroMetrics.map((metric, index) => (
+                        <li key={metric.label}>
+                          <strong>
+                            {metric.valueLabel ?? `${metric.prefix}${metricValues[index].toLocaleString(undefined, {
+                              minimumFractionDigits: metric.decimals ?? 0,
+                              maximumFractionDigits: metric.decimals ?? 0,
+                            })}${metric.suffix}`}
+                          </strong>
+                          <span>{metric.label}</span>
+                          <small>
+                            {metric.note}
+                            <Tooltip>
+                              <TooltipTrigger asChild>
+                                <button
+                                  type="button"
+                                  className="metric-detail-trigger"
+                                  aria-label={`${metric.label}の測定方法`}
+                                >
+                                  <Info aria-hidden="true" />
+                                </button>
+                              </TooltipTrigger>
+                              <TooltipContent>{metric.detail}</TooltipContent>
+                            </Tooltip>
+                          </small>
+                        </li>
+                      ))}
+                    </ul>
+                  </figure>
+                  <div className="hero-actions" data-animate>
+                    <a className="btn btn-cta" href="#contact">
+                      {primaryCtaLabel}
+                    </a>
+                    <a className="hero-secondary-link" href="#resources">
+                      成功事例集をダウンロード
+                    </a>
+                  </div>
+                  <ul className="trust-badges" data-animate aria-label="セキュリティ対策">
+                    {securityBadges.map((badge) => {
+                      const BadgeIcon = badge.icon
+                      return (
+                        <li key={badge.title}>
+                          <span className="trust-badge__icon" aria-hidden="true">
+                            <BadgeIcon />
+                          </span>
+                          <span className="trust-badge__label">{badge.badge}</span>
+                          <span className="trust-badge__title">{badge.title}</span>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </aside>
               </div>
-              <div className="hero-trust-signals" data-animate aria-label="第三者証明と継続実績">
-                {heroTrustSignals.map((signal) => (
-                  <article key={signal.label}>
-                    <h4>{signal.label}</h4>
-                    <p>{signal.description}</p>
-                  </article>
-                ))}
-              </div>
-              <div className="hero-actions">
-                <a className="btn btn-cta" href="#contact">
-                  {primaryCtaLabel}
-                </a>
-                <a className="hero-secondary-link" href="#resources">
-                  成功事例集をダウンロード
-                </a>
-              </div>
-              <ul className="trust-badges" aria-label="セキュリティ対策">
-                {securityBadges.map((badge) => {
-                  const BadgeIcon = badge.icon;
-                  return (
-                    <li key={badge.title}>
-                      <span className="trust-badge__icon" aria-hidden="true">
-                        <BadgeIcon />
-                      </span>
-                      <span className="trust-badge__label">{badge.badge}</span>
-                      <span className="trust-badge__title">{badge.title}</span>
-                    </li>
-                  );
-                })}
-              </ul>
-              <ul className="hero-metrics" ref={metricsRef}>
-                {heroMetrics.map((metric, index) => (
-                  <li key={metric.label}>
-                    <strong>
-                      {metric.valueLabel ?? `${metric.prefix}${metricValues[index].toLocaleString(undefined, {
-                        minimumFractionDigits: metric.decimals ?? 0,
-                        maximumFractionDigits: metric.decimals ?? 0,
-                      })}${metric.suffix}`}
-                    </strong>
-                    <span>{metric.label}</span>
-                    <small>
-                      {metric.note}
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <button
-                            type="button"
-                            className="metric-detail-trigger"
-                            aria-label={`${metric.label}の測定方法`}
-                          >
-                            <Info aria-hidden="true" />
-                          </button>
-                        </TooltipTrigger>
-                        <TooltipContent>{metric.detail}</TooltipContent>
-                      </Tooltip>
-                    </small>
-                  </li>
-                ))}
-              </ul>
               <div className="scroll-cue" aria-hidden="true">
                 <span className="scroll-cue__icon" />
                 <span className="scroll-cue__label">スクロールして詳細を見る</span>
               </div>
             </div>
-            <div className="hero-visual">
-              <div className="hero-quick-form" data-animate>
-                <div className="hero-quick-form__intro">
-                  <h2>60秒で申し込む無料AI診断</h2>
-                  <p>
-                    メールと基本情報の入力だけで受付が完了。最短72時間以内にAI診断レポートと改善骨子をお届けし、専門家がオンラインで初回ヒアリングを行います。
-                  </p>
-                  <ul className="hero-quick-form__highlights" aria-label="申し込み後に得られる価値">
-                    {quickFormHighlights.map((item) => {
-                      const HighlightIcon = item.icon;
+            <aside className="hero-aside" aria-label="経営ダッシュボードと申し込み導線">
+              <figure className="hero-dashboard-shot" data-animate>
+                <img
+                  src="/images/hero-decision-dashboard.svg"
+                  alt="AIダッシュボードが資金繰りと利益計画のシナリオを可視化している画面"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="hero-dashboard-shot__meta">
+                  <div>
+                    <strong>Scenario</strong>
+                    <span>キャッシュ残高×投資余力の即時比較</span>
+                  </div>
+                  <div>
+                    <strong>Alert</strong>
+                    <span>3か月先の資金不足を色分け通知</span>
+                  </div>
+                  <div>
+                    <strong>Focus</strong>
+                    <span>EBITDA感応度とリスク要因を一望</span>
+                  </div>
+                </div>
+                <figcaption>経営会議で説明しやすい論点マップと数値の関係性を72時間で提示</figcaption>
+              </figure>
+              <div className="hero-visual">
+                <div className="hero-quick-form" data-animate>
+                  <div className="hero-quick-form__intro">
+                    <h2>60秒で申し込む無料AI診断</h2>
+                    <p>
+                      メールと基本情報の入力だけで受付が完了。最短72時間以内にAI診断レポートと改善骨子をお届けし、専門家がオンラインで初回ヒアリングを行います。
+                    </p>
+                    <ul className="hero-quick-form__highlights" aria-label="申し込み後に得られる価値">
+                      {quickFormHighlights.map((item) => {
+                        const HighlightIcon = item.icon
+                        return (
+                          <li key={item.title}>
+                            <span className="hero-quick-form__highlight-icon" aria-hidden="true">
+                              <HighlightIcon />
+                            </span>
+                            <div>
+                              <strong>{item.title}</strong>
+                              <span>{item.caption}</span>
+                            </div>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                  <form
+                    className="quick-form"
+                    aria-label="無料AI診断申し込みフォーム"
+                    onSubmit={handleQuickContactSubmit}
+                  >
+                    <div className="quick-form-grid">
+                      <label>
+                        氏名
+                        <input
+                          type="text"
+                          name="name"
+                          autoComplete="name"
+                          value={quickContact.name}
+                          onChange={handleQuickContactChange}
+                          required
+                        />
+                      </label>
+                      <label>
+                        会社名
+                        <input
+                          type="text"
+                          name="company"
+                          autoComplete="organization"
+                          value={quickContact.company}
+                          onChange={handleQuickContactChange}
+                          required
+                        />
+                      </label>
+                      <label>
+                        メールアドレス
+                        <input
+                          type="email"
+                          name="email"
+                          autoComplete="email"
+                          value={quickContact.email}
+                          onChange={handleQuickContactChange}
+                          required
+                        />
+                      </label>
+                    </div>
+                    {quickError && (
+                      <div
+                        className="form-error form-error--inline"
+                        role="alert"
+                        aria-live="assertive"
+                      >
+                        {quickError}
+                      </div>
+                    )}
+                    {quickSubmitted && (
+                      <p
+                        className="quick-form-success"
+                        role="status"
+                        aria-live="polite"
+                      >
+                        送信ありがとうございます。1営業日以内に診断士より初回30分相談の候補日時と72時間診断の流れをご案内します。
+                      </p>
+                    )}
+                    <button type="submit" className="btn btn-cta btn-progress">
+                      {isQuickSubmitting && (
+                        <span className="btn-spinner" aria-hidden="true" />
+                      )}
+                      {isQuickSubmitting ? "送信中..." : "無料相談を申し込む"}
+                    </button>
+                    <p className="quick-form-note">ヒアリング後72時間以内にAI診断レポートと優先課題の整理をお届けします。初回相談と診断レポートは無料でご提供します。</p>
+                  </form>
+                  <ol className="diagnosis-flow" aria-label="診断から提案までの流れ">
+                    {quickFlowSteps.map((step) => {
+                      const StepIcon = step.icon
                       return (
-                        <li key={item.title}>
-                          <span className="hero-quick-form__highlight-icon" aria-hidden="true">
-                            <HighlightIcon />
-                          </span>
-                          <div>
-                            <strong>{item.title}</strong>
-                            <span>{item.caption}</span>
+                        <li key={step.label} className="diagnosis-flow__item">
+                          <div className="diagnosis-flow__icon" aria-hidden="true">
+                            <StepIcon />
+                          </div>
+                          <div className="diagnosis-flow__body">
+                            <div className="diagnosis-flow__header">
+                              <strong>{step.label}</strong>
+                              {step.duration && (
+                                <span className="diagnosis-flow__duration">{step.duration}</span>
+                              )}
+                            </div>
+                            <span>{step.description}</span>
+                            <p>{step.detail}</p>
                           </div>
                         </li>
-                      );
+                      )
                     })}
-                  </ul>
+                  </ol>
                 </div>
-                <form
-                  className="quick-form"
-                  aria-label="無料AI診断申し込みフォーム"
-                  onSubmit={handleQuickContactSubmit}
-                >
-                  <div className="quick-form-grid">
-                    <label>
-                      氏名
-                      <input
-                        type="text"
-                        name="name"
-                        autoComplete="name"
-                        value={quickContact.name}
-                        onChange={handleQuickContactChange}
-                        required
-                      />
-                    </label>
-                    <label>
-                      会社名
-                      <input
-                        type="text"
-                        name="company"
-                        autoComplete="organization"
-                        value={quickContact.company}
-                        onChange={handleQuickContactChange}
-                        required
-                      />
-                    </label>
-                    <label>
-                      メールアドレス
-                      <input
-                        type="email"
-                        name="email"
-                        autoComplete="email"
-                        value={quickContact.email}
-                        onChange={handleQuickContactChange}
-                        required
-                      />
-                    </label>
-                  </div>
-                  {quickError && (
-                    <div
-                      className="form-error form-error--inline"
-                      role="alert"
-                      aria-live="assertive"
-                    >
-                      {quickError}
+                <div className="hero-demo" data-animate data-initial-visible="true">
+                  <div className="hero-collab" aria-label="生成AIと専門家チームの連携イメージ">
+                    <div className="hero-collab__panel hero-collab__panel--ai">
+                      <span className="hero-collab__label">生成AI</span>
+                      <p>
+                        市場・外部・自社データをクロス分析し、資金繰りと成長の複数シナリオを毎週ドラフト。
+                        JAGGAER (2024) が示すように、膨大なデータから最適解を素早く抽出します。
+                      </p>
                     </div>
-                  )}
-                  {quickSubmitted && (
-                    <p
-                      className="quick-form-success"
-                      role="status"
-                      aria-live="polite"
-                    >
-                      送信ありがとうございます。1営業日以内に診断士より初回30分相談の候補日時と72時間診断の流れをご案内します。
-                    </p>
-                  )}
-                  <button type="submit" className="btn btn-cta btn-progress">
-                    {isQuickSubmitting && (
-                      <span className="btn-spinner" aria-hidden="true" />
-                    )}
-                    {isQuickSubmitting ? "送信中..." : "無料相談を申し込む"}
-                  </button>
-                  <p className="quick-form-note">ヒアリング後72時間以内にAI診断レポートと優先課題の整理をお届けします。初回相談と診断レポートは無料でご提供します。</p>
-                </form>
-                <ol className="diagnosis-flow" aria-label="診断から提案までの流れ">
-                  {quickFlowSteps.map((step) => {
-                    const StepIcon = step.icon;
-                    return (
-                      <li key={step.label} className="diagnosis-flow__item">
-                        <div className="diagnosis-flow__icon" aria-hidden="true">
-                          <StepIcon />
-                        </div>
-                        <div className="diagnosis-flow__body">
-                          <div className="diagnosis-flow__header">
-                            <strong>{step.label}</strong>
-                            {step.duration && (
-                              <span className="diagnosis-flow__duration">{step.duration}</span>
-                            )}
-                          </div>
-                          <span>{step.description}</span>
-                          <p>{step.detail}</p>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ol>
-              </div>
-              <div className="hero-demo" data-animate data-initial-visible="true">
-                <div className="hero-collab" aria-label="生成AIと専門家チームの連携イメージ">
-                  <div className="hero-collab__panel hero-collab__panel--ai">
-                    <span className="hero-collab__label">生成AI</span>
-                    <p>
-                      市場・外部・自社データをクロス分析し、資金繰りと成長の複数シナリオを毎週ドラフト。
-                      JAGGAER (2024) が示すように、膨大なデータから最適解を素早く抽出します。
-                    </p>
+                    <div className="hero-collab__connector" aria-hidden="true">
+                      <Bot />
+                    </div>
+                    <div className="hero-collab__panel hero-collab__panel--experts">
+                      <span className="hero-collab__label">専門家チーム</span>
+                      <ul className="hero-collab__experts">
+                        {heroAllianceExperts.map((expert) => (
+                          <li key={expert.name}>
+                            <img src={expert.photo} alt={expert.name} loading="lazy" />
+                            <div>
+                              <strong>{expert.name}</strong>
+                              <span>{expert.role}</span>
+                              <small>{expert.focus}</small>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                  <div className="hero-collab__connector" aria-hidden="true">
-                    <Bot />
-                  </div>
-                  <div className="hero-collab__panel hero-collab__panel--experts">
-                    <span className="hero-collab__label">専門家チーム</span>
-                    <ul className="hero-collab__experts">
-                      {heroAllianceExperts.map((expert) => (
-                        <li key={expert.name}>
-                          <img src={expert.photo} alt={expert.name} loading="lazy" />
-                          <div>
-                            <strong>{expert.name}</strong>
-                            <span>{expert.role}</span>
-                            <small>{expert.focus}</small>
-                          </div>
+                  <div className="hero-evidence" aria-label="外部調査による裏付け">
+                    <span className="hero-evidence__eyebrow">Evidence</span>
+                    <ul className="hero-evidence__list">
+                      {heroEvidence.map((item) => (
+                        <li key={item.source} className="hero-evidence__item">
+                          <p>{item.summary}</p>
+                          <a href={item.url} target="_blank" rel="noreferrer">
+                            {item.source}
+                          </a>
                         </li>
                       ))}
                     </ul>
                   </div>
+                  <button
+                    type="button"
+                    className="hero-demo__button"
+                    onClick={() => {
+                      setIsDemoPlaying(false);
+                      setIsDemoOpen(true);
+                    }}
+                  >
+                    <PlayCircle aria-hidden="true" />
+                    <span>1分で分かるAI×専門家デモを見る</span>
+                  </button>
+                  <p className="hero-demo__caption">
+                    週1回のAIレポートと専門家セッションで、University of Cincinnati Onlineが指摘するリアルタイム意思決定の仕組みを体現。
+                    経営者は重要な判断に集中し、資料の整合性はチームが担保します。
+                  </p>
                 </div>
-                <div className="hero-evidence" aria-label="外部調査による裏付け">
-                  <span className="hero-evidence__eyebrow">Evidence</span>
-                  <ul className="hero-evidence__list">
-                    {heroEvidence.map((item) => (
-                      <li key={item.source} className="hero-evidence__item">
-                        <p>{item.summary}</p>
-                        <a href={item.url} target="_blank" rel="noreferrer">
-                          {item.source}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <button
-                  type="button"
-                  className="hero-demo__button"
-                  onClick={() => {
-                    setIsDemoPlaying(false);
-                    setIsDemoOpen(true);
-                  }}
-                >
-                  <PlayCircle aria-hidden="true" />
-                  <span>1分で分かるAI×専門家デモを見る</span>
-                </button>
-                <p className="hero-demo__caption">
-                  週1回のAIレポートと専門家セッションで、University of Cincinnati Onlineが指摘するリアルタイム意思決定の仕組みを体現。
-                  経営者は重要な判断に集中し、資料の整合性はチームが担保します。
-                </p>
               </div>
-            </div>
+            </aside>
           </div>
         </section>
 
