@@ -48,7 +48,7 @@ import expertTanakaPhoto from "@/assets/expert-tanaka.svg";
 import representativePhoto from "@/assets/representative.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import solutionLogicTimeline from "@/assets/process-flow-infographic.jpg";
-import journeyFlowVisual from "@/assets/data-infographic-growth.jpg";
+import journeyFlowVisual from "@/assets/process-flow-infographic.jpg";
 import heroCausalityDiagram from "@/assets/causality-flow.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
@@ -3511,11 +3511,11 @@ const Index = () => {
               <figure className="journey-cta__visual" data-animate>
                 <img
                   src={journeyFlowVisual}
-                  alt="課題整理から実行準備までの3ステップがインフォグラフィックで示されている"
+                  alt="因果整理・施策設計・合意形成の3段階が矢印でつながれた意思決定プロセス図"
                   loading="lazy"
                 />
                 <figcaption>
-                  因果整理→打ち手設計→実行準備の流れを一枚で視覚化。色分けと矢印で視線を次のカードに運び、スクロール継続と理解の同期を両立させます。
+                  デュアルコーディングを意識した3段階プロセス図。経営判断の視線を矢印で誘導し、テキストと図解を同期させて理解負荷を最小化しました。
                 </figcaption>
               </figure>
               <div className="journey-cta__summary" data-animate>
@@ -3551,13 +3551,27 @@ const Index = () => {
             <ol className="journey-cta__progress" aria-label="経営判断支援の進行ステップ">
               {ctaJourneyStages.map((stage, index) => {
                 const isActive = activeJourneyStage === stage.id;
+                const StageIcon = stage.icon;
                 return (
                   <li
                     key={stage.id}
                     className={`journey-cta__progress-item${isActive ? " is-active" : ""}`}
+                    aria-current={isActive ? "step" : undefined}
                   >
-                    <span className="journey-cta__progress-step">0{index + 1}</span>
-                    <span className="journey-cta__progress-text">{stage.stageLabel}</span>
+                    <div className="journey-cta__progress-header">
+                      <span className="journey-cta__progress-step">STEP 0{index + 1}</span>
+                      <span className="journey-cta__progress-stage">{stage.stageLabel}</span>
+                    </div>
+                    <div className="journey-cta__progress-meta">
+                      <span className="journey-cta__progress-icon" aria-hidden>
+                        <StageIcon />
+                      </span>
+                      <span className="journey-cta__progress-metric">
+                        <span className="journey-cta__progress-value">{stage.metricValue}</span>
+                        <span className="journey-cta__progress-label">{stage.metricLabel}</span>
+                      </span>
+                    </div>
+                    <p className="journey-cta__progress-copy">{stage.headline}</p>
                   </li>
                 );
               })}
