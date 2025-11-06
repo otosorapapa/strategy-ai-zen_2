@@ -2019,6 +2019,33 @@
         gap: clamp(12px, 2vw, 18px);
       }
 
+      .case-visual-anchor {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 12px;
+        border-radius: 22px;
+        padding: clamp(18px, 2.8vw, 28px);
+        background:
+          linear-gradient(135deg, rgba(30, 64, 175, 0.18), rgba(56, 189, 248, 0.22)),
+          rgba(15, 23, 42, 0.32);
+        border: 1px solid rgba(148, 197, 253, 0.28);
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+          0 22px 42px rgba(15, 23, 42, 0.28);
+      }
+
+      .case-visual-anchor svg {
+        width: 100%;
+        height: auto;
+      }
+
+      .case-visual-anchor figcaption {
+        font-size: 0.8rem;
+        line-height: 1.6;
+        color: rgba(226, 232, 240, 0.78);
+      }
+
       .case-pill {
         display: inline-flex;
         align-items: center;
@@ -2133,11 +2160,24 @@
       .case-spotlight-quote {
         position: relative;
         z-index: 1;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        gap: clamp(14px, 2vw, 22px);
         border-radius: 24px;
         background: rgba(15, 23, 42, 0.4);
         border: 1px solid rgba(148, 197, 253, 0.22);
         padding: clamp(18px, 2.6vw, 26px);
         box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+      }
+
+      .case-quote-avatar {
+        width: clamp(64px, 8vw, 88px);
+        height: clamp(64px, 8vw, 88px);
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 12px 26px rgba(15, 23, 42, 0.45);
+        border: 2px solid rgba(148, 197, 253, 0.6);
       }
 
       .case-spotlight-quote blockquote {
@@ -2154,39 +2194,83 @@
         color: rgba(148, 197, 253, 0.78);
       }
 
-      .case-spotlight-flags {
+      .case-evidence-grid {
         position: relative;
         z-index: 1;
-        list-style: none;
-        margin: 0;
-        padding: 0;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: clamp(12px, 2.4vw, 18px);
+        gap: clamp(14px, 2.4vw, 22px);
       }
 
-      .case-spotlight-flags li {
-        background: rgba(15, 23, 42, 0.38);
-        border-radius: 18px;
-        padding: 14px 16px;
-        border: 1px solid rgba(148, 197, 253, 0.18);
+      .evidence-card {
+        display: grid;
+        gap: 10px;
+        border-radius: 20px;
+        padding: clamp(16px, 2.2vw, 22px);
+        background: linear-gradient(140deg, rgba(15, 23, 42, 0.42), rgba(56, 189, 248, 0.18));
+        border: 1px solid rgba(148, 197, 253, 0.25);
+        box-shadow:
+          inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+          0 16px 30px rgba(15, 23, 42, 0.26);
+      }
+
+      .evidence-card.is-highlight {
+        background: linear-gradient(145deg, rgba(249, 115, 22, 0.85), rgba(234, 179, 8, 0.82));
+        color: rgba(15, 23, 42, 0.95);
+        border: 1px solid rgba(248, 250, 252, 0.55);
+        box-shadow: 0 20px 36px rgba(249, 115, 22, 0.35);
+      }
+
+      .evidence-card.is-highlight p {
+        color: rgba(15, 23, 42, 0.8);
+      }
+
+      .evidence-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(148, 197, 253, 0.2);
+        border: 1px solid rgba(148, 197, 253, 0.38);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+      }
+
+      .evidence-card.is-highlight .evidence-icon {
+        background: rgba(255, 255, 255, 0.8);
+        border-color: rgba(249, 250, 251, 0.8);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+      }
+
+      .evidence-card h4 {
+        margin: 0;
+        font-size: 0.85rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(148, 197, 253, 0.92);
+      }
+
+      .evidence-card.is-highlight h4 {
+        color: rgba(15, 23, 42, 0.72);
+      }
+
+      .evidence-card p {
+        margin: 0;
         font-size: 0.78rem;
         line-height: 1.55;
-        color: rgba(226, 232, 240, 0.78);
-        display: grid;
-        gap: 4px;
+        color: rgba(226, 232, 240, 0.82);
       }
 
-      .case-spotlight-flags li span {
-        font-size: 0.75rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: rgba(148, 197, 253, 0.9);
-        font-weight: 700;
-      }
+      @media (max-width: 640px) {
+        .case-spotlight-quote {
+          grid-template-columns: 1fr;
+          text-align: left;
+        }
 
-      .case-spotlight-flags li p {
-        margin: 0;
+        .case-quote-avatar {
+          justify-self: center;
+        }
       }
 
       .case-stack {
@@ -3778,11 +3862,62 @@
                   診断士が金融機関基準でロジックを監査することで、役員会は戦略議論に時間を振り向けられるようになりました。
                 </p>
               </div>
+              <figure class="case-visual-anchor">
+                <svg viewBox="0 0 720 220" role="img" aria-labelledby="case-timeline-title">
+                  <title id="case-timeline-title">72時間で因果構造から実行計画までを組み立てるプロセス</title>
+                  <defs>
+                    <linearGradient id="timeline-surface" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="rgba(148,197,253,0.24)" />
+                      <stop offset="100%" stop-color="rgba(14,165,233,0.15)" />
+                    </linearGradient>
+                    <linearGradient id="timeline-connector" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="rgba(125,211,252,0.9)" />
+                      <stop offset="100%" stop-color="rgba(45,212,191,0.9)" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="40" y="36" width="640" height="148" rx="26" fill="url(#timeline-surface)" stroke="rgba(148,197,253,0.4)" stroke-width="1.5" />
+                  <line x1="170" y1="110" x2="350" y2="110" stroke="url(#timeline-connector)" stroke-width="4" stroke-linecap="round" />
+                  <line x1="370" y1="110" x2="550" y2="110" stroke="url(#timeline-connector)" stroke-width="4" stroke-linecap="round" />
+                  <g transform="translate(130,110)">
+                    <circle r="40" fill="rgba(15,23,42,0.85)" stroke="rgba(125,211,252,0.8)" stroke-width="2" />
+                    <text text-anchor="middle" font-size="14" fill="rgba(226,232,240,0.92)" font-weight="600" dy="-6">現状</text>
+                    <text text-anchor="middle" font-size="22" fill="rgba(226,232,240,0.95)" font-weight="700" dy="20">可視化</text>
+                  </g>
+                  <g transform="translate(360,110)">
+                    <circle r="40" fill="rgba(14,165,233,0.9)" stroke="rgba(226,232,240,0.8)" stroke-width="2" />
+                    <text text-anchor="middle" font-size="14" fill="rgba(15,23,42,0.85)" font-weight="600" dy="-6">介入</text>
+                    <text text-anchor="middle" font-size="22" fill="rgba(15,23,42,0.95)" font-weight="700" dy="20">設計</text>
+                  </g>
+                  <g transform="translate(590,110)">
+                    <circle r="40" fill="rgba(56,189,248,0.92)" stroke="rgba(13,148,136,0.85)" stroke-width="2" />
+                    <text text-anchor="middle" font-size="14" fill="rgba(15,23,42,0.85)" font-weight="600" dy="-6">成果</text>
+                    <text text-anchor="middle" font-size="22" fill="rgba(15,23,42,0.95)" font-weight="700" dy="20">実行</text>
+                  </g>
+                  <g fill="rgba(226,232,240,0.9)" font-size="12" font-weight="500">
+                    <text x="120" y="70">AIスクリーニング</text>
+                    <text x="320" y="70">意思決定マップ</text>
+                    <text x="530" y="70">投資対効果レビュー</text>
+                  </g>
+                  <g fill="rgba(226,232,240,0.75)" font-size="11">
+                    <text x="105" y="170">ヒアリング＆データ連携</text>
+                    <text x="300" y="170">リスクシナリオと代替案</text>
+                    <text x="520" y="170">金融機関向け想定問答</text>
+                  </g>
+                  <g fill="rgba(14,165,233,0.95)" font-size="26" font-weight="700">
+                    <text x="160" y="122">72h</text>
+                    <text x="390" y="122">+AI</text>
+                    <text x="618" y="122">86%</text>
+                  </g>
+                </svg>
+                <figcaption>
+                  72時間で「可視化 → 設計 → 実行」までを一気通貫。AIが因果関係とリスクを抽出し、診断士が投資対効果の説得力を磨きます。
+                </figcaption>
+              </figure>
               <div class="case-spotlight-content">
                 <figure class="case-spotlight-visual">
                   <img
-                    src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=960&q=80"
-                    alt="経営チームが因果マップとダッシュボードを確認している様子"
+                    src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=960&q=80"
+                    alt="経営チームがデータダッシュボードと因果マップを確認している様子"
                     loading="lazy"
                   />
                   <figcaption>因果マップと投資対効果ダッシュボードを一枚化し、優先施策のストーリーを視覚的に比較。</figcaption>
@@ -3811,33 +3946,74 @@
                 </div>
               </div>
               <div class="case-spotlight-quote">
-                <blockquote>
-                  「AIが根拠データを揃え、診断士のレビューで資料の説得力が桁違いになりました。役員会では議論の7割を戦略に充てられるようになっています。」
-                </blockquote>
-                <cite>九州精密工業株式会社（福岡証券取引所Q-Board上場グループ）代表取締役社長 佐藤宏樹 様</cite>
+                <img
+                  class="case-quote-avatar"
+                  src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=160&q=80"
+                  alt="九州精密工業株式会社 代表取締役社長 佐藤宏樹 様"
+                  loading="lazy"
+                />
+                <div>
+                  <blockquote>
+                    「AIが根拠データを揃え、診断士のレビューで資料の説得力が桁違いになりました。役員会では議論の7割を戦略に充てられるようになっています。」
+                  </blockquote>
+                  <cite>九州精密工業株式会社（福岡証券取引所Q-Board上場グループ）代表取締役社長 佐藤宏樹 様</cite>
+                </div>
               </div>
-              <ul class="case-spotlight-flags">
-                <li>
-                  <span>因果性</span>
-                  <p>PL・BS・CF・需要指標をクロス分析し、「なぜその投資か」を一目で把握。</p>
-                </li>
-                <li>
-                  <span>論理性</span>
-                  <p>診断士が金融機関基準で根拠とリスク対策を構造化し、説明責任に耐える資料へ。</p>
-                </li>
-                <li>
-                  <span>デザイン性</span>
-                  <p>光と奥行きを活かしたレイアウトで、役員の視線を次アクションへ誘導。</p>
-                </li>
-                <li>
-                  <span>スマート性</span>
-                  <p>アラートと自動集計で更新を自走化。現場・経営の意思決定リズムが揃う。</p>
-                </li>
-                <li>
-                  <span>納得性</span>
-                  <p>想定問答と証跡リンクを添付し、社内外のステークホルダーが共通理解を持てる状態に。</p>
-                </li>
-              </ul>
+              <div class="case-evidence-grid">
+                <article class="evidence-card">
+                  <span class="evidence-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(148,197,253,0.92)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="6" cy="6" r="3" />
+                      <circle cx="18" cy="10" r="3" />
+                      <circle cx="10" cy="18" r="3" />
+                      <path d="M8.5 7.5L15.5 9.5" />
+                      <path d="M9 16L16.5 12.8" />
+                    </svg>
+                  </span>
+                  <h4>因果性</h4>
+                  <p>PL・BS・CF・需要指標をクロス分析し、「なぜその投資か」を視覚化。意思決定の前提が一目で揃います。</p>
+                </article>
+                <article class="evidence-card">
+                  <span class="evidence-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(148,197,253,0.92)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="4" y="4" width="16" height="16" rx="2" />
+                      <path d="M4 10h16" />
+                      <path d="M10 4v16" />
+                    </svg>
+                  </span>
+                  <h4>論理性</h4>
+                  <p>診断士が金融機関基準で根拠・リスク・代替案を構造化。監査目線の論理展開で納得性を担保。</p>
+                </article>
+                <article class="evidence-card">
+                  <span class="evidence-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(148,197,253,0.92)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M12 3l2.4 4.86 5.4.78-3.9 3.8.92 5.36L12 15.9 7.18 17.8 8.1 12.44 4.2 8.64l5.4-.78L12 3z" />
+                    </svg>
+                  </span>
+                  <h4>デザイン性</h4>
+                  <p>光と奥行きを活かしたレイアウトで視線を誘導。役員会の議論がストーリーボードに沿って進みます。</p>
+                </article>
+                <article class="evidence-card">
+                  <span class="evidence-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(148,197,253,0.92)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 3h4l2 4h6a2 2 0 0 1 1.98 2.3l-1 7A2 2 0 0 1 16 18H8a2 2 0 0 1-1.98-1.7L5 7V3z" />
+                      <path d="M8 21h8" />
+                    </svg>
+                  </span>
+                  <h4>スマート性</h4>
+                  <p>AIアラートと自動集計で更新を自走化。週次の差異が通知され、判断スピードが落ちません。</p>
+                </article>
+                <article class="evidence-card is-highlight">
+                  <span class="evidence-icon" aria-hidden="true">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(234,88,12,0.9)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M20 6l-11 11-5-5" />
+                      <path d="M16 4h4v4" />
+                    </svg>
+                  </span>
+                  <h4>納得性</h4>
+                  <p>想定問答・証跡リンク・投資対効果をワンセットで提示。社内外の合意形成を迷わせません。</p>
+                </article>
+              </div>
             </article>
             <aside class="case-stack">
               <article class="case-tile">
