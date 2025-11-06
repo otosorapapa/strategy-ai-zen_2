@@ -1036,6 +1036,16 @@ type AiValueLegend = {
   description: string;
 };
 
+type AiValueFlowStep = {
+  id: string;
+  symbol: string;
+  cue: string;
+  title: string;
+  description: string;
+  metric: string;
+  accent: AiValueAccent;
+};
+
 type AiValueCardNarrative = {
   label: string;
   description: string;
@@ -1106,6 +1116,36 @@ const aiValueLegend: AiValueLegend[] = [
     accent: "citrus",
     label: "Execution Layer",
     description: "伴走支援で社長の集中時間を取り戻し決裁をスムーズに",
+  },
+];
+
+const aiValueFlow: AiValueFlowStep[] = [
+  {
+    id: "cause",
+    symbol: "因",
+    cue: "Signal Intelligence",
+    title: "兆しを捉える",
+    description: "AIが24時間シグナルを監視し、経営課題の芽を72時間以内に整理。",
+    metric: "72h以内に兆候可視化",
+    accent: "navy",
+  },
+  {
+    id: "logic",
+    symbol: "論",
+    cue: "Evidence Orchestration",
+    title: "論拠を整える",
+    description: "専門家が論理を補強し、役員会の想定問答と検証ログを事前共有。",
+    metric: "12案のシナリオ比較",
+    accent: "mint",
+  },
+  {
+    id: "result",
+    symbol: "果",
+    cue: "Result Delivery",
+    title: "成果を握る",
+    description: "実行と金融連携を伴走し、決裁と資金調達の着地を加速。",
+    metric: "決裁率86%の継続運用",
+    accent: "citrus",
   },
 ];
 
@@ -4315,38 +4355,68 @@ const Index = () => {
               </ol>
             </div>
             <div className="ai-value-grid" data-animate>
-              <div className="ai-value-grid__intro">
-                <span className="ai-value-grid__badge">VALUE BLUEPRINT</span>
-                <h3>因果で束ねた意思決定の指揮所を一枚で俯瞰</h3>
-                <p>
-                  経営計画AIと専門家チームが「因（兆し）→論（論拠）→果（成果）」を循環させるための司令塔を設計しました。
-                  事前共有する論点と、会議で握るべき数字をワンセットで提示することで、役員会の納得感とスピードを同時に高めます。
-                </p>
-                <ul className="ai-value-grid__stats" role="list" aria-label="提供価値の主要指標">
-                  {aiValueStats.map((stat) => (
-                    <li key={stat.label} className={`ai-value-grid__stat ai-value-grid__stat--${stat.accent}`}>
-                      <strong>{stat.value}</strong>
-                      <span>{stat.label}</span>
-                      <small>{stat.caption}</small>
-                    </li>
-                  ))}
-                </ul>
+              <div className="ai-value-grid__overview">
+                <div className="ai-value-grid__intro">
+                  <span className="ai-value-grid__badge">VALUE BLUEPRINT</span>
+                  <h3>因果で束ねた意思決定の指揮所を一枚で俯瞰</h3>
+                  <p>
+                    経営計画AIと専門家チームが「因（兆し）→論（論拠）→果（成果）」を循環させるための司令塔を設計しました。
+                    事前共有する論点と、会議で握るべき数字をワンセットで提示することで、役員会の納得感とスピードを同時に高めます。
+                  </p>
+                  <ol
+                    className="ai-value-grid__flow"
+                    role="list"
+                    aria-label="因・論・果の価値創出フロー"
+                  >
+                    {aiValueFlow.map((step) => (
+                      <li
+                        key={step.id}
+                        className={`ai-value-grid__flow-step ai-value-grid__flow-step--${step.accent}`}
+                      >
+                        <span className="ai-value-grid__flow-symbol" aria-hidden="true">
+                          {step.symbol}
+                        </span>
+                        <div className="ai-value-grid__flow-body">
+                          <span className="ai-value-grid__flow-cue">{step.cue}</span>
+                          <h4>{step.title}</h4>
+                          <p>{step.description}</p>
+                          <span className="ai-value-grid__flow-metric">{step.metric}</span>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                  <ul className="ai-value-grid__stats" role="list" aria-label="提供価値の主要指標">
+                    {aiValueStats.map((stat) => (
+                      <li
+                        key={stat.label}
+                        className={`ai-value-grid__stat ai-value-grid__stat--${stat.accent}`}
+                      >
+                        <strong>{stat.value}</strong>
+                        <span>{stat.label}</span>
+                        <small>{stat.caption}</small>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <figure className="ai-value-grid__blueprint">
+                  <img src={aiValueLatticeVisual} alt="因・論・果の価値連鎖を可視化した設計図" loading="lazy" />
+                  <figcaption>
+                    AIが兆しを検知し、専門家が論理を磨き、経営陣が成果を提示するまでの一連の価値連鎖を視覚化。
+                    会議のストーリーラインを共有し、次のアクションへ視線を導きます。
+                  </figcaption>
+                  <ul className="ai-value-grid__legend" role="list" aria-label="価値レイヤーの説明">
+                    {aiValueLegend.map((item) => (
+                      <li
+                        key={item.label}
+                        className={`ai-value-grid__legend-item ai-value-grid__legend-item--${item.accent}`}
+                      >
+                        <span className="ai-value-grid__legend-label">{item.label}</span>
+                        <p>{item.description}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </figure>
               </div>
-              <figure className="ai-value-grid__blueprint">
-                <img src={aiValueLatticeVisual} alt="因・論・果の価値連鎖を可視化した設計図" loading="lazy" />
-                <figcaption>
-                  AIが兆しを検知し、専門家が論理を磨き、経営陣が成果を提示するまでの一連の価値連鎖を視覚化。
-                  会議のストーリーラインを共有し、次のアクションへ視線を導きます。
-                </figcaption>
-                <ul className="ai-value-grid__legend" role="list" aria-label="価値レイヤーの説明">
-                  {aiValueLegend.map((item) => (
-                    <li key={item.label} className={`ai-value-grid__legend-item ai-value-grid__legend-item--${item.accent}`}>
-                      <span className="ai-value-grid__legend-label">{item.label}</span>
-                      <p>{item.description}</p>
-                    </li>
-                  ))}
-                </ul>
-              </figure>
               <div className="ai-value-grid__cards" role="list">
                 {aiValueCards.map((card) => {
                   const CardIcon = card.icon;
