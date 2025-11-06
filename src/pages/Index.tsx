@@ -50,6 +50,7 @@ import representativePhoto from "@/assets/representative.jpg";
 import problemIllustration from "@/assets/problem-illustration.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import journeyFlowVisual from "@/assets/process-flow-infographic.jpg";
+import decisionRoadmapVisual from "@/assets/process-flow.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
 import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
@@ -106,16 +107,36 @@ const heroProcessPrinciples = [
     label: "因果設計",
     description:
       "AIの相関解析と現場ヒアリングを重ね、課題→施策→KPIを因果で整列。意思決定の抜け漏れをなくします。",
+    icon: Workflow,
   },
   {
     label: "論理検証",
     description:
       "金融機関・取引先の審査観点を基準にロジックツリーで仮説検証。納得性の高い説明ストーリーを設計。",
+    icon: ShieldCheck,
   },
   {
     label: "成果ドリブン",
     description:
       "3か月の伴走で粗利・資金繰り・組織浸透を週次ダッシュボードで追跡し、打ち手を継続改善します。",
+    icon: TrendingUp,
+  },
+];
+const heroProcessHighlights = [
+  {
+    value: "72h",
+    label: "論点・KPIの骨子",
+    description: "AI診断とヒアリングを束ねた判断ファクトブックを共有。",
+  },
+  {
+    value: "92%",
+    label: "金融機関での一次審査通過率",
+    description: "審査観点に沿った計画ドラフトで説明負荷を軽減。",
+  },
+  {
+    value: "+3.2pt",
+    label: "平均粗利改善",
+    description: "週次レビューと伴走で施策の実行定着を支援。",
   },
 ];
 const heroProcessMilestones = [
@@ -3105,19 +3126,52 @@ const Index = () => {
                 <p>
                   初回ヒアリングで経営者の譲れない方向性と現状の数字を言語化。72時間で経営の論点を一枚に整理し、1〜2週間で計画書と会議資料を完成。3か月の伴走で実行と報告を滞りなく進める、納得感の高い支援サイクルです。
                 </p>
-                <ul className="hero-causality-intro__principles">
-                  {heroProcessPrinciples.map((principle) => (
-                    <li key={principle.label}>
-                      <span className="hero-causality-intro__principles-label">{principle.label}</span>
-                      <p>{principle.description}</p>
-                    </li>
+                <div className="hero-causality-intro__metrics" aria-label="初動で得られる成果指標">
+                  {heroProcessHighlights.map((highlight) => (
+                    <div className="hero-causality-intro__metric" key={highlight.label}>
+                      <span className="hero-causality-intro__metric-value">{highlight.value}</span>
+                      <div className="hero-causality-intro__metric-body">
+                        <span className="hero-causality-intro__metric-label">{highlight.label}</span>
+                        <p>{highlight.description}</p>
+                      </div>
+                    </div>
                   ))}
+                </div>
+                <ul className="hero-causality-intro__principles">
+                  {heroProcessPrinciples.map((principle) => {
+                    const PrincipleIcon = principle.icon;
+                    return (
+                      <li key={principle.label}>
+                        <div className="hero-causality-intro__principles-icon" aria-hidden="true">
+                          <PrincipleIcon />
+                        </div>
+                        <div className="hero-causality-intro__principles-copy">
+                          <span className="hero-causality-intro__principles-label">{principle.label}</span>
+                          <p>{principle.description}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
               <figure
                 className="hero-causality-intro__visual"
                 aria-label="72時間診断から3か月伴走までのプロセス図"
               >
+                <div className="hero-causality-intro__visual-graphic">
+                  <img
+                    src={decisionRoadmapVisual}
+                    alt="課題整理から実行伴走までのロードマップが描かれたビジュアル"
+                    loading="lazy"
+                  />
+                  <div className="hero-causality-intro__visual-badge">
+                    <ArrowUpRight aria-hidden="true" />
+                    <div>
+                      <span>納得度を数値で追跡</span>
+                      <strong>意思決定満足度 4.6 / 5</strong>
+                    </div>
+                  </div>
+                </div>
                 <header className="hero-causality-intro__visual-header">
                   <span className="hero-causality-intro__visual-eyebrow">DECISION ROADMAP</span>
                   <p>
@@ -3150,7 +3204,10 @@ const Index = () => {
                 <footer className="hero-causality-intro__visual-footer">
                   <div className="hero-causality-intro__visual-proof">
                     <span>支援体制</span>
-                    <p>認定支援機関×公認会計士×データアナリストが品質を多層チェック。</p>
+                    <p>
+                      認定支援機関×公認会計士×データアナリストが品質を多層チェックし、資料・KPI・説明ストーリーの一貫性を担保し
+                      ます。
+                    </p>
                   </div>
                   <ul className="hero-causality-intro__visual-trust">
                     <li>
@@ -3164,7 +3221,9 @@ const Index = () => {
                     </li>
                   </ul>
                 </footer>
-                <figcaption>意思決定の因果と成果を一望できるロードマップ</figcaption>
+                <figcaption>
+                  因果関係・数字・伴走体制を一枚で可視化することで、経営者と社内外ステークホルダーの認識を揃えます。
+                </figcaption>
               </figure>
             </div>
             <div className="hero-causality" aria-label="因果とロジックの整理" data-animate>

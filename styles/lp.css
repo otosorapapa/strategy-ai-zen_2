@@ -964,46 +964,116 @@ svg {
 
 .hero-causality-intro {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 360px);
-  gap: clamp(24px, 5vw, 40px);
-  align-items: center;
-  margin-bottom: clamp(32px, 5vw, 48px);
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 480px);
+  gap: clamp(28px, 6vw, 48px);
+  align-items: start;
+  margin-bottom: clamp(32px, 5vw, 56px);
 }
 
 .hero-causality-intro__content {
   display: grid;
+  gap: 18px;
+}
+
+.hero-causality-intro__metrics {
+  margin: 0;
+  padding: 18px 20px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(15, 43, 86, 0.08), rgba(255, 255, 255, 0.9));
+  border: 1px solid rgba(15, 43, 86, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.hero-causality-intro__metric {
+  display: flex;
   gap: 14px;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(79, 163, 255, 0.18);
+  box-shadow: 0 8px 22px -12px rgba(15, 43, 86, 0.26);
+}
+
+.hero-causality-intro__metric-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--cta-600);
+  letter-spacing: -0.02em;
+}
+
+.hero-causality-intro__metric-body {
+  display: grid;
+  gap: 4px;
+}
+
+.hero-causality-intro__metric-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(15, 43, 86, 0.7);
+}
+
+.hero-causality-intro__metric-body p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  line-height: 1.5;
 }
 
 .hero-causality-intro__principles {
   margin: 0;
-  padding: 18px;
+  padding: 20px;
   list-style: none;
   display: grid;
-  gap: 12px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, rgba(53, 93, 156, 0.08), rgba(255, 255, 255, 0));
-  border: 1px solid rgba(53, 93, 156, 0.14);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(53, 93, 156, 0.1), rgba(255, 255, 255, 0.85));
+  border: 1px solid rgba(53, 93, 156, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .hero-causality-intro__principles li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.hero-causality-intro__principles-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(79, 163, 255, 0.18), rgba(79, 163, 255, 0));
+  color: var(--cta-600);
+  flex-shrink: 0;
+}
+
+.hero-causality-intro__principles-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.hero-causality-intro__principles-copy {
   display: grid;
   gap: 6px;
 }
 
 .hero-causality-intro__principles-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--cta-600);
 }
 
-.hero-causality-intro__principles p {
+.hero-causality-intro__principles-copy p {
   margin: 0;
   color: var(--gray-600);
   line-height: 1.6;
@@ -1013,9 +1083,9 @@ svg {
   margin: 0;
   position: relative;
   display: grid;
-  gap: clamp(18px, 3vw, 24px);
-  padding: clamp(24px, 4vw, 32px);
-  border-radius: 28px;
+  gap: clamp(18px, 3vw, 26px);
+  padding: clamp(26px, 4vw, 34px);
+  border-radius: 30px;
   background:
     radial-gradient(circle at 12% 16%, rgba(79, 163, 255, 0.32), transparent 46%),
     radial-gradient(circle at 88% 10%, rgba(21, 52, 96, 0.3), transparent 52%),
@@ -1023,6 +1093,56 @@ svg {
   border: 1px solid rgba(79, 163, 255, 0.24);
   box-shadow: 0 32px 88px -42px rgba(8, 35, 74, 0.52);
   overflow: hidden;
+}
+
+.hero-causality-intro__visual-graphic {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(5, 19, 53, 0.6), rgba(79, 163, 255, 0.35));
+  isolation: isolate;
+}
+
+.hero-causality-intro__visual-graphic img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  mix-blend-mode: lighten;
+  opacity: 0.92;
+  display: block;
+}
+
+.hero-causality-intro__visual-badge {
+  position: absolute;
+  inset: auto 18px 18px auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: rgba(12, 34, 71, 0.88);
+  color: #fff;
+  box-shadow: 0 18px 36px -20px rgba(6, 21, 45, 0.9);
+}
+
+.hero-causality-intro__visual-badge svg {
+  width: 20px;
+  height: 20px;
+}
+
+.hero-causality-intro__visual-badge span {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.hero-causality-intro__visual-badge strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .hero-causality-intro__visual figcaption {
@@ -1053,17 +1173,19 @@ svg {
   color: var(--navy-700);
 }
 
+
 .hero-causality-intro__timeline {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   gap: clamp(16px, 3vw, 20px);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 .hero-causality-intro__timeline-step {
   position: relative;
-  padding: 18px 20px 20px 20px;
+  padding: 22px 22px 20px 22px;
   display: grid;
   gap: 12px;
   border-radius: 20px;
@@ -1075,8 +1197,8 @@ svg {
 .hero-causality-intro__timeline-step::before {
   content: attr(data-step);
   position: absolute;
-  inset: -12px auto auto 20px;
-  padding: 4px 10px;
+  inset: -14px auto auto 22px;
+  padding: 4px 12px;
   border-radius: 999px;
   background: linear-gradient(135deg, rgba(79, 163, 255, 0.8), rgba(15, 43, 86, 0.9));
   color: #fff;
@@ -1526,14 +1648,6 @@ svg {
   }
 }
 
-.hero-causality-intro {
-  max-width: 760px;
-  margin: 0 auto 36px;
-  text-align: center;
-  display: grid;
-  gap: 12px;
-}
-
 .hero-causality-intro__eyebrow {
   font-size: 0.78rem;
   font-weight: 700;
@@ -1552,6 +1666,33 @@ svg {
   margin: 0;
   color: var(--gray-600);
   line-height: 1.7;
+}
+
+@media (max-width: 1024px) {
+  .hero-causality-intro {
+    grid-template-columns: 1fr;
+    max-width: 780px;
+    margin: 0 auto clamp(32px, 6vw, 48px);
+    text-align: center;
+  }
+
+  .hero-causality-intro__content {
+    text-align: left;
+    gap: 16px;
+  }
+
+  .hero-causality-intro__metrics {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .hero-causality-intro__principles {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .hero-causality-intro__visual {
+    justify-self: center;
+    width: min(100%, 520px);
+  }
 }
 
 .hero-causality__card {
@@ -2279,11 +2420,21 @@ svg {
 @media (max-width: 1024px) {
   .hero-causality-intro {
     grid-template-columns: 1fr;
+    max-width: 780px;
+    margin: 0 auto clamp(32px, 6vw, 48px);
+  }
+
+  .hero-causality-intro__metrics {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .hero-causality-intro__principles {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   }
 
   .hero-causality-intro__visual {
     justify-self: center;
-    width: min(100%, 460px);
+    width: min(100%, 520px);
   }
 
   .hero-quick-form {
@@ -2369,8 +2520,33 @@ svg {
 }
 
 @media (max-width: 640px) {
+  .hero-causality-intro {
+    text-align: left;
+  }
+
+  .hero-causality-intro__content {
+    gap: 14px;
+  }
+
+  .hero-causality-intro__metrics {
+    padding: 16px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .hero-causality-intro__metric {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .hero-causality-intro__metric-value {
+    font-size: 1.6rem;
+  }
+
   .hero-causality-intro__principles {
     padding: 16px;
+    grid-template-columns: 1fr;
   }
 
   .hero-causality-intro__timeline-stats {
@@ -2398,6 +2574,10 @@ svg {
 
   .hero-causality-intro__visual-trust img {
     height: 28px;
+  }
+
+  .hero-causality-intro__visual-graphic img {
+    height: 180px;
   }
 
   .hero-causality__visual {
