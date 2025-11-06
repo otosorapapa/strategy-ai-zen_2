@@ -1779,29 +1779,31 @@ const faqItems = [
   {
     question: "ITに詳しくなくても導入できますか？",
     answer:
-      "初期設定と社内説明は診断士が担当。Excelや紙帳票しかない場合も、データ整備の手順書とテンプレートを用意し伴走します。",
+      "初期設定と社内説明は当社の診断士チームが直接担当します。普段お使いの会議資料や紙帳票をそのまま共有いただければ、AIが扱える形に整え、経営者さまには意思決定に集中いただけるよう段取りを整えます。",
   },
   {
     question: "手元のデータがバラバラですが大丈夫でしょうか？",
     answer:
-      "会計ソフト・販売管理・現場日報など複数ソースをヒアリングし、AIが読み込める形に専門家が変換。共有しづらい情報は匿名化した上で取り扱います。",
+      "会計・販売・現場記録など複数システムを棚卸しし、企業ごとに整備台帳を作成します。情報の取り扱い手順まで文書化するため、安心してチームに共有しながら一貫した判断材料をそろえられます。",
   },
   {
-    question: "銀行や補助金の書類作成までサポートしてもらえますか？",
+    question: "忙しくても運用できますか？",
     answer:
-      "はい。AIが審査項目に沿ってドラフトを生成し、診断士と元金融機関担当者が根拠と想定問答を整備。採択率86%の実績を基に提出まで伴走します。",
+      "初回の方向合わせはオンライン30分、その後は週1回の短時間レビューで進行します。資料のドラフトや会議の要点整理はAIと診断士が担うので、経営者さまは要所の判断だけを押さえれば大丈夫です。",
   },
   {
-    question: "社長が忙しくて時間が取れません。",
+    question: "社員の理解をどう広げれば良いでしょうか？",
     answer:
-      "30分の初回相談と、週1回15分のレビューで進行できます。資料づくりはAIがドラフト、専門家が仕上げるため社長の負担は最小限です。",
+      "部署別の研修と操作レクチャーを用意し、日常業務に沿ったマニュアルを共有します。成果の見せ方もセットで設計するため、社内から頼られるリーダー像を保ったまま、新しい仕組みを浸透させられます。",
   },
   {
-    question: "社員がついてこられるか心配です。",
+    question: "将来の変化に備える仕組みまで整いますか？",
     answer:
-      "現場キーパーソン向けの研修と操作マニュアルを提供し、週次で質問を解消。Slack/Teamsサポートも含まれ、定着まで伴走します。",
+      "外部環境の指標と社内データを常時モニタリングし、変化の兆しをダッシュボードで通知します。五か年の視点でシナリオを用意するので、いざという時もブレない舵取りができる状態を保てます。",
   },
 ];
+
+const faqVisual = new URL("/images/faq-strategy.svg", import.meta.url).href;
 
 type FocusKey = "finance" | "growth" | "talent";
 
@@ -4109,25 +4111,78 @@ const Index = () => {
         >
           <div className="container">
             <div className="section-header" data-animate>
-              <h2 id="faq-heading">よくあるご質問とリスク対策</h2>
+              <h2 id="faq-heading">経営者の疑問とリスク対策</h2>
               <ul className="section-intro">
-                <li>AI導入時の不安を端的に回答。</li>
-                <li>人とAIの分担でリスクを軽減。</li>
+                <li>診断士と生成AIの二軸で、意思決定の迷いをすばやく解消。</li>
+                <li>導入後の継続運用まで視野に入れた伴走体制をご提示します。</li>
               </ul>
             </div>
-            <div className="faq-accordion" data-animate>
-              <Accordion type="multiple" className="faq-list">
-                {faqItems.map((item) => (
-                  <AccordionItem key={item.question} value={item.question}>
-                    <AccordionTrigger className="faq-question">
-                      {item.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="faq-answer">
-                      {item.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
+            <div className="faq-layout" data-animate>
+              <div className="faq-overview">
+                <span className="faq-overview__badge">診断士×生成AIの伴走設計</span>
+                <h3 className="faq-overview__title">経営判断を磨き込むための支援フロー</h3>
+                <p className="faq-overview__lead">
+                  現場の温度感とデータの裏付けを同時に扱い、経営者さまが納得して舵を切れる状態を整えます。福岡を拠点に、全国の中小企業の経営計画づくりと実行管理を支えるチームが、質問の背景にある課題まで一緒に整理します。
+                </p>
+                <figure className="faq-overview__image">
+                  <img
+                    src={faqVisual}
+                    alt="経営計画のフローを可視化したイラスト"
+                    loading="lazy"
+                  />
+                </figure>
+                <ul className="faq-overview__highlights">
+                  <li>
+                    <h4>目的を共有する</h4>
+                    <p>経営者さまの目指す姿を言語化し、AIにも共有できる指針へ翻訳。判断の軸を全員が理解できる形で整理します。</p>
+                  </li>
+                  <li>
+                    <h4>戦略を描き出す</h4>
+                    <p>業界分析・顧客分析・商品分析を組み合わせ、五か年の経営計画と月次の動き方をダッシュボードで見える化します。</p>
+                  </li>
+                  <li>
+                    <h4>実行を支える</h4>
+                    <p>日々のレポートとアクション管理を生成AIが補助し、診断士が伴走。社内から信頼される決め方を保てます。</p>
+                  </li>
+                </ul>
+                <div className="faq-overview__trust">
+                  <span>秘密保持契約の締結</span>
+                  <span>監査対応マニュアル完備</span>
+                  <span>専任チームが常時サポート</span>
+                </div>
+                <div className="faq-overview__cta">
+                  <a className="btn btn-primary" href="#contact">
+                    無料相談を申し込む
+                  </a>
+                  <a className="link-button" href="#stories">
+                    導入事例を見る
+                  </a>
+                </div>
+              </div>
+              <div className="faq-panel">
+                <div className="faq-panel__header">
+                  <p className="faq-panel__eyebrow">Q&amp;Aガイド</p>
+                  <p className="faq-panel__title">疑問の背景から解きほぐす回答集</p>
+                  <p className="faq-panel__description">
+                    投資判断に直結する論点を5つに整理しました。気になる質問を開くと、準備すべき資料や進め方の流れまで確認できます。
+                  </p>
+                </div>
+                <Accordion type="multiple" className="faq-list">
+                  {faqItems.map((item) => (
+                    <AccordionItem key={item.question} value={item.question}>
+                      <AccordionTrigger className="faq-question">
+                        {item.question}
+                      </AccordionTrigger>
+                      <AccordionContent className="faq-answer">
+                        {item.answer}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+                <div className="faq-panel__footer">
+                  <p>よくある課題別の進め方や伴走レポートも個別相談でご覧いただけます。</p>
+                </div>
+              </div>
             </div>
             {renderStageCta("evaluate", {
               secondary: { label: "導入事例も確認する", href: "#stories" },
