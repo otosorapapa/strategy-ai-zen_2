@@ -54,7 +54,6 @@ import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
 import aiValueRiskVisual from "@/assets/ai-value-risk.svg";
 import aiValueAugmentationVisual from "@/assets/ai-value-augmentation.svg";
-import processFlowInfographic from "@/assets/process-flow-infographic.jpg";
 import customerInoue from "@/assets/customer-inoue.svg";
 import customerTakashima from "@/assets/customer-takashima.svg";
 import customerSugimoto from "@/assets/customer-sugimoto.svg";
@@ -100,6 +99,55 @@ const heroTrustSignals = [
   {
     label: "案件継続率 92%",
     description: "成果創出まで伴走し継続契約をいただいたプロジェクト比率。",
+  },
+];
+const heroProcessPrinciples = [
+  {
+    label: "因果設計",
+    description:
+      "AIの相関解析と現場ヒアリングを重ね、課題→施策→KPIを因果で整列。意思決定の抜け漏れをなくします。",
+  },
+  {
+    label: "論理検証",
+    description:
+      "金融機関・取引先の審査観点を基準にロジックツリーで仮説検証。納得性の高い説明ストーリーを設計。",
+  },
+  {
+    label: "成果ドリブン",
+    description:
+      "3か月の伴走で粗利・資金繰り・組織浸透を週次ダッシュボードで追跡し、打ち手を継続改善します。",
+  },
+];
+const heroProcessMilestones = [
+  {
+    phase: "0〜72時間",
+    outcome: "判断ファクトブック",
+    title: "論点とKPIを一枚に集約",
+    detail:
+      "AI診断が抽出したデータパターンと経営者の意向を重ね、意思決定に必要な論点・KPI・想定問答を整理します。",
+    metricValue: "72h",
+    metricLabel: "初回骨子共有",
+    support: "AI診断レポート／論点マップ",
+  },
+  {
+    phase: "1〜2週間",
+    outcome: "金融機関提出レベル",
+    title: "資金計画と実行ロードマップを合意形成",
+    detail:
+      "財務・投資シナリオを複数比較し、金融機関・取引先への説明資料とストーリーラインを完成させます。",
+    metricValue: "92%",
+    metricLabel: "一次審査通過率",
+    support: "資金計画／提出資料テンプレ",
+  },
+  {
+    phase: "1〜3か月",
+    outcome: "実行・改善フェーズ",
+    title: "週次伴走で成果とリスクをコントロール",
+    detail:
+      "会議ダッシュボードと伴走ミーティングで、粗利改善・資金繰り・オペレーションの実行状況をトラッキングします。",
+    metricValue: "+3.2pt",
+    metricLabel: "平均粗利改善",
+    support: "週次レビュー／リスクモニタリング",
   },
 ];
 const contactPhoneNumber = "03-4520-1234";
@@ -2939,13 +2987,65 @@ const Index = () => {
                 <p>
                   初回ヒアリングで経営者の譲れない方向性と現状の数字を言語化。72時間で経営の論点を一枚に整理し、1〜2週間で計画書と会議資料を完成。3か月の伴走で実行と報告を滞りなく進める、納得感の高い支援サイクルです。
                 </p>
+                <ul className="hero-causality-intro__principles">
+                  {heroProcessPrinciples.map((principle) => (
+                    <li key={principle.label}>
+                      <span className="hero-causality-intro__principles-label">{principle.label}</span>
+                      <p>{principle.description}</p>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <figure className="hero-causality-intro__visual">
-                <img
-                  src={processFlowInfographic}
-                  alt="72時間診断から3か月伴走までのプロセス図"
-                  loading="lazy"
-                />
+              <figure
+                className="hero-causality-intro__visual"
+                aria-label="72時間診断から3か月伴走までのプロセス図"
+              >
+                <header className="hero-causality-intro__visual-header">
+                  <span className="hero-causality-intro__visual-eyebrow">DECISION ROADMAP</span>
+                  <p>
+                    72時間で論点と数字を整え、1〜2週間で提出レベルの計画に昇華。3か月の伴走で成果とリスクを継続的にレビューします。
+                  </p>
+                </header>
+                <ol className="hero-causality-intro__timeline">
+                  {heroProcessMilestones.map((milestone, index) => (
+                    <li
+                      key={milestone.phase}
+                      className="hero-causality-intro__timeline-step"
+                      data-step={`0${index + 1}`}
+                    >
+                      <div className="hero-causality-intro__timeline-meta">
+                        <span className="hero-causality-intro__timeline-phase">{milestone.phase}</span>
+                        <span className="hero-causality-intro__timeline-outcome">{milestone.outcome}</span>
+                      </div>
+                      <h3>{milestone.title}</h3>
+                      <p>{milestone.detail}</p>
+                      <div className="hero-causality-intro__timeline-stats">
+                        <div className="hero-causality-intro__timeline-metric">
+                          <span className="hero-causality-intro__timeline-value">{milestone.metricValue}</span>
+                          <span className="hero-causality-intro__timeline-label">{milestone.metricLabel}</span>
+                        </div>
+                        <span className="hero-causality-intro__timeline-support">{milestone.support}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+                <footer className="hero-causality-intro__visual-footer">
+                  <div className="hero-causality-intro__visual-proof">
+                    <span>支援体制</span>
+                    <p>認定支援機関×公認会計士×データアナリストが品質を多層チェック。</p>
+                  </div>
+                  <ul className="hero-causality-intro__visual-trust">
+                    <li>
+                      <img src={logoOisix} alt="Oisix 導入企業" loading="lazy" />
+                    </li>
+                    <li>
+                      <img src={logoSansan} alt="Sansan 掲載実績" loading="lazy" />
+                    </li>
+                    <li>
+                      <img src={logoRaksul} alt="Raksul 提携企業" loading="lazy" />
+                    </li>
+                  </ul>
+                </footer>
                 <figcaption>意思決定の因果と成果を一望できるロードマップ</figcaption>
               </figure>
             </div>
