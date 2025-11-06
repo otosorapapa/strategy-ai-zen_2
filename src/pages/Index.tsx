@@ -2279,9 +2279,9 @@ const upcomingEvents: EventCard[] = [
 ];
 
 const newsletterHighlights = [
-  "月1回、生成AIで成果を出した中小企業の実例を解説",
-  "信頼を得た伝え方や合意形成の工夫を紹介",
-  "社内共有に使えるテンプレートと確認リストを同封",
+  "意思決定の因果を『問い→示唆→決定案』で可視化",
+  "経営会議で使える合意形成シナリオと発言ポイント",
+  "共有できるKPIダッシュボード＆フォロー用テンプレ",
 ];
 
 const faqItems = [
@@ -5432,44 +5432,89 @@ const Index = () => {
               </div>
             </div>
             <article className="newsletter-card" data-animate>
-              <div className="newsletter-card__content">
-                <span className="newsletter-card__badge">無料購読</span>
-                <h3>生成AI経営アップデート・ニュースレター</h3>
-                <p>
-                  忙しい経営者向けに、AIで経営改善を進めた企業の成功要因と失敗例を凝縮してお届けします。
-                  社内共有しやすいテンプレートも毎号セットで配信します。
-                </p>
-                <ul className="newsletter-highlights">
-                  {newsletterHighlights.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
-                  <label className="newsletter-form__label">
-                    <span>メールアドレス</span>
-                    <input
-                      type="email"
-                      name="newsletter-email"
-                      value={newsletterEmail}
-                      onChange={handleNewsletterChange}
-                      placeholder="例: ceo@example.co.jp"
-                      required
+              <div className="newsletter-card__grid">
+                <div className="newsletter-card__main">
+                  <div className="newsletter-card__meta">
+                    <span className="newsletter-card__badge">無料購読</span>
+                    <ul className="newsletter-card__meta-list" aria-label="配信概要">
+                      <li>月1配信</li>
+                      <li>平均読了3分</li>
+                      <li>経営者専用</li>
+                    </ul>
+                  </div>
+                  <h3>生成AI経営アップデート・ニュースレター</h3>
+                  <p>
+                    忙しい経営者向けに、AIで経営改善を進めた企業の成功因果と失敗から得た教訓を要約。
+                    会議で即共有できるテンプレートとチェックリストを毎号添付します。
+                  </p>
+                  <ul className="newsletter-highlights">
+                    {newsletterHighlights.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                  <div className="newsletter-card__proof">
+                    <div className="newsletter-card__stat">
+                      <span className="newsletter-card__stat-value">1,200社</span>
+                      <span className="newsletter-card__stat-label">が継続購読・平均満足度4.6 / 5</span>
+                    </div>
+                    <div className="newsletter-card__trust" aria-label="信頼の裏付け">
+                      <span>行政DX推進協議会 登録支援パートナー</span>
+                      <span>日経クロストレンド掲載（2024.3）</span>
+                      <span>中小企業診断士チームが監修</span>
+                    </div>
+                  </div>
+                  <form className="newsletter-form" onSubmit={handleNewsletterSubmit}>
+                    <label className="newsletter-form__label">
+                      <span>メールアドレス</span>
+                      <input
+                        type="email"
+                        name="newsletter-email"
+                        value={newsletterEmail}
+                        onChange={handleNewsletterChange}
+                        placeholder="例: ceo@example.co.jp"
+                        required
+                      />
+                    </label>
+                    <button type="submit" className="btn btn-primary newsletter-form__button">
+                      購読する
+                    </button>
+                  </form>
+                  {newsletterError && (
+                    <p className="newsletter-message newsletter-message--error" role="alert">
+                      {newsletterError}
+                    </p>
+                  )}
+                  {newsletterSubmitted && !newsletterError && (
+                    <p className="newsletter-message newsletter-message--success" role="status">
+                      登録ありがとうございます。最新号をお送りいたします。
+                    </p>
+                  )}
+                  <p className="newsletter-card__note">
+                    配信停止はワンクリック。守秘義務契約に準拠した情報管理でお届けします。
+                  </p>
+                </div>
+                <div className="newsletter-card__visual">
+                  <figure className="newsletter-card__figure">
+                    <img
+                      src="/images/newsletter-briefing.svg"
+                      alt="AIが整理した経営ダッシュボードと意思決定サマリーのイメージ"
                     />
-                  </label>
-                  <button type="submit" className="btn btn-primary newsletter-form__button">
-                    購読する
-                  </button>
-                </form>
-                {newsletterError && (
-                  <p className="newsletter-message newsletter-message--error" role="alert">
-                    {newsletterError}
-                  </p>
-                )}
-                {newsletterSubmitted && !newsletterError && (
-                  <p className="newsletter-message newsletter-message--success" role="status">
-                    登録ありがとうございます。最新号をお送りいたします。
-                  </p>
-                )}
+                  </figure>
+                  <ul className="newsletter-card__callouts">
+                    <li>
+                      <span className="newsletter-card__callout-value">分析レポート</span>
+                      <span>AI解析と専門家レビューの要点1枚</span>
+                    </li>
+                    <li>
+                      <span className="newsletter-card__callout-value">合意形成</span>
+                      <span>意思決定を3ステップで整理した会議シナリオ</span>
+                    </li>
+                    <li>
+                      <span className="newsletter-card__callout-value">テンプレ</span>
+                      <span>議事録とフォローアップの共通フォーマット付き</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </article>
             {renderStageCta("learn")}
