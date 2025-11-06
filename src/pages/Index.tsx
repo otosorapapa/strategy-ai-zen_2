@@ -40,7 +40,7 @@ import {
 
 import { submitContactForm } from "@/lib/contact-api";
 
-import heroDecisionVisual from "@/assets/strategic-meeting.jpg";
+import heroDecisionVisual from "@/assets/executive-strategy-meeting.jpg";
 import decisionDashboardVisual from "@/assets/dashboard-preview.jpg";
 import simulatorGuidanceVisual from "@/assets/strategy-planning.jpg";
 import expertKobayashiPhoto from "@/assets/expert-kobayashi.svg";
@@ -71,33 +71,33 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-const primaryCtaLabel = "まずは60秒で自社の意思決定リスクを診断する";
+const primaryCtaLabel = "まずは60秒で経営判断のつまずきを可視化する";
 const heroSnapshotHighlights = [
   {
-    label: "72時間でAI診断レポート",
-    description: "財務・販売・在庫データを束ねた優先課題の整理表を即共有。",
+    label: "72時間で経営状況の整理",
+    description: "財務・販売・在庫データを束ね、経営会議で押さえる要点を整理。",
   },
   {
-    label: "1〜2週間で計画ドラフト",
-    description: "金融機関提出レベルのストーリーとKPIを専門家が伴走作成。",
+    label: "1〜2週間で打ち手の下書き",
+    description: "金融機関や社内説明に使える骨子を専門家が共に磨き上げ。",
   },
   {
-    label: "3か月で定着・資金確保",
-    description: "週次レビューと補助金・融資支援でROIと資金繰りを追跡。",
+    label: "3か月で実行と信頼を両立",
+    description: "週次レビューと外部調整を支援し、数字と成果が連動する状態を維持。",
   },
 ];
 const heroTrustSignals = [
   {
-    label: "経済産業省 認定経営革新等支援機関",
-    description: "登録専門家チームが金融機関提出資料の品質を担保。",
+    label: "中小企業支援の専門登録チーム",
+    description: "金融機関と対話を重ねた専門家が提出資料の要件を把握。",
   },
   {
-    label: "地域金融機関との共同伴走 12行",
-    description: "審査ロジックを踏まえた計画づくりで交渉をスムーズに。",
+    label: "地域金融機関との連携ネットワーク",
+    description: "審査の視点を理解した提案で交渉準備をシンプルに。",
   },
   {
-    label: "案件継続率 92%",
-    description: "成果創出まで伴走し継続契約をいただいたプロジェクト比率。",
+    label: "継続依頼をいただく支援体制",
+    description: "成果報告と現場支援を両立させ、信頼関係を維持。",
   },
 ];
 const contactPhoneNumber = "03-4520-1234";
@@ -131,9 +131,9 @@ const ctaJourneyStages: CtaJourneyStage[] = [
   {
     id: "learn",
     stageLabel: "情報収集フェーズ",
-    headline: "まずは3分で要点を掴む",
+    headline: "まずは3分で全体像を確認",
     description:
-      "AI診断〜伴走までの流れと成果指標をまとめたサマリースライドと要約動画を確認。",
+      "AI診断から伴走支援までの流れと、信頼を得るための要点をまとめた資料と動画を用意しています。",
     buttonLabel: "3分サマリーを確認",
     href: "#summary",
     icon: BookOpen,
@@ -143,7 +143,7 @@ const ctaJourneyStages: CtaJourneyStage[] = [
     stageLabel: "比較検討フェーズ",
     headline: "投資対効果をその場で把握",
     description:
-      "年商規模と投資額を入力し、ROI・回収期間・削減工数を簡易シミュレーション。",
+      "年商規模と投資額を入力し、期待できる効果と準備負担の目安を簡易シミュレーション。",
     buttonLabel: "ROIを試算する",
     href: "#roi-preview",
     icon: BarChart4,
@@ -153,7 +153,7 @@ const ctaJourneyStages: CtaJourneyStage[] = [
     stageLabel: "実行準備フェーズ",
     headline: "無料相談で自社条件を精査",
     description:
-      "専門家が72時間診断の進め方と提出資料例を提示。社内稟議の準備まで伴走します。",
+      "専門家が72時間診断の進め方と提出資料例を提示し、社内説明まで伴走します。",
     buttonLabel: primaryCtaLabel,
     href: "#contact",
     icon: ClipboardCheck,
@@ -206,50 +206,50 @@ type HeroCausality = {
 
 const heroCausality: HeroCausality[] = [
   {
-    title: "72時間で経営の視界をそろえる",
-    subtitle: "現状分析と優先課題の確定",
+    title: "経営者の視座を全員で共有する",
+    subtitle: "初回診断と合意形成",
     cause:
-      "生成AIが財務・販売・顧客データを読み込み、伸ばすべき指標とリスクの兆しを一枚に可視化。",
+      "生成AIが財務・販売・顧客の断片を束ね、注目すべき指標と兆しを一枚で示します。",
     logic:
-      "事業再生を経験した診断士がヒアリングで仮説を磨き込み、経営者の直感を裏付ける論点メモを72時間以内に共有。",
-    impactMetric: "判断の迷いを減らす",
+      "再建現場で磨いた診断士が経営者の考えを言語化し、72時間以内に会議用の論点メモを届けます。",
+    impactMetric: "会議の焦点をそろえる",
     impactDetail:
-      "会議前に優先課題と数字の裏付けを揃え、役員間の認識がそろった状態でディスカッションに臨めます。",
-    trustLabel: "BLUEPRINT",
+      "役員と現場が同じ物差しで状況を語れ、先頭に立つ経営者の言葉に納得感が生まれます。",
+    trustLabel: "INSIGHT",
     trustCopy:
-      "再生・改善案件で蓄積したチェックリストをテンプレート化。初回面談から迷わず論点を掘り下げられます。",
-    highlights: ["現状把握", "優先度", "スピード"],
+      "ヒアリングとデータ分析を組み合わせた独自テンプレートで、初回面談から核心だけを抽出。",
+    highlights: ["現状把握", "共有", "スピード"],
     icon: ScanSearch,
   },
   {
-    title: "1〜2週間で勝ち筋を描き切る",
-    subtitle: "戦略ストーリーとKPI設計",
+    title: "未来に通じる選択肢を描き切る",
+    subtitle: "計画設計とシナリオ検証",
     cause:
-      "生成AIが収益シナリオ・資金繰り・補助金適用パターンを複数案でドラフトし、論点を構造化。",
+      "生成AIが収益・資金・外部環境のシミュレーションを複数案で提案し、意思決定の軸を整理します。",
     logic:
-      "診断士と会計士が金融機関目線で整合性を補正し、説明資料・想定問答・実行ロードマップを仕上げます。",
-    impactMetric: "準備の負担を軽くする",
+      "診断士と会計士が金融機関の視点で整合性を整え、説明資料と実行ロードマップを共同作成します。",
+    impactMetric: "準備の重さを軽くする",
     impactDetail:
-      "KPIと投資配分が明確になり、決算や金融機関面談に合わせて迷いなく説明できる骨子が揃います。",
-    trustLabel: "QUALITY",
+      "判断の根拠と語るべき順番が明快になり、社内外からの信頼を得られる資料が揃います。",
+    trustLabel: "DESIGN",
     trustCopy:
-      "補助金採択・資金調達で評価されたストーリーと数表をナレッジ化し、貴社仕様にカスタマイズ。",
-    highlights: ["戦略設計", "金融目線", "ロードマップ"],
+      "資金調達や補助金で評価されたストーリー資産を貴社の状況に合わせて再構築します。",
+    highlights: ["戦略設計", "検証", "共有"],
     icon: ClipboardCheck,
   },
   {
-    title: "3か月伴走で成果を定着",
-    subtitle: "実行支援と金融機関対応",
+    title: "実行と信頼を積み重ねる",
+    subtitle: "伴走支援と社外説明",
     cause:
-      "生成AIレポートが施策ごとのKPIとキャッシュ見通しを自動更新し、改善余地とリスクを通知。",
+      "生成AIレポートが施策の進捗と資金の動きを自動更新し、次に備える改善余地を知らせます。",
     logic:
-      "再生案件に強い専門家が定例レビューに参加し、金融機関提出資料や補助金申請まで伴走します。",
+      "再生案件に強い専門家が定例レビューや金融機関対応に参加し、報告書と会議資料を共に整えます。",
     impactMetric: "成果への確信を高める",
     impactDetail:
-      "実行状況と成果の因果が共有され、組織と金融機関の双方が納得する形で進捗を報告できます。",
-    trustLabel: "ASSURANCE",
+      "実行状況と数字のつながりが可視化され、社内チームも社外も納得して前進できます。",
+    trustLabel: "SUPPORT",
     trustCopy:
-      "レビュー記録と監査証憑を蓄積し、第三者へ提示できる形で管理。伴走期間終了後も再現可能です。",
+      "レビュー記録とエビデンスを蓄積し、支援終了後も自走できる管理基盤を残します。",
     highlights: ["伴走", "透明性", "信頼"],
     icon: TrendingUp,
   },
@@ -266,20 +266,20 @@ const heroResults: HeroResult[] = [
   {
     value: "72h",
     label: "集中ヒアリングとAI診断",
-    description: "財務・販売・在庫データを解析し72時間で改善骨子を提示。",
-    source: "導入企業平均 (2024)",
+    description: "財務・販売・在庫データを読み込み、72時間で意思決定の指針を提示。",
+    source: "支援ログ (2024)",
   },
   {
     value: "1-2週",
     label: "経営計画ドラフト完成",
-    description: "AIドラフト×診断士レビューで金融機関提出レベルに仕上げ。",
-    source: "支援プロジェクト実績 (n=36)",
+    description: "AIドラフトと専門家レビューで社内外に説明できる資料がそろう。",
+    source: "支援プロジェクト実績", 
   },
   {
-    value: "86%",
-    label: "補助金・融資の採択率",
-    description: "補助金×資金調達のワンストップ支援で採択率86%を継続。",
-    source: "伴走支援レポート (2023-2024)",
+    value: "継続支援",
+    label: "金融機関・補助金対応",
+    description: "資金調達と補助金の調整を同じチームで担い、説明力を高め続ける。",
+    source: "伴走支援レポート",
   },
 ];
 
@@ -305,11 +305,11 @@ const heroBenefitHighlights = [
   },
   {
     title: "1〜2週間で金融機関提出レベルの計画",
-    detail: "診断士と会計士がAIドラフトを磨き込み、ROIと資金計画を整合。",
+    detail: "診断士と会計士がAIドラフトを磨き込み、資金計画と語る順番を整える。",
   },
   {
     title: "3か月伴走で施策実行と資金調達を完走",
-    detail: "週次レビューで進捗とキャッシュを追跡し、補助金・融資の採択率86%を実現。",
+    detail: "週次レビューで進捗と資金を追跡し、補助金・融資の調整まで同じ視点で支援。",
   },
 ];
 
@@ -324,22 +324,22 @@ const heroSummaryCards: HeroSummaryCard[] = [
   {
     title: "3分で成果ストーリー",
     description:
-      "72時間診断→1〜2週間で計画完成→3か月伴走という全体像と、粗利・資金調達の成果を要約。",
-    stat: "成果創出160件",
+      "72時間診断→1〜2週間で計画完成→3か月伴走という全体像と、信頼構築のプロセスを要約。",
+    stat: "主要事例ダイジェスト",
     icon: BookOpen,
   },
   {
     title: "KPIとROIを数値で把握",
     description:
-      "意思決定リードタイム52%短縮、計画作成工数80%削減、粗利+18ptなどの主要KPIをひと目で確認。",
-    stat: "ROI 3.4倍",
+      "意思決定に関わる工数や進捗の見方をダッシュボードで可視化し、進め方を共有。",
+    stat: "主要指標ダッシュボード",
     icon: BarChart4,
   },
   {
     title: "導入ハードルをチェック",
     description:
-      "初期費用・月額・社内稼働の目安と、実際の導入手順をスライドで整理。動画で1分概要も視聴可能。",
-    stat: "準備工数-145h/月",
+      "初期費用や社内稼働の目安、導入手順をスライドで整理。動画で1分概要も視聴可能。",
+    stat: "導入ロードマップ",
     icon: PlayCircle,
   },
 ];
@@ -349,7 +349,7 @@ const heroMetrics = [
     label: "意思決定リードタイム短縮率",
     note: "導入企業20社平均",
     detail:
-      "生成AIと専門家レビューで経営会議の準備を前倒しし、意思決定までの待機時間を6週→2週に圧縮。",
+      "生成AIと専門家レビューで経営会議の準備を前倒しし、支援ログでは待機時間が大幅に短縮。",
     prefix: "-",
     suffix: "%",
     target: 52,
@@ -358,7 +358,7 @@ const heroMetrics = [
     label: "計画作成工数削減",
     note: "AIドラフト運用ログ",
     detail:
-      "AIが骨子と可視化を下書きし、専門家がレビューすることで資料作成工数を最大80%削減。",
+      "AIが骨子と可視化を下書きし、専門家がレビューすることで資料作成工数を大きく削減。",
     prefix: "-",
     suffix: "%",
     target: 80,
@@ -367,7 +367,7 @@ const heroMetrics = [
     label: "粗利率の改善幅",
     note: "リード施策の実績",
     detail:
-      "優先すべきSKUと投資配分を提示し、粗利率+18pt・キャッシュ1.8倍の成果を確認。",
+      "優先すべきSKUと投資配分を提示し、粗利率が着実に上向いた事例が蓄積。",
     prefix: "+",
     suffix: "pt",
     target: 18,
@@ -406,28 +406,28 @@ const competitorComparison: ComparisonRow[] = [
   {
     axis: "初動スピード",
     ourValue:
-      "72時間以内にAI診断レポートと優先課題リストを共有。経営会議の意思決定に間に合わせます。",
-    others: "一般的なコンサルティングでは現状分析に2〜4週間を要し、意思決定が後ろ倒しに。",
-    proof: "導入160件の平均リードタイム52%短縮ログ",
+      "72時間以内にAI診断レポートと優先課題リストを共有し、経営会議の意思決定に間に合わせます。",
+    others: "一般的なコンサルティングでは現状分析に時間を要し、意思決定が後ろ倒しになりがち。",
+    proof: "支援ログで確認した短縮データ",
   },
   {
     axis: "成果物の品質",
     ourValue:
       "金融機関提出レベルの計画書・想定問答・稟議資料を専門家が監修し、すぐに使える形で納品。",
     others: "AIツール単体はドラフト止まりで、金融機関視点の整合性は社内で再調整が必要。",
-    proof: "補助金・融資採択率86%（2023-2024）",
+    proof: "補助金・融資での採択実績レポート",
   },
   {
     axis: "伴走体制",
     ourValue:
       "診断士・会計士・金融機関経験者が週次レビューを実施し、稟議突破まで伴走します。",
     others: "担当1名・チャットサポート中心で、稟議資料づくりは自社対応になるケースが多い。",
-    proof: "継続率92%・専門家3人体制の標準化",
+    proof: "複数専門家による伴走記録",
   },
   {
     axis: "投資対効果",
     ourValue:
-      "意思決定リードタイム52%短縮、計画作成工数80%削減、粗利+18ptでROI3.4倍を実現。",
+      "意思決定のスピードと資料づくりの負担を同時に下げ、現場と金融機関の納得感を高めます。",
     others: "成果指標が定量化されにくく、投資判断・社内稟議で根拠提示が難しい。",
     proof: "伴走プロジェクト実績レポート",
   },
