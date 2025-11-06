@@ -4146,12 +4146,6 @@ const Index = () => {
                       <span className="evidence-card__source-note">{item.sourceNote}</span>
                     </div>
                   </header>
-                  {item.visual ? (
-                    <figure className="evidence-card__visual">
-                      <img src={item.visual.src} alt={item.visual.alt} loading="lazy" />
-                      {item.visual.caption ? <figcaption>{item.visual.caption}</figcaption> : null}
-                    </figure>
-                  ) : null}
                   <div className="evidence-card__body">
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
