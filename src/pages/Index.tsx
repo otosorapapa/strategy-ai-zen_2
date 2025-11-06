@@ -4605,8 +4605,9 @@ const Index = () => {
                 {insightHighlights.map((highlight) => {
                   const HighlightIcon = highlight.icon;
                   const DeltaIcon = highlight.deltaTone === "down" ? ArrowDownRight : ArrowUpRight;
-                  const visualMax =
-                    Math.max(highlight.visual.before.value, highlight.visual.after.value) || 1;
+                  const formatVisualValue = (
+                    entry: InsightHighlight["visual"]["before"],
+                  ) => entry.display ?? `${entry.value.toLocaleString()}${highlight.visual.unit}`;
                   return (
                     <article
                       key={highlight.label}
@@ -4640,31 +4641,21 @@ const Index = () => {
                               <span>専門家レビュー済</span>
                             </span>
                           </div>
-                          <figure
-                            className="insight-highlight__visual"
-                            aria-label={`${highlight.visual.caption}の比較`}
-                          >
-                            <figcaption>{highlight.visual.caption}</figcaption>
-                            <div className="insight-highlight__bars">
-                              {[highlight.visual.before, highlight.visual.after].map((entry) => {
-                                const barWidth = Math.max((entry.value / visualMax) * 100, 12);
-                                const displayValue =
-                                  entry.display ?? `${entry.value.toLocaleString()}${highlight.visual.unit}`;
-                                return (
-                                  <div key={entry.label} className="insight-highlight__bar-row">
-                                    <span>{entry.label}</span>
-                                    <div className="insight-highlight__bar-track">
-                                      <div
-                                        className="insight-highlight__bar-fill"
-                                        style={{ width: `${barWidth}%` }}
-                                      />
-                                      <span className="insight-highlight__bar-value">{displayValue}</span>
-                                    </div>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </figure>
+                          <div className="insight-highlight__metrics" aria-live="polite">
+                            <p className="insight-highlight__metrics-caption">
+                              {highlight.visual.caption}
+                            </p>
+                            <dl className="insight-highlight__metrics-list">
+                              <div className="insight-highlight__metric">
+                                <dt>{highlight.visual.before.label}</dt>
+                                <dd>{formatVisualValue(highlight.visual.before)}</dd>
+                              </div>
+                              <div className="insight-highlight__metric">
+                                <dt>{highlight.visual.after.label}</dt>
+                                <dd>{formatVisualValue(highlight.visual.after)}</dd>
+                              </div>
+                            </dl>
+                          </div>
                         </div>
                         <div className="insight-highlight__context">
                           <p className="insight-highlight__description">{highlight.description}</p>
