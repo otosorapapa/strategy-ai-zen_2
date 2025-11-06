@@ -285,6 +285,25 @@ type EvidenceItem = {
   layout?: "standard" | "wide" | "portrait" | "spotlight";
 };
 
+const evidenceHighlightIconMap: Record<
+  NonNullable<EvidenceHighlight["accent"]>,
+  LucideIcon
+> = {
+  cause: ScanSearch,
+  logic: Workflow,
+  result: TrendingUp,
+  momentum: Gauge,
+  trust: ShieldCheck,
+  signal: Activity,
+  focus: Target,
+};
+
+const evidenceHighlightFlowCaptions: Record<string, string> = {
+  因: "Cause Signal",
+  論: "Logic Proof",
+  果: "Result Impact",
+};
+
 const headerNavItems = [
   { id: "hero", label: "サービス概要" },
   { id: "problem", label: "課題" },
@@ -4132,62 +4151,101 @@ const Index = () => {
               </p>
             </div>
             <div className="evidence-grid">
-              {whyNowEvidence.map((item) => (
-                <article
-                  key={item.title}
-                  className={["evidence-card", item.variant ? `evidence-card--${item.variant}` : ""].filter(Boolean).join(" ")}
-                  data-layout={item.layout ?? "standard"}
-                  data-animate
-                >
-                  <div className="evidence-card__overlay" aria-hidden="true" />
-                  <header className="evidence-card__header">
-                    <div className="evidence-card__metrics">
-                      <span className="evidence-card__badge">{item.statLabel ?? "Key Insight"}</span>
-                      {item.stat ? (
-                        <span className="evidence-stat" aria-label={`${item.statLabel ?? "Insight"}の数値`}>
-                          {item.stat}
-                        </span>
-                      ) : null}
+              {whyNowEvidence.map((item) => {
+                const isTriadFlow = Boolean(
+                  item.variant === "prime" &&
+                    item.highlights &&
+                    item.highlights.length === 3 &&
+                    item.highlights.every((highlight) =>
+                      ["因", "論", "果"].includes(highlight.label)
+                    )
+                );
+
+                return (
+                  <article
+                    key={item.title}
+                    className={["evidence-card", item.variant ? `evidence-card--${item.variant}` : ""].filter(Boolean).join(" ")}
+                    data-layout={item.layout ?? "standard"}
+                    data-animate
+                  >
+                    <div className="evidence-card__overlay" aria-hidden="true" />
+                    <header className="evidence-card__header">
+                      <div className="evidence-card__metrics">
+                        <span className="evidence-card__badge">{item.statLabel ?? "Key Insight"}</span>
+                        {item.stat ? (
+                          <span className="evidence-stat" aria-label={`${item.statLabel ?? "Insight"}の数値`}>
+                            {item.stat}
+                          </span>
+                        ) : null}
+                      </div>
+                      <div className="evidence-card__source">
+                        <span className="evidence-card__source-label">{item.sourceLabel}</span>
+                        <span className="evidence-card__source-note">{item.sourceNote}</span>
+                      </div>
+                    </header>
+                    {item.visual ? (
+                      <figure className="evidence-card__visual">
+                        <img src={item.visual.src} alt={item.visual.alt} loading="lazy" />
+                        {item.visual.caption ? <figcaption>{item.visual.caption}</figcaption> : null}
+                      </figure>
+                    ) : null}
+                    <div className="evidence-card__body">
+                      <h3>{item.title}</h3>
+                      <p>{item.description}</p>
                     </div>
-                    <div className="evidence-card__source">
-                      <span className="evidence-card__source-label">{item.sourceLabel}</span>
-                      <span className="evidence-card__source-note">{item.sourceNote}</span>
-                    </div>
-                  </header>
-                  {item.visual ? (
-                    <figure className="evidence-card__visual">
-                      <img src={item.visual.src} alt={item.visual.alt} loading="lazy" />
-                      {item.visual.caption ? <figcaption>{item.visual.caption}</figcaption> : null}
-                    </figure>
-                  ) : null}
-                  <div className="evidence-card__body">
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </div>
-                  {item.highlights ? (
-                    <ul className="evidence-card__highlights" role="list" aria-label="因・論・果のハイライト">
-                      {item.highlights.map((highlight) => (
-                        <li
-                          key={`${item.title}-${highlight.label}`}
-                          className={`evidence-highlight${highlight.accent ? ` evidence-highlight--${highlight.accent}` : ""}`}
-                          role="listitem"
-                        >
-                          <span className="evidence-highlight__label">{highlight.label}</span>
-                          <span className="evidence-highlight__value">{highlight.value}</span>
-                          <p>{highlight.description}</p>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-                  {item.sourceUrl ? (
-                    <footer className="evidence-card__footer">
-                      <a className="evidence-card__link" href={item.sourceUrl} target="_blank" rel="noopener noreferrer">
-                        一次情報を確認する
-                      </a>
-                    </footer>
-                  ) : null}
-                </article>
-              ))}
+                    {item.highlights ? (
+                      <ul
+                        className="evidence-card__highlights"
+                        role="list"
+                        aria-label="因・論・果のハイライト"
+                        data-flow={isTriadFlow ? "triad" : undefined}
+                      >
+                        {item.highlights.map((highlight) => {
+                          const FlowIcon = highlight.accent
+                            ? evidenceHighlightIconMap[highlight.accent]
+                            : null;
+                          const flowCaption = evidenceHighlightFlowCaptions[highlight.label];
+
+                          return (
+                            <li
+                              key={`${item.title}-${highlight.label}`}
+                              className={`evidence-highlight${highlight.accent ? ` evidence-highlight--${highlight.accent}` : ""}`}
+                              role="listitem"
+                              data-flow-step={isTriadFlow ? highlight.label : undefined}
+                            >
+                              <div className="evidence-highlight__meta">
+                                {FlowIcon ? (
+                                  <span
+                                    className={`evidence-highlight__icon evidence-highlight__icon--${highlight.accent}`}
+                                    aria-hidden="true"
+                                  >
+                                    <FlowIcon />
+                                  </span>
+                                ) : null}
+                                <div className="evidence-highlight__meta-text">
+                                  <span className="evidence-highlight__label">{highlight.label}</span>
+                                  {flowCaption ? (
+                                    <span className="evidence-highlight__caption">{flowCaption}</span>
+                                  ) : null}
+                                </div>
+                              </div>
+                              <span className="evidence-highlight__value">{highlight.value}</span>
+                              <p>{highlight.description}</p>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    ) : null}
+                    {item.sourceUrl ? (
+                      <footer className="evidence-card__footer">
+                        <a className="evidence-card__link" href={item.sourceUrl} target="_blank" rel="noopener noreferrer">
+                          一次情報を確認する
+                        </a>
+                      </footer>
+                    ) : null}
+                  </article>
+                );
+              })}
             </div>
             <p className="footnote" data-animate>
               ※ 参考元リンクから一次情報を確認いただけます。
