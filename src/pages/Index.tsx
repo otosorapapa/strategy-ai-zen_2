@@ -52,7 +52,7 @@ import representativePhoto from "@/assets/representative.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import solutionLogicTimeline from "@/assets/process-flow-infographic.jpg";
 import heroCausalityDiagram from "@/assets/data-infographic-growth.jpg";
-import executiveStrategyVisual from "@/assets/executive-strategy-meeting.jpg";
+import executiveStrategyVisual from "@/assets/strategy-planning.jpg";
 import roiComparisonSnapshot from "@/assets/roi-chart.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
@@ -3334,7 +3334,7 @@ const Index = () => {
                     <div className="hero-intro__visual-media">
                       <img
                         src={executiveStrategyVisual}
-                        alt="経営陣がAIダッシュボードを前に意思決定シナリオを検討している様子"
+                        alt="経営陣が戦略プランニングの資料をもとに意思決定を整理している様子"
                         loading="lazy"
                         decoding="async"
                       />
