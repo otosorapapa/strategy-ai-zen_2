@@ -6726,11 +6726,11 @@ svg {
   position: relative;
   background: rgba(255, 255, 255, 0.96);
   border-radius: 22px;
-  padding: 28px;
+  padding: 30px;
   border: 1px solid rgba(22, 58, 99, 0.08);
   box-shadow: var(--shadow-sm);
   display: grid;
-  gap: 22px;
+  gap: 24px;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   color: var(--navy-800);
   overflow: hidden;
@@ -6833,10 +6833,51 @@ svg {
   font-size: 0.98rem;
 }
 
+.pain-card__grid {
+  display: grid;
+  gap: 24px;
+}
+
+.pain-card__column {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+.pain-card__column--context {
+  gap: 20px;
+}
+
+.pain-card__column--resolution {
+  gap: 20px;
+  position: relative;
+}
+
+.pain-card__column-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(79, 163, 255, 0.16);
+  color: rgba(15, 23, 42, 0.7);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.pain-card__column-label svg {
+  width: 16px;
+  height: 16px;
+  color: var(--navy-600);
+}
+
 .pain-card__proofs {
-  display: flex;
+  display: grid;
   gap: 12px;
-  flex-wrap: wrap;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
 
 .pain-proof {
@@ -6908,6 +6949,23 @@ svg {
   background: rgba(245, 134, 52, 0.18);
 }
 
+.pain-cause {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.06), rgba(148, 163, 184, 0.04));
+  border: 1px solid rgba(79, 163, 255, 0.12);
+  border-radius: 18px;
+  padding: 18px 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.pain-cause__label {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  color: rgba(15, 23, 42, 0.6);
+  text-transform: uppercase;
+}
+
 .pain-chain {
   position: relative;
   display: grid;
@@ -6919,6 +6977,7 @@ svg {
     linear-gradient(135deg, rgba(79, 163, 255, 0.16), rgba(31, 157, 122, 0.12)),
     rgba(255, 255, 255, 0.82);
   border: 1px solid rgba(22, 58, 99, 0.08);
+  align-items: start;
 }
 
 .pain-chain__column {
@@ -7016,6 +7075,33 @@ svg {
   text-transform: uppercase;
 }
 
+.pain-results {
+  display: grid;
+  gap: 18px;
+}
+
+@media (min-width: 1024px) {
+  .pain-card__grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: start;
+    gap: 28px;
+  }
+
+  .pain-results {
+    grid-template-columns: minmax(0, 0.52fr) minmax(0, 0.48fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .pain-card__grid {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  }
+
+  .pain-results {
+    grid-template-columns: minmax(0, 0.48fr) minmax(0, 0.52fr);
+  }
+}
+
 @media (max-width: 960px) {
   .pain-grid {
     gap: 24px;
@@ -7023,6 +7109,14 @@ svg {
 
   .pain-visual {
     margin: 36px 0 28px;
+  }
+
+  .pain-card__grid {
+    gap: 20px;
+  }
+
+  .pain-card__column-label {
+    padding-inline: 10px;
   }
 
   .pain-chain {
@@ -7051,6 +7145,10 @@ svg {
   .pain-card__metric {
     width: 100%;
     justify-items: flex-start;
+  }
+
+  .pain-card__column {
+    gap: 16px;
   }
 }
 
