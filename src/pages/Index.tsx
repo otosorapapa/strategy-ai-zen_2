@@ -564,6 +564,82 @@ type ComparisonRow = {
   proof: string;
 };
 
+type ComparisonHighlight = {
+  stat: string;
+  label: string;
+  description: string;
+  icon: LucideIcon;
+  footnote?: string;
+};
+
+type ComparisonPillar = {
+  title: string;
+  subtitle: string;
+  description: string;
+  icon: LucideIcon;
+  bullets: string[];
+};
+
+const comparisonHighlights: ComparisonHighlight[] = [
+  {
+    stat: "-52%",
+    label: "意思決定リードタイム",
+    description: "AI診断×専門家レビューで会議前の準備と論点整理を同時進行。経営判断が1〜2週間前倒しに。",
+    icon: Timer,
+    footnote: "導入4社平均（製造・小売・IT）",
+  },
+  {
+    stat: "3.2pt",
+    label: "粗利率の改善幅",
+    description: "在庫と販路データを統合し、打ち手ごとにキャッシュ影響を算定。利益構造の因果関係を見える化。",
+    icon: BarChart3,
+    footnote: "伴走開始後90日以内の中央値",
+  },
+  {
+    stat: "92%",
+    label: "継続・増額更新率",
+    description: "金融機関・専門家・現場の三者レビューで再現性を担保。次年度の資金計画と同時に契約更新へ。",
+    icon: ShieldCheck,
+    footnote: "2023年7月〜2024年3月実績",
+  },
+];
+
+const comparisonPillars: ComparisonPillar[] = [
+  {
+    title: "構想と資金戦略を一本化",
+    subtitle: "Vision × Finance",
+    description:
+      "代表の構想を可視化し、銀行・投資家が評価する財務シナリオへブリッジ。意思決定の物語線を最初に固めます。",
+    icon: Compass,
+    bullets: [
+      "3年ビジョンを定量に落とし込むドラフトワークショップ",
+      "金融機関ヒアリングで判明した審査観点の反映",
+    ],
+  },
+  {
+    title: "因果カードで現場を接続",
+    subtitle: "Causality Ops",
+    description:
+      "AIが相関を抽出し、専門チームが因果カードに整理。現場のKPIと会議アジェンダをリンクさせます。",
+    icon: Workflow,
+    bullets: [
+      "部署横断のKPI連鎖を見える化するダッシュボード",
+      "意思決定に必要な証拠書類・根拠データを即時提示",
+    ],
+  },
+  {
+    title: "伴走体制で実行と検証",
+    subtitle: "Execution Guild",
+    description:
+      "診断士・会計士・データアナリストが週次レポートと臨時相談で意思決定を支援。施策のROIを追跡します。",
+    icon: Users2,
+    bullets: [
+      "週次レポートでROIとキャッシュを二軸管理",
+      "融資・補助金の想定問答と資料を専門家が準備",
+    ],
+  },
+];
+
 const competitorComparison: ComparisonRow[] = [
   {
     axis: "描く未来",
@@ -4007,13 +4083,61 @@ const Index = () => {
             <li>先読みアラートと週次レビューで、揺るがないリーダーシップを支える体制を維持します。</li>
           </ul>
         </div>
+        <div className="comparison-highlights" data-animate>
+          {comparisonHighlights.map((highlight) => {
+            const HighlightIcon = highlight.icon;
+            return (
+              <article key={highlight.label} className="comparison-highlight-card">
+                <span className="comparison-highlight-card__icon" aria-hidden="true">
+                  <HighlightIcon />
+                </span>
+                <div className="comparison-highlight-card__body">
+                  <span className="comparison-highlight-card__stat">{highlight.stat}</span>
+                  <h3>{highlight.label}</h3>
+                  <p>{highlight.description}</p>
+                  {highlight.footnote ? (
+                    <span className="comparison-highlight-card__footnote">{highlight.footnote}</span>
+                  ) : null}
+                </div>
+              </article>
+            );
+          })}
+        </div>
         <figure className="comparison-visual" data-animate>
-          <img
-            src="/images/pain-value-flow.svg"
-            alt="計画立案から実行支援までを示す専門家とAIの役割分担図"
-            loading="lazy"
-          />
-          <figcaption>専門家×AIが描く未来像・実行計画・進捗管理の連動イメージ</figcaption>
+          <div className="comparison-visual__header">
+            <span className="comparison-visual__badge">Vision → Execution Blueprint</span>
+            <p>
+              因果で整えた意思決定カードを軸に、構想・財務・現場オペレーションを滑らかにつなげます。
+            </p>
+          </div>
+          <div className="comparison-visual__grid">
+            {comparisonPillars.map((pillar, index) => {
+              const PillarIcon = pillar.icon;
+              return (
+                <div key={pillar.title} className="comparison-visual__pillar">
+                  <div className="comparison-visual__icon" aria-hidden="true">
+                    <PillarIcon />
+                  </div>
+                  <div className="comparison-visual__title">
+                    <span>{pillar.subtitle}</span>
+                    <h3>{pillar.title}</h3>
+                  </div>
+                  <p>{pillar.description}</p>
+                  <ul>
+                    {pillar.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                  {index !== comparisonPillars.length - 1 ? (
+                    <span className="comparison-visual__arrow" aria-hidden="true">
+                      <ArrowRight />
+                    </span>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+          <figcaption>構想→因果設計→実行伴走を一気通貫で連動させる支援スキームの俯瞰図</figcaption>
         </figure>
         <div className="comparison-table-wrapper" data-animate>
           <table className="comparison-table">
@@ -4030,15 +4154,15 @@ const Index = () => {
               {competitorComparison.map((row) => (
                 <tr key={row.axis}>
                   <th scope="row">{row.axis}</th>
-                  <td>
+                  <td className="comparison-table__cell comparison-table__cell--ours">
                     <span className="comparison-badge">当社</span>
                     <p>{row.ourValue}</p>
                   </td>
-                  <td>
+                  <td className="comparison-table__cell comparison-table__cell--others">
                     <span className="comparison-badge comparison-badge--neutral">一般的なサービス</span>
                     <p>{row.others}</p>
                   </td>
-                  <td>
+                  <td className="comparison-table__cell comparison-table__cell--proof">
                     <p>{row.proof}</p>
                   </td>
                 </tr>
