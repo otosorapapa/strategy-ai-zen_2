@@ -48,7 +48,7 @@ import expertTanakaPhoto from "@/assets/expert-tanaka.svg";
 import representativePhoto from "@/assets/representative.jpg";
 import solutionSynergyVisual from "@/assets/solution-synergy.svg";
 import solutionLogicTimeline from "@/assets/process-flow-infographic.jpg";
-import journeyFlowVisual from "@/assets/data-infographic-growth.jpg";
+import journeyFlowVisual from "@/assets/success-metrics-visual.jpg";
 import heroCausalityDiagram from "@/assets/causality-flow.jpg";
 import aiValueRealtimeVisual from "@/assets/ai-value-realtime.svg";
 import aiValueScenarioVisual from "@/assets/ai-value-scenario.svg";
@@ -325,6 +325,30 @@ const journeySummaryStats: JourneySummaryStat[] = [
     value: "30d",
     description: "金融機関・役員会向けの説明ストーリーとKPI管理表を整備",
     icon: FileText,
+  },
+];
+
+type JourneyLeadInsight = {
+  metric: string;
+  title: string;
+  detail: string;
+};
+
+const journeyLeadInsights: JourneyLeadInsight[] = [
+  {
+    metric: "-52%",
+    title: "意思決定リードタイムの短縮",
+    detail: "AI診断レポートと因果マップで経営会議の前提合わせを一気通貫。72時間で判断材料を提示。",
+  },
+  {
+    metric: "1-2週",
+    title: "ROIシナリオの論理検証",
+    detail: "専門家レビュー付きのROI比較と合意形成テンプレで投資判断の納得感を底上げ。",
+  },
+  {
+    metric: "92%",
+    title: "伴走継続率が支える成果化",
+    detail: "金融機関視点の資料審査と90日フォローで実行と資金繰りを失速させない設計。",
   },
 ];
 
@@ -3507,6 +3531,22 @@ const Index = () => {
                 <p>
                   「課題の因果→改善シナリオ→合意形成」の順で支援内容を分解しました。各ステップで得られる成果物と時間軸を明示することで、意思決定プロセスの論理が一目でわかります。
                 </p>
+                <div className="journey-cta__intro-proof">
+                  <ShieldCheck aria-hidden />
+                  <span>経営革新等支援機関による3段階レビューで、72時間診断から90日伴走までを品質保証。</span>
+                </div>
+              </div>
+              <div className="journey-cta__insight" data-animate>
+                <span className="journey-cta__insight-eyebrow">導入企業の成果スナップショット</span>
+                <div className="journey-cta__insight-grid">
+                  {journeyLeadInsights.map((insight) => (
+                    <div className="journey-cta__insight-item" key={insight.title}>
+                      <span className="journey-cta__insight-metric">{insight.metric}</span>
+                      <p className="journey-cta__insight-title">{insight.title}</p>
+                      <span className="journey-cta__insight-detail">{insight.detail}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
               <figure className="journey-cta__visual" data-animate>
                 <img
@@ -3517,8 +3557,32 @@ const Index = () => {
                 <figcaption>
                   因果整理→打ち手設計→実行準備の流れを一枚で視覚化。色分けと矢印で視線を次のカードに運び、スクロール継続と理解の同期を両立させます。
                 </figcaption>
+                <div className="journey-cta__visual-legend" role="presentation">
+                  <div className="journey-cta__visual-legend-heading">
+                    <span>視線誘導の3ポイント</span>
+                    <ArrowRight aria-hidden />
+                  </div>
+                  <ul>
+                    <li>
+                      <Workflow aria-hidden />
+                      <span>課題の因果整理で経営課題の優先順位を明示し、読み手の注意をステップ1のカードへ誘導。</span>
+                    </li>
+                    <li>
+                      <Compass aria-hidden />
+                      <span>ROIシナリオ比較を中心に配置し、ステップ2の論理検証とデータ根拠へ自然と視線を運ぶ構成。</span>
+                    </li>
+                    <li>
+                      <TrendingUp aria-hidden />
+                      <span>金融機関提出レベルの最終成果物を強調し、CTAボタンと信頼コンテンツへとスクロールを連動。</span>
+                    </li>
+                  </ul>
+                </div>
               </figure>
               <div className="journey-cta__summary" data-animate>
+                <div className="journey-cta__summary-heading">
+                  <span className="journey-cta__summary-eyebrow">成果物の全体像</span>
+                  <p>72時間→90日までのアウトプットと意思決定のリズムを一目で把握できます。</p>
+                </div>
                 {journeySummaryStats.map((stat) => {
                   const SummaryIcon = stat.icon;
                   return (
@@ -3533,20 +3597,26 @@ const Index = () => {
                   );
                 })}
               </div>
-              <ul className="journey-cta__trust" data-animate>
-                {journeyAssurancePoints.map((point) => {
-                  const TrustIcon = point.icon;
-                  return (
-                    <li className="journey-cta__trust-item" key={point.title}>
-                      <TrustIcon aria-hidden className="journey-cta__trust-icon" />
-                      <div className="journey-cta__trust-content">
-                        <span className="journey-cta__trust-title">{point.title}</span>
-                        <p className="journey-cta__trust-description">{point.description}</p>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ul>
+              <section className="journey-cta__assurance" data-animate aria-label="信頼の裏付け">
+                <div className="journey-cta__assurance-heading">
+                  <span>トラスト・シグナル</span>
+                  <p>行政認定・専門家レビュー・成果データをProof Sandwichで挟み、CTA手前の納得感と離脱防止を実現します。</p>
+                </div>
+                <ul className="journey-cta__trust-list">
+                  {journeyAssurancePoints.map((point) => {
+                    const TrustIcon = point.icon;
+                    return (
+                      <li className="journey-cta__trust-item" key={point.title}>
+                        <TrustIcon aria-hidden className="journey-cta__trust-icon" />
+                        <div className="journey-cta__trust-content">
+                          <span className="journey-cta__trust-title">{point.title}</span>
+                          <p className="journey-cta__trust-description">{point.description}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </section>
             </div>
             <ol className="journey-cta__progress" aria-label="経営判断支援の進行ステップ">
               {ctaJourneyStages.map((stage, index) => {
