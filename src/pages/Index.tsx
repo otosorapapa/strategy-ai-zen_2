@@ -3110,22 +3110,82 @@ const Index = () => {
                 aria-label="72時間診断から3か月伴走までのプロセス図"
               >
                 <div className="hero-causality-intro__visual-grid">
-                  <div className="hero-causality-intro__visual-graphic">
-                    <img
-                      src={heroCausalityDiagram}
-                      alt="72時間→3か月の伴走プロセスを描いたインフォグラフィック"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    <ul className="hero-causality-intro__visual-snapshot" aria-label="時間軸のハイライト">
-                      {heroProcessSnapshot.map((snapshot) => (
-                        <li key={snapshot.value}>
-                          <strong>{snapshot.value}</strong>
-                          <span>{snapshot.label}</span>
-                          <small>{snapshot.caption}</small>
+                  <div className="hero-causality-intro__visual-main">
+                    <div className="hero-causality-intro__visual-graphic">
+                      <img
+                        src={heroCausalityDiagram}
+                        alt="72時間→3か月の伴走プロセスを描いたインフォグラフィック"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <ul className="hero-causality-intro__visual-snapshot" aria-label="時間軸のハイライト">
+                        {heroProcessSnapshot.map((snapshot) => (
+                          <li key={snapshot.value}>
+                            <strong>{snapshot.value}</strong>
+                            <span>{snapshot.label}</span>
+                            <small>{snapshot.caption}</small>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <header className="hero-causality-intro__visual-header">
+                      <span className="hero-causality-intro__visual-eyebrow">DECISION ROADMAP</span>
+                      <p>
+                        72時間で論点と数字を整え、1〜2週間で提出レベルの計画に昇華。3か月の伴走で成果とリスクを継続的にレビューし
+ます。
+                      </p>
+                    </header>
+                    <div className="hero-causality-intro__visual-body">
+                      <ol className="hero-causality-intro__timeline">
+                        {heroProcessMilestones.map((milestone, index) => (
+                          <li
+                            key={milestone.phase}
+                            className="hero-causality-intro__timeline-step"
+                            data-step={`0${index + 1}`}
+                          >
+                            <div className="hero-causality-intro__timeline-meta">
+                              <span className="hero-causality-intro__timeline-phase">{milestone.phase}</span>
+                              <span className="hero-causality-intro__timeline-outcome">{milestone.outcome}</span>
+                            </div>
+                            <h3>{milestone.title}</h3>
+                            <p>{milestone.detail}</p>
+                            <div className="hero-causality-intro__timeline-stats">
+                              <div className="hero-causality-intro__timeline-metric">
+                                <span className="hero-causality-intro__timeline-value">{milestone.metricValue}</span>
+                                <span className="hero-causality-intro__timeline-label">{milestone.metricLabel}</span>
+                              </div>
+                              <span className="hero-causality-intro__timeline-support">{milestone.support}</span>
+                            </div>
+                          </li>
+                        ))}
+                      </ol>
+                      <div className="hero-causality-intro__visual-kpis" aria-label="支援で得られる指標改善">
+                        {heroProcessKpis.map((kpi) => (
+                          <div key={kpi.label} className="hero-causality-intro__visual-kpi">
+                            <span className="hero-causality-intro__visual-kpi-value">{kpi.value}</span>
+                            <span className="hero-causality-intro__visual-kpi-label">{kpi.label}</span>
+                            <small>{kpi.caption}</small>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <footer className="hero-causality-intro__visual-footer">
+                      <div className="hero-causality-intro__visual-proof">
+                        <span>支援体制</span>
+                        <p>認定支援機関×公認会計士×データアナリストが品質を多層チェック。</p>
+                      </div>
+                      <ul className="hero-causality-intro__visual-trust">
+                        <li>
+                          <img src={logoOisix} alt="Oisix 導入企業" loading="lazy" />
                         </li>
-                      ))}
-                    </ul>
+                        <li>
+                          <img src={logoSansan} alt="Sansan 掲載実績" loading="lazy" />
+                        </li>
+                        <li>
+                          <img src={logoRaksul} alt="Raksul 提携企業" loading="lazy" />
+                        </li>
+                      </ul>
+                    </footer>
                   </div>
                   <aside
                     className="hero-causality-intro__visual-digest"
@@ -3164,63 +3224,6 @@ const Index = () => {
                     </ul>
                   </aside>
                 </div>
-                <header className="hero-causality-intro__visual-header">
-                  <span className="hero-causality-intro__visual-eyebrow">DECISION ROADMAP</span>
-                  <p>
-                    72時間で論点と数字を整え、1〜2週間で提出レベルの計画に昇華。3か月の伴走で成果とリスクを継続的にレビューします。
-                  </p>
-                </header>
-                <div className="hero-causality-intro__visual-body">
-                  <ol className="hero-causality-intro__timeline">
-                    {heroProcessMilestones.map((milestone, index) => (
-                      <li
-                        key={milestone.phase}
-                        className="hero-causality-intro__timeline-step"
-                        data-step={`0${index + 1}`}
-                      >
-                        <div className="hero-causality-intro__timeline-meta">
-                          <span className="hero-causality-intro__timeline-phase">{milestone.phase}</span>
-                          <span className="hero-causality-intro__timeline-outcome">{milestone.outcome}</span>
-                        </div>
-                        <h3>{milestone.title}</h3>
-                        <p>{milestone.detail}</p>
-                        <div className="hero-causality-intro__timeline-stats">
-                          <div className="hero-causality-intro__timeline-metric">
-                            <span className="hero-causality-intro__timeline-value">{milestone.metricValue}</span>
-                            <span className="hero-causality-intro__timeline-label">{milestone.metricLabel}</span>
-                          </div>
-                          <span className="hero-causality-intro__timeline-support">{milestone.support}</span>
-                        </div>
-                      </li>
-                    ))}
-                  </ol>
-                  <div className="hero-causality-intro__visual-kpis" aria-label="支援で得られる指標改善">
-                    {heroProcessKpis.map((kpi) => (
-                      <div key={kpi.label} className="hero-causality-intro__visual-kpi">
-                        <span className="hero-causality-intro__visual-kpi-value">{kpi.value}</span>
-                        <span className="hero-causality-intro__visual-kpi-label">{kpi.label}</span>
-                        <small>{kpi.caption}</small>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <footer className="hero-causality-intro__visual-footer">
-                  <div className="hero-causality-intro__visual-proof">
-                    <span>支援体制</span>
-                    <p>認定支援機関×公認会計士×データアナリストが品質を多層チェック。</p>
-                  </div>
-                  <ul className="hero-causality-intro__visual-trust">
-                    <li>
-                      <img src={logoOisix} alt="Oisix 導入企業" loading="lazy" />
-                    </li>
-                    <li>
-                      <img src={logoSansan} alt="Sansan 掲載実績" loading="lazy" />
-                    </li>
-                    <li>
-                      <img src={logoRaksul} alt="Raksul 提携企業" loading="lazy" />
-                    </li>
-                  </ul>
-                </footer>
                 <figcaption>
                   因果→論理→成果の全体像を、72時間・1〜2週間・90日のスプリントで俯瞰し意思決定の納得性を高めるビジュアルボード
                 </figcaption>
