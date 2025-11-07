@@ -6627,19 +6627,37 @@ svg {
 
 .feature-grid {
   display: grid;
-  gap: 36px;
+  gap: 32px;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   align-items: stretch;
+  grid-auto-rows: 1fr;
+  grid-auto-flow: dense;
+}
+
+@media (min-width: 1024px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1440px) {
+  .feature-grid {
+    gap: 36px;
+  }
 }
 
 .features-layout {
   display: grid;
   gap: 32px;
   margin-top: 56px;
+  align-items: stretch;
 }
 
 .features-visual {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   border-radius: 32px;
   padding: 40px 36px;
   background:
@@ -6693,6 +6711,12 @@ svg {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8);
 }
 
+@media (min-width: 1024px) {
+  .features-visual__figure {
+    margin-top: auto;
+  }
+}
+
 .features-visual__figure img {
   display: block;
   width: 100%;
@@ -6711,8 +6735,15 @@ svg {
 
 @media (min-width: 1024px) {
   .features-layout {
-    grid-template-columns: minmax(0, 420px) minmax(0, 1fr);
-    align-items: start;
+    grid-template-columns: minmax(360px, 420px) minmax(0, 1fr);
+    align-items: stretch;
+    gap: 40px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .features-layout {
+    grid-template-columns: minmax(420px, 480px) minmax(0, 1fr);
   }
 }
 
@@ -6732,6 +6763,7 @@ svg {
   --feature-accent-soft: rgba(22, 58, 99, 0.16);
   --feature-accent-lighter: rgba(22, 58, 99, 0.1);
   --feature-glow: rgba(22, 58, 99, 0.18);
+  height: 100%;
 }
 
 .feature-card::before {
@@ -6826,6 +6858,7 @@ svg {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  flex: 1;
 }
 
 .feature-card h3 {
@@ -6842,11 +6875,12 @@ svg {
 }
 
 .feature-card__highlights {
-  margin: 8px 0 0;
+  margin: auto 0 0;
   padding: 0;
+  padding-top: 8px;
   list-style: none;
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 .feature-card__highlights li {
@@ -6901,6 +6935,8 @@ svg {
   flex-direction: column;
   gap: 16px;
   margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(22, 58, 99, 0.08);
 }
 
 .feature-benefit {
@@ -6978,7 +7014,8 @@ svg {
 
 @media (min-width: 1024px) {
   .feature-grid {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
   }
 }
 
