@@ -1552,52 +1552,45 @@
 
       .data-flow-diagram {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: clamp(24px, 4vw, 40px);
-        position: relative;
-      }
-
-      .data-flow-diagram::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: linear-gradient(120deg, rgba(29, 78, 216, 0.35), rgba(249, 115, 22, 0.28));
-        transform: translateY(-50%);
-        z-index: 0;
+        gap: clamp(24px, 4vw, 36px);
       }
 
       .data-flow-step {
-        background: rgba(255, 255, 255, 0.92);
-        border-radius: 22px;
-        padding: clamp(28px, 3.2vw, 34px) clamp(24px, 3vw, 32px);
-        border: 1px solid rgba(148, 163, 184, 0.2);
-        box-shadow: 0 22px 38px rgba(15, 23, 42, 0.06);
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 24px;
+        padding: clamp(28px, 3.2vw, 34px) clamp(24px, 3vw, 36px);
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        box-shadow: 0 24px 46px rgba(15, 23, 42, 0.06);
+        position: relative;
         display: flex;
         flex-direction: column;
-        gap: 12px;
-        position: relative;
-        z-index: 1;
+        gap: 20px;
+      }
+
+      .data-flow-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        flex-wrap: wrap;
       }
 
       .data-flow-icon {
-        width: 54px;
-        height: 54px;
-        border-radius: 14px;
+        width: 58px;
+        height: 58px;
+        border-radius: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.4rem;
+        font-size: 1.45rem;
         color: var(--primary);
-        background: linear-gradient(140deg, rgba(29, 78, 216, 0.16), rgba(104, 197, 168, 0.3));
-        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+        background: linear-gradient(140deg, rgba(29, 78, 216, 0.18), rgba(104, 197, 168, 0.32));
+        box-shadow: 0 14px 24px rgba(15, 23, 42, 0.1);
       }
 
       .data-flow-step h3 {
         margin: 0;
-        font-size: 1.1rem;
+        font-size: 1.15rem;
       }
 
       .data-flow-step p {
@@ -1606,17 +1599,212 @@
         font-size: 0.95rem;
       }
 
-      .data-flow-detail {
+      .data-flow-roles {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: clamp(16px, 3vw, 24px);
+      }
+
+      .data-flow-role {
+        background: rgba(241, 245, 249, 0.6);
+        border-radius: 18px;
+        padding: clamp(18px, 3vw, 24px);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .data-flow-role h4 {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--secondary);
+      }
+
+      .data-flow-role ul {
+        margin: 0;
+        padding-left: 20px;
         display: flex;
         flex-direction: column;
         gap: 6px;
-        margin: 0;
-        padding-left: 18px;
-        color: rgba(17, 24, 39, 0.7);
+        color: rgba(17, 24, 39, 0.75);
+        font-size: 0.95rem;
+      }
+
+      .data-flow-benefit {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        background: rgba(59, 130, 246, 0.1);
+        border-radius: 999px;
+        font-size: 0.85rem;
+        color: var(--primary);
+        font-weight: 600;
       }
 
       .analysis-section {
         background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(93, 211, 179, 0.12));
+      }
+
+      .pricing-table {
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 24px;
+        padding: clamp(24px, 3.6vw, 32px);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        box-shadow: 0 24px 46px rgba(15, 23, 42, 0.06);
+        overflow-x: auto;
+      }
+
+      .plan-comparison {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        min-width: 680px;
+      }
+
+      .plan-comparison thead th {
+        text-align: left;
+        font-size: 0.9rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: rgba(15, 23, 42, 0.6);
+        padding: 0 18px 12px;
+      }
+
+      .plan-comparison tbody tr {
+        background: rgba(248, 250, 252, 0.68);
+        border-radius: 16px;
+      }
+
+      .plan-comparison tbody tr:not(:last-child) {
+        border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+      }
+
+      .plan-comparison td {
+        padding: clamp(18px, 3vw, 24px) 18px;
+        vertical-align: top;
+      }
+
+      .plan-title {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .plan-title strong {
+        font-size: 1.1rem;
+      }
+
+      .plan-price {
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .plan-meta-list,
+      .plan-support-list {
+        margin: 0;
+        padding-left: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        color: rgba(15, 23, 42, 0.75);
+        font-size: 0.95rem;
+      }
+
+      .plan-cta {
+        margin-top: 10px;
+        align-self: flex-start;
+      }
+
+      .plan-roi {
+        font-weight: 700;
+        color: var(--primary-dark);
+      }
+
+      .simulator-controls {
+        display: flex;
+        flex-direction: column;
+        gap: clamp(16px, 3vw, 24px);
+        margin-bottom: clamp(18px, 3vw, 28px);
+      }
+
+      .scenario-select {
+        display: grid;
+        gap: 8px;
+      }
+
+      .scenario-select label,
+      .efficiency-control label {
+        font-weight: 600;
+        color: rgba(15, 23, 42, 0.82);
+      }
+
+      .scenario-select select,
+      .efficiency-control input[type="range"] {
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        padding: 12px 16px;
+        font-family: inherit;
+        font-size: 1rem;
+        background: rgba(255, 255, 255, 0.95);
+      }
+
+      .efficiency-output {
+        font-weight: 700;
+        color: var(--primary);
+        margin-left: 12px;
+      }
+
+      .roi-visuals {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: clamp(24px, 3vw, 32px);
+        align-items: stretch;
+      }
+
+      .gauge-card {
+        background: rgba(255, 255, 255, 0.92);
+        border-radius: 22px;
+        padding: clamp(24px, 3vw, 30px);
+        border: 1px solid rgba(148, 163, 184, 0.18);
+        box-shadow: 0 22px 38px rgba(15, 23, 42, 0.06);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .gauge-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+      }
+
+      .gauge-wrapper canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+
+      .gauge-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -40%);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .gauge-center strong {
+        font-size: clamp(1.6rem, 3vw, 2rem);
+        color: var(--secondary);
+      }
+
+      .gauge-center span {
+        font-size: 0.85rem;
+        color: rgba(15, 23, 42, 0.6);
       }
 
       .impact-counters {
@@ -3033,7 +3221,9 @@
               <a class="btn btn-primary" href="#consultation" data-open-modal="#contactModal"><i class="fa-solid fa-calendar-check"></i> 30分でAI導入ROIを無料診断</a>
               <a class="btn btn-outline" href="#cases"><i class="fa-solid fa-clipboard"></i> 生成AIで作成した計画書サンプルを見る</a>
             </div>
-            <p class="cta-note">AIで時間を生み出し、経営者の価値ある時間を戦略に振り向ける。</p>
+            <p class="cta-note">
+              Microsoft Work Trend Indexでは、AIユーザーの90%が時間を節約でき、85%が重要業務へ集中できたと回答しています。<a class="source-link" href="https://www.microsoft.com/ja-jp/worklab/work-trend-index/2024-annual-report" target="_blank" rel="noopener">出典</a> 当社の伴走では生成AIが資料作成と情報収集を担い、経営者に毎月45時間の集中時間を取り戻します。
+            </p>
             <div class="hero-metrics" role="list">
               <div class="hero-metric" role="listitem">
                 <strong>52%短縮</strong>
@@ -3216,7 +3406,7 @@
           <div class="section-heading">
             <h2>生成AI・経営者・専門家がそれぞれの強みを活かす体制</h2>
             <p>
-              役割を明確にし、責任の所在をはっきりさせることで、迅速かつ安心感のある意思決定が実現します。
+              役割を明確にし、責任の所在をはっきりさせることで、迅速かつ安心感のある意思決定が実現します。DataScienceCentralは、予測分析とシナリオテストを通じてAIがリスクと需要を先読みし、経営者が考えるべき優先課題だけを提示できると解説しています。<a class="source-link" href="https://www.datasciencecentral.com/how-ai-improves-decision-making-in-business/" target="_blank" rel="noopener">出典</a>
             </p>
           </div>
           <div class="roles-grid">
@@ -3468,48 +3658,115 @@
       <section id="data-flow" class="data-flow-section fade-in">
         <div class="container">
           <div class="section-heading">
-            <h2>データ取得から意思決定までを可視化したフロー</h2>
-            <p>AIが担うプロセスと専門家・経営者が介在するポイントをひと目で把握できるよう、データ連携の流れを図解しました。</p>
-            <p style="font-size: 0.95rem; color: rgba(17, 24, 39, 0.65);">
-              Datarailsは内部・外部データを統合しリアルタイムで財務予測を更新することで、経営判断の精度が向上すると報告しています。またIBMの調査では、AI活用企業の意思決定精度が平均30%以上向上したことが示されました。<a class="source-link" href="https://www.datarails.com/blog/ai-financial-planning-and-analysis/" target="_blank" rel="noopener">出典1</a><a class="source-link" href="https://www.ibm.com/downloads/cas/EXK4XKX8" target="_blank" rel="noopener">出典2</a>
+            <h2>データ取得から意思決定までを4ステップでシンプルに</h2>
+            <p>
+              DataScienceCentralは、AIがデータ収集とパターン認識を自動化することで経営陣がより迅速に意思決定できると述べています。<a class="source-link" href="https://www.datasciencecentral.com/how-ai-improves-decision-making-in-business/" target="_blank" rel="noopener">出典</a> この知見を踏まえ、AIと専門家・経営者の役割分担を「キックオフ→AIドラフト生成→専門家レビュー→意思決定・実行」の4ステップに整理しました。
             </p>
           </div>
           <div class="data-flow-diagram" role="list">
             <article class="data-flow-step" role="listitem">
-              <div class="data-flow-icon"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-              <h3>データ取得</h3>
-              <p>会計・販売・HRシステムや公開情報を接続し、AIがインポートとクレンジングを実施。</p>
-              <ul class="data-flow-detail">
-                <li>API/CSV連携を15分で設定</li>
-                <li>欠損値や異常値を自動補正</li>
-              </ul>
+              <div class="data-flow-header">
+                <div class="data-flow-icon"><i class="fa-solid fa-handshake-simple"></i></div>
+                <div>
+                  <h3>Step1｜キックオフ</h3>
+                  <span class="data-flow-benefit"><i class="fa-solid fa-bolt"></i> データと目的を60分で同期</span>
+                </div>
+              </div>
+              <p>初回ヒアリングで目標・制約・優先課題を共有し、プロジェクト基盤を整えます。</p>
+              <div class="data-flow-roles">
+                <div class="data-flow-role">
+                  <h4><i class="fa-solid fa-robot"></i> AIが行うこと</h4>
+                  <ul>
+                    <li>既存システムからKPI・財務データを一括インポート</li>
+                    <li>取引先・市場ニュースをクロールし初期レポートを生成</li>
+                  </ul>
+                </div>
+                <div class="data-flow-role">
+                  <h4><i class="fa-solid fa-user-tie"></i> 専門家・経営者が行うこと</h4>
+                  <ul>
+                    <li>経営課題と意思決定スケジュールを共有</li>
+                    <li>審査先・投資家など想定読者の期待値を定義</li>
+                  </ul>
+                </div>
+              </div>
             </article>
             <article class="data-flow-step" role="listitem">
-              <div class="data-flow-icon"><i class="fa-solid fa-microchip"></i></div>
-              <h3>生成AI分析</h3>
-              <p>市場レポートと社内データを突合し、指標やリスクアラートを作成。Datarails型のリアルタイム更新で、仮説を常に最新化します。</p>
-              <ul class="data-flow-detail">
-                <li>外部データ 250種を横断分析</li>
-                <li>異業種ベンチマークで比較</li>
-              </ul>
+              <div class="data-flow-header">
+                <div class="data-flow-icon"><i class="fa-solid fa-pen-to-square"></i></div>
+                <div>
+                  <h3>Step2｜AIドラフト生成</h3>
+                  <span class="data-flow-benefit"><i class="fa-solid fa-diagram-project"></i> 24時間で経営計画の骨子を作成</span>
+                </div>
+              </div>
+              <p>連携データをもとに、AIが計画書ドラフトとシナリオ別シミュレーションを構築します。</p>
+              <div class="data-flow-roles">
+                <div class="data-flow-role">
+                  <h4><i class="fa-solid fa-robot"></i> AIが行うこと</h4>
+                  <ul>
+                    <li>市場・競合・政策データを自動突合し、パターンとリスクを抽出</li>
+                    <li>売上・キャッシュフローを3シナリオで試算し、優先課題をリスト化</li>
+                  </ul>
+                </div>
+                <div class="data-flow-role">
+                  <h4><i class="fa-solid fa-user-tie"></i> 専門家・経営者が行うこと</h4>
+                  <ul>
+                    <li>AIが提示した仮説を確認し、現場知見と整合性をチェック</li>
+                    <li>補助金・投資計画など注力テーマをコメントで指示</li>
+                  </ul>
+                </div>
+              </div>
             </article>
             <article class="data-flow-step" role="listitem">
-              <div class="data-flow-icon"><i class="fa-solid fa-user-tie"></i></div>
-              <h3>専門家レビュー</h3>
-              <p>金融機関視点で資料を整備し、ヒアリング内容を反映して計画書の骨子をブラッシュアップ。</p>
-              <ul class="data-flow-detail">
-                <li>提出先に合わせた文体と構成</li>
-                <li>質疑応答シナリオを準備</li>
-              </ul>
+              <div class="data-flow-header">
+                <div class="data-flow-icon"><i class="fa-solid fa-user-check"></i></div>
+                <div>
+                  <h3>Step3｜専門家レビュー</h3>
+                  <span class="data-flow-benefit"><i class="fa-solid fa-shield"></i> 品質と信頼性を担保</span>
+                </div>
+              </div>
+              <p>専門家が審査・投資家視点でドラフトを磨き、社内外の説明責任に耐える資料に仕上げます。</p>
+              <div class="data-flow-roles">
+                <div class="data-flow-role">
+                  <h4><i class="fa-solid fa-robot"></i> AIが行うこと</h4>
+                  <ul>
+                    <li>レビューコメントを反映し、章立て・図表を高速で再生成</li>
+                    <li>想定Q&Aや反論資料をテンプレート化</li>
+                  </ul>
+                </div>
+                <div class="data-flow-role">
+                  <h4><i class="fa-solid fa-user-tie"></i> 専門家・経営者が行うこと</h4>
+                  <ul>
+                    <li>融資交渉・取締役会で問われる論点を監修</li>
+                    <li>決裁プロセスに合わせた表現と根拠資料を調整</li>
+                  </ul>
+                </div>
+              </div>
             </article>
             <article class="data-flow-step" role="listitem">
-              <div class="data-flow-icon"><i class="fa-solid fa-chart-gantt"></i></div>
-              <h3>意思決定と実行</h3>
-              <p>経営者がKPIと優先施策を決定。実行状況はダッシュボードで追跡し、90日ごとに再計画します。</p>
-              <ul class="data-flow-detail">
-                <li>進捗が遅れる指標を自動通知</li>
-                <li>四半期レビューの議事案作成</li>
-              </ul>
+              <div class="data-flow-header">
+                <div class="data-flow-icon"><i class="fa-solid fa-chart-gantt"></i></div>
+                <div>
+                  <h3>Step4｜意思決定・実行</h3>
+                  <span class="data-flow-benefit"><i class="fa-solid fa-gauge-high"></i> 優先課題だけを経営者へ提示</span>
+                </div>
+              </div>
+              <p>経営者は優先アクションの意思決定に集中。実行状況はダッシュボードと四半期レビューで追跡します。</p>
+              <div class="data-flow-roles">
+                <div class="data-flow-role">
+                  <h4><i class="fa-solid fa-robot"></i> AIが行うこと</h4>
+                  <ul>
+                    <li>異常値やリスクシグナルを検知し、改善案を推奨</li>
+                    <li>会議アジェンダと更新版ダッシュボードを自動配信</li>
+                  </ul>
+                </div>
+                <div class="data-flow-role">
+                  <h4><i class="fa-solid fa-user-tie"></i> 専門家・経営者が行うこと</h4>
+                  <ul>
+                    <li>AIが優先度順に提示した論点から意思決定</li>
+                    <li>実行状況を振り返り、次の90日プランを合意</li>
+                  </ul>
+                </div>
+              </div>
             </article>
           </div>
         </div>
@@ -3557,27 +3814,40 @@
             </div>
           </div>
           <div class="sales-simulator" id="demo">
-            <h3>売上・キャッシュフローシミュレーター</h3>
-            <p>目標売上・初期投資・市場規模・粗利率を入力すると、12ヶ月の売上推移とキャッシュフローが更新されます。</p>
-            <form class="simulator-form" id="simulatorForm">
-              <div>
-                <label for="targetRevenue">目標年間売上（万円）</label>
-                <input type="number" id="targetRevenue" min="1000" step="100" value="12000" />
+            <h3>ROIシミュレーター</h3>
+            <p>モデル例を選ぶだけで、12ヶ月の売上推移と累積キャッシュフロー、ROIゲージを自動更新。必要な入力は「シナリオ選択」と「AIによる改善率」のみです。</p>
+            <div class="simulator-controls">
+              <div class="scenario-select">
+                <label for="scenarioSelect">モデル例を選択</label>
+                <select id="scenarioSelect">
+                  <option value="scaleup">年商3億円｜投資600万円｜成長加速モデル</option>
+                  <option value="manufacturing">年商8億円｜投資1,200万円｜製造業の生産最適化</option>
+                  <option value="enterprise">年商20億円｜投資2,800万円｜多拠点展開モデル</option>
+                </select>
               </div>
-              <div>
-                <label for="initialInvestment">初期投資額（万円）</label>
-                <input type="number" id="initialInvestment" min="0" step="50" value="1500" />
+              <div class="efficiency-control">
+                <label for="efficiency">AIによる利益改善率（％）<span class="efficiency-output" id="efficiencyValue">35%</span></label>
+                <input type="range" id="efficiency" min="10" max="60" step="5" value="35" />
               </div>
-              <div>
-                <label for="marketSize">想定市場規模（億円）</label>
-                <input type="number" id="marketSize" min="1" step="0.1" value="12" />
+            </div>
+            <div class="roi-visuals">
+              <div class="chart-frame">
+                <canvas id="performanceChart" aria-label="売上とキャッシュフローの推移"></canvas>
               </div>
-              <div>
-                <label for="grossMargin">粗利率（％）</label>
-                <input type="number" id="grossMargin" min="20" max="90" value="48" />
+              <div class="gauge-card">
+                <h4 style="margin: 0;">12ヶ月後の想定ROI</h4>
+                <div class="gauge-wrapper">
+                  <canvas id="roiGauge" aria-label="ROIゲージ"></canvas>
+                  <div class="gauge-center">
+                    <strong id="roiValue">0%</strong>
+                    <span>AI導入による投資回収率</span>
+                  </div>
+                </div>
+                <p style="margin: 0; font-size: 0.9rem; color: rgba(15, 23, 42, 0.65);">
+                  ゲージがグリーンゾーンに入れば、AI投資が12ヶ月以内に回収できる水準です。シナリオと改善率を変えてインパクトを比較できます。
+                </p>
               </div>
-            </form>
-            <canvas id="performanceChart" aria-label="売上とキャッシュフローの推移"></canvas>
+            </div>
           </div>
         </div>
       </section>
@@ -3616,6 +3886,9 @@
           <div class="section-heading">
             <h2>専門家とAIと経営者、三位一体で「実行できる計画」を共創</h2>
             <p>経験豊富な専門家がAIの提案を精査し、金融機関・投資家提出にも耐える根拠資料へと磨き上げます。最終的なチェックを経て、実行段階で迷わない計画に仕上げます。</p>
+            <p style="font-size: 0.95rem; color: rgba(15, 23, 42, 0.7);">
+              Webstacksは、専門家の顔やプロフィールを公開することが信頼構築につながると提唱しています。<a class="source-link" href="https://www.webstacks.com/blog/b2b-saas-website-trust-signals" target="_blank" rel="noopener">出典</a> 私たちは生成AIのスピードに加え、専門家の実績と人柄が見えるハイブリッド体制で品質を保証します。
+            </p>
           </div>
           <div class="expert-grid">
             <article class="expert-card">
@@ -4109,55 +4382,99 @@
             <h2>ニーズに合わせた3つのプラン</h2>
             <p>すべてのプランで無料トライアル（初回ドラフト＋オンライン相談）をご用意。導入前に成果と運用イメージをご確認いただけます。</p>
           </div>
-          <div class="pricing-table">
-            <article class="plan-card">
-              <h3>ライトプラン</h3>
-              <p class="plan-price">月額 165,000円～</p>
-              <div class="plan-meta">
-                <span><i class="fa-solid fa-user"></i> 対象：年商5,000万～3億円の成長期企業</span>
-                <span><i class="fa-solid fa-flag"></i> 目的：金融機関提出・助成金申請のスピード化</span>
-                <span><i class="fa-solid fa-percent"></i> 想定ROI：計画書作成工数を最大60%削減</span>
-              </div>
-              <ul class="plan-features">
-                <li><i class="fa-solid fa-circle-check"></i> 月1回のAI計画書更新ドラフト納品（PDF・PPT）</li>
-                <li><i class="fa-solid fa-circle-check"></i> 売上・キャッシュフロー予測（3シナリオ）</li>
-                <li><i class="fa-solid fa-circle-check"></i> 融資面談想定Q&Aテンプレート</li>
-                <li><i class="fa-solid fa-circle-check"></i> 導入初月の専門家レビュー1回</li>
-              </ul>
-              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">30分でROI無料診断を受ける</button>
-            </article>
-            <article class="plan-card" style="border: 2px solid var(--primary);">
-              <h3>プロプラン</h3>
-              <p class="plan-price">月額 330,000円～</p>
-              <div class="plan-meta">
-                <span><i class="fa-solid fa-building"></i> 対象：年商3億～15億円、マルチ事業展開企業</span>
-                <span><i class="fa-solid fa-bullseye"></i> 目的：中期経営計画・投資家資料の高度化</span>
-                <span><i class="fa-solid fa-arrow-up-right-dots"></i> 想定ROI：意思決定時間を平均57%削減、資金調達成功率1.6倍</span>
-              </div>
-              <ul class="plan-features">
-                <li><i class="fa-solid fa-circle-check"></i> 月2回のAIドラフト更新＋実績差異分析</li>
-                <li><i class="fa-solid fa-circle-check"></i> 管理会計KPI設計・経営会議ファシリテーション</li>
-                <li><i class="fa-solid fa-circle-check"></i> 投資家・役員会向けピッチデッキ連動</li>
-                <li><i class="fa-solid fa-circle-check"></i> 常時チャット伴走／緊急シミュレーション対応</li>
-              </ul>
-              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">30分でROI無料診断を受ける</button>
-            </article>
-            <article class="plan-card">
-              <h3>エンタープライズプラン</h3>
-              <p class="plan-price">月額 660,000円～</p>
-              <div class="plan-meta">
-                <span><i class="fa-solid fa-city"></i> 対象：年商10億円以上の多拠点・多事業企業</span>
-                <span><i class="fa-solid fa-network-wired"></i> 目的：グループ経営管理・海外拠点連携</span>
-                <span><i class="fa-solid fa-scale-balanced"></i> 想定ROI：意思決定リードタイムを最大65%短縮</span>
-              </div>
-              <ul class="plan-features">
-                <li><i class="fa-solid fa-circle-check"></i> 週次データ連携とAIダッシュボードのカスタム開発</li>
-                <li><i class="fa-solid fa-circle-check"></i> 事業部別シナリオ分析とグループ資金計画の統合</li>
-                <li><i class="fa-solid fa-circle-check"></i> オフサイト四半期レビューの設計・ファシリテーション</li>
-                <li><i class="fa-solid fa-circle-check"></i> 経営陣・現場向け研修とリテラシー向上プログラム</li>
-              </ul>
-              <button class="btn btn-primary" type="button" data-open-modal="#contactModal">30分でROI無料診断を受ける</button>
-            </article>
+          <div class="pricing-table" role="region" aria-label="料金プラン比較">
+            <table class="plan-comparison">
+              <thead>
+                <tr>
+                  <th scope="col">プラン・月額料金</th>
+                  <th scope="col">主要機能</th>
+                  <th scope="col">サポート内容・想定ROI</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="plan-title">
+                      <strong>ライトプラン</strong>
+                      <span class="plan-price">月額 165,000円～</span>
+                      <ul class="plan-meta-list">
+                        <li>対象：年商5,000万～3億円の成長期企業</li>
+                        <li>目的：金融機関提出・助成金申請のスピード化</li>
+                      </ul>
+                      <button class="btn btn-primary plan-cta" type="button" data-open-modal="#contactModal">相談する</button>
+                    </div>
+                  </td>
+                  <td>
+                    <ul class="plan-meta-list">
+                      <li>月1回のAI計画書ドラフト更新（PDF・PPT）</li>
+                      <li>売上・キャッシュフロー予測（3シナリオ）</li>
+                      <li>融資面談想定Q&Aテンプレート</li>
+                    </ul>
+                  </td>
+                  <td>
+                    <ul class="plan-support-list">
+                      <li>導入初月の専門家レビュー1回</li>
+                      <li>メール・チャットでの伴走サポート</li>
+                      <li class="plan-roi">想定ROI：計画書作成工数を最大60%削減</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="plan-title">
+                      <strong>プロプラン</strong>
+                      <span class="plan-price">月額 330,000円～</span>
+                      <ul class="plan-meta-list">
+                        <li>対象：年商3億～15億円、マルチ事業展開企業</li>
+                        <li>目的：中期経営計画・投資家資料の高度化</li>
+                      </ul>
+                      <button class="btn btn-primary plan-cta" type="button" data-open-modal="#contactModal">相談する</button>
+                    </div>
+                  </td>
+                  <td>
+                    <ul class="plan-meta-list">
+                      <li>月2回のAIドラフト更新＋実績差異分析</li>
+                      <li>管理会計KPI設計・経営会議ファシリテーション</li>
+                      <li>投資家・役員会向けピッチデッキ連動</li>
+                    </ul>
+                  </td>
+                  <td>
+                    <ul class="plan-support-list">
+                      <li>常時チャット伴走・緊急シミュレーション対応</li>
+                      <li>専門家による月次レビューと改善提案</li>
+                      <li class="plan-roi">想定ROI：意思決定時間を平均57%削減／資金調達成功率1.6倍</li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="plan-title">
+                      <strong>エンタープライズプラン</strong>
+                      <span class="plan-price">月額 660,000円～</span>
+                      <ul class="plan-meta-list">
+                        <li>対象：年商10億円以上の多拠点・多事業企業</li>
+                        <li>目的：グループ経営管理・海外拠点連携</li>
+                      </ul>
+                      <button class="btn btn-primary plan-cta" type="button" data-open-modal="#contactModal">相談する</button>
+                    </div>
+                  </td>
+                  <td>
+                    <ul class="plan-meta-list">
+                      <li>週次データ連携とAIダッシュボードのカスタム開発</li>
+                      <li>事業部別シナリオ分析とグループ資金計画の統合</li>
+                      <li>オフサイト四半期レビューの設計・ファシリテーション</li>
+                    </ul>
+                  </td>
+                  <td>
+                    <ul class="plan-support-list">
+                      <li>経営陣・現場向け研修とリテラシー向上プログラム</li>
+                      <li>海外拠点・子会社のデータ統合支援</li>
+                      <li class="plan-roi">想定ROI：意思決定リードタイムを最大65%短縮</li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <p style="margin-top: 18px; color: rgba(17, 24, 39, 0.6); font-size: 0.9rem;">
             ※上記は税別。初回ヒアリング後に正式お見積りを提示します。年間契約で月額10%割引、カスタムAPI連携や社内研修はオプションで追加可能です。
@@ -4556,12 +4873,39 @@
         },
       };
 
+      const roiScenarios = {
+        scaleup: {
+          label: "年商3億円｜投資600万円｜成長加速モデル",
+          annualRevenue: 30000,
+          initialInvestment: 600,
+          grossMargin: 0.46,
+          rampFactor: 0.6,
+        },
+        manufacturing: {
+          label: "年商8億円｜投資1,200万円｜製造業の生産最適化",
+          annualRevenue: 80000,
+          initialInvestment: 1200,
+          grossMargin: 0.38,
+          rampFactor: 0.5,
+        },
+        enterprise: {
+          label: "年商20億円｜投資2,800万円｜多拠点展開モデル",
+          annualRevenue: 200000,
+          initialInvestment: 2800,
+          grossMargin: 0.35,
+          rampFactor: 0.45,
+        },
+      };
+
+      const ROI_MAX = 200;
+
       let impactChart;
       let globalChart;
       let productivityChart;
       let quarterlyChart;
       let radarChart;
       let simulatorChart;
+      let roiGaugeChart;
 
       const quarterlyDataset = {
         labels: ["2021", "2022", "2023", "2024", "2025"],
@@ -4785,27 +5129,40 @@
         input.addEventListener("input", updateRadarValues);
       });
 
-      function buildForecast() {
-        const goal = Number(document.getElementById("targetRevenue").value);
-        const investment = Number(document.getElementById("initialInvestment").value);
-        const marketSize = Number(document.getElementById("marketSize").value) * 10000; // convert to 万円
-        const grossMargin = Number(document.getElementById("grossMargin").value) / 100;
+      function getScenario() {
+        const select = document.getElementById("scenarioSelect");
+        const scenarioKey = select ? select.value : "scaleup";
+        return roiScenarios[scenarioKey] || roiScenarios.scaleup;
+      }
 
+      function getEfficiency() {
+        const efficiencyInput = document.getElementById("efficiency");
+        const value = efficiencyInput ? Number(efficiencyInput.value) : 35;
+        return Math.max(0, value) / 100;
+      }
+
+      function buildForecast() {
+        const scenario = getScenario();
+        const efficiency = getEfficiency();
         const months = Array.from({ length: 12 }, (_, i) => `${i + 1}月`);
         const monthlyRevenue = [];
         const cashBalance = [];
-        let cumulativeCash = -investment;
+        let cumulativeCash = -scenario.initialInvestment;
 
         months.forEach((_, index) => {
-          const ramp = Math.min(1, (index + 1) / 8 + marketSize / 1000000);
-          const revenue = Math.min(goal / 12 * (0.6 + ramp * 0.6), goal / 10);
-          const gp = revenue * grossMargin;
+          const baseMonthly = scenario.annualRevenue / 12;
+          const ramp = 0.75 + scenario.rampFactor * ((index + 1) / 12);
+          const revenue = baseMonthly * ramp * (1 + efficiency);
+          const gp = revenue * scenario.grossMargin;
           cumulativeCash += gp;
           monthlyRevenue.push(Math.round(revenue));
           cashBalance.push(Math.round(cumulativeCash));
         });
 
-        return { months, monthlyRevenue, cashBalance };
+        const totalGrossProfit = monthlyRevenue.reduce((sum, revenue) => sum + revenue * scenario.grossMargin, 0);
+        const roi = ((totalGrossProfit - scenario.initialInvestment) / scenario.initialInvestment) * 100;
+
+        return { months, monthlyRevenue, cashBalance, roi };
       }
 
       function initSimulatorChart() {
@@ -4864,11 +5221,67 @@
         simulatorChart.data.datasets[0].data = forecast.monthlyRevenue;
         simulatorChart.data.datasets[1].data = forecast.cashBalance;
         simulatorChart.update();
+        updateRoiGauge(forecast.roi);
+
+        const efficiencyOutput = document.getElementById("efficiencyValue");
+        const efficiencyInput = document.getElementById("efficiency");
+        if (efficiencyOutput && efficiencyInput) {
+          efficiencyOutput.textContent = `${efficiencyInput.value}%`;
+        }
       }
 
-      ["targetRevenue", "initialInvestment", "marketSize", "grossMargin"].forEach((id) => {
-        document.getElementById(id).addEventListener("input", updateSimulatorChart);
-      });
+      function initRoiGauge() {
+        if (!window.Chart) return;
+        const ctx = document.getElementById("roiGauge");
+        if (!ctx) return;
+
+        roiGaugeChart = new Chart(ctx, {
+          type: "doughnut",
+          data: {
+            datasets: [
+              {
+                data: [0, ROI_MAX],
+                backgroundColor: ["rgba(93, 211, 179, 0.9)", "rgba(226, 232, 240, 0.6)"],
+                borderWidth: 0,
+                cutout: "70%",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            rotation: -90,
+            circumference: 180,
+            plugins: {
+              legend: { display: false },
+              tooltip: { enabled: false },
+            },
+          },
+        });
+      }
+
+      function updateRoiGauge(roi) {
+        const roiValueEl = document.getElementById("roiValue");
+        if (roiValueEl && Number.isFinite(roi)) {
+          roiValueEl.textContent = `${roi >= 0 ? "+" : ""}${roi.toFixed(0)}%`;
+        }
+
+        if (!roiGaugeChart || !Number.isFinite(roi)) return;
+
+        const clamped = Math.max(Math.min(roi, ROI_MAX), -50);
+        const positive = Math.max(clamped, 0);
+        roiGaugeChart.data.datasets[0].data = [positive, ROI_MAX - positive];
+        roiGaugeChart.data.datasets[0].backgroundColor = [
+          roi >= 0 ? "rgba(93, 211, 179, 0.9)" : "rgba(248, 113, 113, 0.85)",
+          "rgba(226, 232, 240, 0.6)",
+        ];
+        roiGaugeChart.update();
+      }
+
+      const scenarioSelectEl = document.getElementById("scenarioSelect");
+      const efficiencyEl = document.getElementById("efficiency");
+
+      scenarioSelectEl && scenarioSelectEl.addEventListener("change", updateSimulatorChart);
+      efficiencyEl && efficiencyEl.addEventListener("input", updateSimulatorChart);
 
       const counters = document.querySelectorAll("[data-count]");
       const counterObserver = new IntersectionObserver(
@@ -5034,6 +5447,7 @@
         initEvidenceCharts();
         initRadarChart();
         initQuarterlyChart();
+        initRoiGauge();
         initSimulatorChart();
       }
 
